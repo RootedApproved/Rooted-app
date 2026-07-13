@@ -268,7 +268,7 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
   </div>
   <div class="sec-hd"><span class="sec-title">Categories</span><span class="sec-link" onclick="showTab('categories')">See all →</span></div>
   <div class="cat-grid">
-    <div class="cat-card" onclick="showCategory('clothing')"><span class="cat-icon">👕</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct">30 products rated</div></div></div>
+    <div class="cat-card" onclick="showCategory('clothing')"><span class="cat-icon">👕</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct js-clothing-total">30 products rated</div></div></div>
     <div class="cat-card" onclick="showCategory('oral')"><span class="cat-icon">🦷</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Oral Care</div><div class="cat-ct">Coming soon</div></div></div>
     <div class="cat-card" onclick="showCategory('food')"><span class="cat-icon">🥩</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Food &amp; Diet</div><div class="cat-ct">Coming soon</div></div></div>
     <div class="cat-card" onclick="showCategory('cookware')"><span class="cat-icon">🍳</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Cookware &amp; Kitchen</div><div class="cat-ct">Coming soon</div></div></div>
@@ -303,20 +303,20 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
     <p class="cat-desc">Tap a category to see rated products and education.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('underwear')"><span class="sc-icon">🩲</span><div class="sc-name">Underwear</div><div class="sc-count">10 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('t-shirts')"><span class="sc-icon">👕</span><div class="sc-name">T-Shirts &amp; Henleys</div><div class="sc-count">7 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('long-sleeves')"><span class="sc-icon">🧥</span><div class="sc-name">Long Sleeves &amp; Shirts</div><div class="sc-count">6 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('shorts')"><span class="sc-icon">🩳</span><div class="sc-name">Shorts</div><div class="sc-count">6 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('pants')"><span class="sc-icon">👖</span><div class="sc-name">Pants</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('socks')"><span class="sc-icon">🧦</span><div class="sc-name">Socks</div><div class="sc-count">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showGolfHub()"><span class="sc-icon">⛳</span><div class="sc-name">Golf Apparel</div><div class="sc-count">10 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showWorkoutHub()"><span class="sc-icon">🏋️</span><div class="sc-name">Workout Apparel</div><div class="sc-count">10 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('underwear')"><span class="sc-icon">🩲</span><div class="sc-name">Underwear</div><div class="sc-count" id="count-underwear">10 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('t-shirts')"><span class="sc-icon">👕</span><div class="sc-name">T-Shirts &amp; Henleys</div><div class="sc-count" id="count-t-shirts">7 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('long-sleeves')"><span class="sc-icon">🧥</span><div class="sc-name">Long Sleeves &amp; Shirts</div><div class="sc-count" id="count-long-sleeves">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('shorts')"><span class="sc-icon">🩳</span><div class="sc-name">Shorts</div><div class="sc-count" id="count-shorts">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('pants')"><span class="sc-icon">👖</span><div class="sc-name">Pants</div><div class="sc-count" id="count-pants">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('socks')"><span class="sc-icon">🧦</span><div class="sc-name">Socks</div><div class="sc-count" id="count-socks">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showGolfHub()"><span class="sc-icon">⛳</span><div class="sc-name">Golf Apparel</div><div class="sc-count" id="count-golf">10 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showWorkoutHub()"><span class="sc-icon">🏋️</span><div class="sc-name">Workout Apparel</div><div class="sc-count" id="count-workout">10 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
     <div class="callout"><div class="callout-lbl">ROOTED Standard — Clothing</div><div class="callout-tx">Prioritize natural fibers with GOTS or OEKO-TEX® certification. Avoid synthetic dyes, formaldehyde treatments, and undisclosed chemical finishes. Start with underwear — highest skin contact, highest leverage swap.</div></div>
     <div class="sp-sm"></div>
-    <div class="etc" onclick="showSubcat('underwear')"><div class="etc-left"><div class="etc-lbl">Start Here</div><div class="etc-title">Men's Underwear</div><div class="etc-sub">10 products rated. Tier 1 through Tier 2. →</div></div><span class="etc-arr">›</span></div>
+    <div class="etc" onclick="showSubcat('underwear')"><div class="etc-left"><div class="etc-lbl">Start Here</div><div class="etc-title">Men's Underwear</div><div class="etc-sub"><span id="count-underwear-inline">10</span> products rated. Tier 1 through Tier 2. →</div></div><span class="etc-arr">›</span></div>
   </div>
 </div>
 </div>
@@ -330,11 +330,11 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
     <p class="cat-desc">Golf runs on synthetic performance fabric more than any other category. Tap in to see where natural fiber still holds up — and where it doesn't.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('golf-polos')"><span class="sc-icon">⛳</span><div class="sc-name">Polos</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('golf-shorts')"><span class="sc-icon">⛳</span><div class="sc-name">Shorts</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('golf-pants')"><span class="sc-icon">⛳</span><div class="sc-name">Pants</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('golf-sweaters')"><span class="sc-icon">⛳</span><div class="sc-name">Sweaters</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('golf-quarter-zips')"><span class="sc-icon">⛳</span><div class="sc-name">Quarter-Zips</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('golf-polos')"><span class="sc-icon">⛳</span><div class="sc-name">Polos</div><div class="sc-count" id="count-golf-polos">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('golf-shorts')"><span class="sc-icon">⛳</span><div class="sc-name">Shorts</div><div class="sc-count" id="count-golf-shorts">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('golf-pants')"><span class="sc-icon">⛳</span><div class="sc-name">Pants</div><div class="sc-count" id="count-golf-pants">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('golf-sweaters')"><span class="sc-icon">⛳</span><div class="sc-name">Sweaters</div><div class="sc-count" id="count-golf-sweaters">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('golf-quarter-zips')"><span class="sc-icon">⛳</span><div class="sc-name">Quarter-Zips</div><div class="sc-count" id="count-golf-quarter-zips">2 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -352,11 +352,11 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
     <p class="cat-desc">Athletic wear runs almost entirely on synthetic performance fabric. We show you exactly where natural fiber still holds up — and what the tradeoffs really are.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('workout-tops')"><span class="sc-icon">🏋️</span><div class="sc-name">Tops</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('workout-shorts')"><span class="sc-icon">🏋️</span><div class="sc-name">Shorts</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('workout-joggers')"><span class="sc-icon">🏋️</span><div class="sc-name">Joggers & Sweatpants</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('workout-baselayers')"><span class="sc-icon">🏋️</span><div class="sc-name">Base Layers</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('workout-outerwear')"><span class="sc-icon">🏋️</span><div class="sc-name">Outerwear</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('workout-tops')"><span class="sc-icon">🏋️</span><div class="sc-name">Tops</div><div class="sc-count" id="count-workout-tops">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('workout-shorts')"><span class="sc-icon">🏋️</span><div class="sc-name">Shorts</div><div class="sc-count" id="count-workout-shorts">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('workout-joggers')"><span class="sc-icon">🏋️</span><div class="sc-name">Joggers & Sweatpants</div><div class="sc-count" id="count-workout-joggers">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('workout-baselayers')"><span class="sc-icon">🏋️</span><div class="sc-name">Base Layers</div><div class="sc-count" id="count-workout-baselayers">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('workout-outerwear')"><span class="sc-icon">🏋️</span><div class="sc-name">Outerwear</div><div class="sc-count" id="count-workout-outerwear">2 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -435,7 +435,7 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
 <div class="page">
   <div class="cats-hd"><div class="cats-title">All Categories</div><p class="cats-sub">12 categories at launch. Standards first, products second.</p></div>
   <div class="all-cats">
-    <div class="cat-row" onclick="showCategory('clothing')"><span class="cat-row-icon">👕</span><div class="cat-row-info"><div class="cat-row-name">Clothing (Men's)</div><div class="cat-row-sub">30 products rated</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" onclick="showCategory('clothing')"><span class="cat-row-icon">👕</span><div class="cat-row-info"><div class="cat-row-name">Clothing (Men's)</div><div class="cat-row-sub js-clothing-total">30 products rated</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row" onclick="showCategory('oral')"><span class="cat-row-icon">🦷</span><div class="cat-row-info"><div class="cat-row-name">Oral Care</div><div class="cat-row-sub">Toothbrushes, toothpaste, floss</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row" onclick="showCategory('food')"><span class="cat-row-icon">🥩</span><div class="cat-row-info"><div class="cat-row-name">Food &amp; Diet</div><div class="cat-row-sub">Sourcing, ingredients, grocery</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row" onclick="showCategory('cookware')"><span class="cat-row-icon">🍳</span><div class="cat-row-info"><div class="cat-row-name">Cookware &amp; Kitchen</div><div class="cat-row-sub">Pots, pans, food storage</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
@@ -851,6 +851,41 @@ function imgFallback(img, emoji, size) {
   img.style.display='none';
 }
 
+// ── PRODUCT COUNTS (auto-updates as products are added — never hand-edit these numbers) ─
+function updateProductCounts() {
+  const bySubcat = {};
+  Object.values(PRODUCTS).forEach(p => { bySubcat[p.subcat] = (bySubcat[p.subcat] || 0) + 1; });
+  const total = Object.keys(PRODUCTS).length;
+
+  // Per-subcat counts: any element with id="count-<subcat>" gets "<n> rated"
+  Object.keys(bySubcat).forEach(subcat => {
+    const el = document.getElementById('count-' + subcat);
+    if (el) el.textContent = bySubcat[subcat] + ' rated';
+  });
+
+  // Grouped hub totals: sums every subcat starting with a given prefix.
+  // Add a new [id, prefix] pair here whenever a new hub category (like Suits or Swim) is added.
+  const groups = [
+    ['count-golf', 'golf-'],
+    ['count-workout', 'workout-'],
+    ['count-suits', 'suits-'],
+    ['count-swim', 'swim-'],
+  ];
+  groups.forEach(([id, prefix]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const sum = Object.keys(bySubcat).filter(s => s.startsWith(prefix)).reduce((a, s) => a + bySubcat[s], 0);
+    if (sum > 0) el.textContent = sum + ' rated';
+  });
+
+  // Overall Clothing (Men's) total — every product currently rolls up under Clothing
+  document.querySelectorAll('.js-clothing-total').forEach(el => { el.textContent = total + ' products rated'; });
+
+  // Inline "Start Here" underwear count
+  const inlineEl = document.getElementById('count-underwear-inline');
+  if (inlineEl) inlineEl.textContent = bySubcat['underwear'] || 0;
+}
+
 // ── EMAIL ─────────────────────────────────────────────────────────────
 function initFeaturedImages() {
   // Render featured NADS image on home screen
@@ -862,6 +897,7 @@ function initFeaturedImages() {
 }
 // Run on load
 window.addEventListener('DOMContentLoaded', initFeaturedImages);
+window.addEventListener('DOMContentLoaded', updateProductCounts);
 
 function submitEmail(){
   const val=document.getElementById('email-val').value;
