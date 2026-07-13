@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ROOTED — The Standard for Healthy Living</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5F0E6;--cream2:#EDE7D9;--forest:#2D5016;--sage:#5C8A2E;--teal:#2E7D7A;--earth:#8B6914;--red:#B53A2F;--char:#1A1A1A;--mid:#4A4A4A;--muted:#888;--border:#DDD8CE;--white:#FFFFFF;--bar-h:56px;--nav-h:52px;--font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',system-ui,sans-serif;--font-m:'DM Mono',monospace;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-size:15px;line-height:1.6;overflow-x:hidden;padding-top:var(--nav-h);padding-bottom:var(--bar-h);}
+.screen{display:none;}.screen.active{display:block;}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:var(--nav-h);background:var(--cream);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 18px;}
+.nav-brand{font-family:var(--font-d);font-weight:900;font-size:20px;color:var(--forest);letter-spacing:.04em;cursor:pointer;}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.nav-icon{background:none;border:none;cursor:pointer;font-size:18px;color:var(--mid);padding:4px;line-height:1;}
+.nav-join{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--white);background:var(--forest);border:none;border-radius:3px;padding:6px 13px;cursor:pointer;}
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;height:var(--bar-h);background:var(--white);border-top:1px solid var(--border);display:flex;z-index:300;box-shadow:0 -2px 12px rgba(0,0,0,.06);}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;background:none;border:none;padding:0;color:var(--muted);transition:color .15s;}
+.tab.active{color:var(--forest);}
+.tab-icon{font-size:19px;line-height:1;}
+.tab-label{font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;}
+.page{max-width:480px;margin:0 auto;}
+.eyebrow{font-family:var(--font-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+.tb{display:inline-flex;align-items:center;gap:5px;background:var(--forest);color:var(--white);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px 3px 5px;border-radius:2px;}
+.tb .tn{background:rgba(255,255,255,.22);border-radius:1px;padding:1px 5px;font-size:9px;}
+.tb.t2{background:var(--sage);}
+.home-hero{padding:28px 18px 24px;border-bottom:1px solid var(--border);}
+.home-hl{font-family:var(--font-d);font-size:33px;font-weight:900;line-height:1.1;color:var(--char);margin-bottom:12px;}
+.home-hl em{font-style:italic;color:var(--forest);}
+.home-sub{font-size:13.5px;color:var(--mid);line-height:1.65;max-width:340px;}
+.sec-hd{display:flex;align-items:baseline;justify-content:space-between;padding:22px 18px 11px;}
+.sec-title{font-family:var(--font-d);font-size:17px;font-weight:700;}
+.sec-link{font-size:12px;color:var(--teal);font-weight:600;cursor:pointer;}
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 18px 22px;}
+.cat-card{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;aspect-ratio:1;display:flex;flex-direction:column;justify-content:flex-end;position:relative;transition:transform .15s,box-shadow .15s;}
+.cat-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.08);}
+.cat-icon{position:absolute;top:14px;left:14px;font-size:26px;line-height:1;}
+.cat-body{padding:11px 13px;}
+.cat-lbl{font-family:var(--font-m);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:2px;}
+.cat-name{font-family:var(--font-d);font-size:14px;font-weight:700;line-height:1.2;}
+.cat-ct{font-size:11px;color:var(--muted);margin-top:2px;}
+.promise-strip{background:var(--forest);padding:20px 18px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.prom-num{font-family:var(--font-d);font-size:26px;font-weight:900;color:var(--white);line-height:1;}
+.prom-lbl{font-size:11px;color:rgba(255,255,255,.62);margin-top:2px;line-height:1.4;}
+.feat-card{background:var(--white);border:1px solid var(--border);border-radius:6px;display:flex;gap:13px;padding:13px;cursor:pointer;transition:box-shadow .15s;margin:0 18px 24px;}
+.feat-img{width:68px;height:68px;border-radius:4px;background:var(--cream2);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:26px;}
+.feat-img img{width:100%;height:100%;object-fit:cover;}
+.feat-brand{font-size:10.5px;color:var(--teal);font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
+.feat-name{font-family:var(--font-d);font-size:14px;font-weight:700;line-height:1.25;margin:2px 0 6px;}
+.feat-meta{display:flex;align-items:center;gap:7px;}
+.feat-price{font-size:12px;color:var(--mid);}
+.mission-card{background:var(--forest);border-radius:6px;padding:18px;cursor:pointer;margin:0 18px 28px;}
+.mission-card .eyebrow{color:rgba(255,255,255,.5);margin-bottom:5px;}
+.mc-title{font-family:var(--font-d);font-size:16px;font-weight:700;color:var(--white);margin-bottom:3px;}
+.mc-sub{font-size:12.5px;color:rgba(255,255,255,.65);}
+.mc-link{display:inline-block;margin-top:11px;font-size:12px;font-weight:600;color:var(--white);border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:1px;}
+.cat-hd{padding:20px 18px 18px;border-bottom:1px solid var(--border);}
+.cat-back{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--teal);font-weight:500;cursor:pointer;background:none;border:none;padding:0;margin-bottom:10px;}
+.cat-title{font-family:var(--font-d);font-size:27px;font-weight:900;color:var(--char);margin-bottom:5px;}
+.cat-desc{font-size:13.5px;color:var(--mid);line-height:1.6;}
+.subcat-grid{display:flex;flex-direction:column;gap:9px;padding:16px 18px 24px;}
+.subcat-card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:box-shadow .15s,transform .12s;}
+.subcat-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.08);transform:translateY(-1px);}
+.sc-icon{font-size:24px;width:36px;text-align:center;flex-shrink:0;}
+.sc-name{font-family:var(--font-d);font-size:16px;font-weight:700;color:var(--char);flex:1;}
+.sc-count{font-size:12px;color:var(--muted);margin-right:4px;}
+.sc-arr{color:var(--muted);font-size:18px;flex-shrink:0;}
+.tog-bar{display:flex;background:var(--cream2);border-bottom:1px solid var(--border);padding:0 18px;}
+.tog{flex:1;background:none;border:none;border-bottom:2.5px solid transparent;padding:12px 0;font-family:var(--font-b);font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;transition:color .15s,border-color .15s;}
+.tog.active{color:var(--forest);border-bottom-color:var(--forest);}
+.tier-filters{display:flex;gap:6px;padding:12px 18px;overflow-x:auto;scrollbar-width:none;}
+.tier-filters::-webkit-scrollbar{display:none;}
+.tf{flex-shrink:0;font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);color:var(--mid);cursor:pointer;white-space:nowrap;transition:all .15s;}
+.tf.active{background:var(--forest);border-color:var(--forest);color:var(--white);}
+.prod-list{padding:0 18px 8px;display:flex;flex-direction:column;gap:9px;}
+.pc{background:var(--white);border:1px solid var(--border);border-radius:6px;display:flex;gap:13px;padding:13px;cursor:pointer;transition:box-shadow .15s;align-items:flex-start;}
+.pc:hover{box-shadow:0 3px 12px rgba(0,0,0,.08);}
+.pc-img{width:82px;height:82px;border-radius:5px;background:var(--cream2);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:28px;}
+.pc-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.pc-body{flex:1;min-width:0;}
+.pc-brand{font-size:10.5px;color:var(--teal);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px;}
+.pc-name{font-family:var(--font-d);font-size:14.5px;font-weight:700;color:var(--char);line-height:1.25;margin-bottom:5px;}
+.pc-verdict{font-size:12px;color:var(--mid);line-height:1.5;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.pc-meta{display:flex;align-items:center;gap:7px;}
+.pc-price{font-size:12px;color:var(--mid);}
+.pc-arr{margin-left:auto;color:var(--muted);font-size:14px;align-self:center;flex-shrink:0;}
+.callout{margin:0 18px 18px;border-left:3px solid var(--teal);background:var(--white);border-radius:0 4px 4px 0;padding:13px 14px;}
+.callout-lbl{font-family:var(--font-m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:5px;}
+.callout-tx{font-size:13.5px;color:var(--mid);line-height:1.65;}
+.etc{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:box-shadow .15s;gap:12px;}
+.etc:hover{box-shadow:0 2px 10px rgba(0,0,0,.08);}
+.etc-left{flex:1;}
+.etc-lbl{font-family:var(--font-m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:3px;}
+.etc-title{font-family:var(--font-d);font-size:14px;font-weight:700;color:var(--char);margin-bottom:2px;}
+.etc-sub{font-size:12px;color:var(--muted);}
+.etc-arr{color:var(--muted);font-size:18px;flex-shrink:0;}
+.scroll-sec{margin-bottom:28px;}
+.ss-hd{padding:22px 18px 12px;border-bottom:1px solid var(--border);margin-bottom:18px;}
+.ss-eye{font-family:var(--font-m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:5px;}
+.ss-title{font-family:var(--font-d);font-size:20px;font-weight:700;color:var(--char);}
+.flags-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 18px;}
+.flag-col-hd{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:8px 12px;border-radius:3px 3px 0 0;}
+.flag-col-hd.green{background:var(--forest);color:var(--white);}
+.flag-col-hd.red{background:var(--red);color:var(--white);}
+.flag-items{background:var(--white);border:1px solid var(--border);border-top:none;border-radius:0 0 3px 3px;list-style:none;}
+.flag-items li{font-size:12px;color:var(--mid);padding:7px 10px 7px 22px;border-bottom:1px solid var(--border);position:relative;line-height:1.45;}
+.flag-items li:last-child{border-bottom:none;}
+.flag-items.green li::before{content:'✓';position:absolute;left:7px;top:8px;color:var(--forest);font-weight:700;font-size:10px;}
+.flag-items.red li::before{content:'✗';position:absolute;left:7px;top:8px;color:var(--red);font-weight:700;font-size:10px;}
+.avoid-list{list-style:none;padding:0 18px;}
+.avoid-list li{font-size:13px;color:var(--mid);padding:9px 0 9px 20px;border-bottom:1px solid var(--border);position:relative;line-height:1.5;}
+.avoid-list li:last-child{border-bottom:none;}
+.avoid-list li::before{content:'✗';position:absolute;left:0;top:10px;color:var(--red);font-size:11px;font-weight:700;}
+.pd-back{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--teal);font-weight:500;cursor:pointer;padding:14px 18px 0;background:none;border:none;}
+.pd-hero{padding:12px 18px 0;}
+.pd-img{width:100%;border-radius:6px;background:var(--white);border:1px solid var(--border);overflow:hidden;margin-bottom:16px;max-height:280px;display:flex;align-items:center;justify-content:center;font-size:48px;}
+.pd-img img{width:100%;object-fit:cover;display:block;}
+.pd-brand{font-size:11.5px;color:var(--teal);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px;}
+.pd-name{font-family:var(--font-d);font-size:24px;font-weight:900;line-height:1.15;color:var(--char);margin-bottom:4px;}
+.pd-sub{font-size:12.5px;color:var(--muted);margin-bottom:14px;}
+.pd-verdict-box{background:var(--white);border-left:3px solid var(--forest);border-radius:0 4px 4px 0;padding:12px 13px;margin-bottom:16px;}
+.pd-verdict-box.t2{border-color:var(--sage);}
+.pd-vhd{font-size:10.5px;font-weight:700;color:var(--forest);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px;}
+.pd-vtx{font-size:13.5px;color:var(--mid);line-height:1.65;}
+.pd-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:13px;}
+.pd-price{font-size:22px;font-weight:600;color:var(--char);}
+.btn-buy{display:block;width:100%;background:var(--forest);color:var(--white);text-align:center;padding:15px;font-size:15px;font-weight:600;border-radius:4px;text-decoration:none;border:none;cursor:pointer;margin-bottom:9px;letter-spacing:.02em;box-shadow:0 3px 10px rgba(45,80,22,.22);}
+.btn-brand{display:block;width:100%;background:transparent;color:var(--forest);text-align:center;padding:12px;font-size:14px;font-weight:500;border:1.5px solid var(--forest);border-radius:4px;text-decoration:none;cursor:pointer;margin-bottom:6px;}
+.pd-aff{font-size:10.5px;color:#C8C8C8;text-align:center;margin-bottom:18px;}
+.pd-certs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px;padding-top:16px;border-top:1px solid var(--border);}
+.cert-pill{font-size:11px;font-weight:600;color:var(--forest);background:rgba(45,80,22,.08);border:1px solid rgba(45,80,22,.18);padding:3px 9px;border-radius:2px;}
+.pd-sec{padding:0 18px;margin-bottom:26px;}
+.pd-eye{font-family:var(--font-m);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;}
+.pd-sec-title{font-family:var(--font-d);font-size:18px;font-weight:700;color:var(--char);margin-bottom:13px;padding-bottom:9px;border-bottom:1px solid var(--border);}
+.flag-box{background:#FFF8EC;border-left:3px solid var(--earth);border-radius:0 4px 4px 0;padding:12px 13px;margin-top:10px;}
+.flag-hd{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--earth);margin-bottom:4px;}
+.flag-tx{font-size:12.5px;color:var(--mid);line-height:1.6;}
+.proscons{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.pcb{background:var(--white);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.pcb-hd{padding:8px 11px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;}
+.pcb-hd.g{background:var(--forest);color:var(--white);}
+.pcb-hd.s{background:var(--cream2);color:var(--char);}
+.pcb-list{list-style:none;padding:7px 11px;}
+.pcb-list li{font-size:12px;color:var(--mid);padding:5px 0 5px 15px;border-bottom:1px solid var(--border);position:relative;line-height:1.45;}
+.pcb-list li:last-child{border-bottom:none;}
+.pros .pcb-list li::before{content:'✓';position:absolute;left:0;top:6px;color:var(--forest);font-weight:700;font-size:10px;}
+.cons .pcb-list li::before{content:'—';position:absolute;left:0;top:6px;color:var(--earth);font-size:10px;}
+.alt-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:13px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:11px;cursor:pointer;}
+.alt-name{font-weight:600;font-size:13px;color:var(--char);margin-bottom:3px;}
+.alt-note{font-size:12px;color:var(--mid);line-height:1.45;}
+.alt-badge{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:2px;flex-shrink:0;white-space:nowrap;}
+.ab1{background:var(--forest);color:var(--white);}
+.ab2{background:var(--sage);color:var(--white);}
+.bbs{background:var(--forest);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:20px;}
+.bbs-l strong{display:block;font-family:var(--font-d);font-size:14px;color:var(--white);}
+.bbs-l span{font-size:11px;color:rgba(255,255,255,.6);}
+.bbs-btn{background:var(--white);color:var(--forest);padding:10px 16px;border-radius:3px;font-size:13px;font-weight:700;border:none;cursor:pointer;white-space:nowrap;text-decoration:none;flex-shrink:0;}
+.cats-hd{padding:20px 18px 14px;border-bottom:1px solid var(--border);}
+.cats-title{font-family:var(--font-d);font-size:25px;font-weight:900;color:var(--char);margin-bottom:3px;}
+.cats-sub{font-size:13px;color:var(--mid);}
+.all-cats{padding:14px 18px 24px;display:flex;flex-direction:column;gap:8px;}
+.cat-row{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:13px 15px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:box-shadow .15s;}
+.cat-row:hover{box-shadow:0 2px 10px rgba(0,0,0,.07);}
+.cat-row-icon{font-size:22px;width:34px;text-align:center;flex-shrink:0;}
+.cat-row-info{flex:1;}
+.cat-row-name{font-family:var(--font-d);font-size:14.5px;font-weight:700;color:var(--char);}
+.cat-row-sub{font-size:11.5px;color:var(--muted);}
+.status-pill{font-size:10px;font-weight:600;padding:3px 8px;border-radius:10px;flex-shrink:0;}
+.live{background:rgba(45,80,22,.1);color:var(--forest);}
+.soon{background:var(--cream2);color:var(--muted);}
+.cat-row-arr{color:var(--muted);font-size:14px;flex-shrink:0;}
+.search-wrap{padding:16px 18px 0;}
+.search-box{display:flex;align-items:center;gap:9px;background:var(--white);border:1.5px solid var(--border);border-radius:6px;padding:10px 13px;margin-bottom:18px;}
+.search-icon{color:var(--muted);font-size:15px;flex-shrink:0;}
+.search-input{flex:1;border:none;background:transparent;font-family:var(--font-b);font-size:15px;color:var(--char);outline:none;}
+.search-input::placeholder{color:var(--muted);}
+.sugg-lbl{font-family:var(--font-m);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:9px;}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px;}
+.chip{font-size:12.5px;color:var(--mid);background:var(--white);border:1px solid var(--border);border-radius:20px;padding:5px 12px;cursor:pointer;transition:all .15s;}
+.chip:hover{border-color:var(--forest);color:var(--forest);}
+.search-results{display:flex;flex-direction:column;gap:8px;}
+.search-empty{text-align:center;padding:36px 20px;color:var(--muted);font-size:14px;}
+.profile-hd{padding:26px 18px 20px;border-bottom:1px solid var(--border);text-align:center;}
+.profile-av{width:60px;height:60px;border-radius:50%;background:var(--forest);color:var(--white);font-family:var(--font-d);font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+.profile-name{font-family:var(--font-d);font-size:19px;font-weight:700;}
+.profile-tier{font-size:12px;color:var(--muted);margin-top:2px;}
+.profile-join-btn{display:inline-block;margin-top:12px;background:var(--forest);color:var(--white);font-size:13px;font-weight:600;padding:8px 20px;border-radius:3px;border:none;cursor:pointer;}
+.mem-card{background:var(--forest);border-radius:8px;padding:17px;margin:16px 18px;}
+.mem-eye{font-family:var(--font-m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:7px;}
+.mem-title{font-family:var(--font-d);font-size:19px;font-weight:900;color:var(--white);margin-bottom:3px;}
+.mem-sub{font-size:12.5px;color:rgba(255,255,255,.65);margin-bottom:13px;}
+.mem-perks{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
+.mem-perk{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.4;}
+.mem-check{color:rgba(255,255,255,.55);flex-shrink:0;}
+.mem-cta{display:block;width:100%;background:var(--white);color:var(--forest);text-align:center;padding:12px;font-size:14px;font-weight:700;border-radius:3px;border:none;cursor:pointer;}
+.prof-sec{padding:16px 18px 0;}
+.prof-sec-title{font-family:var(--font-m);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:9px;}
+.prof-rows{display:flex;flex-direction:column;margin-bottom:22px;}
+.prof-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer;}
+.prof-row:last-child{border-bottom:none;}
+.prof-row-label{font-size:14px;color:var(--char);font-weight:500;}
+.prof-row-right{font-size:13px;color:var(--muted);}
+.about-hero{background:var(--forest);padding:32px 18px 28px;}
+.about-hl{font-family:var(--font-d);font-size:30px;font-weight:900;color:var(--white);line-height:1.1;margin-bottom:10px;}
+.about-hl em{font-style:italic;}
+.about-hero-sub{font-size:13.5px;color:rgba(255,255,255,.68);line-height:1.65;}
+.about-body{padding:22px 18px;}
+.about-p{font-size:13.5px;color:var(--mid);line-height:1.75;margin-bottom:16px;}
+.about-p strong{color:var(--char);}
+.principles{list-style:none;margin:16px 0 26px;}
+.principle-row{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.principle-row:first-child{border-top:1px solid var(--border);}
+.pn{font-family:var(--font-m);font-size:10.5px;color:var(--teal);flex-shrink:0;padding-top:2px;}
+.pt{font-size:13px;color:var(--mid);line-height:1.5;}
+.pt strong{color:var(--char);display:block;margin-bottom:1px;}
+.email-strip{background:var(--cream2);padding:20px 18px;}
+.email-strip-title{font-family:var(--font-d);font-size:17px;font-weight:700;color:var(--char);margin-bottom:5px;}
+.email-strip-sub{font-size:13px;color:var(--mid);margin-bottom:14px;}
+.email-row{display:flex;gap:8px;}
+.email-input{flex:1;border:1.5px solid var(--border);border-radius:4px;padding:10px 11px;font-family:var(--font-b);font-size:14px;background:var(--white);outline:none;color:var(--char);}
+.email-input:focus{border-color:var(--forest);}
+.email-submit{background:var(--forest);color:var(--white);border:none;border-radius:4px;padding:10px 14px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.email-thanks{display:none;font-size:14px;color:var(--forest);font-weight:600;padding:10px 0;}
+.tier-page{padding:22px 18px 30px;}
+.tier-page-title{font-family:var(--font-d);font-size:24px;font-weight:900;color:var(--char);margin-bottom:5px;}
+.tier-page-sub{font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:20px;}
+.tier-blk{margin-bottom:12px;border-radius:6px;overflow:hidden;border:1px solid var(--border);}
+.tier-blk-hd{background:var(--forest);padding:12px 15px;display:flex;align-items:center;gap:9px;}
+.tier-blk-num{font-family:var(--font-m);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);background:rgba(255,255,255,.15);border-radius:2px;padding:2px 7px;}
+.tier-blk-name{font-family:var(--font-d);font-size:14.5px;font-weight:700;color:var(--white);}
+.tier-blk-body{background:var(--white);padding:12px 15px;}
+.tier-blk-tag{font-size:13px;color:var(--mid);line-height:1.55;margin-bottom:5px;}
+.tier-blk-list{list-style:none;}
+.tier-blk-list li{font-size:12.5px;color:var(--mid);padding:3px 0 3px 13px;position:relative;}
+.tier-blk-list li::before{content:'·';position:absolute;left:3px;color:var(--teal);font-weight:700;}
+.coming-soon{padding:44px 18px;text-align:center;}
+.cs-icon{font-size:44px;margin-bottom:14px;}
+.cs-title{font-family:var(--font-d);font-size:20px;font-weight:700;color:var(--char);margin-bottom:7px;}
+.cs-sub{font-size:13.5px;color:var(--mid);line-height:1.65;margin-bottom:22px;}
+.cs-btn{background:var(--forest);color:var(--white);border:none;border-radius:4px;padding:11px 22px;font-size:14px;font-weight:600;cursor:pointer;}
+.divider{height:1px;background:var(--border);margin:0 18px;}
+.sp-sm{height:10px;}.sp-md{height:22px;}
+.pending-badge{display:inline-block;background:#FFF3CD;color:#856404;font-size:10px;font-weight:600;padding:2px 8px;border-radius:2px;border:1px solid #FFE083;margin-left:6px;vertical-align:middle;}
+</style>
+</head>
+<body>
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <span class="nav-brand" onclick="goHome()">ROOTED</span>
+  <div class="nav-right">
+    <button class="nav-icon" onclick="showTab('search')">🔍</button>
+    <button class="nav-join" onclick="showAbout()">Join</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="screen-home" class="screen active">
+<div class="page">
+  <div class="home-hero">
+    <div class="eyebrow">Standards · Education · Products</div>
+    <h1 class="home-hl">The <em>trusted</em><br>standard for<br>healthy living.</h1>
+    <p class="home-sub">Every product rated against a published standard. No guesswork.</p>
+  </div>
+  <div class="sec-hd"><span class="sec-title">Categories</span><span class="sec-link" onclick="showTab('categories')">See all →</span></div>
+  <div class="cat-grid">
+    <div class="cat-card" onclick="showCategory('clothing')"><span class="cat-icon">👕</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct">30 products rated</div></div></div>
+    <div class="cat-card" onclick="showCategory('oral')"><span class="cat-icon">🦷</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Oral Care</div><div class="cat-ct">Coming soon</div></div></div>
+    <div class="cat-card" onclick="showCategory('food')"><span class="cat-icon">🥩</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Food &amp; Diet</div><div class="cat-ct">Coming soon</div></div></div>
+    <div class="cat-card" onclick="showCategory('cookware')"><span class="cat-icon">🍳</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Cookware &amp; Kitchen</div><div class="cat-ct">Coming soon</div></div></div>
+  </div>
+  <div class="promise-strip">
+    <div><div class="prom-num">12</div><div class="prom-lbl">Product categories<br>at launch</div></div>
+    <div><div class="prom-num">4</div><div class="prom-lbl">Tiers — no scores,<br>no pay-to-play</div></div>
+    <div><div class="prom-num">10</div><div class="prom-lbl">Education modules<br>per category</div></div>
+    <div><div class="prom-num">100%</div><div class="prom-lbl">Independent.<br>No ads. Ever.</div></div>
+  </div>
+  <div class="sec-hd"><span class="sec-title">Featured Product</span></div>
+  <div class="feat-card" onclick="showProduct('nads')">
+    <div class="feat-img" style="padding:0;overflow:hidden" id="feat-img-nads"></div>
+    <div><div class="feat-brand">NADS</div><div class="feat-name">Ball-Natural™ Boxer — Natural</div><div class="feat-meta"><span class="tb t2"><span class="tn">TIER 2</span> Good Option</span><span class="feat-price">$28–$35</span></div></div>
+  </div>
+  <div class="divider"></div><div class="sp-md"></div>
+  <div class="mission-card" onclick="showAbout()">
+    <div class="eyebrow">Our Mission</div>
+    <div class="mc-title">Why does ROOTED exist?</div>
+    <div class="mc-sub">Marketing is not a standard. We built one.</div>
+    <span class="mc-link">Read our mission →</span>
+  </div>
+</div>
+</div>
+
+<!-- CLOTHING HUB -->
+<div id="screen-clothing" class="screen">
+<div class="page">
+  <div class="cat-hd">
+    <button class="cat-back" onclick="goHome()">← Home</button>
+    <div class="cat-title">Clothing (Men's)</div>
+    <p class="cat-desc">Tap a category to see rated products and education.</p>
+  </div>
+  <div class="subcat-grid">
+    <div class="subcat-card" onclick="showSubcat('underwear')"><span class="sc-icon">🩲</span><div class="sc-name">Underwear</div><div class="sc-count">10 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('t-shirts')"><span class="sc-icon">👕</span><div class="sc-name">T-Shirts &amp; Henleys</div><div class="sc-count">7 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('long-sleeves')"><span class="sc-icon">🧥</span><div class="sc-name">Long Sleeves &amp; Shirts</div><div class="sc-count">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('shorts')"><span class="sc-icon">🩳</span><div class="sc-name">Shorts</div><div class="sc-count">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('pants')"><span class="sc-icon">👖</span><div class="sc-name">Pants</div><div class="sc-count">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('socks')"><span class="sc-icon">🧦</span><div class="sc-name">Socks</div><div class="sc-count">4 rated</div><span class="sc-arr">›</span></div>
+  </div>
+  <div class="divider"></div>
+  <div style="padding:18px 18px 24px">
+    <div class="callout"><div class="callout-lbl">ROOTED Standard — Clothing</div><div class="callout-tx">Prioritize natural fibers with GOTS or OEKO-TEX® certification. Avoid synthetic dyes, formaldehyde treatments, and undisclosed chemical finishes. Start with underwear — highest skin contact, highest leverage swap.</div></div>
+    <div class="sp-sm"></div>
+    <div class="etc" onclick="showSubcat('underwear')"><div class="etc-left"><div class="etc-lbl">Start Here</div><div class="etc-title">Men's Underwear</div><div class="etc-sub">10 products rated. Tier 1 through Tier 2. →</div></div><span class="etc-arr">›</span></div>
+  </div>
+</div>
+</div>
+
+<!-- SUBCAT TEMPLATE -->
+<div id="screen-subcat" class="screen">
+<div class="page">
+  <div class="cat-hd">
+    <button class="cat-back" onclick="showCategory('clothing')">← Clothing</button>
+    <div class="cat-title" id="subcat-title"></div>
+    <p class="cat-desc" id="subcat-desc"></p>
+  </div>
+  <div class="tog-bar">
+    <button class="tog active" id="sc-tog-p" onclick="toggleSubcatTab('products')">Products</button>
+    <button class="tog" id="sc-tog-e" onclick="toggleSubcatTab('education')">Education</button>
+  </div>
+  <div id="sc-products-tab">
+    <div class="tier-filters" id="sc-filters"></div>
+    <div class="prod-list" id="sc-prod-list"></div>
+    <div style="padding:8px 18px 28px"><div class="etc" onclick="toggleSubcatTab('education')"><div class="etc-left"><div class="etc-lbl">Education</div><div class="etc-title">Why this category matters</div><div class="etc-sub">Standards, green flags, myths, buying framework →</div></div><span class="etc-arr">›</span></div></div>
+  </div>
+  <div id="sc-education-tab" style="display:none">
+    <div class="scroll-sec">
+      <div class="ss-hd"><div class="ss-eye">01 — ROOTED Standard</div><div class="ss-title">What good looks like</div></div>
+      <div class="callout"><div class="callout-lbl">The Bottom Line</div><div class="callout-tx" id="edu-standard"></div></div>
+    </div>
+    <div class="scroll-sec">
+      <div class="ss-hd"><div class="ss-eye">02 — Green Flags &amp; Red Flags</div><div class="ss-title">What to look for. What to walk away from.</div></div>
+      <div class="flags-grid">
+        <div><div class="flag-col-hd green">✓ Look for</div><ul class="flag-items green" id="edu-green"></ul></div>
+        <div><div class="flag-col-hd red">✗ Avoid</div><ul class="flag-items red" id="edu-red"></ul></div>
+      </div>
+    </div>
+    <div class="scroll-sec">
+      <div class="ss-hd"><div class="ss-eye">03 — Why It Matters</div><div class="ss-title" id="edu-why-title"></div></div>
+      <div class="callout" style="border-color:var(--teal)"><div class="callout-lbl">ROOTED Standard</div><div class="callout-tx" id="edu-why"></div></div>
+    </div>
+    <div class="scroll-sec">
+      <div class="ss-hd"><div class="ss-eye">04 — What to Avoid</div><div class="ss-title">Not Recommended</div></div>
+      <ul class="avoid-list" id="edu-avoid"></ul>
+    </div>
+    <div style="padding:8px 18px 28px"><div class="etc" onclick="toggleSubcatTab('products')"><div class="etc-left"><div class="etc-lbl">Products</div><div class="etc-title" id="edu-back-title">See all rated products</div><div class="etc-sub">Tier 1 &amp; Tier 2 options →</div></div><span class="etc-arr">›</span></div></div>
+  </div>
+</div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div id="screen-product" class="screen">
+<div class="page" id="product-detail-content"></div>
+</div>
+
+<!-- COMING SOON: ORAL -->
+<div id="screen-oral" class="screen"><div class="page">
+  <div class="cat-hd"><button class="cat-back" onclick="goHome()">← Home</button><div class="cat-title">Oral Care</div></div>
+  <div class="coming-soon"><div class="cs-icon">🦷</div><div class="cs-title">In Progress</div><div class="cs-sub">Building out the Oral Care standards and product database. Standards come before products — always.</div><button class="cs-btn" onclick="showAbout()">Get notified →</button></div>
+</div></div>
+
+<!-- COMING SOON: FOOD -->
+<div id="screen-food" class="screen"><div class="page">
+  <div class="cat-hd"><button class="cat-back" onclick="goHome()">← Home</button><div class="cat-title">Food &amp; Diet</div></div>
+  <div class="coming-soon"><div class="cs-icon">🥩</div><div class="cs-title">In Progress</div><div class="cs-sub">Sourcing, regenerative agriculture, ingredient evaluation. White Oak Pastures, TruBeef, Force of Nature — coming soon.</div><button class="cs-btn" onclick="showAbout()">Get notified →</button></div>
+</div></div>
+
+<!-- COMING SOON: COOKWARE -->
+<div id="screen-cookware" class="screen"><div class="page">
+  <div class="cat-hd"><button class="cat-back" onclick="goHome()">← Home</button><div class="cat-title">Cookware &amp; Kitchen</div></div>
+  <div class="coming-soon"><div class="cs-icon">🍳</div><div class="cs-title">In Progress</div><div class="cs-sub">Cast iron, stainless, bakeware, food storage — coming soon. Sign up to be first in.</div><button class="cs-btn" onclick="showAbout()">Get notified →</button></div>
+</div></div>
+
+<!-- CATEGORIES -->
+<div id="screen-categories" class="screen">
+<div class="page">
+  <div class="cats-hd"><div class="cats-title">All Categories</div><p class="cats-sub">12 categories at launch. Standards first, products second.</p></div>
+  <div class="all-cats">
+    <div class="cat-row" onclick="showCategory('clothing')"><span class="cat-row-icon">👕</span><div class="cat-row-info"><div class="cat-row-name">Clothing (Men's)</div><div class="cat-row-sub">30 products rated</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" onclick="showCategory('oral')"><span class="cat-row-icon">🦷</span><div class="cat-row-info"><div class="cat-row-name">Oral Care</div><div class="cat-row-sub">Toothbrushes, toothpaste, floss</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" onclick="showCategory('food')"><span class="cat-row-icon">🥩</span><div class="cat-row-info"><div class="cat-row-name">Food &amp; Diet</div><div class="cat-row-sub">Sourcing, ingredients, grocery</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" onclick="showCategory('cookware')"><span class="cat-row-icon">🍳</span><div class="cat-row-info"><div class="cat-row-name">Cookware &amp; Kitchen</div><div class="cat-row-sub">Pots, pans, food storage</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row"><span class="cat-row-icon">💧</span><div class="cat-row-info"><div class="cat-row-name">Water</div><div class="cat-row-sub">Filtration, bottles, shower</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row"><span class="cat-row-icon">🧴</span><div class="cat-row-info"><div class="cat-row-name">Personal Care</div><div class="cat-row-sub">Skincare, deodorant, sunscreen</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row"><span class="cat-row-icon">🛏</span><div class="cat-row-info"><div class="cat-row-name">Textiles &amp; Bedroom</div><div class="cat-row-sub">Sheets, pillows, mattresses</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row"><span class="cat-row-icon">🧹</span><div class="cat-row-info"><div class="cat-row-name">Cleaning &amp; Home</div><div class="cat-row-sub">Dish soap, laundry, surfaces</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row"><span class="cat-row-icon">💨</span><div class="cat-row-info"><div class="cat-row-name">Air Quality</div><div class="cat-row-sub">Purifiers, ventilation, humidity</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row"><span class="cat-row-icon">💡</span><div class="cat-row-info"><div class="cat-row-name">Lighting &amp; Circadian Health</div><div class="cat-row-sub">Blue light, red light, EMF</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row"><span class="cat-row-icon">☀️</span><div class="cat-row-info"><div class="cat-row-name">Sunlight &amp; Recovery</div><div class="cat-row-sub">Sauna, cold plunge, grounding</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row"><span class="cat-row-icon">💊</span><div class="cat-row-info"><div class="cat-row-name">Supplements</div><div class="cat-row-sub">Foundational, organs, minerals</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
+  </div>
+</div>
+</div>
+
+<!-- SEARCH -->
+<div id="screen-search" class="screen">
+<div class="page">
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="text" placeholder="Search products, brands..." id="search-input" oninput="handleSearch(this.value)">
+  </div>
+  <div id="search-initial">
+    <div class="sugg-lbl">Popular Searches</div>
+    <div class="chips">
+      <span class="chip" onclick="doSearch('organic cotton')">organic cotton</span>
+      <span class="chip" onclick="doSearch('hemp')">hemp</span>
+      <span class="chip" onclick="doSearch('linen')">linen</span>
+      <span class="chip" onclick="doSearch('elastic free')">elastic free</span>
+      <span class="chip" onclick="doSearch('Cottonique')">Cottonique</span>
+      <span class="chip" onclick="doSearch('Rawganique')">Rawganique</span>
+      <span class="chip" onclick="doSearch('Jungmaven')">Jungmaven</span>
+      <span class="chip" onclick="doSearch('Not Perfect Linen')">Not Perfect Linen</span>
+    </div>
+    <div class="sugg-lbl">Browse by Tier</div>
+    <div class="chips">
+      <span class="chip" onclick="doSearch('tier1')">✓ Tier 1 — Rooted Approved</span>
+      <span class="chip" onclick="doSearch('tier2')">Tier 2 — Good Option</span>
+    </div>
+  </div>
+  <div id="search-results" class="search-results" style="display:none"></div>
+</div>
+</div>
+</div>
+
+<!-- PROFILE -->
+<div id="screen-profile" class="screen">
+<div class="page">
+  <div class="profile-hd">
+    <div class="profile-av">R</div>
+    <div class="profile-name">Guest</div>
+    <div class="profile-tier">Free Member</div>
+    <button class="profile-join-btn" onclick="showAbout()">Create Account</button>
+  </div>
+  <div class="mem-card">
+    <div class="mem-eye">ROOTED Member — $9/mo</div>
+    <div class="mem-title">Unlock the full database</div>
+    <div class="mem-sub">Every product, every tier, every rationale.</div>
+    <div class="mem-perks">
+      <div class="mem-perk"><span class="mem-check">✓</span>Full product database — all 12 categories</div>
+      <div class="mem-perk"><span class="mem-check">✓</span>Buying frameworks for every category</div>
+      <div class="mem-perk"><span class="mem-check">✓</span>Tier update notifications</div>
+      <div class="mem-perk"><span class="mem-check">✓</span>Quarterly research reports</div>
+      <div class="mem-perk"><span class="mem-check">✓</span>Ad-free always</div>
+    </div>
+    <button class="mem-cta" onclick="showAbout()">Join for $9/month →</button>
+  </div>
+  <div class="prof-sec">
+    <div class="prof-sec-title">Account</div>
+    <div class="prof-rows">
+      <div class="prof-row"><span class="prof-row-label">Membership</span><span class="prof-row-right">Free ›</span></div>
+      <div class="prof-row"><span class="prof-row-label">Saved Products</span><span class="prof-row-right">0 ›</span></div>
+      <div class="prof-row"><span class="prof-row-label">Notifications</span><span class="prof-row-right">Off ›</span></div>
+    </div>
+  </div>
+  <div class="prof-sec">
+    <div class="prof-sec-title">About</div>
+    <div class="prof-rows">
+      <div class="prof-row" onclick="showAbout()"><span class="prof-row-label">Our Mission</span><span class="prof-row-right">›</span></div>
+      <div class="prof-row" onclick="showTierPage()"><span class="prof-row-label">How Tiers Work</span><span class="prof-row-right">›</span></div>
+      <div class="prof-row"><span class="prof-row-label">No Pay-to-Play Policy</span><span class="prof-row-right">›</span></div>
+    </div>
+  </div>
+  <div class="sp-md"></div>
+</div>
+</div>
+
+<!-- ABOUT -->
+<div id="screen-about" class="screen">
+<div class="page">
+  <div style="padding:13px 18px 0"><button class="cat-back" onclick="goHome()">← Home</button></div>
+  <div class="about-hero">
+    <div class="eyebrow">Why We Exist</div>
+    <h1 class="about-hl">The standard<br><em>has to come</em><br>from somewhere.</h1>
+    <p class="about-hero-sub">Marketing is not a standard. "Natural" means nothing. "Clean" means nothing. We built the standard that should have existed years ago.</p>
+  </div>
+  <div class="about-body">
+    <p class="about-p">Most people want to live healthier. The problem is not motivation — it is information. <strong>ROOTED cuts through that noise.</strong> We research every category deeply. We publish our standards publicly. We rate products against those standards with full rationale. We never accept payment from brands.</p>
+    <p class="about-p"><strong>Standards come first. Products come second. People always.</strong></p>
+    <div class="pd-eye" style="padding:0;margin-bottom:9px;">Our 10 Principles</div>
+    <ul class="principles">
+      <li class="principle-row"><span class="pn">01</span><div class="pt"><strong>Transparency</strong>If we cannot verify it, we will not claim it.</div></li>
+      <li class="principle-row"><span class="pn">02</span><div class="pt"><strong>Simplicity</strong>If it requires a PhD to follow, it fails our standard.</div></li>
+      <li class="principle-row"><span class="pn">03</span><div class="pt"><strong>Evidence-Based</strong>Science first. Traditional wisdom considered. Anecdote never relied upon.</div></li>
+      <li class="principle-row"><span class="pn">04</span><div class="pt"><strong>Practicality</strong>The best choice is one people will actually use.</div></li>
+      <li class="principle-row"><span class="pn">05</span><div class="pt"><strong>Long-Term Health</strong>We optimize for 20-year outcomes, not 20-day results.</div></li>
+      <li class="principle-row"><span class="pn">06</span><div class="pt"><strong>No Fear Marketing</strong>We use information. Not fear.</div></li>
+      <li class="principle-row"><span class="pn">07</span><div class="pt"><strong>No Pay-to-Play</strong>No brand can pay for a better rating. Ever.</div></li>
+      <li class="principle-row"><span class="pn">08</span><div class="pt"><strong>Natural When Practical</strong>Preferred — not worshipped.</div></li>
+      <li class="principle-row"><span class="pn">09</span><div class="pt"><strong>Minimal Exposure</strong>When two options are equal, choose fewer chemical inputs.</div></li>
+      <li class="principle-row"><span class="pn">10</span><div class="pt"><strong>Always Evolving</strong>Standards are living documents. We update when evidence does.</div></li>
+    </ul>
+  </div>
+  <div class="email-strip">
+    <div class="email-strip-title">Get early access</div>
+    <div class="email-strip-sub">Be first when new categories and products go live.</div>
+    <div class="email-row" id="email-form">
+      <input class="email-input" type="email" placeholder="your@email.com" id="email-val">
+      <button class="email-submit" onclick="submitEmail()">Join</button>
+    </div>
+    <div class="email-thanks" id="email-thanks">You're on the list.</div>
+  </div>
+  <div class="sp-md"></div>
+</div>
+</div>
+
+<!-- TIERS -->
+<div id="screen-tiers" class="screen">
+<div class="page">
+  <div style="padding:13px 18px 0"><button class="cat-back" onclick="goHome()">← Back</button></div>
+  <div class="tier-page">
+    <div class="tier-page-title">The Tier System</div>
+    <p class="tier-page-sub">Products sit in one of four tiers based on ROOTED's published standards. Every placement includes a written rationale. No pay-to-play. Ever.</p>
+    <div class="tier-blk"><div class="tier-blk-hd"><span class="tier-blk-num">TIER 1</span><span class="tier-blk-name">Rooted Approved</span></div><div class="tier-blk-body"><div class="tier-blk-tag">No meaningful compromises. Would confidently recommend to a family member.</div><ul class="tier-blk-list"><li>Meets all primary ROOTED standards</li><li>Transparent sourcing and manufacturing</li><li>Third-party certification confirmed</li></ul></div></div>
+    <div class="tier-blk"><div class="tier-blk-hd" style="background:var(--sage)"><span class="tier-blk-num">TIER 2</span><span class="tier-blk-name">Good Option</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Minor compromises — documented clearly. Still recommended for most people.</div><ul class="tier-blk-list"><li>Meets most ROOTED standards</li><li>One or two minor flags — always disclosed</li></ul></div></div>
+    <div class="tier-blk"><div class="tier-blk-hd" style="background:var(--earth)"><span class="tier-blk-num">TIER 3</span><span class="tier-blk-name">Budget / Transitional</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Acceptable when cost limits better options. Not ideal long-term.</div><ul class="tier-blk-list"><li>Meets basic safety thresholds</li><li>Notable compromises — clearly disclosed</li></ul></div></div>
+    <div class="tier-blk"><div class="tier-blk-hd" style="background:var(--red)"><span class="tier-blk-num">TIER 4</span><span class="tier-blk-name">Not Recommended</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Fails ROOTED standards. Listed for educational comparison only.</div><ul class="tier-blk-list"><li>Fails one or more critical standards</li><li>Popularity is not a standard</li></ul></div></div>
+    <div style="background:var(--cream2);border-radius:6px;padding:14px;margin-top:8px;">
+      <div class="eyebrow" style="margin-bottom:5px;">The Rule</div>
+      <p style="font-size:13px;color:var(--mid);line-height:1.65;">No brand can pay to improve their tier. If a brand reformulates, we update the rating with a date stamp. Tier assignments are living documents.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <button class="tab active" id="tab-home" onclick="showTab('home')"><span class="tab-icon">🏠</span><span class="tab-label">Home</span></button>
+  <button class="tab" id="tab-search" onclick="showTab('search')"><span class="tab-icon">🔍</span><span class="tab-label">Search</span></button>
+  <button class="tab" id="tab-categories" onclick="showTab('categories')"><span class="tab-icon">☰</span><span class="tab-label">Categories</span></button>
+  <button class="tab" id="tab-profile" onclick="showTab('profile')"><span class="tab-icon">👤</span><span class="tab-label">Profile</span></button>
+</div>
+<script>
+const PRODUCTS = {
+  'cottonique-drawstring-boxer':{brand:'Cottonique',tier:'1',label:'Rooted Approved',name:'Drawstring Loose Boxer Shorts — Natural',price:'$30/pair',url:'https://cottonique.com/products/latex-free-mens-drawstring-loose-boxer-shorts-2-pack',subcat:'underwear',emoji:'👕',img:'https://cottonique.com/cdn/shop/products/IMG_5710.jpg',verdict:'100% GOTS organic cotton. Zero elastic, zero synthetic thread, zero dyes. The purest men\'s underwear at any price.',composition:'100% GOTS organic cotton · 100% cotton sewing thread · Organic cotton drawstring · Coco button · Zero dyes · Zero elastic',flags:null,pros:['100% GOTS organic cotton','Zero elastic — drawstring closure','Zero synthetic sewing thread','Completely undyed — Natural colorway','B-Corp certified factory, Philippines','100% biodegradable'],cons:['Loose fit — not for athletic use','Drawstring adjustment learning curve','Online only'],certs:['GOTS Certified','B-Corp Factory','OEKO-TEX® Standard 100','Zero Dyes','Zero Elastic','100% Biodegradable'],alts:['cottonique-boxer-brief','rawganique-joey','rawganique-bach']},
+  'cottonique-boxer-brief':{brand:'Cottonique',tier:'1',label:'Rooted Approved',name:'Elastic-Free Drawstring Boxer Brief — Natural',price:'$35',url:'https://cottonique.com/products/latex-free-mens-rib-drawstring-boxer-brief-w-fly',subcat:'underwear',emoji:'👕',img:'https://cottonique.com/cdn/shop/products/cottonique-boxer-brief-natural.jpg?width=400',verdict:'100% GOTS organic cotton rib knit. Elastic-free drawstring with fly. 100% cotton thread throughout.',composition:'100% GOTS organic cotton rib · 100% cotton sewing thread · Organic cotton drawstring · Zero dyes · Zero elastic',flags:null,pros:['100% GOTS organic cotton rib knit','Elastic-free drawstring with fly','100% cotton thread','Undyed Natural colorway','B-Corp certified factory'],cons:['Drawstring style — different from conventional boxer brief','Online only'],certs:['GOTS Certified','B-Corp Factory','Zero Elastic','Zero Dyes'],alts:['cottonique-drawstring-boxer','rawganique-bach']},
+  'rawganique-joey':{brand:'Rawganique',tier:'1',label:'Rooted Approved',name:'JOEY Hemp Boxer — Natural Undyed',price:'$38–$46',url:'https://rawganique.com/products/all-american-classic-hemp-boxers-joey',subcat:'underwear',emoji:'🌿',img:'https://rawganique.com/cdn/shop/products/joey-hemp-boxer-natural.jpg?width=400',verdict:'100% organic European hemp. Natural rubber elastic (50% OC / 50% natural rubber). Organic cotton thread. 100% biodegradable. Plastic-free since 1997.',composition:'100% organic European hemp · Organic cotton thread · Elastic: 50% OC / 50% natural rubber · Tagua nut buttons · Zero synthetic dyes',flags:null,pros:['100% organic European hemp','Organic cotton thread — no polyester','100% biodegradable elastic','Tagua nut buttons — plastic-free','Full supply chain transparency','Plastic-free since 1997'],cons:['Premium price','Hemp woven — stiffer initially','Ships from Europe','Online only'],certs:['Certified Organic Hemp','Organic Cotton Thread','Zero Synthetic Dyes','Plastic-Free Since 1997','100% Biodegradable'],alts:['rawganique-bach','cottonique-drawstring-boxer']},
+  'rawganique-bach':{brand:'Rawganique',tier:'1',label:'Rooted Approved',name:'BACH Elastic-Free Cotton Boxer — Natural',price:'$32–$40',url:'https://rawganique.com/products/elastic-free-organic-prima-cotton-knit-boxers-bach',subcat:'underwear',emoji:'🌿',img:'https://rawganique.com/cdn/shop/products/bach-organic-cotton-boxer.jpg?width=400',verdict:'100% organic Prima cotton. Zero elastic — drawstring only. Organic cotton thread. Tagua nut buttons. 100% biodegradable.',composition:'100% organic Prima cotton 190 GSM · Organic cotton thread · Drawstring — no elastic · Tagua/coconut buttons · Zero synthetic dyes',flags:null,pros:['100% organic Prima cotton — very soft','Zero elastic — fully elastic-free','Organic cotton thread only','Tagua nut buttons — plastic-free','100% biodegradable'],cons:['Drawstring takes adjustment','No compression — loose fit','Online only'],certs:['Certified Organic Cotton','Elastic-Free','100% Biodegradable','Zero Synthetic Dyes'],alts:['cottonique-drawstring-boxer','rawganique-joey']},
+  'cottonique-crew-socks':{brand:'Cottonique',tier:'1',label:'Rooted Approved',name:'Elite Elastic-Free Crew Socks — Natural (2-pack)',price:'$28 / 2-pack',url:'https://cottonique.com/products/elite-elastic-free-100-cotton-socks-black-2-pack',subcat:'socks',emoji:'🧦',img:'https://cottonique.com/cdn/shop/products/cottonique-elite-socks-natural.jpg?width=400',verdict:'100% organic combed cotton yarn. Zero elastic, zero synthetic fiber, zero dyes. Engineered to stay up without elastic. The gold standard in clean socks.',composition:'100% organic combed cotton yarn · Zero elastic · Zero synthetic fiber · Zero dyes · 800 GSM heavyweight',flags:null,pros:['100% organic combed cotton','Zero elastic — engineered to stay up','Zero dyes in Natural','Zero rubber accelerators','B-Corp certified factory','100% biodegradable'],cons:['Heavyweight — warmer than lightweight socks','May require adjustment period','Online only'],certs:['GOTS Certified','B-Corp Factory','Zero Elastic','Zero Dyes','100% Biodegradable'],alts:['cottonique-quarter-socks','rawganique-canaltown']},
+  'cottonique-quarter-socks':{brand:'Cottonique',tier:'1',label:'Rooted Approved',name:'Elastic-Free Quarter Socks — Natural (2-pack)',price:'$22–$28 / 2-pack',url:'https://cottonique.com/products/elastic-free-100-organic-cotton-quarter-socks-2-pairs-pack',subcat:'socks',emoji:'🧦',img:'https://cottonique.com/cdn/shop/products/cottonique-quarter-socks-natural.jpg?width=400',verdict:'100% GOTS organic cotton. Elastic-free quarter-length with wider non-binding cuff. Zero synthetic content.',composition:'100% GOTS organic cotton · Zero elastic · Zero synthetic fiber · Zero dyes · Wider non-binding cuff',flags:null,pros:['100% organic cotton','Elastic-free — wider non-binding opening','Better foot length coverage','Zero dyes','Ideal for sensitive skin'],cons:['Quarter length — not for boots','Online only'],certs:['GOTS Certified','B-Corp Factory','Zero Elastic','Zero Dyes'],alts:['cottonique-crew-socks','rawganique-canaltown']},
+  'rawganique-canaltown':{brand:'Rawganique',tier:'1',label:'Rooted Approved',name:'CANALTOWN Elastic-Free Organic Cotton Socks',price:'~$18–$24/pair',url:'https://rawganique.com/products/organic-cotton-jacquard-socks-no-elastic',subcat:'socks',emoji:'🌿',img:'https://rawganique.com/cdn/shop/products/canaltown-socks-natural.jpg?width=400',verdict:'100% organic cotton — the only ingredient. Zero elastic, zero synthetic fiber, zero polyamide. 100% biodegradable.',composition:'100% organic cotton · Zero elastic · Zero synthetic fiber · Zero polyamide · 100% biodegradable',flags:null,pros:['100% organic cotton — only ingredient','Zero elastic, zero polyamide','100% biodegradable','Plastic-free construction'],cons:['Ships from Europe — longer delivery','Online only'],certs:['Certified Organic Cotton','Zero Elastic','Zero Polyamide','100% Biodegradable'],alts:['cottonique-crew-socks','rawganique-creekmill']},
+  'rawganique-creekmill':{brand:'Rawganique',tier:'1',label:'Rooted Approved',name:'CREEKMILL Elastic-Free 3-Ply Cotton Socks',price:'~$18–$24/pair',url:'https://rawganique.com/products/elastic-free-ribbed-organic-cotton-socks-3-ply-biodegradable',subcat:'socks',emoji:'🌿',img:'https://rawganique.com/cdn/shop/products/creekmill-socks-natural.jpg?width=400',verdict:'100% organic cotton, 3-ply ribbed knit. Zero elastic, zero synthetic fiber. Dye-free. 100% biodegradable. Ribbed pattern provides natural grip without compression.',composition:'100% organic cotton 3-ply · Zero elastic · Zero synthetic fiber · Dye-free · 100% biodegradable',flags:null,pros:['100% organic cotton 3-ply — extra durable','Zero elastic — ribbed provides natural grip','Completely dye-free','100% biodegradable'],cons:['Ships from Europe','Online only'],certs:['Certified Organic Cotton','Zero Elastic','Dye-Free','100% Biodegradable'],alts:['cottonique-crew-socks','rawganique-canaltown']},
+  'cottonique-henley':{brand:'Cottonique',tier:'1',label:'Rooted Approved',name:'Organic Cotton Henley — Natural',price:'$50',url:'https://cottonique.com/products/mens-slub-henley-neck-short-sleeve',subcat:'t-shirts',emoji:'👕',img:'https://cottonique.com/cdn/shop/products/cottonique-henley-natural.jpg?width=400',verdict:'100% GOTS organic cotton slub jersey. 100% cotton thread in Natural. Coco buttons. Zero elastic cuffs, zero dyes. The cleanest henley available.',composition:'100% GOTS organic cotton slub jersey · 100% cotton thread · Hypoallergenic coco buttons · Zero dyes · Zero elastic',flags:'Natural (undyed) colorway only for Tier 1. Colored variants use polyester-core thread — those drop to Tier 2.',pros:['100% GOTS organic cotton','100% cotton thread (Natural colorway)','Hypoallergenic coco buttons','Zero elastic','Zero dyes in Natural'],cons:['Colored variants use polyester-core thread — choose Natural only','Online only'],certs:['GOTS Certified','B-Corp Factory','Zero Dyes (Natural)','Zero Elastic'],alts:['npl-quebec','harvest-mill-tee']},
+  'harvest-mill-tee':{brand:'Harvest & Mill',tier:'1',label:'Rooted Approved',name:'Undyed Organic Tee — Natural',price:'$60–$65',url:'https://harvestandmill.com/products/organic-cotton-t-shirt-undyed',subcat:'t-shirts',emoji:'🌱',img:'https://harvestandmill.com/cdn/shop/products/harvest-mill-undyed-tee.jpg?width=400',verdict:'100% USA-grown GOTS organic cotton. Milled and sewn in California. Completely undyed. Brand verification pending — provisional Tier 1.',composition:'100% USA-grown GOTS organic cotton · Milled in California · Made in USA · Undyed Natural',flags:'Brand verification pending final confirmation. Thread composition under review. Provisional Tier 1 — will update when confirmed.',pros:['100% USA-grown GOTS organic cotton','Milled and sewn in California — rare full domestic supply chain','Completely undyed in Natural','Carbon negative cotton sourcing'],cons:['Brand verification still pending — provisional rating','Premium price'],certs:['GOTS Certified (USA Cotton)','Made in USA — California','Pending Verification'],alts:['cottonique-henley','npl-quebec']},
+  'cottonique-long-sleeve':{brand:'Cottonique',tier:'1',label:'Rooted Approved',name:'Organic Cotton Long Sleeve Tee — Natural',price:'$38',url:'https://cottonique.com/products/mens-henley-long-sleeve-shirt',subcat:'long-sleeves',emoji:'👕',img:'https://cottonique.com/cdn/shop/products/cottonique-long-sleeve-natural.jpg?width=400',verdict:'100% GOTS organic cotton. 100% cotton sewing thread in Natural colorway. Zero elastic cuffs, zero dyes.',composition:'100% GOTS organic cotton slub single jersey · 100% cotton thread (Natural) · Coco buttons · Zero dyes',flags:'Natural (undyed) colorway only. Colored variants use polyester-core thread — those are Tier 2.',pros:['100% GOTS organic cotton','Cotton thread in Natural','Zero elastic cuffs','Hypoallergenic coco buttons','Relaxed fit'],cons:['Colored variants use polyester-core thread — choose Natural only','Online only'],certs:['GOTS Certified','B-Corp Factory','OEKO-TEX® Standard 100'],alts:['cottonique-thermal','npl-montreal']},
+  'cottonique-thermal':{brand:'Cottonique',tier:'1',label:'Rooted Approved',name:'Organic Cotton Thermal Long Sleeve — Natural',price:'$42–$48',url:'https://cottonique.com/products/hypoallergenic-mens-thermal-long-sleeve',subcat:'long-sleeves',emoji:'👕',img:'https://cottonique.com/cdn/shop/products/cottonique-thermal-natural.jpg?width=400',verdict:'100% GOTS organic cotton jacquard thermal. 100% cotton thread. OEKO-TEX® certified. Zero elastic cuffs, zero dyes. Ideal clean base layer.',composition:'100% GOTS organic cotton jacquard thermal · 100% cotton sewing thread · Zero elastic · Zero dyes · 205 GSM',flags:null,pros:['100% GOTS organic cotton thermal','100% cotton thread throughout','Zero elastic cuffs','Zero dyes in Natural','OEKO-TEX® Standard 100','B-Corp certified'],cons:['Thermal weight — warm for summer','Online only'],certs:['GOTS Certified','OEKO-TEX® Standard 100','B-Corp Factory','Zero Dyes','Zero Elastic'],alts:['cottonique-long-sleeve','npl-montreal']},
+  'npl-montreal':{brand:'Not Perfect Linen',tier:'1',label:'Rooted Approved',name:'MONTREAL Long Sleeve Linen Shirt',price:'$146',url:'https://notperfectlinen.com/products/mens-linen-shirts-long-sleeve-montreal',subcat:'long-sleeves',emoji:'🌾',img:'https://notperfectlinen.com/cdn/shop/products/montreal-linen-shirt-men.jpg?width=400',verdict:'100% OEKO-TEX® certified European linen. Made-to-order by artisans in Lithuania. Naturally antimicrobial and heat-regulating.',composition:'100% OEKO-TEX® certified European linen · Natural linen buttons · Made-to-order in Lithuania',flags:null,pros:['100% pure European linen','OEKO-TEX® certified fabric','Made-to-order — no overproduction','Natural linen buttons','Naturally antimicrobial','Artisan-made in Lithuania since 2014'],cons:['Ships from Lithuania — 10–20 days','Premium price','Made-to-order lead time'],certs:['OEKO-TEX® Standard 100','Made-To-Order Production','European Linen'],alts:['cottonique-long-sleeve','alexcrane-playa']},
+  'npl-darwin':{brand:'Not Perfect Linen',tier:'1',label:'Rooted Approved',name:'DARWIN Linen Shorts',price:'$109',url:'https://notperfectlinen.com/products/mens-linen-shorts-darwin',subcat:'shorts',emoji:'🌾',img:'https://notperfectlinen.com/cdn/shop/products/darwin-linen-shorts-men.jpg?width=400',verdict:'100% OEKO-TEX® certified European linen shorts. Belt loops and pockets. Made-to-order, Lithuania.',composition:'100% OEKO-TEX® European linen · Linen-wrapped elastic waist · Belt loops · Side pockets · Made in Lithuania',flags:'Elastic waistband present — wrapped in linen. Accepted at Tier 1 due to full OEKO-TEX® certification and linen-wrapped construction.',pros:['100% OEKO-TEX® certified linen','Practical belt loops + pockets','Relaxed versatile cut','Made-to-order Lithuania','Naturally breathable'],cons:['Elastic waistband present (linen-wrapped)','Ships from Lithuania','Premium price'],certs:['OEKO-TEX® Standard 100','Made-To-Order','European Linen'],alts:['npl-byron','alexcrane-bo-shorts']},
+  'npl-byron':{brand:'Not Perfect Linen',tier:'1',label:'Rooted Approved',name:'BYRON Linen Shorts',price:'$109',url:'https://notperfectlinen.com/products/linen-shorts-men-darwin',subcat:'shorts',emoji:'🌾',img:'https://notperfectlinen.com/cdn/shop/products/byron-linen-shorts.jpg?width=400',verdict:'100% OEKO-TEX® certified European linen. Relaxed casual cut. Made-to-order by Lithuanian artisans.',composition:'100% OEKO-TEX® European linen · Made-to-order Lithuania · Natural buttons',flags:null,pros:['100% OEKO-TEX® certified European linen','Relaxed casual cut','Made-to-order — no overproduction','Natural buttons'],cons:['Ships from Lithuania','Made-to-order lead time','Premium price'],certs:['OEKO-TEX® Standard 100','Made-To-Order','European Linen'],alts:['npl-darwin','alexcrane-bo-shorts']},
+  'npl-ontario':{brand:'Not Perfect Linen',tier:'1',label:'Rooted Approved',name:'ONTARIO Linen Pants — Drawstring',price:'$139',url:'https://notperfectlinen.com/products/mens-linen-drawstring-pants-ontario',subcat:'pants',emoji:'🌾',img:'https://notperfectlinen.com/cdn/shop/products/ontario-linen-pants.jpg?width=400',verdict:'100% OEKO-TEX® certified European linen. Drawstring waist. Tapered legs, side pockets. Made-to-order Lithuania. Choose drawstring-only variant for Tier 1.',composition:'100% OEKO-TEX® European linen · Drawstring waist · Natural buttons · Made in Lithuania',flags:'Choose drawstring-only variant for Tier 1. Elastic waist variant drops to Tier 2.',pros:['100% OEKO-TEX® certified European linen','Tapered modern cut','Drawstring waist — choose no-elastic variant','Natural buttons','Made-to-order'],cons:['Must choose drawstring variant — elastic version is Tier 2','Ships from Lithuania'],certs:['OEKO-TEX® Standard 100','Made-To-Order','European Linen'],alts:['alexcrane-bo-pants']},
+  'nads':{brand:'NADS',tier:'2',label:'Good Option',name:'Ball-Natural™ Boxer — Natural Undyed',price:'$28–$35',url:'https://nadsunder.com/products/natural-mens-boxers',subcat:'underwear',emoji:'👕',img:'/mnt/user-data/uploads/FullSizeRender.jpeg',verdict:'100% GOTS organic cotton, completely undyed. Two minor flags — polyester-core thread and enclosed elastic waistband. Best fitted-style clean boxer available.',composition:'100% GOTS organic cotton · Polyester-core thread [Flag] · Elastic waistband enclosed in organic cotton [Flag] · Zero dyes',flags:'Polyester-core sewing thread and elastic waistband present. Elastic is enclosed so skin doesn\'t touch it directly. Both disclosed by brand.',pros:['100% GOTS organic cotton','Completely undyed','Elastic enclosed in cotton wrap','OEKO-TEX® certified','Full composition disclosed'],cons:['Elastic waistband present','Polyester-core sewing thread','Shrinks ~5% — size up'],certs:['GOTS Certified','OEKO-TEX® Standard 100','Undyed & Unbleached'],alts:['cottonique-drawstring-boxer','rawganique-bach','maro-boxer-brief']},
+  'rawganique-moby':{brand:'Rawganique',tier:'2',label:'Good Option',name:'MOBY Organic Cotton Boxer — Natural',price:'$30–$40',url:'https://rawganique.com/products/organic-prima-cotton-boxer-shorts-moby',subcat:'underwear',emoji:'🌿',img:'https://rawganique.com/cdn/shop/products/moby-organic-cotton-boxer.jpg?width=400',verdict:'100% organic Prima cotton jersey. Gusseted crotch. Covered organic elastic. Choose Natural (undyed) colorway only.',composition:'100% organic Prima cotton 190 GSM · Organic cotton thread · Covered organic elastic (OC/natural rubber) · Tagua buttons',flags:'Covered elastic waistband present. Natural colorway is undyed — choose Natural only.',pros:['100% organic Prima cotton','Organic cotton thread','Gusseted crotch — no middle seam','Organic natural rubber elastic option','Tagua nut buttons'],cons:['Covered elastic waistband present','Choose Natural colorway only for best purity'],certs:['Certified Organic Cotton','Organic Cotton Thread','Natural Rubber Elastic Option'],alts:['rawganique-bach','cottonique-drawstring-boxer']},
+  'ryker-titan':{brand:'Ryker',tier:'2',label:'Good Option',name:'Titan 100% Merino Wool Boxer Brief',price:'$46',url:'https://rykerclothingco.com/products/the-titan-100-merino-wool-boxer-brief',subcat:'underwear',emoji:'🐑',img:'https://rykerclothingco.com/cdn/shop/files/Titan-Black-1.png?v=1716481924&width=400',verdict:'100% merino wool body. Waistband: 70% cotton / 30% natural rubber — no spandex. GOTS + OEKO-TEX certified. Best natural fiber fitted option for active use.',composition:'100% merino wool · Waistband: 70% cotton / 30% natural rubber · GOTS + OEKO-TEX certified dyes · No spandex',flags:'Natural rubber elastic waistband. OEKO-TEX certified dyes (not undyed).',pros:['100% merino wool — naturally antimicrobial','Natural rubber waistband — no spandex','GOTS + OEKO-TEX certified','Temperature regulating','Odor-resistant — wash less frequently'],cons:['Natural rubber elastic waistband','OEKO-TEX dyes — not undyed','Lay flat to dry','Premium price'],certs:['GOTS Certified','OEKO-TEX® Standard 100','No Spandex'],alts:['cottonique-drawstring-boxer','maro-boxer-brief']},
+  'ryker-atlas':{brand:'Ryker',tier:'2',label:'Good Option',name:'Atlas 100% Organic Cotton Boxer Brief',price:'$34',url:'https://rykerclothingco.com/products/the-atlas-100-organic-cotton-boxer-brief',subcat:'underwear',emoji:'🩲',img:'https://rykerclothingco.com/cdn/shop/files/Atlas-Black-1.png?v=1716481924&width=400',verdict:'100% GOTS organic cotton. Natural rubber waistband. No spandex. Currently sold out — check back. OEKO-TEX certified dyes.',composition:'100% GOTS organic cotton · Natural rubber waistband · OEKO-TEX certified dyes · No spandex',flags:'Natural rubber elastic waistband. OEKO-TEX dyes. Currently sold out.',pros:['100% GOTS organic cotton','Natural rubber waistband — no spandex','GOTS + OEKO-TEX certified','Fitted athletic cut','Most affordable in category'],cons:['Currently sold out — check for restock','Natural rubber elastic','OEKO-TEX dyes — not undyed'],certs:['GOTS Certified','OEKO-TEX® Standard 100','No Spandex'],alts:['ryker-titan','maro-boxer-brief']},
+  'maro-boxer-brief':{brand:'MARO',tier:'2',label:'Good Option',name:'Plastic-Free Boxer Briefs',price:'$28–$32',url:'https://wearmaro.com/products/plastic-free-boxers',subcat:'underwear',emoji:'🌱',img:'https://wearmaro.com/cdn/shop/files/maro-boxer-brief-forest.webp?v=1714684800&width=400',verdict:'100% GOTS organic cotton. Waistband: 60% organic cotton / 40% natural rubber — no spandex. Made in Portugal. Fully plastic-free per ROOTED standard.',composition:'100% GOTS organic cotton · Waistband: 60% OC / 40% natural rubber · Covered in organic cotton · Made in Portugal',flags:'Natural rubber elastic present. Thread composition not fully disclosed.',pros:['100% GOTS organic cotton','60% OC / 40% natural rubber waistband — cleanest ratio in category','Plastic-free per brand standard','Made in Portugal'],cons:['Natural rubber waistband','Thread composition not disclosed','Size up from normal size'],certs:['GOTS Certified','Plastic-Free','Natural Rubber Waistband','Made in Portugal'],alts:['cottonique-drawstring-boxer','rawganique-bach']},
+  'maro-relaxed-boxer':{brand:'MARO',tier:'2',label:'Good Option',name:'Plastic-Free Relaxed Boxer',price:'$28–$32',url:'https://wearmaro.com/products/100-plastic-free-organic-cotton-button-boxers',subcat:'underwear',emoji:'🌱',img:'https://wearmaro.com/cdn/shop/files/maro-relaxed-boxer.webp?v=1714684800&width=400',verdict:'100% GOTS organic cotton. Same clean natural rubber waistband as boxer brief. Loose fit with corozo button fly and side slits. Made in Portugal.',composition:'100% GOTS organic cotton · Waistband: 60% OC / 40% natural rubber · Corozo button fly · Side slits · Made in Portugal',flags:'Natural rubber elastic present. Thread composition not disclosed.',pros:['100% GOTS organic cotton','Clean natural rubber waistband','Corozo button fly — plastic-free','Loose comfortable fit','Side slits for movement'],cons:['Natural rubber elastic present','Thread composition not disclosed','Size up recommended'],certs:['GOTS Certified','Plastic-Free','Natural Rubber Waistband','Corozo Buttons'],alts:['cottonique-drawstring-boxer','nads']},
+  'npl-quebec':{brand:'Not Perfect Linen',tier:'2',label:'Good Option',name:'QUEBEC Short Sleeve Linen Shirt',price:'$130–$140',url:'https://notperfectlinen.com/products/men-s-short-sleeve-linen-shirt-quebec-5',subcat:'t-shirts',emoji:'🌾',img:'https://notperfectlinen.com/cdn/shop/products/quebec-linen-shirt.jpg?width=400',verdict:'100% OEKO-TEX® European linen. Relaxed short sleeve worn as shirt or overshirt. Same Lithuanian artisan production as Montreal. Button-front, chest pocket.',composition:'100% OEKO-TEX® European linen · Natural buttons · Made-to-order Lithuania',flags:'Some construction details may include minimal elastic — check individual product page.',pros:['100% OEKO-TEX® certified linen','Versatile — shirt or overshirt','Point collar, round hem','Made-to-order — no overproduction','Natural buttons'],cons:['Some elastic in construction details','Ships from Lithuania','Premium price'],certs:['OEKO-TEX® Standard 100','Made-To-Order','European Linen'],alts:['npl-montreal','alexcrane-suntee']},
+  'jungmaven-mana10':{brand:'Jungmaven',tier:'2',label:'Good Option',name:'Mana 10 — 100% Hemp Tee',price:'$120',url:'https://jungmaven.com/products/hemp-shirt-100-tee-mana-10',subcat:'t-shirts',emoji:'🌿',img:'https://jungmaven.com/cdn/shop/products/mana10-hemp-tee.jpg?width=400',verdict:'100% hemp — the only 100% hemp tee in the Jungmaven line. Heavyweight 10 oz jersey. Garment-dyed. Made in USA. Gets softer with each wash.',composition:'100% hemp jersey · Garment-dyed · Made in USA · 10 oz heavyweight',flags:'Garment dyes used — not undyed. Thread not fully disclosed.',pros:['100% hemp — only 100% hemp Jungmaven product','Made in USA','Gets softer with wear and washing','Heavyweight and durable','Sophisticated drape'],cons:['Dyes used — not undyed','Thread composition not disclosed','Premium price'],certs:['Made in USA','100% Hemp'],alts:['jungmaven-baja','cottonique-henley']},
+  'jungmaven-baja':{brand:'Jungmaven',tier:'2',label:'Good Option',name:'Baja Tee — Hemp/Organic Cotton',price:'$62',url:'https://jungmaven.com/products/hemp-shirt-short-sleve-baja-5oz',subcat:'t-shirts',emoji:'🌿',img:'https://jungmaven.com/cdn/shop/products/baja-tee-hemp.jpg?width=400',verdict:'55% hemp / 45% GOTS organic cotton. Iconic everyday tee since 1996. Lightweight 5 oz jersey. Made in USA. Best value Jungmaven entry.',composition:'55% hemp / 45% GOTS organic cotton · 5 oz lightweight · Garment-dyed · Made in USA',flags:'Hemp/cotton blend — not 100% single fiber. Garment dyes used.',pros:['Hemp/GOTS organic cotton blend','GOTS-certified cotton component','Made in USA','Most affordable Jungmaven entry','Relaxed versatile fit'],cons:['Blend — not 100% single fiber','Dyes used — not undyed'],certs:['GOTS Certified (Cotton)','Made in USA','Hemp Blend'],alts:['jungmaven-mana10','cottonique-henley']},
+  'alexcrane-suntee':{brand:'Alex Crane',tier:'2',label:'Good Option',name:'Sun Tee — 100% French Linen',price:'$68',url:'https://alexcrane.co/products/sun-tee-steel',subcat:'t-shirts',emoji:'🏝️',img:'https://alexcrane.co/cdn/shop/products/sun-tee-bone.jpg?width=400',verdict:'100% sustainably-grown French linen from Normandy. GOTS-certified organic pigments. Made in Guimarães, Portugal. B-Corp certified brand.',composition:'100% Normandy French linen · GOTS-certified organic pigments · Made in Portugal',flags:'GOTS-certified organic dyes used — not undyed. Thread not fully disclosed.',pros:['100% Normandy French linen','GOTS-certified organic dye pigments','Made in Portugal — premium linen tradition','B-Corp certified brand','Most affordable Alex Crane piece'],cons:['Dyes present (GOTS organic — not undyed)','Thread not fully disclosed'],certs:['B-Corp Certified','GOTS Certified Dyes','Made in Portugal'],alts:['alexcrane-playa','npl-quebec']},
+  'alexcrane-playa':{brand:'Alex Crane',tier:'2',label:'Good Option',name:'Playa Linen Button-Down Shirt',price:'$158',url:'https://alexcrane.co/products/playa-shirt-bone',subcat:'long-sleeves',emoji:'🏝️',img:'https://alexcrane.co/cdn/shop/products/playa-shirt-bone.jpg?width=400',verdict:'100% sustainably-grown French linen. Corozo buttons (biodegradable nut). Biodegradable softeners in washing. B-Corp certified. SA 8000 certified factory.',composition:'100% French linen (Normandy) · Corozo buttons · Biodegradable softeners · Made in Chennai (SA 8000)',flags:'Sewing thread not fully disclosed — likely polyester-core. Organic pigment dyes used.',pros:['100% Normandy French linen','Corozo biodegradable buttons','Biodegradable softeners','SA 8000 certified factory','B-Corp certified'],cons:['Thread not fully disclosed — likely polyester-core','Organic pigment dyes used (not undyed)','Premium price'],certs:['B-Corp Certified','SA 8000 Factory','European Linen','Corozo Buttons'],alts:['npl-montreal','alexcrane-suntee']},
+  'ryker-apex':{brand:'Ryker',tier:'2',label:'Good Option',name:'Apex Short — OC Shell + Merino Liner',price:'$99',url:'https://rykerclothingco.com/products/the-apex-short-master',subcat:'shorts',emoji:'🩳',img:'https://rykerclothingco.com/cdn/shop/files/Apex-Black-1.png?v=1716481924&width=400',verdict:'100% organic cotton shell with 100% merino wool built-in liner. Zero polyester, zero spandex. Natural rubber waistband. GOTS + OEKO-TEX. Size up one.',composition:'Shell: 100% GOTS organic cotton · Liner: 100% merino wool · Waistband: 70% cotton / 30% natural rubber · OEKO-TEX dyes',flags:'Natural rubber elastic waistband. OEKO-TEX dyes (not undyed). Size up one — runs small.',pros:['100% organic cotton outer','100% merino wool liner','Zero polyester, zero spandex','Natural rubber waistband','GOTS + OEKO-TEX certified'],cons:['Size up one — runs small','Natural rubber elastic','OEKO-TEX dyes (not undyed)','Merino liner — lay flat to dry','Premium price'],certs:['GOTS Certified (Cotton)','OEKO-TEX® Standard 100','No Polyester','No Spandex'],alts:['ryker-ares','alexcrane-bo-shorts']},
+  'ryker-ares':{brand:'Ryker',tier:'2',label:'Good Option',name:'Ares 100% Organic Cotton Short',price:'$79',url:'https://rykerclothingco.com/products/the-ascend-100-organic-cotton-shorts-navy-5-5-copy',subcat:'shorts',emoji:'🩳',img:'https://rykerclothingco.com/cdn/shop/files/Ares-Black-1.png?v=1716481924&width=400',verdict:'100% GOTS organic cotton. No liner. Natural rubber waistband, no spandex. OEKO-TEX certified dyes. Best value Ryker option.',composition:'100% GOTS organic cotton · No liner · Waistband: 70% cotton / 30% natural rubber · OEKO-TEX certified dyes',flags:'Natural rubber elastic waistband. OEKO-TEX dyes (not undyed). Size up one.',pros:['100% GOTS organic cotton','No liner — simple clean short','Natural rubber waistband — no spandex','OEKO-TEX certified','Most affordable Ryker short'],cons:['Natural rubber elastic waistband','OEKO-TEX dyes (not undyed)','Size up one — runs small'],certs:['GOTS Certified','OEKO-TEX® Standard 100','No Spandex'],alts:['ryker-apex','alexcrane-bo-shorts']},
+  'ryker-apollo':{brand:'Ryker',tier:'2',label:'Good Option',name:'Apollo 100% Merino Wool Short',price:'$99',url:'https://rykerclothingco.com/collections/mens-shorts-vf',subcat:'shorts',emoji:'🩳',img:'https://rykerclothingco.com/cdn/shop/files/Apollo-Black-1.png?v=1716481924&width=400',verdict:'100% merino wool. No liner. Natural rubber waistband, no spandex. Naturally temperature-regulating and antimicrobial.',composition:'100% merino wool · Waistband: 70% cotton / 30% natural rubber · OEKO-TEX certified dyes · No spandex',flags:'Natural rubber elastic waistband. OEKO-TEX dyes.',pros:['100% merino wool — naturally antimicrobial','Temperature regulating','Zero polyester, zero spandex','Natural rubber waistband','Wear longer between washes'],cons:['Natural rubber elastic','Lay flat to dry','Premium price'],certs:['OEKO-TEX® Standard 100','No Polyester','No Spandex'],alts:['ryker-apex','ryker-ares']},
+  'alexcrane-bo-shorts':{brand:'Alex Crane',tier:'2',label:'Good Option',name:'Bo Linen Drawstring Shorts',price:'$85',url:'https://alexcrane.co/products/bo-shorts-bone',subcat:'shorts',emoji:'🏝️',img:'https://alexcrane.co/cdn/shop/products/bo-shorts-bone.jpg?width=400',verdict:'100% Normandy French linen. Natural rubber drawstring waistband. Relaxed fit. GOTS-certified organic pigments. B-Corp certified.',composition:'100% French linen (Normandy) · Natural rubber waistband · Drawstring · GOTS-certified organic dyes',flags:'Natural rubber waistband. GOTS-certified dyes (not undyed). Thread not disclosed.',pros:['100% Normandy French linen','Natural rubber waistband — no spandex','GOTS-certified organic pigments','B-Corp certified'],cons:['Natural rubber waistband','GOTS organic dyes (not undyed)','Thread not disclosed'],certs:['B-Corp Certified','GOTS Certified Dyes','Natural Rubber Waistband'],alts:['npl-darwin','ryker-ares']},
+  'alexcrane-bo-pants':{brand:'Alex Crane',tier:'2',label:'Good Option',name:'Bo Linen Drawstring Pants',price:'$138',url:'https://alexcrane.co/products/bo-pants-bone',subcat:'pants',emoji:'🏝️',img:'https://alexcrane.co/cdn/shop/products/bo-pants-bone.jpg?width=400',verdict:'100% Normandy French linen. Relaxed drawstring pant with natural rubber waistband. Same fabric as Bo Shorts. Machine wash cool.',composition:'100% French linen (Normandy) · Natural rubber waistband · Drawstring · GOTS-certified organic dyes · Made in Chennai',flags:'Natural rubber waistband. GOTS-certified dyes. Thread not fully disclosed.',pros:['100% Normandy French linen','Natural rubber waistband','Relaxed breathable drawstring pant','B-Corp certified','Machine washable'],cons:['Natural rubber waistband','GOTS organic dyes (not undyed)','Thread not fully disclosed'],certs:['B-Corp Certified','GOTS Certified Dyes','Natural Rubber Waistband'],alts:['npl-ontario']},
+};
+
+const SUBCAT_EDU = {
+  'underwear':{title:"Men's Underwear",desc:'10 products rated against ROOTED standards.',standard:'Prioritize natural fibers with GOTS or OEKO-TEX® certification. Avoid synthetic dyes, formaldehyde treatments, and undisclosed chemical finishes. Start with underwear — highest skin contact, highest leverage swap for men\'s health.',greenFlags:['GOTS certified — fiber to finished garment','OEKO-TEX® Standard 100','100% organic cotton, linen, or hemp','Organic cotton sewing thread','Full composition disclosed','Elastic-free or natural rubber elastic only'],redFlags:['Polyester, nylon, spandex in main fabric','Synthetic dyes — especially AZO','Bamboo viscose — heavy chemical processing','Antimicrobial coatings on fabric','No composition disclosure from brand','Spandex waistbands'],whyTitle:'Underwear first. Here\'s why.',why:'Underwear is in direct skin contact 16+ hours per day with tissue sensitive to heat and endocrine disruption. Research links scrotal temperature elevation from non-breathable synthetics to reduced sperm quality. Synthetic dyes and formaldehyde treatments have documented endocrine-disrupting potential. One of the highest-leverage single swaps for men\'s health.',avoid:['<strong>Hanes, Calvin Klein, Tommy Hilfiger</strong> — polyester blends, synthetic dyes, formaldehyde wrinkle treatments','<strong>Nike, Under Armour, Lululemon</strong> — polyester with antimicrobial chemical coatings','<strong>Bamboo viscose</strong> — heavy chemical processing. It\'s rayon. The "natural bamboo" label is misleading.','<strong>"Wrinkle resistant" or "easy care"</strong> — formaldehyde-based resin treatment applied to fabric'],backTitle:'See all 10 rated underwear products'},
+  't-shirts':{title:'T-Shirts &amp; Henleys',desc:'7 products rated — organic cotton, hemp, and linen.',standard:'Choose 100% natural fibers with GOTS or OEKO-TEX® certification. Prioritize undyed or eco-dyed options. Look for natural buttons (coco, corozo, tagua) and organic thread. Avoid polyester, elastane, and untransparent dye systems.',greenFlags:['100% organic cotton, hemp, or linen','GOTS or OEKO-TEX® certified','Undyed or GOTS-certified organic pigments','Natural buttons (coco, corozo, tagua)','Full fiber composition disclosed','Made in certified factories'],redFlags:['Any polyester or elastane in the blend','Synthetic dyes without OEKO-TEX® certification','"Easy care" or "wrinkle resistant" finishes','Undisclosed thread material','Bamboo viscose labeled as "natural"','Performance coatings'],whyTitle:'What you wear on your skin matters more than labels suggest.',why:'A conventional cotton t-shirt can contain synthetic dyes, formaldehyde-based wrinkle treatments, optical brighteners, and polyester thread — none of which appear on a "100% cotton" hangtag. GOTS and OEKO-TEX® certifications are the only independent way to verify what\'s actually in the fabric.',avoid:['<strong>"Moisture-wicking" synthetic t-shirts</strong> — polyester with chemical coatings that shed microplastics','<strong>Fast fashion basics</strong> — polyester blends, synthetic dyes, no transparency','<strong>Bamboo viscose tees labeled "natural"</strong> — requires heavy chemical processing','<strong>Any tee with no fiber or dye disclosure</strong> — if a brand won\'t tell you what\'s in it, walk away'],backTitle:'See all 7 rated t-shirts & henleys'},
+  'long-sleeves':{title:'Long Sleeves &amp; Shirts',desc:'6 products rated — linen, cotton, and thermal.',standard:'For long sleeves and button-down shirts, linen and organic cotton are the primary fiber choices. Linen is the most breathable and antimicrobial natural fiber available. OEKO-TEX® or GOTS certification confirms the fabric has been tested for harmful substances.',greenFlags:['100% organic cotton, linen, or hemp','GOTS or OEKO-TEX® certified','Elastic-free cuffs','Natural buttons (coco, corozo, linen)','Undyed or GOTS organic dyes','Full supply chain disclosed'],redFlags:['Polyester or synthetic fiber blends','Spandex in cuffs or body','Synthetic dyes without OEKO-TEX®','"Easy care" or "non-iron" finishes','Plastic buttons','No transparency on fiber or dye'],whyTitle:'Shirts in contact with skin all day deserve the same scrutiny as underwear.',why:'Long sleeves and button-downs are in direct contact with your arms, torso, and chest all day. Conventional dress shirts often contain formaldehyde-based "non-iron" treatments, polyester blends, and synthetic dyes. Natural fibers like linen and organic cotton breathe, regulate temperature naturally, and don\'t require chemical finishes.',avoid:['<strong>"Non-iron" or "wrinkle-free" dress shirts</strong> — formaldehyde-based resin finishes — major red flag','<strong>Polyester-cotton blend shirts</strong> — if it has polyester, it sheds microplastics','<strong>Performance dress shirts (moisture-wicking)</strong> — polyester with chemical coatings','<strong>Bamboo viscose shirts</strong> — "natural" claim is misleading'],backTitle:'See all 6 rated long sleeves & shirts'},
+  'shorts':{title:"Men's Shorts",desc:'6 products rated — organic cotton, merino wool, and linen.',standard:'The activewear category is dominated by polyester. ROOTED\'s standard: 100% natural fibers, natural rubber or elastic-free waistband, GOTS + OEKO-TEX® certification, no synthetic coatings. Performance does not require polyester.',greenFlags:['100% organic cotton, merino wool, or linen','GOTS + OEKO-TEX® certified','Natural rubber waistband (70%+ cotton to rubber)','No polyester or spandex','No antimicrobial chemical coatings','Full composition including liner disclosed'],redFlags:['Polyester, nylon, or spandex in shell or liner','Synthetic elastic waistbands (spandex/polyester)','Moisture-wicking coatings (PFAS, DWR)','Antimicrobial treatments','No disclosure of liner composition','Recycled polyester — still polyester'],whyTitle:'Athletic wear does not require plastic.',why:'Most "performance" athletic shorts are 100% polyester — a plastic that sheds microplastics with every wear and wash, often contains endocrine-disrupting compounds, and sits in direct contact with some of the most hormonally sensitive tissue on the male body. Natural fibers perform comparably for everyday athletic use without the microplastic exposure.',avoid:['<strong>Nike, Lululemon, Vuori, Rhone, Ten Thousand</strong> — polyester base with chemical coatings','<strong>"Recycled polyester" or "rPET" shorts</strong> — still polyester, still sheds microplastics','<strong>Any short with a synthetic liner</strong> — most athletic shorts have polyester liners in direct contact with sensitive skin','<strong>"Moisture-wicking" treated fabrics</strong> — often coated with PFAS (forever chemicals)'],backTitle:'See all 6 rated shorts'},
+  'pants':{title:"Men's Pants",desc:'2 products rated — linen and organic cotton.',standard:'For everyday pants, linen and organic cotton are the cleanest choices. Elastic-free drawstring waistbands preferred. OEKO-TEX® or GOTS certification covers fiber and any dyeing or finishing.',greenFlags:['100% organic cotton or linen','GOTS or OEKO-TEX® certified','Elastic-free or natural rubber waistband','Drawstring closure','Natural buttons','Full composition disclosed'],redFlags:['Polyester, elastane, or spandex blend','"Stretch" or "4-way stretch" fabric — almost always synthetic','Synthetic dyes without OEKO-TEX®','"Wrinkle resistant" dress pants — formaldehyde treatments','No composition transparency'],whyTitle:'Your pants are in contact with your skin from morning to night.',why:'Most dress pants and "performance" casual pants contain polyester blends, spandex for stretch, and chemical dye systems — in direct contact with large surface areas of skin for 10+ hours a day. Linen and organic cotton offer comparable or superior comfort without the synthetic fiber exposure.',avoid:['<strong>Synthetic "performance" pants</strong> — polyester blends with stretch coatings','<strong>"Stretch" chinos or dress pants</strong> — elastane added for stretch, often undisclosed polyester thread','<strong>"Wrinkle-resistant" dress pants</strong> — formaldehyde-based resin treatment standard in this category','<strong>Any pants without fiber composition disclosure</strong>'],backTitle:'See all 2 rated pants'},
+  'socks':{title:"Men's Socks",desc:'4 products rated — organic cotton and natural fiber.',standard:'Most socks contain polyamide (nylon), polyester, and elastane. ROOTED\'s standard: 100% organic cotton or natural fiber, elastic-free or natural rubber only, zero synthetic fiber including toe reinforcement, zero polyamide.',greenFlags:['100% organic cotton or natural fiber','GOTS certified','Zero polyamide (nylon)','Zero synthetic fiber including reinforcement','Elastic-free or natural rubber','Zero dyes in natural colorways'],redFlags:['Any polyamide or nylon — even "reinforcement"','Polyester in blend or thread','Elastane or spandex','Synthetic dyes without OEKO-TEX®','No fiber disclosure','"Performance" or "moisture-wicking" socks'],whyTitle:'The hidden synthetic problem in socks.',why:'Most socks marketed as "100% cotton" legally contain 10–20% nylon and elastane without disclosing it — because the law allows omission of "elastic fiber" from the label. ROOTED only rates socks that disclose 100% of their fiber composition and contain zero synthetic content.',avoid:['<strong>Bombas, Darn Tough, Smartwool, Stance, Nike</strong> — contain polyamide or elastane','<strong>Merino "performance" socks</strong> — almost all contain nylon reinforcement','<strong>Any sock labeled "100% cotton" without explicit confirmation of zero elastic and zero nylon</strong>','<strong>"Moisture-wicking" socks</strong> — typically a polyester or nylon blend'],backTitle:'See all 4 rated socks'},
+};
+
+// ── NAVIGATION ───────────────────────────────────────────────────────
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);}
+function showTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));const btn=document.getElementById('tab-'+tab);if(btn)btn.classList.add('active');if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='profile')showScreen('profile');}
+function goHome(){showTab('home');}
+function showCategory(cat){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));showScreen(cat);}
+function showAbout(){showScreen('about');}
+function showTierPage(){showScreen('tiers');}
+
+// ── SUBCAT ───────────────────────────────────────────────────────────
+function showSubcat(sub){
+  const edu=SUBCAT_EDU[sub];if(!edu)return;
+  document.getElementById('subcat-title').innerHTML=edu.title;
+  document.getElementById('subcat-desc').textContent=edu.desc.replace(/&amp;/g,'&');
+  const subProds=Object.entries(PRODUCTS).filter(([k,p])=>p.subcat===sub);
+  const t1=subProds.filter(([k,p])=>p.tier==='1').length;
+  const t2=subProds.filter(([k,p])=>p.tier==='2').length;
+  document.getElementById('sc-filters').innerHTML=`<button class="tf active" onclick="filterSubcat(this,'all')">All (${subProds.length})</button>${t1?`<button class="tf" onclick="filterSubcat(this,'1')">Tier 1 (${t1})</button>`:''}${t2?`<button class="tf" onclick="filterSubcat(this,'2')">Tier 2 (${t2})</button>`:''}`;
+  document.getElementById('sc-prod-list').innerHTML=subProds.map(([id,p])=>buildProdCard(id,p)).join('');
+  document.getElementById('edu-standard').textContent=edu.standard;
+  document.getElementById('edu-green').innerHTML=edu.greenFlags.map(f=>`<li>${f}</li>`).join('');
+  document.getElementById('edu-red').innerHTML=edu.redFlags.map(f=>`<li>${f}</li>`).join('');
+  document.getElementById('edu-why-title').textContent=edu.whyTitle;
+  document.getElementById('edu-why').textContent=edu.why;
+  document.getElementById('edu-avoid').innerHTML=edu.avoid.map(a=>`<li>${a}</li>`).join('');
+  document.getElementById('edu-back-title').textContent=edu.backTitle;
+  toggleSubcatTab('products');
+  showScreen('subcat');
+}
+
+function buildProdCard(id,p){
+  const imgHtml = buildImgEl(id, p, false);
+  const tc=p.tier==='1'?'':p.tier==='2'?'t2':'t3';
+  return `<div class="pc" data-tier="${p.tier}" onclick="showProduct('${id}')"><div class="pc-img" style="padding:0;overflow:hidden">${imgHtml}</div><div class="pc-body"><div class="pc-brand">${p.brand}</div><div class="pc-name">${p.name}</div><div class="pc-verdict">${p.verdict}</div><div class="pc-meta"><span class="tb ${tc}"><span class="tn">TIER ${p.tier}</span> ${p.label}</span><span class="pc-price">${p.price}</span></div></div><span class="pc-arr">›</span></div>`;
+}
+
+function toggleSubcatTab(tab){
+  const pt=document.getElementById('sc-products-tab');const et=document.getElementById('sc-education-tab');const tp=document.getElementById('sc-tog-p');const te=document.getElementById('sc-tog-e');
+  if(tab==='products'){pt.style.display='block';et.style.display='none';tp.classList.add('active');te.classList.remove('active');}
+  else{pt.style.display='none';et.style.display='block';tp.classList.remove('active');te.classList.add('active');}
+  window.scrollTo(0,0);
+}
+
+function filterSubcat(btn,tier){
+  document.getElementById('sc-filters').querySelectorAll('.tf').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  document.getElementById('sc-prod-list').querySelectorAll('.pc').forEach(card=>{card.style.display=(tier==='all'||card.dataset.tier===tier)?'flex':'none';});
+}
+
+// ── PRODUCT DETAIL ───────────────────────────────────────────────────
+function showProduct(id){
+  const p=PRODUCTS[id];if(!p)return;
+  const tc=p.tier==='1'?'':p.tier==='2'?'t2':'t3';
+  const vbc=p.tier==='2'?'pd-verdict-box t2':'pd-verdict-box';
+  const imgHtml = buildImgEl(id, p, true);
+  const flagHtml=p.flags?`<div class="flag-box"><div class="flag-hd">⚠ Flag(s)</div><div class="flag-tx">${p.flags}</div></div>`:'';
+  const pendingHtml=id==='harvest-mill-tee'?'<span class="pending-badge">Pending Verification</span>':'';
+  const prosList=p.pros.map(x=>`<li>${x}</li>`).join('');
+  const consList=p.cons.map(x=>`<li>${x}</li>`).join('');
+  const certsList=p.certs.map(c=>`<span class="cert-pill">${c}</span>`).join('');
+  const altsList=(p.alts||[]).filter(aid=>PRODUCTS[aid]).map(aid=>{const a=PRODUCTS[aid];const ac=a.tier==='1'?'ab1':a.tier==='2'?'ab2':'ab3';return `<div class="alt-card" onclick="showProduct('${aid}')"><div><div class="alt-name">${a.brand} — ${a.name}</div><div class="alt-note">${a.verdict.substring(0,90)}...</div></div><span class="alt-badge ${ac}">Tier ${a.tier}</span></div>`;}).join('');
+  const subcatLabel=SUBCAT_EDU[p.subcat]?SUBCAT_EDU[p.subcat].title.replace(/&amp;/g,'&'):'Back';
+  const brandDomain=p.url.split('/products')[0]||p.url;
+  const html=`
+    <button class="pd-back" onclick="showSubcat('${p.subcat}')">← ${subcatLabel}</button>
+    <div class="pd-hero">
+      <div class="pd-img" style="padding:0;height:280px;max-height:280px;overflow:hidden">${imgHtml}</div>
+      <span class="tb ${tc}" style="margin-bottom:9px"><span class="tn">TIER ${p.tier}</span> ${p.label}</span>${pendingHtml}
+      <div class="pd-brand" style="margin-top:10px">${p.brand}</div>
+      <h1 class="pd-name">${p.name}</h1>
+      <div class="pd-sub">${p.price}</div>
+      <div class="${vbc}"><div class="pd-vhd">ROOTED Verdict</div><div class="pd-vtx">${p.verdict}</div></div>
+      <a href="${p.url}" target="_blank" class="btn-buy">Buy on ${p.brand} ↗</a>
+      <a href="${brandDomain}" target="_blank" class="btn-brand">Visit Brand Website</a>
+      <p class="pd-aff">Affiliate link — commission never influences ratings</p>
+      <div class="pd-certs">${certsList}</div>
+    </div>
+    <div class="pd-sec"><div class="pd-eye">Full Composition</div><div class="pd-sec-title">What's In It</div><p style="font-size:13.5px;color:var(--mid);line-height:1.7">${p.composition}</p>${flagHtml}</div>
+    <div class="pd-sec"><div class="pd-eye">Pros &amp; Cons</div><div class="pd-sec-title">The Full Picture</div><div class="proscons"><div class="pcb pros"><div class="pcb-hd g">Pros</div><ul class="pcb-list">${prosList}</ul></div><div class="pcb cons"><div class="pcb-hd s">Cons</div><ul class="pcb-list">${consList}</ul></div></div></div>
+    ${altsList?`<div class="pd-sec"><div class="pd-eye">Alternatives</div><div class="pd-sec-title">Other Options</div>${altsList}</div>`:''}
+    <div class="bbs"><div class="bbs-l"><strong>${p.brand} — ${p.price}</strong><span>Tier ${p.tier} · ${p.label}</span></div><a href="${p.url}" target="_blank" class="bbs-btn">Buy Now ↗</a></div>
+    <div class="sp-md"></div>`;
+  document.getElementById('product-detail-content').innerHTML=html;
+  showScreen('product');
+}
+
+// ── SEARCH ───────────────────────────────────────────────────────────
+function handleSearch(val){
+  const init=document.getElementById('search-initial');const res=document.getElementById('search-results');
+  if(!val.trim()){init.style.display='block';res.style.display='none';return;}
+  init.style.display='none';res.style.display='flex';renderSearch(val);
+}
+function doSearch(q){
+  document.getElementById('search-input').value=q;
+  document.getElementById('search-initial').style.display='none';
+  document.getElementById('search-results').style.display='flex';
+  renderSearch(q);
+}
+function renderSearch(query){
+  const q=query.toLowerCase();const results=document.getElementById('search-results');
+  const matches=Object.entries(PRODUCTS).filter(([id,p])=>{
+    if(q==='tier1')return p.tier==='1';if(q==='tier2')return p.tier==='2';
+    return p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)||p.verdict.toLowerCase().includes(q)||p.subcat.toLowerCase().includes(q)||(p.composition&&p.composition.toLowerCase().includes(q));
+  });
+  if(!matches.length){results.innerHTML=`<div class="search-empty">No products found for "${query}".<br><br>More categories coming soon.</div>`;return;}
+  results.innerHTML=matches.map(([id,p])=>buildProdCard(id,p)).join('');
+}
+
+// ── IMAGE FALLBACK ────────────────────────────────────────────────────
+// IMAGE SYSTEM: auto-fetches og:image from product URL via CORS proxy,
+// caches in localStorage, updates UI live. New products get images automatically.
+const IMG_CACHE_KEY = 'rooted_img_v2';
+const CF_WORKER = 'https://rooted.team-ce0.workers.dev';
+
+function getImgCache(){try{return JSON.parse(localStorage.getItem(IMG_CACHE_KEY)||'{}');}catch(e){return {};}}
+function setImgCache(c){try{localStorage.setItem(IMG_CACHE_KEY,JSON.stringify(c));}catch(e){}}
+
+async function resolveProductImage(id, url) {
+  const cache = getImgCache();
+  if (cache[id] || cache[id+'_pending']) return;
+  cache[id+'_pending'] = 1;
+  setImgCache(cache);
+  try {
+    const res = await fetch(CF_WORKER + '?url=' + encodeURIComponent(url), {signal: AbortSignal.timeout(10000)});
+    if (!res.ok) throw new Error('worker '+res.status);
+    const data = await res.json();
+    if (data.image) {
+      const nc = getImgCache();
+      nc[id] = data.image;
+      delete nc[id+'_pending'];
+      setImgCache(nc);
+      document.querySelectorAll('[data-imgid="'+id+'"]').forEach(el => {
+        el.innerHTML = buildImgTag(data.image, el.dataset.size === 'lg');
+      });
+    } else {
+      const nc = getImgCache(); delete nc[id+'_pending']; setImgCache(nc);
+    }
+  } catch(e) {
+    const nc = getImgCache(); delete nc[id+'_pending']; setImgCache(nc);
+  }
+}
+
+function buildImgTag(src, large) {
+  const h = large ? '100%' : '100%';
+  return '<img src="'+src+'" style="width:100%;height:'+h+';object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.style.opacity=0">';
+}
+
+const BRAND_BG = {
+  'Cottonique':'#E8F0DC','Rawganique':'#D5E8CE','NADS':'#EEE8DE',
+  'MARO':'#D8E8D8','Ryker':'#DDE3EC','Jungmaven':'#DDE8D5',
+  'Alex Crane':'#E8E2D5','Not Perfect Linen':'#EDE8E0','Harvest & Mill':'#E5EAD8',
+};
+
+function buildImgEl(id, p, large) {
+  const cache = getImgCache();
+  const bg = BRAND_BG[p.brand] || '#EDE7D9';
+  const size = large ? 'lg' : 'sm';
+  const hasImg = cache[id];
+
+  const inner = hasImg
+    ? buildImgTag(cache[id], large)
+    : `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:5px;padding:8px">
+        <span style="font-size:${large?'36px':'24px'}">${p.emoji}</span>
+        <span style="font-family:'DM Mono',monospace;font-size:${large?'9px':'8px'};color:#2D5016;opacity:.65;letter-spacing:.07em;text-transform:uppercase;text-align:center;line-height:1.3">${p.brand}</span>
+       </div>`;
+
+  // Queue fetch if not cached
+  if (!hasImg) setTimeout(() => resolveProductImage(id, p.url), 80);
+
+  return `<div data-imgid="${id}" data-size="${size}" style="width:100%;height:100%;background:${bg};border-radius:inherit;overflow:hidden">${inner}</div>`;
+}
+
+function imgFallback(img, emoji, size) {
+  img.style.display='none';
+}
+
+// ── EMAIL ─────────────────────────────────────────────────────────────
+function initFeaturedImages() {
+  // Render featured NADS image on home screen
+  const nads = PRODUCTS['nads'];
+  if (nads) {
+    const el = document.getElementById('feat-img-nads');
+    if (el) el.innerHTML = buildImgEl('nads', nads, false);
+  }
+}
+// Run on load
+window.addEventListener('DOMContentLoaded', initFeaturedImages);
+
+function submitEmail(){
+  const val=document.getElementById('email-val').value;
+  if(!val||!val.includes('@')){alert('Please enter a valid email.');return;}
+  document.getElementById('email-form').style.display='none';
+  document.getElementById('email-thanks').style.display='block';
+}
+</script>
+</body>
+</html>
