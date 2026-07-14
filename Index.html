@@ -1168,17 +1168,30 @@ function haversineMiles(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+let lastFetchDiagnostics = [];
+
 async function fetchOneDirectory(type, lat, lng, zipCode) {
   const params = (lat != null && lng != null) ? `x=${lng}&y=${lat}&radius=50` : `zip=${zipCode}&radius=50`;
-  const res = await fetch(`https://www.usdalocalfoodportal.com/api/${type}/?apikey=${USDA_API_KEY}&${params}`);
-  if (!res.ok) throw new Error('USDA API request failed for ' + type + ': ' + res.status);
-  const data = await res.json();
-  return (Array.isArray(data) ? data : []).map(m => ({ ...m, _type: type }));
+  const url = `https://www.usdalocalfoodportal.com/api/${type}/?apikey=${USDA_API_KEY}&${params}`;
+  const res = await fetch(url);
+  const text = await res.text();
+  let data;
+  try { data = JSON.parse(text); } catch (e) {
+    throw new Error('[' + type + '] HTTP ' + res.status + ', non-JSON response: ' + text.slice(0, 150));
+  }
+  if (!Array.isArray(data)) {
+    // The API responded (often HTTP 200) but didn't return the expected array —
+    // this is usually an error message or auth problem hiding inside a "successful" response.
+    throw new Error('[' + type + '] HTTP ' + res.status + ', unexpected (non-array) response: ' + JSON.stringify(data).slice(0, 200));
+  }
+  if (!res.ok) throw new Error('[' + type + '] HTTP ' + res.status);
+  return data.map(m => ({ ...m, _type: type }));
 }
 
 async function fetchFarmersMarkets(lat, lng, zipCode) {
   const originLat = lat != null ? lat : 39.8283;
   const originLng = lng != null ? lng : -98.5795;
+  lastFetchDiagnostics = [];
 
   let combined;
   if (!USDA_API_KEY) {
@@ -1190,7 +1203,8 @@ async function fetchFarmersMarkets(lat, lng, zipCode) {
     const results = await Promise.allSettled(types.map(t => fetchOneDirectory(t, lat, lng, zipCode)));
     combined = results.filter(r => r.status === 'fulfilled').flatMap(r => r.value);
     const failed = results.filter(r => r.status === 'rejected');
-    if (failed.length) console.warn('ROOTED local food map — ' + failed.length + ' of ' + types.length + ' directories failed to load:', failed.map(f => f.reason && f.reason.message));
+    lastFetchDiagnostics = failed.map(f => f.reason && f.reason.message ? f.reason.message : String(f.reason));
+    if (failed.length) console.warn('ROOTED local food map — ' + failed.length + ' of ' + types.length + ' directories failed to load:', lastFetchDiagnostics);
     if (!combined.length && failed.length === types.length) throw new Error('All USDA directories failed to load');
   }
 
@@ -1262,7 +1276,16 @@ async function runFarmersSearch(lat, lng, zip) {
     const rawMarkets = await fetchFarmersMarkets(lat, lng, zip);
     clearFarmersMarkers();
     if (!rawMarkets || !rawMarkets.length) {
-      statusEl.textContent = 'No markets found in that area. Try a wider search.';
+      if (USDA_API_KEY && lastFetchDiagnostics.length) {
+        // At least one directory returned something unexpected (often an auth/key error hiding
+        // inside an HTTP 200 response) — show it on-screen so this is diagnosable on a phone.
+        statusEl.innerHTML = 'No listings loaded — the USDA service returned an unexpected response for ' +
+          lastFetchDiagnostics.length + ' of 4 directories.' +
+          '<div class="fm-debug-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">🔧 Show details</div>' +
+          '<pre class="fm-debug-json" style="display:none">' + lastFetchDiagnostics.join('\n\n').replace(/</g, '&lt;') + '</pre>';
+      } else {
+        statusEl.textContent = 'No markets found in that area. Try a wider search.';
+      }
       return;
     }
 
@@ -1346,7 +1369,13 @@ async function runFarmersSearch(lat, lng, zip) {
       resultsEl.appendChild(debugWrap);
     }
   } catch (e) {
-    statusEl.textContent = 'Could not load market data right now. Please try again.';
+    if (USDA_API_KEY && lastFetchDiagnostics.length) {
+      statusEl.innerHTML = 'Could not load market data right now.' +
+        '<div class="fm-debug-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">🔧 Show details</div>' +
+        '<pre class="fm-debug-json" style="display:none">' + lastFetchDiagnostics.join('\n\n').replace(/</g, '&lt;') + '</pre>';
+    } else {
+      statusEl.textContent = 'Could not load market data right now. Please try again.';
+    }
     console.error('Farmers market search error:', e);
   }
 }
