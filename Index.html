@@ -563,13 +563,15 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
   <div class="cat-hd">
     <button class="cat-back" onclick="goHome()">← Home</button>
     <div class="cat-title">Local Food Map</div>
-    <p class="cat-desc">Search farmers markets, farms offering direct pickup, CSAs, and food hubs near you — hours, products, and practices like organic and grass-fed, sourced from USDA's Local Food Directories.</p>
+    <p class="cat-desc">Search farmers markets, farms offering direct pickup, CSAs, and food hubs nationwide via USDA data — plus ROOTED-vetted grocery stores and restaurants in select areas, starting with Santa Monica.</p>
   </div>
   <div class="fm-legend">
     <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#2E7D7A"></span>Farmers Market</span>
     <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#A0622D"></span>On-Farm Pickup</span>
     <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#6B4C7A"></span>CSA</span>
     <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#4A6572"></span>Food Hub</span>
+    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#B8860B"></span>Grocery Store</span>
+    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#8B3A3A"></span>Restaurant</span>
   </div>
   <div style="padding:0 18px 4px">
     <div class="fm-search-row">
@@ -1143,7 +1145,27 @@ const LOCAL_FOOD_TYPES = {
   onfarmmarket:  { label: 'On-Farm Pickup', icon: '🚜', color: '#A0622D' },
   csa:           { label: 'CSA',            icon: '📦', color: '#6B4C7A' },
   foodhub:       { label: 'Food Hub',       icon: '🏭', color: '#4A6572' },
+  grocery:       { label: 'Grocery Store',  icon: '🛒', color: '#B8860B' },
+  restaurant:    { label: 'Restaurant',     icon: '🍽️', color: '#8B3A3A' },
 };
+
+// Hand-curated grocery stores and restaurants — ROOTED-vetted, not from the USDA API.
+// Only shown when a search falls within CURATED_RADIUS_MILES of a curated listing's coordinates.
+// Coordinates are reasonable estimates from known addresses, not precision-geocoded.
+const CURATED_RADIUS_MILES = 20;
+const CURATED_LISTINGS = [
+  {_type:'grocery',listing_name:"Erewhon",location_address:"2800 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.4820,location_y:34.0387,schedules:"7am-10pm daily",products:"Organic produce, prepared foods, supplements, house-brand grass-fed beef",practices:"Grass-Fed Beef (American Farmers Network partnership, no hormones/antibiotics/GMOs), Certified Organic Produce",media_website:"https://www.erewhonmarket.com/"},
+  {_type:'grocery',listing_name:"Co-Opportunity Market",location_address:"1525 Broadway",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4838,location_y:34.0158,schedules:"7am-10pm daily",products:"Produce, bulk foods, raw dairy, meat, seafood",practices:"Member-owned co-op since 1974, written sourcing policy: grass-fed/pastured red meat, organic poultry only, no antibiotics/hormones, wild-caught seafood only from stable populations",media_website:"https://www.coopportunity.com/"},
+  {_type:'grocery',listing_name:"Whole Foods Market (Wilshire)",location_address:"2201 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.4791,location_y:34.0369,schedules:"7am-10pm daily",products:"Full grocery, produce, meat counter",practices:"Carries Panorama Organic (AGA-certified 100% grass-fed/finished) and Verde Farms — look for the certified brand label specifically, not generic store signage",media_website:"https://www.wholefoodsmarket.com/"},
+  {_type:'grocery',listing_name:"Bristol Farms",location_address:"3105 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.4841,location_y:34.0389,schedules:"6am-11pm daily",products:"Full-service butcher counter, seafood, produce",practices:"Premium meat/seafood departments; ask the butcher counter directly about sourcing on specific cuts — not systematically published like Erewhon or Co-Opportunity",media_website:"https://www.bristolfarms.com/"},
+  {_type:'grocery',listing_name:"Gelson's",location_address:"2627 Lincoln Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90405",location_x:-118.4783,location_y:34.0245,schedules:"6am-11pm daily",products:"Full grocery, produce, some organic/grass-fed lines",practices:"Carries organic and grass-fed options but without the sourcing rigor of Erewhon or Co-Opportunity — verify individual products",media_website:"https://www.gelsons.com/"},
+  {_type:'restaurant',listing_name:"Palms n' Patties",location_address:"3032 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.4823,location_y:34.0387,schedules:"11am-10pm daily",products:"Grass-fed burgers, tallow-fried fries",practices:"100% organic, grass-fed/grass-finished, pasture-raised beef; fries cooked in preservative-free beef tallow; glyphosate-free, seed-oil-free buns",media_website:"https://palmsnpatties.com/"},
+  {_type:'restaurant',listing_name:"HiHo Cheeseburger",location_address:"1320 2nd St",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4959,location_y:34.0158,schedules:"11:30am-10pm daily",products:"100% grass-fed Wagyu burgers",practices:"Exclusively 100% grass-fed/grass-finished Wagyu from First Light Farms (85-farmer NZ collective), Certified Humane; note: fries reportedly cooked in avocado/neutral oil, not tallow",media_website:"https://www.hiho.la/"},
+  {_type:'restaurant',listing_name:"Talo Organic",location_address:"401 Lincoln Blvd",location_city:"Venice",location_state:"CA",location_zipcode:"90291",location_x:-118.4738,location_y:33.9998,schedules:"10:30am-9pm (Sun until 12:30pm)",products:"Seed-oil-free prepared meals, grass-fed beef tallow cooking",practices:"100% seed-oil-free, 100% grass-fed/pasture-raised beef tallow, ~99% organic ingredients, no plastic cutting boards or non-stick pans, RO water, glass jar delivery",media_website:"https://taloorganic.com/"},
+  {_type:'restaurant',listing_name:"Rustic Canyon",location_address:"1119 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4934,location_y:34.0198,schedules:"5pm-9:30pm (Fri-Sat until 10pm)",products:"Farm-to-table seasonal dinner menu",practices:"Chef team sources personally from the Santa Monica Farmers Market; natural/biodynamic/organic wine list; not formally certified on every item but genuine farmer relationships",media_website:"https://rusticcanyonwins.com/"},
+  {_type:'restaurant',listing_name:"Kreation Kafe & Juicery",location_address:"1023 Montana Ave",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.4934,location_y:34.0339,schedules:"7am-8:30pm daily",products:"Cold-pressed juice, smoothies, bone broth, organic breakfast/lunch",practices:"Certified organic ingredients across juice and smoothie menu",media_website:"https://kreationjuice.com/"},
+  {_type:'restaurant',listing_name:"McConnell's Fine Ice Creams",location_address:"1456 3rd St Promenade",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4965,location_y:34.0161,schedules:"12pm-10pm daily (later Fri-Sat)",products:"Ice cream made from scratch",practices:"Grass-grazed Central Coast milk & cream (Producers Dairy), organic cage-free eggs, no stabilizers/preservatives/fillers — note: brand uses the specific term \"grass-grazed,\" not \"grass-fed\"",media_website:"https://mcconnells.com/"},
+];
 
 const MOCK_MARKETS = [
   {_type:'farmersmarket',listing_name:"Ferry Plaza Farmers Market",location_address:"1 Ferry Building",location_city:"San Francisco",location_state:"CA",location_zipcode:"94111",location_x:-122.3937,location_y:37.7955,schedules:"Sat 8am-2pm, Tue 10am-2pm",products:"Produce, Cheese, Meat, Eggs, Flowers, Baked Goods",practices:"Certified Organic, Grass Fed, Pasture Raised",media_website:"https://foodwise.org/"},
@@ -1193,19 +1215,32 @@ async function fetchFarmersMarkets(lat, lng, zipCode) {
   const originLng = lng != null ? lng : -98.5795;
   lastFetchDiagnostics = [];
 
+  // Hand-curated grocery/restaurant listings are independent of the USDA API entirely, and only
+  // included if they're actually near the search location (otherwise a Seattle search would show
+  // Santa Monica restaurants 900+ miles away). Computed first so they're available even if USDA fails.
+  const nearbyCurated = CURATED_LISTINGS.filter(c =>
+    haversineMiles(originLat, originLng, c.location_y, c.location_x) <= CURATED_RADIUS_MILES
+  );
+
   let combined;
   if (!USDA_API_KEY) {
-    combined = MOCK_MARKETS;
+    combined = MOCK_MARKETS.concat(nearbyCurated);
   } else {
-    // Query all four directories in parallel. If one directory fails, the others still show —
+    // Query all four USDA directories in parallel. If one fails, the others still show —
     // a partial result set is far more useful than the whole search failing.
-    const types = Object.keys(LOCAL_FOOD_TYPES);
-    const results = await Promise.allSettled(types.map(t => fetchOneDirectory(t, lat, lng, zipCode)));
-    combined = results.filter(r => r.status === 'fulfilled').flatMap(r => r.value);
+    // (grocery/restaurant are curated-only and never queried against the USDA API.)
+    const usdaTypes = ['farmersmarket', 'onfarmmarket', 'csa', 'foodhub'];
+    const results = await Promise.allSettled(usdaTypes.map(t => fetchOneDirectory(t, lat, lng, zipCode)));
+    const usdaResults = results.filter(r => r.status === 'fulfilled').flatMap(r => r.value);
     const failed = results.filter(r => r.status === 'rejected');
     lastFetchDiagnostics = failed.map(f => f.reason && f.reason.message ? f.reason.message : String(f.reason));
-    if (failed.length) console.warn('ROOTED local food map — ' + failed.length + ' of ' + types.length + ' directories failed to load:', lastFetchDiagnostics);
-    if (!combined.length && failed.length === types.length) throw new Error('All USDA directories failed to load');
+    if (failed.length) console.warn('ROOTED local food map — ' + failed.length + ' of ' + usdaTypes.length + ' USDA directories failed to load:', lastFetchDiagnostics);
+    // Only throw a hard error if USDA totally failed AND there's nothing curated to fall back on —
+    // otherwise the curated Santa Monica listings still make the search worthwhile even when USDA is down.
+    if (!usdaResults.length && failed.length === usdaTypes.length && !nearbyCurated.length) {
+      throw new Error('All USDA directories failed to load, and no curated listings nearby');
+    }
+    combined = usdaResults.concat(nearbyCurated);
   }
 
   // Distance is computed client-side for every result, live or mock, so sorting is always consistent
