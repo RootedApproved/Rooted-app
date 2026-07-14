@@ -1119,7 +1119,7 @@ function imgFallback(img, emoji, size) {
 // https://www.usdalocalfoodportal.com/fe/fregisterpublicapi/ and paste it below.
 // Everything else already works end-to-end against mock data shaped exactly
 // like the real API response — no other code changes needed once the key is added.
-const USDA_API_KEY = ''; // <-- paste real key here when approved
+const USDA_API_KEY = 'HfeDBj5c1Z';
 let fmMap = null;
 let fmMarkers = [];
 
@@ -1192,6 +1192,13 @@ function useMyLocationForMarkets() {
   );
 }
 
+function pick(obj, ...keys) {
+  for (const k of keys) {
+    if (obj[k] !== undefined && obj[k] !== null && obj[k] !== '') return obj[k];
+  }
+  return null;
+}
+
 async function runFarmersSearch(lat, lng, zip) {
   const statusEl = document.getElementById('fm-status');
   const resultsEl = document.getElementById('fm-results');
@@ -1205,30 +1212,48 @@ async function runFarmersSearch(lat, lng, zip) {
       statusEl.textContent = 'No markets found in that area. Try a wider search.';
       return;
     }
+    if (USDA_API_KEY && markets[0]) {
+      // Debug aid: logs the real API's actual field names to the browser console on first live use,
+      // so field mapping below can be corrected quickly if any labels show "Not listed" incorrectly.
+      console.log('ROOTED farmers market — raw API fields for first result:', markets[0]);
+    }
     const previewNote = USDA_API_KEY ? '' : 'Preview mode — showing sample markets while the live USDA key is pending. ';
     statusEl.textContent = previewNote + markets.length + ' markets found, sorted by distance.';
     const bounds = [];
     markets.forEach(m => {
+      const name = pick(m, 'listing_name', 'market_name', 'name') || 'Unnamed Market';
+      const address = pick(m, 'location_address', 'listing_address', 'address', 'street') || '';
+      const city = pick(m, 'location_city', 'city') || '';
+      const state = pick(m, 'location_state', 'state') || '';
+      const zipc = pick(m, 'location_zipcode', 'location_zip', 'zip', 'zipcode') || '';
+      const hours = pick(m, 'schedules', 'schedule', 'schedule_desc', 'market_hours', 'operation_hours', 'season1time');
+      const products = pick(m, 'products', 'product_desc', 'products_desc', 'products_offered');
+      const practices = pick(m, 'practices', 'practice_desc', 'growing_practices') || '';
+      const website = pick(m, 'media_website', 'website', 'url');
+      const lat_ = pick(m, 'location_y', 'location_latitude', 'latitude', 'lat', 'y');
+      const lng_ = pick(m, 'location_x', 'location_longitude', 'longitude', 'lng', 'lon', 'x');
+
       const card = document.createElement('div');
       card.className = 'fm-card';
-      const practiceTags = (m.practices || '').split(',').map(p => p.trim()).filter(Boolean)
+      const practiceTags = String(practices).split(',').map(p => p.trim()).filter(Boolean)
         .map(p => '<span class="fm-tag">' + p + '</span>').join('');
       card.innerHTML =
-        '<div class="fm-card-name">' + m.listing_name + '</div>' +
+        '<div class="fm-card-name">' + name + '</div>' +
         '<div class="fm-card-dist">' + (m.distance != null ? m.distance.toFixed(1) + ' mi away' : '') + '</div>' +
-        '<div class="fm-card-addr">' + (m.location_address || '') + ', ' + m.location_city + ', ' + m.location_state + ' ' + m.location_zipcode + '</div>' +
+        '<div class="fm-card-addr">' + [address, city, state, zipc].filter(Boolean).join(', ') + '</div>' +
         '<div class="fm-card-detail">' +
-          '<div><strong>Hours:</strong> ' + (m.schedules || 'Not listed') + '</div>' +
-          '<div style="margin-top:6px"><strong>Products:</strong> ' + (m.products || 'Not listed') + '</div>' +
+          '<div><strong>Hours:</strong> ' + (hours || 'Not listed') + '</div>' +
+          '<div style="margin-top:6px"><strong>Products:</strong> ' + (products || 'Not listed') + '</div>' +
           (practiceTags ? '<div style="margin-top:9px">' + practiceTags + '</div>' : '') +
-          (m.media_website ? '<div style="margin-top:9px"><a href="' + m.media_website + '" target="_blank" style="color:var(--teal);font-weight:600;">Visit website →</a></div>' : '') +
+          (website ? '<div style="margin-top:9px"><a href="' + website + '" target="_blank" style="color:var(--teal);font-weight:600;">Visit website →</a></div>' : '') +
         '</div>';
       card.onclick = () => card.classList.toggle('expanded');
       resultsEl.appendChild(card);
-      if (m.location_y != null && m.location_x != null) {
-        const marker = L.marker([m.location_y, m.location_x]).addTo(fmMap).bindPopup(m.listing_name);
+      const latN = parseFloat(lat_), lngN = parseFloat(lng_);
+      if (!isNaN(latN) && !isNaN(lngN)) {
+        const marker = L.marker([latN, lngN]).addTo(fmMap).bindPopup(name);
         fmMarkers.push(marker);
-        bounds.push([m.location_y, m.location_x]);
+        bounds.push([latN, lngN]);
       }
     });
     if (bounds.length) fmMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 12 });
