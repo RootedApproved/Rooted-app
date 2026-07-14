@@ -84,6 +84,10 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
 .fm-badge{display:inline-block;background:var(--sage);color:var(--white);font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;margin-bottom:7px;letter-spacing:.03em;}
 .fm-debug-toggle{font-family:var(--font-m);font-size:10.5px;color:var(--muted);cursor:pointer;padding:8px 0;text-align:center;text-decoration:underline;}
 .fm-debug-json{background:var(--char);color:#8FE388;font-family:var(--font-m);font-size:10.5px;padding:12px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-top:4px;}
+.fm-type-badge{display:inline-block;color:var(--white);font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;margin-bottom:8px;letter-spacing:.02em;}
+.fm-legend{display:flex;flex-wrap:wrap;gap:6px 12px;padding:0 18px 12px;}
+.fm-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--mid);font-weight:600;}
+.fm-legend-dot{width:11px;height:11px;border-radius:50%;display:inline-block;}
 .subcat-card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:box-shadow .15s,transform .12s;}
 .subcat-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.08);transform:translateY(-1px);}
 .sc-icon{font-size:24px;width:36px;text-align:center;flex-shrink:0;}
@@ -298,7 +302,7 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
     <div class="cat-card" onclick="showCategory('food')"><span class="cat-icon">🥩</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Food &amp; Diet</div><div class="cat-ct">Coming soon</div></div></div>
     <div class="cat-card" onclick="showCategory('cookware')"><span class="cat-icon">🍳</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Cookware &amp; Kitchen</div><div class="cat-ct js-cookware-total">20 products rated</div></div></div>
     <div class="cat-card" onclick="showCategory('personal')"><span class="cat-icon">🧴</span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Personal Care</div><div class="cat-ct js-personal-total">8 products rated</div></div></div>
-    <div class="cat-card" onclick="showScreen('farmers')"><span class="cat-icon">🌾</span><div class="cat-body"><div class="cat-lbl">Tool</div><div class="cat-name">Farmers Markets</div><div class="cat-ct">Find one near you</div></div></div>
+    <div class="cat-card" onclick="showScreen('farmers')"><span class="cat-icon">🌾</span><div class="cat-body"><div class="cat-lbl">Tool</div><div class="cat-name">Local Food Map</div><div class="cat-ct">Farms, markets, CSAs & more</div></div></div>
   </div>
   <div class="promise-strip">
     <div><div class="prom-num">12</div><div class="prom-lbl">Product categories<br>at launch</div></div>
@@ -558,8 +562,14 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
 <div id="screen-farmers" class="screen"><div class="page">
   <div class="cat-hd">
     <button class="cat-back" onclick="goHome()">← Home</button>
-    <div class="cat-title">Farmers Markets</div>
-    <p class="cat-desc">Search real farmers markets near you — hours, vendors, products, and practices like organic and grass-fed, sourced from the USDA National Farmers Market Directory.</p>
+    <div class="cat-title">Local Food Map</div>
+    <p class="cat-desc">Search farmers markets, farms offering direct pickup, CSAs, and food hubs near you — hours, products, and practices like organic and grass-fed, sourced from USDA's Local Food Directories.</p>
+  </div>
+  <div class="fm-legend">
+    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#2E7D7A"></span>Farmers Market</span>
+    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#A0622D"></span>On-Farm Pickup</span>
+    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#6B4C7A"></span>CSA</span>
+    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#4A6572"></span>Food Hub</span>
   </div>
   <div style="padding:0 18px 4px">
     <div class="fm-search-row">
@@ -569,7 +579,7 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
     <button class="fm-locate-btn" onclick="useMyLocationForMarkets()">📍 Use My Location</button>
   </div>
   <div id="fm-map" class="fm-map"></div>
-  <div id="fm-status" class="fm-status">Enter a zip code or use your location to find nearby markets.</div>
+  <div id="fm-status" class="fm-status">Enter a zip code or use your location to find nearby farms, markets, CSAs, and food hubs.</div>
   <div id="fm-results" class="fm-results"></div>
 </div></div>
 
@@ -603,7 +613,7 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
     <div class="cat-row" onclick="showCategory('cookware')"><span class="cat-row-icon">🍳</span><div class="cat-row-info"><div class="cat-row-name">Cookware &amp; Kitchen</div><div class="cat-row-sub js-cookware-total">20 products rated</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row" onclick="showCategory('water')"><span class="cat-row-icon">💧</span><div class="cat-row-info"><div class="cat-row-name">Water</div><div class="cat-row-sub js-water-total">10 products rated</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row" onclick="showCategory('personal')"><span class="cat-row-icon">🧴</span><div class="cat-row-info"><div class="cat-row-name">Personal Care</div><div class="cat-row-sub js-personal-total">8 products rated</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showScreen('farmers')"><span class="cat-row-icon">🌾</span><div class="cat-row-info"><div class="cat-row-name">Farmers Markets</div><div class="cat-row-sub">Search by zip or location, nationwide</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" onclick="showScreen('farmers')"><span class="cat-row-icon">🌾</span><div class="cat-row-info"><div class="cat-row-name">Local Food Map</div><div class="cat-row-sub">Farmers markets, farms, CSAs & food hubs, nationwide</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row"><span class="cat-row-icon">🛏</span><div class="cat-row-info"><div class="cat-row-name">Textiles &amp; Bedroom</div><div class="cat-row-sub">Sheets, pillows, mattresses</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row"><span class="cat-row-icon">🧹</span><div class="cat-row-info"><div class="cat-row-name">Cleaning &amp; Home</div><div class="cat-row-sub">Dish soap, laundry, surfaces</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row"><span class="cat-row-icon">💨</span><div class="cat-row-info"><div class="cat-row-name">Air Quality</div><div class="cat-row-sub">Purifiers, ventilation, humidity</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
@@ -1119,7 +1129,7 @@ function imgFallback(img, emoji, size) {
 }
 
 // ── PRODUCT COUNTS (auto-updates as products are added — never hand-edit these numbers) ─
-// ── FARMERS MARKETS (USDA Local Food Directories API) ───────────────────
+// ── LOCAL FOOD MAP (USDA Local Food Directories API: farmers markets, on-farm markets, CSAs, food hubs) ─
 // To go live nationwide: apply for a free key at
 // https://www.usdalocalfoodportal.com/fe/fregisterpublicapi/ and paste it below.
 // Everything else already works end-to-end against mock data shaped exactly
@@ -1128,13 +1138,26 @@ const USDA_API_KEY = 'HfeDBj5c1Z';
 let fmMap = null;
 let fmMarkers = [];
 
+const LOCAL_FOOD_TYPES = {
+  farmersmarket: { label: 'Farmers Market', icon: '🌾', color: '#2E7D7A' },
+  onfarmmarket:  { label: 'On-Farm Pickup', icon: '🚜', color: '#A0622D' },
+  csa:           { label: 'CSA',            icon: '📦', color: '#6B4C7A' },
+  foodhub:       { label: 'Food Hub',       icon: '🏭', color: '#4A6572' },
+};
+
 const MOCK_MARKETS = [
-  {listing_name:"Ferry Plaza Farmers Market",location_address:"1 Ferry Building",location_city:"San Francisco",location_state:"CA",location_zipcode:"94111",location_x:-122.3937,location_y:37.7955,schedules:"Sat 8am-2pm, Tue 10am-2pm",products:"Produce, Cheese, Meat, Eggs, Flowers, Baked Goods",practices:"Certified Organic, Grass Fed, Pasture Raised",media_website:"https://foodwise.org/"},
-  {listing_name:"Union Square Greenmarket",location_address:"Union Square W & 17th St",location_city:"New York",location_state:"NY",location_zipcode:"10003",location_x:-73.9909,location_y:40.7359,schedules:"Mon, Wed, Fri, Sat 8am-6pm",products:"Produce, Dairy, Meat, Fish, Maple Syrup, Bread",practices:"Non-GMO, No Pesticides, Humane Treatment of Animals",media_website:"https://www.grownyc.org/greenmarket"},
-  {listing_name:"Dane County Farmers' Market",location_address:"200 Martin Luther King Jr Blvd",location_city:"Madison",location_state:"WI",location_zipcode:"53703",location_x:-89.3838,location_y:43.0747,schedules:"Sat 6am-1pm (Apr-Nov)",products:"Produce, Cheese, Meat, Honey, Plants",practices:"Certified Organic, Producer-Only Market",media_website:"https://dcfm.org/"},
-  {listing_name:"Ballard Farmers Market",location_address:"Ballard Ave NW & 22nd Ave NW",location_city:"Seattle",location_state:"WA",location_zipcode:"98107",location_x:-122.3838,location_y:47.6684,schedules:"Sun 10am-3pm, year-round",products:"Produce, Seafood, Meat, Dairy, Flowers",practices:"Certified Organic, Grass Fed, No Antibiotics",media_website:"https://sfmamarkets.com/ballard/"},
-  {listing_name:"Eastern Market",location_address:"225 7th St SE",location_city:"Washington",location_state:"DC",location_zipcode:"20003",location_x:-76.9958,location_y:38.8807,schedules:"Sat-Sun 8am-4pm, year-round",products:"Produce, Meat, Seafood, Baked Goods, Flowers",practices:"Grass Fed, Pasture Raised, Local Only",media_website:"https://easternmarket-dc.org/"},
-  {listing_name:"Austin Farmers Market",location_address:"1600 Barton Springs Rd",location_city:"Austin",location_state:"TX",location_zipcode:"78704",location_x:-97.7714,location_y:30.2635,schedules:"Sat 9am-1pm, year-round",products:"Produce, Eggs, Meat, Dairy, Honey",practices:"Certified Organic, No Hormones, No Antibiotics",media_website:"https://austinfarmersmarket.org/"},
+  {_type:'farmersmarket',listing_name:"Ferry Plaza Farmers Market",location_address:"1 Ferry Building",location_city:"San Francisco",location_state:"CA",location_zipcode:"94111",location_x:-122.3937,location_y:37.7955,schedules:"Sat 8am-2pm, Tue 10am-2pm",products:"Produce, Cheese, Meat, Eggs, Flowers, Baked Goods",practices:"Certified Organic, Grass Fed, Pasture Raised",media_website:"https://foodwise.org/"},
+  {_type:'farmersmarket',listing_name:"Union Square Greenmarket",location_address:"Union Square W & 17th St",location_city:"New York",location_state:"NY",location_zipcode:"10003",location_x:-73.9909,location_y:40.7359,schedules:"Mon, Wed, Fri, Sat 8am-6pm",products:"Produce, Dairy, Meat, Fish, Maple Syrup, Bread",practices:"Non-GMO, No Pesticides, Humane Treatment of Animals",media_website:"https://www.grownyc.org/greenmarket"},
+  {_type:'farmersmarket',listing_name:"Dane County Farmers' Market",location_address:"200 Martin Luther King Jr Blvd",location_city:"Madison",location_state:"WI",location_zipcode:"53703",location_x:-89.3838,location_y:43.0747,schedules:"Sat 6am-1pm (Apr-Nov)",products:"Produce, Cheese, Meat, Honey, Plants",practices:"Certified Organic, Producer-Only Market",media_website:"https://dcfm.org/"},
+  {_type:'farmersmarket',listing_name:"Ballard Farmers Market",location_address:"Ballard Ave NW & 22nd Ave NW",location_city:"Seattle",location_state:"WA",location_zipcode:"98107",location_x:-122.3838,location_y:47.6684,schedules:"Sun 10am-3pm, year-round",products:"Produce, Seafood, Meat, Dairy, Flowers",practices:"Certified Organic, Grass Fed, No Antibiotics",media_website:"https://sfmamarkets.com/ballard/"},
+  {_type:'farmersmarket',listing_name:"Eastern Market",location_address:"225 7th St SE",location_city:"Washington",location_state:"DC",location_zipcode:"20003",location_x:-76.9958,location_y:38.8807,schedules:"Sat-Sun 8am-4pm, year-round",products:"Produce, Meat, Seafood, Baked Goods, Flowers",practices:"Grass Fed, Pasture Raised, Local Only",media_website:"https://easternmarket-dc.org/"},
+  {_type:'farmersmarket',listing_name:"Austin Farmers Market",location_address:"1600 Barton Springs Rd",location_city:"Austin",location_state:"TX",location_zipcode:"78704",location_x:-97.7714,location_y:30.2635,schedules:"Sat 9am-1pm, year-round",products:"Produce, Eggs, Meat, Dairy, Honey",practices:"Certified Organic, No Hormones, No Antibiotics",media_website:"https://austinfarmersmarket.org/"},
+  {_type:'onfarmmarket',listing_name:"Marin Sun Farms",location_address:"10905 Shoreline Hwy",location_city:"Point Reyes Station",location_state:"CA",location_zipcode:"94956",location_x:-122.8189,location_y:38.0713,schedules:"Farm store: Wed-Sun 10am-5pm",products:"Beef, Pork, Chicken, Eggs, Dairy",practices:"Grass Fed, Pasture Raised, Regenerative",media_website:"https://marinsunfarms.com/"},
+  {_type:'onfarmmarket',listing_name:"Polyface Farm",location_address:"43 Pure Meadows Ln",location_city:"Swoope",location_state:"VA",location_zipcode:"24479",location_x:-79.1876,location_y:38.2065,schedules:"By appointment, call ahead",products:"Beef, Pork, Chicken, Eggs, Turkey",practices:"Grass Fed, Pasture Raised, No Antibiotics, No Hormones",media_website:"https://polyfacefarms.com/"},
+  {_type:'csa',listing_name:"Full Belly Farm CSA",location_address:"Rd 43",location_city:"Guinda",location_state:"CA",location_zipcode:"95637",location_x:-122.1953,location_y:38.8544,schedules:"Weekly pickup, year-round",products:"Seasonal Produce, Fruit, Flowers",practices:"Certified Organic",media_website:"https://fullbellyfarm.com/"},
+  {_type:'csa',listing_name:"Brookfield Farm CSA",location_address:"24 Hulst Rd",location_city:"Amherst",location_state:"MA",location_zipcode:"01002",location_x:-72.5451,location_y:42.3671,schedules:"Weekly pickup, Jun-Oct",products:"Vegetables, Herbs, Flowers",practices:"Certified Organic, Biodynamic",media_website:"https://brookfieldfarm.org/"},
+  {_type:'foodhub',listing_name:"Common Market Mid-Atlantic",location_address:"2233 Jasper St",location_city:"Philadelphia",location_state:"PA",location_zipcode:"19125",location_x:-75.1277,location_y:39.9764,schedules:"Wholesale distribution, weekdays",products:"Produce, Dairy, Meat, Grains (aggregated from regional farms)",practices:"Sustainably Grown, Supports Small Farms",media_website:"https://www.commonmarket.org/"},
+  {_type:'foodhub',listing_name:"Iowa Food Hub",location_address:"117 W Greene St",location_city:"Postville",location_state:"IA",location_zipcode:"52162",location_x:-91.5701,location_y:43.0822,schedules:"Wholesale distribution, weekdays",products:"Produce, Meat, Eggs, Dairy (aggregated from regional farms)",practices:"Non-GMO, Supports Small Farms",media_website:"https://iowafoodhub.com/"},
 ];
 
 function haversineMiles(lat1, lon1, lat2, lon2) {
@@ -1145,19 +1168,37 @@ function haversineMiles(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-async function fetchFarmersMarkets(lat, lng, zipCode) {
-  if (!USDA_API_KEY) {
-    // Preview mode: distances computed for real from mock coordinates so search/sort behavior matches production exactly.
-    const originLat = lat != null ? lat : 39.8283;
-    const originLng = lng != null ? lng : -98.5795;
-    return MOCK_MARKETS
-      .map(m => ({ ...m, distance: haversineMiles(originLat, originLng, m.location_y, m.location_x) }))
-      .sort((a, b) => a.distance - b.distance);
-  }
+async function fetchOneDirectory(type, lat, lng, zipCode) {
   const params = (lat != null && lng != null) ? `x=${lng}&y=${lat}&radius=50` : `zip=${zipCode}&radius=50`;
-  const res = await fetch(`https://www.usdalocalfoodportal.com/api/farmersmarket/?apikey=${USDA_API_KEY}&${params}`);
-  if (!res.ok) throw new Error('USDA API request failed: ' + res.status);
-  return await res.json();
+  const res = await fetch(`https://www.usdalocalfoodportal.com/api/${type}/?apikey=${USDA_API_KEY}&${params}`);
+  if (!res.ok) throw new Error('USDA API request failed for ' + type + ': ' + res.status);
+  const data = await res.json();
+  return (Array.isArray(data) ? data : []).map(m => ({ ...m, _type: type }));
+}
+
+async function fetchFarmersMarkets(lat, lng, zipCode) {
+  const originLat = lat != null ? lat : 39.8283;
+  const originLng = lng != null ? lng : -98.5795;
+
+  let combined;
+  if (!USDA_API_KEY) {
+    combined = MOCK_MARKETS;
+  } else {
+    // Query all four directories in parallel. If one directory fails, the others still show —
+    // a partial result set is far more useful than the whole search failing.
+    const types = Object.keys(LOCAL_FOOD_TYPES);
+    const results = await Promise.allSettled(types.map(t => fetchOneDirectory(t, lat, lng, zipCode)));
+    combined = results.filter(r => r.status === 'fulfilled').flatMap(r => r.value);
+    const failed = results.filter(r => r.status === 'rejected');
+    if (failed.length) console.warn('ROOTED local food map — ' + failed.length + ' of ' + types.length + ' directories failed to load:', failed.map(f => f.reason && f.reason.message));
+    if (!combined.length && failed.length === types.length) throw new Error('All USDA directories failed to load');
+  }
+
+  // Distance is computed client-side for every result, live or mock, so sorting is always consistent
+  // regardless of whether the API itself returns a distance field.
+  return combined
+    .map(m => ({ ...m, distance: haversineMiles(originLat, originLng, m.location_y, m.location_x) }))
+    .sort((a, b) => a.distance - b.distance);
 }
 
 function initFarmersMap() {
@@ -1228,9 +1269,11 @@ async function runFarmersSearch(lat, lng, zip) {
     // Normalize every market's fields up front (handles uncertain real-API field names defensively).
     const markets = rawMarkets.map(m => {
       const practices = pick(m, 'practices', 'practice_desc', 'growing_practices') || '';
+      const typeKey = LOCAL_FOOD_TYPES[m._type] ? m._type : 'farmersmarket';
       return {
         raw: m,
-        name: pick(m, 'listing_name', 'market_name', 'name') || 'Unnamed Market',
+        type: typeKey,
+        name: pick(m, 'listing_name', 'market_name', 'name') || 'Unnamed Listing',
         address: pick(m, 'location_address', 'listing_address', 'address', 'street') || '',
         city: pick(m, 'location_city', 'city') || '',
         state: pick(m, 'location_state', 'state') || '',
@@ -1251,19 +1294,21 @@ async function runFarmersSearch(lat, lng, zip) {
 
     if (USDA_API_KEY && rawMarkets[0]) {
       // Debug aid: logs the real API's actual field names to the browser console on first live use.
-      console.log('ROOTED farmers market — raw API fields for first result:', rawMarkets[0]);
+      console.log('ROOTED local food map — raw API fields for first result:', rawMarkets[0]);
     }
-    const previewNote = USDA_API_KEY ? '' : 'Preview mode — showing sample markets while the live USDA key is pending. ';
-    const countLabel = markets.length === 1 ? '1 market found' : markets.length + ' markets found';
+    const previewNote = USDA_API_KEY ? '' : 'Preview mode — showing sample listings while the live USDA key is pending. ';
+    const countLabel = markets.length === 1 ? '1 listing found' : markets.length + ' listings found';
     statusEl.textContent = previewNote + countLabel + ', great practices highlighted first.';
 
     const bounds = [];
     markets.forEach(mk => {
+      const typeInfo = LOCAL_FOOD_TYPES[mk.type];
       const card = document.createElement('div');
       card.className = 'fm-card' + (mk.score > 0 ? ' fm-card-highlight' : '');
       const practiceTags = String(mk.practices).split(',').map(p => p.trim()).filter(Boolean)
         .map(p => '<span class="fm-tag">' + p + '</span>').join('');
       card.innerHTML =
+        '<div class="fm-type-badge" style="background:' + typeInfo.color + '">' + typeInfo.icon + ' ' + typeInfo.label + '</div>' +
         (mk.score > 0 ? '<div class="fm-badge">🌿 Great Practices</div>' : '') +
         '<div class="fm-card-name">' + mk.name + '</div>' +
         '<div class="fm-card-dist">' + (mk.distance != null ? mk.distance.toFixed(1) + ' mi away' : '') + '</div>' +
@@ -1277,7 +1322,13 @@ async function runFarmersSearch(lat, lng, zip) {
       card.onclick = () => card.classList.toggle('expanded');
       resultsEl.appendChild(card);
       if (!isNaN(mk.lat) && !isNaN(mk.lng)) {
-        const marker = L.marker([mk.lat, mk.lng]).addTo(fmMap).bindPopup(mk.name);
+        const icon = L.divIcon({
+          html: '<div style="background:' + typeInfo.color + ';width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);font-size:13px;">' + typeInfo.icon + '</span></div>',
+          className: '',
+          iconSize: [26, 26],
+          iconAnchor: [13, 26]
+        });
+        const marker = L.marker([mk.lat, mk.lng], { icon }).addTo(fmMap).bindPopup(typeInfo.icon + ' ' + mk.name);
         fmMarkers.push(marker);
         bounds.push([mk.lat, mk.lng]);
       }
