@@ -85,8 +85,10 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
 .fm-debug-toggle{font-family:var(--font-m);font-size:10.5px;color:var(--muted);cursor:pointer;padding:8px 0;text-align:center;text-decoration:underline;}
 .fm-debug-json{background:var(--char);color:#8FE388;font-family:var(--font-m);font-size:10.5px;padding:12px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-top:4px;}
 .fm-type-badge{display:inline-block;color:var(--white);font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;margin-bottom:8px;letter-spacing:.02em;}
-.fm-legend{display:flex;flex-wrap:wrap;gap:6px 12px;padding:0 18px 12px;}
-.fm-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--mid);font-weight:600;}
+.fm-legend{display:flex;flex-wrap:wrap;gap:7px;padding:0 18px 12px;}
+.fm-toggle{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);font-weight:600;font-family:var(--font-b);background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:6px 11px;cursor:pointer;transition:all .15s;opacity:.55;}
+.fm-toggle.active{color:var(--char);border-color:var(--char);opacity:1;}
+.fm-toggle:active{transform:scale(.96);}
 .fm-legend-dot{width:11px;height:11px;border-radius:50%;display:inline-block;}
 .subcat-card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:box-shadow .15s,transform .12s;}
 .subcat-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.08);transform:translateY(-1px);}
@@ -566,12 +568,12 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
     <p class="cat-desc">Search farmers markets, farms offering direct pickup, CSAs, and food hubs nationwide via USDA data — plus ROOTED-vetted grocery stores and restaurants in select areas, starting with Santa Monica.</p>
   </div>
   <div class="fm-legend">
-    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#2E7D7A"></span>Farmers Market</span>
-    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#A0622D"></span>On-Farm Pickup</span>
-    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#6B4C7A"></span>CSA</span>
-    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#4A6572"></span>Food Hub</span>
-    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#B8860B"></span>Grocery Store</span>
-    <span class="fm-legend-item"><span class="fm-legend-dot" style="background:#8B3A3A"></span>Restaurant</span>
+    <button class="fm-toggle active" id="fm-toggle-farmersmarket" onclick="toggleLocalFoodType('farmersmarket')"><span class="fm-legend-dot" style="background:#2E7D7A"></span>Farmers Market</button>
+    <button class="fm-toggle active" id="fm-toggle-onfarmmarket" onclick="toggleLocalFoodType('onfarmmarket')"><span class="fm-legend-dot" style="background:#A0622D"></span>On-Farm Pickup</button>
+    <button class="fm-toggle active" id="fm-toggle-csa" onclick="toggleLocalFoodType('csa')"><span class="fm-legend-dot" style="background:#6B4C7A"></span>CSA</button>
+    <button class="fm-toggle active" id="fm-toggle-foodhub" onclick="toggleLocalFoodType('foodhub')"><span class="fm-legend-dot" style="background:#4A6572"></span>Food Hub</button>
+    <button class="fm-toggle active" id="fm-toggle-grocery" onclick="toggleLocalFoodType('grocery')"><span class="fm-legend-dot" style="background:#B8860B"></span>Grocery Store</button>
+    <button class="fm-toggle active" id="fm-toggle-restaurant" onclick="toggleLocalFoodType('restaurant')"><span class="fm-legend-dot" style="background:#8B3A3A"></span>Restaurant</button>
   </div>
   <div style="padding:0 18px 4px">
     <div class="fm-search-row">
@@ -1320,6 +1322,127 @@ function practiceScore(practicesStr) {
   return GOOD_PRACTICE_KEYWORDS.reduce((score, kw) => score + (lower.includes(kw) ? 1 : 0), 0);
 }
 
+let activeLocalFoodTypes = new Set(Object.keys(LOCAL_FOOD_TYPES));
+let lastRawListings = null;
+
+function toggleLocalFoodType(type) {
+  const btn = document.getElementById('fm-toggle-' + type);
+  if (activeLocalFoodTypes.has(type)) {
+    activeLocalFoodTypes.delete(type);
+    if (btn) btn.classList.remove('active');
+  } else {
+    activeLocalFoodTypes.add(type);
+    if (btn) btn.classList.add('active');
+  }
+  // Re-render from the already-fetched results — no need to search again just to change filters.
+  if (lastRawListings) renderLocalFoodResults(lastRawListings);
+}
+
+function renderLocalFoodResults(rawMarkets) {
+  const statusEl = document.getElementById('fm-status');
+  const resultsEl = document.getElementById('fm-results');
+  resultsEl.innerHTML = '';
+  clearFarmersMarkers();
+
+  const filteredRaw = rawMarkets.filter(m => activeLocalFoodTypes.has(LOCAL_FOOD_TYPES[m._type] ? m._type : 'farmersmarket'));
+
+  if (!filteredRaw.length) {
+    if (rawMarkets.length) {
+      statusEl.textContent = 'No listings match your current filters — try enabling more categories above.';
+    } else if (USDA_API_KEY && lastFetchDiagnostics.length) {
+      // At least one directory returned something unexpected (often an auth/key error hiding
+      // inside an HTTP 200 response) — show it on-screen so this is diagnosable on a phone.
+      statusEl.innerHTML = 'No listings loaded — the USDA service returned an unexpected response for ' +
+        lastFetchDiagnostics.length + ' of 4 directories.' +
+        '<div class="fm-debug-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">🔧 Show details</div>' +
+        '<pre class="fm-debug-json" style="display:none">' + lastFetchDiagnostics.join('\n\n').replace(/</g, '&lt;') + '</pre>';
+    } else {
+      statusEl.textContent = 'No markets found in that area. Try a wider search.';
+    }
+    return;
+  }
+
+  // Normalize every market's fields up front (handles uncertain real-API field names defensively).
+  const markets = filteredRaw.map(m => {
+    const practices = pick(m, 'practices', 'practice_desc', 'growing_practices') || '';
+    const typeKey = LOCAL_FOOD_TYPES[m._type] ? m._type : 'farmersmarket';
+    return {
+      raw: m,
+      type: typeKey,
+      name: pick(m, 'listing_name', 'market_name', 'name') || 'Unnamed Listing',
+      address: pick(m, 'location_address', 'listing_address', 'address', 'street') || '',
+      city: pick(m, 'location_city', 'city') || '',
+      state: pick(m, 'location_state', 'state') || '',
+      zipc: pick(m, 'location_zipcode', 'location_zip', 'zip', 'zipcode') || '',
+      hours: pick(m, 'schedules', 'schedule', 'schedule_desc', 'market_hours', 'operation_hours', 'season1time'),
+      products: pick(m, 'products', 'product_desc', 'products_desc', 'products_offered'),
+      practices: practices,
+      website: pick(m, 'media_website', 'website', 'url'),
+      lat: parseFloat(pick(m, 'location_y', 'location_latitude', 'latitude', 'lat', 'y')),
+      lng: parseFloat(pick(m, 'location_x', 'location_longitude', 'longitude', 'lng', 'lon', 'x')),
+      distance: m.distance,
+      score: practiceScore(practices)
+    };
+  });
+
+  // Sort by practice quality first (per ROOTED standard: highlight good practices), distance as tiebreaker.
+  markets.sort((a, b) => b.score - a.score || (a.distance ?? 999) - (b.distance ?? 999));
+
+  if (USDA_API_KEY && rawMarkets[0]) {
+    // Debug aid: logs the real API's actual field names to the browser console on first live use.
+    console.log('ROOTED local food map — raw API fields for first result:', rawMarkets[0]);
+  }
+  const previewNote = USDA_API_KEY ? '' : 'Preview mode — showing sample listings while the live USDA key is pending. ';
+  const countLabel = markets.length === 1 ? '1 listing found' : markets.length + ' listings found';
+  statusEl.textContent = previewNote + countLabel + ', great practices highlighted first.';
+
+  const bounds = [];
+  markets.forEach(mk => {
+    const typeInfo = LOCAL_FOOD_TYPES[mk.type];
+    const card = document.createElement('div');
+    card.className = 'fm-card' + (mk.score > 0 ? ' fm-card-highlight' : '');
+    const practiceTags = String(mk.practices).split(',').map(p => p.trim()).filter(Boolean)
+      .map(p => '<span class="fm-tag">' + p + '</span>').join('');
+    card.innerHTML =
+      '<div class="fm-type-badge" style="background:' + typeInfo.color + '">' + typeInfo.icon + ' ' + typeInfo.label + '</div>' +
+      (mk.score > 0 ? '<div class="fm-badge">🌿 Great Practices</div>' : '') +
+      '<div class="fm-card-name">' + mk.name + '</div>' +
+      '<div class="fm-card-dist">' + (mk.distance != null ? mk.distance.toFixed(1) + ' mi away' : '') + '</div>' +
+      '<div class="fm-card-addr">' + [mk.address, mk.city, mk.state, mk.zipc].filter(Boolean).join(', ') + '</div>' +
+      '<div class="fm-card-detail">' +
+        '<div><strong>Hours:</strong> ' + (mk.hours || 'Not listed') + '</div>' +
+        '<div style="margin-top:6px"><strong>Products:</strong> ' + (mk.products || 'Not listed') + '</div>' +
+        (practiceTags ? '<div style="margin-top:9px">' + practiceTags + '</div>' : '') +
+        (mk.website ? '<div style="margin-top:9px"><a href="' + mk.website + '" target="_blank" style="color:var(--teal);font-weight:600;">Visit website →</a></div>' : '') +
+      '</div>';
+    card.onclick = () => card.classList.toggle('expanded');
+    resultsEl.appendChild(card);
+    if (!isNaN(mk.lat) && !isNaN(mk.lng)) {
+      const icon = L.divIcon({
+        html: '<div style="background:' + typeInfo.color + ';width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);font-size:13px;">' + typeInfo.icon + '</span></div>',
+        className: '',
+        iconSize: [26, 26],
+        iconAnchor: [13, 26]
+      });
+      const marker = L.marker([mk.lat, mk.lng], { icon }).addTo(fmMap).bindPopup(typeInfo.icon + ' ' + mk.name);
+      fmMarkers.push(marker);
+      bounds.push([mk.lat, mk.lng]);
+    }
+  });
+  if (bounds.length) fmMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 12 });
+
+  // Mobile-friendly debug view: shows the real API's raw first result directly on-screen
+  // (no dev tools needed) so field mapping can be verified/corrected quickly on a phone.
+  if (USDA_API_KEY && rawMarkets[0]) {
+    const debugWrap = document.createElement('div');
+    debugWrap.style.cssText = 'margin-top:6px;';
+    debugWrap.innerHTML =
+      '<div class="fm-debug-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">🔧 Show raw API data (debug)</div>' +
+      '<pre class="fm-debug-json" style="display:none">' + JSON.stringify(rawMarkets[0], null, 2).replace(/</g, '&lt;') + '</pre>';
+    resultsEl.appendChild(debugWrap);
+  }
+}
+
 async function runFarmersSearch(lat, lng, zip) {
   const statusEl = document.getElementById('fm-status');
   const resultsEl = document.getElementById('fm-results');
@@ -1328,100 +1451,8 @@ async function runFarmersSearch(lat, lng, zip) {
   initFarmersMap();
   try {
     const rawMarkets = await fetchFarmersMarkets(lat, lng, zip);
-    clearFarmersMarkers();
-    if (!rawMarkets || !rawMarkets.length) {
-      if (USDA_API_KEY && lastFetchDiagnostics.length) {
-        // At least one directory returned something unexpected (often an auth/key error hiding
-        // inside an HTTP 200 response) — show it on-screen so this is diagnosable on a phone.
-        statusEl.innerHTML = 'No listings loaded — the USDA service returned an unexpected response for ' +
-          lastFetchDiagnostics.length + ' of 4 directories.' +
-          '<div class="fm-debug-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">🔧 Show details</div>' +
-          '<pre class="fm-debug-json" style="display:none">' + lastFetchDiagnostics.join('\n\n').replace(/</g, '&lt;') + '</pre>';
-      } else {
-        statusEl.textContent = 'No markets found in that area. Try a wider search.';
-      }
-      return;
-    }
-
-    // Normalize every market's fields up front (handles uncertain real-API field names defensively).
-    const markets = rawMarkets.map(m => {
-      const practices = pick(m, 'practices', 'practice_desc', 'growing_practices') || '';
-      const typeKey = LOCAL_FOOD_TYPES[m._type] ? m._type : 'farmersmarket';
-      return {
-        raw: m,
-        type: typeKey,
-        name: pick(m, 'listing_name', 'market_name', 'name') || 'Unnamed Listing',
-        address: pick(m, 'location_address', 'listing_address', 'address', 'street') || '',
-        city: pick(m, 'location_city', 'city') || '',
-        state: pick(m, 'location_state', 'state') || '',
-        zipc: pick(m, 'location_zipcode', 'location_zip', 'zip', 'zipcode') || '',
-        hours: pick(m, 'schedules', 'schedule', 'schedule_desc', 'market_hours', 'operation_hours', 'season1time'),
-        products: pick(m, 'products', 'product_desc', 'products_desc', 'products_offered'),
-        practices: practices,
-        website: pick(m, 'media_website', 'website', 'url'),
-        lat: parseFloat(pick(m, 'location_y', 'location_latitude', 'latitude', 'lat', 'y')),
-        lng: parseFloat(pick(m, 'location_x', 'location_longitude', 'longitude', 'lng', 'lon', 'x')),
-        distance: m.distance,
-        score: practiceScore(practices)
-      };
-    });
-
-    // Sort by practice quality first (per ROOTED standard: highlight good practices), distance as tiebreaker.
-    markets.sort((a, b) => b.score - a.score || (a.distance ?? 999) - (b.distance ?? 999));
-
-    if (USDA_API_KEY && rawMarkets[0]) {
-      // Debug aid: logs the real API's actual field names to the browser console on first live use.
-      console.log('ROOTED local food map — raw API fields for first result:', rawMarkets[0]);
-    }
-    const previewNote = USDA_API_KEY ? '' : 'Preview mode — showing sample listings while the live USDA key is pending. ';
-    const countLabel = markets.length === 1 ? '1 listing found' : markets.length + ' listings found';
-    statusEl.textContent = previewNote + countLabel + ', great practices highlighted first.';
-
-    const bounds = [];
-    markets.forEach(mk => {
-      const typeInfo = LOCAL_FOOD_TYPES[mk.type];
-      const card = document.createElement('div');
-      card.className = 'fm-card' + (mk.score > 0 ? ' fm-card-highlight' : '');
-      const practiceTags = String(mk.practices).split(',').map(p => p.trim()).filter(Boolean)
-        .map(p => '<span class="fm-tag">' + p + '</span>').join('');
-      card.innerHTML =
-        '<div class="fm-type-badge" style="background:' + typeInfo.color + '">' + typeInfo.icon + ' ' + typeInfo.label + '</div>' +
-        (mk.score > 0 ? '<div class="fm-badge">🌿 Great Practices</div>' : '') +
-        '<div class="fm-card-name">' + mk.name + '</div>' +
-        '<div class="fm-card-dist">' + (mk.distance != null ? mk.distance.toFixed(1) + ' mi away' : '') + '</div>' +
-        '<div class="fm-card-addr">' + [mk.address, mk.city, mk.state, mk.zipc].filter(Boolean).join(', ') + '</div>' +
-        '<div class="fm-card-detail">' +
-          '<div><strong>Hours:</strong> ' + (mk.hours || 'Not listed') + '</div>' +
-          '<div style="margin-top:6px"><strong>Products:</strong> ' + (mk.products || 'Not listed') + '</div>' +
-          (practiceTags ? '<div style="margin-top:9px">' + practiceTags + '</div>' : '') +
-          (mk.website ? '<div style="margin-top:9px"><a href="' + mk.website + '" target="_blank" style="color:var(--teal);font-weight:600;">Visit website →</a></div>' : '') +
-        '</div>';
-      card.onclick = () => card.classList.toggle('expanded');
-      resultsEl.appendChild(card);
-      if (!isNaN(mk.lat) && !isNaN(mk.lng)) {
-        const icon = L.divIcon({
-          html: '<div style="background:' + typeInfo.color + ';width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);font-size:13px;">' + typeInfo.icon + '</span></div>',
-          className: '',
-          iconSize: [26, 26],
-          iconAnchor: [13, 26]
-        });
-        const marker = L.marker([mk.lat, mk.lng], { icon }).addTo(fmMap).bindPopup(typeInfo.icon + ' ' + mk.name);
-        fmMarkers.push(marker);
-        bounds.push([mk.lat, mk.lng]);
-      }
-    });
-    if (bounds.length) fmMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 12 });
-
-    // Mobile-friendly debug view: shows the real API's raw first result directly on-screen
-    // (no dev tools needed) so field mapping can be verified/corrected quickly on a phone.
-    if (USDA_API_KEY && rawMarkets[0]) {
-      const debugWrap = document.createElement('div');
-      debugWrap.style.cssText = 'margin-top:6px;';
-      debugWrap.innerHTML =
-        '<div class="fm-debug-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">🔧 Show raw API data (debug)</div>' +
-        '<pre class="fm-debug-json" style="display:none">' + JSON.stringify(rawMarkets[0], null, 2).replace(/</g, '&lt;') + '</pre>';
-      resultsEl.appendChild(debugWrap);
-    }
+    lastRawListings = rawMarkets || [];
+    renderLocalFoodResults(lastRawListings);
   } catch (e) {
     if (USDA_API_KEY && lastFetchDiagnostics.length) {
       statusEl.innerHTML = 'Could not load market data right now.' +
