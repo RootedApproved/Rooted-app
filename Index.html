@@ -1264,13 +1264,32 @@ function clearFarmersMarkers() {
   fmMarkers = [];
 }
 
-function searchFarmersMarkets() {
+async function searchFarmersMarkets() {
   const zip = document.getElementById('fm-zip-input').value.trim();
+  const statusEl = document.getElementById('fm-status');
   if (!/^\d{5}$/.test(zip)) {
-    document.getElementById('fm-status').textContent = 'Enter a valid 5-digit zip code.';
+    statusEl.textContent = 'Enter a valid 5-digit zip code.';
     return;
   }
-  runFarmersSearch(null, null, zip);
+  statusEl.textContent = 'Looking up that zip code...';
+  try {
+    // Resolve the zip to real coordinates first (free, no-key, CORS-enabled service) so that
+    // curated-listing distance filtering works correctly regardless of USDA's own zip handling.
+    const res = await fetch('https://api.zippopotam.us/us/' + zip);
+    if (!res.ok) throw new Error('zip not found');
+    const data = await res.json();
+    const place = data.places && data.places[0];
+    const lat = place ? parseFloat(place.latitude) : null;
+    const lng = place ? parseFloat(place.longitude) : null;
+    if (lat == null || lng == null || isNaN(lat) || isNaN(lng)) throw new Error('no coordinates for zip');
+    return runFarmersSearch(lat, lng, zip);
+  } catch (e) {
+    console.warn('ROOTED local food map — zip-to-coordinates lookup failed, falling back to zip-only search:', e.message);
+    // Fall back to the old behavior: pass the zip directly and let USDA attempt its own zip
+    // handling. Curated-listing distance filtering won't work in this fallback case, but the
+    // USDA-sourced results (if that service is up) still have a chance to come through.
+    return runFarmersSearch(null, null, zip);
+  }
 }
 
 function useMyLocationForMarkets() {
