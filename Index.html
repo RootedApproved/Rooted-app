@@ -1154,11 +1154,13 @@ const LOCAL_FOOD_TYPES = {
 // Hand-curated grocery stores and restaurants — ROOTED-vetted, not from the USDA API.
 // Only shown when a search falls within CURATED_RADIUS_MILES of a curated listing's coordinates.
 // Coordinates are reasonable estimates from known addresses, not precision-geocoded.
-const CURATED_RADIUS_MILES = 20;
+const CURATED_RADIUS_MILES = 60;
 const CURATED_LISTINGS = [
   {_type:'grocery',listing_name:"Erewhon",location_address:"2800 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.4820,location_y:34.0387,schedules:"7am-10pm daily",products:"Organic produce, prepared foods, supplements, house-brand grass-fed beef",practices:"Grass-Fed Beef (American Farmers Network partnership, no hormones/antibiotics/GMOs), Certified Organic Produce",media_website:"https://www.erewhonmarket.com/"},
   {_type:'grocery',listing_name:"Co-Opportunity Market",location_address:"1525 Broadway",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4838,location_y:34.0158,schedules:"7am-10pm daily",products:"Produce, bulk foods, raw dairy, meat, seafood",practices:"Member-owned co-op since 1974, written sourcing policy: grass-fed/pastured red meat, organic poultry only, no antibiotics/hormones, wild-caught seafood only from stable populations",media_website:"https://www.coopportunity.com/"},
-  {_type:'grocery',listing_name:"Whole Foods Market (Wilshire)",location_address:"2201 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.4791,location_y:34.0369,schedules:"7am-10pm daily",products:"Full grocery, produce, meat counter",practices:"Carries Panorama Organic (AGA-certified 100% grass-fed/finished) and Verde Farms — look for the certified brand label specifically, not generic store signage",media_website:"https://www.wholefoodsmarket.com/"},
+  {_type:'grocery',listing_name:"Whole Foods Market (Wilshire)",location_address:"2201 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.481342,location_y:34.033288,schedules:"7am-10pm daily",products:"Full grocery, produce, meat counter",practices:"Carries Panorama Organic (AGA-certified 100% grass-fed/finished) and Verde Farms — look for the certified brand label specifically, not generic store signage",media_website:"https://www.wholefoodsmarket.com/stores/santamonica"},
+  {_type:'grocery',listing_name:"Whole Foods Market (Montana Ave)",location_address:"1425 Montana Ave",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.4877,location_y:34.0339,schedules:"8am-9pm daily",products:"Full grocery, produce, meat counter — smaller-format neighborhood store",practices:"Same Whole Foods sourcing standards as the Wilshire location; carries Panorama Organic and Verde Farms grass-fed lines — verify by brand label",media_website:"https://www.wholefoodsmarket.com/stores/montanaave"},
+  {_type:'grocery',listing_name:"Whole Foods Market 365 (Pico / Cloverfield)",location_address:"2121 Cloverfield Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90404",location_x:-118.4691,location_y:34.0248,schedules:"7am-10pm daily",products:"Full grocery, prepared foods, grab-and-go — Whole Foods 365 concept store",practices:"Same Whole Foods sourcing standards; note this location replaced the former 500 Wilshire Blvd store, which closed",media_website:"https://www.wholefoodsmarket.com/stores/santamonicapico"},
   {_type:'grocery',listing_name:"Bristol Farms",location_address:"3105 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.4841,location_y:34.0389,schedules:"6am-11pm daily",products:"Full-service butcher counter, seafood, produce",practices:"Premium meat/seafood departments; ask the butcher counter directly about sourcing on specific cuts — not systematically published like Erewhon or Co-Opportunity",media_website:"https://www.bristolfarms.com/"},
   {_type:'grocery',listing_name:"Gelson's",location_address:"2627 Lincoln Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90405",location_x:-118.4783,location_y:34.0245,schedules:"6am-11pm daily",products:"Full grocery, produce, some organic/grass-fed lines",practices:"Carries organic and grass-fed options but without the sourcing rigor of Erewhon or Co-Opportunity — verify individual products",media_website:"https://www.gelsons.com/"},
   {_type:'restaurant',listing_name:"Palms n' Patties",location_address:"3032 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90403",location_x:-118.4823,location_y:34.0387,schedules:"11am-10pm daily",products:"Grass-fed burgers, tallow-fried fries",practices:"100% organic, grass-fed/grass-finished, pasture-raised beef; fries cooked in preservative-free beef tallow; glyphosate-free, seed-oil-free buns",media_website:"https://palmsnpatties.com/"},
@@ -1169,10 +1171,10 @@ const CURATED_LISTINGS = [
   {_type:'restaurant',listing_name:"McConnell's Fine Ice Creams",location_address:"1456 3rd St Promenade",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4965,location_y:34.0161,schedules:"12pm-10pm daily (later Fri-Sat)",products:"Ice cream made from scratch",practices:"Grass-grazed Central Coast milk & cream (Producers Dairy), organic cage-free eggs, no stabilizers/preservatives/fillers — note: brand uses the specific term \"grass-grazed,\" not \"grass-fed\"",media_website:"https://mcconnells.com/"},
   {_type:'grocery',listing_name:"Bay Cities Italian Deli & Bakery",location_address:"1517 Lincoln Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4894,location_y:34.0179,schedules:"Wed-Sun 9am-6pm (closed Mon-Tue)",products:"Imported Italian cheeses, cured meats, fresh-baked bread, house-made pasta, olive oils, the famous \"Godmother\" sandwich",practices:"Family-owned since 1925; specialty ingredient authenticity/quality rather than an explicit grass-fed/organic sourcing policy — a different kind of \"quality\" than the health-focused picks on this list, included because it's a genuine, beloved Santa Monica landmark",media_website:"https://www.bcdeli.com/"},
   {_type:'grocery',listing_name:"Santa Monica Seafood Market & Café",location_address:"1000 Wilshire Blvd",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4928,location_y:34.0195,schedules:"9am-9pm daily",products:"Fresh and frozen seafood, oyster bar, prepared seafood dishes",practices:"Family-owned since 1939; ASC (Aquaculture Stewardship Council) and MSC (Marine Stewardship Council) certified sustainable sourcing partnerships",media_website:"https://smseafoodmarket.com/"},
-  {_type:'farmersmarket',listing_name:"Santa Monica Farmers Market — Downtown (Wednesday)",location_address:"Arizona Ave & 2nd/3rd St",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4959,location_y:34.0166,schedules:"Wed 8am-1pm, year-round, rain or shine",products:"Produce, cheese, meat, flowers, prepared foods — 40+ farm stands across four blocks",practices:"Established 1981; the longest-running and largest of the four city markets, known as the chef/restaurant favorite where LA-area kitchens do their weekly sourcing",media_website:"https://www.santamonica.gov/places/farmers-markets/downtown-farmers-market"},
-  {_type:'farmersmarket',listing_name:"Santa Monica Farmers Market — Downtown (Saturday)",location_address:"Arizona Ave & 2nd/3rd St",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4959,location_y:34.0166,schedules:"Sat 8am-1pm, year-round, rain or shine (closed Thanksgiving weekend)",products:"Produce, organic pastries, seasonal farm goods",practices:"Established 1991 as the \"Organic Market\"; carries the highest percentage of certified-organic growers of any of the four city markets",media_website:"https://www.santamonica.gov/places/farmers-markets/downtown-farmers-market"},
-  {_type:'farmersmarket',listing_name:"Santa Monica Farmers Market — Pico (Saturday)",location_address:"2200 Virginia Ave (Virginia Avenue Park)",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90404",location_x:-118.4784,location_y:34.0161,schedules:"Sat 8am-1pm, year-round, rain or shine",products:"Produce from ~35 certified California farms, live entertainment, prepared and prepackaged food",practices:"Established 1992; neighborhood-focused, family-friendly community market with a Market Match program that matches CalFresh EBT benefits for fresh produce",media_website:"https://www.santamonica.gov/places/farmers-markets/pico-farmers-market"},
-  {_type:'farmersmarket',listing_name:"Santa Monica Farmers Market — Main Street (Sunday)",location_address:"2640 Main St (Victorian Parking Lot / Heritage Square)",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90405",location_x:-118.4919,location_y:34.0064,schedules:"Sun 8:30am-1:30pm, year-round, rain or shine",products:"Produce, artisan crafts, prepared foods (breakfast burritos, crepes, pastries), live music",practices:"Community-oriented market blending produce shopping with local artisan/craft vendors and live entertainment",media_website:"https://www.santamonica.gov/categories/programs/farmers-market"},
+  {_type:'farmersmarket',listing_name:"Santa Monica Farmers Market — Downtown (Wednesday)",location_address:"Arizona Ave & 2nd/3rd St",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4948,location_y:34.0163,schedules:"Wed 8am-1pm, year-round, rain or shine",products:"Produce, cheese, meat, flowers, prepared foods — 40+ farm stands across four blocks",practices:"Established 1981; the longest-running and largest of the four city markets, known as the chef/restaurant favorite where LA-area kitchens do their weekly sourcing",media_website:"https://www.santamonica.gov/places/farmers-markets/downtown-farmers-market"},
+  {_type:'farmersmarket',listing_name:"Santa Monica Farmers Market — Downtown (Saturday)",location_address:"Arizona Ave & 2nd/3rd St",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90401",location_x:-118.4948,location_y:34.0163,schedules:"Sat 8am-1pm, year-round, rain or shine (closed Thanksgiving weekend)",products:"Produce, organic pastries, seasonal farm goods",practices:"Established 1991 as the \"Organic Market\"; carries the highest percentage of certified-organic growers of any of the four city markets",media_website:"https://www.santamonica.gov/places/farmers-markets/downtown-farmers-market"},
+  {_type:'farmersmarket',listing_name:"Santa Monica Farmers Market — Pico (Saturday)",location_address:"2200 Virginia Ave (Virginia Avenue Park)",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90404",location_x:-118.4788,location_y:34.0178,schedules:"Sat 8am-1pm, year-round, rain or shine",products:"Produce from ~35 certified California farms, live entertainment, prepared and prepackaged food",practices:"Established 1992; neighborhood-focused, family-friendly community market with a Market Match program that matches CalFresh EBT benefits for fresh produce",media_website:"https://www.santamonica.gov/places/farmers-markets/pico-farmers-market"},
+  {_type:'farmersmarket',listing_name:"Santa Monica Farmers Market — Main Street (Sunday)",location_address:"2640 Main St (Victorian Parking Lot / Heritage Square)",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90405",location_x:-118.4921,location_y:34.0067,schedules:"Sun 8:30am-1:30pm, year-round, rain or shine",products:"Produce, artisan crafts, prepared foods (breakfast burritos, crepes, pastries), live music",practices:"Community-oriented market blending produce shopping with local artisan/craft vendors and live entertainment",media_website:"https://www.santamonica.gov/categories/programs/farmers-market"},
 ];
 
 const MOCK_MARKETS = [
@@ -1201,7 +1203,7 @@ function haversineMiles(lat1, lon1, lat2, lon2) {
 let lastFetchDiagnostics = [];
 
 async function fetchOneDirectory(type, lat, lng, zipCode) {
-  const params = (lat != null && lng != null) ? `x=${lng}&y=${lat}&radius=50` : `zip=${zipCode}&radius=50`;
+  const params = (lat != null && lng != null) ? `x=${lng}&y=${lat}&radius=100` : `zip=${zipCode}&radius=100`;
   const url = `https://www.usdalocalfoodportal.com/api/${type}/?apikey=${USDA_API_KEY}&${params}`;
   const res = await fetch(url);
   const text = await res.text();
@@ -1265,6 +1267,11 @@ function initFarmersMap() {
     attribution: '© OpenStreetMap contributors',
     maxZoom: 18
   }).addTo(fmMap);
+  // Panning or zooming the map re-filters the results list to whatever's currently visible —
+  // no new search needed, since every fetched listing's marker already exists on the map.
+  fmMap.on('moveend zoomend', () => {
+    if (lastNormalizedMarkets.length) updateListForViewport();
+  });
 }
 
 function clearFarmersMarkers() {
@@ -1330,6 +1337,7 @@ function practiceScore(practicesStr) {
 
 let activeLocalFoodTypes = new Set(Object.keys(LOCAL_FOOD_TYPES));
 let lastRawListings = null;
+let lastNormalizedMarkets = [];
 
 function toggleLocalFoodType(type) {
   const btn = document.getElementById('fm-toggle-' + type);
@@ -1340,70 +1348,85 @@ function toggleLocalFoodType(type) {
     activeLocalFoodTypes.add(type);
     if (btn) btn.classList.add('active');
   }
-  // Re-render from the already-fetched results — no need to search again just to change filters.
-  if (lastRawListings) renderLocalFoodResults(lastRawListings);
+  renderMarkersForActiveTypes();
+  updateListForViewport();
 }
 
-function renderLocalFoodResults(rawMarkets) {
+function normalizeListing(m) {
+  const practices = pick(m, 'practices', 'practice_desc', 'growing_practices') || '';
+  const typeKey = LOCAL_FOOD_TYPES[m._type] ? m._type : 'farmersmarket';
+  return {
+    raw: m,
+    type: typeKey,
+    name: pick(m, 'listing_name', 'market_name', 'name') || 'Unnamed Listing',
+    address: pick(m, 'location_address', 'listing_address', 'address', 'street') || '',
+    city: pick(m, 'location_city', 'city') || '',
+    state: pick(m, 'location_state', 'state') || '',
+    zipc: pick(m, 'location_zipcode', 'location_zip', 'zip', 'zipcode') || '',
+    hours: pick(m, 'schedules', 'schedule', 'schedule_desc', 'market_hours', 'operation_hours', 'season1time'),
+    products: pick(m, 'products', 'product_desc', 'products_desc', 'products_offered'),
+    practices: practices,
+    website: pick(m, 'media_website', 'website', 'url'),
+    lat: parseFloat(pick(m, 'location_y', 'location_latitude', 'latitude', 'lat', 'y')),
+    lng: parseFloat(pick(m, 'location_x', 'location_longitude', 'longitude', 'lng', 'lon', 'x')),
+    distance: m.distance,
+    score: practiceScore(practices)
+  };
+}
+
+// Creates markers for every fetched listing whose type is currently active — regardless of the
+// map's current viewport. Leaflet only visually shows markers within the current view anyway, so
+// panning/zooming the map naturally reveals more without needing to recreate anything.
+function renderMarkersForActiveTypes() {
+  clearFarmersMarkers();
+  lastNormalizedMarkets.forEach(mk => {
+    if (!activeLocalFoodTypes.has(mk.type)) return;
+    if (isNaN(mk.lat) || isNaN(mk.lng)) return;
+    const typeInfo = LOCAL_FOOD_TYPES[mk.type];
+    const icon = L.divIcon({
+      html: '<div style="background:' + typeInfo.color + ';width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);font-size:13px;">' + typeInfo.icon + '</span></div>',
+      className: '',
+      iconSize: [26, 26],
+      iconAnchor: [13, 26]
+    });
+    const marker = L.marker([mk.lat, mk.lng], { icon }).addTo(fmMap).bindPopup(typeInfo.icon + ' ' + mk.name);
+    fmMarkers.push(marker);
+  });
+}
+
+// Renders the results LIST filtered to whatever's currently visible in the map's viewport, so
+// panning/zooming the map explores new areas without a new search or losing already-loaded data.
+function updateListForViewport() {
   const statusEl = document.getElementById('fm-status');
   const resultsEl = document.getElementById('fm-results');
   resultsEl.innerHTML = '';
-  clearFarmersMarkers();
 
-  const filteredRaw = rawMarkets.filter(m => activeLocalFoodTypes.has(LOCAL_FOOD_TYPES[m._type] ? m._type : 'farmersmarket'));
-
-  if (!filteredRaw.length) {
-    if (rawMarkets.length) {
-      statusEl.textContent = 'No listings match your current filters — try enabling more categories above.';
-    } else if (USDA_API_KEY && lastFetchDiagnostics.length) {
-      // At least one directory returned something unexpected (often an auth/key error hiding
-      // inside an HTTP 200 response) — show it on-screen so this is diagnosable on a phone.
-      statusEl.innerHTML = 'No listings loaded — the USDA service returned an unexpected response for ' +
-        lastFetchDiagnostics.length + ' of 4 directories.' +
-        '<div class="fm-debug-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">🔧 Show details</div>' +
-        '<pre class="fm-debug-json" style="display:none">' + lastFetchDiagnostics.join('\n\n').replace(/</g, '&lt;') + '</pre>';
-    } else {
-      statusEl.textContent = 'No markets found in that area. Try a wider search.';
-    }
+  const byType = lastNormalizedMarkets.filter(mk => activeLocalFoodTypes.has(mk.type));
+  if (!byType.length) {
+    statusEl.textContent = lastNormalizedMarkets.length
+      ? 'No listings match your current filters — try enabling more categories above.'
+      : 'No markets found in that area. Try a wider search.';
     return;
   }
 
-  // Normalize every market's fields up front (handles uncertain real-API field names defensively).
-  const markets = filteredRaw.map(m => {
-    const practices = pick(m, 'practices', 'practice_desc', 'growing_practices') || '';
-    const typeKey = LOCAL_FOOD_TYPES[m._type] ? m._type : 'farmersmarket';
-    return {
-      raw: m,
-      type: typeKey,
-      name: pick(m, 'listing_name', 'market_name', 'name') || 'Unnamed Listing',
-      address: pick(m, 'location_address', 'listing_address', 'address', 'street') || '',
-      city: pick(m, 'location_city', 'city') || '',
-      state: pick(m, 'location_state', 'state') || '',
-      zipc: pick(m, 'location_zipcode', 'location_zip', 'zip', 'zipcode') || '',
-      hours: pick(m, 'schedules', 'schedule', 'schedule_desc', 'market_hours', 'operation_hours', 'season1time'),
-      products: pick(m, 'products', 'product_desc', 'products_desc', 'products_offered'),
-      practices: practices,
-      website: pick(m, 'media_website', 'website', 'url'),
-      lat: parseFloat(pick(m, 'location_y', 'location_latitude', 'latitude', 'lat', 'y')),
-      lng: parseFloat(pick(m, 'location_x', 'location_longitude', 'longitude', 'lng', 'lon', 'x')),
-      distance: m.distance,
-      score: practiceScore(practices)
-    };
-  });
-
-  // Sort by practice quality first (per ROOTED standard: highlight good practices), distance as tiebreaker.
-  markets.sort((a, b) => b.score - a.score || (a.distance ?? 999) - (b.distance ?? 999));
-
-  if (USDA_API_KEY && rawMarkets[0]) {
-    // Debug aid: logs the real API's actual field names to the browser console on first live use.
-    console.log('ROOTED local food map — raw API fields for first result:', rawMarkets[0]);
+  let visible = byType;
+  if (fmMap && typeof fmMap.getBounds === 'function') {
+    const bounds = fmMap.getBounds();
+    visible = byType.filter(mk => !isNaN(mk.lat) && !isNaN(mk.lng) && bounds.contains([mk.lat, mk.lng]));
   }
-  const previewNote = USDA_API_KEY ? '' : 'Preview mode — showing sample listings while the live USDA key is pending. ';
-  const countLabel = markets.length === 1 ? '1 listing found' : markets.length + ' listings found';
-  statusEl.textContent = previewNote + countLabel + ', great practices highlighted first.';
 
-  const bounds = [];
-  markets.forEach(mk => {
+  if (!visible.length) {
+    statusEl.textContent = 'Nothing in the current map view — zoom out or pan to see more listings.';
+    return;
+  }
+
+  visible.sort((a, b) => b.score - a.score || (a.distance ?? 999) - (b.distance ?? 999));
+
+  const previewNote = USDA_API_KEY ? '' : 'Preview mode — showing sample listings while the live USDA key is pending. ';
+  const countLabel = visible.length === 1 ? '1 listing found' : visible.length + ' listings found';
+  statusEl.textContent = previewNote + countLabel + ' in view, great practices highlighted first.';
+
+  visible.forEach(mk => {
     const typeInfo = LOCAL_FOOD_TYPES[mk.type];
     const card = document.createElement('div');
     card.className = 'fm-card' + (mk.score > 0 ? ' fm-card-highlight' : '');
@@ -1423,30 +1446,57 @@ function renderLocalFoodResults(rawMarkets) {
       '</div>';
     card.onclick = () => card.classList.toggle('expanded');
     resultsEl.appendChild(card);
-    if (!isNaN(mk.lat) && !isNaN(mk.lng)) {
-      const icon = L.divIcon({
-        html: '<div style="background:' + typeInfo.color + ';width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);font-size:13px;">' + typeInfo.icon + '</span></div>',
-        className: '',
-        iconSize: [26, 26],
-        iconAnchor: [13, 26]
-      });
-      const marker = L.marker([mk.lat, mk.lng], { icon }).addTo(fmMap).bindPopup(typeInfo.icon + ' ' + mk.name);
-      fmMarkers.push(marker);
-      bounds.push([mk.lat, mk.lng]);
-    }
   });
-  if (bounds.length) fmMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 12 });
 
-  // Mobile-friendly debug view: shows the real API's raw first result directly on-screen
-  // (no dev tools needed) so field mapping can be verified/corrected quickly on a phone.
-  if (USDA_API_KEY && rawMarkets[0]) {
+  // Mobile-friendly debug view of the raw first result — shown once per search regardless of viewport.
+  if (USDA_API_KEY && lastRawListings && lastRawListings[0]) {
     const debugWrap = document.createElement('div');
     debugWrap.style.cssText = 'margin-top:6px;';
     debugWrap.innerHTML =
       '<div class="fm-debug-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">🔧 Show raw API data (debug)</div>' +
-      '<pre class="fm-debug-json" style="display:none">' + JSON.stringify(rawMarkets[0], null, 2).replace(/</g, '&lt;') + '</pre>';
+      '<pre class="fm-debug-json" style="display:none">' + JSON.stringify(lastRawListings[0], null, 2).replace(/</g, '&lt;') + '</pre>';
     resultsEl.appendChild(debugWrap);
   }
+}
+
+function renderLocalFoodResults(rawMarkets) {
+  const statusEl = document.getElementById('fm-status');
+  if (!rawMarkets || !rawMarkets.length) {
+    lastNormalizedMarkets = [];
+    clearFarmersMarkers();
+    document.getElementById('fm-results').innerHTML = '';
+    if (USDA_API_KEY && lastFetchDiagnostics.length) {
+      statusEl.innerHTML = 'No listings loaded — the USDA service returned an unexpected response for ' +
+        lastFetchDiagnostics.length + ' of 4 directories.' +
+        '<div class="fm-debug-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">🔧 Show details</div>' +
+        '<pre class="fm-debug-json" style="display:none">' + lastFetchDiagnostics.join('\n\n').replace(/</g, '&lt;') + '</pre>';
+    } else {
+      statusEl.textContent = 'No markets found in that area. Try a wider search.';
+    }
+    return;
+  }
+
+  if (USDA_API_KEY && rawMarkets[0]) {
+    // Debug aid: logs the real API's actual field names to the browser console on first live use.
+    console.log('ROOTED local food map — raw API fields for first result:', rawMarkets[0]);
+  }
+
+  lastNormalizedMarkets = rawMarkets.map(normalizeListing);
+  renderMarkersForActiveTypes();
+
+  // Initial zoom: fit to the nearest ~15 results (or fewer if that's all there is) so the first
+  // view is immediately useful, rather than zoomed out to show the entire 60-mile fetch radius.
+  // Panning/zooming out afterward reveals the rest, since all markers already exist on the map.
+  const activeSorted = lastNormalizedMarkets
+    .filter(mk => activeLocalFoodTypes.has(mk.type) && !isNaN(mk.lat) && !isNaN(mk.lng))
+    .sort((a, b) => (a.distance ?? 999) - (b.distance ?? 999));
+  const nearbyForInitialView = activeSorted.slice(0, 15);
+  if (nearbyForInitialView.length) {
+    const bounds = nearbyForInitialView.map(mk => [mk.lat, mk.lng]);
+    fmMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 13 });
+  }
+
+  updateListForViewport();
 }
 
 async function runFarmersSearch(lat, lng, zip) {
