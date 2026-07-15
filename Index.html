@@ -41,6 +41,41 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
 .sec-link{font-size:12px;color:var(--teal);font-weight:600;cursor:pointer;}
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 18px 22px;}
 .cat-card{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;aspect-ratio:1;display:flex;flex-direction:column;justify-content:flex-end;position:relative;transition:transform .15s,box-shadow .15s;}
+
+/* ── CARD STYLE VARIANTS (toggleable via .style-color/.style-photo/.style-rect on body) ── */
+/* Style A: solid color-tint background, cycling through the brand palette */
+body.style-color .cat-card{border:none;}
+body.style-color .cat-card .cat-icon{color:var(--white);}
+body.style-color .cat-card .cat-lbl{color:rgba(255,255,255,.75);}
+body.style-color .cat-card .cat-name{color:var(--white);}
+body.style-color .cat-card .cat-ct{color:rgba(255,255,255,.7);}
+body.style-color .cat-card:nth-child(4n+1){background:var(--forest);}
+body.style-color .cat-card:nth-child(4n+2){background:var(--teal);}
+body.style-color .cat-card:nth-child(4n+3){background:var(--earth);}
+body.style-color .cat-card:nth-child(4n+4){background:var(--sage);}
+
+/* Style B: placeholder gradient "photo" block with scrim overlay for text legibility */
+body.style-photo .cat-card{border:none;}
+body.style-photo .cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,var(--cream2),var(--border) 60%,var(--muted));opacity:.55;}
+body.style-photo .cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65%;background:linear-gradient(to top,rgba(0,0,0,.55),transparent);}
+body.style-photo .cat-card .cat-icon{color:var(--white);z-index:2;}
+body.style-photo .cat-card .cat-body{position:relative;z-index:2;}
+body.style-photo .cat-card .cat-lbl{color:rgba(255,255,255,.8);}
+body.style-photo .cat-card .cat-name{color:var(--white);}
+body.style-photo .cat-card .cat-ct{color:rgba(255,255,255,.75);}
+
+/* Style C: rectangular (not square) with a larger, centered icon */
+body.style-rect .cat-grid{grid-template-columns:1fr;}
+body.style-rect .cat-card{aspect-ratio:auto;flex-direction:row;align-items:center;padding:14px 16px;gap:14px;}
+body.style-rect .cat-card .cat-icon{position:static;background:var(--cream2);border-radius:50%;padding:12px;flex-shrink:0;}
+body.style-rect .cat-card .cat-icon i{width:24px;height:24px;}
+body.style-rect .cat-card .cat-body{padding:0;}
+@media (min-width:1024px){body.style-rect .cat-grid{grid-template-columns:repeat(2,1fr);}}
+
+.style-toggle-wrap{display:flex;align-items:center;gap:8px;padding:0 18px 12px;flex-wrap:wrap;}
+.style-toggle-label{font-family:var(--font-m);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+.style-toggle-btn{font-family:var(--font-b);font-size:11.5px;font-weight:700;color:var(--mid);background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:5px 12px;cursor:pointer;}
+.style-toggle-btn.active{color:var(--white);background:var(--forest);border-color:var(--forest);}
 .cat-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.08);}
 .cat-icon{position:absolute;top:14px;left:14px;line-height:1;display:flex;color:var(--forest);}
 .cat-icon i{width:26px;height:26px;stroke-width:1.5;}
@@ -349,6 +384,13 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
     <p class="home-sub">Every product rated against a published standard. No guesswork.</p>
   </div>
   <div class="sec-hd"><span class="sec-title">Categories</span><span class="sec-link" onclick="showTab('categories')">See all →</span></div>
+  <div class="style-toggle-wrap">
+    <span class="style-toggle-label">Card style:</span>
+    <button class="style-toggle-btn" id="style-btn-default" onclick="setCardStyle('default')">Default</button>
+    <button class="style-toggle-btn" id="style-btn-color" onclick="setCardStyle('color')">Color</button>
+    <button class="style-toggle-btn" id="style-btn-photo" onclick="setCardStyle('photo')">Photo</button>
+    <button class="style-toggle-btn" id="style-btn-rect" onclick="setCardStyle('rect')">Rectangle</button>
+  </div>
   <div class="cat-grid">
     <div class="cat-card" onclick="showCategory('clothing')"><span class="cat-icon"><i data-lucide="shirt"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct js-clothing-total">30 products rated</div></div></div>
     <div class="cat-card" onclick="showCategory('oral')"><span class="cat-icon"><i data-lucide="smile"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Oral Care</div><div class="cat-ct js-oral-total">10 products rated</div></div></div>
@@ -1773,6 +1815,23 @@ function initFeaturedImages() {
   }
 }
 // Run on load
+// Lets the home page category cards preview 3 different visual treatments live —
+// a comparison tool, not a final design decision. Persists choice across reloads.
+function setCardStyle(style) {
+  document.body.classList.remove('style-color', 'style-photo', 'style-rect');
+  if (style !== 'default') document.body.classList.add('style-' + style);
+  document.querySelectorAll('.style-toggle-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('style-btn-' + style);
+  if (btn) btn.classList.add('active');
+  try { localStorage.setItem('rooted-card-style', style); } catch (e) {}
+}
+
+function initCardStyle() {
+  let saved = 'default';
+  try { saved = localStorage.getItem('rooted-card-style') || 'default'; } catch (e) {}
+  setCardStyle(saved);
+}
+
 function applyFeatureFlags() {
   const womens1 = document.getElementById('subcat-card-womens1');
   const womens2 = document.getElementById('subcat-card-womens2');
@@ -1785,6 +1844,7 @@ function applyFeatureFlags() {
 window.addEventListener('DOMContentLoaded', initFeaturedImages);
 window.addEventListener('DOMContentLoaded', updateProductCounts);
 window.addEventListener('DOMContentLoaded', applyFeatureFlags);
+window.addEventListener('DOMContentLoaded', initCardStyle);
 window.addEventListener('DOMContentLoaded', () => { if (typeof lucide !== 'undefined') lucide.createIcons(); });
 
 function submitEmail(){
