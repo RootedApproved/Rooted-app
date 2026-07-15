@@ -627,10 +627,22 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
     <div class="subcat-card" onclick="showSubcat('personal-hair')"><span class="sc-icon">💇</span><div class="sc-name">Hair &amp; Scalp Care</div><div class="sc-count" id="count-personal-hair">2 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" onclick="showSubcat('personal-shaving')"><span class="sc-icon">🪒</span><div class="sc-name">Shaving</div><div class="sc-count" id="count-personal-shaving">2 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" onclick="showSubcat('personal-sun')"><span class="sc-icon">☀️</span><div class="sc-name">Sun Protection &amp; Outdoor Care</div><div class="sc-count" id="count-personal-sun">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-deodorant')"><span class="sc-icon">🌿</span><div class="sc-name">Deodorant &amp; Antiperspirant</div><div class="sc-count" id="count-personal-deodorant">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-fragrance')"><span class="sc-icon">🌸</span><div class="sc-name">Fragrance &amp; Perfume</div><div class="sc-count" id="count-personal-fragrance">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-cosmetics')"><span class="sc-icon">💄</span><div class="sc-name">Cosmetics &amp; Makeup</div><div class="sc-count" id="count-personal-cosmetics">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-nails')"><span class="sc-icon">💅</span><div class="sc-name">Nail Care &amp; Color</div><div class="sc-count" id="count-personal-nails">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-grooming')"><span class="sc-icon">✂️</span><div class="sc-name">Grooming Tools &amp; Accessories</div><div class="sc-count" id="count-personal-grooming">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-bath')"><span class="sc-icon">🛁</span><div class="sc-name">Bath &amp; Body Extras</div><div class="sc-count" id="count-personal-bath">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-foot')"><span class="sc-icon">🦶</span><div class="sc-name">Foot Care</div><div class="sc-count" id="count-personal-foot">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-handhygiene')"><span class="sc-icon">🧼</span><div class="sc-name">Hand Hygiene</div><div class="sc-count" id="count-personal-handhygiene">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-disposables')"><span class="sc-icon">🧻</span><div class="sc-name">Hygiene Disposables &amp; Reusables</div><div class="sc-count" id="count-personal-disposables">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" id="subcat-card-womens1" style="display:none" onclick="showSubcat('personal-menstrual')"><span class="sc-icon">🌷</span><div class="sc-name">Menstrual Care</div><div class="sc-count" id="count-personal-menstrual">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" id="subcat-card-womens2" style="display:none" onclick="showSubcat('personal-intimate')"><span class="sc-icon">🌷</span><div class="sc-name">Intimate Cleansing</div><div class="sc-count" id="count-personal-intimate">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" id="subcat-card-lube" style="display:none" onclick="showSubcat('personal-lube')"><span class="sc-icon">💧</span><div class="sc-name">Intimate Lubrication &amp; Sexual Wellness</div><div class="sc-count" id="count-personal-lube">0 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
-    <div class="callout"><div class="callout-lbl">ROOTED Standard — Personal Care</div><div class="callout-tx">Personal care products are among the most frequently used products in daily life, making ingredient quality just as important as food quality. ROOTED prioritizes biologically compatible fats, minimal formulations, and full transparency over cosmetic marketing claims — buying fewer, higher-quality products that can be trusted for decades. Oral Care is covered separately in its own category.</div></div>
+    <div class="callout"><div class="callout-lbl">ROOTED Standard — Personal Care</div><div class="callout-tx">Personal care products are among the most frequently used products in daily life, making ingredient quality just as important as food quality. "Natural" is not automatically safer or more effective — ROOTED distinguishes genuinely simple products from clean-marketing language, and flags categories where conventional options offer real, honest performance advantages. Oral Care is covered separately in its own category.</div></div>
   </div>
 </div></div>
 
@@ -1191,6 +1203,13 @@ function imgFallback(img, emoji, size) {
 // https://www.usdalocalfoodportal.com/fe/fregisterpublicapi/ and paste it below.
 // Everything else already works end-to-end against mock data shaped exactly
 // like the real API response — no other code changes needed once the key is added.
+// ── FEATURE FLAGS ────────────────────────────────────────────────────────
+// Simple on/off switches. Flipping these to true/false shows or hides the
+// relevant Personal Care subcategories everywhere on the site (hub grid,
+// search, counts) without touching or deleting any underlying product data.
+const SHOW_WOMENS_CARE = false;   // Menstrual Care + Intimate Cleansing
+const SHOW_INTIMATE_LUBE = false; // Intimate Lubrication & Sexual Wellness — independent of the flag above
+
 const USDA_API_KEY = 'hoiSwsOw7I';
 let fmMap = null;
 let fmMarkers = [];
@@ -1655,8 +1674,18 @@ function initFeaturedImages() {
   }
 }
 // Run on load
+function applyFeatureFlags() {
+  const womens1 = document.getElementById('subcat-card-womens1');
+  const womens2 = document.getElementById('subcat-card-womens2');
+  const lube = document.getElementById('subcat-card-lube');
+  if (womens1) womens1.style.display = SHOW_WOMENS_CARE ? 'flex' : 'none';
+  if (womens2) womens2.style.display = SHOW_WOMENS_CARE ? 'flex' : 'none';
+  if (lube) lube.style.display = SHOW_INTIMATE_LUBE ? 'flex' : 'none';
+}
+
 window.addEventListener('DOMContentLoaded', initFeaturedImages);
 window.addEventListener('DOMContentLoaded', updateProductCounts);
+window.addEventListener('DOMContentLoaded', applyFeatureFlags);
 
 function submitEmail(){
   const val=document.getElementById('email-val').value;
