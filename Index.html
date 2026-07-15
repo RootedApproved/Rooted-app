@@ -13,7 +13,8 @@ html{scroll-behavior:smooth;}
 body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-size:15px;line-height:1.6;overflow-x:hidden;padding-top:var(--nav-h);padding-bottom:var(--bar-h);}
 .screen{display:none;}.screen.active{display:block;}
 .top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:var(--nav-h);background:var(--cream);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 18px;}
-.nav-brand{font-family:var(--font-d);font-weight:900;font-size:20px;color:var(--forest);letter-spacing:.04em;cursor:pointer;}
+.nav-brand{font-family:var(--font-d);font-weight:900;font-size:20px;color:var(--forest);letter-spacing:.04em;cursor:pointer;display:flex;align-items:center;gap:8px;}
+.brand-logo{width:26px;height:26px;flex-shrink:0;}
 .nav-right{display:flex;align-items:center;gap:12px;}
 .nav-search{display:flex;align-items:center;gap:7px;background:var(--cream2);border:1px solid var(--border);border-radius:20px;padding:7px 14px;cursor:pointer;color:var(--mid);font-family:var(--font-b);font-size:13px;transition:border-color .15s,background .15s;}
 .nav-search:hover{border-color:var(--sage);background:var(--white);}
@@ -334,24 +335,29 @@ body.style-rect .cat-card .cat-body{padding:0;}
 
 /* ── DESKTOP SIDEBAR (hidden on mobile by default) ─────────────────────── */
 .desktop-sidebar{display:none;}
-.sidebar-brand{font-family:var(--font-d);font-weight:900;font-size:19px;color:var(--forest);letter-spacing:.04em;cursor:pointer;padding:0 10px 20px;}
-.sidebar-tab{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:8px 10px;border-radius:6px;font-size:13.5px;font-weight:600;color:var(--mid);margin-bottom:2px;}
-.sidebar-tab i{width:17px;height:17px;stroke-width:1.75;flex-shrink:0;}
+.sidebar-brand{font-family:var(--font-d);font-weight:900;font-size:16px;color:var(--forest);letter-spacing:.04em;cursor:pointer;padding:0 8px 22px;display:flex;align-items:center;gap:8px;}
+.sidebar-brand .brand-logo{width:22px;height:22px;flex-shrink:0;}
+.sidebar-nav{padding:4px 0 8px;}
+.sidebar-tab{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:7px 9px;border-radius:6px;font-size:12.5px;font-weight:600;color:var(--mid);margin-bottom:5px;}
+.sidebar-tab i{width:15px;height:15px;stroke-width:1.75;flex-shrink:0;}
 .sidebar-tab.active{background:var(--cream2);color:var(--forest);}
 .sidebar-tab:hover{background:var(--cream2);}
 .sidebar-spacer{flex:1;}
-.sidebar-join{background:var(--forest);color:var(--white);border:none;border-radius:6px;padding:10px 12px;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;margin:0 0 16px;}
-.sidebar-footer{display:flex;gap:12px;padding:14px 10px 0;border-top:1px solid var(--border);}
-.sidebar-social{color:var(--muted);transition:color .15s;}
-.sidebar-social:hover{color:var(--forest);}
-.sidebar-social i{width:18px;height:18px;stroke-width:1.6;}
+.sidebar-join{background:var(--forest);color:var(--white);border:none;border-radius:6px;padding:10px 12px;font-size:11.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;margin:0 0 14px;}
+.sidebar-footer{display:flex;gap:14px;padding:14px 8px;border-top:1px solid var(--border);margin-bottom:10px;}
+.sidebar-social{opacity:.85;transition:opacity .15s,transform .15s;}
+.sidebar-social:hover{opacity:1;transform:translateY(-1px);}
+.sidebar-social img{width:19px;height:19px;display:block;}
+.sidebar-contact-btn{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--teal);color:var(--white);border:none;border-radius:8px;padding:11px 12px;font-family:var(--font-b);font-size:12px;font-weight:700;letter-spacing:.02em;cursor:pointer;text-decoration:none;transition:background .15s,transform .15s;}
+.sidebar-contact-btn:hover{background:#256664;transform:translateY(-1px);}
+.sidebar-contact-btn i{width:15px;height:15px;stroke-width:2;}
 
 /* ── DESKTOP LAYOUT (1024px+): sidebar nav, wide multi-column grids ────── */
 @media (min-width:1024px){
-  body{padding-left:210px;padding-bottom:0;padding-top:0;}
+  body{padding-left:180px;padding-bottom:0;padding-top:0;}
   .bottom-bar{display:none;}
-  .desktop-sidebar{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:210px;background:var(--white);border-right:1px solid var(--border);padding:20px 10px 16px;z-index:300;}
-  .top-nav{left:210px;padding:0 32px;}
+  .desktop-sidebar{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:180px;background:var(--white);border-right:1px solid var(--border);padding:18px 8px 14px;z-index:300;}
+  .top-nav{left:180px;padding:0 32px;}
   .page{max-width:920px;margin:0 auto;padding-top:8px;}
   .cat-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 32px 28px;}
   .subcat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px 32px 28px;}
@@ -368,7 +374,7 @@ body.style-rect .cat-card .cat-body{padding:0;}
 <body>
 <!-- TOP NAV -->
 <nav class="top-nav">
-  <span class="nav-brand" onclick="goHome()">ROOTED</span>
+  <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</span>
   <div class="nav-right">
     <button class="nav-search" onclick="showTab('search')"><i data-lucide="search"></i><span class="nav-search-label">Search</span></button>
     <button class="nav-join" onclick="showAbout()">Join</button>
@@ -896,18 +902,20 @@ body.style-rect .cat-card .cat-body{padding:0;}
 
 <!-- DESKTOP SIDEBAR (desktop only, hidden on mobile via CSS) -->
 <nav class="desktop-sidebar">
-  <div class="sidebar-brand" onclick="goHome()">ROOTED</div>
-  <button class="tab sidebar-tab active" data-tab="home" onclick="showTab('home')"><i data-lucide="house"></i><span>Home</span></button>
-  <button class="tab sidebar-tab" data-tab="search" onclick="showTab('search')"><i data-lucide="search"></i><span>Search</span></button>
-  <button class="tab sidebar-tab" data-tab="categories" onclick="showTab('categories')"><i data-lucide="menu"></i><span>Categories</span></button>
-  <button class="tab sidebar-tab" data-tab="profile" onclick="showTab('profile')"><i data-lucide="circle-user"></i><span>Profile</span></button>
+  <div class="sidebar-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
+  <div class="sidebar-nav">
+    <button class="tab sidebar-tab active" data-tab="home" onclick="showTab('home')"><i data-lucide="house"></i><span>Home</span></button>
+    <button class="tab sidebar-tab" data-tab="search" onclick="showTab('search')"><i data-lucide="search"></i><span>Search</span></button>
+    <button class="tab sidebar-tab" data-tab="categories" onclick="showTab('categories')"><i data-lucide="menu"></i><span>Categories</span></button>
+    <button class="tab sidebar-tab" data-tab="profile" onclick="showTab('profile')"><i data-lucide="circle-user"></i><span>Profile</span></button>
+  </div>
   <div class="sidebar-spacer"></div>
   <button class="sidebar-join" onclick="showAbout()">Join ROOTED</button>
   <div class="sidebar-footer">
-    <a href="https://instagram.com/rootedapproved" target="_blank" class="sidebar-social" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-    <a href="https://tiktok.com/@rootedapproved" target="_blank" class="sidebar-social" aria-label="TikTok"><i data-lucide="music-2"></i></a>
-    <a href="mailto:team@rootedapproved.com" class="sidebar-social" aria-label="Email"><i data-lucide="mail"></i></a>
+    <a href="https://instagram.com/rootedapproved" target="_blank" class="sidebar-social" aria-label="Instagram"><img src="https://cdn.simpleicons.org/instagram" alt="Instagram"></a>
+    <a href="https://tiktok.com/@rootedapproved" target="_blank" class="sidebar-social" aria-label="TikTok"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok"></a>
   </div>
+  <a href="mailto:team@rootedapproved.com" class="sidebar-contact-btn"><i data-lucide="mail"></i>Contact Us</a>
 </nav>
 <script>
 const PRODUCTS = {
