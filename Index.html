@@ -7,7 +7,7 @@
 <title>ROOTED — The Standard for Healthy Living</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#F5F0E6;--cream2:#EDE7D9;--forest:#2D5016;--sage:#5C8A2E;--teal:#2E7D7A;--earth:#8B6914;--red:#B53A2F;--char:#1A1A1A;--mid:#4A4A4A;--muted:#888;--border:#DDD8CE;--white:#FFFFFF;--bar-h:56px;--nav-h:52px;--font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',system-ui,sans-serif;--font-m:'DM Mono',monospace;}
+:root{--cream:#F5F0E6;--cream2:#EDE7D9;--forest:#2D5016;--sage:#5C8A2E;--teal:#2E7D7A;--earth:#8B6914;--red:#B53A2F;--terracotta:#B5563F;--gold:#D69A2D;--char:#1A1A1A;--mid:#4A4A4A;--muted:#888;--border:#DDD8CE;--white:#FFFFFF;--bar-h:56px;--nav-h:52px;--font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',system-ui,sans-serif;--font-m:'DM Mono',monospace;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-size:15px;line-height:1.6;overflow-x:hidden;padding-top:var(--nav-h);padding-bottom:var(--bar-h);}
@@ -365,7 +365,7 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 @media (min-width:1024px){
   body{padding-left:180px;padding-bottom:0;padding-top:0;}
   .bottom-bar{display:none;}
-  .desktop-sidebar{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:180px;background:var(--white);border-right:1px solid var(--border);padding:18px 8px 14px;z-index:300;}
+  .desktop-sidebar{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:180px;background:var(--white);border-right:1px solid var(--border);padding:18px 8px 14px;z-index:300;transition:background .2s;}
   .top-nav{left:180px;padding:0 32px;}
   .page{max-width:920px;margin:0 auto;padding-top:8px;}
   .cat-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 32px 28px;}
@@ -374,6 +374,20 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
   .cat-hd,.sec-hd{padding-left:32px;padding-right:32px;}
   .fm-map{margin:0 32px 12px;}
   .fm-legend-wrap,.fm-results{margin-left:32px;margin-right:32px;}
+
+  /* Sidebar background variants */
+  body.sidebar-dark .desktop-sidebar{background:var(--forest);border-right:none;}
+  body.sidebar-terracotta .desktop-sidebar{background:var(--terracotta);border-right:none;}
+  body.sidebar-dark .sidebar-brand,body.sidebar-terracotta .sidebar-brand{color:var(--white);}
+  body.sidebar-dark .sidebar-tab,body.sidebar-terracotta .sidebar-tab{color:rgba(255,255,255,.75);}
+  body.sidebar-dark .sidebar-tab.active,body.sidebar-terracotta .sidebar-tab.active{background:rgba(255,255,255,.16);color:var(--white);}
+  body.sidebar-dark .sidebar-tab:hover,body.sidebar-terracotta .sidebar-tab:hover{background:rgba(255,255,255,.1);}
+  body.sidebar-dark .sidebar-join,body.sidebar-terracotta .sidebar-join{background:var(--white);color:var(--forest);}
+  body.sidebar-terracotta .sidebar-join{color:var(--terracotta);}
+  body.sidebar-dark .sidebar-footer,body.sidebar-terracotta .sidebar-footer{border-top-color:rgba(255,255,255,.2);}
+  body.sidebar-dark .sidebar-contact-btn,body.sidebar-terracotta .sidebar-contact-btn{background:rgba(255,255,255,.18);}
+  body.sidebar-dark .sidebar-contact-btn:hover,body.sidebar-terracotta .sidebar-contact-btn:hover{background:rgba(255,255,255,.28);}
+  body.sidebar-gradient .desktop-sidebar{background:linear-gradient(165deg,var(--cream2) 0%,rgba(181,86,63,.14) 65%,rgba(214,154,45,.16) 100%);}
 }
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -404,6 +418,13 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
     <button class="style-toggle-btn" id="style-btn-color" onclick="setCardStyle('color')">Color</button>
     <button class="style-toggle-btn" id="style-btn-photo" onclick="setCardStyle('photo')">Photo</button>
     <button class="style-toggle-btn" id="style-btn-rect" onclick="setCardStyle('rect')">Rectangle</button>
+  </div>
+  <div class="style-toggle-wrap">
+    <span class="style-toggle-label">Sidebar bg (desktop):</span>
+    <button class="style-toggle-btn" id="sidebar-btn-plain" onclick="setSidebarStyle('plain')">Plain</button>
+    <button class="style-toggle-btn" id="sidebar-btn-dark" onclick="setSidebarStyle('dark')">Dark Forest</button>
+    <button class="style-toggle-btn" id="sidebar-btn-terracotta" onclick="setSidebarStyle('terracotta')">Terracotta</button>
+    <button class="style-toggle-btn" id="sidebar-btn-gradient" onclick="setSidebarStyle('gradient')">Soft Gradient</button>
   </div>
   <div class="cat-grid">
     <div class="cat-card" onclick="showCategory('clothing')"><span class="cat-icon"><i data-lucide="shirt"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct js-clothing-total">30 products rated</div></div></div>
@@ -1849,6 +1870,22 @@ function initCardStyle() {
   setCardStyle(saved);
 }
 
+// Live comparison toggle for the desktop sidebar background — same pattern as setCardStyle.
+function setSidebarStyle(style) {
+  document.body.classList.remove('sidebar-dark', 'sidebar-terracotta', 'sidebar-gradient');
+  if (style !== 'plain') document.body.classList.add('sidebar-' + style);
+  document.querySelectorAll('[id^="sidebar-btn-"]').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('sidebar-btn-' + style);
+  if (btn) btn.classList.add('active');
+  try { localStorage.setItem('rooted-sidebar-style', style); } catch (e) {}
+}
+
+function initSidebarStyle() {
+  let saved = 'plain';
+  try { saved = localStorage.getItem('rooted-sidebar-style') || 'plain'; } catch (e) {}
+  setSidebarStyle(saved);
+}
+
 function applyFeatureFlags() {
   const womens1 = document.getElementById('subcat-card-womens1');
   const womens2 = document.getElementById('subcat-card-womens2');
@@ -1862,6 +1899,7 @@ window.addEventListener('DOMContentLoaded', initFeaturedImages);
 window.addEventListener('DOMContentLoaded', updateProductCounts);
 window.addEventListener('DOMContentLoaded', applyFeatureFlags);
 window.addEventListener('DOMContentLoaded', initCardStyle);
+window.addEventListener('DOMContentLoaded', initSidebarStyle);
 window.addEventListener('DOMContentLoaded', () => { if (typeof lucide !== 'undefined') lucide.createIcons(); });
 
 function submitEmail(){
