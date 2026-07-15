@@ -347,8 +347,8 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 .sidebar-brand{font-family:var(--font-d);font-weight:900;font-size:16px;color:var(--forest);letter-spacing:.04em;cursor:pointer;padding:0 8px 22px;display:flex;align-items:center;gap:8px;}
 .sidebar-brand .brand-logo{width:22px;height:22px;flex-shrink:0;}
 .sidebar-nav{padding:4px 0 8px;}
-.sidebar-tab{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:7px 9px;border-radius:6px;font-size:12.5px;font-weight:600;color:var(--mid);margin-bottom:5px;}
-.sidebar-tab i{width:15px;height:15px;stroke-width:1.75;flex-shrink:0;}
+.sidebar-tab{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:6px 8px;border-radius:5px;font-size:11.5px;font-weight:600;color:var(--mid);margin-bottom:4px;}
+.sidebar-tab i{width:13px;height:13px;stroke-width:1.75;flex-shrink:0;}
 .sidebar-tab.active{background:var(--cream2);color:var(--forest);}
 .sidebar-tab:hover{background:var(--cream2);}
 .sidebar-spacer{flex:1;}
@@ -401,7 +401,6 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
   <div class="sec-hd"><span class="sec-title">Categories</span><span class="sec-link" onclick="showTab('categories')">See all →</span></div>
   <div class="style-toggle-wrap">
     <span class="style-toggle-label">Card style:</span>
-    <button class="style-toggle-btn" id="style-btn-default" onclick="setCardStyle('default')">Default</button>
     <button class="style-toggle-btn" id="style-btn-color" onclick="setCardStyle('color')">Color</button>
     <button class="style-toggle-btn" id="style-btn-photo" onclick="setCardStyle('photo')">Photo</button>
     <button class="style-toggle-btn" id="style-btn-rect" onclick="setCardStyle('rect')">Rectangle</button>
@@ -1844,8 +1843,9 @@ function setCardStyle(style) {
 }
 
 function initCardStyle() {
-  let saved = 'default';
-  try { saved = localStorage.getItem('rooted-card-style') || 'default'; } catch (e) {}
+  let saved = 'color';
+  try { saved = localStorage.getItem('rooted-card-style') || 'color'; } catch (e) {}
+  if (saved === 'default') saved = 'color'; // old saved preference from before Default was removed
   setCardStyle(saved);
 }
 
