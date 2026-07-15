@@ -47,9 +47,9 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
 /* Style A: solid color-tint background, cycling through the brand palette */
 body.style-color .cat-card{border:none;}
 body.style-color .cat-card .cat-icon{color:var(--white);}
-body.style-color .cat-card .cat-lbl{color:rgba(255,255,255,.75);}
-body.style-color .cat-card .cat-name{color:var(--white);}
-body.style-color .cat-card .cat-ct{color:rgba(255,255,255,.7);}
+body.style-color .cat-card .cat-lbl{color:rgba(255,255,255,.75);font-size:10px;}
+body.style-color .cat-card .cat-name{color:var(--white);font-size:17px;}
+body.style-color .cat-card .cat-ct{color:rgba(255,255,255,.7);font-size:12px;}
 body.style-color .cat-card:nth-child(4n+1){background:var(--forest);}
 body.style-color .cat-card:nth-child(4n+2){background:var(--teal);}
 body.style-color .cat-card:nth-child(4n+3){background:var(--earth);}
@@ -65,12 +65,18 @@ body.style-photo .cat-card .cat-lbl{color:rgba(255,255,255,.8);}
 body.style-photo .cat-card .cat-name{color:var(--white);}
 body.style-photo .cat-card .cat-ct{color:rgba(255,255,255,.75);}
 
-/* Style C: rectangular (not square) with a larger, centered icon */
-body.style-rect .cat-grid{grid-template-columns:1fr;}
-body.style-rect .cat-card{aspect-ratio:auto;flex-direction:row;align-items:center;padding:14px 16px;gap:14px;}
-body.style-rect .cat-card .cat-icon{position:static;background:var(--cream2);border-radius:50%;padding:12px;flex-shrink:0;}
-body.style-rect .cat-card .cat-icon i{width:24px;height:24px;}
-body.style-rect .cat-card .cat-body{padding:0;}
+/* Style C: rectangular (not square) list-row cards with a colored icon badge and clear affordance */
+body.style-rect .cat-grid{grid-template-columns:1fr;gap:10px;}
+body.style-rect .cat-card{aspect-ratio:auto;flex-direction:row;justify-content:flex-start;align-items:center;padding:16px 18px;gap:16px;border:1px solid var(--border);}
+body.style-rect .cat-card .cat-icon{position:static;background:var(--forest);color:var(--white);border-radius:12px;width:52px;height:52px;padding:0;flex-shrink:0;align-items:center;justify-content:center;}
+body.style-rect .cat-card:nth-child(4n+2) .cat-icon{background:var(--teal);}
+body.style-rect .cat-card:nth-child(4n+3) .cat-icon{background:var(--earth);}
+body.style-rect .cat-card:nth-child(4n+4) .cat-icon{background:var(--sage);}
+body.style-rect .cat-card .cat-icon i{width:24px;height:24px;stroke-width:1.5;}
+body.style-rect .cat-card .cat-body{padding:0;flex:1;min-width:0;}
+body.style-rect .cat-card .cat-name{font-size:16px;}
+body.style-rect .cat-card .cat-ct{font-size:12px;margin-top:3px;}
+body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-size:22px;color:var(--muted);flex-shrink:0;line-height:1;}
 @media (min-width:1024px){body.style-rect .cat-grid{grid-template-columns:repeat(2,1fr);}}
 
 .style-toggle-wrap{display:flex;align-items:center;gap:8px;padding:0 18px 12px;flex-wrap:wrap;}
