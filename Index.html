@@ -990,10 +990,6 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 <!-- BOTTOM BAR (mobile) -->
 <!-- ROOTED ASSISTANT: floating chat button + panel -->
 <button class="chat-fab" id="chat-fab" onclick="toggleChat()" aria-label="Ask ROOTED Assistant"><i data-lucide="message-circle"></i></button>
-<!-- TEMPORARY DIAGNOSTIC PANEL — shows real live values from the actual device so the exact
-     cause of the scroll issue can be pinpointed from real data instead of guesswork. Remove
-     once the underlying bug is confirmed fixed. -->
-<div id="chat-debug-panel" style="display:none;position:fixed;top:8px;left:8px;right:8px;z-index:9999;background:rgba(0,0,0,.88);color:#0f0;font-family:monospace;font-size:11px;line-height:1.5;padding:8px 10px;border-radius:6px;pointer-events:none;white-space:pre;"></div>
 <div class="chat-panel" id="chat-panel">
   <div class="chat-panel-hd">
     <div class="chat-panel-title"><i data-lucide="sparkles"></i> ROOTED Assistant</div>
@@ -1413,13 +1409,6 @@ let chatOpen = false;
 let chatScrollY = 0;
 let chatTouchMoveHandler = null;
 let chatViewportHandler = null;
-let chatDebugInterval = null;
-let chatTouchMoveCount = 0;
-let chatDebugMaxScrollY = 0;
-let chatDebugMaxBodyRectTop = 0;
-let chatDebugMinVvHeight = null;
-let chatDebugEventLog = [];
-let updateDebugPanelRef = null;
 let chatInputTouchHandler = null;
 let chatSize = 'compact';
 const CHAT_SIZES = ['mini', 'compact', 'expanded', 'fullscreen'];
@@ -1453,61 +1442,6 @@ function toggleChat() {
     try { savedSize = localStorage.getItem('rooted-chat-size') || 'compact'; } catch (e) {}
     setChatSize(savedSize, false);
 
-    // TEMPORARY: show real live values AND track peak/worst values + an event log, since a
-    // transient glitch that reverts in well under a second could revert before a screenshot
-    // captures it — this way the evidence persists on screen even after values go back to
-    // normal.
-    const debugPanel = document.getElementById('chat-debug-panel');
-    debugPanel.style.display = 'block';
-    chatTouchMoveCount = 0;
-    chatDebugMaxScrollY = 0;
-    chatDebugMaxBodyRectTop = 0;
-    chatDebugMinVvHeight = window.visualViewport ? window.visualViewport.height : null;
-    chatDebugEventLog = [];
-    const logEvent = (msg) => {
-      chatDebugEventLog.unshift('[' + (Date.now() % 100000) + '] ' + msg);
-      if (chatDebugEventLog.length > 6) chatDebugEventLog.length = 6;
-    };
-    logEvent('chat opened');
-    updateDebugPanelRef = () => {
-      const vv = window.visualViewport;
-      const bodyRect = document.body.getBoundingClientRect();
-      if (Math.abs(window.scrollY) > Math.abs(chatDebugMaxScrollY)) {
-        chatDebugMaxScrollY = window.scrollY;
-        logEvent('scrollY jumped to ' + window.scrollY);
-      }
-      if (Math.abs(bodyRect.top) > Math.abs(chatDebugMaxBodyRectTop)) {
-        chatDebugMaxBodyRectTop = bodyRect.top;
-        logEvent('body rect.top jumped to ' + Math.round(bodyRect.top));
-      }
-      if (vv && (chatDebugMinVvHeight === null || vv.height < chatDebugMinVvHeight)) {
-        chatDebugMinVvHeight = vv.height;
-        logEvent('visualViewport.height dropped to ' + vv.height);
-      }
-      debugPanel.textContent =
-        '--- LIVE (right now) ---\n' +
-        'scrollY: ' + window.scrollY + '  input focused: ' + (document.activeElement && document.activeElement.id === 'chat-input') + '\n' +
-        'body.top: ' + (document.body.style.top || '(none)') + '  body rect.top: ' + Math.round(bodyRect.top) + '\n' +
-        (vv ? ('vv.height: ' + vv.height + '  vv.offsetTop: ' + vv.offsetTop + '\n') : 'visualViewport: NOT AVAILABLE\n') +
-        'panel.height: ' + (panel.style.height || '(none)') + '  touchmove blocks: ' + chatTouchMoveCount + '\n' +
-        '--- WORST SEEN THIS SESSION (persists even if it reverts) ---\n' +
-        'max |scrollY|: ' + chatDebugMaxScrollY + '\n' +
-        'max |body rect.top|: ' + Math.round(chatDebugMaxBodyRectTop) + '\n' +
-        'min vv.height: ' + chatDebugMinVvHeight + '\n' +
-        '--- RECENT EVENTS ---\n' +
-        chatDebugEventLog.join('\n');
-    };
-    chatDebugInterval = setInterval(updateDebugPanelRef, 100);
-    updateDebugPanelRef();
-    // Also update INSTANTLY on the actual events, not just every 100ms — the last round of
-    // screenshots showed real visual movement that my polling-only version completely missed,
-    // meaning the glitch is fast enough to happen and fully resolve between two poll ticks.
-    window.addEventListener('scroll', updateDebugPanelRef, { passive: true });
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', updateDebugPanelRef);
-      window.visualViewport.addEventListener('scroll', updateDebugPanelRef);
-    }
-
     // 1) Lock the background from actual scrolling. Save the exact scroll position so it can
     // be restored precisely on close.
     chatScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
@@ -1527,7 +1461,6 @@ function toggleChat() {
     // after opening.
     chatTouchMoveHandler = (e) => {
       if (panel.contains(e.target)) return; // never interfere with anything inside the chat panel
-      chatTouchMoveCount++;
       e.preventDefault();
     };
     document.addEventListener('touchmove', chatTouchMoveHandler, { passive: false });
@@ -1585,13 +1518,6 @@ function toggleChat() {
 
     setTimeout(() => document.getElementById('chat-input').focus({ preventScroll: true }), 50);
   } else {
-    if (chatDebugInterval) { clearInterval(chatDebugInterval); chatDebugInterval = null; }
-    window.removeEventListener('scroll', updateDebugPanelRef);
-    if (window.visualViewport) {
-      window.visualViewport.removeEventListener('resize', updateDebugPanelRef);
-      window.visualViewport.removeEventListener('scroll', updateDebugPanelRef);
-    }
-    document.getElementById('chat-debug-panel').style.display = 'none';
     if (chatTouchMoveHandler) { document.removeEventListener('touchmove', chatTouchMoveHandler); chatTouchMoveHandler = null; }
     if (chatInputTouchHandler) {
       const chatInputEl = document.getElementById('chat-input');
