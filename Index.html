@@ -1405,7 +1405,6 @@ let chatOpen = false;
 
 let chatScrollY = 0;
 let chatTouchMoveHandler = null;
-let chatViewportHandler = null;
 let chatSize = 'compact';
 const CHAT_SIZES = ['mini', 'compact', 'expanded', 'fullscreen'];
 
@@ -1450,6 +1449,12 @@ function toggleChat() {
     document.body.style.overflow = 'hidden';
 
     // 2) Block background drag-scrolling, with one exception for the chat's own message list.
+    // This, combined with #1, is deliberately the entire fix now. Every attempt to also
+    // dynamically reposition the panel around the keyboard (via visualViewport math) has
+    // introduced a new, different bug each time — including moving the panel to a
+    // completely wrong position. Rather than trying to perfectly track the keyboard, this
+    // stops at the two techniques that have been confirmed solid on their own: nothing can
+    // scroll or drag the background, and the panel simply keeps its normal CSS position.
     chatTouchMoveHandler = (e) => {
       const scrollableEl = document.getElementById('chat-messages');
       if (scrollableEl && scrollableEl.contains(e.target)) return;
@@ -1457,40 +1462,9 @@ function toggleChat() {
     };
     document.addEventListener('touchmove', chatTouchMoveHandler, { passive: false });
 
-    // 3) Compensate for iOS Safari shifting its internal Layout Viewport when the keyboard
-    // opens (a real, separate mechanism from actual scrolling or dragging — visualViewport.
-    // offsetTop reports exactly how far that shift is). CRITICAL: this compensation is
-    // applied ONLY via the `top`/`bottom` positional properties that body and the panel
-    // already use for their own fixed positioning — NEVER via CSS `transform`. Applying a
-    // transform to body would make body a new containing block for every position:fixed
-    // descendant, including the chat panel itself, un-anchoring it from the real viewport
-    // entirely — that is exactly what caused the panel to disappear before. top/bottom
-    // adjustments on already-fixed elements carry no such side effect.
-    if (window.visualViewport) {
-      chatViewportHandler = () => {
-        if (!chatOpen) return;
-        const offset = window.visualViewport.offsetTop || 0;
-        document.body.style.top = `-${chatScrollY + offset}px`;
-        if (panel.classList.contains('fullscreen')) {
-          panel.style.bottom = ''; // fullscreen fills via inset:0, never needs bottom repositioning
-        } else {
-          panel.style.bottom = offset ? `calc(var(--bar-h) + 76px + ${offset}px)` : '';
-        }
-      };
-      window.visualViewport.addEventListener('resize', chatViewportHandler);
-      window.visualViewport.addEventListener('scroll', chatViewportHandler);
-      chatViewportHandler();
-    }
-
     setTimeout(() => document.getElementById('chat-input').focus({ preventScroll: true }), 50);
   } else {
     if (chatTouchMoveHandler) { document.removeEventListener('touchmove', chatTouchMoveHandler); chatTouchMoveHandler = null; }
-    if (chatViewportHandler && window.visualViewport) {
-      window.visualViewport.removeEventListener('resize', chatViewportHandler);
-      window.visualViewport.removeEventListener('scroll', chatViewportHandler);
-      chatViewportHandler = null;
-    }
-    panel.style.bottom = '';
     document.getElementById('chat-size-menu').classList.remove('open');
     document.documentElement.style.overflow = '';
     document.body.style.position = '';
