@@ -1434,14 +1434,12 @@ function toggleChat() {
   const panel = document.getElementById('chat-panel');
   panel.classList.toggle('open', chatOpen);
   if (chatOpen) {
-    // Restore the user's last chosen size each time the chat opens.
     let savedSize = 'compact';
     try { savedSize = localStorage.getItem('rooted-chat-size') || 'compact'; } catch (e) {}
     setChatSize(savedSize, false);
 
-    // Save exact scroll position, then lock html/body as a baseline (prevents actual
-    // document scroll and, since we restore this exact position on close, avoids the
-    // "resets scroll to top" caveat that a naive position:fixed lock can otherwise cause).
+    // 1) Lock the background from actual scrolling. Save the exact scroll position so it can
+    // be restored precisely on close.
     chatScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
     document.documentElement.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
@@ -1451,35 +1449,33 @@ function toggleChat() {
     document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
 
-    // PRIMARY FIX — the technique used by body-scroll-lock (the industry-standard library
-    // for exactly this problem, used across a huge number of production sites): rather than
-    // reacting to a scroll after it happens, or trying to reposition elements around the
-    // keyboard, directly block the touchmove gesture at the document level entirely — except
-    // inside the chat's own message list, which still needs to scroll normally. With no
-    // gesture able to move the background at all, there's nothing for the keyboard opening
-    // to trigger a visible scroll on.
+    // 2) Block background drag-scrolling, with one exception for the chat's own message list.
     chatTouchMoveHandler = (e) => {
       const scrollableEl = document.getElementById('chat-messages');
-      if (scrollableEl && scrollableEl.contains(e.target)) return; // allow the chat history itself to scroll
+      if (scrollableEl && scrollableEl.contains(e.target)) return;
       e.preventDefault();
     };
     document.addEventListener('touchmove', chatTouchMoveHandler, { passive: false });
 
-    // SECOND FIX — this is a different mechanism than the touchmove block above, and
-    // targets the actual symptom of "both the background and the chat panel move up
-    // together": when the keyboard opens, Safari shifts its internal Layout Viewport
-    // (not a scroll, not a drag) so the focused input stays visible above the keyboard.
-    // Since body and the panel are both anchored to that same Layout Viewport, they both
-    // drift together — no scroll-prevention technique touches this, because nothing is
-    // actually scrolling. visualViewport.offsetTop reports exactly how far that shift is,
-    // so counter-translating body and the panel by the same amount cancels it out, keeping
-    // both visually anchored to the real screen regardless of what the layout viewport does.
+    // 3) Compensate for iOS Safari shifting its internal Layout Viewport when the keyboard
+    // opens (a real, separate mechanism from actual scrolling or dragging — visualViewport.
+    // offsetTop reports exactly how far that shift is). CRITICAL: this compensation is
+    // applied ONLY via the `top`/`bottom` positional properties that body and the panel
+    // already use for their own fixed positioning — NEVER via CSS `transform`. Applying a
+    // transform to body would make body a new containing block for every position:fixed
+    // descendant, including the chat panel itself, un-anchoring it from the real viewport
+    // entirely — that is exactly what caused the panel to disappear before. top/bottom
+    // adjustments on already-fixed elements carry no such side effect.
     if (window.visualViewport) {
       chatViewportHandler = () => {
         if (!chatOpen) return;
         const offset = window.visualViewport.offsetTop || 0;
-        document.body.style.transform = offset ? `translateY(${offset}px)` : '';
-        panel.style.transform = offset ? `translateY(${offset}px)` : '';
+        document.body.style.top = `-${chatScrollY + offset}px`;
+        if (panel.classList.contains('fullscreen')) {
+          panel.style.bottom = ''; // fullscreen fills via inset:0, never needs bottom repositioning
+        } else {
+          panel.style.bottom = offset ? `calc(var(--bar-h) + 76px + ${offset}px)` : '';
+        }
       };
       window.visualViewport.addEventListener('resize', chatViewportHandler);
       window.visualViewport.addEventListener('scroll', chatViewportHandler);
@@ -1494,8 +1490,7 @@ function toggleChat() {
       window.visualViewport.removeEventListener('scroll', chatViewportHandler);
       chatViewportHandler = null;
     }
-    document.body.style.transform = '';
-    panel.style.transform = '';
+    panel.style.bottom = '';
     document.getElementById('chat-size-menu').classList.remove('open');
     document.documentElement.style.overflow = '';
     document.body.style.position = '';
