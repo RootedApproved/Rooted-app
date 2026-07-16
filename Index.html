@@ -399,17 +399,30 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 .chat-fab{position:fixed;right:16px;bottom:calc(var(--bar-h) + 16px);width:52px;height:52px;border-radius:50%;background:var(--forest);color:var(--white);border:none;box-shadow:0 4px 16px rgba(0,0,0,.2);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:400;transition:transform .15s;}
 .chat-fab:active{transform:scale(.92);}
 .chat-fab i{width:24px;height:24px;stroke-width:1.75;}
-.chat-panel{position:fixed;right:16px;bottom:calc(var(--bar-h) + 76px);width:min(360px,calc(100vw - 32px));height:460px;max-height:520px;background:var(--white);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.25);display:none;flex-direction:column;overflow:hidden;z-index:400;transition:width .25s ease,height .25s ease;}
+.chat-panel{position:fixed;right:16px;bottom:calc(var(--bar-h) + 76px);width:min(360px,calc(100vw - 32px));height:460px;max-height:520px;background:var(--white);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.25);display:none;flex-direction:column;overflow:hidden;z-index:400;transition:width .25s ease,height .25s ease,border-radius .25s ease,inset .25s ease;}
 .chat-panel.open{display:flex;}
+.chat-panel.mini{width:min(280px,calc(100vw - 32px));height:340px;max-height:380px;}
 .chat-panel.expanded{width:min(420px,calc(100vw - 24px));height:640px;max-height:680px;}
+/* Full screen: takes over the entire viewport edge-to-edge, background fully hidden.
+   Uses inset:0 rather than a fixed vh-based height — this is the one size where the panel
+   SHOULD naturally resize for the keyboard (standard full-app chat behavior), unlike the
+   floating sizes above which stay a stable fixed size regardless of keyboard state. */
+.chat-panel.fullscreen{inset:0;right:0;bottom:0;width:auto;height:auto;max-height:none;border-radius:0;}
 .chat-panel-hd{background:var(--forest);color:var(--white);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .chat-panel-title{font-family:var(--font-d);font-weight:700;font-size:15px;display:flex;align-items:center;gap:7px;}
 .chat-panel-title i{width:17px;height:17px;}
 .chat-panel-actions{display:flex;align-items:center;gap:4px;}
+.chat-size-wrap{position:relative;}
 .chat-panel-size,.chat-panel-close{background:none;border:none;color:var(--white);cursor:pointer;display:flex;padding:4px;border-radius:5px;opacity:.9;}
 .chat-panel-size:hover,.chat-panel-close:hover{opacity:1;background:rgba(255,255,255,.12);}
 .chat-panel-size i{width:16px;height:16px;stroke-width:1.75;}
 .chat-panel-close i{width:19px;height:19px;}
+.chat-size-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--white);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.2);padding:5px;min-width:140px;z-index:410;flex-direction:column;}
+.chat-size-menu.open{display:flex;}
+.chat-size-opt{display:flex;align-items:center;gap:9px;background:none;border:none;color:var(--char);font-family:var(--font-b);font-size:13px;font-weight:600;padding:8px 10px;border-radius:6px;cursor:pointer;text-align:left;width:100%;}
+.chat-size-opt:hover{background:var(--cream2);}
+.chat-size-opt.active{color:var(--forest);background:var(--cream2);}
+.chat-size-opt i{width:15px;height:15px;stroke-width:1.75;flex-shrink:0;}
 .chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
 .chat-msg{max-width:85%;padding:9px 12px;border-radius:12px;font-size:13.5px;line-height:1.5;}
 .chat-msg-bot{background:var(--cream2);color:var(--char);align-self:flex-start;border-bottom-left-radius:3px;}
@@ -423,6 +436,7 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 @media (min-width:1024px){
   .chat-fab{bottom:20px;right:24px;}
   .chat-panel{bottom:88px;right:24px;}
+  .chat-panel.fullscreen{bottom:0;}
 }
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -963,7 +977,15 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
   <div class="chat-panel-hd">
     <div class="chat-panel-title"><i data-lucide="sparkles"></i> ROOTED Assistant</div>
     <div class="chat-panel-actions">
-      <button class="chat-panel-size" id="chat-size-btn" onclick="toggleChatSize()" aria-label="Expand or compact chat"><i data-lucide="maximize-2" id="chat-size-icon"></i></button>
+      <div class="chat-size-wrap">
+        <button class="chat-panel-size" id="chat-size-btn" onclick="toggleChatSizeMenu()" aria-label="Resize chat"><i data-lucide="maximize-2"></i></button>
+        <div class="chat-size-menu" id="chat-size-menu">
+          <button class="chat-size-opt" data-size="mini" onclick="setChatSize('mini')"><i data-lucide="minimize-2"></i>Mini</button>
+          <button class="chat-size-opt" data-size="compact" onclick="setChatSize('compact')"><i data-lucide="square"></i>Compact</button>
+          <button class="chat-size-opt" data-size="expanded" onclick="setChatSize('expanded')"><i data-lucide="maximize-2"></i>Expanded</button>
+          <button class="chat-size-opt" data-size="fullscreen" onclick="setChatSize('fullscreen')"><i data-lucide="maximize"></i>Full Screen</button>
+        </div>
+      </div>
       <button class="chat-panel-close" onclick="toggleChat()"><i data-lucide="x"></i></button>
     </div>
   </div>
@@ -1368,37 +1390,38 @@ let chatHistory = [];
 let chatOpen = false;
 
 let chatScrollY = 0;
-let chatExpanded = false;
+let chatSize = 'compact';
+const CHAT_SIZES = ['mini', 'compact', 'expanded', 'fullscreen'];
 
-// Lets the user switch between a compact and expanded chat panel size, seamlessly (CSS
-// transition handles the resize animation) and remembers their preference for next time.
-function setChatSize(expanded, persist = true) {
-  chatExpanded = expanded;
+// Sets one of 4 explicit chat panel sizes — mini (smallest), compact (default), expanded,
+// or fullscreen (largest, takes over the whole screen). CSS transition handles the resize
+// animation seamlessly. Remembers the choice for next time the chat is opened.
+function setChatSize(size, persist = true) {
+  if (!CHAT_SIZES.includes(size)) size = 'compact';
+  chatSize = size;
   const panel = document.getElementById('chat-panel');
-  panel.classList.toggle('expanded', expanded);
-  // Lucide replaces the <i data-lucide> tag with real SVG markup on render, so swapping the
-  // icon later means injecting a fresh <i> tag and re-running createIcons — not just changing
-  // an attribute on the already-rendered SVG.
-  const btn = document.getElementById('chat-size-btn');
-  btn.innerHTML = `<i data-lucide="${expanded ? 'minimize-2' : 'maximize-2'}" id="chat-size-icon"></i>`;
-  if (typeof lucide !== 'undefined') lucide.createIcons();
-  if (persist) { try { localStorage.setItem('rooted-chat-size', expanded ? 'expanded' : 'compact'); } catch (e) {} }
+  CHAT_SIZES.forEach(s => panel.classList.toggle(s, s === size));
+  // Highlight the current selection in the menu and close it after choosing.
+  document.querySelectorAll('.chat-size-opt').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.size === size);
+  });
+  document.getElementById('chat-size-menu').classList.remove('open');
+  if (persist) { try { localStorage.setItem('rooted-chat-size', size); } catch (e) {} }
 }
 
-function toggleChatSize() {
-  setChatSize(!chatExpanded);
+function toggleChatSizeMenu() {
+  document.getElementById('chat-size-menu').classList.toggle('open');
 }
-
 
 function toggleChat() {
   chatOpen = !chatOpen;
   const panel = document.getElementById('chat-panel');
   panel.classList.toggle('open', chatOpen);
   if (chatOpen) {
-    // Restore the user's last chosen size (compact/expanded) each time the chat opens.
+    // Restore the user's last chosen size each time the chat opens.
     let savedSize = 'compact';
     try { savedSize = localStorage.getItem('rooted-chat-size') || 'compact'; } catch (e) {}
-    setChatSize(savedSize === 'expanded', false);
+    setChatSize(savedSize, false);
     // Lock the background page in place so opening the keyboard can't scroll it —
     // the standard fix for this on iOS Safari, which otherwise tries to "scroll the
     // focused input into view" even though the input lives in a fixed-position panel.
@@ -1417,6 +1440,7 @@ function toggleChat() {
     // compute "scroll into view" against the pre-lock layout.
     setTimeout(() => document.getElementById('chat-input').focus(), 50);
   } else {
+    document.getElementById('chat-size-menu').classList.remove('open');
     document.documentElement.style.overflow = '';
     document.documentElement.style.overscrollBehavior = '';
     document.body.style.position = '';
@@ -2131,6 +2155,13 @@ window.addEventListener('DOMContentLoaded', updateProductCounts);
 window.addEventListener('DOMContentLoaded', applyFeatureFlags);
 window.addEventListener('DOMContentLoaded', initCardStyle);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('chat-size-menu');
+  const wrap = document.querySelector('.chat-size-wrap');
+  if (menu && menu.classList.contains('open') && wrap && !wrap.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
 window.addEventListener('DOMContentLoaded', () => { if (typeof lucide !== 'undefined') lucide.createIcons(); });
 
 function submitEmail(){
