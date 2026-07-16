@@ -1419,6 +1419,8 @@ let chatDebugMaxScrollY = 0;
 let chatDebugMaxBodyRectTop = 0;
 let chatDebugMinVvHeight = null;
 let chatDebugEventLog = [];
+let updateDebugPanelRef = null;
+let chatInputTouchHandler = null;
 let chatSize = 'compact';
 const CHAT_SIZES = ['mini', 'compact', 'expanded', 'fullscreen'];
 
@@ -1467,7 +1469,7 @@ function toggleChat() {
       if (chatDebugEventLog.length > 6) chatDebugEventLog.length = 6;
     };
     logEvent('chat opened');
-    const updateDebugPanel = () => {
+    updateDebugPanelRef = () => {
       const vv = window.visualViewport;
       const bodyRect = document.body.getBoundingClientRect();
       if (Math.abs(window.scrollY) > Math.abs(chatDebugMaxScrollY)) {
@@ -1495,9 +1497,16 @@ function toggleChat() {
         '--- RECENT EVENTS ---\n' +
         chatDebugEventLog.join('\n');
     };
-    chatDebugInterval = setInterval(updateDebugPanel, 100);
-    updateDebugPanel();
-    updateDebugPanel();
+    chatDebugInterval = setInterval(updateDebugPanelRef, 100);
+    updateDebugPanelRef();
+    // Also update INSTANTLY on the actual events, not just every 100ms — the last round of
+    // screenshots showed real visual movement that my polling-only version completely missed,
+    // meaning the glitch is fast enough to happen and fully resolve between two poll ticks.
+    window.addEventListener('scroll', updateDebugPanelRef, { passive: true });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', updateDebugPanelRef);
+      window.visualViewport.addEventListener('scroll', updateDebugPanelRef);
+    }
 
     // 1) Lock the background from actual scrolling. Save the exact scroll position so it can
     // be restored precisely on close.
@@ -1511,12 +1520,6 @@ function toggleChat() {
     document.body.style.overflow = 'hidden';
 
     // 2) Block background drag-scrolling, with one exception for the chat's own message list.
-    // This, combined with #1, is deliberately the entire fix now. Every attempt to also
-    // dynamically reposition the panel around the keyboard (via visualViewport math) has
-    // introduced a new, different bug each time — including moving the panel to a
-    // completely wrong position. Rather than trying to perfectly track the keyboard, this
-    // stops at the two techniques that have been confirmed solid on their own: nothing can
-    // scroll or drag the background, and the panel simply keeps its normal CSS position.
     chatTouchMoveHandler = (e) => {
       const scrollableEl = document.getElementById('chat-messages');
       if (scrollableEl && scrollableEl.contains(e.target)) return;
@@ -1525,18 +1528,24 @@ function toggleChat() {
     };
     document.addEventListener('touchmove', chatTouchMoveHandler, { passive: false });
 
-    // 3) The screenshots showed the actual page content shifting (lower sections revealed
+    // 3) NEW THIS ROUND — intercept the raw tap on the input itself, before it ever reaches
+    // Safari's native tap-to-focus handling. Every previous fix reacted to the keyboard AFTER
+    // focus already happened; this instead cancels the native tap outright and manually
+    // triggers focus with preventScroll explicitly set, so Safari's own focus-driven
+    // scroll-into-view logic — which normally runs as an intrinsic part of native tap
+    // handling and isn't fully preventable after the fact — never gets a chance to run at all.
+    const chatInputEl = document.getElementById('chat-input');
+    chatInputTouchHandler = (e) => {
+      e.preventDefault();
+      chatInputEl.focus({ preventScroll: true });
+    };
+    chatInputEl.addEventListener('touchend', chatInputTouchHandler, { passive: false });
+
+    // 4) The screenshots showed the actual page content shifting (lower sections revealed
     // at the top) — this confirms Safari is shifting its internal Layout Viewport when the
     // keyboard opens, which affects position:fixed elements (including body itself, locked
     // fixed in step 1) independent of any scroll or drag. visualViewport.offsetTop reports
     // exactly that shift, so folding it into body's existing `top` value cancels it out.
-    //
-    // For the panel specifically: previous attempts shifted its position (`bottom`) to dodge
-    // the keyboard, which could push a tall panel like Expanded (640px) off the top of the
-    // screen entirely on smaller phones — almost certainly what broke last time. This time,
-    // the panel's position never moves at all. Instead, its HEIGHT shrinks to fit within
-    // whatever space is actually still visible above the keyboard, so it is mathematically
-    // guaranteed to always fit on screen regardless of keyboard size or device height.
     const chatPanelBaseHeights = { mini: 340, compact: 460, expanded: 640 };
     if (window.visualViewport) {
       chatViewportHandler = () => {
@@ -1559,8 +1568,18 @@ function toggleChat() {
     setTimeout(() => document.getElementById('chat-input').focus({ preventScroll: true }), 50);
   } else {
     if (chatDebugInterval) { clearInterval(chatDebugInterval); chatDebugInterval = null; }
+    window.removeEventListener('scroll', updateDebugPanelRef);
+    if (window.visualViewport) {
+      window.visualViewport.removeEventListener('resize', updateDebugPanelRef);
+      window.visualViewport.removeEventListener('scroll', updateDebugPanelRef);
+    }
     document.getElementById('chat-debug-panel').style.display = 'none';
     if (chatTouchMoveHandler) { document.removeEventListener('touchmove', chatTouchMoveHandler); chatTouchMoveHandler = null; }
+    if (chatInputTouchHandler) {
+      const chatInputEl = document.getElementById('chat-input');
+      if (chatInputEl) chatInputEl.removeEventListener('touchend', chatInputTouchHandler);
+      chatInputTouchHandler = null;
+    }
     if (chatViewportHandler && window.visualViewport) {
       window.visualViewport.removeEventListener('resize', chatViewportHandler);
       window.visualViewport.removeEventListener('scroll', chatViewportHandler);
