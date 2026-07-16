@@ -1405,6 +1405,7 @@ let chatOpen = false;
 
 let chatScrollY = 0;
 let chatTouchMoveHandler = null;
+let chatViewportHandler = null;
 let chatSize = 'compact';
 const CHAT_SIZES = ['mini', 'compact', 'expanded', 'fullscreen'];
 
@@ -1462,9 +1463,46 @@ function toggleChat() {
     };
     document.addEventListener('touchmove', chatTouchMoveHandler, { passive: false });
 
+    // 3) The screenshots showed the actual page content shifting (lower sections revealed
+    // at the top) — this confirms Safari is shifting its internal Layout Viewport when the
+    // keyboard opens, which affects position:fixed elements (including body itself, locked
+    // fixed in step 1) independent of any scroll or drag. visualViewport.offsetTop reports
+    // exactly that shift, so folding it into body's existing `top` value cancels it out.
+    //
+    // For the panel specifically: previous attempts shifted its position (`bottom`) to dodge
+    // the keyboard, which could push a tall panel like Expanded (640px) off the top of the
+    // screen entirely on smaller phones — almost certainly what broke last time. This time,
+    // the panel's position never moves at all. Instead, its HEIGHT shrinks to fit within
+    // whatever space is actually still visible above the keyboard, so it is mathematically
+    // guaranteed to always fit on screen regardless of keyboard size or device height.
+    const chatPanelBaseHeights = { mini: 340, compact: 460, expanded: 640 };
+    if (window.visualViewport) {
+      chatViewportHandler = () => {
+        if (!chatOpen) return;
+        const vv = window.visualViewport;
+        const offset = vv.offsetTop || 0;
+        document.body.style.top = `-${chatScrollY + offset}px`;
+        if (!panel.classList.contains('fullscreen')) {
+          const baseBottomPx = 132; // matches CSS: var(--bar-h)=56 + 76
+          const naturalHeight = chatPanelBaseHeights[chatSize] || 460;
+          const availableHeight = vv.height - baseBottomPx - 12;
+          panel.style.height = Math.max(200, Math.min(naturalHeight, availableHeight)) + 'px';
+        }
+      };
+      window.visualViewport.addEventListener('resize', chatViewportHandler);
+      window.visualViewport.addEventListener('scroll', chatViewportHandler);
+      chatViewportHandler();
+    }
+
     setTimeout(() => document.getElementById('chat-input').focus({ preventScroll: true }), 50);
   } else {
     if (chatTouchMoveHandler) { document.removeEventListener('touchmove', chatTouchMoveHandler); chatTouchMoveHandler = null; }
+    if (chatViewportHandler && window.visualViewport) {
+      window.visualViewport.removeEventListener('resize', chatViewportHandler);
+      window.visualViewport.removeEventListener('scroll', chatViewportHandler);
+      chatViewportHandler = null;
+    }
+    panel.style.height = '';
     document.getElementById('chat-size-menu').classList.remove('open');
     document.documentElement.style.overflow = '';
     document.body.style.position = '';
