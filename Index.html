@@ -1405,6 +1405,7 @@ let chatOpen = false;
 
 let chatScrollY = 0;
 let chatTouchMoveHandler = null;
+let chatViewportHandler = null;
 let chatSize = 'compact';
 const CHAT_SIZES = ['mini', 'compact', 'expanded', 'fullscreen'];
 
@@ -1464,9 +1465,37 @@ function toggleChat() {
     };
     document.addEventListener('touchmove', chatTouchMoveHandler, { passive: false });
 
+    // SECOND FIX — this is a different mechanism than the touchmove block above, and
+    // targets the actual symptom of "both the background and the chat panel move up
+    // together": when the keyboard opens, Safari shifts its internal Layout Viewport
+    // (not a scroll, not a drag) so the focused input stays visible above the keyboard.
+    // Since body and the panel are both anchored to that same Layout Viewport, they both
+    // drift together — no scroll-prevention technique touches this, because nothing is
+    // actually scrolling. visualViewport.offsetTop reports exactly how far that shift is,
+    // so counter-translating body and the panel by the same amount cancels it out, keeping
+    // both visually anchored to the real screen regardless of what the layout viewport does.
+    if (window.visualViewport) {
+      chatViewportHandler = () => {
+        if (!chatOpen) return;
+        const offset = window.visualViewport.offsetTop || 0;
+        document.body.style.transform = offset ? `translateY(${offset}px)` : '';
+        panel.style.transform = offset ? `translateY(${offset}px)` : '';
+      };
+      window.visualViewport.addEventListener('resize', chatViewportHandler);
+      window.visualViewport.addEventListener('scroll', chatViewportHandler);
+      chatViewportHandler();
+    }
+
     setTimeout(() => document.getElementById('chat-input').focus({ preventScroll: true }), 50);
   } else {
     if (chatTouchMoveHandler) { document.removeEventListener('touchmove', chatTouchMoveHandler); chatTouchMoveHandler = null; }
+    if (chatViewportHandler && window.visualViewport) {
+      window.visualViewport.removeEventListener('resize', chatViewportHandler);
+      window.visualViewport.removeEventListener('scroll', chatViewportHandler);
+      chatViewportHandler = null;
+    }
+    document.body.style.transform = '';
+    panel.style.transform = '';
     document.getElementById('chat-size-menu').classList.remove('open');
     document.documentElement.style.overflow = '';
     document.body.style.position = '';
