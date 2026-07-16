@@ -1556,6 +1556,13 @@ function toggleChat() {
     // this handler. The panel height-shrinking below is unaffected by this change and is
     // confirmed working correctly from the same diagnostic data (it shrank to exactly fit the
     // visible space above the keyboard as intended).
+    // Now that body itself no longer moves (confirmed clean from the last round of
+    // screenshots — max |scrollY| and max |body rect.top| both stayed at exactly 0), the
+    // remaining issue is that the panel's bottom edge (where the input lives) was staying
+    // anchored at its normal resting position even though the keyboard covers far more space
+    // than that — meaning the input was very likely sitting behind the keyboard, invisible.
+    // Fixed by moving the panel's bottom edge up to clear the keyboard height, combined with
+    // the existing height-shrink so it still can't be pushed off the top of the screen.
     const chatPanelBaseHeights = { mini: 340, compact: 460, expanded: 640 };
     if (window.visualViewport) {
       chatViewportHandler = () => {
@@ -1564,7 +1571,10 @@ function toggleChat() {
         if (!panel.classList.contains('fullscreen')) {
           const baseBottomPx = 132; // matches CSS: var(--bar-h)=56 + 76
           const naturalHeight = chatPanelBaseHeights[chatSize] || 460;
-          const availableHeight = vv.height - baseBottomPx - 12;
+          const keyboardHeight = Math.max(0, window.innerHeight - vv.height);
+          const newBottom = Math.max(baseBottomPx, keyboardHeight + 12);
+          panel.style.bottom = newBottom + 'px';
+          const availableHeight = vv.height - 12;
           panel.style.height = Math.max(200, Math.min(naturalHeight, availableHeight)) + 'px';
         }
       };
@@ -1594,6 +1604,7 @@ function toggleChat() {
       chatViewportHandler = null;
     }
     panel.style.height = '';
+    panel.style.bottom = '';
     document.getElementById('chat-size-menu').classList.remove('open');
     document.documentElement.style.overflow = '';
     document.body.style.position = '';
