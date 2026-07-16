@@ -987,6 +987,10 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 <!-- BOTTOM BAR (mobile) -->
 <!-- ROOTED ASSISTANT: floating chat button + panel -->
 <button class="chat-fab" id="chat-fab" onclick="toggleChat()" aria-label="Ask ROOTED Assistant"><i data-lucide="message-circle"></i></button>
+<!-- TEMPORARY DIAGNOSTIC PANEL — shows real live values from the actual device so the exact
+     cause of the scroll issue can be pinpointed from real data instead of guesswork. Remove
+     once the underlying bug is confirmed fixed. -->
+<div id="chat-debug-panel" style="display:none;position:fixed;top:8px;left:8px;right:8px;z-index:9999;background:rgba(0,0,0,.88);color:#0f0;font-family:monospace;font-size:11px;line-height:1.5;padding:8px 10px;border-radius:6px;pointer-events:none;white-space:pre;"></div>
 <div class="chat-panel" id="chat-panel">
   <div class="chat-panel-hd">
     <div class="chat-panel-title"><i data-lucide="sparkles"></i> ROOTED Assistant</div>
@@ -1406,6 +1410,8 @@ let chatOpen = false;
 let chatScrollY = 0;
 let chatTouchMoveHandler = null;
 let chatViewportHandler = null;
+let chatDebugInterval = null;
+let chatTouchMoveCount = 0;
 let chatSize = 'compact';
 const CHAT_SIZES = ['mini', 'compact', 'expanded', 'fullscreen'];
 
@@ -1438,6 +1444,30 @@ function toggleChat() {
     try { savedSize = localStorage.getItem('rooted-chat-size') || 'compact'; } catch (e) {}
     setChatSize(savedSize, false);
 
+    // TEMPORARY: show real live values on-screen so the exact cause can be diagnosed from
+    // actual device data instead of guesswork. Updates continuously while the chat is open.
+    const debugPanel = document.getElementById('chat-debug-panel');
+    debugPanel.style.display = 'block';
+    chatTouchMoveCount = 0;
+    const updateDebugPanel = () => {
+      const vv = window.visualViewport;
+      const bodyRect = document.body.getBoundingClientRect();
+      debugPanel.textContent =
+        'window.scrollY: ' + window.scrollY + '\n' +
+        'window.innerHeight: ' + window.innerHeight + '\n' +
+        'body.style.top: ' + (document.body.style.top || '(none)') + '\n' +
+        'body.style.position: ' + (document.body.style.position || '(none)') + '\n' +
+        'body.getBoundingClientRect().top: ' + Math.round(bodyRect.top) + '\n' +
+        'visualViewport exists: ' + (vv ? 'YES' : 'NO') + '\n' +
+        (vv ? ('visualViewport.height: ' + vv.height + '\n' +
+               'visualViewport.offsetTop: ' + vv.offsetTop + '\n') : '') +
+        'panel.style.height: ' + (panel.style.height || '(none)') + '\n' +
+        'touchmove blocks fired: ' + chatTouchMoveCount + '\n' +
+        'input focused: ' + (document.activeElement && document.activeElement.id === 'chat-input');
+    };
+    chatDebugInterval = setInterval(updateDebugPanel, 150);
+    updateDebugPanel();
+
     // 1) Lock the background from actual scrolling. Save the exact scroll position so it can
     // be restored precisely on close.
     chatScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
@@ -1459,6 +1489,7 @@ function toggleChat() {
     chatTouchMoveHandler = (e) => {
       const scrollableEl = document.getElementById('chat-messages');
       if (scrollableEl && scrollableEl.contains(e.target)) return;
+      chatTouchMoveCount++;
       e.preventDefault();
     };
     document.addEventListener('touchmove', chatTouchMoveHandler, { passive: false });
@@ -1496,6 +1527,8 @@ function toggleChat() {
 
     setTimeout(() => document.getElementById('chat-input').focus({ preventScroll: true }), 50);
   } else {
+    if (chatDebugInterval) { clearInterval(chatDebugInterval); chatDebugInterval = null; }
+    document.getElementById('chat-debug-panel').style.display = 'none';
     if (chatTouchMoveHandler) { document.removeEventListener('touchmove', chatTouchMoveHandler); chatTouchMoveHandler = null; }
     if (chatViewportHandler && window.visualViewport) {
       window.visualViewport.removeEventListener('resize', chatViewportHandler);
