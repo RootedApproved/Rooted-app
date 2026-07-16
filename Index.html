@@ -1455,7 +1455,7 @@ function toggleChat() {
     // sneak in a scroll when an input INSIDE the panel is tapped directly (separate from
     // opening the chat itself) — this catches that the instant it happens and snaps back,
     // rather than only trying to prevent it upfront.
-    chatScrollWatchdog = () => { if (chatOpen && window.scrollY !== 0) window.scrollTo(0, 0); };
+    chatScrollWatchdog = () => { if (chatOpen && window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
     window.addEventListener('scroll', chatScrollWatchdog, { passive: true });
     // Delay focus very slightly so the lock is actually painted before the keyboard
     // triggers — focusing in the same tick as the style change can let the browser
@@ -1473,7 +1473,7 @@ function toggleChat() {
     document.body.style.right = '';
     document.body.style.width = '';
     document.body.style.overflow = '';
-    window.scrollTo(0, chatScrollY);
+    window.scrollTo({ top: chatScrollY, left: 0, behavior: 'instant' });
   }
 }
 
