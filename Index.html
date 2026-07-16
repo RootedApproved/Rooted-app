@@ -1404,6 +1404,7 @@ let chatHistory = [];
 let chatOpen = false;
 
 let chatScrollY = 0;
+let chatScrollWatchdog = null;
 let chatSize = 'compact';
 const CHAT_SIZES = ['mini', 'compact', 'expanded', 'fullscreen'];
 
@@ -1449,11 +1450,20 @@ function toggleChat() {
     document.body.style.right = '0';
     document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
+    // Active watchdog: with body pinned via position:fixed, the window's own scroll
+    // position should always read 0 while the chat is open. Some mobile browsers still
+    // sneak in a scroll when an input INSIDE the panel is tapped directly (separate from
+    // opening the chat itself) — this catches that the instant it happens and snaps back,
+    // rather than only trying to prevent it upfront.
+    chatScrollWatchdog = () => { if (chatOpen && window.scrollY !== 0) window.scrollTo(0, 0); };
+    window.addEventListener('scroll', chatScrollWatchdog, { passive: true });
     // Delay focus very slightly so the lock is actually painted before the keyboard
     // triggers — focusing in the same tick as the style change can let the browser
-    // compute "scroll into view" against the pre-lock layout.
-    setTimeout(() => document.getElementById('chat-input').focus(), 50);
+    // compute "scroll into view" against the pre-lock layout. preventScroll is a second,
+    // complementary safeguard against the browser auto-scrolling to reveal the input.
+    setTimeout(() => document.getElementById('chat-input').focus({ preventScroll: true }), 50);
   } else {
+    if (chatScrollWatchdog) { window.removeEventListener('scroll', chatScrollWatchdog); chatScrollWatchdog = null; }
     document.getElementById('chat-size-menu').classList.remove('open');
     document.documentElement.style.overflow = '';
     document.documentElement.style.overscrollBehavior = '';
