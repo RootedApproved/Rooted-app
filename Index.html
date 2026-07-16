@@ -399,12 +399,16 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 .chat-fab{position:fixed;right:16px;bottom:calc(var(--bar-h) + 16px);width:52px;height:52px;border-radius:50%;background:var(--forest);color:var(--white);border:none;box-shadow:0 4px 16px rgba(0,0,0,.2);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:400;transition:transform .15s;}
 .chat-fab:active{transform:scale(.92);}
 .chat-fab i{width:24px;height:24px;stroke-width:1.75;}
-.chat-panel{position:fixed;right:16px;bottom:calc(var(--bar-h) + 76px);width:min(360px,calc(100vw - 32px));height:460px;max-height:520px;background:var(--white);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.25);display:none;flex-direction:column;overflow:hidden;z-index:400;}
+.chat-panel{position:fixed;right:16px;bottom:calc(var(--bar-h) + 76px);width:min(360px,calc(100vw - 32px));height:460px;max-height:520px;background:var(--white);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.25);display:none;flex-direction:column;overflow:hidden;z-index:400;transition:width .25s ease,height .25s ease;}
 .chat-panel.open{display:flex;}
-.chat-panel-hd{background:var(--forest);color:var(--white);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;}
+.chat-panel.expanded{width:min(420px,calc(100vw - 24px));height:640px;max-height:680px;}
+.chat-panel-hd{background:var(--forest);color:var(--white);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .chat-panel-title{font-family:var(--font-d);font-weight:700;font-size:15px;display:flex;align-items:center;gap:7px;}
 .chat-panel-title i{width:17px;height:17px;}
-.chat-panel-close{background:none;border:none;color:var(--white);cursor:pointer;display:flex;padding:2px;}
+.chat-panel-actions{display:flex;align-items:center;gap:4px;}
+.chat-panel-size,.chat-panel-close{background:none;border:none;color:var(--white);cursor:pointer;display:flex;padding:4px;border-radius:5px;opacity:.9;}
+.chat-panel-size:hover,.chat-panel-close:hover{opacity:1;background:rgba(255,255,255,.12);}
+.chat-panel-size i{width:16px;height:16px;stroke-width:1.75;}
 .chat-panel-close i{width:19px;height:19px;}
 .chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
 .chat-msg{max-width:85%;padding:9px 12px;border-radius:12px;font-size:13.5px;line-height:1.5;}
@@ -958,7 +962,10 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 <div class="chat-panel" id="chat-panel">
   <div class="chat-panel-hd">
     <div class="chat-panel-title"><i data-lucide="sparkles"></i> ROOTED Assistant</div>
-    <button class="chat-panel-close" onclick="toggleChat()"><i data-lucide="x"></i></button>
+    <div class="chat-panel-actions">
+      <button class="chat-panel-size" id="chat-size-btn" onclick="toggleChatSize()" aria-label="Expand or compact chat"><i data-lucide="maximize-2" id="chat-size-icon"></i></button>
+      <button class="chat-panel-close" onclick="toggleChat()"><i data-lucide="x"></i></button>
+    </div>
   </div>
   <div class="chat-messages" id="chat-messages">
     <div class="chat-msg chat-msg-bot">Hi! Ask me about any product, ingredient, or clean-living question — I'll answer using ROOTED's actual standards and ratings.</div>
@@ -1361,12 +1368,37 @@ let chatHistory = [];
 let chatOpen = false;
 
 let chatScrollY = 0;
+let chatExpanded = false;
+
+// Lets the user switch between a compact and expanded chat panel size, seamlessly (CSS
+// transition handles the resize animation) and remembers their preference for next time.
+function setChatSize(expanded, persist = true) {
+  chatExpanded = expanded;
+  const panel = document.getElementById('chat-panel');
+  panel.classList.toggle('expanded', expanded);
+  // Lucide replaces the <i data-lucide> tag with real SVG markup on render, so swapping the
+  // icon later means injecting a fresh <i> tag and re-running createIcons — not just changing
+  // an attribute on the already-rendered SVG.
+  const btn = document.getElementById('chat-size-btn');
+  btn.innerHTML = `<i data-lucide="${expanded ? 'minimize-2' : 'maximize-2'}" id="chat-size-icon"></i>`;
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+  if (persist) { try { localStorage.setItem('rooted-chat-size', expanded ? 'expanded' : 'compact'); } catch (e) {} }
+}
+
+function toggleChatSize() {
+  setChatSize(!chatExpanded);
+}
+
 
 function toggleChat() {
   chatOpen = !chatOpen;
   const panel = document.getElementById('chat-panel');
   panel.classList.toggle('open', chatOpen);
   if (chatOpen) {
+    // Restore the user's last chosen size (compact/expanded) each time the chat opens.
+    let savedSize = 'compact';
+    try { savedSize = localStorage.getItem('rooted-chat-size') || 'compact'; } catch (e) {}
+    setChatSize(savedSize === 'expanded', false);
     // Lock the background page in place so opening the keyboard can't scroll it —
     // the standard fix for this on iOS Safari, which otherwise tries to "scroll the
     // focused input into view" even though the input lives in a fixed-position panel.
