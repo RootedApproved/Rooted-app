@@ -1360,11 +1360,27 @@ const CHAT_WORKER_URL = 'https://rooted-chat.YOUR-SUBDOMAIN.workers.dev';
 let chatHistory = [];
 let chatOpen = false;
 
+let chatScrollY = 0;
+
 function toggleChat() {
   chatOpen = !chatOpen;
   const panel = document.getElementById('chat-panel');
   panel.classList.toggle('open', chatOpen);
-  if (chatOpen) document.getElementById('chat-input').focus();
+  if (chatOpen) {
+    // Lock the background page in place so opening the keyboard can't scroll it —
+    // the standard fix for this on iOS Safari, which otherwise tries to "scroll the
+    // focused input into view" even though the input lives in a fixed-position panel.
+    chatScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${chatScrollY}px`;
+    document.body.style.width = '100%';
+    document.getElementById('chat-input').focus();
+  } else {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, chatScrollY);
+  }
 }
 
 // Finds a small, relevant slice of the product database matching the question — reuses the
