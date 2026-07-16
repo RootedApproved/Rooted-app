@@ -413,7 +413,7 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 .chat-fab{position:fixed;right:16px;bottom:calc(var(--bar-h) + 16px);width:52px;height:52px;border-radius:50%;background:var(--forest);color:var(--white);border:none;box-shadow:0 4px 16px rgba(0,0,0,.2);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:400;transition:transform .15s;}
 .chat-fab:active{transform:scale(.92);}
 .chat-fab i{width:24px;height:24px;stroke-width:1.75;}
-.chat-panel{position:fixed;right:16px;bottom:calc(var(--bar-h) + 76px);width:min(360px,calc(100vw - 32px));height:460px;max-height:520px;background:var(--white);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.25);display:none;flex-direction:column;overflow:hidden;z-index:400;transition:width .25s ease,height .25s ease,border-radius .25s ease,inset .25s ease;}
+.chat-panel{position:fixed;right:16px;bottom:calc(var(--bar-h) + 76px);width:min(360px,calc(100vw - 32px));height:460px;max-height:520px;background:var(--white);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.25);display:none;flex-direction:column;overflow:hidden;z-index:400;transition:width .25s ease,height .25s ease,border-radius .25s ease,inset .25s ease,bottom .2s ease;}
 .chat-panel.open{display:flex;}
 .chat-panel.mini{width:min(280px,calc(100vw - 32px));height:340px;max-height:380px;}
 .chat-panel.expanded{width:min(420px,calc(100vw - 24px));height:640px;max-height:680px;}
@@ -1439,10 +1439,8 @@ function toggleChat() {
     let savedSize = 'compact';
     try { savedSize = localStorage.getItem('rooted-chat-size') || 'compact'; } catch (e) {}
     setChatSize(savedSize, false);
-    // Lock the background page in place so opening the keyboard can't scroll it —
-    // the standard fix for this on iOS Safari, which otherwise tries to "scroll the
-    // focused input into view" even though the input lives in a fixed-position panel.
-    // Locking both html and body, plus overscroll-behavior, covers more browser variants.
+    // Lock the background page in place as a baseline safety net (covers non-iOS browsers
+    // and prevents actual document scrolling regardless of the fix below).
     chatScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
     document.documentElement.style.overflow = 'hidden';
     document.documentElement.style.overscrollBehavior = 'none';
@@ -1452,41 +1450,30 @@ function toggleChat() {
     document.body.style.right = '0';
     document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
-    // Active watchdog: with body pinned via position:fixed, the window's own scroll
-    // position should always read 0 while the chat is open. Some mobile browsers still
-    // sneak in a scroll when an input INSIDE the panel is tapped directly (separate from
-    // opening the chat itself) — this catches that the instant it happens and snaps back,
-    // rather than only trying to prevent it upfront.
     chatScrollWatchdog = () => { if (chatOpen && window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
     window.addEventListener('scroll', chatScrollWatchdog, { passive: true });
-    // Known active iOS 26 Safari regression: visualViewport.offsetTop can get "stuck"
-    // non-zero after the keyboard shows/hides, which visibly misaligns position:fixed
-    // elements even when window.scrollY itself reads 0 — a scroll-based fix alone can't
-    // catch this since it's a viewport-offset bug, not an actual scroll. Compensating the
-    // panel and FAB directly against visualViewport.offsetTop keeps them visually locked
-    // to the real screen regardless of what Safari's internal layout viewport is doing.
+
+    // PRIMARY FIX: preemptively move the panel clear of the keyboard, rather than reacting
+    // to a scroll after it happens. Safari scrolls the page specifically because it thinks
+    // the focused input would otherwise be hidden behind the keyboard — if the panel is
+    // already repositioned above the keyboard before that judgment gets made, there is
+    // nothing for Safari to "fix" by scrolling in the first place.
     if (window.visualViewport) {
       chatViewportHandler = () => {
         if (!chatOpen) return;
         const vv = window.visualViewport;
-        const offset = vv.offsetTop || 0;
-        panel.style.transform = offset ? `translateY(${offset}px)` : '';
-        if (fab) fab.style.transform = offset ? `translateY(${offset}px)` : '';
-        // Documented workaround for the specific iOS 26 bug where offsetTop doesn't reset
-        // to 0 after the keyboard dismisses: a 1px scroll nudge forces Safari to recompute
-        // the visual viewport correctly, rather than staying stuck in the offset state.
-        if (offset === 0 && window.scrollY === 0) {
-          window.scrollBy(0, -1);
-          window.scrollBy(0, 1);
-        }
+        if (panel.classList.contains('fullscreen')) { panel.style.bottom = ''; return; } // fullscreen already fills via inset:0
+        const keyboardHeight = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+        panel.style.bottom = keyboardHeight > 0
+          ? `calc(var(--bar-h) + 76px + ${keyboardHeight}px)`
+          : '';
+        if (fab) fab.style.transform = '';
+        panel.style.transform = '';
       };
       window.visualViewport.addEventListener('resize', chatViewportHandler);
       window.visualViewport.addEventListener('scroll', chatViewportHandler);
+      chatViewportHandler(); // run once immediately in case the keyboard is already showing
     }
-    // Delay focus very slightly so the lock is actually painted before the keyboard
-    // triggers — focusing in the same tick as the style change can let the browser
-    // compute "scroll into view" against the pre-lock layout. preventScroll is a second,
-    // complementary safeguard against the browser auto-scrolling to reveal the input.
     setTimeout(() => document.getElementById('chat-input').focus({ preventScroll: true }), 50);
   } else {
     if (chatScrollWatchdog) { window.removeEventListener('scroll', chatScrollWatchdog); chatScrollWatchdog = null; }
@@ -1496,6 +1483,7 @@ function toggleChat() {
       chatViewportHandler = null;
     }
     panel.style.transform = '';
+    panel.style.bottom = '';
     if (fab) fab.style.transform = '';
     document.getElementById('chat-size-menu').classList.remove('open');
     document.documentElement.style.overflow = '';
