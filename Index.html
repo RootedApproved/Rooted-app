@@ -1370,15 +1370,29 @@ function toggleChat() {
     // Lock the background page in place so opening the keyboard can't scroll it —
     // the standard fix for this on iOS Safari, which otherwise tries to "scroll the
     // focused input into view" even though the input lives in a fixed-position panel.
-    chatScrollY = window.scrollY;
+    // Locking both html and body, plus overscroll-behavior, covers more browser variants.
+    chatScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.overscrollBehavior = 'none';
     document.body.style.position = 'fixed';
     document.body.style.top = `-${chatScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
     document.body.style.width = '100%';
-    document.getElementById('chat-input').focus();
+    document.body.style.overflow = 'hidden';
+    // Delay focus very slightly so the lock is actually painted before the keyboard
+    // triggers — focusing in the same tick as the style change can let the browser
+    // compute "scroll into view" against the pre-lock layout.
+    setTimeout(() => document.getElementById('chat-input').focus(), 50);
   } else {
+    document.documentElement.style.overflow = '';
+    document.documentElement.style.overscrollBehavior = '';
     document.body.style.position = '';
     document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
     document.body.style.width = '';
+    document.body.style.overflow = '';
     window.scrollTo(0, chatScrollY);
   }
 }
