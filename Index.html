@@ -1546,17 +1546,21 @@ function toggleChat() {
     chatInputEl.addEventListener('touchend', chatInputTouchHandler, { passive: false });
 
     // 4) The screenshots showed the actual page content shifting (lower sections revealed
-    // at the top) — this confirms Safari is shifting its internal Layout Viewport when the
-    // keyboard opens, which affects position:fixed elements (including body itself, locked
-    // fixed in step 1) independent of any scroll or drag. visualViewport.offsetTop reports
-    // exactly that shift, so folding it into body's existing `top` value cancels it out.
+    // The diagnostic data this round showed something important: body rect.top jumped an
+    // EXTRA -50px just 25ms after the chat opened — before the keyboard's visualViewport even
+    // started shrinking (that came almost 3 seconds later). That timing lines up exactly with
+    // this handler's own offsetTop-based compensation reacting to a brief, transient value and
+    // applying an additional shift to body — meaning this "fix," intended to cancel out
+    // Safari's viewport shift, was itself very likely the visible jump being reported. Removed
+    // entirely. body's position is now set once when the chat opens and never touched again by
+    // this handler. The panel height-shrinking below is unaffected by this change and is
+    // confirmed working correctly from the same diagnostic data (it shrank to exactly fit the
+    // visible space above the keyboard as intended).
     const chatPanelBaseHeights = { mini: 340, compact: 460, expanded: 640 };
     if (window.visualViewport) {
       chatViewportHandler = () => {
         if (!chatOpen) return;
         const vv = window.visualViewport;
-        const offset = vv.offsetTop || 0;
-        document.body.style.top = `-${chatScrollY + offset}px`;
         if (!panel.classList.contains('fullscreen')) {
           const baseBottomPx = 132; // matches CSS: var(--bar-h)=56 + 76
           const naturalHeight = chatPanelBaseHeights[chatSize] || 460;
