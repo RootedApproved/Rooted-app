@@ -1400,6 +1400,35 @@ function findRelevantProducts(query) {
     }));
 }
 
+// Checks for ONE clearly-confident product match (not just "found something") — used to answer
+// direct "what tier is X" questions instantly from the database, completely free, with zero API call.
+// Only proceeds to the paid API when there's no confident single match (i.e., a genuinely open question).
+function findTopProductMatch(query) {
+  const q = query.toLowerCase();
+  const words = q.split(/\s+/).filter(w => w.length > 2);
+  if (words.length < 1) return null;
+
+  const scored = Object.entries(PRODUCTS).map(([id, p]) => {
+    const nameField = (p.name + ' ' + p.brand).toLowerCase();
+    let score = 0;
+    words.forEach(w => { if (nameField.includes(w)) score++; });
+    return { id, p, score };
+  }).sort((a, b) => b.score - a.score);
+
+  const top = scored[0];
+  const second = scored[1];
+  // Require at least 2 matching words in the name/brand, and a clear lead over the runner-up —
+  // otherwise this is ambiguous and should go to the LLM rather than guessing.
+  if (top && top.score >= 2 && (!second || top.score > second.score)) {
+    return top.p;
+  }
+  return null;
+}
+
+function tierLabelText(tier) {
+  return { '1': 'Tier 1 — Rooted Approved', '2': 'Tier 2 — Good Option', '3': 'Tier 3 — Budget/Transitional', '4': 'Tier 4 — Not Recommended' }[tier] || 'Unrated';
+}
+
 async function sendChatMessage() {
   const input = document.getElementById('chat-input');
   const message = input.value.trim();
@@ -1409,6 +1438,16 @@ async function sendChatMessage() {
   messagesEl.innerHTML += `<div class="chat-msg chat-msg-user">${message.replace(/</g, '&lt;')}</div>`;
   input.value = '';
   messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  // FREE PATH: a confident direct product match is answered instantly from the database —
+  // no API call, no cost. Only genuinely open-ended questions reach the paid model below.
+  const directMatch = findTopProductMatch(message);
+  if (directMatch) {
+    const reply = `<strong>${directMatch.brand} ${directMatch.name}</strong> — ${tierLabelText(directMatch.tier)}<br><br>${directMatch.verdict}${directMatch.price ? `<br><br>Price: ${directMatch.price}` : ''}`;
+    messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${reply}</div>`;
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return;
+  }
 
   const loadingEl = document.createElement('div');
   loadingEl.className = 'chat-msg chat-msg-loading';
