@@ -395,6 +395,30 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
   body.sidebar-dark .sidebar-contact-btn,body.sidebar-terracotta .sidebar-contact-btn{background:rgba(255,255,255,.18);}
   body.sidebar-dark .sidebar-contact-btn:hover,body.sidebar-terracotta .sidebar-contact-btn:hover{background:rgba(255,255,255,.28);}
   body.sidebar-gradient .desktop-sidebar{background:linear-gradient(165deg,var(--cream2) 0%,rgba(181,86,63,.14) 65%,rgba(214,154,45,.16) 100%);}
+}/* ── ROOTED ASSISTANT CHAT ────────────────────────────────────────────── */
+.chat-fab{position:fixed;right:16px;bottom:calc(var(--bar-h) + 16px);width:52px;height:52px;border-radius:50%;background:var(--forest);color:var(--white);border:none;box-shadow:0 4px 16px rgba(0,0,0,.2);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:400;transition:transform .15s;}
+.chat-fab:active{transform:scale(.92);}
+.chat-fab i{width:24px;height:24px;stroke-width:1.75;}
+.chat-panel{position:fixed;right:16px;bottom:calc(var(--bar-h) + 76px);width:min(360px,calc(100vw - 32px));height:min(520px,calc(100vh - 180px));background:var(--white);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.25);display:none;flex-direction:column;overflow:hidden;z-index:400;}
+.chat-panel.open{display:flex;}
+.chat-panel-hd{background:var(--forest);color:var(--white);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;}
+.chat-panel-title{font-family:var(--font-d);font-weight:700;font-size:15px;display:flex;align-items:center;gap:7px;}
+.chat-panel-title i{width:17px;height:17px;}
+.chat-panel-close{background:none;border:none;color:var(--white);cursor:pointer;display:flex;padding:2px;}
+.chat-panel-close i{width:19px;height:19px;}
+.chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.chat-msg{max-width:85%;padding:9px 12px;border-radius:12px;font-size:13.5px;line-height:1.5;}
+.chat-msg-bot{background:var(--cream2);color:var(--char);align-self:flex-start;border-bottom-left-radius:3px;}
+.chat-msg-user{background:var(--forest);color:var(--white);align-self:flex-end;border-bottom-right-radius:3px;}
+.chat-msg-loading{background:var(--cream2);color:var(--muted);align-self:flex-start;font-style:italic;}
+.chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);}
+.chat-input{flex:1;border:1px solid var(--border);border-radius:20px;padding:9px 14px;font-family:var(--font-b);font-size:13.5px;outline:none;}
+.chat-input:focus{border-color:var(--teal);}
+.chat-send{background:var(--forest);color:var(--white);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.chat-send i{width:16px;height:16px;}
+@media (min-width:1024px){
+  .chat-fab{bottom:20px;right:24px;}
+  .chat-panel{bottom:88px;right:24px;}
 }
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -929,6 +953,22 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 </div>
 
 <!-- BOTTOM BAR (mobile) -->
+<!-- ROOTED ASSISTANT: floating chat button + panel -->
+<button class="chat-fab" id="chat-fab" onclick="toggleChat()" aria-label="Ask ROOTED Assistant"><i data-lucide="message-circle"></i></button>
+<div class="chat-panel" id="chat-panel">
+  <div class="chat-panel-hd">
+    <div class="chat-panel-title"><i data-lucide="sparkles"></i> ROOTED Assistant</div>
+    <button class="chat-panel-close" onclick="toggleChat()"><i data-lucide="x"></i></button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-msg chat-msg-bot">Hi! Ask me about any product, ingredient, or clean-living question — I'll answer using ROOTED's actual standards and ratings.</div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" class="chat-input" id="chat-input" placeholder="Ask about a product or ingredient..." onkeydown="if(event.key==='Enter')sendChatMessage()">
+    <button class="chat-send" onclick="sendChatMessage()"><i data-lucide="send"></i></button>
+  </div>
+</div>
+
 <div class="bottom-bar">
   <button class="tab active" data-tab="home" onclick="showTab('home')"><span class="tab-icon"><i data-lucide="house"></i></span><span class="tab-label">Home</span></button>
   <button class="tab" data-tab="search" onclick="showTab('search')"><span class="tab-icon"><i data-lucide="search"></i></span><span class="tab-label">Search</span></button>
@@ -1312,6 +1352,89 @@ function renderSearch(query){
   });
   if(!matches.length){results.innerHTML=`<div class="search-empty">No products found for "${query}".<br><br>More categories coming soon.</div>`;return;}
   results.innerHTML=matches.map(([id,p])=>buildProdCard(id,p)).join('');
+}
+
+// ── ROOTED ASSISTANT CHAT ─────────────────────────────────────────────
+// Set this to your deployed Cloudflare Worker URL once it's live (see worker.js).
+const CHAT_WORKER_URL = 'https://rooted-chat.YOUR-SUBDOMAIN.workers.dev';
+let chatHistory = [];
+let chatOpen = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const panel = document.getElementById('chat-panel');
+  panel.classList.toggle('open', chatOpen);
+  if (chatOpen) document.getElementById('chat-input').focus();
+}
+
+// Finds a small, relevant slice of the product database matching the question — reuses the
+// same matching logic as the Search tab. Keeps the context sent to the API small and cheap
+// rather than sending the entire 160+ product database on every message.
+// Scores by how MANY query words match (not just "any single word") to avoid false positives
+// from coincidental shared words (e.g., a shirt's "Non-Iron resin finish" matching a "cast iron" query).
+function findRelevantProducts(query) {
+  const q = query.toLowerCase();
+  const words = q.split(/\s+/).filter(w => w.length > 2);
+  if (!words.length) return [];
+
+  const scored = Object.entries(PRODUCTS).map(([id, p]) => {
+    const nameField = (p.name + ' ' + p.brand).toLowerCase();
+    const otherFields = (p.subcat + ' ' + (p.composition || '') + ' ' + (p.verdict || '')).toLowerCase();
+    let score = 0;
+    words.forEach(w => {
+      if (nameField.includes(w)) score += 2; // name/brand matches count double — much more reliable signal
+      else if (otherFields.includes(w)) score += 1;
+    });
+    return { id, p, score };
+  });
+
+  // Require matching more than just one coincidental word, unless the query itself is a single word.
+  const minScore = words.length === 1 ? 1 : 2;
+  return scored
+    .filter(s => s.score >= minScore)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5)
+    .map(({ p }) => ({
+      name: p.name, brand: p.brand, tier: p.tier, label: p.label,
+      verdict: p.verdict, composition: p.composition, price: p.price
+    }));
+}
+
+async function sendChatMessage() {
+  const input = document.getElementById('chat-input');
+  const message = input.value.trim();
+  if (!message) return;
+  const messagesEl = document.getElementById('chat-messages');
+
+  messagesEl.innerHTML += `<div class="chat-msg chat-msg-user">${message.replace(/</g, '&lt;')}</div>`;
+  input.value = '';
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  const loadingEl = document.createElement('div');
+  loadingEl.className = 'chat-msg chat-msg-loading';
+  loadingEl.textContent = 'Thinking...';
+  messagesEl.appendChild(loadingEl);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  try {
+    const productContext = findRelevantProducts(message);
+    const res = await fetch(CHAT_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, history: chatHistory, productContext })
+    });
+    if (!res.ok) throw new Error('Assistant request failed: ' + res.status);
+    const data = await res.json();
+    loadingEl.remove();
+    messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${(data.reply || '').replace(/</g, '&lt;')}</div>`;
+    chatHistory.push({ role: 'user', content: message });
+    chatHistory.push({ role: 'assistant', content: data.reply });
+  } catch (e) {
+    loadingEl.remove();
+    messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">Sorry, I'm having trouble connecting right now. Please try again in a moment.</div>`;
+    console.error('ROOTED Assistant error:', e);
+  }
+  messagesEl.scrollTop = messagesEl.scrollHeight;
 }
 
 // ── IMAGE FALLBACK ────────────────────────────────────────────────────
