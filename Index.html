@@ -1519,10 +1519,14 @@ function toggleChat() {
     document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
 
-    // 2) Block background drag-scrolling, with one exception for the chat's own message list.
+    // 2) Block background drag-scrolling only. Exempts the ENTIRE chat panel (not just the
+    // message list) — a real tap always involves a small amount of finger movement, which
+    // fires touchmove events even for a simple tap. If those were being caught and blocked
+    // on the input itself, that could interfere with the native tap-to-focus gesture
+    // completing normally, which is very likely why the keyboard was closing again shortly
+    // after opening.
     chatTouchMoveHandler = (e) => {
-      const scrollableEl = document.getElementById('chat-messages');
-      if (scrollableEl && scrollableEl.contains(e.target)) return;
+      if (panel.contains(e.target)) return; // never interfere with anything inside the chat panel
       chatTouchMoveCount++;
       e.preventDefault();
     };
