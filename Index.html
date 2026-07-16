@@ -994,15 +994,10 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
   <div class="chat-panel-hd">
     <div class="chat-panel-title"><i data-lucide="sparkles"></i> ROOTED Assistant</div>
     <div class="chat-panel-actions">
-      <div class="chat-size-wrap">
-        <button class="chat-panel-size" id="chat-size-btn" onclick="toggleChatSizeMenu()" aria-label="Resize chat"><i data-lucide="maximize-2"></i></button>
-        <div class="chat-size-menu" id="chat-size-menu">
-          <button class="chat-size-opt" data-size="mini" onclick="setChatSize('mini')"><i data-lucide="minimize-2"></i>Mini</button>
-          <button class="chat-size-opt" data-size="compact" onclick="setChatSize('compact')"><i data-lucide="square"></i>Compact</button>
-          <button class="chat-size-opt" data-size="expanded" onclick="setChatSize('expanded')"><i data-lucide="maximize-2"></i>Expanded</button>
-          <button class="chat-size-opt" data-size="fullscreen" onclick="setChatSize('fullscreen')"><i data-lucide="maximize"></i>Full Screen</button>
-        </div>
-      </div>
+      <!-- Resize button/menu removed per request — the underlying size system (mini/compact/
+           expanded/fullscreen CSS classes, setChatSize(), toggleChatSizeMenu(), CHAT_SIZES)
+           is intentionally left fully intact in the code below for easy future re-enabling;
+           only this UI entry point was removed. Compact is now the only size ever used. -->
       <button class="chat-panel-close" onclick="toggleChat()"><i data-lucide="x"></i></button>
     </div>
   </div>
@@ -1425,12 +1420,14 @@ function setChatSize(size, persist = true) {
   document.querySelectorAll('.chat-size-opt').forEach(opt => {
     opt.classList.toggle('active', opt.dataset.size === size);
   });
-  document.getElementById('chat-size-menu').classList.remove('open');
+  const sizeMenu = document.getElementById('chat-size-menu');
+  if (sizeMenu) sizeMenu.classList.remove('open');
   if (persist) { try { localStorage.setItem('rooted-chat-size', size); } catch (e) {} }
 }
 
 function toggleChatSizeMenu() {
-  document.getElementById('chat-size-menu').classList.toggle('open');
+  const sizeMenu = document.getElementById('chat-size-menu');
+  if (sizeMenu) sizeMenu.classList.toggle('open');
 }
 
 function toggleChat() {
@@ -1438,12 +1435,19 @@ function toggleChat() {
   const panel = document.getElementById('chat-panel');
   panel.classList.toggle('open', chatOpen);
   if (chatOpen) {
-    let savedSize = 'compact';
-    try { savedSize = localStorage.getItem('rooted-chat-size') || 'compact'; } catch (e) {}
-    setChatSize(savedSize, false);
+    // Resize button removed per request — compact is now the only size ever used, on both
+    // mobile and desktop. Ignores any size a user may have previously saved via the old menu.
+    setChatSize('compact', false);
 
     // 1) Lock the background from actual scrolling. Save the exact scroll position so it can
     // be restored precisely on close.
+    // Desktop-specific fix: locking body removes the vertical scrollbar, which makes the
+    // available page width suddenly larger by the scrollbar's width — this is what was
+    // causing the whole page to visibly slide right on desktop. Measuring that width before
+    // locking and adding it back as padding keeps the page's total width constant, so nothing
+    // shifts. Mobile scrollbars are typically overlay-style and don't take up layout space,
+    // so this naturally computes to 0 there and has no effect.
+    const chatScrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     chatScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
     document.documentElement.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
@@ -1452,6 +1456,7 @@ function toggleChat() {
     document.body.style.right = '0';
     document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
+    if (chatScrollbarWidth > 0) document.body.style.paddingRight = chatScrollbarWidth + 'px';
 
     // 2) Block background drag-scrolling only. Exempts the ENTIRE chat panel (not just the
     // message list) — a real tap always involves a small amount of finger movement, which
@@ -1531,7 +1536,8 @@ function toggleChat() {
     }
     panel.style.height = '';
     panel.style.bottom = '';
-    document.getElementById('chat-size-menu').classList.remove('open');
+    const sizeMenuOnClose = document.getElementById('chat-size-menu');
+    if (sizeMenuOnClose) sizeMenuOnClose.classList.remove('open');
     document.documentElement.style.overflow = '';
     document.body.style.position = '';
     document.body.style.top = '';
@@ -1539,6 +1545,7 @@ function toggleChat() {
     document.body.style.right = '';
     document.body.style.width = '';
     document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
     window.scrollTo({ top: chatScrollY, left: 0, behavior: 'instant' });
   }
 }
