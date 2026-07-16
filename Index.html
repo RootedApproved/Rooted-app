@@ -437,7 +437,7 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 .chat-size-opt:hover{background:var(--cream2);}
 .chat-size-opt.active{color:var(--forest);background:var(--cream2);}
 .chat-size-opt i{width:15px;height:15px;stroke-width:1.75;flex-shrink:0;}
-.chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.chat-messages{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;display:flex;flex-direction:column;gap:10px;}
 .chat-msg{max-width:85%;padding:9px 12px;border-radius:12px;font-size:13.5px;line-height:1.5;}
 .chat-msg-bot{background:var(--cream2);color:var(--char);align-self:flex-start;border-bottom-left-radius:3px;}
 .chat-msg-user{background:var(--forest);color:var(--white);align-self:flex-end;border-bottom-right-radius:3px;}
@@ -1404,8 +1404,7 @@ let chatHistory = [];
 let chatOpen = false;
 
 let chatScrollY = 0;
-let chatScrollWatchdog = null;
-let chatViewportHandler = null;
+let chatTouchMoveHandler = null;
 let chatSize = 'compact';
 const CHAT_SIZES = ['mini', 'compact', 'expanded', 'fullscreen'];
 
@@ -1432,62 +1431,44 @@ function toggleChatSizeMenu() {
 function toggleChat() {
   chatOpen = !chatOpen;
   const panel = document.getElementById('chat-panel');
-  const fab = document.getElementById('chat-fab');
   panel.classList.toggle('open', chatOpen);
   if (chatOpen) {
     // Restore the user's last chosen size each time the chat opens.
     let savedSize = 'compact';
     try { savedSize = localStorage.getItem('rooted-chat-size') || 'compact'; } catch (e) {}
     setChatSize(savedSize, false);
-    // Lock the background page in place as a baseline safety net (covers non-iOS browsers
-    // and prevents actual document scrolling regardless of the fix below).
+
+    // Save exact scroll position, then lock html/body as a baseline (prevents actual
+    // document scroll and, since we restore this exact position on close, avoids the
+    // "resets scroll to top" caveat that a naive position:fixed lock can otherwise cause).
     chatScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
     document.documentElement.style.overflow = 'hidden';
-    document.documentElement.style.overscrollBehavior = 'none';
     document.body.style.position = 'fixed';
     document.body.style.top = `-${chatScrollY}px`;
     document.body.style.left = '0';
     document.body.style.right = '0';
     document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
-    chatScrollWatchdog = () => { if (chatOpen && window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
-    window.addEventListener('scroll', chatScrollWatchdog, { passive: true });
 
-    // PRIMARY FIX: preemptively move the panel clear of the keyboard, rather than reacting
-    // to a scroll after it happens. Safari scrolls the page specifically because it thinks
-    // the focused input would otherwise be hidden behind the keyboard — if the panel is
-    // already repositioned above the keyboard before that judgment gets made, there is
-    // nothing for Safari to "fix" by scrolling in the first place.
-    if (window.visualViewport) {
-      chatViewportHandler = () => {
-        if (!chatOpen) return;
-        const vv = window.visualViewport;
-        if (panel.classList.contains('fullscreen')) { panel.style.bottom = ''; return; } // fullscreen already fills via inset:0
-        const keyboardHeight = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
-        panel.style.bottom = keyboardHeight > 0
-          ? `calc(var(--bar-h) + 76px + ${keyboardHeight}px)`
-          : '';
-        if (fab) fab.style.transform = '';
-        panel.style.transform = '';
-      };
-      window.visualViewport.addEventListener('resize', chatViewportHandler);
-      window.visualViewport.addEventListener('scroll', chatViewportHandler);
-      chatViewportHandler(); // run once immediately in case the keyboard is already showing
-    }
+    // PRIMARY FIX — the technique used by body-scroll-lock (the industry-standard library
+    // for exactly this problem, used across a huge number of production sites): rather than
+    // reacting to a scroll after it happens, or trying to reposition elements around the
+    // keyboard, directly block the touchmove gesture at the document level entirely — except
+    // inside the chat's own message list, which still needs to scroll normally. With no
+    // gesture able to move the background at all, there's nothing for the keyboard opening
+    // to trigger a visible scroll on.
+    chatTouchMoveHandler = (e) => {
+      const scrollableEl = document.getElementById('chat-messages');
+      if (scrollableEl && scrollableEl.contains(e.target)) return; // allow the chat history itself to scroll
+      e.preventDefault();
+    };
+    document.addEventListener('touchmove', chatTouchMoveHandler, { passive: false });
+
     setTimeout(() => document.getElementById('chat-input').focus({ preventScroll: true }), 50);
   } else {
-    if (chatScrollWatchdog) { window.removeEventListener('scroll', chatScrollWatchdog); chatScrollWatchdog = null; }
-    if (chatViewportHandler && window.visualViewport) {
-      window.visualViewport.removeEventListener('resize', chatViewportHandler);
-      window.visualViewport.removeEventListener('scroll', chatViewportHandler);
-      chatViewportHandler = null;
-    }
-    panel.style.transform = '';
-    panel.style.bottom = '';
-    if (fab) fab.style.transform = '';
+    if (chatTouchMoveHandler) { document.removeEventListener('touchmove', chatTouchMoveHandler); chatTouchMoveHandler = null; }
     document.getElementById('chat-size-menu').classList.remove('open');
     document.documentElement.style.overflow = '';
-    document.documentElement.style.overscrollBehavior = '';
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.left = '';
