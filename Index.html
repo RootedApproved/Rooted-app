@@ -58,7 +58,9 @@ body.style-color .cat-card:nth-child(4n+4){background:var(--sage);}
 
 /* Style B: placeholder gradient "photo" block with scrim overlay for text legibility */
 body.style-photo .cat-card{border:none;}
-body.style-photo .cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,var(--cream2),var(--border) 60%,var(--muted));opacity:.55;}
+body.style-photo .cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,var(--cream2),var(--border) 60%,var(--muted));opacity:.55;background-size:cover;background-position:center;}
+body.style-photo .cat-card[data-cat="clothing"]::before{background-image:url('https://images.unsplash.com/photo-1612654516785-0e1a96be21d1?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="cookware"]::before{background-image:url('https://images.unsplash.com/photo-1603038124597-2c5c207edf47?auto=format&fit=crop&w=600&q=80');opacity:1;}
 body.style-photo .cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65%;background:linear-gradient(to top,rgba(0,0,0,.55),transparent);}
 body.style-photo .cat-card .cat-icon{color:var(--white);z-index:2;}
 body.style-photo .cat-card .cat-body{position:relative;z-index:2;}
@@ -432,13 +434,13 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
     <button class="style-toggle-btn" id="sidebar-btn-gradient" onclick="setSidebarStyle('gradient')">Soft Gradient</button>
   </div>
   <div class="cat-grid">
-    <div class="cat-card" onclick="showCategory('clothing')"><span class="cat-icon"><i data-lucide="shirt"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct js-clothing-total">30 products rated</div></div></div>
-    <div class="cat-card" onclick="showCategory('oral')"><span class="cat-icon"><i data-lucide="smile"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Oral Care</div><div class="cat-ct js-oral-total">10 products rated</div></div></div>
-    <div class="cat-card" onclick="showCategory('water')"><span class="cat-icon"><i data-lucide="droplet"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Water</div><div class="cat-ct js-water-total">10 products rated</div></div></div>
-    <div class="cat-card" onclick="showCategory('food')"><span class="cat-icon"><i data-lucide="beef"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Food &amp; Diet</div><div class="cat-ct">Coming soon</div></div></div>
-    <div class="cat-card" onclick="showCategory('cookware')"><span class="cat-icon"><i data-lucide="cooking-pot"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Cookware &amp; Kitchen</div><div class="cat-ct js-cookware-total">20 products rated</div></div></div>
-    <div class="cat-card" onclick="showCategory('personal')"><span class="cat-icon"><i data-lucide="sparkles"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Personal Care</div><div class="cat-ct js-personal-total">8 products rated</div></div></div>
-    <div class="cat-card" onclick="showScreen('farmers')"><span class="cat-icon"><i data-lucide="wheat"></i></span><div class="cat-body"><div class="cat-lbl">Tool</div><div class="cat-name">Local Food Map</div><div class="cat-ct">Farms, markets, CSAs & more</div></div></div>
+    <div class="cat-card" data-cat="clothing" onclick="showCategory('clothing')"><span class="cat-icon"><i data-lucide="shirt"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct js-clothing-total">30 products rated</div></div></div>
+    <div class="cat-card" data-cat="oral" onclick="showCategory('oral')"><span class="cat-icon"><i data-lucide="smile"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Oral Care</div><div class="cat-ct js-oral-total">10 products rated</div></div></div>
+    <div class="cat-card" data-cat="water" onclick="showCategory('water')"><span class="cat-icon"><i data-lucide="droplet"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Water</div><div class="cat-ct js-water-total">10 products rated</div></div></div>
+    <div class="cat-card" data-cat="food" onclick="showCategory('food')"><span class="cat-icon"><i data-lucide="beef"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Food &amp; Diet</div><div class="cat-ct">Coming soon</div></div></div>
+    <div class="cat-card" data-cat="cookware" onclick="showCategory('cookware')"><span class="cat-icon"><i data-lucide="cooking-pot"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Cookware &amp; Kitchen</div><div class="cat-ct js-cookware-total">20 products rated</div></div></div>
+    <div class="cat-card" data-cat="personal" onclick="showCategory('personal')"><span class="cat-icon"><i data-lucide="sparkles"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Personal Care</div><div class="cat-ct js-personal-total">8 products rated</div></div></div>
+    <div class="cat-card" data-cat="farmers" onclick="showScreen('farmers')"><span class="cat-icon"><i data-lucide="wheat"></i></span><div class="cat-body"><div class="cat-lbl">Tool</div><div class="cat-name">Local Food Map</div><div class="cat-ct">Farms, markets, CSAs & more</div></div></div>
   </div>
   <div class="promise-strip">
     <div><div class="prom-num">12</div><div class="prom-lbl">Product categories<br>at launch</div></div>
