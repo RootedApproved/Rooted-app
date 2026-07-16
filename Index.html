@@ -1412,6 +1412,10 @@ let chatTouchMoveHandler = null;
 let chatViewportHandler = null;
 let chatDebugInterval = null;
 let chatTouchMoveCount = 0;
+let chatDebugMaxScrollY = 0;
+let chatDebugMaxBodyRectTop = 0;
+let chatDebugMinVvHeight = null;
+let chatDebugEventLog = [];
 let chatSize = 'compact';
 const CHAT_SIZES = ['mini', 'compact', 'expanded', 'fullscreen'];
 
@@ -1444,28 +1448,52 @@ function toggleChat() {
     try { savedSize = localStorage.getItem('rooted-chat-size') || 'compact'; } catch (e) {}
     setChatSize(savedSize, false);
 
-    // TEMPORARY: show real live values on-screen so the exact cause can be diagnosed from
-    // actual device data instead of guesswork. Updates continuously while the chat is open.
+    // TEMPORARY: show real live values AND track peak/worst values + an event log, since a
+    // transient glitch that reverts in well under a second could revert before a screenshot
+    // captures it — this way the evidence persists on screen even after values go back to
+    // normal.
     const debugPanel = document.getElementById('chat-debug-panel');
     debugPanel.style.display = 'block';
     chatTouchMoveCount = 0;
+    chatDebugMaxScrollY = 0;
+    chatDebugMaxBodyRectTop = 0;
+    chatDebugMinVvHeight = window.visualViewport ? window.visualViewport.height : null;
+    chatDebugEventLog = [];
+    const logEvent = (msg) => {
+      chatDebugEventLog.unshift('[' + (Date.now() % 100000) + '] ' + msg);
+      if (chatDebugEventLog.length > 6) chatDebugEventLog.length = 6;
+    };
+    logEvent('chat opened');
     const updateDebugPanel = () => {
       const vv = window.visualViewport;
       const bodyRect = document.body.getBoundingClientRect();
+      if (Math.abs(window.scrollY) > Math.abs(chatDebugMaxScrollY)) {
+        chatDebugMaxScrollY = window.scrollY;
+        logEvent('scrollY jumped to ' + window.scrollY);
+      }
+      if (Math.abs(bodyRect.top) > Math.abs(chatDebugMaxBodyRectTop)) {
+        chatDebugMaxBodyRectTop = bodyRect.top;
+        logEvent('body rect.top jumped to ' + Math.round(bodyRect.top));
+      }
+      if (vv && (chatDebugMinVvHeight === null || vv.height < chatDebugMinVvHeight)) {
+        chatDebugMinVvHeight = vv.height;
+        logEvent('visualViewport.height dropped to ' + vv.height);
+      }
       debugPanel.textContent =
-        'window.scrollY: ' + window.scrollY + '\n' +
-        'window.innerHeight: ' + window.innerHeight + '\n' +
-        'body.style.top: ' + (document.body.style.top || '(none)') + '\n' +
-        'body.style.position: ' + (document.body.style.position || '(none)') + '\n' +
-        'body.getBoundingClientRect().top: ' + Math.round(bodyRect.top) + '\n' +
-        'visualViewport exists: ' + (vv ? 'YES' : 'NO') + '\n' +
-        (vv ? ('visualViewport.height: ' + vv.height + '\n' +
-               'visualViewport.offsetTop: ' + vv.offsetTop + '\n') : '') +
-        'panel.style.height: ' + (panel.style.height || '(none)') + '\n' +
-        'touchmove blocks fired: ' + chatTouchMoveCount + '\n' +
-        'input focused: ' + (document.activeElement && document.activeElement.id === 'chat-input');
+        '--- LIVE (right now) ---\n' +
+        'scrollY: ' + window.scrollY + '  input focused: ' + (document.activeElement && document.activeElement.id === 'chat-input') + '\n' +
+        'body.top: ' + (document.body.style.top || '(none)') + '  body rect.top: ' + Math.round(bodyRect.top) + '\n' +
+        (vv ? ('vv.height: ' + vv.height + '  vv.offsetTop: ' + vv.offsetTop + '\n') : 'visualViewport: NOT AVAILABLE\n') +
+        'panel.height: ' + (panel.style.height || '(none)') + '  touchmove blocks: ' + chatTouchMoveCount + '\n' +
+        '--- WORST SEEN THIS SESSION (persists even if it reverts) ---\n' +
+        'max |scrollY|: ' + chatDebugMaxScrollY + '\n' +
+        'max |body rect.top|: ' + Math.round(chatDebugMaxBodyRectTop) + '\n' +
+        'min vv.height: ' + chatDebugMinVvHeight + '\n' +
+        '--- RECENT EVENTS ---\n' +
+        chatDebugEventLog.join('\n');
     };
-    chatDebugInterval = setInterval(updateDebugPanel, 150);
+    chatDebugInterval = setInterval(updateDebugPanel, 100);
+    updateDebugPanel();
     updateDebugPanel();
 
     // 1) Lock the background from actual scrolling. Save the exact scroll position so it can
