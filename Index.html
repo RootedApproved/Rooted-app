@@ -2529,7 +2529,7 @@ function setColorTheme(theme) {
 // Both are safe to keep in client-side code — the anon key is designed to be public,
 // protected by database security rules (Row Level Security), unlike a normal secret API key.
 const SUPABASE_URL = 'https://albpewafjrktxhuydzke.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY'; // waiting on the FULL publishable key (sb_publishable_...) — the screenshot only showed the start of it
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsYnBld2FmanJrdHhodXlkemtlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzQxMTMsImV4cCI6MjA5OTg1MDExM30.OkD7_w-HQcGzV4gpNmiWa94XPCP0pH743_uRaBWwjfg';
 let rootedSupabase = null;
 try {
   if (typeof supabase !== 'undefined' && !SUPABASE_URL.includes('YOUR-PROJECT') && !SUPABASE_ANON_KEY.includes('YOUR_ANON_KEY')) {
