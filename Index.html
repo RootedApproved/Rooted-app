@@ -386,12 +386,16 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .auth-field-label{display:block;font-family:var(--font-b);font-size:12.5px;font-weight:700;color:var(--char);margin-bottom:6px;}
 .auth-field{width:100%;padding:12px 14px;font-family:var(--font-b);font-size:16px;border:1.5px solid var(--border);border-radius:8px;background:var(--white);color:var(--char);outline:none;box-sizing:border-box;margin-bottom:16px;}
 .auth-field:focus{border-color:var(--teal);}
-.auth-submit-btn{width:100%;padding:13px 14px;background:var(--forest);color:var(--white);border:none;border-radius:8px;font-family:var(--font-b);font-size:14px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;cursor:pointer;}
+.auth-submit-btn{width:100%;background:var(--forest);color:var(--white);border:none;border-radius:8px;font-family:var(--font-b);font-weight:700;letter-spacing:.02em;text-transform:uppercase;cursor:pointer;}
+.auth-submit-btn-signup{padding:11px 14px;font-size:13px;}
+.auth-submit-btn-login{padding:15px 14px;font-size:15px;}
 .auth-switch{text-align:center;margin-top:16px;font-family:var(--font-b);font-size:13px;color:var(--mid);}
 .auth-switch span{color:var(--forest);font-weight:700;cursor:pointer;}
 .auth-forgot{text-align:right;margin:-10px 0 16px;font-family:var(--font-b);font-size:12.5px;color:var(--forest);font-weight:600;cursor:pointer;}
 .auth-error{display:none;background:rgba(181,58,47,.1);color:var(--red);border-radius:6px;padding:9px 12px;font-family:var(--font-b);font-size:13px;margin-bottom:14px;}
 .auth-error.show{display:block;}
+.welcome-toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--forest);color:var(--white);padding:13px 22px;border-radius:30px;font-family:var(--font-b);font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:600;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;white-space:nowrap;}
+.welcome-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .mem-card{background:var(--forest);border-radius:8px;padding:17px;margin:16px 18px;}
 .mem-eye{font-family:var(--font-m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:7px;}
 .mem-title{font-family:var(--font-d);font-size:19px;font-weight:900;color:var(--white);margin-bottom:3px;}
@@ -552,6 +556,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 </head>
 <body>
 <!-- TOP NAV -->
+<div id="welcome-toast" class="welcome-toast"></div>
 <nav class="top-nav">
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileDrawer()" aria-label="Open menu"><i data-lucide="menu"></i></button>
   <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</span>
@@ -1015,7 +1020,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="profile-av" id="profile-av">R</div>
     <div class="profile-name" id="profile-name">Guest</div>
     <div class="profile-tier" id="profile-tier">Free Member</div>
-    <button class="profile-join-btn" id="profile-action-btn" onclick="showScreen('signup')">Create Account</button>
+    <button class="profile-join-btn" id="profile-action-btn" onclick="showScreen('signup')">Create Account / Log In</button>
   </div>
   <div class="mem-card">
     <div class="mem-eye">ROOTED Member — $9/mo</div>
@@ -1076,7 +1081,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <input class="auth-field" type="email" id="signup-email" placeholder="you@email.com">
     <label class="auth-field-label">Password</label>
     <input class="auth-field" type="password" id="signup-password" placeholder="At least 8 characters">
-    <button class="auth-submit-btn" onclick="rootedSignUp()">Create Account</button>
+    <button class="auth-submit-btn auth-submit-btn-signup" onclick="rootedSignUp()">Create Account</button>
     <div class="auth-switch">Already have an account? <span onclick="showScreen('login')">Log in</span></div>
   </div>
 </div></div>
@@ -1093,7 +1098,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <label class="auth-field-label">Password</label>
     <input class="auth-field" type="password" id="login-password" placeholder="Your password">
     <div class="auth-forgot" onclick="rootedForgotPassword()">Forgot password?</div>
-    <button class="auth-submit-btn" onclick="rootedLogIn()">Log In</button>
+    <button class="auth-submit-btn auth-submit-btn-login" onclick="rootedLogIn()">Log In</button>
     <div class="auth-switch">New to ROOTED? <span onclick="showScreen('signup')">Create an account</span></div>
   </div>
 </div></div>
@@ -2554,6 +2559,13 @@ function clearAuthError(elId) {
   el.classList.remove('show');
 }
 
+function showWelcomeToast(message) {
+  const toast = document.getElementById('welcome-toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
 async function rootedSignUp() {
   clearAuthError('signup-error');
   if (!rootedSupabase) { showAuthError('signup-error', 'Account system not connected yet.'); return; }
@@ -2568,6 +2580,7 @@ async function rootedSignUp() {
   if (error) { showAuthError('signup-error', error.message); return; }
   showScreen('profile');
   showTab('profile');
+  showWelcomeToast('Welcome, ' + name + '!');
 }
 
 async function rootedLogIn() {
@@ -2580,6 +2593,8 @@ async function rootedLogIn() {
   if (error) { showAuthError('login-error', error.message); return; }
   showScreen('profile');
   showTab('profile');
+  const loggedInName = (data.user.user_metadata && data.user.user_metadata.full_name) || data.user.email;
+  showWelcomeToast('Welcome back, ' + loggedInName + '!');
 }
 
 async function rootedForgotPassword() {
@@ -2615,7 +2630,7 @@ function updateProfileUIForAuthState(session) {
     nameEl.textContent = 'Guest';
     avEl.textContent = 'R';
     tierEl.textContent = 'Free Member';
-    btnEl.textContent = 'Create Account';
+    btnEl.textContent = 'Create Account / Log In';
     btnEl.onclick = () => showScreen('signup');
   }
 }
