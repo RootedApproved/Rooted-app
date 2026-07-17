@@ -15,7 +15,33 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-size:15px;line-height:1.6;overflow-x:hidden;padding-top:var(--nav-h);padding-bottom:var(--bar-h);}
 .screen{display:none;}.screen.active{display:block;}
-.top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:var(--nav-h);background:var(--cream);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 18px;}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:var(--nav-h);background:var(--cream);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 18px;gap:10px;}
+.nav-hamburger{display:none;background:none;border:none;padding:4px;cursor:pointer;color:var(--forest);flex-shrink:0;}
+.nav-hamburger i{width:24px;height:24px;stroke-width:1.75;}
+body.navstyle-drawer .nav-hamburger{display:flex;}
+body.navstyle-drawer .bottom-bar{display:none;}
+body.navstyle-drawer{padding-bottom:0;}
+.mobile-drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:490;}
+.mobile-drawer-overlay.open{display:block;}
+.mobile-drawer{position:fixed;top:0;left:0;bottom:0;width:min(78vw,300px);background:var(--white);z-index:500;transform:translateX(-100%);transition:transform .25s ease;display:flex;flex-direction:column;padding:20px 16px;box-shadow:2px 0 20px rgba(0,0,0,.15);}
+.mobile-drawer.open{transform:translateX(0);}
+.mobile-drawer-brand{font-family:var(--font-d);font-weight:900;font-size:19px;color:var(--forest);letter-spacing:.04em;display:flex;align-items:center;gap:8px;padding-bottom:20px;margin-bottom:12px;border-bottom:1px solid var(--border);}
+.mobile-drawer-brand .brand-logo{width:30px;height:30px;}
+.mobile-drawer-nav{display:flex;flex-direction:column;gap:2px;}
+.tab.mobile-drawer-tab{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:13px;background:none;border:none;padding:13px 10px;border-radius:8px;font-family:var(--font-b);font-size:15px;font-weight:600;color:var(--char);cursor:pointer;text-align:left;}
+.mobile-drawer-tab i{width:20px;height:20px;stroke-width:1.75;color:var(--muted);flex-shrink:0;}
+.mobile-drawer-tab.active{background:var(--cream2);color:var(--forest);}
+.mobile-drawer-tab.active i{color:var(--forest);}
+.mobile-drawer-spacer{flex:1;}
+.mobile-drawer-footer{display:flex;gap:16px;padding:16px 10px;border-top:1px solid var(--border);}
+.mobile-drawer-social img{width:24px;height:24px;display:block;}
+.mobile-drawer-actions{display:flex;gap:8px;padding:0 10px;}
+.mobile-drawer-join{flex:1;background:var(--forest);color:var(--white);border:none;border-radius:6px;padding:11px 8px;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;}
+.mobile-drawer-contact{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;background:var(--teal);color:var(--white);border:none;border-radius:6px;padding:11px 8px;font-family:var(--font-b);font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;}
+.mobile-drawer-contact i{width:14px;height:14px;}
+@media (min-width:1024px){
+  .nav-hamburger,.mobile-drawer-overlay,.mobile-drawer{display:none !important;}
+}
 .nav-brand{font-family:var(--font-d);font-weight:900;font-size:20px;color:var(--forest);letter-spacing:.04em;cursor:pointer;display:flex;align-items:center;gap:8px;}
 .brand-logo{width:26px;height:26px;flex-shrink:0;}
 .nav-right{display:flex;align-items:center;gap:12px;}
@@ -409,14 +435,15 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .sidebar-tab.active{background:var(--cream2);color:var(--forest);}
 .sidebar-tab:hover{background:var(--cream2);}
 .sidebar-spacer{flex:1;}
-.sidebar-join{background:var(--forest);color:var(--white);border:none;border-radius:6px;padding:10px 12px;font-size:11.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;margin:0 0 14px;}
+.sidebar-join{background:var(--forest);color:var(--white);border:none;border-radius:6px;padding:10px 8px;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;flex:1;white-space:nowrap;}
+.sidebar-actions{display:flex;gap:8px;margin:0 0 4px;}
 .sidebar-footer{display:flex;gap:14px;padding:14px 8px;border-top:1px solid var(--border);margin-bottom:10px;}
 .sidebar-social{opacity:.85;transition:opacity .15s,transform .15s;}
 .sidebar-social:hover{opacity:1;transform:translateY(-1px);}
-.sidebar-social img{width:19px;height:19px;display:block;}
-.sidebar-contact-btn{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--teal);color:var(--white);border:none;border-radius:8px;padding:11px 12px;font-family:var(--font-b);font-size:12px;font-weight:700;letter-spacing:.02em;cursor:pointer;text-decoration:none;transition:background .15s,transform .15s;}
+.sidebar-social img{width:23px;height:23px;display:block;}
+.sidebar-contact-btn{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--teal);color:var(--white);border:none;border-radius:8px;padding:10px 8px;font-family:var(--font-b);font-size:11px;font-weight:700;letter-spacing:.02em;cursor:pointer;text-decoration:none;transition:background .15s,transform .15s;flex:1;white-space:nowrap;}
 .sidebar-contact-btn:hover{background:#256664;transform:translateY(-1px);}
-.sidebar-contact-btn i{width:15px;height:15px;stroke-width:2;}
+.sidebar-contact-btn i{width:14px;height:14px;stroke-width:2;}
 
 /* ── DESKTOP LAYOUT (1024px+): sidebar nav, wide multi-column grids ────── */
 @media (min-width:1024px){
@@ -496,6 +523,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <body>
 <!-- TOP NAV -->
 <nav class="top-nav">
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileDrawer()" aria-label="Open menu"><i data-lucide="menu"></i></button>
   <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</span>
   <div class="nav-right">
     <button class="nav-search" onclick="showTab('search')"><i data-lucide="search"></i><span class="nav-search-label">Search</span></button>
@@ -517,6 +545,11 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="style-toggle-btn" id="style-btn-color" onclick="setCardStyle('color')">Color</button>
     <button class="style-toggle-btn" id="style-btn-photo" onclick="setCardStyle('photo')">Photo</button>
     <button class="style-toggle-btn" id="style-btn-rect" onclick="setCardStyle('rect')">Rectangle</button>
+  </div>
+  <div class="style-toggle-wrap">
+    <span class="style-toggle-label">Mobile navigation:</span>
+    <button class="style-toggle-btn" id="navstyle-btn-bottom" onclick="setMobileNavStyle('bottom')">Bottom Bar</button>
+    <button class="style-toggle-btn" id="navstyle-btn-drawer" onclick="setMobileNavStyle('drawer')">Side Menu</button>
   </div>
   <div class="style-toggle-wrap">
     <span class="style-toggle-label">Sidebar bg (desktop):</span>
@@ -1075,6 +1108,27 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <button class="tab" data-tab="profile" onclick="showTab('profile')"><span class="tab-icon"><i data-lucide="circle-user"></i></span><span class="tab-label">Profile</span></button>
 </div>
 
+<!-- MOBILE SIDE MENU DRAWER (alternative to bottom bar, toggled via Mobile Navigation setting) -->
+<div class="mobile-drawer-overlay" id="mobile-drawer-overlay" onclick="toggleMobileDrawer()"></div>
+<nav class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-drawer-brand"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
+  <div class="mobile-drawer-nav">
+    <button class="tab mobile-drawer-tab active" data-tab="home" onclick="showTab('home');toggleMobileDrawer()"><i data-lucide="house"></i><span>Home</span></button>
+    <button class="tab mobile-drawer-tab" data-tab="search" onclick="showTab('search');toggleMobileDrawer()"><i data-lucide="search"></i><span>Search</span></button>
+    <button class="tab mobile-drawer-tab" data-tab="categories" onclick="showTab('categories');toggleMobileDrawer()"><i data-lucide="menu"></i><span>Categories</span></button>
+    <button class="tab mobile-drawer-tab" data-tab="profile" onclick="showTab('profile');toggleMobileDrawer()"><i data-lucide="circle-user"></i><span>Profile</span></button>
+  </div>
+  <div class="mobile-drawer-spacer"></div>
+  <div class="mobile-drawer-footer">
+    <a href="https://instagram.com/rootedapproved" target="_blank" class="mobile-drawer-social" aria-label="Instagram"><img src="https://cdn.simpleicons.org/instagram" alt="Instagram"></a>
+    <a href="https://tiktok.com/@rootedapproved" target="_blank" class="mobile-drawer-social" aria-label="TikTok"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok"></a>
+  </div>
+  <div class="mobile-drawer-actions">
+    <button class="mobile-drawer-join" onclick="showAbout();toggleMobileDrawer()">Join</button>
+    <a href="mailto:team@rootedapproved.com" class="mobile-drawer-contact"><i data-lucide="mail"></i>Contact</a>
+  </div>
+</nav>
+
 <!-- DESKTOP SIDEBAR (desktop only, hidden on mobile via CSS) -->
 <nav class="desktop-sidebar">
   <div class="sidebar-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
@@ -1085,12 +1139,14 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="tab sidebar-tab" data-tab="profile" onclick="showTab('profile')"><i data-lucide="circle-user"></i><span>Profile</span></button>
   </div>
   <div class="sidebar-spacer"></div>
-  <button class="sidebar-join" onclick="showAbout()">Join ROOTED</button>
   <div class="sidebar-footer">
     <a href="https://instagram.com/rootedapproved" target="_blank" class="sidebar-social" aria-label="Instagram"><img src="https://cdn.simpleicons.org/instagram" alt="Instagram"></a>
     <a href="https://tiktok.com/@rootedapproved" target="_blank" class="sidebar-social" aria-label="TikTok"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok"></a>
   </div>
-  <a href="mailto:team@rootedapproved.com" class="sidebar-contact-btn"><i data-lucide="mail"></i>Contact Us</a>
+  <div class="sidebar-actions">
+    <button class="sidebar-join" onclick="showAbout()">Join</button>
+    <a href="mailto:team@rootedapproved.com" class="sidebar-contact-btn" aria-label="Contact Us"><i data-lucide="mail"></i>Contact</a>
+  </div>
 </nav>
 <script>
 const PRODUCTS = {
@@ -2346,6 +2402,39 @@ function initSidebarStyle() {
   setSidebarStyle(saved);
 }
 
+// Lets the user compare bottom tab bar vs. side drawer navigation on mobile — same
+// live-toggle pattern as card style / sidebar style. Closes the drawer if it happens to be
+// open when switching away from drawer mode, so nothing is left in an inconsistent state.
+function setMobileNavStyle(style) {
+  document.body.classList.toggle('navstyle-drawer', style === 'drawer');
+  document.querySelectorAll('[id^="navstyle-btn-"]').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('navstyle-btn-' + style);
+  if (btn) btn.classList.add('active');
+  if (style !== 'drawer') closeMobileDrawer();
+  try { localStorage.setItem('rooted-mobile-navstyle', style); } catch (e) {}
+}
+
+function initMobileNavStyle() {
+  let saved = 'bottom';
+  try { saved = localStorage.getItem('rooted-mobile-navstyle') || 'bottom'; } catch (e) {}
+  setMobileNavStyle(saved);
+}
+
+function toggleMobileDrawer() {
+  const isOpen = document.getElementById('mobile-drawer').classList.contains('open');
+  if (isOpen) closeMobileDrawer(); else openMobileDrawer();
+}
+
+function openMobileDrawer() {
+  document.getElementById('mobile-drawer').classList.add('open');
+  document.getElementById('mobile-drawer-overlay').classList.add('open');
+}
+
+function closeMobileDrawer() {
+  document.getElementById('mobile-drawer').classList.remove('open');
+  document.getElementById('mobile-drawer-overlay').classList.remove('open');
+}
+
 function applyFeatureFlags() {
   const womens1 = document.getElementById('subcat-card-womens1');
   const womens2 = document.getElementById('subcat-card-womens2');
@@ -2362,6 +2451,7 @@ window.addEventListener('DOMContentLoaded', initCardStyle);
 window.addEventListener('DOMContentLoaded', initPhotoVariants);
 window.addEventListener('DOMContentLoaded', initHomeCategoryVisibility);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
+window.addEventListener('DOMContentLoaded', initMobileNavStyle);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
   const wrap = document.querySelector('.chat-size-wrap');
