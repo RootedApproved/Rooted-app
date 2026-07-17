@@ -65,6 +65,8 @@ body.navstyle-drawer{padding-bottom:0;}
 .nav-search i{width:15px;height:15px;stroke-width:1.75;}
 .nav-search-label{display:none;}
 .nav-join{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--white);background:var(--forest);border:none;border-radius:3px;padding:6px 13px;cursor:pointer;}
+.nav-login-link{display:none;font-size:12.5px;font-weight:700;color:var(--forest);background:none;border:none;cursor:pointer;font-family:var(--font-b);}
+.nav-login-link:hover{text-decoration:underline;}
 .bottom-bar{position:fixed;bottom:0;left:0;right:0;height:var(--bar-h);background:var(--white);border-top:1px solid var(--border);display:flex;z-index:300;box-shadow:0 -2px 12px rgba(0,0,0,.06);}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;background:none;border:none;padding:0;color:var(--muted);transition:color .15s;}
 .tab.active{color:var(--forest);}
@@ -387,8 +389,8 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .auth-field{width:100%;padding:12px 14px;font-family:var(--font-b);font-size:16px;border:1.5px solid var(--border);border-radius:8px;background:var(--white);color:var(--char);outline:none;box-sizing:border-box;margin-bottom:16px;}
 .auth-field:focus{border-color:var(--teal);}
 .auth-submit-btn{width:100%;background:var(--forest);color:var(--white);border:none;border-radius:8px;font-family:var(--font-b);font-weight:700;letter-spacing:.02em;text-transform:uppercase;cursor:pointer;}
-.auth-submit-btn-signup{padding:11px 14px;font-size:13px;}
-.auth-submit-btn-login{padding:15px 14px;font-size:15px;}
+.auth-submit-btn-signup{padding:12px 14px;font-size:13.5px;}
+.auth-submit-btn-login{padding:14px 14px;font-size:14.5px;}
 .auth-switch{text-align:center;margin-top:16px;font-family:var(--font-b);font-size:13px;color:var(--mid);}
 .auth-switch span{color:var(--forest);font-weight:700;cursor:pointer;}
 .auth-forgot{text-align:right;margin:-10px 0 16px;font-family:var(--font-b);font-size:12.5px;color:var(--forest);font-weight:600;cursor:pointer;}
@@ -481,6 +483,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 /* ── DESKTOP LAYOUT (1024px+): sidebar nav, wide multi-column grids ────── */
 @media (min-width:1024px){
   body{padding-left:180px;padding-bottom:0;padding-top:0;}
+  .nav-login-link{display:inline-block;}
   .bottom-bar{display:none;}
   .desktop-sidebar{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:180px;background:var(--white);border-right:1px solid var(--border);padding:18px 8px 14px;z-index:300;transition:background .2s;}
   .top-nav{left:180px;padding:0 32px;}
@@ -562,6 +565,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</span>
   <div class="nav-right">
     <button class="nav-search" onclick="showTab('search')"><i data-lucide="search"></i><span class="nav-search-label">Search</span></button>
+    <button class="nav-login-link" onclick="showScreen('login')">Log In</button>
     <button class="nav-join" onclick="showScreen('signup')">Join</button>
   </div>
 </nav>
