@@ -46,6 +46,7 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-si
 .sec-link{font-size:12px;color:var(--teal);font-weight:600;cursor:pointer;}
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 18px 22px;}
 .cat-card{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;aspect-ratio:1;display:flex;flex-direction:column;justify-content:flex-end;position:relative;transition:transform .15s,box-shadow .15s;}
+.cat-card.home-hidden{display:none;}
 
 /* ── CARD STYLE VARIANTS (toggleable via .style-color/.style-photo/.style-rect on body) ── */
 /* Style A: solid color-tint background, cycling through the brand palette */
@@ -123,6 +124,11 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 @media (min-width:1024px){body.style-rect .cat-grid{grid-template-columns:repeat(2,1fr);}}
 
 .style-toggle-wrap{display:flex;align-items:center;gap:8px;padding:0 18px 12px;flex-wrap:wrap;}
+.home-cat-panel{display:none;flex-wrap:wrap;gap:6px 14px;padding:4px 18px 16px;}
+.home-cat-panel.open{display:flex;}
+.home-cat-option{display:flex;align-items:center;gap:6px;font-family:var(--font-b);font-size:13px;color:var(--char);cursor:pointer;padding:4px 0;}
+.home-cat-option i{width:15px;height:15px;color:var(--forest);flex-shrink:0;}
+.home-cat-option input[type="checkbox"]{width:15px;height:15px;accent-color:var(--forest);cursor:pointer;}
 .style-toggle-label{font-family:var(--font-m);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
 .style-toggle-btn{font-family:var(--font-b);font-size:11.5px;font-weight:700;color:var(--mid);background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:5px 12px;cursor:pointer;}
 .style-toggle-btn.active{color:var(--white);background:var(--forest);border-color:var(--forest);}
@@ -519,6 +525,25 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="style-toggle-btn" id="sidebar-btn-terracotta" onclick="setSidebarStyle('terracotta')">Terracotta</button>
     <button class="style-toggle-btn" id="sidebar-btn-gradient" onclick="setSidebarStyle('gradient')">Soft Gradient</button>
   </div>
+  <div class="style-toggle-wrap">
+    <span class="style-toggle-label">Home screen categories:</span>
+    <button class="style-toggle-btn" id="home-cat-toggle-btn" onclick="toggleHomeCatPanel()">Choose Categories</button>
+  </div>
+  <div class="home-cat-panel" id="home-cat-panel">
+    <label class="home-cat-option"><input type="checkbox" id="homecat-clothing" onchange="setHomeCategoryVisibility('clothing', this.checked)"><i data-lucide="shirt"></i>Clothing (Men's)</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-oral" onchange="setHomeCategoryVisibility('oral', this.checked)"><i data-lucide="smile"></i>Oral Care</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-water" onchange="setHomeCategoryVisibility('water', this.checked)"><i data-lucide="droplet"></i>Water</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-food" onchange="setHomeCategoryVisibility('food', this.checked)"><i data-lucide="beef"></i>Food & Diet</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-cookware" onchange="setHomeCategoryVisibility('cookware', this.checked)"><i data-lucide="cooking-pot"></i>Cookware & Kitchen</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-personal" onchange="setHomeCategoryVisibility('personal', this.checked)"><i data-lucide="sparkles"></i>Personal Care</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-farmers" onchange="setHomeCategoryVisibility('farmers', this.checked)"><i data-lucide="wheat"></i>Local Food Map</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-textiles" onchange="setHomeCategoryVisibility('textiles', this.checked)"><i data-lucide="bed"></i>Textiles & Bedroom</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-cleaning" onchange="setHomeCategoryVisibility('cleaning', this.checked)"><i data-lucide="brush-cleaning"></i>Cleaning & Home</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-air" onchange="setHomeCategoryVisibility('air', this.checked)"><i data-lucide="wind"></i>Air Quality</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-lighting" onchange="setHomeCategoryVisibility('lighting', this.checked)"><i data-lucide="lightbulb"></i>Lighting & Circadian Health</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-sunlight" onchange="setHomeCategoryVisibility('sunlight', this.checked)"><i data-lucide="sun"></i>Sunlight & Recovery</label>
+    <label class="home-cat-option"><input type="checkbox" id="homecat-supplements" onchange="setHomeCategoryVisibility('supplements', this.checked)"><i data-lucide="pill"></i>Supplements</label>
+  </div>
   <div class="cat-grid">
     <div class="cat-card" data-cat="clothing" data-photo-variant="1" onclick="showCategory('clothing')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('clothing')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="shirt"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct js-clothing-total">30 products rated</div></div></div>
     <div class="cat-card" data-cat="oral" data-photo-variant="1" onclick="showCategory('oral')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('oral')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="smile"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Oral Care</div><div class="cat-ct js-oral-total">10 products rated</div></div></div>
@@ -527,6 +552,12 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="cat-card" data-cat="cookware" data-photo-variant="1" onclick="showCategory('cookware')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('cookware')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="cooking-pot"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Cookware &amp; Kitchen</div><div class="cat-ct js-cookware-total">20 products rated</div></div></div>
     <div class="cat-card" data-cat="personal" data-photo-variant="1" onclick="showCategory('personal')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('personal')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="sparkles"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Personal Care</div><div class="cat-ct js-personal-total">8 products rated</div></div></div>
     <div class="cat-card" data-cat="farmers" data-photo-variant="1" onclick="showScreen('farmers')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('farmers')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="wheat"></i></span><div class="cat-body"><div class="cat-lbl">Tool</div><div class="cat-name">Local Food Map</div><div class="cat-ct">Farms, markets, CSAs & more</div></div></div>
+    <div class="cat-card" data-cat="textiles" data-photo-variant="1" onclick="showCategory('textiles')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('textiles')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="bed"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Textiles & Bedroom</div><div class="cat-ct">Coming soon</div></div></div>
+    <div class="cat-card" data-cat="cleaning" data-photo-variant="1" onclick="showCategory('cleaning')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('cleaning')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="brush-cleaning"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Cleaning & Home</div><div class="cat-ct">Coming soon</div></div></div>
+    <div class="cat-card" data-cat="air" data-photo-variant="1" onclick="showCategory('air')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('air')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="wind"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Air Quality</div><div class="cat-ct">Coming soon</div></div></div>
+    <div class="cat-card" data-cat="lighting" data-photo-variant="1" onclick="showCategory('lighting')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('lighting')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="lightbulb"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Lighting & Circadian Health</div><div class="cat-ct">Coming soon</div></div></div>
+    <div class="cat-card" data-cat="sunlight" data-photo-variant="1" onclick="showCategory('sunlight')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('sunlight')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="sun"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Sunlight & Recovery</div><div class="cat-ct">Coming soon</div></div></div>
+    <div class="cat-card" data-cat="supplements" data-photo-variant="1" onclick="showCategory('supplements')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('supplements')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="pill"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Supplements</div><div class="cat-ct">Coming soon</div></div></div>
   </div>
   <div class="promise-strip">
     <div><div class="prom-num">12</div><div class="prom-lbl">Product categories<br>at launch</div></div>
@@ -2254,6 +2285,35 @@ function cyclePhoto(cat) {
   try { localStorage.setItem('rooted-photo-' + cat, next); } catch (e) {}
 }
 
+// Lets the user choose which of all 13 categories appear on the home screen grid. The
+// original 7 are visible by default; the 6 not-yet-built categories default to hidden but
+// can be turned on the same way. Persists per-category so choices stick across visits.
+const HOME_CAT_DEFAULTS = {
+  clothing: true, oral: true, water: true, food: true, cookware: true, personal: true, farmers: true,
+  textiles: false, cleaning: false, air: false, lighting: false, sunlight: false, supplements: false
+};
+
+function setHomeCategoryVisibility(cat, visible) {
+  const card = document.querySelector('.cat-card[data-cat="' + cat + '"]');
+  if (card) card.classList.toggle('home-hidden', !visible);
+  try { localStorage.setItem('rooted-homecat-' + cat, visible ? '1' : '0'); } catch (e) {}
+}
+
+function toggleHomeCatPanel() {
+  document.getElementById('home-cat-panel').classList.toggle('open');
+}
+
+function initHomeCategoryVisibility() {
+  Object.keys(HOME_CAT_DEFAULTS).forEach(cat => {
+    let saved = null;
+    try { saved = localStorage.getItem('rooted-homecat-' + cat); } catch (e) {}
+    const visible = saved === null ? HOME_CAT_DEFAULTS[cat] : saved === '1';
+    setHomeCategoryVisibility(cat, visible);
+    const checkbox = document.getElementById('homecat-' + cat);
+    if (checkbox) checkbox.checked = visible;
+  });
+}
+
 function initPhotoVariants() {
   document.querySelectorAll('.cat-card[data-cat]').forEach(card => {
     const cat = card.dataset.cat;
@@ -2300,6 +2360,7 @@ window.addEventListener('DOMContentLoaded', updateProductCounts);
 window.addEventListener('DOMContentLoaded', applyFeatureFlags);
 window.addEventListener('DOMContentLoaded', initCardStyle);
 window.addEventListener('DOMContentLoaded', initPhotoVariants);
+window.addEventListener('DOMContentLoaded', initHomeCategoryVisibility);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
