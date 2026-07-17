@@ -1072,12 +1072,19 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <div class="email-strip">
     <div class="email-strip-title">Get early access</div>
     <div class="email-strip-sub">Be first when new categories and products go live.</div>
-    <div class="email-row" id="email-form">
-      <input class="email-input" type="email" placeholder="your@email.com" id="email-val">
-      <button class="email-submit" onclick="submitEmail()">Join</button>
-    </div>
+    <!-- Mailchimp's own "host your own signup form" pattern — no API key needed, since this
+         action URL + audience id are meant to be publicly embedded (they're not secret
+         credentials). Posts through a hidden iframe so the page never navigates away to
+         Mailchimp's own hosted page, keeping the existing smooth "thanks" UX intact. -->
+    <form class="email-row" id="email-form" action="https://YOUR-ACCOUNT.usXX.list-manage.com/subscribe/post?u=YOUR_USER_ID&amp;id=YOUR_AUDIENCE_ID" method="POST" target="mc-hidden-iframe" onsubmit="return handleEmailSubmit(event)">
+      <input class="email-input" type="email" name="EMAIL" placeholder="your@email.com" id="email-val" required>
+      <!-- Mailchimp bot-honeypot field — real users never see or fill this; must stay empty -->
+      <div style="position:absolute;left:-5000px;" aria-hidden="true"><input type="text" name="b_YOUR_USER_ID_YOUR_AUDIENCE_ID" tabindex="-1" value=""></div>
+      <button class="email-submit" type="submit">Join</button>
+    </form>
     <div class="email-thanks" id="email-thanks">You're on the list.</div>
   </div>
+  <iframe name="mc-hidden-iframe" style="display:none;" title="Mailchimp signup (hidden)"></iframe>
   <div class="sp-md"></div>
 </div>
 </div>
@@ -2514,11 +2521,17 @@ document.addEventListener('click', (e) => {
 });
 window.addEventListener('DOMContentLoaded', () => { if (typeof lucide !== 'undefined') lucide.createIcons(); });
 
-function submitEmail(){
+// Validates the email, then lets the form's real POST to Mailchimp proceed (returning true).
+// The response can't be read back (Mailchimp's endpoint doesn't support reading cross-origin
+// responses from the hidden iframe), so the "thanks" UI shows optimistically right after
+// submitting — this is the standard, expected pattern for this exact integration, and matches
+// how the vast majority of sites using Mailchimp's own custom-form approach handle it.
+function handleEmailSubmit(event){
   const val=document.getElementById('email-val').value;
-  if(!val||!val.includes('@')){alert('Please enter a valid email.');return;}
+  if(!val||!val.includes('@')){alert('Please enter a valid email.');event.preventDefault();return false;}
   document.getElementById('email-form').style.display='none';
   document.getElementById('email-thanks').style.display='block';
+  return true; // allow the real form POST to Mailchimp to proceed via the hidden iframe
 }
 </script>
 </body>
