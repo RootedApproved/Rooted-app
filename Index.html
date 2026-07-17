@@ -11,6 +11,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--cream:#F5F0E6;--cream2:#EDE7D9;--forest:#2D5016;--sage:#5C8A2E;--teal:#2E7D7A;--earth:#8B6914;--red:#B53A2F;--terracotta:#B5563F;--gold:#D69A2D;--char:#1A1A1A;--mid:#4A4A4A;--muted:#888;--border:#DDD8CE;--white:#FFFFFF;--bar-h:56px;--nav-h:52px;--font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',system-ui,sans-serif;--font-m:'DM Mono',monospace;}
+/* THEME 2 — Midnight: dark mode, inspired by Notion/Linear/Oura. Note --white is
+   intentionally redefined to a dark tone here, not literal white — it's used throughout
+   the site as "the contrast color for text sitting on top of saturated accent buttons",
+   so redefining it keeps that text readable against these brightened, dark-mode-tuned
+   accent colors instead of creating light-on-light contrast failures. */
+body.theme-midnight{--cream:#1C1B18;--cream2:#26241F;--forest:#6FA84F;--sage:#8FC468;--teal:#52ABA8;--earth:#C4934A;--red:#E0685A;--terracotta:#E0785D;--gold:#F0C158;--char:#F0EDE4;--mid:#C9C4B8;--muted:#8A8578;--border:#3A382F;--white:#1C1B18;}
+/* THEME 3 — Scandinavian Minimal: inspired by Apple.com/Muji/Everlane. Pure white,
+   near-black as the "primary" color instead of green, color used sparingly as accent only. */
+body.theme-minimal{--cream:#FFFFFF;--cream2:#F5F5F5;--forest:#2B2B2B;--sage:#6B8E5A;--teal:#4A7A78;--earth:#8B7355;--red:#B5453A;--terracotta:#A8695A;--gold:#B8934A;--char:#1A1A1A;--mid:#5A5A5A;--muted:#9A9A9A;--border:#E5E5E5;--white:#FFFFFF;}
+/* THEME 4 — Terracotta Clay: inspired by Aesop's warm ceramic-toned branding. Terracotta
+   becomes the dominant color throughout (logo, buttons, etc.), not just an accent. */
+body.theme-clay{--cream:#F5E8DD;--cream2:#EEDBC9;--forest:#B5563F;--sage:#A87A52;--teal:#6B8A82;--earth:#8B5A2E;--red:#9E4A3A;--terracotta:#C86B4F;--gold:#D6952D;--char:#3D2817;--mid:#6B5240;--muted:#A08870;--border:#DDC3AD;--white:#FFFFFF;}
+/* THEME 5 — Coastal Sage: inspired by Calm/Headspace's cool, calming wellness palettes.
+   Sage-teal dominant, cooler and quieter than the original warm earthy palette. */
+body.theme-coastal{--cream:#F0F5F2;--cream2:#E3ECE6;--forest:#4A8577;--sage:#6BA88F;--teal:#3D7A8C;--earth:#7A9285;--red:#B5544A;--terracotta:#C77A5E;--gold:#C9A24A;--char:#1E2E2A;--mid:#4A5E58;--muted:#8AA098;--border:#D0DDD6;--white:#FFFFFF;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-size:15px;line-height:1.6;overflow-x:hidden;padding-top:var(--nav-h);padding-bottom:var(--bar-h);}
@@ -545,6 +560,14 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="style-toggle-btn" id="style-btn-color" onclick="setCardStyle('color')">Color</button>
     <button class="style-toggle-btn" id="style-btn-photo" onclick="setCardStyle('photo')">Photo</button>
     <button class="style-toggle-btn" id="style-btn-rect" onclick="setCardStyle('rect')">Rectangle</button>
+  </div>
+  <div class="style-toggle-wrap">
+    <span class="style-toggle-label">Color theme:</span>
+    <button class="style-toggle-btn" id="theme-btn-original" onclick="setColorTheme('original')">Original</button>
+    <button class="style-toggle-btn" id="theme-btn-midnight" onclick="setColorTheme('midnight')">Midnight</button>
+    <button class="style-toggle-btn" id="theme-btn-minimal" onclick="setColorTheme('minimal')">Minimal</button>
+    <button class="style-toggle-btn" id="theme-btn-clay" onclick="setColorTheme('clay')">Terracotta Clay</button>
+    <button class="style-toggle-btn" id="theme-btn-coastal" onclick="setColorTheme('coastal')">Coastal Sage</button>
   </div>
   <div class="style-toggle-wrap">
     <span class="style-toggle-label">Mobile navigation:</span>
@@ -2420,6 +2443,27 @@ function initMobileNavStyle() {
   setMobileNavStyle(saved);
 }
 
+// 5 complete color themes (background, text, logo, borders, accents) — since the whole
+// site is already built on these CSS variables, redefining them per-theme via a body class
+// re-colors everything at once, including the logo SVG, with no per-component CSS needed.
+const COLOR_THEMES = ['original', 'midnight', 'minimal', 'clay', 'coastal'];
+
+function setColorTheme(theme) {
+  if (!COLOR_THEMES.includes(theme)) theme = 'original';
+  document.body.classList.remove('theme-midnight', 'theme-minimal', 'theme-clay', 'theme-coastal');
+  if (theme !== 'original') document.body.classList.add('theme-' + theme);
+  document.querySelectorAll('[id^="theme-btn-"]').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('theme-btn-' + theme);
+  if (btn) btn.classList.add('active');
+  try { localStorage.setItem('rooted-color-theme', theme); } catch (e) {}
+}
+
+function initColorTheme() {
+  let saved = 'original';
+  try { saved = localStorage.getItem('rooted-color-theme') || 'original'; } catch (e) {}
+  setColorTheme(saved);
+}
+
 function toggleMobileDrawer() {
   const isOpen = document.getElementById('mobile-drawer').classList.contains('open');
   if (isOpen) closeMobileDrawer(); else openMobileDrawer();
@@ -2452,6 +2496,7 @@ window.addEventListener('DOMContentLoaded', initPhotoVariants);
 window.addEventListener('DOMContentLoaded', initHomeCategoryVisibility);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
 window.addEventListener('DOMContentLoaded', initMobileNavStyle);
+window.addEventListener('DOMContentLoaded', initColorTheme);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
   const wrap = document.querySelector('.chat-size-wrap');
