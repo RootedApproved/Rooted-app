@@ -1076,10 +1076,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
          action URL + audience id are meant to be publicly embedded (they're not secret
          credentials). Posts through a hidden iframe so the page never navigates away to
          Mailchimp's own hosted page, keeping the existing smooth "thanks" UX intact. -->
-    <form class="email-row" id="email-form" action="https://YOUR-ACCOUNT.usXX.list-manage.com/subscribe/post?u=YOUR_USER_ID&amp;id=YOUR_AUDIENCE_ID" method="POST" target="mc-hidden-iframe" onsubmit="return handleEmailSubmit(event)">
+    <form class="email-row" id="email-form" action="https://rootedapproved.us9.list-manage.com/subscribe/post?u=e63a1293bee33d7b108135b22&amp;id=82291b3d31" method="POST" target="mc-hidden-iframe" onsubmit="return handleEmailSubmit(event)">
       <input class="email-input" type="email" name="EMAIL" placeholder="your@email.com" id="email-val" required>
       <!-- Mailchimp bot-honeypot field — real users never see or fill this; must stay empty -->
-      <div style="position:absolute;left:-5000px;" aria-hidden="true"><input type="text" name="b_YOUR_USER_ID_YOUR_AUDIENCE_ID" tabindex="-1" value=""></div>
+      <div style="position:absolute;left:-5000px;" aria-hidden="true"><input type="text" name="b_e63a1293bee33d7b108135b22_82291b3d31" tabindex="-1" value=""></div>
       <button class="email-submit" type="submit">Join</button>
     </form>
     <div class="email-thanks" id="email-thanks">You're on the list.</div>
