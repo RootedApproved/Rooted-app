@@ -556,7 +556,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</span>
   <div class="nav-right">
     <button class="nav-search" onclick="showTab('search')"><i data-lucide="search"></i><span class="nav-search-label">Search</span></button>
-    <button class="nav-join" onclick="showAbout()">Join</button>
+    <button class="nav-join" onclick="showScreen('signup')">Join</button>
   </div>
 </nav>
 
@@ -1027,7 +1027,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
       <div class="mem-perk"><span class="mem-check">✓</span>Quarterly research reports</div>
       <div class="mem-perk"><span class="mem-check">✓</span>Ad-free always</div>
     </div>
-    <button class="mem-cta" onclick="showAbout()">Join for $9/month →</button>
+    <!-- Routes to Sign Up for now, since an account is needed before checkout either way.
+         Once Stripe is built, this should check login state: if already logged in, go
+         straight to Stripe Checkout for the Member plan instead of back to signup. -->
+    <button class="mem-cta" onclick="showScreen('signup')">Join for $9/month →</button>
   </div>
   <div class="prof-sec">
     <div class="prof-sec-title">Account</div>
@@ -1205,7 +1208,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <a href="https://tiktok.com/@rootedapproved" target="_blank" class="mobile-drawer-social" aria-label="TikTok"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok"></a>
   </div>
   <div class="mobile-drawer-actions">
-    <button class="mobile-drawer-join" onclick="showAbout();toggleMobileDrawer()">Join</button>
+    <button class="mobile-drawer-join" onclick="showScreen('signup');toggleMobileDrawer()">Join</button>
     <a href="mailto:team@rootedapproved.com" class="mobile-drawer-contact"><i data-lucide="mail"></i>Contact</a>
   </div>
 </nav>
@@ -1225,7 +1228,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <a href="https://tiktok.com/@rootedapproved" target="_blank" class="sidebar-social" aria-label="TikTok"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok"></a>
   </div>
   <div class="sidebar-actions">
-    <button class="sidebar-join" onclick="showAbout()">Join</button>
+    <button class="sidebar-join" onclick="showScreen('signup')">Join</button>
     <a href="mailto:team@rootedapproved.com" class="sidebar-contact-btn" aria-label="Contact Us"><i data-lucide="mail"></i>Contact</a>
   </div>
 </nav>
