@@ -470,6 +470,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .sidebar-social:hover{opacity:1;transform:translateY(-1px);}
 .sidebar-social img{width:23px;height:23px;display:block;}
 .sidebar-contact-btn{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--teal);color:var(--white);border:none;border-radius:8px;padding:10px 8px;font-family:var(--font-b);font-size:11px;font-weight:700;letter-spacing:.02em;cursor:pointer;text-decoration:none;transition:background .15s,transform .15s;flex:1;white-space:nowrap;}
+.contact-email-line{text-align:center;font-family:var(--font-b);font-size:10.5px;color:var(--muted);padding:6px 8px 2px;word-break:break-all;}
 .sidebar-contact-btn:hover{background:#256664;transform:translateY(-1px);}
 .sidebar-contact-btn i{width:14px;height:14px;stroke-width:2;}
 
@@ -479,7 +480,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   .bottom-bar{display:none;}
   .desktop-sidebar{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:180px;background:var(--white);border-right:1px solid var(--border);padding:18px 8px 14px;z-index:300;transition:background .2s;}
   .top-nav{left:180px;padding:0 32px;}
-  .page{max-width:920px;margin:0 auto;padding-top:8px;}
+  .page{max-width:920px;margin:0 auto;padding-top:calc(var(--nav-h) + 8px);}
   .cat-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 32px 28px;}
   .subcat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px 32px 28px;}
   .prod-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 32px 8px;}
@@ -1211,6 +1212,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="mobile-drawer-join" onclick="showScreen('signup');toggleMobileDrawer()">Join</button>
     <a href="mailto:team@rootedapproved.com" class="mobile-drawer-contact"><i data-lucide="mail"></i>Contact</a>
   </div>
+  <div class="contact-email-line">team@rootedapproved.com</div>
 </nav>
 
 <!-- DESKTOP SIDEBAR (desktop only, hidden on mobile via CSS) -->
@@ -1231,6 +1233,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="sidebar-join" onclick="showScreen('signup')">Join</button>
     <a href="mailto:team@rootedapproved.com" class="sidebar-contact-btn" aria-label="Contact Us"><i data-lucide="mail"></i>Contact</a>
   </div>
+  <div class="contact-email-line">team@rootedapproved.com</div>
 </nav>
 <script>
 const PRODUCTS = {
