@@ -2528,11 +2528,11 @@ function setColorTheme(theme) {
 // Fill in these two values from Supabase (Settings > API) once the project exists.
 // Both are safe to keep in client-side code — the anon key is designed to be public,
 // protected by database security rules (Row Level Security), unlike a normal secret API key.
-const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
+const SUPABASE_URL = 'https://albpewafjrktxhuydzke.supabase.co';
+const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY'; // waiting on the FULL publishable key (sb_publishable_...) — the screenshot only showed the start of it
 let rootedSupabase = null;
 try {
-  if (typeof supabase !== 'undefined' && !SUPABASE_URL.includes('YOUR-PROJECT')) {
+  if (typeof supabase !== 'undefined' && !SUPABASE_URL.includes('YOUR-PROJECT') && !SUPABASE_ANON_KEY.includes('YOUR_ANON_KEY')) {
     rootedSupabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   }
 } catch (e) { console.error('Supabase init failed:', e); }
