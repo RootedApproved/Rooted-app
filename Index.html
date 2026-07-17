@@ -62,22 +62,45 @@ body.style-color .cat-card:nth-child(4n+4){background:var(--sage);}
 /* Style B: placeholder gradient "photo" block with scrim overlay for text legibility */
 body.style-photo .cat-card{border:none;}
 body.style-photo .cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,var(--cream2),var(--border) 60%,var(--muted));opacity:.55;background-size:cover;background-position:center;}
-body.style-photo .cat-card[data-cat="clothing"]::before{background-image:url('https://images.unsplash.com/photo-1612654516785-0e1a96be21d1?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="cookware"]::before{background-image:url('https://images.unsplash.com/photo-1603038124597-2c5c207edf47?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="oral"]::before{background-image:url('https://images.unsplash.com/photo-1553691158-91a7f9183156?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="water"]::before{background-image:url('https://images.unsplash.com/photo-1599675267516-c502d37e40cb?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="food"]::before{background-image:url('https://images.unsplash.com/photo-1563865436874-9aef32095fad?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="personal"]::before{background-image:url('https://images.unsplash.com/photo-1748543668676-ea8241cb3886?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="farmers"]::before{background-image:url('https://images.unsplash.com/photo-1757609909192-0246239198c0?auto=format&fit=crop&w=600&q=80');opacity:1;}
-/* The 6 categories below aren't on the home grid yet — these rules are ready in advance so that
-   if/when a .cat-card with the matching data-cat is added to the home screen, it automatically
-   gets its photo with zero extra work. See Categories tab for the full 6-category "Soon" list. */
-body.style-photo .cat-card[data-cat="textiles"]::before{background-image:url('https://images.unsplash.com/photo-1600494448655-ae58f58bb945?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="cleaning"]::before{background-image:url('https://images.unsplash.com/photo-1550963295-019d8a8a61c5?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="air"]::before{background-image:url('https://images.unsplash.com/photo-1766243062910-bda898a2470c?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="lighting"]::before{background-image:url('https://images.unsplash.com/photo-1631832293782-2eda7804489b?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="sunlight"]::before{background-image:url('https://images.unsplash.com/photo-1770573319185-049b29ab0ca9?auto=format&fit=crop&w=600&q=80');opacity:1;}
-body.style-photo .cat-card[data-cat="supplements"]::before{background-image:url('https://images.unsplash.com/photo-1757802412806-433e4e60eec7?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="clothing"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1612654516785-0e1a96be21d1?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="clothing"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="clothing"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1602810316693-3667c854239a?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="cookware"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1603038124597-2c5c207edf47?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="cookware"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1603038124597-2c5c207edf47?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="cookware"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1603038124597-2c5c207edf47?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="oral"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1553691158-91a7f9183156?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="oral"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1553691158-91a7f9183156?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="oral"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1553691158-91a7f9183156?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="water"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1599675267516-c502d37e40cb?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="water"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1599675267516-c502d37e40cb?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="water"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1599675267516-c502d37e40cb?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="food"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1563865436874-9aef32095fad?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="food"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1563865436874-9aef32095fad?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="food"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1563865436874-9aef32095fad?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="personal"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1748543668676-ea8241cb3886?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="personal"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1748543668676-ea8241cb3886?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="personal"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1748543668676-ea8241cb3886?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="farmers"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1757609909192-0246239198c0?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="farmers"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1757609909192-0246239198c0?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="farmers"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1757609909192-0246239198c0?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="textiles"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1600494448655-ae58f58bb945?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="textiles"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1600494448655-ae58f58bb945?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="textiles"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1600494448655-ae58f58bb945?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="cleaning"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1550963295-019d8a8a61c5?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="cleaning"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1550963295-019d8a8a61c5?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="cleaning"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1550963295-019d8a8a61c5?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="air"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1766243062910-bda898a2470c?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="air"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1766243062910-bda898a2470c?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="air"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1766243062910-bda898a2470c?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="lighting"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1631832293782-2eda7804489b?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="lighting"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1631832293782-2eda7804489b?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="lighting"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1631832293782-2eda7804489b?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="sunlight"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1770573319185-049b29ab0ca9?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="sunlight"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1770573319185-049b29ab0ca9?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="sunlight"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1770573319185-049b29ab0ca9?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="supplements"][data-photo-variant="1"]::before{background-image:url('https://images.unsplash.com/photo-1757802412806-433e4e60eec7?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="supplements"][data-photo-variant="2"]::before{background-image:url('https://images.unsplash.com/photo-1757802412806-433e4e60eec7?auto=format&fit=crop&w=600&q=80');opacity:1;}
+body.style-photo .cat-card[data-cat="supplements"][data-photo-variant="3"]::before{background-image:url('https://images.unsplash.com/photo-1757802412806-433e4e60eec7?auto=format&fit=crop&w=600&q=80');opacity:1;}
 body.style-photo .cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65%;background:linear-gradient(to top,rgba(0,0,0,.55),transparent);}
 body.style-photo .cat-card .cat-icon{color:var(--white);z-index:2;}
 body.style-photo .cat-card .cat-body{position:relative;z-index:2;}
@@ -105,6 +128,10 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
 .style-toggle-btn.active{color:var(--white);background:var(--forest);border-color:var(--forest);}
 .cat-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.08);}
 .cat-icon{position:absolute;top:14px;left:14px;line-height:1;display:flex;color:var(--forest);}
+.cat-photo-cycle{display:none;position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.45);border:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;}
+.cat-photo-cycle i{width:15px;height:15px;stroke-width:2;color:var(--white);}
+body.style-photo .cat-photo-cycle{display:flex;}
+.cat-photo-cycle:hover{background:rgba(0,0,0,.65);}
 .cat-icon i{width:26px;height:26px;stroke-width:1.5;}
 .cat-body{padding:11px 13px;}
 .cat-lbl{font-family:var(--font-m);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:2px;}
@@ -493,13 +520,13 @@ body.style-rect .cat-card::after{content:'›';font-family:var(--font-b);font-si
     <button class="style-toggle-btn" id="sidebar-btn-gradient" onclick="setSidebarStyle('gradient')">Soft Gradient</button>
   </div>
   <div class="cat-grid">
-    <div class="cat-card" data-cat="clothing" onclick="showCategory('clothing')"><span class="cat-icon"><i data-lucide="shirt"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct js-clothing-total">30 products rated</div></div></div>
-    <div class="cat-card" data-cat="oral" onclick="showCategory('oral')"><span class="cat-icon"><i data-lucide="smile"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Oral Care</div><div class="cat-ct js-oral-total">10 products rated</div></div></div>
-    <div class="cat-card" data-cat="water" onclick="showCategory('water')"><span class="cat-icon"><i data-lucide="droplet"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Water</div><div class="cat-ct js-water-total">10 products rated</div></div></div>
-    <div class="cat-card" data-cat="food" onclick="showCategory('food')"><span class="cat-icon"><i data-lucide="beef"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Food &amp; Diet</div><div class="cat-ct">Coming soon</div></div></div>
-    <div class="cat-card" data-cat="cookware" onclick="showCategory('cookware')"><span class="cat-icon"><i data-lucide="cooking-pot"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Cookware &amp; Kitchen</div><div class="cat-ct js-cookware-total">20 products rated</div></div></div>
-    <div class="cat-card" data-cat="personal" onclick="showCategory('personal')"><span class="cat-icon"><i data-lucide="sparkles"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Personal Care</div><div class="cat-ct js-personal-total">8 products rated</div></div></div>
-    <div class="cat-card" data-cat="farmers" onclick="showScreen('farmers')"><span class="cat-icon"><i data-lucide="wheat"></i></span><div class="cat-body"><div class="cat-lbl">Tool</div><div class="cat-name">Local Food Map</div><div class="cat-ct">Farms, markets, CSAs & more</div></div></div>
+    <div class="cat-card" data-cat="clothing" data-photo-variant="1" onclick="showCategory('clothing')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('clothing')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="shirt"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct js-clothing-total">30 products rated</div></div></div>
+    <div class="cat-card" data-cat="oral" data-photo-variant="1" onclick="showCategory('oral')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('oral')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="smile"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Oral Care</div><div class="cat-ct js-oral-total">10 products rated</div></div></div>
+    <div class="cat-card" data-cat="water" data-photo-variant="1" onclick="showCategory('water')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('water')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="droplet"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Water</div><div class="cat-ct js-water-total">10 products rated</div></div></div>
+    <div class="cat-card" data-cat="food" data-photo-variant="1" onclick="showCategory('food')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('food')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="beef"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Food &amp; Diet</div><div class="cat-ct">Coming soon</div></div></div>
+    <div class="cat-card" data-cat="cookware" data-photo-variant="1" onclick="showCategory('cookware')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('cookware')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="cooking-pot"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Cookware &amp; Kitchen</div><div class="cat-ct js-cookware-total">20 products rated</div></div></div>
+    <div class="cat-card" data-cat="personal" data-photo-variant="1" onclick="showCategory('personal')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('personal')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="sparkles"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Personal Care</div><div class="cat-ct js-personal-total">8 products rated</div></div></div>
+    <div class="cat-card" data-cat="farmers" data-photo-variant="1" onclick="showScreen('farmers')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('farmers')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="wheat"></i></span><div class="cat-body"><div class="cat-lbl">Tool</div><div class="cat-name">Local Food Map</div><div class="cat-ct">Farms, markets, CSAs & more</div></div></div>
   </div>
   <div class="promise-strip">
     <div><div class="prom-num">12</div><div class="prom-lbl">Product categories<br>at launch</div></div>
@@ -2215,6 +2242,27 @@ function setCardStyle(style) {
   try { localStorage.setItem('rooted-card-style', style); } catch (e) {}
 }
 
+// Lets each category card cycle through 3 photo options independently (tap the small
+// refresh icon in the corner, visible only in Photo card style). Persists per-category so
+// choices stick across visits.
+function cyclePhoto(cat) {
+  const card = document.querySelector('.cat-card[data-cat="' + cat + '"]');
+  if (!card) return;
+  let current = parseInt(card.dataset.photoVariant || '1', 10);
+  const next = current >= 3 ? 1 : current + 1;
+  card.dataset.photoVariant = next;
+  try { localStorage.setItem('rooted-photo-' + cat, next); } catch (e) {}
+}
+
+function initPhotoVariants() {
+  document.querySelectorAll('.cat-card[data-cat]').forEach(card => {
+    const cat = card.dataset.cat;
+    let saved = '1';
+    try { saved = localStorage.getItem('rooted-photo-' + cat) || '1'; } catch (e) {}
+    card.dataset.photoVariant = saved;
+  });
+}
+
 function initCardStyle() {
   let saved = 'color';
   try { saved = localStorage.getItem('rooted-card-style') || 'color'; } catch (e) {}
@@ -2251,6 +2299,7 @@ window.addEventListener('DOMContentLoaded', initFeaturedImages);
 window.addEventListener('DOMContentLoaded', updateProductCounts);
 window.addEventListener('DOMContentLoaded', applyFeatureFlags);
 window.addEventListener('DOMContentLoaded', initCardStyle);
+window.addEventListener('DOMContentLoaded', initPhotoVariants);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
