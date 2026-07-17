@@ -379,6 +379,19 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .profile-name{font-family:var(--font-d);font-size:19px;font-weight:700;}
 .profile-tier{font-size:12px;color:var(--muted);margin-top:2px;}
 .profile-join-btn{display:inline-block;margin-top:12px;background:var(--forest);color:var(--white);font-size:13px;font-weight:600;padding:8px 20px;border-radius:3px;border:none;cursor:pointer;}
+.auth-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:36px 28px;max-width:360px;margin:32px auto;box-shadow:0 8px 32px rgba(0,0,0,.06);}
+.auth-card-hd{text-align:center;margin-bottom:24px;}
+.auth-card-title{font-family:var(--font-d);font-weight:900;font-size:20px;color:var(--forest);margin-top:10px;}
+.auth-card-sub{font-family:var(--font-b);font-size:13px;color:var(--muted);margin-top:4px;}
+.auth-field-label{display:block;font-family:var(--font-b);font-size:12.5px;font-weight:700;color:var(--char);margin-bottom:6px;}
+.auth-field{width:100%;padding:12px 14px;font-family:var(--font-b);font-size:16px;border:1.5px solid var(--border);border-radius:8px;background:var(--white);color:var(--char);outline:none;box-sizing:border-box;margin-bottom:16px;}
+.auth-field:focus{border-color:var(--teal);}
+.auth-submit-btn{width:100%;padding:13px 14px;background:var(--forest);color:var(--white);border:none;border-radius:8px;font-family:var(--font-b);font-size:14px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;cursor:pointer;}
+.auth-switch{text-align:center;margin-top:16px;font-family:var(--font-b);font-size:13px;color:var(--mid);}
+.auth-switch span{color:var(--forest);font-weight:700;cursor:pointer;}
+.auth-forgot{text-align:right;margin:-10px 0 16px;font-family:var(--font-b);font-size:12.5px;color:var(--forest);font-weight:600;cursor:pointer;}
+.auth-error{display:none;background:rgba(181,58,47,.1);color:var(--red);border-radius:6px;padding:9px 12px;font-family:var(--font-b);font-size:13px;margin-bottom:14px;}
+.auth-error.show{display:block;}
 .mem-card{background:var(--forest);border-radius:8px;padding:17px;margin:16px 18px;}
 .mem-eye{font-family:var(--font-m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:7px;}
 .mem-title{font-family:var(--font-d);font-size:19px;font-weight:900;color:var(--white);margin-bottom:3px;}
@@ -534,6 +547,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <!-- TOP NAV -->
@@ -997,10 +1011,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <div id="screen-profile" class="screen">
 <div class="page">
   <div class="profile-hd">
-    <div class="profile-av">R</div>
-    <div class="profile-name">Guest</div>
-    <div class="profile-tier">Free Member</div>
-    <button class="profile-join-btn" onclick="showAbout()">Create Account</button>
+    <div class="profile-av" id="profile-av">R</div>
+    <div class="profile-name" id="profile-name">Guest</div>
+    <div class="profile-tier" id="profile-tier">Free Member</div>
+    <button class="profile-join-btn" id="profile-action-btn" onclick="showScreen('signup')">Create Account</button>
   </div>
   <div class="mem-card">
     <div class="mem-eye">ROOTED Member — $9/mo</div>
@@ -1042,6 +1056,43 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <div class="sp-md"></div>
 </div>
 </div>
+
+<!-- AUTH SCREENS — Sign Up / Log In, matching the approved mockup design -->
+<div id="screen-signup" class="screen"><div class="page">
+  <div class="auth-card">
+    <div class="auth-card-hd">
+      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="auth-card-title">Create your account</div>
+      <div class="auth-card-sub">Standards first. Products second. People always.</div>
+    </div>
+    <div id="signup-error" class="auth-error"></div>
+    <label class="auth-field-label">Name</label>
+    <input class="auth-field" type="text" id="signup-name" placeholder="Your name">
+    <label class="auth-field-label">Email</label>
+    <input class="auth-field" type="email" id="signup-email" placeholder="you@email.com">
+    <label class="auth-field-label">Password</label>
+    <input class="auth-field" type="password" id="signup-password" placeholder="At least 8 characters">
+    <button class="auth-submit-btn" onclick="rootedSignUp()">Create Account</button>
+    <div class="auth-switch">Already have an account? <span onclick="showScreen('login')">Log in</span></div>
+  </div>
+</div></div>
+
+<div id="screen-login" class="screen"><div class="page">
+  <div class="auth-card">
+    <div class="auth-card-hd">
+      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="auth-card-title">Welcome back</div>
+    </div>
+    <div id="login-error" class="auth-error"></div>
+    <label class="auth-field-label">Email</label>
+    <input class="auth-field" type="email" id="login-email" placeholder="you@email.com">
+    <label class="auth-field-label">Password</label>
+    <input class="auth-field" type="password" id="login-password" placeholder="Your password">
+    <div class="auth-forgot" onclick="rootedForgotPassword()">Forgot password?</div>
+    <button class="auth-submit-btn" onclick="rootedLogIn()">Log In</button>
+    <div class="auth-switch">New to ROOTED? <span onclick="showScreen('signup')">Create an account</span></div>
+  </div>
+</div></div>
 
 <!-- ABOUT -->
 <div id="screen-about" class="screen">
@@ -2473,6 +2524,106 @@ function setColorTheme(theme) {
   try { localStorage.setItem('rooted-color-theme', theme); } catch (e) {}
 }
 
+// ── SUPABASE AUTH ──────────────────────────────────────────────────────
+// Fill in these two values from Supabase (Settings > API) once the project exists.
+// Both are safe to keep in client-side code — the anon key is designed to be public,
+// protected by database security rules (Row Level Security), unlike a normal secret API key.
+const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
+const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
+let rootedSupabase = null;
+try {
+  if (typeof supabase !== 'undefined' && !SUPABASE_URL.includes('YOUR-PROJECT')) {
+    rootedSupabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+} catch (e) { console.error('Supabase init failed:', e); }
+
+function showAuthError(elId, message) {
+  const el = document.getElementById(elId);
+  el.textContent = message;
+  el.classList.add('show');
+}
+function clearAuthError(elId) {
+  const el = document.getElementById(elId);
+  el.textContent = '';
+  el.classList.remove('show');
+}
+
+async function rootedSignUp() {
+  clearAuthError('signup-error');
+  if (!rootedSupabase) { showAuthError('signup-error', 'Account system not connected yet.'); return; }
+  const name = document.getElementById('signup-name').value.trim();
+  const email = document.getElementById('signup-email').value.trim();
+  const password = document.getElementById('signup-password').value;
+  if (!name || !email || !password) { showAuthError('signup-error', 'Please fill in all fields.'); return; }
+  if (password.length < 8) { showAuthError('signup-error', 'Password must be at least 8 characters.'); return; }
+  const { data, error } = await rootedSupabase.auth.signUp({
+    email, password, options: { data: { full_name: name } }
+  });
+  if (error) { showAuthError('signup-error', error.message); return; }
+  showScreen('profile');
+  showTab('profile');
+}
+
+async function rootedLogIn() {
+  clearAuthError('login-error');
+  if (!rootedSupabase) { showAuthError('login-error', 'Account system not connected yet.'); return; }
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  if (!email || !password) { showAuthError('login-error', 'Please enter your email and password.'); return; }
+  const { data, error } = await rootedSupabase.auth.signInWithPassword({ email, password });
+  if (error) { showAuthError('login-error', error.message); return; }
+  showScreen('profile');
+  showTab('profile');
+}
+
+async function rootedForgotPassword() {
+  if (!rootedSupabase) return;
+  const email = document.getElementById('login-email').value.trim();
+  if (!email) { showAuthError('login-error', 'Enter your email above first, then tap "Forgot password?" again.'); return; }
+  const { error } = await rootedSupabase.auth.resetPasswordForEmail(email);
+  clearAuthError('login-error');
+  if (error) { showAuthError('login-error', error.message); return; }
+  alert('Check your email for a password reset link.');
+}
+
+async function rootedSignOut() {
+  if (!rootedSupabase) return;
+  await rootedSupabase.auth.signOut();
+  updateProfileUIForAuthState(null);
+  showTab('home');
+}
+
+function updateProfileUIForAuthState(session) {
+  const nameEl = document.getElementById('profile-name');
+  const avEl = document.getElementById('profile-av');
+  const tierEl = document.getElementById('profile-tier');
+  const btnEl = document.getElementById('profile-action-btn');
+  if (session && session.user) {
+    const fullName = (session.user.user_metadata && session.user.user_metadata.full_name) || session.user.email;
+    nameEl.textContent = fullName;
+    avEl.textContent = fullName.charAt(0).toUpperCase();
+    tierEl.textContent = 'Free Member'; // becomes real once Stripe subscription status is wired to the database
+    btnEl.textContent = 'Sign Out';
+    btnEl.onclick = rootedSignOut;
+  } else {
+    nameEl.textContent = 'Guest';
+    avEl.textContent = 'R';
+    tierEl.textContent = 'Free Member';
+    btnEl.textContent = 'Create Account';
+    btnEl.onclick = () => showScreen('signup');
+  }
+}
+
+function initAuthState() {
+  if (!rootedSupabase) return;
+  rootedSupabase.auth.getSession().then(({ data: { session } }) => {
+    updateProfileUIForAuthState(session);
+  });
+  rootedSupabase.auth.onAuthStateChange((event, session) => {
+    updateProfileUIForAuthState(session);
+  });
+}
+
 function initColorTheme() {
   let saved = 'original';
   try { saved = localStorage.getItem('rooted-color-theme') || 'original'; } catch (e) {}
@@ -2512,6 +2663,7 @@ window.addEventListener('DOMContentLoaded', initHomeCategoryVisibility);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
 window.addEventListener('DOMContentLoaded', initMobileNavStyle);
 window.addEventListener('DOMContentLoaded', initColorTheme);
+window.addEventListener('DOMContentLoaded', initAuthState);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
   const wrap = document.querySelector('.chat-size-wrap');
