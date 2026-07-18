@@ -83,7 +83,12 @@ body.navstyle-drawer{padding-bottom:0;}
 .home-hl{font-family:var(--font-d);font-size:33px;font-weight:900;line-height:1.1;color:var(--char);margin-bottom:12px;}
 .home-hl em{font-style:italic;color:var(--forest);}
 .home-sub{font-size:13.5px;color:var(--mid);line-height:1.65;max-width:340px;}
-.sec-hd{display:flex;align-items:baseline;justify-content:space-between;padding:22px 18px 11px;}
+.sec-hd{display:flex;align-items:baseline;justify-content:space-between;padding:22px 18px 11px;gap:10px;}
+.dev-panel-gear{display:flex;align-items:center;cursor:pointer;color:var(--muted);opacity:.35;flex-shrink:0;}
+.dev-panel-gear:hover{opacity:.8;}
+.dev-panel-gear i{width:15px;height:15px;}
+.dev-toggle-panel{display:none;}
+.dev-toggle-panel.show{display:block;}
 .sec-title{font-family:var(--font-d);font-size:17px;font-weight:700;display:inline-flex;align-items:center;gap:9px;}
 .sec-title::before{content:'';display:inline-block;width:5px;height:18px;background:var(--terracotta);border-radius:2px;}
 .sec-link{font-size:12px;color:var(--teal);font-weight:600;cursor:pointer;}
@@ -578,7 +583,8 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <h1 class="home-hl">The <em>trusted</em><br>standard for<br>healthy living.</h1>
     <p class="home-sub">Every product rated against a published standard. No guesswork.</p>
   </div>
-  <div class="sec-hd"><span class="sec-title">Categories</span><span class="sec-link" onclick="showTab('categories')">See all →</span></div>
+  <div class="sec-hd"><span class="sec-title">Categories</span><span class="dev-panel-gear" onclick="toggleDevPanel()" title="Site settings"><i data-lucide="settings"></i></span><span class="sec-link" onclick="showTab('categories')">See all →</span></div>
+  <div id="dev-toggle-panel" class="dev-toggle-panel">
   <div class="style-toggle-wrap">
     <span class="style-toggle-label">Card style:</span>
     <button class="style-toggle-btn" id="style-btn-color" onclick="setCardStyle('color')">Color</button>
@@ -623,6 +629,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <label class="home-cat-option"><input type="checkbox" id="homecat-lighting" onchange="setHomeCategoryVisibility('lighting', this.checked)"><i data-lucide="lightbulb"></i>Lighting & Circadian Health</label>
     <label class="home-cat-option"><input type="checkbox" id="homecat-sunlight" onchange="setHomeCategoryVisibility('sunlight', this.checked)"><i data-lucide="sun"></i>Sunlight & Recovery</label>
     <label class="home-cat-option"><input type="checkbox" id="homecat-supplements" onchange="setHomeCategoryVisibility('supplements', this.checked)"><i data-lucide="pill"></i>Supplements</label>
+  </div>
   </div>
   <div class="cat-grid">
     <div class="cat-card" data-cat="clothing" data-photo-variant="1" onclick="showCategory('clothing')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('clothing')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="shirt"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct js-clothing-total">30 products rated</div></div></div>
@@ -1201,6 +1208,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <button class="tab active" data-tab="home" onclick="showTab('home')"><span class="tab-icon"><i data-lucide="house"></i></span><span class="tab-label">Home</span></button>
   <button class="tab" data-tab="search" onclick="showTab('search')"><span class="tab-icon"><i data-lucide="search"></i></span><span class="tab-label">Search</span></button>
   <button class="tab" data-tab="categories" onclick="showTab('categories')"><span class="tab-icon"><i data-lucide="menu"></i></span><span class="tab-label">Categories</span></button>
+  <button class="tab" data-tab="cookware" onclick="showTab('cookware')"><span class="tab-icon"><i data-lucide="cooking-pot"></i></span><span class="tab-label">Cookware</span></button>
   <button class="tab" data-tab="profile" onclick="showTab('profile')"><span class="tab-icon"><i data-lucide="circle-user"></i></span><span class="tab-label">Profile</span></button>
 </div>
 
@@ -1212,6 +1220,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="tab mobile-drawer-tab active" data-tab="home" onclick="showTab('home');toggleMobileDrawer()"><i data-lucide="house"></i><span>Home</span></button>
     <button class="tab mobile-drawer-tab" data-tab="search" onclick="showTab('search');toggleMobileDrawer()"><i data-lucide="search"></i><span>Search</span></button>
     <button class="tab mobile-drawer-tab" data-tab="categories" onclick="showTab('categories');toggleMobileDrawer()"><i data-lucide="menu"></i><span>Categories</span></button>
+    <button class="tab mobile-drawer-tab" data-tab="cookware" onclick="showTab('cookware');toggleMobileDrawer()"><i data-lucide="cooking-pot"></i><span>Cookware & Kitchen</span></button>
     <button class="tab mobile-drawer-tab" data-tab="profile" onclick="showTab('profile');toggleMobileDrawer()"><i data-lucide="circle-user"></i><span>Profile</span></button>
   </div>
   <div class="mobile-drawer-spacer"></div>
@@ -1235,6 +1244,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="tab sidebar-tab active" data-tab="home" onclick="showTab('home')"><i data-lucide="house"></i><span>Home</span></button>
     <button class="tab sidebar-tab" data-tab="search" onclick="showTab('search')"><i data-lucide="search"></i><span>Search</span></button>
     <button class="tab sidebar-tab" data-tab="categories" onclick="showTab('categories')"><i data-lucide="menu"></i><span>Categories</span></button>
+    <button class="tab sidebar-tab" data-tab="cookware" onclick="showTab('cookware')"><i data-lucide="cooking-pot"></i><span>Cookware & Kitchen</span></button>
     <button class="tab sidebar-tab" data-tab="profile" onclick="showTab('profile')"><i data-lucide="circle-user"></i><span>Profile</span></button>
   </div>
   <div class="sidebar-spacer"></div>
@@ -1484,7 +1494,7 @@ const SUBCAT_EDU = {
 
 // ── NAVIGATION ───────────────────────────────────────────────────────
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);}
-function showTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab[data-tab="'+tab+'"]').forEach(b=>b.classList.add('active'));if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='profile')showScreen('profile');}
+function showTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab[data-tab="'+tab+'"]').forEach(b=>b.classList.add('active'));if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='cookware')showScreen('cookware');else if(tab==='profile')showScreen('profile');}
 function goHome(){showTab('home');}
 function showCategory(cat){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));showScreen(cat);}
 function showGolfHub(){showScreen('golf-hub');}
@@ -2455,7 +2465,7 @@ function cyclePhoto(cat) {
 // original 7 are visible by default; the 6 not-yet-built categories default to hidden but
 // can be turned on the same way. Persists per-category so choices stick across visits.
 const HOME_CAT_DEFAULTS = {
-  clothing: true, oral: true, water: true, food: true, cookware: true, personal: true, farmers: true,
+  clothing: true, oral: true, water: true, food: true, cookware: true, personal: true, farmers: false,
   textiles: false, cleaning: false, air: false, lighting: false, sunlight: false, supplements: false
 };
 
@@ -2463,6 +2473,21 @@ function setHomeCategoryVisibility(cat, visible) {
   const card = document.querySelector('.cat-card[data-cat="' + cat + '"]');
   if (card) card.classList.toggle('home-hidden', !visible);
   try { localStorage.setItem('rooted-homecat-' + cat, visible ? '1' : '0'); } catch (e) {}
+}
+
+// Lets J hide all the style/layout toggles from regular visitors while keeping them fully
+// functional in the code — tap the small gear icon next to "Categories" to reveal or
+// re-hide them. Defaults to hidden; persists across visits once toggled either way.
+function toggleDevPanel() {
+  const panel = document.getElementById('dev-toggle-panel');
+  panel.classList.toggle('show');
+  try { localStorage.setItem('rooted-dev-panel', panel.classList.contains('show') ? '1' : '0'); } catch (e) {}
+}
+
+function initDevPanel() {
+  let saved = '0';
+  try { saved = localStorage.getItem('rooted-dev-panel') || '0'; } catch (e) {}
+  document.getElementById('dev-toggle-panel').classList.toggle('show', saved === '1');
 }
 
 function toggleHomeCatPanel() {
@@ -2490,9 +2515,9 @@ function initPhotoVariants() {
 }
 
 function initCardStyle() {
-  let saved = 'color';
-  try { saved = localStorage.getItem('rooted-card-style') || 'color'; } catch (e) {}
-  if (saved === 'default') saved = 'color'; // old saved preference from before Default was removed
+  let saved = 'photo';
+  try { saved = localStorage.getItem('rooted-card-style') || 'photo'; } catch (e) {}
+  if (saved === 'default') saved = 'photo'; // old saved preference from before Default was removed
   setCardStyle(saved);
 }
 
@@ -2507,8 +2532,8 @@ function setSidebarStyle(style) {
 }
 
 function initSidebarStyle() {
-  let saved = 'plain';
-  try { saved = localStorage.getItem('rooted-sidebar-style') || 'plain'; } catch (e) {}
+  let saved = 'dark';
+  try { saved = localStorage.getItem('rooted-sidebar-style') || 'dark'; } catch (e) {}
   setSidebarStyle(saved);
 }
 
@@ -2666,8 +2691,8 @@ function initAuthState() {
 }
 
 function initColorTheme() {
-  let saved = 'original';
-  try { saved = localStorage.getItem('rooted-color-theme') || 'original'; } catch (e) {}
+  let saved = 'coastal';
+  try { saved = localStorage.getItem('rooted-color-theme') || 'coastal'; } catch (e) {}
   setColorTheme(saved);
 }
 
@@ -2704,6 +2729,7 @@ window.addEventListener('DOMContentLoaded', initHomeCategoryVisibility);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
 window.addEventListener('DOMContentLoaded', initMobileNavStyle);
 window.addEventListener('DOMContentLoaded', initColorTheme);
+window.addEventListener('DOMContentLoaded', initDevPanel);
 window.addEventListener('DOMContentLoaded', initAuthState);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
