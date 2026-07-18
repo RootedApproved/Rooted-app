@@ -1040,7 +1040,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <!-- Routes to Sign Up for now, since an account is needed before checkout either way.
          Once Stripe is built, this should check login state: if already logged in, go
          straight to Stripe Checkout for the Member plan instead of back to signup. -->
-    <button class="mem-cta" onclick="showScreen('signup')">Join for $9/month →</button>
+    <button class="mem-cta" id="mem-cta-btn" onclick="showScreen('signup')">Join for $9/month →</button>
   </div>
   <div class="prof-sec">
     <div class="prof-sec-title">Account</div>
@@ -1237,6 +1237,8 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <div class="sidebar-footer">
     <a href="https://instagram.com/rootedapproved" target="_blank" class="sidebar-social" aria-label="Instagram"><img src="https://cdn.simpleicons.org/instagram" alt="Instagram"></a>
     <a href="https://tiktok.com/@rootedapproved" target="_blank" class="sidebar-social" aria-label="TikTok"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok"></a>
+    <a href="https://x.com/rootedapproved" target="_blank" class="sidebar-social" aria-label="X (Twitter)"><img src="https://cdn.simpleicons.org/x" alt="X"></a>
+    <a href="https://youtube.com/@rootedapproved" target="_blank" class="sidebar-social" aria-label="YouTube"><img src="https://cdn.simpleicons.org/youtube" alt="YouTube"></a>
   </div>
   <div class="sidebar-actions">
     <button class="sidebar-join" onclick="showScreen('signup')">Join</button>
@@ -2623,6 +2625,7 @@ function updateProfileUIForAuthState(session) {
   const avEl = document.getElementById('profile-av');
   const tierEl = document.getElementById('profile-tier');
   const btnEl = document.getElementById('profile-action-btn');
+  const memBtnEl = document.getElementById('mem-cta-btn');
   if (session && session.user) {
     const fullName = (session.user.user_metadata && session.user.user_metadata.full_name) || session.user.email;
     nameEl.textContent = fullName;
@@ -2630,12 +2633,21 @@ function updateProfileUIForAuthState(session) {
     tierEl.textContent = 'Free Member'; // becomes real once Stripe subscription status is wired to the database
     btnEl.textContent = 'Sign Out';
     btnEl.onclick = rootedSignOut;
+    // Already signed in — don't send them back through signup again. Payment isn't
+    // connected yet, so this is an honest placeholder rather than a real checkout,
+    // but it no longer forces a confusing re-signup loop for an existing member.
+    if (memBtnEl) {
+      memBtnEl.onclick = () => alert('You\'re signed in as ' + fullName + '! Payment setup is coming very soon — we\'ll email you the moment upgrading is ready.');
+    }
   } else {
     nameEl.textContent = 'Guest';
     avEl.textContent = 'R';
     tierEl.textContent = 'Free Member';
     btnEl.textContent = 'Create Account / Log In';
     btnEl.onclick = () => showScreen('signup');
+    if (memBtnEl) {
+      memBtnEl.onclick = () => showScreen('signup');
+    }
   }
 }
 
