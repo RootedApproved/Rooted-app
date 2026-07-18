@@ -1208,7 +1208,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <button class="tab active" data-tab="home" onclick="showTab('home')"><span class="tab-icon"><i data-lucide="house"></i></span><span class="tab-label">Home</span></button>
   <button class="tab" data-tab="search" onclick="showTab('search')"><span class="tab-icon"><i data-lucide="search"></i></span><span class="tab-label">Search</span></button>
   <button class="tab" data-tab="categories" onclick="showTab('categories')"><span class="tab-icon"><i data-lucide="menu"></i></span><span class="tab-label">Categories</span></button>
-  <button class="tab" data-tab="cookware" onclick="showTab('cookware')"><span class="tab-icon"><i data-lucide="cooking-pot"></i></span><span class="tab-label">Cookware</span></button>
+  <button class="tab" data-tab="farmers" onclick="showTab('farmers')"><span class="tab-icon"><i data-lucide="map-pinned"></i></span><span class="tab-label">Food Map</span></button>
   <button class="tab" data-tab="profile" onclick="showTab('profile')"><span class="tab-icon"><i data-lucide="circle-user"></i></span><span class="tab-label">Profile</span></button>
 </div>
 
@@ -1220,7 +1220,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="tab mobile-drawer-tab active" data-tab="home" onclick="showTab('home');toggleMobileDrawer()"><i data-lucide="house"></i><span>Home</span></button>
     <button class="tab mobile-drawer-tab" data-tab="search" onclick="showTab('search');toggleMobileDrawer()"><i data-lucide="search"></i><span>Search</span></button>
     <button class="tab mobile-drawer-tab" data-tab="categories" onclick="showTab('categories');toggleMobileDrawer()"><i data-lucide="menu"></i><span>Categories</span></button>
-    <button class="tab mobile-drawer-tab" data-tab="cookware" onclick="showTab('cookware');toggleMobileDrawer()"><i data-lucide="cooking-pot"></i><span>Cookware & Kitchen</span></button>
+    <button class="tab mobile-drawer-tab" data-tab="farmers" onclick="showTab('farmers');toggleMobileDrawer()"><i data-lucide="map-pinned"></i><span>Local Food Map</span></button>
     <button class="tab mobile-drawer-tab" data-tab="profile" onclick="showTab('profile');toggleMobileDrawer()"><i data-lucide="circle-user"></i><span>Profile</span></button>
   </div>
   <div class="mobile-drawer-spacer"></div>
@@ -1244,7 +1244,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="tab sidebar-tab active" data-tab="home" onclick="showTab('home')"><i data-lucide="house"></i><span>Home</span></button>
     <button class="tab sidebar-tab" data-tab="search" onclick="showTab('search')"><i data-lucide="search"></i><span>Search</span></button>
     <button class="tab sidebar-tab" data-tab="categories" onclick="showTab('categories')"><i data-lucide="menu"></i><span>Categories</span></button>
-    <button class="tab sidebar-tab" data-tab="cookware" onclick="showTab('cookware')"><i data-lucide="cooking-pot"></i><span>Cookware & Kitchen</span></button>
+    <button class="tab sidebar-tab" data-tab="farmers" onclick="showTab('farmers')"><i data-lucide="map-pinned"></i><span>Local Food Map</span></button>
     <button class="tab sidebar-tab" data-tab="profile" onclick="showTab('profile')"><i data-lucide="circle-user"></i><span>Profile</span></button>
   </div>
   <div class="sidebar-spacer"></div>
@@ -1494,7 +1494,7 @@ const SUBCAT_EDU = {
 
 // ── NAVIGATION ───────────────────────────────────────────────────────
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);}
-function showTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab[data-tab="'+tab+'"]').forEach(b=>b.classList.add('active'));if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='cookware')showScreen('cookware');else if(tab==='profile')showScreen('profile');}
+function showTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab[data-tab="'+tab+'"]').forEach(b=>b.classList.add('active'));if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='farmers')showScreen('farmers');else if(tab==='profile')showScreen('profile');}
 function goHome(){showTab('home');}
 function showCategory(cat){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));showScreen(cat);}
 function showGolfHub(){showScreen('golf-hub');}
