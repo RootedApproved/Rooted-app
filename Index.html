@@ -142,6 +142,10 @@ body.navstyle-drawer{padding-bottom:0;}
 .hnc-title{font-family:var(--font-d);font-weight:700;font-size:16px;color:var(--char);margin-bottom:4px;}
 .hnc-sub{font-family:var(--font-b);font-size:12px;color:var(--muted);line-height:1.4;flex:1;}
 .hnc-link{font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--forest);margin-top:8px;}
+.hnc-full{justify-content:flex-end;color:var(--white);}
+.hnc-full .hnc-title{color:var(--white);}
+.hnc-full .hnc-sub{color:rgba(255,255,255,.85);}
+.hnc-full .hnc-link{color:var(--white);}
 #home-classic{display:none;}
 body.home-layout-classic #home-classic{display:block;}
 body.home-layout-classic #home-new{display:none;}
@@ -700,17 +704,9 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <div class="hnc-sub">Farms, markets, CSAs &amp; more</div>
         <span class="hnc-link">Map page →</span>
       </div>
-      <div class="hnc" onclick="showWelcomeToast('Recommendations — coming soon')">
-        <div class="hnc-img" id="recs-bg"></div>
-        <div class="logo-picker-row" onclick="event.stopPropagation()">
-          <button class="wordmark-picker-btn active" onclick="setCardBg('recs','bg1',this)">1</button>
-          <button class="wordmark-picker-btn" onclick="setCardBg('recs','bg2',this)">2</button>
-          <button class="wordmark-picker-btn" onclick="setCardBg('recs','bg3',this)">3</button>
-          <button class="wordmark-picker-btn" onclick="setCardBg('recs','bg4',this)">4</button>
-          <button class="wordmark-picker-btn" onclick="setCardBg('recs','bg5',this)">5</button>
-        </div>
+      <div class="hnc hnc-full cardbg-bg1" onclick="showWelcomeToast('Recommendations — coming soon')">
         <div class="hnc-title">Recommendations</div>
-        <div class="hnc-sub">Pulled from across all categories</div>
+        <div class="hnc-sub">Your top Tier 1 picks across every category, matched to what you're shopping for right now</div>
         <span class="hnc-link">Coming soon →</span>
       </div>
       <div class="hnc" onclick="showWelcomeToast('Rooted U — coming soon')">
@@ -727,18 +723,9 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <div class="hnc-sub">Education modules</div>
         <span class="hnc-link">Coming soon →</span>
       </div>
-      <div class="hnc" onclick="showTab('categories')">
-        <div class="hnc-img" id="seemore-bg"></div>
-        <div class="logo-picker-row" onclick="event.stopPropagation()">
-          <button class="wordmark-picker-btn active" onclick="setCardBg('seemore','bg1',this)">1</button>
-          <button class="wordmark-picker-btn" onclick="setCardBg('seemore','bg2',this)">2</button>
-          <button class="wordmark-picker-btn" onclick="setCardBg('seemore','bg3',this)">3</button>
-          <button class="wordmark-picker-btn" onclick="setCardBg('seemore','bg4',this)">4</button>
-          <button class="wordmark-picker-btn" onclick="setCardBg('seemore','bg5',this)">5</button>
-        </div>
+      <div class="hnc hnc-full cardbg-bg4" onclick="showTab('categories')">
         <div class="hnc-title">See More</div>
-        <div class="hnc-sub">Browse everything</div>
-        <span class="hnc-link">Categories →</span>
+        <span class="hnc-link">Browse all categories →</span>
       </div>
     </div>
   </div>
@@ -3015,32 +3002,6 @@ function initRootedULogo() {
   });
 }
 
-const CARD_BGS = ['bg1', 'bg2', 'bg3', 'bg4', 'bg5'];
-function setCardBg(cardKey, bg, btn) {
-  const el = document.getElementById(cardKey === 'recs' ? 'recs-bg' : 'seemore-bg');
-  if (!el) return;
-  CARD_BGS.forEach(b => el.classList.remove('cardbg-' + b));
-  el.classList.add('cardbg-' + bg);
-  if (btn) {
-    btn.parentElement.querySelectorAll('.wordmark-picker-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-  try { localStorage.setItem('rooted-cardbg-' + cardKey, bg); } catch (e) {}
-}
-
-function initCardBgs() {
-  ['recs', 'seemore'].forEach(cardKey => {
-    let saved = 'bg1';
-    try { saved = localStorage.getItem('rooted-cardbg-' + cardKey) || 'bg1'; } catch (e) {}
-    const el = document.getElementById(cardKey === 'recs' ? 'recs-bg' : 'seemore-bg');
-    if (el) el.classList.add('cardbg-' + saved);
-    if (el && el.parentElement) {
-      const pickerBtns = el.parentElement.querySelectorAll('.logo-picker-row .wordmark-picker-btn');
-      pickerBtns.forEach((b, i) => b.classList.toggle('active', CARD_BGS[i] === saved));
-    }
-  });
-}
-
 function initDevPanel() {
   // The gear that opens this panel is currently hidden from the live site (see the
   // .dev-panel-gear{display:none} rule). With no way to close the panel via UI, we
@@ -3362,7 +3323,6 @@ window.addEventListener('DOMContentLoaded', initMobileNavStyle);
 window.addEventListener('DOMContentLoaded', initColorTheme);
 window.addEventListener('DOMContentLoaded', initDevPanel);
 window.addEventListener('DOMContentLoaded', initRootedULogo);
-window.addEventListener('DOMContentLoaded', initCardBgs);
 window.addEventListener('DOMContentLoaded', initAuthState);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
