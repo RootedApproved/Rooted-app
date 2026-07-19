@@ -126,10 +126,18 @@ body.navstyle-drawer{padding-bottom:0;}
 .home-ai-messages{display:none;flex-direction:column;gap:10px;margin-top:12px;max-height:360px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 2px;}
 .home-ai-messages.active{display:flex;}
 .home-new-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px 24px;}
-.hnc{border:1px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;display:flex;flex-direction:column;min-height:128px;background:var(--white);transition:border-color .15s,transform .15s;}
+.hnc{position:relative;border:1px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;display:flex;flex-direction:column;min-height:128px;background:var(--white);transition:border-color .15s,transform .15s;}
 .hnc:active{transform:scale(.97);}
 .hnc:hover{border-color:var(--forest);}
 .hnc-img{width:100%;height:60px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:10px;overflow:hidden;}
+.logo-picker-row{position:absolute;top:52px;left:22px;right:22px;display:flex;justify-content:center;gap:4px;background:rgba(0,0,0,.5);border-radius:10px;padding:3px 4px;}
+.logo-picker-row .wordmark-picker-btn{padding:2px 7px;font-size:9px;background:rgba(255,255,255,.15);color:var(--white);border-color:transparent;}
+.logo-picker-row .wordmark-picker-btn.active{background:var(--white);color:var(--forest);}
+.cardbg-bg1{background:linear-gradient(160deg,#3D7A1F 0%,#2D5016 100%);}
+.cardbg-bg2{background:linear-gradient(150deg,#D69A2D 0%,#B5563F 100%);}
+.cardbg-bg3{background:linear-gradient(150deg,#EDE7D9 0%,#A8C48A 100%);}
+.cardbg-bg4{background:linear-gradient(160deg,#2A2A26 0%,#12120F 100%);border:1px solid rgba(214,154,45,.4);}
+.cardbg-bg5{background:linear-gradient(150deg,#F5F0E6 0%,#D9C7A8 100%);}
 .hnc-img svg{width:100%;height:100%;display:block;}
 .hnc-title{font-family:var(--font-d);font-weight:700;font-size:16px;color:var(--char);margin-bottom:4px;}
 .hnc-sub{font-family:var(--font-b);font-size:12px;color:var(--muted);line-height:1.4;flex:1;}
@@ -693,47 +701,41 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <span class="hnc-link">Map page →</span>
       </div>
       <div class="hnc" onclick="showWelcomeToast('Recommendations — coming soon')">
+        <div class="hnc-img" id="recs-bg"></div>
+        <div class="logo-picker-row" onclick="event.stopPropagation()">
+          <button class="wordmark-picker-btn active" onclick="setCardBg('recs','bg1',this)">1</button>
+          <button class="wordmark-picker-btn" onclick="setCardBg('recs','bg2',this)">2</button>
+          <button class="wordmark-picker-btn" onclick="setCardBg('recs','bg3',this)">3</button>
+          <button class="wordmark-picker-btn" onclick="setCardBg('recs','bg4',this)">4</button>
+          <button class="wordmark-picker-btn" onclick="setCardBg('recs','bg5',this)">5</button>
+        </div>
         <div class="hnc-title">Recommendations</div>
         <div class="hnc-sub">Pulled from across all categories</div>
         <span class="hnc-link">Coming soon →</span>
       </div>
       <div class="hnc" onclick="showWelcomeToast('Rooted U — coming soon')">
-        <div class="hnc-img"><svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <radialGradient id="glow" cx="50%" cy="20%" r="90%">
-      <stop offset="0%" stop-color="#4A7A28"/>
-      <stop offset="55%" stop-color="#2D5016"/>
-      <stop offset="100%" stop-color="#1B3410"/>
-    </radialGradient>
-  </defs>
-  <rect width="540" height="190" fill="url(#glow)"/>
-
-  <!-- signature motif: roots rising into an open-book bloom — rooted growth, fused with
-       education. Centered now that no text needs to share the frame. -->
-  <g fill="none" stroke="#D69A2D" stroke-width="3.5" stroke-linecap="round" opacity="0.85">
-    <path d="M270,172 Q250,186 228,183"/>
-    <path d="M270,172 Q260,190 270,196"/>
-    <path d="M270,172 Q290,186 312,182"/>
-  </g>
-  <path d="M270,172 C270,138 269,100 270,62" fill="none" stroke="#F5F0E6" stroke-width="5" stroke-linecap="round"/>
-
-  <g stroke-linejoin="round" stroke-linecap="round">
-    <path d="M270,62 C232,47 206,56 198,38 C224,28 254,34 270,62 Z" fill="#F5F0E6" opacity="0.96"/>
-    <path d="M270,62 C308,47 334,56 342,38 C316,28 286,34 270,62 Z" fill="#F5F0E6" opacity="0.96"/>
-    <path d="M270,62 L270,36" stroke="#2D5016" stroke-width="2.4"/>
-    <path d="M204,44 Q228,53 269,60" fill="none" stroke="#2D5016" stroke-width="1.5" opacity="0.5"/>
-    <path d="M336,44 Q312,53 271,60" fill="none" stroke="#2D5016" stroke-width="1.5" opacity="0.5"/>
-  </g>
-
-  <!-- terracotta checkmark badge, echoing the ROOTED logo -->
-  <circle cx="466" cy="146" r="30" fill="#B5563F"/>
-  <path d="M451,147 L462,158 L483,135" fill="none" stroke="#F5F0E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></div>
+        <div class="hnc-img" id="rooted-u-img"></div>
+        <div class="logo-picker-row" onclick="event.stopPropagation()">
+          <button class="wordmark-picker-btn active" onclick="setRootedULogo('v1',this)">1</button>
+          <button class="wordmark-picker-btn" onclick="setRootedULogo('v2',this)">2</button>
+          <button class="wordmark-picker-btn" onclick="setRootedULogo('v3',this)">3</button>
+          <button class="wordmark-picker-btn" onclick="setRootedULogo('v4',this)">4</button>
+          <button class="wordmark-picker-btn" onclick="setRootedULogo('v5',this)">5</button>
+          <button class="wordmark-picker-btn" onclick="setRootedULogo('v6',this)">6</button>
+        </div>
         <div class="hnc-title">Rooted U</div>
         <div class="hnc-sub">Education modules</div>
         <span class="hnc-link">Coming soon →</span>
       </div>
       <div class="hnc" onclick="showTab('categories')">
+        <div class="hnc-img" id="seemore-bg"></div>
+        <div class="logo-picker-row" onclick="event.stopPropagation()">
+          <button class="wordmark-picker-btn active" onclick="setCardBg('seemore','bg1',this)">1</button>
+          <button class="wordmark-picker-btn" onclick="setCardBg('seemore','bg2',this)">2</button>
+          <button class="wordmark-picker-btn" onclick="setCardBg('seemore','bg3',this)">3</button>
+          <button class="wordmark-picker-btn" onclick="setCardBg('seemore','bg4',this)">4</button>
+          <button class="wordmark-picker-btn" onclick="setCardBg('seemore','bg5',this)">5</button>
+        </div>
         <div class="hnc-title">See More</div>
         <div class="hnc-sub">Browse everything</div>
         <span class="hnc-link">Categories →</span>
@@ -2920,6 +2922,125 @@ function toggleDevPanel() {
   try { localStorage.setItem('rooted-dev-panel', panel.classList.contains('show') ? '1' : '0'); } catch (e) {}
 }
 
+// 6 genuinely distinct visual concepts for "Rooted U" (the education sub-brand), each using
+// ROOTED's palette but a different idea entirely, not just variations on one theme —
+// intended to feel like its own recognizable, distinct identity within ROOTED.
+const ROOTED_U_LOGOS = {
+  // v1: roots rising into an open-book bloom (the original concept)
+  v1: `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="g1" cx="50%" cy="20%" r="90%"><stop offset="0%" stop-color="#4A7A28"/><stop offset="55%" stop-color="#2D5016"/><stop offset="100%" stop-color="#1B3410"/></radialGradient></defs>
+  <rect width="540" height="190" fill="url(#g1)"/>
+  <g fill="none" stroke="#D69A2D" stroke-width="3.5" stroke-linecap="round" opacity="0.85"><path d="M270,172 Q250,186 228,183"/><path d="M270,172 Q260,190 270,196"/><path d="M270,172 Q290,186 312,182"/></g>
+  <path d="M270,172 C270,138 269,100 270,62" fill="none" stroke="#F5F0E6" stroke-width="5" stroke-linecap="round"/>
+  <g stroke-linejoin="round" stroke-linecap="round"><path d="M270,62 C232,47 206,56 198,38 C224,28 254,34 270,62 Z" fill="#F5F0E6" opacity="0.96"/><path d="M270,62 C308,47 334,56 342,38 C316,28 286,34 270,62 Z" fill="#F5F0E6" opacity="0.96"/><path d="M270,62 L270,36" stroke="#2D5016" stroke-width="2.4"/><path d="M204,44 Q228,53 269,60" fill="none" stroke="#2D5016" stroke-width="1.5" opacity="0.5"/><path d="M336,44 Q312,53 271,60" fill="none" stroke="#2D5016" stroke-width="1.5" opacity="0.5"/></g>
+  <circle cx="466" cy="146" r="30" fill="#B5563F"/><path d="M451,147 L462,158 L483,135" fill="none" stroke="#F5F0E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`,
+  // v2: graduation cap with roots growing from beneath it — the most literal "education +
+  // rooted growth" pairing, warm terracotta field for contrast against the other cool-toned options
+  v2: `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="g2" cx="50%" cy="25%" r="90%"><stop offset="0%" stop-color="#C9694E"/><stop offset="60%" stop-color="#B5563F"/><stop offset="100%" stop-color="#8B4230"/></radialGradient></defs>
+  <rect width="540" height="190" fill="url(#g2)"/>
+  <g fill="none" stroke="#2D5016" stroke-width="3" stroke-linecap="round" opacity="0.9"><path d="M270,148 Q252,160 234,158"/><path d="M270,148 Q262,164 270,170"/><path d="M270,148 Q288,160 306,157"/></g>
+  <rect x="245" y="118" width="50" height="30" rx="4" fill="#F5F0E6"/>
+  <path d="M195,110 L270,88 L345,110 L270,132 Z" fill="#D69A2D"/>
+  <path d="M270,88 L270,132" stroke="#8B6210" stroke-width="1.5" opacity="0.4"/>
+  <path d="M340,110 L340,138" stroke="#F5F0E6" stroke-width="3" stroke-linecap="round"/><circle cx="340" cy="142" r="5" fill="#F5F0E6"/>
+  <circle cx="466" cy="146" r="30" fill="#2D5016"/><path d="M451,147 L462,158 L483,135" fill="none" stroke="#F5F0E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`,
+  // v3: minimalist owl (classic wisdom/education symbol) perched on a root branch —
+  // deliberately playful and distinct from the other, more architectural concepts
+  v3: `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="g3" cx="50%" cy="20%" r="90%"><stop offset="0%" stop-color="#3A6B1E"/><stop offset="60%" stop-color="#1F3D10"/><stop offset="100%" stop-color="#12240A"/></radialGradient></defs>
+  <rect width="540" height="190" fill="url(#g3)"/>
+  <path d="M225,152 Q270,168 315,152 Q300,158 270,158 Q240,158 225,152 Z" fill="#D69A2D" opacity="0.85"/>
+  <ellipse cx="270" cy="105" rx="42" ry="46" fill="#F5F0E6"/>
+  <path d="M235,72 L248,95 L228,95 Z" fill="#F5F0E6"/><path d="M305,72 L292,95 L312,95 Z" fill="#F5F0E6"/>
+  <circle cx="252" cy="102" r="14" fill="#2D5016"/><circle cx="288" cy="102" r="14" fill="#2D5016"/>
+  <circle cx="252" cy="102" r="5" fill="#F5F0E6"/><circle cx="288" cy="102" r="5" fill="#F5F0E6"/>
+  <path d="M262,120 L270,132 L278,120 Z" fill="#D69A2D"/>
+  <circle cx="466" cy="146" r="30" fill="#B5563F"/><path d="M451,147 L462,158 L483,135" fill="none" stroke="#F5F0E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`,
+  // v4: circular lettermark badge with a laurel wreath — the most "formal/academic" of the
+  // set, reads like a seal or credential rather than an illustration
+  v4: `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="g4" cx="50%" cy="30%" r="85%"><stop offset="0%" stop-color="#F0E4C8"/><stop offset="100%" stop-color="#D9C89E"/></radialGradient></defs>
+  <rect width="540" height="190" fill="url(#g4)"/>
+  <circle cx="270" cy="105" r="52" fill="#2D5016"/>
+  <text x="270" y="122" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="46" fill="#F5F0E6" text-anchor="middle">RU</text>
+  <g fill="none" stroke="#D69A2D" stroke-width="3" stroke-linecap="round"><path d="M222,148 Q210,165 218,178"/><path d="M226,152 Q217,166 224,176"/><path d="M318,148 Q330,165 322,178"/><path d="M314,152 Q323,166 316,176"/></g>
+  <circle cx="466" cy="146" r="30" fill="#B5563F"/><path d="M451,147 L462,158 L483,135" fill="none" stroke="#F5F0E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`,
+  // v5: lightbulb with roots instead of a screw base — "insight/learning" paired with growth,
+  // warm gold field makes it the brightest, most optimistic-feeling option
+  v5: `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="g5" cx="50%" cy="22%" r="90%"><stop offset="0%" stop-color="#E8B84A"/><stop offset="60%" stop-color="#D69A2D"/><stop offset="100%" stop-color="#A87418"/></radialGradient></defs>
+  <rect width="540" height="190" fill="url(#g5)"/>
+  <circle cx="270" cy="88" r="40" fill="#F5F0E6"/>
+  <path d="M254,120 L286,120 L282,138 L258,138 Z" fill="#F5F0E6"/>
+  <g stroke="#D69A2D" stroke-width="2.5" stroke-linecap="round"><path d="M262,138 L262,150"/><path d="M270,138 L270,152"/><path d="M278,138 L278,150"/></g>
+  <path d="M258,78 Q270,60 282,78 Q272,86 270,98 Q268,86 258,78 Z" fill="#D69A2D" opacity="0.55"/>
+  <g fill="none" stroke="#2D5016" stroke-width="3" stroke-linecap="round" opacity="0.9"><path d="M262,150 Q244,164 226,161"/><path d="M270,152 Q266,170 274,178"/><path d="M278,150 Q296,164 314,160"/></g>
+  <circle cx="466" cy="146" r="30" fill="#2D5016"/><path d="M451,147 L462,158 L483,135" fill="none" stroke="#F5F0E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`,
+  // v6: compass/dial with a root at its base — reads as "guidance, standards, direction,"
+  // tying more directly to ROOTED's framework-driven positioning than a literal school symbol
+  v6: `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="g6" cx="50%" cy="22%" r="90%"><stop offset="0%" stop-color="#3D8886"/><stop offset="60%" stop-color="#2E7D7A"/><stop offset="100%" stop-color="#1D5250"/></radialGradient></defs>
+  <rect width="540" height="190" fill="url(#g6)"/>
+  <circle cx="270" cy="98" r="48" fill="none" stroke="#F5F0E6" stroke-width="4"/>
+  <g stroke="#F5F0E6" stroke-width="2.5" stroke-linecap="round"><path d="M270,50 L270,58"/><path d="M270,138 L270,146"/><path d="M222,98 L230,98"/><path d="M310,98 L318,98"/></g>
+  <path d="M270,72 L282,98 L270,124 L258,98 Z" fill="#B5563F"/>
+  <circle cx="270" cy="98" r="6" fill="#F5F0E6"/>
+  <g fill="none" stroke="#D69A2D" stroke-width="3" stroke-linecap="round" opacity="0.9"><path d="M270,146 Q252,160 234,157"/><path d="M270,146 Q262,164 270,172"/><path d="M270,146 Q288,160 306,156"/></g>
+  <circle cx="466" cy="146" r="30" fill="#B5563F"/><path d="M451,147 L462,158 L483,135" fill="none" stroke="#F5F0E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`
+};
+
+function setRootedULogo(key, btn) {
+  const img = document.getElementById('rooted-u-img');
+  if (!img || !ROOTED_U_LOGOS[key]) return;
+  img.innerHTML = ROOTED_U_LOGOS[key];
+  document.querySelectorAll('.logo-picker-row .wordmark-picker-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  try { localStorage.setItem('rooted-u-logo', key); } catch (e) {}
+}
+
+function initRootedULogo() {
+  let saved = 'v1';
+  try { saved = localStorage.getItem('rooted-u-logo') || 'v1'; } catch (e) {}
+  const img = document.getElementById('rooted-u-img');
+  if (img) img.innerHTML = ROOTED_U_LOGOS[saved] || ROOTED_U_LOGOS.v1;
+  document.querySelectorAll('.logo-picker-row .wordmark-picker-btn').forEach((b, i) => {
+    b.classList.toggle('active', ('v' + (i + 1)) === saved);
+  });
+}
+
+const CARD_BGS = ['bg1', 'bg2', 'bg3', 'bg4', 'bg5'];
+function setCardBg(cardKey, bg, btn) {
+  const el = document.getElementById(cardKey === 'recs' ? 'recs-bg' : 'seemore-bg');
+  if (!el) return;
+  CARD_BGS.forEach(b => el.classList.remove('cardbg-' + b));
+  el.classList.add('cardbg-' + bg);
+  if (btn) {
+    btn.parentElement.querySelectorAll('.wordmark-picker-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  try { localStorage.setItem('rooted-cardbg-' + cardKey, bg); } catch (e) {}
+}
+
+function initCardBgs() {
+  ['recs', 'seemore'].forEach(cardKey => {
+    let saved = 'bg1';
+    try { saved = localStorage.getItem('rooted-cardbg-' + cardKey) || 'bg1'; } catch (e) {}
+    const el = document.getElementById(cardKey === 'recs' ? 'recs-bg' : 'seemore-bg');
+    if (el) el.classList.add('cardbg-' + saved);
+    if (el && el.parentElement) {
+      const pickerBtns = el.parentElement.querySelectorAll('.logo-picker-row .wordmark-picker-btn');
+      pickerBtns.forEach((b, i) => b.classList.toggle('active', CARD_BGS[i] === saved));
+    }
+  });
+}
+
 function initDevPanel() {
   // The gear that opens this panel is currently hidden from the live site (see the
   // .dev-panel-gear{display:none} rule). With no way to close the panel via UI, we
@@ -3240,6 +3361,8 @@ window.addEventListener('DOMContentLoaded', initSidebarStyle);
 window.addEventListener('DOMContentLoaded', initMobileNavStyle);
 window.addEventListener('DOMContentLoaded', initColorTheme);
 window.addEventListener('DOMContentLoaded', initDevPanel);
+window.addEventListener('DOMContentLoaded', initRootedULogo);
+window.addEventListener('DOMContentLoaded', initCardBgs);
 window.addEventListener('DOMContentLoaded', initAuthState);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
