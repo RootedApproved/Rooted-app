@@ -115,7 +115,7 @@ body.navstyle-drawer{padding-bottom:0;}
 .home-new-tagline.tag-v5{font-family:var(--font-b);font-size:12.5px;font-weight:600;color:var(--char);}
 .home-new-tagline.tag-v5 .tag-word2{border-bottom:2px solid var(--forest);padding-bottom:1px;margin-left:4px;}
 .home-new-tagline.tag-v6{font-family:var(--font-b);text-transform:lowercase;letter-spacing:.06em;font-size:12px;font-weight:400;color:var(--muted);}
-.home-ai-widget{margin:24px 18px 18px;}
+.home-ai-widget{margin:44px 18px 18px;}
 .home-ai-input-row{display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--border);border-radius:30px;background:var(--white);transition:border-color .15s;}
 .home-ai-input-row:focus-within{border-color:var(--forest);}
 .home-ai-input-row>i{width:18px;height:18px;flex-shrink:0;color:var(--forest);}
@@ -717,7 +717,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <div class="hnc-sub">Farms, markets, CSAs &amp; more</div>
         <span class="hnc-link">Map page →</span>
       </div>
-      <div class="hnc hnc-full cardbg-warm" id="recs-card" onclick="showScreen('recommendations-placeholder')">
+      <div class="hnc" id="recs-card" onclick="showScreen('recommendations-placeholder')">
         <div class="hnc-title">Recommendations</div>
         <div class="hnc-sub">Your top Tier 1 picks across every category, matched to what you're shopping for right now</div>
         <span class="hnc-link">Coming soon →</span>
@@ -727,7 +727,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <div class="hnc-sub">Education modules</div>
         <span class="hnc-link">Coming soon →</span>
       </div>
-      <div class="hnc hnc-full hnc-center cardbg-warm" onclick="showTab('categories')">
+      <div class="hnc" onclick="showTab('categories')">
         <div class="hnc-title">See More</div>
         <span class="hnc-link">Browse all categories →</span>
       </div>
@@ -2974,8 +2974,8 @@ const ROOTED_U_LOGOS = {
   // with a graduation cap signaling "this is the education section" at a glance
   v4: `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
   <rect width="540" height="190" fill="#FFFFFF"/>
-  <text x="188" y="118" font-size="58" text-anchor="middle">🎓</text>
-  <text x="355" y="115" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="56" fill="#2D5016" text-anchor="middle">RootedU</text>
+  <text x="150" y="118" font-size="58" text-anchor="middle">🎓</text>
+  <text x="320" y="115" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="56" fill="#2D5016" text-anchor="middle">RootedU</text>
 </svg>`,
   // v5: lightbulb with roots instead of a screw base — "insight/learning" paired with growth,
   // warm gold field makes it the brightest, most optimistic-feeling option
