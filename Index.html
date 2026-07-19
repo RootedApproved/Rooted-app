@@ -84,7 +84,7 @@ body.navstyle-drawer{padding-bottom:0;}
 .home-hl em{font-style:italic;color:var(--forest);}
 .home-sub{font-size:13.5px;color:var(--mid);line-height:1.65;max-width:340px;}
 .sec-hd{display:flex;align-items:baseline;justify-content:space-between;padding:22px 18px 11px;gap:10px;}
-.dev-panel-gear{display:flex;align-items:center;cursor:pointer;color:var(--muted);opacity:.35;flex-shrink:0;}
+.dev-panel-gear{display:none;align-items:center;cursor:pointer;color:var(--muted);opacity:.35;flex-shrink:0;}
 .dev-panel-gear:hover{opacity:.8;}
 .dev-panel-gear i{width:15px;height:15px;}
 .dev-toggle-panel{display:none;}
@@ -606,6 +606,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <div class="page">
   <div id="home-new">
     <div class="home-new-hero">
+      <!-- Settings gear (opens dev-toggle-panel: home layout, card style, color theme, etc.)
+           is intentionally hidden from the live site for now per request — set via CSS
+           (.dev-panel-gear{display:none}) rather than deleted, so all toggle functionality
+           stays fully intact in the code for easy future re-enabling. -->
       <span class="dev-panel-gear" style="position:absolute;right:18px;top:14px;" onclick="toggleDevPanel()" title="Site settings"><i data-lucide="settings"></i></span>
       <div class="home-new-wordmark">Rooted.</div>
       <div class="home-new-tagline">RootedApproved</div>
