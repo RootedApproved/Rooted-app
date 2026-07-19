@@ -143,6 +143,8 @@ body.navstyle-drawer{padding-bottom:0;}
 .hnc-sub{font-family:var(--font-b);font-size:12px;color:var(--muted);line-height:1.4;flex:1;}
 .hnc-link{font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--forest);margin-top:8px;}
 .hnc-full{justify-content:flex-end;color:var(--white);}
+.hnc-center{justify-content:center;}
+.hnc-full .logo-picker-row{position:absolute;top:10px;left:12px;right:auto;background:rgba(0,0,0,.35);}
 .hnc-full .hnc-title{color:var(--white);}
 .hnc-full .hnc-sub{color:rgba(255,255,255,.85);}
 .hnc-full .hnc-link{color:var(--white);}
@@ -461,6 +463,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .auth-forgot{text-align:right;margin:-10px 0 16px;font-family:var(--font-b);font-size:12.5px;color:var(--forest);font-weight:600;cursor:pointer;}
 .auth-error{display:none;background:rgba(181,58,47,.1);color:var(--red);border-radius:6px;padding:9px 12px;font-family:var(--font-b);font-size:13px;margin-bottom:14px;}
 .auth-error.show{display:block;}
+.placeholder-screen{max-width:480px;margin:0 auto;padding:24px 20px 60px;text-align:center;}
+.placeholder-back{display:block;text-align:left;font-family:var(--font-b);font-size:13px;font-weight:600;color:var(--forest);cursor:pointer;margin-bottom:20px;}
+.placeholder-title{font-family:var(--font-d);font-weight:900;font-size:24px;color:var(--forest);margin-bottom:12px;}
+.placeholder-sub{font-family:var(--font-b);font-size:14.5px;color:var(--mid);line-height:1.6;}
 .welcome-toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--forest);color:var(--white);padding:13px 22px;border-radius:30px;font-family:var(--font-b);font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:600;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;white-space:nowrap;}
 .welcome-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .mem-card{background:var(--forest);border-radius:8px;padding:17px;margin:16px 18px;}
@@ -700,30 +706,28 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="home-new-grid">
       <div class="hnc" onclick="showScreen('farmers')">
         <div class="hnc-img" style="background-image:url('https://images.unsplash.com/photo-1757609909192-0246239198c0?auto=format&fit=crop&w=600&q=80')"></div>
-        <div class="hnc-title">Food &amp; Store Finder</div>
+        <div class="hnc-title">Local Food Finder</div>
         <div class="hnc-sub">Farms, markets, CSAs &amp; more</div>
         <span class="hnc-link">Map page →</span>
       </div>
-      <div class="hnc hnc-full cardbg-bg1" onclick="showWelcomeToast('Recommendations — coming soon')">
+      <div class="hnc hnc-full cardbg-bg1" id="recs-card" onclick="showScreen('recommendations-placeholder')">
         <div class="hnc-title">Recommendations</div>
         <div class="hnc-sub">Your top Tier 1 picks across every category, matched to what you're shopping for right now</div>
         <span class="hnc-link">Coming soon →</span>
-      </div>
-      <div class="hnc" onclick="showWelcomeToast('Rooted U — coming soon')">
-        <div class="hnc-img" id="rooted-u-img"></div>
         <div class="logo-picker-row" onclick="event.stopPropagation()">
-          <button class="wordmark-picker-btn active" onclick="setRootedULogo('v1',this)">1</button>
-          <button class="wordmark-picker-btn" onclick="setRootedULogo('v2',this)">2</button>
-          <button class="wordmark-picker-btn" onclick="setRootedULogo('v3',this)">3</button>
-          <button class="wordmark-picker-btn" onclick="setRootedULogo('v4',this)">4</button>
-          <button class="wordmark-picker-btn" onclick="setRootedULogo('v5',this)">5</button>
-          <button class="wordmark-picker-btn" onclick="setRootedULogo('v6',this)">6</button>
+          <button class="wordmark-picker-btn active" onclick="setRecsColor('bg1',this)">1</button>
+          <button class="wordmark-picker-btn" onclick="setRecsColor('bg2',this)">2</button>
+          <button class="wordmark-picker-btn" onclick="setRecsColor('bg3',this)">3</button>
+          <button class="wordmark-picker-btn" onclick="setRecsColor('bg4',this)">4</button>
+          <button class="wordmark-picker-btn" onclick="setRecsColor('bg5',this)">5</button>
         </div>
-        <div class="hnc-title">Rooted U</div>
+      </div>
+      <div class="hnc" onclick="showScreen('rooted-u-placeholder')">
+        <div class="hnc-img" id="rooted-u-img"></div>
         <div class="hnc-sub">Education modules</div>
         <span class="hnc-link">Coming soon →</span>
       </div>
-      <div class="hnc hnc-full cardbg-bg4" onclick="showTab('categories')">
+      <div class="hnc hnc-full hnc-center cardbg-bg4" onclick="showTab('categories')">
         <div class="hnc-title">See More</div>
         <span class="hnc-link">Browse all categories →</span>
       </div>
@@ -1273,6 +1277,24 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="auth-forgot" onclick="rootedForgotPassword()">Forgot password?</div>
     <button class="auth-submit-btn auth-submit-btn-login" onclick="rootedLogIn()">Log In</button>
     <div class="auth-switch">New to ROOTED? <span onclick="showScreen('signup')">Create an account</span></div>
+  </div>
+</div></div>
+
+<!-- PLACEHOLDER SCREENS — real, working links, honestly labeled as not built out yet -->
+<div id="screen-rooted-u-placeholder" class="screen"><div class="page">
+  <div class="placeholder-screen">
+    <span class="placeholder-back" onclick="showTab('home')">← Back</span>
+    <div class="hnc-img" id="rooted-u-placeholder-img" style="max-width:320px;margin:24px auto;"></div>
+    <div class="placeholder-title">Rooted U</div>
+    <div class="placeholder-sub">Education modules — this page isn't built out yet, but the link works and this is exactly where it'll live once the 10-module curriculum is ready for each category.</div>
+  </div>
+</div></div>
+
+<div id="screen-recommendations-placeholder" class="screen"><div class="page">
+  <div class="placeholder-screen">
+    <span class="placeholder-back" onclick="showTab('home')">← Back</span>
+    <div class="placeholder-title">Recommendations</div>
+    <div class="placeholder-sub">Your top Tier 1 picks across every category, matched to what you're shopping for right now. This page isn't built out yet, but the link works and this is exactly where it'll live.</div>
   </div>
 </div></div>
 
@@ -2992,14 +3014,39 @@ function setRootedULogo(key, btn) {
   try { localStorage.setItem('rooted-u-logo', key); } catch (e) {}
 }
 
-function initRootedULogo() {
-  let saved = 'v1';
-  try { saved = localStorage.getItem('rooted-u-logo') || 'v1'; } catch (e) {}
-  const img = document.getElementById('rooted-u-img');
-  if (img) img.innerHTML = ROOTED_U_LOGOS[saved] || ROOTED_U_LOGOS.v1;
-  document.querySelectorAll('.logo-picker-row .wordmark-picker-btn').forEach((b, i) => {
-    b.classList.toggle('active', ('v' + (i + 1)) === saved);
+const RECS_COLORS = ['bg1', 'bg2', 'bg3', 'bg4', 'bg5'];
+function setRecsColor(color, btn) {
+  const card = document.getElementById('recs-card');
+  if (!card) return;
+  RECS_COLORS.forEach(c => card.classList.remove('cardbg-' + c));
+  card.classList.add('cardbg-' + color);
+  if (btn) {
+    document.querySelectorAll('#recs-card .logo-picker-row .wordmark-picker-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  try { localStorage.setItem('rooted-recs-color', color); } catch (e) {}
+}
+
+function initRecsColor() {
+  let saved = 'bg1';
+  try { saved = localStorage.getItem('rooted-recs-color') || 'bg1'; } catch (e) {}
+  const card = document.getElementById('recs-card');
+  if (card) {
+    RECS_COLORS.forEach(c => card.classList.remove('cardbg-' + c));
+    card.classList.add('cardbg-' + saved);
+  }
+  document.querySelectorAll('#recs-card .logo-picker-row .wordmark-picker-btn').forEach((b, i) => {
+    b.classList.toggle('active', RECS_COLORS[i] === saved);
   });
+}
+
+function initRootedULogo() {
+  // Picker removed per request — v4 (the "RU" lettermark badge) is now the permanent,
+  // fixed choice, matching what J specifically asked for: capital R, capital U.
+  const img = document.getElementById('rooted-u-img');
+  if (img) img.innerHTML = ROOTED_U_LOGOS.v4;
+  const placeholderImg = document.getElementById('rooted-u-placeholder-img');
+  if (placeholderImg) placeholderImg.innerHTML = ROOTED_U_LOGOS.v4;
 }
 
 function initDevPanel() {
@@ -3323,6 +3370,7 @@ window.addEventListener('DOMContentLoaded', initMobileNavStyle);
 window.addEventListener('DOMContentLoaded', initColorTheme);
 window.addEventListener('DOMContentLoaded', initDevPanel);
 window.addEventListener('DOMContentLoaded', initRootedULogo);
+window.addEventListener('DOMContentLoaded', initRecsColor);
 window.addEventListener('DOMContentLoaded', initAuthState);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
