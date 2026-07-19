@@ -126,10 +126,10 @@ body.navstyle-drawer{padding-bottom:0;}
 .home-ai-messages{display:none;flex-direction:column;gap:10px;margin-top:12px;max-height:360px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 2px;}
 .home-ai-messages.active{display:flex;}
 .home-new-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px 24px;}
-.hnc{position:relative;border:1px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;display:flex;flex-direction:column;min-height:128px;background:var(--white);transition:border-color .15s,transform .15s;}
+.hnc{position:relative;border:1px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;display:flex;flex-direction:column;min-height:190px;background:var(--white);transition:border-color .15s,transform .15s;}
 .hnc:active{transform:scale(.97);}
 .hnc:hover{border-color:var(--forest);}
-.hnc-img{width:100%;height:60px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:10px;overflow:hidden;}
+.hnc-img{width:100%;height:105px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:10px;overflow:hidden;}
 .logo-picker-row{position:absolute;top:52px;left:22px;right:22px;display:flex;justify-content:center;gap:4px;background:rgba(0,0,0,.5);border-radius:10px;padding:3px 4px;}
 .logo-picker-row .wordmark-picker-btn{padding:2px 7px;font-size:9px;background:rgba(255,255,255,.15);color:var(--white);border-color:transparent;}
 .logo-picker-row .wordmark-picker-btn.active{background:var(--white);color:var(--forest);}
@@ -150,6 +150,11 @@ body.navstyle-drawer{padding-bottom:0;}
 .hnc-full .hnc-title{color:var(--white);}
 .hnc-full .hnc-sub{color:rgba(255,255,255,.85);}
 .hnc-full .hnc-link{color:var(--white);}
+.cardbg-warm{background:linear-gradient(150deg,#F5F0E6 0%,#E8DCC4 100%);}
+.hnc-full.cardbg-warm{color:var(--char);}
+.hnc-full.cardbg-warm .hnc-title{color:var(--forest);}
+.hnc-full.cardbg-warm .hnc-sub{color:var(--mid);}
+.hnc-full.cardbg-warm .hnc-link{color:var(--forest);}
 #home-classic{display:none;}
 body.home-layout-classic #home-classic{display:block;}
 body.home-layout-classic #home-new{display:none;}
@@ -712,24 +717,17 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <div class="hnc-sub">Farms, markets, CSAs &amp; more</div>
         <span class="hnc-link">Map page →</span>
       </div>
-      <div class="hnc hnc-full cardbg-bg1" id="recs-card" onclick="showScreen('recommendations-placeholder')">
+      <div class="hnc hnc-full cardbg-warm" id="recs-card" onclick="showScreen('recommendations-placeholder')">
         <div class="hnc-title">Recommendations</div>
         <div class="hnc-sub">Your top Tier 1 picks across every category, matched to what you're shopping for right now</div>
         <span class="hnc-link">Coming soon →</span>
-        <div class="logo-picker-row" onclick="event.stopPropagation()">
-          <button class="wordmark-picker-btn active" onclick="setRecsColor('bg1',this)">1</button>
-          <button class="wordmark-picker-btn" onclick="setRecsColor('bg2',this)">2</button>
-          <button class="wordmark-picker-btn" onclick="setRecsColor('bg3',this)">3</button>
-          <button class="wordmark-picker-btn" onclick="setRecsColor('bg4',this)">4</button>
-          <button class="wordmark-picker-btn" onclick="setRecsColor('bg5',this)">5</button>
-        </div>
       </div>
       <div class="hnc" onclick="showScreen('rooted-u-placeholder')">
         <div class="hnc-img" id="rooted-u-img"></div>
         <div class="hnc-sub">Education modules</div>
         <span class="hnc-link">Coming soon →</span>
       </div>
-      <div class="hnc hnc-full hnc-center cardbg-bg2" onclick="showTab('categories')">
+      <div class="hnc hnc-full hnc-center cardbg-warm" onclick="showTab('categories')">
         <div class="hnc-title">See More</div>
         <span class="hnc-link">Browse all categories →</span>
       </div>
@@ -2976,8 +2974,8 @@ const ROOTED_U_LOGOS = {
   // with a graduation cap signaling "this is the education section" at a glance
   v4: `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
   <rect width="540" height="190" fill="#FFFFFF"/>
-  <text x="205" y="115" font-size="52" text-anchor="middle">🎓</text>
-  <text x="345" y="112" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="48" fill="#2D5016" text-anchor="middle">RootedU</text>
+  <text x="188" y="118" font-size="58" text-anchor="middle">🎓</text>
+  <text x="355" y="115" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="56" fill="#2D5016" text-anchor="middle">RootedU</text>
 </svg>`,
   // v5: lightbulb with roots instead of a screw base — "insight/learning" paired with growth,
   // warm gold field makes it the brightest, most optimistic-feeling option
@@ -3012,32 +3010,6 @@ function setRootedULogo(key, btn) {
   document.querySelectorAll('.logo-picker-row .wordmark-picker-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   try { localStorage.setItem('rooted-u-logo', key); } catch (e) {}
-}
-
-const RECS_COLORS = ['bg1', 'bg2', 'bg3', 'bg4', 'bg5'];
-function setRecsColor(color, btn) {
-  const card = document.getElementById('recs-card');
-  if (!card) return;
-  RECS_COLORS.forEach(c => card.classList.remove('cardbg-' + c));
-  card.classList.add('cardbg-' + color);
-  if (btn) {
-    document.querySelectorAll('#recs-card .logo-picker-row .wordmark-picker-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-  try { localStorage.setItem('rooted-recs-color', color); } catch (e) {}
-}
-
-function initRecsColor() {
-  let saved = 'bg1';
-  try { saved = localStorage.getItem('rooted-recs-color') || 'bg1'; } catch (e) {}
-  const card = document.getElementById('recs-card');
-  if (card) {
-    RECS_COLORS.forEach(c => card.classList.remove('cardbg-' + c));
-    card.classList.add('cardbg-' + saved);
-  }
-  document.querySelectorAll('#recs-card .logo-picker-row .wordmark-picker-btn').forEach((b, i) => {
-    b.classList.toggle('active', RECS_COLORS[i] === saved);
-  });
 }
 
 function initRootedULogo() {
@@ -3370,7 +3342,6 @@ window.addEventListener('DOMContentLoaded', initMobileNavStyle);
 window.addEventListener('DOMContentLoaded', initColorTheme);
 window.addEventListener('DOMContentLoaded', initDevPanel);
 window.addEventListener('DOMContentLoaded', initRootedULogo);
-window.addEventListener('DOMContentLoaded', initRecsColor);
 window.addEventListener('DOMContentLoaded', initAuthState);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
