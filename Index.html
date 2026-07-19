@@ -309,6 +309,15 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .fm-debug-toggle{font-family:var(--font-m);font-size:10.5px;color:var(--muted);cursor:pointer;padding:8px 0;text-align:center;text-decoration:underline;}
 .fm-debug-json{background:var(--char);color:#8FE388;font-family:var(--font-m);font-size:10.5px;padding:12px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-top:4px;}
 .fm-type-badge{display:inline-block;color:var(--white);font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;margin-bottom:8px;letter-spacing:.02em;}
+.fm-flex-layout{display:flex;flex-direction:column;}
+#fm-map{order:10;}
+#fm-status{order:40;}
+#fm-results{order:50;}
+.fm-flex-layout.search-above #fm-search-section{order:8;}
+.fm-flex-layout.search-below #fm-search-section{order:15;}
+.fm-flex-layout.legend-above #fm-legend-section{order:5;}
+.fm-flex-layout.legend-below-map #fm-legend-section{order:12;}
+.fm-flex-layout.legend-below-results #fm-legend-section{order:60;}
 .fm-legend-wrap{background:var(--cream2);border-radius:14px;margin:0 18px 14px;padding:14px 14px 12px;}
 .fm-legend-hd{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:11px;}
 .fm-legend-hd-label{font-size:12.5px;font-weight:700;color:var(--char);}
@@ -1074,35 +1083,54 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="cat-title">Local Food Map</div>
     <p class="cat-desc">Search farmers markets, farms offering direct pickup, and CSAs nationwide via USDA data — plus ROOTED-vetted grocery stores and restaurants in select areas, starting with Santa Monica.</p>
   </div>
+
+  <!-- Layout toggles: control WHERE the zip search and category legend sit relative to the
+       map, via CSS order on this flex container — lets J compare arrangements live without
+       touching actual DOM structure each time. -->
+  <div class="style-toggle-wrap">
+    <span class="style-toggle-label">Zip search position:</span>
+    <button class="style-toggle-btn" id="fm-search-pos-btn-above" onclick="setFmSearchPosition('above')">Above Map</button>
+    <button class="style-toggle-btn" id="fm-search-pos-btn-below" onclick="setFmSearchPosition('below')">Below Map</button>
+  </div>
+  <div class="style-toggle-wrap">
+    <span class="style-toggle-label">Category legend position:</span>
+    <button class="style-toggle-btn" id="fm-legend-pos-btn-above" onclick="setFmLegendPosition('above')">Above Map</button>
+    <button class="style-toggle-btn" id="fm-legend-pos-btn-below-map" onclick="setFmLegendPosition('below-map')">Below Map</button>
+    <button class="style-toggle-btn" id="fm-legend-pos-btn-below-results" onclick="setFmLegendPosition('below-results')">Below Results</button>
+  </div>
+
+  <div class="fm-flex-layout" id="fm-flex-layout">
+    <div class="fm-legend-wrap" id="fm-legend-section">
+      <div class="fm-legend-hd">
+        <span class="fm-legend-hd-label">👆 Tap a category to show or hide it on the map</span>
+        <div class="fm-legend-actions">
+          <button class="fm-legend-action" onclick="setAllLocalFoodTypes(true)">Show All</button>
+          <button class="fm-legend-action" onclick="setAllLocalFoodTypes(false)">Hide All</button>
+        </div>
+      </div>
+      <div class="fm-legend">
+        <button class="fm-toggle active" id="fm-toggle-farmersmarket" onclick="toggleLocalFoodType('farmersmarket')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#2E7D7A"></span>Farmers Market</button>
+        <button class="fm-toggle active" id="fm-toggle-onfarmmarket" onclick="toggleLocalFoodType('onfarmmarket')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#A0622D"></span>On-Farm Pickup</button>
+        <button class="fm-toggle active" id="fm-toggle-csa" onclick="toggleLocalFoodType('csa')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#6B4C7A"></span>CSA</button>
+        <button class="fm-toggle active" id="fm-toggle-grocery" onclick="toggleLocalFoodType('grocery')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#B8860B"></span>Grocery Store</button>
+        <button class="fm-toggle active" id="fm-toggle-restaurant" onclick="toggleLocalFoodType('restaurant')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#8B3A3A"></span>Restaurant</button>
+      </div>
+    </div>
+    <div style="padding:0 18px 4px" id="fm-search-section">
+      <div class="fm-search-row">
+        <input type="text" id="fm-zip-input" class="fm-zip-input" placeholder="Enter zip code" inputmode="numeric" maxlength="5" onkeydown="if(event.key==='Enter')searchFarmersMarkets()">
+        <button class="fm-search-btn" onclick="searchFarmersMarkets()">Search</button>
+      </div>
+      <button class="fm-locate-btn" onclick="useMyLocationForMarkets()">📍 Use My Location</button>
+    </div>
+    <div id="fm-map" class="fm-map"></div>
+    <div id="fm-status" class="fm-status">Enter a zip code or use your location to find nearby farms, markets, and CSAs.</div>
+    <div id="fm-results" class="fm-results"></div>
+  </div>
+
   <div style="padding:0 18px 14px">
     <div class="callout"><div class="callout-lbl">What's a CSA?</div><div class="callout-tx">Short for Community Supported Agriculture. You pay a local farm in advance for a "share," and in return get a box of whatever's freshly harvested that week — usually picked up weekly from a set nearby location. It's a direct relationship with a real farm, not a subscription box company: you don't choose what's inside, you get what's in season, and your money supports that specific farm rather than a distributor.</div></div>
   </div>
-  <div class="fm-legend-wrap">
-    <div class="fm-legend-hd">
-      <span class="fm-legend-hd-label">👆 Tap a category to show or hide it on the map</span>
-      <div class="fm-legend-actions">
-        <button class="fm-legend-action" onclick="setAllLocalFoodTypes(true)">Show All</button>
-        <button class="fm-legend-action" onclick="setAllLocalFoodTypes(false)">Hide All</button>
-      </div>
-    </div>
-    <div class="fm-legend">
-      <button class="fm-toggle active" id="fm-toggle-farmersmarket" onclick="toggleLocalFoodType('farmersmarket')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#2E7D7A"></span>Farmers Market</button>
-      <button class="fm-toggle active" id="fm-toggle-onfarmmarket" onclick="toggleLocalFoodType('onfarmmarket')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#A0622D"></span>On-Farm Pickup</button>
-      <button class="fm-toggle active" id="fm-toggle-csa" onclick="toggleLocalFoodType('csa')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#6B4C7A"></span>CSA</button>
-      <button class="fm-toggle active" id="fm-toggle-grocery" onclick="toggleLocalFoodType('grocery')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#B8860B"></span>Grocery Store</button>
-      <button class="fm-toggle active" id="fm-toggle-restaurant" onclick="toggleLocalFoodType('restaurant')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#8B3A3A"></span>Restaurant</button>
-    </div>
-  </div>
-  <div style="padding:0 18px 4px">
-    <div class="fm-search-row">
-      <input type="text" id="fm-zip-input" class="fm-zip-input" placeholder="Enter zip code" inputmode="numeric" maxlength="5" onkeydown="if(event.key==='Enter')searchFarmersMarkets()">
-      <button class="fm-search-btn" onclick="searchFarmersMarkets()">Search</button>
-    </div>
-    <button class="fm-locate-btn" onclick="useMyLocationForMarkets()">📍 Use My Location</button>
-  </div>
-  <div id="fm-map" class="fm-map"></div>
-  <div id="fm-status" class="fm-status">Enter a zip code or use your location to find nearby farms, markets, and CSAs.</div>
-  <div id="fm-results" class="fm-results"></div>
 </div></div>
 
 <!-- PERSONAL CARE HUB -->
@@ -1927,7 +1955,7 @@ const SUBCAT_EDU = {
 };
 
 // ── NAVIGATION ───────────────────────────────────────────────────────
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();if(id==='farmers')initFarmersMap();}
 function showTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab[data-tab="'+tab+'"]').forEach(b=>b.classList.add('active'));if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='farmers')showScreen('farmers');else if(tab==='profile')showScreen('profile');}
 function goHome(){showTab('home');}
 function showCategory(cat){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));showScreen(cat);}
@@ -3022,6 +3050,42 @@ function initRootedULogo() {
   if (placeholderImg) placeholderImg.innerHTML = ROOTED_U_LOGOS.v4;
 }
 
+// Lets J compare where the zip search and category legend sit relative to the map, via CSS
+// order on the shared flex container — purely a layout preference, doesn't touch the actual
+// map/search functionality at all.
+function setFmSearchPosition(pos) {
+  const layout = document.getElementById('fm-flex-layout');
+  if (!layout) return;
+  layout.classList.remove('search-above', 'search-below');
+  layout.classList.add('search-' + pos);
+  document.querySelectorAll('[id^="fm-search-pos-btn-"]').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('fm-search-pos-btn-' + pos);
+  if (btn) btn.classList.add('active');
+  try { localStorage.setItem('rooted-fm-search-pos', pos); } catch (e) {}
+}
+
+function setFmLegendPosition(pos) {
+  const layout = document.getElementById('fm-flex-layout');
+  if (!layout) return;
+  layout.classList.remove('legend-above', 'legend-below-map', 'legend-below-results');
+  layout.classList.add('legend-' + pos);
+  document.querySelectorAll('[id^="fm-legend-pos-btn-"]').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('fm-legend-pos-btn-' + pos);
+  if (btn) btn.classList.add('active');
+  try { localStorage.setItem('rooted-fm-legend-pos', pos); } catch (e) {}
+}
+
+function initFmLayout() {
+  let searchPos = 'above';
+  let legendPos = 'above';
+  try {
+    searchPos = localStorage.getItem('rooted-fm-search-pos') || 'above';
+    legendPos = localStorage.getItem('rooted-fm-legend-pos') || 'above';
+  } catch (e) {}
+  setFmSearchPosition(searchPos);
+  setFmLegendPosition(legendPos);
+}
+
 function initDevPanel() {
   // The gear that opens this panel is currently hidden from the live site (see the
   // .dev-panel-gear{display:none} rule). With no way to close the panel via UI, we
@@ -3342,6 +3406,7 @@ window.addEventListener('DOMContentLoaded', initSidebarStyle);
 window.addEventListener('DOMContentLoaded', initMobileNavStyle);
 window.addEventListener('DOMContentLoaded', initColorTheme);
 window.addEventListener('DOMContentLoaded', initDevPanel);
+window.addEventListener('DOMContentLoaded', initFmLayout);
 window.addEventListener('DOMContentLoaded', initRootedULogo);
 window.addEventListener('DOMContentLoaded', initAuthState);
 document.addEventListener('click', (e) => {
