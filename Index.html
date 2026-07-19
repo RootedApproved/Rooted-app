@@ -129,7 +129,8 @@ body.navstyle-drawer{padding-bottom:0;}
 .hnc{border:1px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;display:flex;flex-direction:column;min-height:128px;background:var(--white);transition:border-color .15s,transform .15s;}
 .hnc:active{transform:scale(.97);}
 .hnc:hover{border-color:var(--forest);}
-.hnc-img{width:100%;height:60px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:10px;}
+.hnc-img{width:100%;height:60px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:10px;overflow:hidden;}
+.hnc-img svg{width:100%;height:100%;display:block;}
 .hnc-title{font-family:var(--font-d);font-weight:700;font-size:16px;color:var(--char);margin-bottom:4px;}
 .hnc-sub{font-family:var(--font-b);font-size:12px;color:var(--muted);line-height:1.4;flex:1;}
 .hnc-link{font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--forest);margin-top:8px;}
@@ -697,6 +698,37 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <span class="hnc-link">Coming soon →</span>
       </div>
       <div class="hnc" onclick="showWelcomeToast('Rooted U — coming soon')">
+        <div class="hnc-img"><svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="20%" r="90%">
+      <stop offset="0%" stop-color="#4A7A28"/>
+      <stop offset="55%" stop-color="#2D5016"/>
+      <stop offset="100%" stop-color="#1B3410"/>
+    </radialGradient>
+  </defs>
+  <rect width="540" height="190" fill="url(#glow)"/>
+
+  <!-- signature motif: roots rising into an open-book bloom — rooted growth, fused with
+       education. Centered now that no text needs to share the frame. -->
+  <g fill="none" stroke="#D69A2D" stroke-width="3.5" stroke-linecap="round" opacity="0.85">
+    <path d="M270,172 Q250,186 228,183"/>
+    <path d="M270,172 Q260,190 270,196"/>
+    <path d="M270,172 Q290,186 312,182"/>
+  </g>
+  <path d="M270,172 C270,138 269,100 270,62" fill="none" stroke="#F5F0E6" stroke-width="5" stroke-linecap="round"/>
+
+  <g stroke-linejoin="round" stroke-linecap="round">
+    <path d="M270,62 C232,47 206,56 198,38 C224,28 254,34 270,62 Z" fill="#F5F0E6" opacity="0.96"/>
+    <path d="M270,62 C308,47 334,56 342,38 C316,28 286,34 270,62 Z" fill="#F5F0E6" opacity="0.96"/>
+    <path d="M270,62 L270,36" stroke="#2D5016" stroke-width="2.4"/>
+    <path d="M204,44 Q228,53 269,60" fill="none" stroke="#2D5016" stroke-width="1.5" opacity="0.5"/>
+    <path d="M336,44 Q312,53 271,60" fill="none" stroke="#2D5016" stroke-width="1.5" opacity="0.5"/>
+  </g>
+
+  <!-- terracotta checkmark badge, echoing the ROOTED logo -->
+  <circle cx="466" cy="146" r="30" fill="#B5563F"/>
+  <path d="M451,147 L462,158 L483,135" fill="none" stroke="#F5F0E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
         <div class="hnc-title">Rooted U</div>
         <div class="hnc-sub">Education modules</div>
         <span class="hnc-link">Coming soon →</span>
