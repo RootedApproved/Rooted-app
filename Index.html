@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="ROOTED">
 <title>ROOTED — The Standard for Healthy Living</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--cream:#F5F0E6;--cream2:#EDE7D9;--forest:#2D5016;--sage:#5C8A2E;--teal:#2E7D7A;--earth:#8B6914;--red:#B53A2F;--terracotta:#B5563F;--gold:#D69A2D;--char:#1A1A1A;--mid:#4A4A4A;--muted:#888;--border:#DDD8CE;--white:#FFFFFF;--bar-h:56px;--nav-h:52px;--font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',system-ui,sans-serif;--font-m:'DM Mono',monospace;}
 /* THEME 2 — Midnight: dark mode, inspired by Notion/Linear/Oura. Note --white is
@@ -89,6 +89,23 @@ body.navstyle-drawer{padding-bottom:0;}
 .dev-panel-gear i{width:15px;height:15px;}
 .dev-toggle-panel{display:none;}
 .dev-toggle-panel.show{display:block;}
+.home-new-hero{padding:36px 18px 6px;text-align:center;position:relative;}
+.home-new-wordmark{font-family:var(--font-d);font-style:italic;font-weight:700;font-size:44px;color:var(--forest);line-height:1;}
+.home-new-tagline{font-family:var(--font-d);font-style:italic;font-size:13.5px;color:var(--muted);margin-top:7px;}
+.home-ai-bar{display:flex;align-items:center;gap:10px;margin:24px 18px 18px;padding:14px 18px;border:1px solid var(--border);border-radius:30px;background:var(--white);cursor:pointer;color:var(--muted);font-family:var(--font-b);font-size:13.5px;transition:border-color .15s;}
+.home-ai-bar:hover{border-color:var(--forest);}
+.home-ai-bar i{width:18px;height:18px;flex-shrink:0;color:var(--forest);}
+.home-new-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px 24px;}
+.hnc{border:1px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;display:flex;flex-direction:column;min-height:128px;background:var(--white);transition:border-color .15s,transform .15s;}
+.hnc:active{transform:scale(.97);}
+.hnc:hover{border-color:var(--forest);}
+.hnc-img{width:100%;height:60px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:10px;}
+.hnc-title{font-family:var(--font-d);font-weight:700;font-size:16px;color:var(--char);margin-bottom:4px;}
+.hnc-sub{font-family:var(--font-b);font-size:12px;color:var(--muted);line-height:1.4;flex:1;}
+.hnc-link{font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--forest);margin-top:8px;}
+#home-classic{display:none;}
+body.home-layout-classic #home-classic{display:block;}
+body.home-layout-classic #home-new{display:none;}
 .sec-title{font-family:var(--font-d);font-size:17px;font-weight:700;display:inline-flex;align-items:center;gap:9px;}
 .sec-title::before{content:'';display:inline-block;width:5px;height:18px;background:var(--terracotta);border-radius:2px;}
 .sec-link{font-size:12px;color:var(--teal);font-weight:600;cursor:pointer;}
@@ -494,6 +511,8 @@ body.style-photo .cat-photo-cycle{display:flex;}
   .top-nav{left:180px;padding:0 32px;}
   .page{max-width:920px;margin:0 auto;padding-top:calc(var(--nav-h) + 8px);}
   .cat-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 32px 28px;}
+  .home-new-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 32px 28px;}
+  .home-ai-bar{margin-left:32px;margin-right:32px;}
   .subcat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px 32px 28px;}
   .prod-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 32px 8px;}
   .cat-hd,.sec-hd{padding-left:32px;padding-right:32px;}
@@ -578,13 +597,43 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <!-- HOME -->
 <div id="screen-home" class="screen active">
 <div class="page">
-  <div class="home-hero">
-    <div class="eyebrow">Standards · Education · Products</div>
-    <h1 class="home-hl">The <em>trusted</em><br>standard for<br>healthy living.</h1>
-    <p class="home-sub">Every product rated against a published standard. No guesswork.</p>
+  <div id="home-new">
+    <div class="home-new-hero">
+      <span class="dev-panel-gear" style="position:absolute;right:18px;top:14px;" onclick="toggleDevPanel()" title="Site settings"><i data-lucide="settings"></i></span>
+      <div class="home-new-wordmark">Rooted.</div>
+      <div class="home-new-tagline">RootedApproved</div>
+    </div>
+    <div class="home-ai-bar" onclick="openHomeAssistant()"><i data-lucide="sparkles"></i><span>Ask Rooted's AI assistant to help you get rooted...</span></div>
+    <div class="home-new-grid">
+      <div class="hnc" onclick="showScreen('farmers')">
+        <div class="hnc-img" style="background-image:url('https://images.unsplash.com/photo-1757609909192-0246239198c0?auto=format&fit=crop&w=600&q=80')"></div>
+        <div class="hnc-title">Food &amp; Store Finder</div>
+        <div class="hnc-sub">Farms, markets, CSAs &amp; more</div>
+        <span class="hnc-link">Map page →</span>
+      </div>
+      <div class="hnc" onclick="showWelcomeToast('Recommendations — coming soon')">
+        <div class="hnc-title">Recommendations</div>
+        <div class="hnc-sub">Pulled from across all categories</div>
+        <span class="hnc-link">Coming soon →</span>
+      </div>
+      <div class="hnc" onclick="showWelcomeToast('Rooted U — coming soon')">
+        <div class="hnc-title">Rooted U</div>
+        <div class="hnc-sub">Education modules</div>
+        <span class="hnc-link">Coming soon →</span>
+      </div>
+      <div class="hnc" onclick="showTab('categories')">
+        <div class="hnc-title">See More</div>
+        <div class="hnc-sub">Browse everything</div>
+        <span class="hnc-link">Categories →</span>
+      </div>
+    </div>
   </div>
-  <div class="sec-hd"><span class="sec-title">Categories</span><span class="dev-panel-gear" onclick="toggleDevPanel()" title="Site settings"><i data-lucide="settings"></i></span><span class="sec-link" onclick="showTab('categories')">See all →</span></div>
   <div id="dev-toggle-panel" class="dev-toggle-panel">
+  <div class="style-toggle-wrap">
+    <span class="style-toggle-label">Home layout:</span>
+    <button class="style-toggle-btn" id="homelayout-btn-new" onclick="setHomeLayout('new')">New</button>
+    <button class="style-toggle-btn" id="homelayout-btn-classic" onclick="setHomeLayout('classic')">Classic</button>
+  </div>
   <div class="style-toggle-wrap">
     <span class="style-toggle-label">Card style:</span>
     <button class="style-toggle-btn" id="style-btn-color" onclick="setCardStyle('color')">Color</button>
@@ -631,6 +680,13 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <label class="home-cat-option"><input type="checkbox" id="homecat-supplements" onchange="setHomeCategoryVisibility('supplements', this.checked)"><i data-lucide="pill"></i>Supplements</label>
   </div>
   </div>
+  <div id="home-classic">
+  <div class="home-hero">
+    <div class="eyebrow">Standards · Education · Products</div>
+    <h1 class="home-hl">The <em>trusted</em><br>standard for<br>healthy living.</h1>
+    <p class="home-sub">Every product rated against a published standard. No guesswork.</p>
+  </div>
+  <div class="sec-hd"><span class="sec-title">Categories</span><span class="sec-link" onclick="showTab('categories')">See all →</span></div>
   <div class="cat-grid">
     <div class="cat-card" data-cat="clothing" data-photo-variant="1" onclick="showCategory('clothing')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('clothing')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="shirt"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Clothing (Men's)</div><div class="cat-ct js-clothing-total">30 products rated</div></div></div>
     <div class="cat-card" data-cat="oral" data-photo-variant="1" onclick="showCategory('oral')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('oral')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="smile"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Oral Care</div><div class="cat-ct js-oral-total">10 products rated</div></div></div>
@@ -663,6 +719,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="mc-title">Why does ROOTED exist?</div>
     <div class="mc-sub">Marketing is not a standard. We built one.</div>
     <span class="mc-link">Read our mission →</span>
+  </div>
   </div>
 </div>
 </div>
@@ -2521,6 +2578,31 @@ function initCardStyle() {
   setCardStyle(saved);
 }
 
+// New 4-card AI-forward home layout vs. the original hero + full category grid layout.
+// New is the default; Classic remains fully intact and can be restored anytime via the
+// dev panel (gear icon) without losing any functionality — nothing was deleted, just hidden.
+function setHomeLayout(layout) {
+  document.body.classList.remove('home-layout-new', 'home-layout-classic');
+  document.body.classList.add('home-layout-' + layout);
+  document.querySelectorAll('#homelayout-btn-new, #homelayout-btn-classic').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('homelayout-btn-' + layout);
+  if (btn) btn.classList.add('active');
+  try { localStorage.setItem('rooted-home-layout', layout); } catch (e) {}
+}
+
+function initHomeLayout() {
+  let saved = 'new';
+  try { saved = localStorage.getItem('rooted-home-layout') || 'new'; } catch (e) {}
+  setHomeLayout(saved);
+}
+
+// Opens the ROOTED Assistant chat panel from the home screen search bar and focuses
+// the input so the person can start typing immediately.
+function openHomeAssistant() {
+  if (!chatOpen) toggleChat();
+  setTimeout(() => { const inp = document.getElementById('chat-input'); if (inp) inp.focus(); }, 300);
+}
+
 // Live comparison toggle for the desktop sidebar background — same pattern as setCardStyle.
 function setSidebarStyle(style) {
   document.body.classList.remove('sidebar-dark', 'sidebar-terracotta', 'sidebar-gradient');
@@ -2724,6 +2806,7 @@ window.addEventListener('DOMContentLoaded', initFeaturedImages);
 window.addEventListener('DOMContentLoaded', updateProductCounts);
 window.addEventListener('DOMContentLoaded', applyFeatureFlags);
 window.addEventListener('DOMContentLoaded', initCardStyle);
+window.addEventListener('DOMContentLoaded', initHomeLayout);
 window.addEventListener('DOMContentLoaded', initPhotoVariants);
 window.addEventListener('DOMContentLoaded', initHomeCategoryVisibility);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
