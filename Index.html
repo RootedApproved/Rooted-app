@@ -91,7 +91,26 @@ body.navstyle-drawer{padding-bottom:0;}
 .dev-toggle-panel.show{display:block;}
 .home-new-hero{padding:36px 18px 6px;text-align:center;position:relative;}
 .home-new-wordmark{font-family:var(--font-d);font-style:italic;font-weight:700;font-size:44px;color:var(--forest);line-height:1;}
-.home-new-tagline{font-family:var(--font-d);font-style:italic;font-size:13.5px;color:var(--muted);margin-top:7px;}
+.home-new-wordmark.wm-weight-regular{font-weight:400;}
+.home-new-wordmark.wm-case-upper{text-transform:uppercase;}
+.home-new-wordmark.wm-case-lower{text-transform:lowercase;}
+.wordmark-picker{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:10px 0 4px;}
+.wordmark-picker-btn{font-family:var(--font-b);font-size:10.5px;font-weight:600;color:var(--mid);background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:4px 10px;cursor:pointer;}
+.wordmark-picker-btn.active{color:var(--white);background:var(--forest);border-color:var(--forest);}
+.tagline-picker{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px 0 2px;}
+.home-new-tagline{margin-top:7px;}
+.home-new-tagline .tag-word2{margin-left:3px;}
+.home-new-tagline.tag-v1{font-family:var(--font-b);text-transform:uppercase;letter-spacing:.14em;font-size:10.5px;font-weight:700;color:var(--forest);}
+.home-new-tagline.tag-v1 .tag-word2{margin-left:.14em;}
+.home-new-tagline.tag-v2{font-family:var(--font-b);font-size:13px;}
+.home-new-tagline.tag-v2 .tag-word1{font-weight:800;color:var(--forest);}
+.home-new-tagline.tag-v2 .tag-word2{font-weight:400;color:var(--muted);margin-left:4px;}
+.home-new-tagline.tag-v3{display:inline-block;font-family:var(--font-b);text-transform:uppercase;letter-spacing:.1em;font-size:9.5px;font-weight:700;color:var(--forest);background:var(--cream2);padding:5px 14px;border-radius:20px;}
+.home-new-tagline.tag-v4{font-family:var(--font-m);text-transform:uppercase;letter-spacing:.08em;font-size:10px;color:var(--mid);}
+.home-new-tagline.tag-v4 .tag-word1::after{content:' · ';color:var(--teal);}
+.home-new-tagline.tag-v5{font-family:var(--font-b);font-size:12.5px;font-weight:600;color:var(--char);}
+.home-new-tagline.tag-v5 .tag-word2{border-bottom:2px solid var(--forest);padding-bottom:1px;margin-left:4px;}
+.home-new-tagline.tag-v6{font-family:var(--font-b);text-transform:lowercase;letter-spacing:.06em;font-size:12px;font-weight:400;color:var(--muted);}
 .home-ai-widget{margin:24px 18px 18px;}
 .home-ai-input-row{display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--border);border-radius:30px;background:var(--white);transition:border-color .15s;}
 .home-ai-input-row:focus-within{border-color:var(--forest);}
@@ -634,13 +653,29 @@ body.style-photo .cat-photo-cycle{display:flex;}
            (.dev-panel-gear{display:none}) rather than deleted, so all toggle functionality
            stays fully intact in the code for easy future re-enabling. -->
       <span class="dev-panel-gear" style="position:absolute;right:18px;top:14px;" onclick="toggleDevPanel()" title="Site settings"><i data-lucide="settings"></i></span>
-      <div class="home-new-wordmark">Rooted.</div>
-      <div class="home-new-tagline">RootedApproved</div>
+      <div class="home-new-wordmark wm-weight-bold wm-case-title" id="home-wordmark">Rooted.</div>
+      <div class="wordmark-picker">
+        <button class="wordmark-picker-btn active" onclick="setWordmarkStyle('bold','title',this)">Bold Rr</button>
+        <button class="wordmark-picker-btn" onclick="setWordmarkStyle('bold','upper',this)">Bold RR</button>
+        <button class="wordmark-picker-btn" onclick="setWordmarkStyle('bold','lower',this)">Bold rr</button>
+        <button class="wordmark-picker-btn" onclick="setWordmarkStyle('regular','title',this)">Reg. Rr</button>
+        <button class="wordmark-picker-btn" onclick="setWordmarkStyle('regular','upper',this)">Reg. RR</button>
+        <button class="wordmark-picker-btn" onclick="setWordmarkStyle('regular','lower',this)">Reg. rr</button>
+      </div>
+      <div class="home-new-tagline tag-v1" id="home-tagline"><span class="tag-word1">Rooted</span> <span class="tag-word2">Approved</span></div>
+      <div class="tagline-picker">
+        <button class="wordmark-picker-btn active" onclick="setTaglineStyle('tag-v1',this)">1</button>
+        <button class="wordmark-picker-btn" onclick="setTaglineStyle('tag-v2',this)">2</button>
+        <button class="wordmark-picker-btn" onclick="setTaglineStyle('tag-v3',this)">3</button>
+        <button class="wordmark-picker-btn" onclick="setTaglineStyle('tag-v4',this)">4</button>
+        <button class="wordmark-picker-btn" onclick="setTaglineStyle('tag-v5',this)">5</button>
+        <button class="wordmark-picker-btn" onclick="setTaglineStyle('tag-v6',this)">6</button>
+      </div>
     </div>
     <div class="home-ai-widget">
       <div class="home-ai-input-row">
         <i data-lucide="sparkles"></i>
-        <input type="text" id="home-chat-input" class="home-ai-input" placeholder="Ask Rooted's AI assistant to help you get rooted..." onkeydown="if(event.key==='Enter')sendHomeChatMessage()">
+        <input type="text" id="home-chat-input" class="home-ai-input" placeholder="Ask anything to get rooted..." onkeydown="if(event.key==='Enter')sendHomeChatMessage()">
         <button class="home-ai-send" onclick="sendHomeChatMessage()" aria-label="Ask"><i data-lucide="send"></i></button>
       </div>
       <div class="home-ai-messages" id="home-ai-messages"></div>
@@ -2861,6 +2896,28 @@ function initDevPanel() {
 
 function toggleHomeCatPanel() {
   document.getElementById('home-cat-panel').classList.toggle('open');
+}
+
+// Temporary experiment toggles so J can flip between wordmark/tagline treatments live
+// and pick a favorite. Once a direction is chosen, hardcode it and remove these controls.
+function setWordmarkStyle(weight, caseStyle, btn) {
+  const el = document.getElementById('home-wordmark');
+  el.classList.remove('wm-weight-bold', 'wm-weight-regular', 'wm-case-title', 'wm-case-upper', 'wm-case-lower');
+  el.classList.add('wm-weight-' + weight, 'wm-case-' + caseStyle);
+  if (btn) {
+    btn.parentElement.querySelectorAll('.wordmark-picker-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+}
+
+function setTaglineStyle(variant, btn) {
+  const el = document.getElementById('home-tagline');
+  el.classList.remove('tag-v1', 'tag-v2', 'tag-v3', 'tag-v4', 'tag-v5', 'tag-v6');
+  el.classList.add(variant);
+  if (btn) {
+    btn.parentElement.querySelectorAll('.wordmark-picker-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
 }
 
 function toggleStandardCard(id) {
