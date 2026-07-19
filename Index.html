@@ -143,7 +143,9 @@ body.navstyle-drawer{padding-bottom:0;}
 .hnc-sub{font-family:var(--font-b);font-size:12px;color:var(--muted);line-height:1.4;flex:1;}
 .hnc-link{font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--forest);margin-top:8px;}
 .hnc-full{justify-content:flex-end;color:var(--white);}
-.hnc-center{justify-content:center;}
+.hnc-center{justify-content:center;align-items:center;text-align:center;padding:24px 16px;}
+.hnc-center .hnc-title{font-size:19px;margin-bottom:8px;}
+.hnc-center .hnc-link{font-size:14px;margin-top:0;}
 .hnc-full .logo-picker-row{position:absolute;top:10px;left:12px;right:auto;background:rgba(0,0,0,.35);}
 .hnc-full .hnc-title{color:var(--white);}
 .hnc-full .hnc-sub{color:rgba(255,255,255,.85);}
@@ -727,7 +729,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <div class="hnc-sub">Education modules</div>
         <span class="hnc-link">Coming soon →</span>
       </div>
-      <div class="hnc hnc-full hnc-center cardbg-bg4" onclick="showTab('categories')">
+      <div class="hnc hnc-full hnc-center cardbg-bg2" onclick="showTab('categories')">
         <div class="hnc-title">See More</div>
         <span class="hnc-link">Browse all categories →</span>
       </div>
@@ -2969,15 +2971,13 @@ const ROOTED_U_LOGOS = {
   <path d="M262,120 L270,132 L278,120 Z" fill="#D69A2D"/>
   <circle cx="466" cy="146" r="30" fill="#B5563F"/><path d="M451,147 L462,158 L483,135" fill="none" stroke="#F5F0E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`,
-  // v4: circular lettermark badge with a laurel wreath — the most "formal/academic" of the
-  // set, reads like a seal or credential rather than an illustration
+  // v4: simplified per direct feedback — plain white background matching the rest of the
+  // card, "RootedU" spelled out in full (capital R, capital U) in ROOTED's forest green,
+  // with a graduation cap signaling "this is the education section" at a glance
   v4: `<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
-  <defs><radialGradient id="g4" cx="50%" cy="30%" r="85%"><stop offset="0%" stop-color="#F0E4C8"/><stop offset="100%" stop-color="#D9C89E"/></radialGradient></defs>
-  <rect width="540" height="190" fill="url(#g4)"/>
-  <circle cx="270" cy="105" r="52" fill="#2D5016"/>
-  <text x="270" y="122" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="46" fill="#F5F0E6" text-anchor="middle">RU</text>
-  <g fill="none" stroke="#D69A2D" stroke-width="3" stroke-linecap="round"><path d="M222,148 Q210,165 218,178"/><path d="M226,152 Q217,166 224,176"/><path d="M318,148 Q330,165 322,178"/><path d="M314,152 Q323,166 316,176"/></g>
-  <circle cx="466" cy="146" r="30" fill="#B5563F"/><path d="M451,147 L462,158 L483,135" fill="none" stroke="#F5F0E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect width="540" height="190" fill="#FFFFFF"/>
+  <text x="205" y="115" font-size="52" text-anchor="middle">🎓</text>
+  <text x="345" y="112" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="48" fill="#2D5016" text-anchor="middle">RootedU</text>
 </svg>`,
   // v5: lightbulb with roots instead of a screw base — "insight/learning" paired with growth,
   // warm gold field makes it the brightest, most optimistic-feeling option
