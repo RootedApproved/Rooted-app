@@ -984,7 +984,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <div class="cat-hd">
     <button class="cat-back" onclick="goHome()">← Home</button>
     <div class="cat-title">Local Food Map</div>
-    <p class="cat-desc">Search farmers markets, farms offering direct pickup, CSAs, and food hubs nationwide via USDA data — plus ROOTED-vetted grocery stores and restaurants in select areas, starting with Santa Monica.</p>
+    <p class="cat-desc">Search farmers markets, farms offering direct pickup, and CSAs nationwide via USDA data — plus ROOTED-vetted grocery stores and restaurants in select areas, starting with Santa Monica.</p>
+  </div>
+  <div style="padding:0 18px 14px">
+    <div class="callout"><div class="callout-lbl">What's a CSA?</div><div class="callout-tx">Short for Community Supported Agriculture. You pay a local farm in advance for a "share," and in return get a box of whatever's freshly harvested that week — usually picked up weekly from a set nearby location. It's a direct relationship with a real farm, not a subscription box company: you don't choose what's inside, you get what's in season, and your money supports that specific farm rather than a distributor.</div></div>
   </div>
   <div class="fm-legend-wrap">
     <div class="fm-legend-hd">
@@ -998,7 +1001,6 @@ body.style-photo .cat-photo-cycle{display:flex;}
       <button class="fm-toggle active" id="fm-toggle-farmersmarket" onclick="toggleLocalFoodType('farmersmarket')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#2E7D7A"></span>Farmers Market</button>
       <button class="fm-toggle active" id="fm-toggle-onfarmmarket" onclick="toggleLocalFoodType('onfarmmarket')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#A0622D"></span>On-Farm Pickup</button>
       <button class="fm-toggle active" id="fm-toggle-csa" onclick="toggleLocalFoodType('csa')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#6B4C7A"></span>CSA</button>
-      <button class="fm-toggle active" id="fm-toggle-foodhub" onclick="toggleLocalFoodType('foodhub')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#4A6572"></span>Food Hub</button>
       <button class="fm-toggle active" id="fm-toggle-grocery" onclick="toggleLocalFoodType('grocery')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#B8860B"></span>Grocery Store</button>
       <button class="fm-toggle active" id="fm-toggle-restaurant" onclick="toggleLocalFoodType('restaurant')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#8B3A3A"></span>Restaurant</button>
     </div>
@@ -1011,7 +1013,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="fm-locate-btn" onclick="useMyLocationForMarkets()">📍 Use My Location</button>
   </div>
   <div id="fm-map" class="fm-map"></div>
-  <div id="fm-status" class="fm-status">Enter a zip code or use your location to find nearby farms, markets, CSAs, and food hubs.</div>
+  <div id="fm-status" class="fm-status">Enter a zip code or use your location to find nearby farms, markets, and CSAs.</div>
   <div id="fm-results" class="fm-results"></div>
 </div></div>
 
@@ -1057,7 +1059,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="cat-row" onclick="showCategory('cookware')"><span class="cat-row-icon"><i data-lucide="cooking-pot"></i></span><div class="cat-row-info"><div class="cat-row-name">Cookware &amp; Kitchen</div><div class="cat-row-sub js-cookware-total">20 products rated</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row" onclick="showCategory('water')"><span class="cat-row-icon"><i data-lucide="droplet"></i></span><div class="cat-row-info"><div class="cat-row-name">Water</div><div class="cat-row-sub js-water-total">10 products rated</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row" onclick="showCategory('personal')"><span class="cat-row-icon"><i data-lucide="sparkles"></i></span><div class="cat-row-info"><div class="cat-row-name">Personal Care</div><div class="cat-row-sub js-personal-total">8 products rated</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showScreen('farmers')"><span class="cat-row-icon"><i data-lucide="wheat"></i></span><div class="cat-row-info"><div class="cat-row-name">Local Food Map</div><div class="cat-row-sub">Farmers markets, farms, CSAs & food hubs, nationwide</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" onclick="showScreen('farmers')"><span class="cat-row-icon"><i data-lucide="wheat"></i></span><div class="cat-row-info"><div class="cat-row-name">Local Food Map</div><div class="cat-row-sub">Farmers markets, farms & CSAs, nationwide</div></div><span class="status-pill live">Live</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row"><span class="cat-row-icon"><i data-lucide="bed"></i></span><div class="cat-row-info"><div class="cat-row-name">Textiles &amp; Bedroom</div><div class="cat-row-sub">Sheets, pillows, mattresses</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row"><span class="cat-row-icon"><i data-lucide="brush-cleaning"></i></span><div class="cat-row-info"><div class="cat-row-name">Cleaning &amp; Home</div><div class="cat-row-sub">Dish soap, laundry, surfaces</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
     <div class="cat-row"><span class="cat-row-icon"><i data-lucide="wind"></i></span><div class="cat-row-info"><div class="cat-row-name">Air Quality</div><div class="cat-row-sub">Purifiers, ventilation, humidity</div></div><span class="status-pill soon">Soon</span><span class="cat-row-arr">›</span></div>
@@ -2043,7 +2045,7 @@ function imgFallback(img, emoji, size) {
 }
 
 // ── PRODUCT COUNTS (auto-updates as products are added — never hand-edit these numbers) ─
-// ── LOCAL FOOD MAP (USDA Local Food Directories API: farmers markets, on-farm markets, CSAs, food hubs) ─
+// ── LOCAL FOOD MAP (USDA Local Food Directories API: farmers markets, on-farm markets, CSAs) ─
 // To go live nationwide: apply for a free key at
 // https://www.usdalocalfoodportal.com/fe/fregisterpublicapi/ and paste it below.
 // Everything else already works end-to-end against mock data shaped exactly
@@ -2063,7 +2065,6 @@ const LOCAL_FOOD_TYPES = {
   farmersmarket: { label: 'Farmers Market', icon: '🌾', color: '#2E7D7A' },
   onfarmmarket:  { label: 'On-Farm Pickup', icon: '🚜', color: '#A0622D' },
   csa:           { label: 'CSA',            icon: '📦', color: '#6B4C7A' },
-  foodhub:       { label: 'Food Hub',       icon: '🏭', color: '#4A6572' },
   grocery:       { label: 'Grocery Store',  icon: '🛒', color: '#B8860B' },
   restaurant:    { label: 'Restaurant',     icon: '🍽️', color: '#8B3A3A' },
 };
@@ -2106,6 +2107,8 @@ const CURATED_LISTINGS = [
   {_type:'farmersmarket',listing_name:"Westwood Village Farmers' Market",location_address:"1036 Broxton Ave",location_city:"Los Angeles",location_state:"CA",location_zipcode:"90024",location_x:-118.4461798,location_y:34.0618288,schedules:"Thu 12pm-5pm, year-round",products:"Produce, French pastries, jams, nut butters, vintage goods",practices:"Weekly college-town market near UCLA; verify specific certifications per vendor",media_website:"https://www.farmhabit.com/westwoodvillage"},
   {_type:'farmersmarket',listing_name:"Century City Certified Farmers Market",location_address:"10100 Santa Monica Blvd",location_city:"Los Angeles",location_state:"CA",location_zipcode:"90067",location_x:-118.4167528,location_y:34.0613911,schedules:"Thu 10am-2pm, year-round",products:"Produce, hot food vendors, aguas frescas, fresh fish",practices:"Certified Farmers' Market — verify specific certifications per vendor",media_website:null},
   {_type:'farmersmarket',listing_name:"Motor Avenue Farmers Market (Palms)",location_address:"National Blvd & Motor Ave",location_city:"Los Angeles",location_state:"CA",location_zipcode:"90034",location_x:-118.4112504,location_y:34.0289295,schedules:"Sun 9am-2pm, year-round",products:"Produce, fresh eggs, sourdough bread, honey, coffee",practices:"Small, community-driven neighborhood market in Palms — verify specific certifications per vendor",media_website:"https://motoravenuemarket.com/"},
+  {_type:'csa',listing_name:"Good Box Organics (formerly Good Life Organics)",location_address:"Ocean Park / Santa Monica South pickup site",location_city:"Santa Monica",location_state:"CA",location_zipcode:"90405",location_x:-118.4770,location_y:34.0021,schedules:"Weekly boxes, pickup network across the Westside — Ocean Park/Santa Monica South (Mon 12-7:30pm), Brentwood/Santa Monica North (Tue 11am-8pm), Venice (Mon 1-8pm), Pacific Palisades (Tue 3:30-7:30pm), Mar Vista (Mon 11am-6pm), Culver City (Mon 11am-8pm), Westwood (Thu 3-6pm); home delivery also available across LA",products:"Seasonal organic fruit & vegetable boxes ($18-$50+ depending on size), sourced from a named family-farm network (Something Good/John Givens Farm in Goleta, Etheridge Organics in Dinuba, Sunrise Organic Farm in Lompoc, Frecker Farms in Carpinteria, Sycamore Hill Ranch in Fillmore, and others)",practices:"100% organic sourcing across its core farm network; direct, named farmer relationships rather than an anonymous aggregator; also runs farm-to-school programs at LA-area schools",media_website:"https://goodboxorganics.com/"},
+  {_type:'csa',listing_name:"South Central Farmers Cooperative — CSA",location_address:"Culver City pickup site (exact address sent day-of)",location_city:"Culver City",location_state:"CA",location_zipcode:"90066",location_x:-118.4051,location_y:34.0140,schedules:"Sunday pickup in Culver City; also Sunday pickup in NELA (Highland Park area) and LA-area home delivery — order by Thursday for that week",products:"Full or Mini seasonal CSA produce box, sliding-scale pricing",practices:"Farmer-owned cooperative descended from the historic South Central Farm (1992-2006); grows on their own farmland in Buttonwillow, CA; food-justice mission, sliding-scale pricing so members pay what they can afford",media_website:"https://www.southcentralfarmers.com/"},
 ];
 
 const MOCK_MARKETS = [
@@ -2119,8 +2122,6 @@ const MOCK_MARKETS = [
   {_type:'onfarmmarket',listing_name:"Polyface Farm",location_address:"43 Pure Meadows Ln",location_city:"Swoope",location_state:"VA",location_zipcode:"24479",location_x:-79.1876,location_y:38.2065,schedules:"By appointment, call ahead",products:"Beef, Pork, Chicken, Eggs, Turkey",practices:"Grass Fed, Pasture Raised, No Antibiotics, No Hormones",media_website:"https://polyfacefarms.com/"},
   {_type:'csa',listing_name:"Full Belly Farm CSA",location_address:"Rd 43",location_city:"Guinda",location_state:"CA",location_zipcode:"95637",location_x:-122.1953,location_y:38.8544,schedules:"Weekly pickup, year-round",products:"Seasonal Produce, Fruit, Flowers",practices:"Certified Organic",media_website:"https://fullbellyfarm.com/"},
   {_type:'csa',listing_name:"Brookfield Farm CSA",location_address:"24 Hulst Rd",location_city:"Amherst",location_state:"MA",location_zipcode:"01002",location_x:-72.5451,location_y:42.3671,schedules:"Weekly pickup, Jun-Oct",products:"Vegetables, Herbs, Flowers",practices:"Certified Organic, Biodynamic",media_website:"https://brookfieldfarm.org/"},
-  {_type:'foodhub',listing_name:"Common Market Mid-Atlantic",location_address:"2233 Jasper St",location_city:"Philadelphia",location_state:"PA",location_zipcode:"19125",location_x:-75.1277,location_y:39.9764,schedules:"Wholesale distribution, weekdays",products:"Produce, Dairy, Meat, Grains (aggregated from regional farms)",practices:"Sustainably Grown, Supports Small Farms",media_website:"https://www.commonmarket.org/"},
-  {_type:'foodhub',listing_name:"Iowa Food Hub",location_address:"117 W Greene St",location_city:"Postville",location_state:"IA",location_zipcode:"52162",location_x:-91.5701,location_y:43.0822,schedules:"Wholesale distribution, weekdays",products:"Produce, Meat, Eggs, Dairy (aggregated from regional farms)",practices:"Non-GMO, Supports Small Farms",media_website:"https://iowafoodhub.com/"},
 ];
 
 function haversineMiles(lat1, lon1, lat2, lon2) {
@@ -2170,7 +2171,7 @@ async function fetchFarmersMarkets(lat, lng, zipCode) {
     // Query all four USDA directories in parallel. If one fails, the others still show —
     // a partial result set is far more useful than the whole search failing.
     // (grocery/restaurant are curated-only and never queried against the USDA API.)
-    const usdaTypes = ['farmersmarket', 'onfarmmarket', 'csa', 'foodhub'];
+    const usdaTypes = ['farmersmarket', 'onfarmmarket', 'csa'];
     const results = await Promise.allSettled(usdaTypes.map(t => fetchOneDirectory(t, lat, lng, zipCode)));
     const usdaResults = results.filter(r => r.status === 'fulfilled').flatMap(r => r.value);
     const failed = results.filter(r => r.status === 'rejected');
