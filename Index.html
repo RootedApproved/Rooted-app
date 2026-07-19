@@ -92,9 +92,16 @@ body.navstyle-drawer{padding-bottom:0;}
 .home-new-hero{padding:36px 18px 6px;text-align:center;position:relative;}
 .home-new-wordmark{font-family:var(--font-d);font-style:italic;font-weight:700;font-size:44px;color:var(--forest);line-height:1;}
 .home-new-tagline{font-family:var(--font-d);font-style:italic;font-size:13.5px;color:var(--muted);margin-top:7px;}
-.home-ai-bar{display:flex;align-items:center;gap:10px;margin:24px 18px 18px;padding:14px 18px;border:1px solid var(--border);border-radius:30px;background:var(--white);cursor:pointer;color:var(--muted);font-family:var(--font-b);font-size:13.5px;transition:border-color .15s;}
-.home-ai-bar:hover{border-color:var(--forest);}
-.home-ai-bar i{width:18px;height:18px;flex-shrink:0;color:var(--forest);}
+.home-ai-widget{margin:24px 18px 18px;}
+.home-ai-input-row{display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--border);border-radius:30px;background:var(--white);transition:border-color .15s;}
+.home-ai-input-row:focus-within{border-color:var(--forest);}
+.home-ai-input-row>i{width:18px;height:18px;flex-shrink:0;color:var(--forest);}
+.home-ai-input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:var(--font-b);font-size:13.5px;color:var(--char);}
+.home-ai-input::placeholder{color:var(--muted);}
+.home-ai-send{border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--forest);flex-shrink:0;padding:2px;}
+.home-ai-send i{width:18px;height:18px;}
+.home-ai-messages{display:none;flex-direction:column;gap:10px;margin-top:12px;max-height:360px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 2px;}
+.home-ai-messages.active{display:flex;}
 .home-new-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px 24px;}
 .hnc{border:1px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;display:flex;flex-direction:column;min-height:128px;background:var(--white);transition:border-color .15s,transform .15s;}
 .hnc:active{transform:scale(.97);}
@@ -512,7 +519,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   .page{max-width:920px;margin:0 auto;padding-top:calc(var(--nav-h) + 8px);}
   .cat-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 32px 28px;}
   .home-new-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 32px 28px;}
-  .home-ai-bar{margin-left:32px;margin-right:32px;}
+  .home-ai-widget{margin-left:32px;margin-right:32px;}
   .subcat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px 32px 28px;}
   .prod-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 32px 8px;}
   .cat-hd,.sec-hd{padding-left:32px;padding-right:32px;}
@@ -603,7 +610,14 @@ body.style-photo .cat-photo-cycle{display:flex;}
       <div class="home-new-wordmark">Rooted.</div>
       <div class="home-new-tagline">RootedApproved</div>
     </div>
-    <div class="home-ai-bar" onclick="openHomeAssistant()"><i data-lucide="sparkles"></i><span>Ask Rooted's AI assistant to help you get rooted...</span></div>
+    <div class="home-ai-widget">
+      <div class="home-ai-input-row">
+        <i data-lucide="sparkles"></i>
+        <input type="text" id="home-chat-input" class="home-ai-input" placeholder="Ask Rooted's AI assistant to help you get rooted..." onkeydown="if(event.key==='Enter')sendHomeChatMessage()">
+        <button class="home-ai-send" onclick="sendHomeChatMessage()" aria-label="Ask"><i data-lucide="send"></i></button>
+      </div>
+      <div class="home-ai-messages" id="home-ai-messages"></div>
+    </div>
     <div class="home-new-grid">
       <div class="hnc" onclick="showScreen('farmers')">
         <div class="hnc-img" style="background-image:url('https://images.unsplash.com/photo-1757609909192-0246239198c0?auto=format&fit=crop&w=600&q=80')"></div>
@@ -1550,7 +1564,7 @@ const SUBCAT_EDU = {
 };
 
 // ── NAVIGATION ───────────────────────────────────────────────────────
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();}
 function showTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab[data-tab="'+tab+'"]').forEach(b=>b.classList.add('active'));if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='farmers')showScreen('farmers');else if(tab==='profile')showScreen('profile');}
 function goHome(){showTab('home');}
 function showCategory(cat){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));showScreen(cat);}
@@ -1895,14 +1909,12 @@ function tierLabelText(tier) {
   return { '1': 'Tier 1 — Rooted Approved', '2': 'Tier 2 — Good Option', '3': 'Tier 3 — Budget/Transitional', '4': 'Tier 4 — Not Recommended' }[tier] || 'Unrated';
 }
 
-async function sendChatMessage() {
-  const input = document.getElementById('chat-input');
-  const message = input.value.trim();
+async function sendChatMessageCore(inputEl, messagesEl) {
+  const message = inputEl.value.trim();
   if (!message) return;
-  const messagesEl = document.getElementById('chat-messages');
 
   messagesEl.innerHTML += `<div class="chat-msg chat-msg-user">${message.replace(/</g, '&lt;')}</div>`;
-  input.value = '';
+  inputEl.value = '';
   messagesEl.scrollTop = messagesEl.scrollHeight;
 
   // FREE PATH: a confident direct product match is answered instantly from the database —
@@ -1941,6 +1953,22 @@ async function sendChatMessage() {
   }
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
+
+async function sendChatMessage() {
+  const input = document.getElementById('chat-input');
+  const messagesEl = document.getElementById('chat-messages');
+  await sendChatMessageCore(input, messagesEl);
+}
+
+// Inline home-screen version: same logic as the modal chat panel, but the answer
+// renders right on the home screen instead of opening the chat-panel modal.
+async function sendHomeChatMessage() {
+  const input = document.getElementById('home-chat-input');
+  const messagesEl = document.getElementById('home-ai-messages');
+  if (input.value.trim()) messagesEl.classList.add('active');
+  await sendChatMessageCore(input, messagesEl);
+}
+
 
 // ── IMAGE FALLBACK ────────────────────────────────────────────────────
 // IMAGE SYSTEM: auto-fetches og:image from product URL via CORS proxy,
@@ -2588,19 +2616,25 @@ function setHomeLayout(layout) {
   const btn = document.getElementById('homelayout-btn-' + layout);
   if (btn) btn.classList.add('active');
   try { localStorage.setItem('rooted-home-layout', layout); } catch (e) {}
+  updateChatFabVisibility();
+}
+
+// The 💬 floating chat button is only hidden when we're on Home AND the New layout
+// (which has its own inline ask-a-question bar) is active. Every other screen — and
+// Home in Classic mode, which has no inline bar — always keeps the 💬 button available.
+function updateChatFabVisibility() {
+  const fab = document.getElementById('chat-fab');
+  if (!fab) return;
+  const homeScreen = document.getElementById('screen-home');
+  const onHome = !!(homeScreen && homeScreen.classList.contains('active'));
+  const newLayout = document.body.classList.contains('home-layout-new');
+  fab.style.display = (onHome && newLayout) ? 'none' : 'flex';
 }
 
 function initHomeLayout() {
   let saved = 'new';
   try { saved = localStorage.getItem('rooted-home-layout') || 'new'; } catch (e) {}
   setHomeLayout(saved);
-}
-
-// Opens the ROOTED Assistant chat panel from the home screen search bar and focuses
-// the input so the person can start typing immediately.
-function openHomeAssistant() {
-  if (!chatOpen) toggleChat();
-  setTimeout(() => { const inp = document.getElementById('chat-input'); if (inp) inp.focus(); }, 300);
 }
 
 // Live comparison toggle for the desktop sidebar background — same pattern as setCardStyle.
