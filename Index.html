@@ -60,7 +60,9 @@ body.navstyle-drawer{padding-bottom:0;}
 .nav-brand{font-family:var(--font-d);font-weight:900;font-size:20px;color:var(--forest);letter-spacing:.04em;cursor:pointer;display:flex;align-items:center;gap:8px;}
 .brand-logo{width:26px;height:26px;flex-shrink:0;}
 .nav-right{display:flex;align-items:center;gap:12px;}
-.nav-search{display:flex;align-items:center;gap:7px;background:var(--cream2);border:1px solid var(--border);border-radius:20px;padding:7px 14px;cursor:pointer;color:var(--mid);font-family:var(--font-b);font-size:13px;transition:border-color .15s,background .15s;}
+/* Hidden per request — a Search tab already exists on the bottom nav / sidebar, making this
+   top-right search bar redundant. Hidden via CSS, not deleted, so it can come back easily. */
+.nav-search{display:none;align-items:center;gap:7px;background:var(--cream2);border:1px solid var(--border);border-radius:20px;padding:7px 14px;cursor:pointer;color:var(--mid);font-family:var(--font-b);font-size:13px;transition:border-color .15s,background .15s;}
 .nav-search:hover{border-color:var(--sage);background:var(--white);}
 .nav-search i{width:15px;height:15px;stroke-width:1.75;}
 .nav-search-label{display:none;}
@@ -94,11 +96,13 @@ body.navstyle-drawer{padding-bottom:0;}
 .home-new-wordmark.wm-weight-regular{font-weight:400;}
 .home-new-wordmark.wm-case-upper{text-transform:uppercase;}
 .home-new-wordmark.wm-case-lower{text-transform:lowercase;}
-.wordmark-picker{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:10px 0 4px;}
+/* Hidden per request — style pickers and the "Rooted Approved" tagline removed from the
+   live site but kept fully functional in the code for future re-enabling. */
+.wordmark-picker{display:none;flex-wrap:wrap;justify-content:center;gap:6px;margin:10px 0 4px;}
 .wordmark-picker-btn{font-family:var(--font-b);font-size:10.5px;font-weight:600;color:var(--mid);background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:4px 10px;cursor:pointer;}
 .wordmark-picker-btn.active{color:var(--white);background:var(--forest);border-color:var(--forest);}
-.tagline-picker{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px 0 2px;}
-.home-new-tagline{margin-top:7px;}
+.tagline-picker{display:none;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px 0 2px;}
+.home-new-tagline{display:none;margin-top:7px;}
 .home-new-tagline .tag-word2{margin-left:3px;}
 .home-new-tagline.tag-v1{font-family:var(--font-b);text-transform:uppercase;letter-spacing:.14em;font-size:10.5px;font-weight:700;color:var(--forest);}
 .home-new-tagline.tag-v1 .tag-word2{margin-left:.14em;}
