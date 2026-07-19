@@ -2576,9 +2576,13 @@ function toggleDevPanel() {
 }
 
 function initDevPanel() {
-  let saved = '0';
-  try { saved = localStorage.getItem('rooted-dev-panel') || '0'; } catch (e) {}
-  document.getElementById('dev-toggle-panel').classList.toggle('show', saved === '1');
+  // The gear that opens this panel is currently hidden from the live site (see the
+  // .dev-panel-gear{display:none} rule). With no way to close the panel via UI, we
+  // always force it closed on load rather than honoring a stale "left open" state
+  // from before the gear was hidden. toggleDevPanel() and the panel itself are left
+  // fully functional in code for whenever the gear is re-enabled.
+  document.getElementById('dev-toggle-panel').classList.remove('show');
+  try { localStorage.setItem('rooted-dev-panel', '0'); } catch (e) {}
 }
 
 function toggleHomeCatPanel() {
