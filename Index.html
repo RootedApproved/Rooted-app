@@ -750,6 +750,11 @@ body.style-photo .cat-photo-cycle{display:flex;}
   </div>
   <div id="dev-toggle-panel" class="dev-toggle-panel">
   <div class="style-toggle-wrap">
+    <span class="style-toggle-label">Membership Paywall:</span>
+    <button class="style-toggle-btn" id="paywall-btn-on" onclick="setPaywallEnabled(true)">On</button>
+    <button class="style-toggle-btn" id="paywall-btn-off" onclick="setPaywallEnabled(false)">Off (everyone full access)</button>
+  </div>
+  <div class="style-toggle-wrap">
     <span class="style-toggle-label">Home layout:</span>
     <button class="style-toggle-btn" id="homelayout-btn-new" onclick="setHomeLayout('new')">New</button>
     <button class="style-toggle-btn" id="homelayout-btn-classic" onclick="setHomeLayout('classic')">Classic</button>
@@ -1220,7 +1225,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="profile-join-btn" id="profile-action-btn" onclick="showScreen('signup')">Create Account / Log In</button>
   </div>
   <div class="mem-card">
-    <div class="mem-eye">ROOTED Member — $9/mo</div>
+    <div class="mem-eye">ROOTED Member — $10/mo</div>
     <div class="mem-title">Unlock the full database</div>
     <div class="mem-sub">Every product, every tier, every rationale.</div>
     <div class="mem-perks">
@@ -1233,7 +1238,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <!-- Routes to Sign Up for now, since an account is needed before checkout either way.
          Once Stripe is built, this should check login state: if already logged in, go
          straight to Stripe Checkout for the Member plan instead of back to signup. -->
-    <button class="mem-cta" id="mem-cta-btn" onclick="showScreen('signup')">Join for $9/month →</button>
+    <button class="mem-cta" id="mem-cta-btn" onclick="showScreen('signup')">Join for $10/month →</button>
   </div>
   <div class="prof-sec">
     <div class="prof-sec-title">Account</div>
@@ -1636,6 +1641,19 @@ body.style-photo .cat-photo-cycle{display:flex;}
 </div>
 </div>
 
+<!-- PAYWALL -->
+<div id="screen-paywall" class="screen">
+<div class="page">
+  <div style="padding:70px 24px 24px;text-align:center;">
+    <div style="font-size:38px;margin-bottom:14px;">🔒</div>
+    <div class="tier-page-title" id="paywall-title">Members Only</div>
+    <p class="tier-page-sub" id="paywall-message">This is part of ROOTED Membership.</p>
+    <button class="btn-buy" style="margin-top:10px;" onclick="showScreen('signup')">Join for $10/month →</button>
+    <div style="margin-top:16px;"><span class="sec-link" onclick="showTab('home')">← Back to Home</span></div>
+  </div>
+</div>
+</div>
+
 <!-- BOTTOM BAR (mobile) -->
 <!-- ROOTED ASSISTANT: floating chat button + panel -->
 <button class="chat-fab" id="chat-fab" onclick="toggleChat()" aria-label="Ask ROOTED Assistant"><i data-lucide="message-circle"></i></button>
@@ -1951,7 +1969,30 @@ const SUBCAT_EDU = {
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();if(id==='farmers')initFarmersMap();}
 function showTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab[data-tab="'+tab+'"]').forEach(b=>b.classList.add('active'));if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='farmers')showScreen('farmers');else if(tab==='profile')showScreen('profile');}
 function goHome(){showTab('home');}
-function showCategory(cat){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));showScreen(cat);}
+// Human-readable names for the paywall message — kept in sync manually since there
+// are only a dozen categories total.
+const CATEGORY_LABELS = {
+  clothing: "Clothing", oral: "Oral Care", food: "Food & Diet", cookware: "Cookware & Kitchen",
+  water: "Water", personal: "Personal Care", textiles: "Textiles & Bedroom", cleaning: "Cleaning & Home",
+  air: "Air Quality", lighting: "Lighting & Circadian Health", sunlight: "Sunlight & Recovery", supplements: "Supplements",
+};
+
+// Shows the paywall screen with a category-specific message instead of the real content.
+function showPaywall(featureName) {
+  document.getElementById('paywall-title').textContent = 'Members Only';
+  document.getElementById('paywall-message').textContent =
+    `${featureName} is part of ROOTED Membership. Join for full access to every category.`;
+  showScreen('paywall');
+}
+
+function showCategory(cat){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  if (!hasFullAccess() && !FREE_CATEGORIES.includes(cat)) {
+    showPaywall(CATEGORY_LABELS[cat] || 'This category');
+    return;
+  }
+  showScreen(cat);
+}
 function showGolfHub(){showScreen('golf-hub');}
 function showWorkoutHub(){showScreen('workout-hub');}
 function showSuitsHub(){showScreen('suits-hub');}
@@ -2339,10 +2380,23 @@ async function sendChatMessageCore(inputEl, messagesEl) {
 
   // FREE PATH: a confident direct product match is answered instantly from the database —
   // no API call, no cost. Only genuinely open-ended questions reach the paid model below.
-  const directMatch = findTopProductMatch(message);
+  // Only take the free instant-match shortcut for short, clearly single-part questions —
+  // otherwise a longer or multi-part message (e.g. "X, and also Y?") could silently get
+  // answered with just a product lookup while the rest of the question gets dropped.
+  const looksMultiPart = message.split('?').length > 2 || /\band also\b|\balso,?\s/i.test(message) || message.split(/\s+/).length > 12;
+  const directMatch = looksMultiPart ? null : findTopProductMatch(message);
   if (directMatch) {
     const reply = `<strong>${directMatch.brand} ${directMatch.name}</strong> — ${tierLabelText(directMatch.tier)}<br><br>${directMatch.verdict}${directMatch.price ? `<br><br>Price: ${directMatch.price}` : ''}`;
     messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${reply}</div>`;
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return;
+  }
+
+  // Free members only get the instant, zero-cost database lookup above. Anything more
+  // open-ended requires the paid AI model, which is a ROOTED Member benefit.
+  if (!hasFullAccess()) {
+    const upsellReply = `That's a bit more open-ended than I can answer for free — try asking about a specific product by name (like "SAXX Ballpark Boxer Briefs"), or <span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="showScreen('signup')">join for $10/month →</span> for full AI answers on anything.`;
+    messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${upsellReply}</div>`;
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return;
   }
@@ -2722,6 +2776,13 @@ function practiceScore(practicesStr) {
 }
 
 let activeLocalFoodTypes = new Set(Object.keys(LOCAL_FOOD_TYPES));
+
+// Free members only see FREE_FOOD_MAP_TYPES (restaurants by default); every other type
+// stays hidden from the map/list/markers regardless of which filter toggles are active,
+// until they join or REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS is turned off.
+function canSeeListingType(type) {
+  return hasFullAccess() || FREE_FOOD_MAP_TYPES.includes(type);
+}
 let lastRawListings = null;
 let lastNormalizedMarkets = [];
 
@@ -2781,7 +2842,7 @@ function normalizeListing(m) {
 function renderMarkersForActiveTypes() {
   clearFarmersMarkers();
   lastNormalizedMarkets.forEach(mk => {
-    if (!activeLocalFoodTypes.has(mk.type)) return;
+    if (!activeLocalFoodTypes.has(mk.type) || !canSeeListingType(mk.type)) return;
     if (isNaN(mk.lat) || isNaN(mk.lng)) return;
     const typeInfo = LOCAL_FOOD_TYPES[mk.type];
     const icon = L.divIcon({
@@ -2802,7 +2863,16 @@ function updateListForViewport() {
   const resultsEl = document.getElementById('fm-results');
   resultsEl.innerHTML = '';
 
-  const byType = lastNormalizedMarkets.filter(mk => activeLocalFoodTypes.has(mk.type));
+  const byType = lastNormalizedMarkets.filter(mk => activeLocalFoodTypes.has(mk.type) && canSeeListingType(mk.type));
+  if (!hasFullAccess()) {
+    const hiddenCount = lastNormalizedMarkets.filter(mk => activeLocalFoodTypes.has(mk.type) && !canSeeListingType(mk.type)).length;
+    if (hiddenCount > 0) {
+      const upsell = document.createElement('div');
+      upsell.style.cssText = 'padding:12px 16px;margin-bottom:10px;background:var(--cream2);border-radius:8px;font-size:12.5px;color:var(--mid);text-align:center;';
+      upsell.innerHTML = `${hiddenCount} more listing${hiddenCount === 1 ? '' : 's'} (farmers markets, CSAs, groceries) are members-only. <span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="showScreen('signup')">Join for $10/month →</span>`;
+      resultsEl.appendChild(upsell);
+    }
+  }
   if (!byType.length) {
     statusEl.textContent = lastNormalizedMarkets.length
       ? 'No listings match your current filters — try enabling more categories above.'
@@ -2889,7 +2959,7 @@ function renderLocalFoodResults(rawMarkets) {
   // view is immediately useful, rather than zoomed out to show the entire 60-mile fetch radius.
   // Panning/zooming out afterward reveals the rest, since all markers already exist on the map.
   const activeSorted = lastNormalizedMarkets
-    .filter(mk => activeLocalFoodTypes.has(mk.type) && !isNaN(mk.lat) && !isNaN(mk.lng))
+    .filter(mk => activeLocalFoodTypes.has(mk.type) && canSeeListingType(mk.type) && !isNaN(mk.lat) && !isNaN(mk.lng))
     .sort((a, b) => (a.distance ?? 999) - (b.distance ?? 999));
   const nearbyForInitialView = activeSorted.slice(0, 15);
   if (nearbyForInitialView.length) {
@@ -3198,6 +3268,21 @@ function initCardStyle() {
 // New 4-card AI-forward home layout vs. the original hero + full category grid layout.
 // New is the default; Classic remains fully intact and can be restored anytime via the
 // dev panel (gear icon) without losing any functionality — nothing was deleted, just hidden.
+// Membership paywall on/off toggle — persists across visits, and re-renders any
+// currently visible gated content immediately so the effect is visible without a reload.
+function setPaywallEnabled(enabled) {
+  REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS = enabled;
+  try { localStorage.setItem('rooted-paywall-enabled', enabled ? '1' : '0'); } catch (e) {}
+  document.getElementById('paywall-btn-on')?.classList.toggle('active', enabled);
+  document.getElementById('paywall-btn-off')?.classList.toggle('active', !enabled);
+  if (typeof lastNormalizedMarkets !== 'undefined' && lastNormalizedMarkets.length) updateListForViewport();
+}
+
+function initPaywallToggleUI() {
+  document.getElementById('paywall-btn-on')?.classList.toggle('active', REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS);
+  document.getElementById('paywall-btn-off')?.classList.toggle('active', !REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS);
+}
+
 function setHomeLayout(layout) {
   document.body.classList.remove('home-layout-new', 'home-layout-classic');
   document.body.classList.add('home-layout-' + layout);
@@ -3281,6 +3366,28 @@ function setColorTheme(theme) {
 // protected by database security rules (Row Level Security), unlike a normal secret API key.
 const SUPABASE_URL = 'https://albpewafjrktxhuydzke.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsYnBld2FmanJrdHhodXlkemtlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzQxMTMsImV4cCI6MjA5OTg1MDExM30.OkD7_w-HQcGzV4gpNmiWa94XPCP0pH743_uRaBWwjfg';
+// ── MEMBERSHIP GATING CONFIG ──────────────────────────────────────────────
+// Master switch. Set the DEFAULT below to false to disable the paywall by default —
+// everyone gets full access regardless of membership tier. This can also be flipped
+// live via the dev panel toggle (Membership Paywall: On/Off), which persists across
+// visits — the toggle always wins over this default once someone's used it.
+const PAYWALL_DEFAULT = true;
+let REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS = PAYWALL_DEFAULT;
+try {
+  const savedPaywall = localStorage.getItem('rooted-paywall-enabled');
+  if (savedPaywall !== null) REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS = savedPaywall === '1';
+} catch (e) {}
+
+// Category ids free members can access in full. To change what's free, just
+// add or remove ids from this list — nothing else needs to change.
+// All category ids: 'clothing','oral','food','cookware','water','personal',
+// 'textiles','cleaning','air','lighting','sunlight','supplements'
+const FREE_CATEGORIES = ['clothing', 'cookware', 'food'];
+
+// Local Food Map listing types free members can see (everything else shows a
+// paywall prompt instead). Options: 'farmersmarket','onfarmmarket','csa','grocery','restaurant'
+const FREE_FOOD_MAP_TYPES = ['restaurant'];
+
 let rootedSupabase = null;
 try {
   if (typeof supabase !== 'undefined' && !SUPABASE_URL.includes('YOUR-PROJECT') && !SUPABASE_ANON_KEY.includes('YOUR_ANON_KEY')) {
@@ -3354,6 +3461,18 @@ async function rootedSignOut() {
   showTab('home');
 }
 
+// Tracks the current visitor's real membership tier so gating checks elsewhere in the
+// app (categories, Local Food Map, chat) can read it synchronously without re-querying
+// Supabase every time. Updated whenever auth state or subscription status changes.
+let currentMembershipTier = 'free';
+
+// The one function every gating check calls. Honors the master
+// REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS switch above — flip that to false and this
+// returns true for everyone, instantly lifting every paywall in the app.
+function hasFullAccess() {
+  return !REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS || currentMembershipTier === 'member';
+}
+
 function updateProfileUIForAuthState(session) {
   const nameEl = document.getElementById('profile-name');
   const avEl = document.getElementById('profile-av');
@@ -3370,13 +3489,14 @@ function updateProfileUIForAuthState(session) {
     if (memBtnEl) memBtnEl.onclick = () => startCheckout(session.user.id, session.user.email);
     refreshMembershipStatus(session.user.id);
   } else {
+    currentMembershipTier = 'free';
     nameEl.textContent = 'Guest';
     avEl.textContent = 'R';
     tierEl.textContent = 'Free Member';
     btnEl.textContent = 'Create Account / Log In';
     btnEl.onclick = () => showScreen('signup');
     if (memBtnEl) {
-      memBtnEl.textContent = 'Join for $9/month →';
+      memBtnEl.textContent = 'Join for $10/month →';
       memBtnEl.onclick = () => showScreen('signup');
     }
   }
@@ -3387,21 +3507,22 @@ function updateProfileUIForAuthState(session) {
 async function refreshMembershipStatus(userId) {
   const tierEl = document.getElementById('profile-tier');
   const memBtnEl = document.getElementById('mem-cta-btn');
-  if (!rootedSupabase) { tierEl.textContent = 'Free Member'; return; }
+  if (!rootedSupabase) { currentMembershipTier = 'free'; tierEl.textContent = 'Free Member'; return; }
   const { data, error } = await rootedSupabase
     .from('profiles')
     .select('subscription_tier, stripe_customer_id')
     .eq('id', userId)
     .single();
-  if (error || !data) { tierEl.textContent = 'Free Member'; return; }
+  if (error || !data) { currentMembershipTier = 'free'; tierEl.textContent = 'Free Member'; return; }
   const isMember = data.subscription_tier === 'member';
+  currentMembershipTier = isMember ? 'member' : 'free';
   tierEl.textContent = isMember ? 'ROOTED Member' : 'Free Member';
   if (memBtnEl) {
     if (isMember) {
       memBtnEl.textContent = 'Manage Membership →';
       memBtnEl.onclick = () => openBillingPortal(data.stripe_customer_id);
     } else {
-      memBtnEl.textContent = 'Join for $9/month →';
+      memBtnEl.textContent = 'Join for $10/month →';
       memBtnEl.onclick = () => startCheckout(userId, null);
     }
   }
@@ -3524,6 +3645,7 @@ window.addEventListener('DOMContentLoaded', updateProductCounts);
 window.addEventListener('DOMContentLoaded', applyFeatureFlags);
 window.addEventListener('DOMContentLoaded', initCardStyle);
 window.addEventListener('DOMContentLoaded', initHomeLayout);
+window.addEventListener('DOMContentLoaded', initPaywallToggleUI);
 window.addEventListener('DOMContentLoaded', initPhotoVariants);
 window.addEventListener('DOMContentLoaded', initHomeCategoryVisibility);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
