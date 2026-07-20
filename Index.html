@@ -2079,6 +2079,10 @@ function renderSearch(query){
 // ── ROOTED ASSISTANT CHAT ─────────────────────────────────────────────
 // Set this to your deployed Cloudflare Worker URL once it's live (see worker.js).
 const CHAT_WORKER_URL = 'https://rooted-chat.YOUR-SUBDOMAIN.workers.dev';
+// Same pattern as CHAT_WORKER_URL above — swap this for the real rooted-stripe Worker URL
+// once it's deployed (see rooted-stripe-worker.js). Until then, checkout is disabled with
+// an honest message rather than silently failing.
+const STRIPE_WORKER_URL = 'https://rooted-stripe.YOUR-SUBDOMAIN.workers.dev';
 let chatHistory = [];
 let chatOpen = false;
 
@@ -3327,15 +3331,11 @@ function updateProfileUIForAuthState(session) {
     const fullName = (session.user.user_metadata && session.user.user_metadata.full_name) || session.user.email;
     nameEl.textContent = fullName;
     avEl.textContent = fullName.charAt(0).toUpperCase();
-    tierEl.textContent = 'Free Member'; // becomes real once Stripe subscription status is wired to the database
     btnEl.textContent = 'Sign Out';
     btnEl.onclick = rootedSignOut;
-    // Already signed in — don't send them back through signup again. Payment isn't
-    // connected yet, so this is an honest placeholder rather than a real checkout,
-    // but it no longer forces a confusing re-signup loop for an existing member.
-    if (memBtnEl) {
-      memBtnEl.onclick = () => alert('You\'re signed in as ' + fullName + '! Payment setup is coming very soon — we\'ll email you the moment upgrading is ready.');
-    }
+    tierEl.textContent = 'Checking membership…';
+    if (memBtnEl) memBtnEl.onclick = () => startCheckout(session.user.id, session.user.email);
+    refreshMembershipStatus(session.user.id);
   } else {
     nameEl.textContent = 'Guest';
     avEl.textContent = 'R';
@@ -3343,8 +3343,106 @@ function updateProfileUIForAuthState(session) {
     btnEl.textContent = 'Create Account / Log In';
     btnEl.onclick = () => showScreen('signup');
     if (memBtnEl) {
+      memBtnEl.textContent = 'Join for $9/month →';
       memBtnEl.onclick = () => showScreen('signup');
     }
+  }
+}
+
+// Looks up real subscription_tier from Supabase (kept in sync by the rooted-stripe Worker's
+// webhook handler) and updates the tier badge + membership card CTA to match reality.
+async function refreshMembershipStatus(userId) {
+  const tierEl = document.getElementById('profile-tier');
+  const memBtnEl = document.getElementById('mem-cta-btn');
+  if (!rootedSupabase) { tierEl.textContent = 'Free Member'; return; }
+  const { data, error } = await rootedSupabase
+    .from('profiles')
+    .select('subscription_tier, stripe_customer_id')
+    .eq('id', userId)
+    .single();
+  if (error || !data) { tierEl.textContent = 'Free Member'; return; }
+  const isMember = data.subscription_tier === 'member';
+  tierEl.textContent = isMember ? 'ROOTED Member' : 'Free Member';
+  if (memBtnEl) {
+    if (isMember) {
+      memBtnEl.textContent = 'Manage Membership →';
+      memBtnEl.onclick = () => openBillingPortal(data.stripe_customer_id);
+    } else {
+      memBtnEl.textContent = 'Join for $9/month →';
+      memBtnEl.onclick = () => startCheckout(userId, null);
+    }
+  }
+}
+
+// Starts a real Stripe Checkout session and redirects the browser there.
+async function startCheckout(userId, email) {
+  if (STRIPE_WORKER_URL.includes('YOUR-SUBDOMAIN')) {
+    alert('Membership checkout isn\'t connected yet — check back very soon!');
+    return;
+  }
+  const memBtnEl = document.getElementById('mem-cta-btn');
+  const originalText = memBtnEl ? memBtnEl.textContent : '';
+  if (memBtnEl) { memBtnEl.textContent = 'Redirecting to checkout…'; memBtnEl.disabled = true; }
+  try {
+    let userEmail = email;
+    if (!userEmail && rootedSupabase) {
+      const { data: { session } } = await rootedSupabase.auth.getSession();
+      userEmail = session?.user?.email;
+    }
+    const res = await fetch(STRIPE_WORKER_URL + '/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, email: userEmail }),
+    });
+    const data = await res.json();
+    if (data.url) { window.location.href = data.url; return; }
+    throw new Error(data.error || 'Checkout failed');
+  } catch (e) {
+    console.error('Checkout error:', e);
+    alert('Something went wrong starting checkout. Please try again in a moment.');
+  }
+  if (memBtnEl) { memBtnEl.textContent = originalText; memBtnEl.disabled = false; }
+}
+
+// Sends an existing member to Stripe's hosted portal to update payment info or cancel.
+async function openBillingPortal(customerId) {
+  if (!customerId || STRIPE_WORKER_URL.includes('YOUR-SUBDOMAIN')) {
+    alert('Subscription management isn\'t connected yet — check back very soon!');
+    return;
+  }
+  try {
+    const res = await fetch(STRIPE_WORKER_URL + '/create-portal-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ customerId }),
+    });
+    const data = await res.json();
+    if (data.url) { window.location.href = data.url; return; }
+    throw new Error(data.error || 'Could not open billing portal');
+  } catch (e) {
+    console.error('Billing portal error:', e);
+    alert('Something went wrong opening billing management. Please try again in a moment.');
+  }
+}
+
+// If Stripe just redirected back after checkout, show a welcome toast. The webhook usually
+// finishes updating Supabase within a second or two, so we re-check membership shortly after
+// rather than assuming it's instant.
+function checkStripeReturn() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('checkout') === 'success') {
+    showWelcomeToast('Welcome to ROOTED Member! 🌿');
+    showTab('profile');
+    window.history.replaceState({}, '', window.location.pathname);
+    setTimeout(() => {
+      if (rootedSupabase) {
+        rootedSupabase.auth.getSession().then(({ data: { session } }) => {
+          if (session?.user) refreshMembershipStatus(session.user.id);
+        });
+      }
+    }, 2000);
+  } else if (params.get('checkout') === 'cancelled') {
+    window.history.replaceState({}, '', window.location.pathname);
   }
 }
 
@@ -3401,6 +3499,7 @@ window.addEventListener('DOMContentLoaded', initColorTheme);
 window.addEventListener('DOMContentLoaded', initDevPanel);
 window.addEventListener('DOMContentLoaded', initRootedULogo);
 window.addEventListener('DOMContentLoaded', initAuthState);
+window.addEventListener('DOMContentLoaded', checkStripeReturn);
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('chat-size-menu');
   const wrap = document.querySelector('.chat-size-wrap');
