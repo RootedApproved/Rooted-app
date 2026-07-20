@@ -86,7 +86,7 @@ body.navstyle-drawer{padding-bottom:0;}
 .home-hl em{font-style:italic;color:var(--forest);}
 .home-sub{font-size:13.5px;color:var(--mid);line-height:1.65;max-width:340px;}
 .sec-hd{display:flex;align-items:baseline;justify-content:space-between;padding:22px 18px 11px;gap:10px;}
-.dev-panel-gear{display:none;align-items:center;cursor:pointer;color:var(--muted);opacity:.35;flex-shrink:0;}
+.dev-panel-gear{display:flex;align-items:center;cursor:pointer;color:var(--muted);opacity:.35;flex-shrink:0;}
 .dev-panel-gear:hover{opacity:.8;}
 .dev-panel-gear i{width:15px;height:15px;}
 .dev-toggle-panel{display:none;}
@@ -692,10 +692,9 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <div class="page">
   <div id="home-new">
     <div class="home-new-hero">
-      <!-- Settings gear (opens dev-toggle-panel: home layout, card style, color theme, etc.)
-           is intentionally hidden from the live site for now per request — set via CSS
-           (.dev-panel-gear{display:none}) rather than deleted, so all toggle functionality
-           stays fully intact in the code for easy future re-enabling. -->
+      <!-- Settings gear opens dev-toggle-panel: Membership Paywall on/off, home layout,
+           card style, color theme, etc. Re-enabled per request for direct self-serve
+           access (was previously hidden via .dev-panel-gear{display:none}). -->
       <span class="dev-panel-gear" style="position:absolute;right:18px;top:14px;" onclick="toggleDevPanel()" title="Site settings"><i data-lucide="settings"></i></span>
       <div class="home-new-wordmark wm-weight-bold wm-case-title" id="home-wordmark">Rooted.</div>
       <div class="wordmark-picker">
@@ -3187,13 +3186,11 @@ function initRootedULogo() {
 }
 
 function initDevPanel() {
-  // The gear that opens this panel is currently hidden from the live site (see the
-  // .dev-panel-gear{display:none} rule). With no way to close the panel via UI, we
-  // always force it closed on load rather than honoring a stale "left open" state
-  // from before the gear was hidden. toggleDevPanel() and the panel itself are left
-  // fully functional in code for whenever the gear is re-enabled.
-  document.getElementById('dev-toggle-panel').classList.remove('show');
-  try { localStorage.setItem('rooted-dev-panel', '0'); } catch (e) {}
+  // The gear is visible again, so the panel can be properly opened/closed via UI —
+  // restore its last saved open/closed state instead of always forcing it shut.
+  let saved = '0';
+  try { saved = localStorage.getItem('rooted-dev-panel') || '0'; } catch (e) {}
+  document.getElementById('dev-toggle-panel').classList.toggle('show', saved === '1');
 }
 
 function toggleHomeCatPanel() {
