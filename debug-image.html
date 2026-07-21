@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROOTED Image Worker Diagnostic</title>
+<style>
+  body{font-family:-apple-system,sans-serif;max-width:700px;margin:40px auto;padding:0 20px;background:#F5F0E6;color:#1A1A1A;}
+  h1{font-size:20px;}
+  button{background:#2D5016;color:white;border:none;padding:10px 18px;border-radius:8px;font-size:14px;cursor:pointer;margin:6px 6px 6px 0;}
+  button:disabled{opacity:.5;}
+  pre{background:white;border:1px solid #ddd;border-radius:8px;padding:14px;white-space:pre-wrap;word-break:break-word;font-size:12px;max-height:300px;overflow:auto;margin-bottom:20px;}
+  .label{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#666;margin-top:6px;}
+  .ok{color:#2D5016;font-weight:700;}
+  .fail{color:#8B3A3A;font-weight:700;}
+  .row{border-bottom:1px solid #ddd;padding:16px 0;}
+</style>
+</head>
+<body>
+  <h1>ROOTED Image Worker Diagnostic</h1>
+  <p>Sends real requests to the image-proxy Worker for specific known products and shows exactly what comes back.</p>
+  <button onclick="runAll()">Test All Products Below</button>
+
+  <div id="results"></div>
+
+<script>
+const CF_WORKER = 'https://rooted.team-ce0.workers.dev';
+
+const TEST_PRODUCTS = [
+  { name: 'Rawganique JOEY (confirmed has og:image)', url: 'https://rawganique.com/products/all-american-classic-hemp-boxers-joey' },
+  { name: 'Rawganique BACH', url: 'https://rawganique.com/products/elastic-free-organic-prima-cotton-knit-boxers-bach' },
+  { name: 'Ryker Titan', url: 'https://rykerclothingco.com/products/the-titan-100-merino-wool-boxer-brief' },
+  { name: 'Cottonique Drawstring (known working)', url: 'https://cottonique.com/products/latex-free-mens-drawstring-loose-boxer-shorts-2-pack' },
+];
+
+async function runAll() {
+  const container = document.getElementById('results');
+  container.innerHTML = '';
+  for (const p of TEST_PRODUCTS) {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = `<div class="label">${p.name}</div><div style="font-size:11px;color:#999;margin-bottom:6px;">${p.url}</div><pre>Testing...</pre>`;
+    container.appendChild(row);
+    const pre = row.querySelector('pre');
+
+    const startTime = Date.now();
+    try {
+      const res = await fetch(CF_WORKER + '?url=' + encodeURIComponent(p.url), { signal: AbortSignal.timeout(15000) });
+      const elapsed = Date.now() - startTime;
+      const rawText = await res.text();
+      pre.textContent = `HTTP ${res.status} — ${elapsed}ms\n\n${rawText}`;
+      pre.className = res.ok ? 'ok' : 'fail';
+    } catch (e) {
+      const elapsed = Date.now() - startTime;
+      pre.textContent = `NETWORK-LEVEL ERROR — ${elapsed}ms\n\n${e.name}: ${e.message}`;
+      pre.className = 'fail';
+    }
+  }
+}
+</script>
+</body>
+</html>
