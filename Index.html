@@ -2739,6 +2739,17 @@ function buildImgEl(id, p, large) {
   // A manually-verified image (p.img) always wins over the live og:image fetch — this is
   // the fix for products where the automatic fetch fails (bot-blocked sites, missing
   // og:image tags, broken/redirected URLs, etc.). Verified once, locked in permanently.
+  //
+  // ⚠️ CRITICAL RULE — READ BEFORE ADDING OR EDITING ANY p.img VALUE ⚠️
+  // On 2026-07-21 we found 21 fabricated (guessed, never-verified) image URLs sitting
+  // in this exact field, silently blocking the real live-fetch system for weeks. NEVER
+  // add or edit a p.img value without first personally confirming it via a real fetch
+  // of the product's actual page (og:image tag or Shopify .json). Run verify_images.py
+  // before every push that touches PRODUCTS — it automatically catches the two
+  // fabrication signatures we've already seen (generic "?width=NNN" params, and the
+  // same fake version number reused across different products). If you don't have a
+  // confirmed real URL, leave p.img unset — the live-fetch system handles it correctly
+  // on its own now.
   const hasImg = p.img || cache[id];
 
   const inner = hasImg
