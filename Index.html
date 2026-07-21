@@ -2078,7 +2078,25 @@ function showAbout(){showScreen('about');}
 function showTierPage(){showScreen('tiers');}
 
 // ── SUBCAT ───────────────────────────────────────────────────────────
+// Live, on-page status indicator (no second page, no localStorage round-trip) so we can
+// see directly whether image fetches are even being scheduled/completing at all. Shows
+// briefly in the corner whenever a subcategory page has uncached images to load.
+let imgFetchStats = { scheduled: 0, succeeded: 0, failed: 0 };
+function updateImgFetchStatusUI() {
+  let el = document.getElementById('img-fetch-status');
+  if (imgFetchStats.scheduled === 0) { if (el) el.remove(); return; }
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'img-fetch-status';
+    el.style.cssText = 'position:fixed;bottom:70px;right:14px;background:#1A1A1A;color:#fff;padding:8px 12px;border-radius:8px;font-size:11px;font-family:monospace;z-index:9999;opacity:.9;';
+    document.body.appendChild(el);
+  }
+  el.textContent = `Images: ${imgFetchStats.succeeded + imgFetchStats.failed}/${imgFetchStats.scheduled} done (${imgFetchStats.succeeded} ok, ${imgFetchStats.failed} failed)`;
+}
+
 function showSubcat(sub){
+  imgFetchStats = { scheduled: 0, succeeded: 0, failed: 0 };
+  const el = document.getElementById('img-fetch-status'); if (el) el.remove();
   const edu=SUBCAT_EDU[sub];if(!edu)return;
   document.getElementById('subcat-title').innerHTML=edu.title;
   document.getElementById('subcat-desc').textContent=edu.desc.replace(/&amp;/g,'&');
@@ -2664,16 +2682,22 @@ async function resolveProductImage(id, url) {
       delete nc[id+'_pending'];
       setImgCache(nc);
       logImgDiagnostic(id, url, 'success', data.image, Date.now() - attemptStart);
+      imgFetchStats.succeeded++;
+      updateImgFetchStatusUI();
       document.querySelectorAll('[data-imgid="'+id+'"]').forEach(el => {
         el.innerHTML = buildImgTag(data.image, el.dataset.size === 'lg');
       });
     } else {
       const nc = getImgCache(); delete nc[id+'_pending']; setImgCache(nc);
       logImgDiagnostic(id, url, 'no-image-in-response', JSON.stringify(data), Date.now() - attemptStart);
+      imgFetchStats.failed++;
+      updateImgFetchStatusUI();
     }
   } catch(e) {
     const nc = getImgCache(); delete nc[id+'_pending']; setImgCache(nc);
     logImgDiagnostic(id, url, 'exception', String(e && e.message ? e.message : e), Date.now() - attemptStart);
+    imgFetchStats.failed++;
+    updateImgFetchStatusUI();
   }
 }
 
@@ -2730,6 +2754,8 @@ function buildImgEl(id, p, large) {
   if (!hasImg) {
     const delay = 80 + (imgFetchQueueIndex * 350);
     imgFetchQueueIndex++;
+    imgFetchStats.scheduled++;
+    updateImgFetchStatusUI();
     setTimeout(() => resolveProductImage(id, p.url), delay);
   }
 
