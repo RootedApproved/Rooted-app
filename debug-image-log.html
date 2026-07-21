@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROOTED Real Image Fetch Log</title>
+<style>
+  body{font-family:-apple-system,sans-serif;max-width:700px;margin:40px auto;padding:0 20px;background:#F5F0E6;color:#1A1A1A;}
+  h1{font-size:20px;}
+  button{background:#2D5016;color:white;border:none;padding:10px 18px;border-radius:8px;font-size:14px;cursor:pointer;margin:6px 6px 6px 0;}
+  .entry{background:white;border:1px solid #ddd;border-radius:8px;padding:12px 14px;margin-bottom:10px;font-size:13px;}
+  .success{border-left:4px solid #2D5016;}
+  .fail{border-left:4px solid #8B3A3A;}
+  .meta{color:#666;font-size:11px;margin-top:4px;word-break:break-all;}
+</style>
+</head>
+<body>
+  <h1>Real Image Fetch Log</h1>
+  <p>Shows exactly what happened the last time this browser actually tried to load product images on a real page — not a synthetic test.</p>
+  <button onclick="location.reload()">Refresh</button>
+  <div id="log"></div>
+
+<script>
+function render() {
+  let log = [];
+  try { log = JSON.parse(localStorage.getItem('rooted_img_diagnostic_log') || '[]'); } catch (e) {}
+  const container = document.getElementById('log');
+  if (!log.length) {
+    container.innerHTML = '<p><strong>No entries yet.</strong> Go visit a product category page on the real site first (e.g. Men underwear), let it fully load, then come back to this page and refresh.</p>';
+    return;
+  }
+  container.innerHTML = log.map(e => `
+    <div class="entry ${e.outcome === 'success' ? 'success' : 'fail'}">
+      <strong>${e.id}</strong> — ${e.outcome} (${e.elapsedMs}ms)
+      <div class="meta">${e.url}</div>
+      <div class="meta">${e.detail}</div>
+      <div class="meta">${e.time}</div>
+    </div>
+  `).join('');
+}
+render();
+</script>
+</body>
+</html>
