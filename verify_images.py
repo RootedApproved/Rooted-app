@@ -82,7 +82,7 @@ def check_category_page_urls(block):
     problems = []
     for eid, brand, url in all_entries:
         for pattern in CATEGORY_PAGE_URL_PATTERNS:
-            if re.search(pattern, url):
+            if re.search(pattern, url, re.IGNORECASE):
                 problems.append((eid, brand, url))
                 break
     return all_entries, problems
