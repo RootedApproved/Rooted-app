@@ -685,7 +685,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <div class="nav-right">
     <button class="nav-search" onclick="showTab('search')"><i data-lucide="search"></i><span class="nav-search-label">Search</span></button>
     <button class="nav-login-link" onclick="showScreen('login')">Log In</button>
-    <button class="nav-join" onclick="showScreen('signup')">Join</button>
+    <button class="nav-join" id="nav-join-btn" onclick="handleJoinClick()">Join</button>
   </div>
 </nav>
 
@@ -1645,7 +1645,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div style="font-size:38px;margin-bottom:14px;">🔒</div>
     <div class="tier-page-title" id="paywall-title">Members Only</div>
     <p class="tier-page-sub" id="paywall-message">This is part of ROOTED Membership.</p>
-    <button class="btn-buy" style="margin-top:10px;" onclick="showScreen('signup')">Join for $10/month →</button>
+    <button class="btn-buy" style="margin-top:10px;" onclick="handleJoinClick()">Join for $10/month →</button>
     <div style="margin-top:16px;"><span class="sec-link" onclick="showTab('home')">← Back to Home</span></div>
   </div>
 </div>
@@ -1701,7 +1701,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <a href="https://youtube.com/@rootedapproved" target="_blank" class="mobile-drawer-social" aria-label="YouTube"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="YouTube"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
   </div>
   <div class="mobile-drawer-actions">
-    <button class="mobile-drawer-join" onclick="showScreen('signup');toggleMobileDrawer()">Join</button>
+    <button class="mobile-drawer-join" id="mobile-drawer-join-btn" onclick="handleJoinClick();toggleMobileDrawer()">Join</button>
     <a href="mailto:team@rootedapproved.com" class="mobile-drawer-contact"><i data-lucide="mail"></i>Contact</a>
   </div>
   <div class="contact-email-line">team@rootedapproved.com</div>
@@ -1725,7 +1725,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <a href="https://youtube.com/@rootedapproved" target="_blank" class="sidebar-social" aria-label="YouTube"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="YouTube"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
   </div>
   <div class="sidebar-actions">
-    <button class="sidebar-join" onclick="showScreen('signup')">Join</button>
+    <button class="sidebar-join" id="sidebar-join-btn" onclick="handleJoinClick()">Join</button>
     <a href="mailto:team@rootedapproved.com" class="sidebar-contact-btn" aria-label="Contact Us"><i data-lucide="mail"></i>Contact</a>
   </div>
   <div class="contact-email-line">team@rootedapproved.com</div>
@@ -2492,7 +2492,7 @@ async function sendChatMessageCore(inputEl, messagesEl) {
   // Free members only get the instant, zero-cost database lookup above. Anything more
   // open-ended requires the paid AI model, which is a ROOTED Member benefit.
   if (!hasFullAccess()) {
-    const upsellReply = `That's a bit more open-ended than I can answer for free — try asking about a specific product by name (like "SAXX Ballpark Boxer Briefs"), or <span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="showScreen('signup')">join for $10/month →</span> for full AI answers on anything.`;
+    const upsellReply = `That's a bit more open-ended than I can answer for free — try asking about a specific product by name (like "SAXX Ballpark Boxer Briefs"), or <span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="handleJoinClick()">join for $10/month →</span> for full AI answers on anything.`;
     messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${upsellReply}</div>`;
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return;
@@ -2970,7 +2970,7 @@ function updateListForViewport() {
     if (hiddenCount > 0) {
       const upsell = document.createElement('div');
       upsell.style.cssText = 'padding:12px 16px;margin-bottom:10px;background:var(--cream2);border-radius:8px;font-size:12.5px;color:var(--mid);text-align:center;';
-      upsell.innerHTML = `${hiddenCount} more listing${hiddenCount === 1 ? '' : 's'} (farmers markets, CSAs, groceries) are members-only. <span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="showScreen('signup')">Join for $10/month →</span>`;
+      upsell.innerHTML = `${hiddenCount} more listing${hiddenCount === 1 ? '' : 's'} (farmers markets, CSAs, groceries) are members-only. <span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="handleJoinClick()">Join for $10/month →</span>`;
       resultsEl.appendChild(upsell);
     }
   }
@@ -3574,7 +3574,13 @@ function updateProfileUIForAuthState(session) {
   const tierEl = document.getElementById('profile-tier');
   const btnEl = document.getElementById('profile-action-btn');
   const memBtnEl = document.getElementById('mem-cta-btn');
+  // These nav-level "Join" buttons only make sense for a signed-out guest — once someone
+  // is signed in (whether free or paying), the actual upgrade prompt lives on the Profile
+  // card and the paywall screen, both of which now route correctly via handleJoinClick().
+  const navJoinButtons = ['nav-join-btn', 'mobile-drawer-join-btn', 'sidebar-join-btn']
+    .map(id => document.getElementById(id)).filter(Boolean);
   if (session && session.user) {
+    navJoinButtons.forEach(b => b.style.display = 'none');
     const fullName = (session.user.user_metadata && session.user.user_metadata.full_name) || session.user.email;
     nameEl.textContent = fullName;
     avEl.textContent = fullName.charAt(0).toUpperCase();
@@ -3584,6 +3590,7 @@ function updateProfileUIForAuthState(session) {
     if (memBtnEl) memBtnEl.onclick = () => startCheckout(session.user.id, session.user.email);
     refreshMembershipStatus(session.user.id);
   } else {
+    navJoinButtons.forEach(b => b.style.display = '');
     currentMembershipTier = 'free';
     nameEl.textContent = 'Guest';
     avEl.textContent = 'R';
@@ -3624,6 +3631,22 @@ async function refreshMembershipStatus(userId) {
 }
 
 // Starts a real Stripe Checkout session and redirects the browser there.
+// The single function every "Join" button/link on the site now calls. Previously each
+// one independently hardcoded showScreen('signup'), which meant an already-logged-in
+// person clicking "Join" anywhere except the Profile card got sent back to the signup
+// form instead of straight to checkout. This checks the real, current session every
+// time instead of assuming logged-out.
+async function handleJoinClick() {
+  if (!rootedSupabase) { showScreen('signup'); return; }
+  const { data: { session } } = await rootedSupabase.auth.getSession();
+  if (session && session.user) {
+    if (currentMembershipTier === 'member') { showTab('profile'); return; }
+    startCheckout(session.user.id, session.user.email);
+  } else {
+    showScreen('signup');
+  }
+}
+
 async function startCheckout(userId, email) {
   if (STRIPE_WORKER_URL.includes('YOUR-SUBDOMAIN')) {
     alert('Membership checkout isn\'t connected yet — check back very soon!');
