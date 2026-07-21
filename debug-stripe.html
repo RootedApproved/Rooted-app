@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROOTED Stripe Worker Diagnostic</title>
+<style>
+  body{font-family:-apple-system,sans-serif;max-width:600px;margin:40px auto;padding:0 20px;background:#F5F0E6;color:#1A1A1A;}
+  h1{font-size:20px;}
+  button{background:#2D5016;color:white;border:none;padding:14px 24px;border-radius:8px;font-size:16px;cursor:pointer;width:100%;margin:16px 0;}
+  button:disabled{opacity:.5;}
+  pre{background:white;border:1px solid #ddd;border-radius:8px;padding:16px;white-space:pre-wrap;word-break:break-word;font-size:13px;max-height:400px;overflow:auto;}
+  .label{font-weight:700;margin-top:16px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#666;}
+  .ok{color:#2D5016;font-weight:700;}
+  .fail{color:#8B3A3A;font-weight:700;}
+</style>
+</head>
+<body>
+  <h1>ROOTED Stripe Worker Diagnostic</h1>
+  <p>Sends a real test request to /create-checkout-session directly from your browser and shows exactly what comes back — no guessing.</p>
+  <div class="label">Worker URL being tested</div>
+  <pre id="url-display"></pre>
+  <button id="test-btn" onclick="runTest()">Test Checkout Session Creation</button>
+  <div class="label">Result</div>
+  <pre id="result">Tap the button above to run the test.</pre>
+
+<script>
+const STRIPE_WORKER_URL = 'https://rooted-stripe.team-ce0.workers.dev';
+document.getElementById('url-display').textContent = STRIPE_WORKER_URL;
+
+async function runTest() {
+  const btn = document.getElementById('test-btn');
+  const resultEl = document.getElementById('result');
+  btn.disabled = true;
+  btn.textContent = 'Testing…';
+  resultEl.textContent = 'Sending request...';
+  resultEl.className = '';
+
+  const startTime = Date.now();
+  try {
+    const res = await fetch(STRIPE_WORKER_URL + '/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: 'diagnostic-test-user', email: 'diagnostic-test@rootedapproved.com' }),
+    });
+    const elapsed = Date.now() - startTime;
+    const rawText = await res.text();
+
+    let output = `HTTP Status: ${res.status} ${res.statusText}\nTime: ${elapsed}ms\n\n`;
+    output += `Raw response body:\n${rawText}\n`;
+
+    resultEl.textContent = output;
+    resultEl.className = res.ok ? 'ok' : 'fail';
+  } catch (e) {
+    const elapsed = Date.now() - startTime;
+    resultEl.textContent = `NETWORK-LEVEL ERROR (request never got a response)\nTime: ${elapsed}ms\n\n${e.name}: ${e.message}`;
+    resultEl.className = 'fail';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Test Checkout Session Creation';
+}
+</script>
+</body>
+</html>
