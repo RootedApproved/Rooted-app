@@ -696,24 +696,8 @@ body.style-photo .cat-photo-cycle{display:flex;}
            card style, color theme, etc. Re-enabled per request for direct self-serve
            access (was previously hidden via .dev-panel-gear{display:none}). -->
       <span class="dev-panel-gear" style="position:absolute;right:18px;top:14px;" onclick="toggleDevPanel()" title="Site settings"><i data-lucide="settings"></i></span>
-      <div class="home-new-wordmark wm-weight-bold wm-case-title" id="home-wordmark">Rooted.</div>
-      <div class="wordmark-picker">
-        <button class="wordmark-picker-btn active" onclick="setWordmarkStyle('bold','title',this)">Bold Rr</button>
-        <button class="wordmark-picker-btn" onclick="setWordmarkStyle('bold','upper',this)">Bold RR</button>
-        <button class="wordmark-picker-btn" onclick="setWordmarkStyle('bold','lower',this)">Bold rr</button>
-        <button class="wordmark-picker-btn" onclick="setWordmarkStyle('regular','title',this)">Reg. Rr</button>
-        <button class="wordmark-picker-btn" onclick="setWordmarkStyle('regular','upper',this)">Reg. RR</button>
-        <button class="wordmark-picker-btn" onclick="setWordmarkStyle('regular','lower',this)">Reg. rr</button>
-      </div>
+      <div class="home-new-wordmark" id="home-wordmark">Rooted.</div>
       <div class="home-new-tagline tag-v1" id="home-tagline"><span class="tag-word1">Rooted</span> <span class="tag-word2">Approved</span></div>
-      <div class="tagline-picker">
-        <button class="wordmark-picker-btn active" onclick="setTaglineStyle('tag-v1',this)">1</button>
-        <button class="wordmark-picker-btn" onclick="setTaglineStyle('tag-v2',this)">2</button>
-        <button class="wordmark-picker-btn" onclick="setTaglineStyle('tag-v3',this)">3</button>
-        <button class="wordmark-picker-btn" onclick="setTaglineStyle('tag-v4',this)">4</button>
-        <button class="wordmark-picker-btn" onclick="setTaglineStyle('tag-v5',this)">5</button>
-        <button class="wordmark-picker-btn" onclick="setTaglineStyle('tag-v6',this)">6</button>
-      </div>
     </div>
     <div class="home-ai-widget">
       <div class="home-ai-input-row">
@@ -3195,28 +3179,6 @@ function initDevPanel() {
 
 function toggleHomeCatPanel() {
   document.getElementById('home-cat-panel').classList.toggle('open');
-}
-
-// Temporary experiment toggles so J can flip between wordmark/tagline treatments live
-// and pick a favorite. Once a direction is chosen, hardcode it and remove these controls.
-function setWordmarkStyle(weight, caseStyle, btn) {
-  const el = document.getElementById('home-wordmark');
-  el.classList.remove('wm-weight-bold', 'wm-weight-regular', 'wm-case-title', 'wm-case-upper', 'wm-case-lower');
-  el.classList.add('wm-weight-' + weight, 'wm-case-' + caseStyle);
-  if (btn) {
-    btn.parentElement.querySelectorAll('.wordmark-picker-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-}
-
-function setTaglineStyle(variant, btn) {
-  const el = document.getElementById('home-tagline');
-  el.classList.remove('tag-v1', 'tag-v2', 'tag-v3', 'tag-v4', 'tag-v5', 'tag-v6');
-  el.classList.add(variant);
-  if (btn) {
-    btn.parentElement.querySelectorAll('.wordmark-picker-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
 }
 
 function toggleStandardCard(id) {
