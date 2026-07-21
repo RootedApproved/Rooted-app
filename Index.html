@@ -738,6 +738,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
   </div>
   <div id="dev-toggle-panel" class="dev-toggle-panel">
   <div class="style-toggle-wrap">
+    <span class="style-toggle-label">Product images:</span>
+    <button class="style-toggle-btn" onclick="clearImageCache()">Clear Image Cache</button>
+  </div>
+  <div class="style-toggle-wrap">
     <span class="style-toggle-label">Membership Paywall:</span>
     <button class="style-toggle-btn" id="paywall-btn-on" onclick="setPaywallEnabled(true)">On</button>
     <button class="style-toggle-btn" id="paywall-btn-off" onclick="setPaywallEnabled(false)">Off (everyone full access)</button>
@@ -2621,6 +2625,16 @@ async function sendHomeChatMessage() {
 // IMAGE SYSTEM: auto-fetches og:image from product URL via CORS proxy,
 // caches in localStorage, updates UI live. New products get images automatically.
 const IMG_CACHE_KEY = 'rooted_img_v2';
+
+// Wipes stale image data from this browser's local storage and reloads. A normal hard
+// refresh (Cmd+Shift+R) does NOT clear localStorage — it's a separate, persistent bucket
+// that can hold onto old broken image results indefinitely. This is the actual fix for
+// that, without needing to dig through browser settings.
+function clearImageCache() {
+  try { localStorage.removeItem(IMG_CACHE_KEY); } catch (e) {}
+  alert('Image cache cleared — the page will now reload.');
+  window.location.reload();
+}
 const CF_WORKER = 'https://rooted.team-ce0.workers.dev';
 
 function getImgCache(){try{return JSON.parse(localStorage.getItem(IMG_CACHE_KEY)||'{}');}catch(e){return {};}}
