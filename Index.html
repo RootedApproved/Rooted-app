@@ -2666,16 +2666,20 @@ function buildImgEl(id, p, large) {
   const cache = getImgCache();
   const bg = BRAND_BG[p.brand] || '#EDE7D9';
   const size = large ? 'lg' : 'sm';
-  const hasImg = cache[id];
+  // A manually-verified image (p.img) always wins over the live og:image fetch — this is
+  // the fix for products where the automatic fetch fails (bot-blocked sites, missing
+  // og:image tags, broken/redirected URLs, etc.). Verified once, locked in permanently.
+  const hasImg = p.img || cache[id];
 
   const inner = hasImg
-    ? buildImgTag(cache[id], large)
+    ? buildImgTag(p.img || cache[id], large)
     : `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:5px;padding:8px">
         <span style="font-size:${large?'36px':'24px'}">${p.emoji}</span>
         <span style="font-family:'DM Mono',monospace;font-size:${large?'9px':'8px'};color:#2D5016;opacity:.65;letter-spacing:.07em;text-transform:uppercase;text-align:center;line-height:1.3">${p.brand}</span>
        </div>`;
 
-  // Queue fetch if not cached
+  // Only queue the live fetch if there's no manual override — verified products never
+  // need to hit the network at all.
   if (!hasImg) setTimeout(() => resolveProductImage(id, p.url), 80);
 
   return `<div data-imgid="${id}" data-size="${size}" style="width:100%;height:100%;background:${bg};border-radius:inherit;overflow:hidden">${inner}</div>`;
