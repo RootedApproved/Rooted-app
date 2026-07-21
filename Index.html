@@ -1290,6 +1290,22 @@ body.style-photo .cat-photo-cycle{display:flex;}
   </div>
 </div></div>
 
+<div id="screen-reset-password" class="screen"><div class="page">
+  <div class="auth-card">
+    <div class="auth-card-hd">
+      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="auth-card-title">Set a new password</div>
+      <div class="auth-card-sub">You're verified via your reset link — choose a new password below.</div>
+    </div>
+    <div id="reset-password-error" class="auth-error"></div>
+    <label class="auth-field-label">New Password</label>
+    <input class="auth-field" type="password" id="reset-password-new" placeholder="At least 8 characters">
+    <label class="auth-field-label">Confirm New Password</label>
+    <input class="auth-field" type="password" id="reset-password-confirm" placeholder="Re-enter new password">
+    <button class="auth-submit-btn auth-submit-btn-login" onclick="rootedUpdatePassword()">Set New Password</button>
+  </div>
+</div></div>
+
 <!-- PLACEHOLDER SCREENS — real, working links, honestly labeled as not built out yet -->
 <div id="screen-rooted-u-placeholder" class="screen"><div class="page">
   <div class="placeholder-screen">
@@ -3417,6 +3433,24 @@ async function rootedForgotPassword() {
   alert('Check your email for a password reset link.');
 }
 
+// Completes the password reset flow — this is the piece that was missing entirely.
+// By the time someone reaches this screen, clicking their email link has already given
+// them a valid recovery session (Supabase handles that automatically); this just needs
+// to actually set the new password on that session.
+async function rootedUpdatePassword() {
+  clearAuthError('reset-password-error');
+  if (!rootedSupabase) { showAuthError('reset-password-error', 'Account system not connected yet.'); return; }
+  const newPassword = document.getElementById('reset-password-new').value;
+  const confirmPassword = document.getElementById('reset-password-confirm').value;
+  if (!newPassword || !confirmPassword) { showAuthError('reset-password-error', 'Please fill in both fields.'); return; }
+  if (newPassword.length < 8) { showAuthError('reset-password-error', 'Password must be at least 8 characters.'); return; }
+  if (newPassword !== confirmPassword) { showAuthError('reset-password-error', 'Passwords do not match.'); return; }
+  const { error } = await rootedSupabase.auth.updateUser({ password: newPassword });
+  if (error) { showAuthError('reset-password-error', error.message); return; }
+  showWelcomeToast('Password updated! 🌿');
+  showTab('profile');
+}
+
 async function rootedSignOut() {
   if (!rootedSupabase) return;
   await rootedSupabase.auth.signOut();
@@ -3569,6 +3603,13 @@ function initAuthState() {
     updateProfileUIForAuthState(session);
   });
   rootedSupabase.auth.onAuthStateChange((event, session) => {
+    // Supabase fires this specific event when someone lands on the site via a password
+    // reset link — previously nothing handled it, so they'd just land on the home screen
+    // with a valid-but-unusable session and no way to actually set a new password.
+    if (event === 'PASSWORD_RECOVERY') {
+      showScreen('reset-password');
+      return;
+    }
     updateProfileUIForAuthState(session);
   });
 }
