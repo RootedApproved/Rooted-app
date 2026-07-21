@@ -1963,7 +1963,27 @@ const SUBCAT_EDU = {
 };
 
 // ── NAVIGATION ───────────────────────────────────────────────────────
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();if(id==='farmers')initFarmersMap();}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers')initFarmersMap();}
+
+// The top-right nav Log In button is the only login entry point on every screen except
+// Profile, which already has its own bigger, more prominent "Create Account / Log In"
+// CTA — showing both there is just redundant clutter, so we hide the small nav one
+// specifically while on Profile (auth state, handled separately, still governs it everywhere else).
+function updateNavJoinVisibility(screenId) {
+  const btn = document.getElementById('nav-join-btn');
+  if (!btn) return;
+  if (screenId === 'profile') { btn.dataset.hiddenForProfile = '1'; btn.style.display = 'none'; return; }
+  btn.dataset.hiddenForProfile = '';
+  // Only restore visibility here if a guest session actually calls for it — a signed-in
+  // user should still see it hidden per updateProfileUIForAuthState's own logic.
+  if (rootedSupabase) {
+    rootedSupabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) btn.style.display = '';
+    });
+  } else {
+    btn.style.display = '';
+  }
+}
 function showTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab[data-tab="'+tab+'"]').forEach(b=>b.classList.add('active'));if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='farmers')showScreen('farmers');else if(tab==='profile')showScreen('profile');}
 function goHome(){showTab('home');}
 // Human-readable names for the paywall message — kept in sync manually since there
