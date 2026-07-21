@@ -2628,8 +2628,15 @@ function setImgCache(c){try{localStorage.setItem(IMG_CACHE_KEY,JSON.stringify(c)
 
 async function resolveProductImage(id, url) {
   const cache = getImgCache();
-  if (cache[id] || cache[id+'_pending']) return;
-  cache[id+'_pending'] = 1;
+  // A stuck pending flag with no expiry could permanently block a product's image from
+  // ever retrying once set — this was very likely the real cause of today's regression:
+  // heavy testing traffic causing many concurrent fetches to time out or get rate-limited,
+  // leaving them stuck in "pending" forever in each visitor's own browser cache. A pending
+  // flag older than 30 seconds is now treated as stale and retried instead of trusted.
+  const PENDING_TTL_MS = 30000;
+  if (cache[id]) return;
+  if (cache[id+'_pending'] && (Date.now() - cache[id+'_pending']) < PENDING_TTL_MS) return;
+  cache[id+'_pending'] = Date.now();
   setImgCache(cache);
   try {
     const res = await fetch(CF_WORKER + '?url=' + encodeURIComponent(url), {signal: AbortSignal.timeout(10000)});
