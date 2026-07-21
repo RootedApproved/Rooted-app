@@ -1311,7 +1311,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <!-- PLACEHOLDER SCREENS — real, working links, honestly labeled as not built out yet -->
 <div id="screen-rooted-u-placeholder" class="screen"><div class="page">
   <div class="placeholder-screen">
-    <span class="placeholder-back" onclick="showTab('home')">← Back</span>
+    <span class="placeholder-back" onclick="goBackSmart()">← Back</span>
     <div class="hnc-img" id="rooted-u-placeholder-img" style="max-width:320px;margin:24px auto;"></div>
     <div class="placeholder-title">Rooted U</div>
     <div class="placeholder-sub">Education modules — this page isn't built out yet, but the link works and this is exactly where it'll live once the 10-module curriculum is ready for each category.</div>
@@ -1325,7 +1325,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <!-- ABOUT -->
 <div id="screen-about" class="screen">
 <div class="page">
-  <div style="padding:13px 18px 0"><button class="cat-back" onclick="goHome()">← Home</button></div>
+  <div style="padding:13px 18px 0"><button class="cat-back" onclick="goBackSmart()">← Back</button></div>
   <div class="about-hero">
     <div class="eyebrow">Why We Exist</div>
     <h1 class="about-hl">The standard<br><em>has to come</em><br>from somewhere.</h1>
@@ -1371,7 +1371,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <!-- TIERS -->
 <div id="screen-tiers" class="screen">
 <div class="page">
-  <div style="padding:13px 18px 0"><button class="cat-back" onclick="goHome()">← Back</button></div>
+  <div style="padding:13px 18px 0"><button class="cat-back" onclick="goBackSmart()">← Back</button></div>
   <div class="tier-page">
     <div class="tier-page-title">Standards &amp; Tiers</div>
     <p class="tier-page-sub">ROOTED is not a list of recommended products — it's the trusted standard for evaluating them. Every category is judged against its own published standard before a single product in it is rated. Standards come first. Products come second. People always.</p>
@@ -1963,7 +1963,31 @@ const SUBCAT_EDU = {
 };
 
 // ── NAVIGATION ───────────────────────────────────────────────────────
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers')initFarmersMap();}
+// Tracks whatever screen was actually active right before this one, so shared
+// subsections (About, Standards, Rooted U, Recommendations — all reachable from both
+// Home and Profile) can send Back to wherever the person genuinely came from, instead
+// of always defaulting to Home.
+let previousScreen = 'home';
+const TAB_SCREEN_IDS = ['home', 'search', 'categories', 'farmers', 'profile'];
+
+function showScreen(id){
+  const currentActive = document.querySelector('.screen.active');
+  const currentId = currentActive ? currentActive.id.replace('screen-', '') : null;
+  if (currentId && currentId !== id) previousScreen = currentId;
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers')initFarmersMap();
+}
+
+// Use this instead of a hardcoded goHome()/showTab('home') on any back button that's
+// reachable from more than one place — it goes to the real previous screen, and uses
+// showTab() rather than showScreen() when that previous screen is a main bottom-nav
+// tab, so the tab bar's highlighted icon stays correct too.
+function goBackSmart() {
+  if (TAB_SCREEN_IDS.includes(previousScreen)) {
+    showTab(previousScreen);
+  } else {
+    showScreen(previousScreen);
+  }
+}
 
 // The top-right nav Log In button is the only login entry point on every screen except
 // Profile, which already has its own bigger, more prominent "Create Account / Log In"
@@ -2131,7 +2155,7 @@ function renderRecommendations() {
   const saved = getSavedProducts();
   const recent = getRecentlyViewed();
 
-  let html = '<div style="padding:13px 18px 0"><button class="cat-back" onclick="showTab(\'home\')">← Home</button></div>';
+  let html = '<div style="padding:13px 18px 0"><button class="cat-back" onclick="goBackSmart()">← Back</button></div>';
   html += '<div style="padding:8px 18px 0"><div class="tier-page-title">Recommendations</div><p class="tier-page-sub">Your top Tier 1 picks, based on what you\'ve viewed and saved.</p></div>';
 
   if (!saved.length && !recent.length) {
