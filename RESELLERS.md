@@ -15,6 +15,33 @@ bot-protected domains automatically.
 | Champion, Van Heusen, Kenneth Cole, Kenneth Cole Reaction | — | Macy's |
 | Demeyere | Own site (demeyere.us) mostly collection pages, thin on single-product pages | Zwilling (zwilling.com, Demeyere's parent company) — real per-SKU product pages with Scene7/Demandware image CDN |
 
+## Not Perfect Linen: a third failure mode (SKU rotation, not bot-protection)
+
+Confirmed 2026-07-21 (second pass). Not Perfect Linen isn't bot-protected and isn't
+using category-page URLs by mistake — but it silently breaks anyway. This brand's
+Shopify store frequently re-lists the *same* product design under a new numbered
+slug (e.g. `mens-linen-shirts-long-sleeve-montreal` → `men-s-long-sleeve-linen-shirt-montreal-2`
+→ `-3`, etc.) as old batches sell through. The old slug doesn't 404 — it silently
+redirects to a generic collection page, so a stored URL can look fine for months
+and then start returning the wrong (collection banner) image with no error.
+
+**What this means in practice:** for this brand specifically, a URL that worked
+when first added can go stale later even with no changes on our end. If an NPL
+product's image starts failing:
+1. Search `notperfectlinen.com "<product name>"` — multiple numbered variants of
+   the same listing usually show up in results.
+2. Fetch each candidate with `text_content_token_limit` set low (~150-300) to
+   avoid the enormous country-flag-dropdown boilerplate this site includes on
+   every page — the real content (og:image, price, description) appears at the
+   very top of the fetch regardless.
+3. Confirm the canonical in the fetched frontmatter matches the URL you fetched
+   (if it doesn't, you've been redirected to a stale slug — try the next
+   candidate).
+4. A live product page's "Complete the look" section often links to another
+   NPL product's *current* live slug — useful for chaining fixes across
+   multiple products from a single fetch, as happened when Montreal's page led
+   directly to Darwin's live slug.
+
 ## Notes on Macy's specifically
 
 Macy's carries both a brand's genuine line and, for some brands, a
