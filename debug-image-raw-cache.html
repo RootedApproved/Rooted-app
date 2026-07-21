@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROOTED Raw Image Cache</title>
+<style>
+  body{font-family:-apple-system,sans-serif;max-width:700px;margin:40px auto;padding:0 20px;background:#F5F0E6;color:#1A1A1A;}
+  h1{font-size:20px;}
+  button{background:#2D5016;color:white;border:none;padding:10px 18px;border-radius:8px;font-size:14px;cursor:pointer;margin:6px 6px 6px 0;}
+  pre{background:white;border:1px solid #ddd;border-radius:8px;padding:14px;white-space:pre-wrap;word-break:break-word;font-size:12px;max-height:600px;overflow:auto;}
+  .row{border-bottom:1px solid #eee;padding:10px 0;font-size:13px;}
+  .key{font-weight:700;}
+</style>
+</head>
+<body>
+  <h1>Raw Image Cache Contents</h1>
+  <p>Shows exactly what's actually stored in this browser's image cache right now — the real data, not a summary.</p>
+  <button onclick="location.reload()">Refresh</button>
+  <button onclick="wipeAndReload()">Wipe Cache & Reload This Page</button>
+  <div id="out"></div>
+
+<script>
+function render() {
+  let cache = {};
+  try { cache = JSON.parse(localStorage.getItem('rooted_img_v2') || '{}'); } catch (e) {}
+  const keys = Object.keys(cache);
+  const out = document.getElementById('out');
+  if (!keys.length) {
+    out.innerHTML = '<p><strong>Cache is completely empty.</strong></p>';
+    return;
+  }
+  out.innerHTML = '<p><strong>' + keys.length + ' entries found:</strong></p>' +
+    keys.map(k => `<div class="row"><span class="key">${k}</span>: <code>${JSON.stringify(cache[k])}</code></div>`).join('');
+}
+function wipeAndReload() {
+  try { localStorage.removeItem('rooted_img_v2'); } catch (e) {}
+  location.reload();
+}
+render();
+</script>
+</body>
+</html>
