@@ -1981,6 +1981,7 @@ function showScreen(id){
   const currentActive = document.querySelector('.screen.active');
   const currentId = currentActive ? currentActive.id.replace('screen-', '') : null;
   if (currentId && currentId !== id) previousScreen = currentId;
+  imgFetchQueueIndex = 0;
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers')initFarmersMap();
   // Home already shows the full italic "Rooted." wordmark prominently in its own hero,
   // so the nav icon there stays icon-only (no redundant "ROOTED" text) — every other
@@ -2683,6 +2684,13 @@ const BRAND_BG = {
   'Alex Crane':'#E8E2D5','Not Perfect Linen':'#EDE8E0','Harvest & Mill':'#E5EAD8',
 };
 
+// Staggers image fetches across a page instead of firing them all in the same ~80ms
+// window. A category page with 11 products was queuing 11 near-simultaneous Worker
+// calls, which is very likely what caused some to silently fail while others succeeded
+// (confirmed via direct diagnostic testing that the Worker itself handles each of these
+// exact products correctly one at a time). Resets on every screen change.
+let imgFetchQueueIndex = 0;
+
 function buildImgEl(id, p, large) {
   const cache = getImgCache();
   const bg = BRAND_BG[p.brand] || '#EDE7D9';
@@ -2700,8 +2708,13 @@ function buildImgEl(id, p, large) {
        </div>`;
 
   // Only queue the live fetch if there's no manual override — verified products never
-  // need to hit the network at all.
-  if (!hasImg) setTimeout(() => resolveProductImage(id, p.url), 80);
+  // need to hit the network at all. Each one gets a progressively later delay so a page
+  // full of images doesn't burst-fire all at once.
+  if (!hasImg) {
+    const delay = 80 + (imgFetchQueueIndex * 350);
+    imgFetchQueueIndex++;
+    setTimeout(() => resolveProductImage(id, p.url), delay);
+  }
 
   return `<div data-imgid="${id}" data-size="${size}" style="width:100%;height:100%;background:${bg};border-radius:inherit;overflow:hidden">${inner}</div>`;
 }
