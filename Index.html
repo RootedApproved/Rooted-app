@@ -396,6 +396,8 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .pd-hero{padding:12px 18px 0;}
 .pd-img{width:100%;border-radius:6px;background:var(--white);border:1px solid var(--border);overflow:hidden;margin-bottom:16px;max-height:280px;display:flex;align-items:center;justify-content:center;font-size:48px;}
 .pd-img img{width:100%;object-fit:cover;display:block;}
+.pd-save-btn{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12.5px;font-weight:700;color:var(--mid);cursor:pointer;margin-bottom:9px;margin-left:8px;}
+.pd-save-btn.saved{background:rgba(139,58,58,.08);border-color:var(--red);color:var(--red);}
 .pd-brand{font-size:11.5px;color:var(--teal);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px;}
 .pd-name{font-family:var(--font-d);font-size:24px;font-weight:900;line-height:1.15;color:var(--char);margin-bottom:4px;}
 .pd-sub{font-size:12.5px;color:var(--muted);margin-bottom:14px;}
@@ -714,10 +716,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <div class="hnc-sub">Farms, markets, CSAs &amp; more</div>
         <span class="hnc-link">Explore the Map →</span>
       </div>
-      <div class="hnc" id="recs-card" onclick="showScreen('recommendations-placeholder')">
+      <div class="hnc" id="recs-card" onclick="showRecommendations()">
         <div class="hnc-title">Recommendations</div>
-        <div class="hnc-sub">Your top Tier 1 picks across every category, matched to what you're shopping for right now</div>
-        <span class="hnc-link">Coming soon →</span>
+        <div class="hnc-sub">Your top Tier 1 picks, based on what you've viewed and saved</div>
+        <span class="hnc-link">See your picks →</span>
       </div>
       <div class="hnc" onclick="showScreen('rooted-u-placeholder')">
         <div class="hnc-img" id="rooted-u-img"></div>
@@ -1227,7 +1229,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="prof-sec-title">Account</div>
     <div class="prof-rows">
       <div class="prof-row"><span class="prof-row-label">Membership</span><span class="prof-row-right">Free ›</span></div>
-      <div class="prof-row"><span class="prof-row-label">Saved Products</span><span class="prof-row-right">0 ›</span></div>
+      <div class="prof-row" onclick="showRecommendations()"><span class="prof-row-label">Saved Products</span><span class="prof-row-right" id="prof-saved-count">0 ›</span></div>
       <div class="prof-row"><span class="prof-row-label">Notifications</span><span class="prof-row-right">Off ›</span></div>
     </div>
   </div>
@@ -1317,11 +1319,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 </div></div>
 
 <div id="screen-recommendations-placeholder" class="screen"><div class="page">
-  <div class="placeholder-screen">
-    <span class="placeholder-back" onclick="showTab('home')">← Back</span>
-    <div class="placeholder-title">Recommendations</div>
-    <div class="placeholder-sub">Your top Tier 1 picks across every category, matched to what you're shopping for right now. This page isn't built out yet, but the link works and this is exactly where it'll live.</div>
-  </div>
+  <div id="recommendations-content"></div>
 </div></div>
 
 <!-- ABOUT -->
@@ -2058,8 +2056,107 @@ function filterSubcat(btn,tier){
 }
 
 // ── PRODUCT DETAIL ───────────────────────────────────────────────────
+// ── SAVED PRODUCTS & RECENTLY VIEWED (foundation for Recommendations) ────
+// Both stored client-side in localStorage — no backend schema change needed to ship this.
+function getSavedProducts() {
+  try { return JSON.parse(localStorage.getItem('rooted-saved-products') || '[]'); } catch (e) { return []; }
+}
+function isProductSaved(id) {
+  return getSavedProducts().includes(id);
+}
+function toggleSaveProduct(id) {
+  let saved = getSavedProducts();
+  if (saved.includes(id)) {
+    saved = saved.filter(x => x !== id);
+  } else {
+    saved.push(id);
+  }
+  try { localStorage.setItem('rooted-saved-products', JSON.stringify(saved)); } catch (e) {}
+  updateSaveButtonUI(id);
+  updateSavedProductsCount();
+}
+function updateSaveButtonUI(id) {
+  const btn = document.getElementById('pd-save-btn');
+  if (!btn) return;
+  const saved = isProductSaved(id);
+  btn.classList.toggle('saved', saved);
+  btn.innerHTML = saved ? '♥ Saved' : '♡ Save';
+}
+function updateSavedProductsCount() {
+  const el = document.getElementById('prof-saved-count');
+  if (el) el.textContent = getSavedProducts().length + ' ›';
+}
+
+function getRecentlyViewed() {
+  try { return JSON.parse(localStorage.getItem('rooted-recently-viewed') || '[]'); } catch (e) { return []; }
+}
+function trackRecentlyViewed(id) {
+  let recent = getRecentlyViewed().filter(x => x !== id);
+  recent.unshift(id);
+  recent = recent.slice(0, 30);
+  try { localStorage.setItem('rooted-recently-viewed', JSON.stringify(recent)); } catch (e) {}
+}
+
+// Recommendations is a full-database Member feature (matches the home card's own
+// "unlock the full database" positioning) — free members hit the paywall like any
+// other members-only feature.
+function showRecommendations() {
+  if (!hasFullAccess()) { showPaywall('Recommendations'); return; }
+  renderRecommendations();
+  showScreen('recommendations-placeholder');
+}
+
+function renderRecommendations() {
+  const container = document.getElementById('recommendations-content');
+  const saved = getSavedProducts();
+  const recent = getRecentlyViewed();
+
+  let html = '<div style="padding:13px 18px 0"><button class="cat-back" onclick="showTab(\'home\')">← Home</button></div>';
+  html += '<div style="padding:8px 18px 0"><div class="tier-page-title">Recommendations</div><p class="tier-page-sub">Your top Tier 1 picks, based on what you\'ve viewed and saved.</p></div>';
+
+  if (!saved.length && !recent.length) {
+    html += `<div style="padding:40px 24px;text-align:center;color:var(--mid);">
+      <div style="font-size:34px;margin-bottom:10px;">🔍</div>
+      <p style="font-size:14px;">You haven't viewed or saved anything yet — explore a category and your personalized picks will show up here.</p>
+      <button class="btn-buy" style="margin-top:16px;" onclick="showTab('categories')">Browse Categories →</button>
+    </div>`;
+    container.innerHTML = html;
+    return;
+  }
+
+  if (saved.length) {
+    const savedItems = saved.map(id => ({ id, p: PRODUCTS[id] })).filter(x => x.p);
+    if (savedItems.length) html += renderRecSection('Your Saved Products', savedItems);
+  }
+
+  const seedIds = [...new Set([...saved, ...recent])];
+  const seedSubcats = new Set(seedIds.map(id => PRODUCTS[id]?.subcat).filter(Boolean));
+  const excludeIds = new Set(seedIds);
+  const suggestions = Object.entries(PRODUCTS)
+    .filter(([id, p]) => p.tier === '1' && seedSubcats.has(p.subcat) && !excludeIds.has(id))
+    .slice(0, 12)
+    .map(([id, p]) => ({ id, p }));
+
+  if (suggestions.length) {
+    html += renderRecSection("Because You've Been Looking At...", suggestions);
+  } else {
+    html += `<div style="padding:20px 18px;color:var(--mid);font-size:13px;">No further Tier 1 matches yet in these categories — check back as we add more products.</div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+function renderRecSection(title, items) {
+  const cards = items.map(({ id, p }) => {
+    const ac = p.tier === '1' ? 'ab1' : p.tier === '2' ? 'ab2' : 'ab3';
+    return `<div class="alt-card" onclick="showProduct('${id}')"><div><div class="alt-name">${p.brand} — ${p.name}</div><div class="alt-note">${p.verdict.substring(0, 90)}...</div></div><span class="alt-badge ${ac}">Tier ${p.tier}</span></div>`;
+  }).join('');
+  return `<div class="pd-sec"><div class="pd-eye">Recommended</div><div class="pd-sec-title">${title}</div>${cards}</div>`;
+}
+
 function showProduct(id){
   const p=PRODUCTS[id];if(!p)return;
+  trackRecentlyViewed(id);
   const tc=p.tier==='1'?'':p.tier==='2'?'t2':'t3';
   const vbc=p.tier==='2'?'pd-verdict-box t2':p.tier==='3'?'pd-verdict-box t3':'pd-verdict-box';
   const imgHtml = buildImgEl(id, p, true);
@@ -2076,6 +2173,7 @@ function showProduct(id){
     <div class="pd-hero">
       <div class="pd-img" style="padding:0;height:280px;max-height:280px;overflow:hidden">${imgHtml}</div>
       <span class="tb ${tc}" style="margin-bottom:9px"><span class="tn">TIER ${p.tier}</span> ${p.label}</span>${pendingHtml}
+      <button id="pd-save-btn" class="pd-save-btn" onclick="toggleSaveProduct('${id}')">${isProductSaved(id) ? '♥ Saved' : '♡ Save'}</button>
       <div class="pd-brand" style="margin-top:10px">${p.brand}</div>
       <h1 class="pd-name">${p.name}</h1>
       <div class="pd-sub">${p.price}</div>
@@ -3650,6 +3748,7 @@ window.addEventListener('DOMContentLoaded', applyFeatureFlags);
 window.addEventListener('DOMContentLoaded', initCardStyle);
 window.addEventListener('DOMContentLoaded', initHomeLayout);
 window.addEventListener('DOMContentLoaded', initPaywallToggleUI);
+window.addEventListener('DOMContentLoaded', updateSavedProductsCount);
 window.addEventListener('DOMContentLoaded', initPhotoVariants);
 window.addEventListener('DOMContentLoaded', initHomeCategoryVisibility);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
