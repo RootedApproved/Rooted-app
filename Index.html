@@ -681,7 +681,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <div id="welcome-toast" class="welcome-toast"></div>
 <nav class="top-nav">
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileDrawer()" aria-label="Open menu"><i data-lucide="menu"></i></button>
-  <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</span>
+  <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="nav-brand-text" style="display:none;">ROOTED</span></span>
   <div class="nav-right">
     <button class="nav-search" onclick="showTab('search')"><i data-lucide="search"></i><span class="nav-search-label">Search</span></button>
     <button class="nav-login-link" onclick="showScreen('login')">Log In</button>
@@ -1975,6 +1975,11 @@ function showScreen(id){
   const currentId = currentActive ? currentActive.id.replace('screen-', '') : null;
   if (currentId && currentId !== id) previousScreen = currentId;
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers')initFarmersMap();
+  // Home already shows the full italic "Rooted." wordmark prominently in its own hero,
+  // so the nav icon there stays icon-only (no redundant "ROOTED" text) — every other
+  // screen keeps the full icon + text brand mark since it's their only wordmark on screen.
+  const brandTextEl = document.getElementById('nav-brand-text');
+  if (brandTextEl) brandTextEl.style.display = (id === 'home') ? 'none' : '';
 }
 
 // Use this instead of a hardcoded goHome()/showTab('home') on any back button that's
