@@ -688,7 +688,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="nav-brand-text" style="display:none;">ROOTED</span></span>
   <div class="nav-right">
     <button class="nav-search" onclick="showTab('search')"><i data-lucide="search"></i><span class="nav-search-label">Search</span></button>
-    <button class="nav-login-link" onclick="showScreen('login')">Log In</button>
+    <button class="nav-login-link" id="nav-login-link" onclick="showScreen('login')">Log In</button>
     <button class="nav-join" id="nav-join-btn" onclick="showScreen('login')">Log In</button>
     <button class="nav-upgrade" id="nav-upgrade-btn" onclick="handleJoinClick()" style="display:none;">Full Access →</button>
   </div>
@@ -2013,9 +2013,11 @@ function goBackSmart() {
 // specifically while on Profile (auth state, handled separately, still governs it everywhere else).
 function updateNavJoinVisibility(screenId) {
   const btn = document.getElementById('nav-join-btn');
+  const loginLink = document.getElementById('nav-login-link');
   const upgradeBtn = document.getElementById('nav-upgrade-btn');
   if (screenId === 'profile') {
     if (btn) { btn.dataset.hiddenForProfile = '1'; btn.style.display = 'none'; }
+    if (loginLink) { loginLink.dataset.hiddenForProfile = '1'; loginLink.style.display = 'none'; }
     // Same reasoning as the Log In button: Profile already has its own bigger,
     // more prominent "Join for $10/month" card - showing this quiet nav pill too
     // is redundant clutter on that specific screen only.
@@ -2024,15 +2026,20 @@ function updateNavJoinVisibility(screenId) {
     return;
   }
   if (btn) btn.dataset.hiddenForProfile = '';
+  if (loginLink) loginLink.dataset.hiddenForProfile = '';
   if (upgradeBtn) upgradeBtn.dataset.hiddenForProfile = '';
   // Only restore visibility here if a guest session actually calls for it — a signed-in
   // user should still see it hidden per updateProfileUIForAuthState's own logic.
   if (rootedSupabase) {
     rootedSupabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session && btn) btn.style.display = '';
+      if (!session) {
+        if (btn) btn.style.display = '';
+        if (loginLink) loginLink.style.display = '';
+      }
     });
-  } else if (btn) {
-    btn.style.display = '';
+  } else {
+    if (btn) btn.style.display = '';
+    if (loginLink) loginLink.style.display = '';
   }
   updateUpgradePillVisibility();
 }
@@ -3758,7 +3765,7 @@ function updateProfileUIForAuthState(session) {
   // These nav-level "Join" buttons only make sense for a signed-out guest — once someone
   // is signed in (whether free or paying), the actual upgrade prompt lives on the Profile
   // card and the paywall screen, both of which now route correctly via handleJoinClick().
-  const navJoinButtons = ['nav-join-btn', 'mobile-drawer-join-btn', 'sidebar-join-btn']
+  const navJoinButtons = ['nav-login-link', 'nav-join-btn', 'mobile-drawer-join-btn', 'sidebar-join-btn']
     .map(id => document.getElementById(id)).filter(Boolean);
   if (session && session.user) {
     navJoinButtons.forEach(b => b.style.display = 'none');
