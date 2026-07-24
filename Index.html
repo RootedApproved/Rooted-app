@@ -3527,9 +3527,12 @@ function initPhotoVariants() {
 }
 
 function initCardStyle() {
-  let saved = 'photo';
-  try { saved = localStorage.getItem('rooted-card-style') || 'photo'; } catch (e) {}
-  if (saved === 'default') saved = 'photo'; // old saved preference from before Default was removed
+  let saved = 'rect';
+  try { saved = localStorage.getItem('rooted-card-style') || 'rect'; } catch (e) {}
+  // Both 'default' (removed previously) and 'photo' (the old default, now retired in favor
+  // of Rectangle) get migrated forward automatically - otherwise anyone with either value
+  // already saved in their own browser would keep seeing the old look with no visible change.
+  if (saved === 'default' || saved === 'photo') saved = 'rect';
   setCardStyle(saved);
 }
 
