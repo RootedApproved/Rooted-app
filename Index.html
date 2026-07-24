@@ -739,7 +739,9 @@ body.style-photo .cat-photo-cycle{display:flex;}
     </div>
   </div>
   <div id="dev-toggle-panel" class="dev-toggle-panel">
-  <div class="style-toggle-wrap">
+  <!-- Everything except Membership Paywall hidden per J's request (temporary) - kept in the
+       DOM, just display:none, so these come back easily whenever we want them again. -->
+  <div class="style-toggle-wrap" style="display:none">
     <span class="style-toggle-label">Product images:</span>
     <button class="style-toggle-btn" onclick="clearImageCache()">Clear Image Cache</button>
   </div>
@@ -748,18 +750,18 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="style-toggle-btn" id="paywall-btn-on" onclick="setPaywallEnabled(true)">On</button>
     <button class="style-toggle-btn" id="paywall-btn-off" onclick="setPaywallEnabled(false)">Off (everyone full access)</button>
   </div>
-  <div class="style-toggle-wrap">
+  <div class="style-toggle-wrap" style="display:none">
     <span class="style-toggle-label">Home layout:</span>
     <button class="style-toggle-btn" id="homelayout-btn-new" onclick="setHomeLayout('new')">New</button>
     <button class="style-toggle-btn" id="homelayout-btn-classic" onclick="setHomeLayout('classic')">Classic</button>
   </div>
-  <div class="style-toggle-wrap">
+  <div class="style-toggle-wrap" style="display:none">
     <span class="style-toggle-label">Card style:</span>
     <button class="style-toggle-btn" id="style-btn-color" onclick="setCardStyle('color')">Color</button>
     <button class="style-toggle-btn" id="style-btn-photo" onclick="setCardStyle('photo')">Photo</button>
     <button class="style-toggle-btn" id="style-btn-rect" onclick="setCardStyle('rect')">Rectangle</button>
   </div>
-  <div class="style-toggle-wrap">
+  <div class="style-toggle-wrap" style="display:none">
     <span class="style-toggle-label">Color theme:</span>
     <button class="style-toggle-btn" id="theme-btn-original" onclick="setColorTheme('original')">Original</button>
     <button class="style-toggle-btn" id="theme-btn-midnight" onclick="setColorTheme('midnight')">Midnight</button>
@@ -767,23 +769,23 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <button class="style-toggle-btn" id="theme-btn-clay" onclick="setColorTheme('clay')">Terracotta Clay</button>
     <button class="style-toggle-btn" id="theme-btn-coastal" onclick="setColorTheme('coastal')">Coastal Sage</button>
   </div>
-  <div class="style-toggle-wrap">
+  <div class="style-toggle-wrap" style="display:none">
     <span class="style-toggle-label">Mobile navigation:</span>
     <button class="style-toggle-btn" id="navstyle-btn-bottom" onclick="setMobileNavStyle('bottom')">Bottom Bar</button>
     <button class="style-toggle-btn" id="navstyle-btn-drawer" onclick="setMobileNavStyle('drawer')">Side Menu</button>
   </div>
-  <div class="style-toggle-wrap">
+  <div class="style-toggle-wrap" style="display:none">
     <span class="style-toggle-label">Sidebar bg (desktop):</span>
     <button class="style-toggle-btn" id="sidebar-btn-plain" onclick="setSidebarStyle('plain')">Plain</button>
     <button class="style-toggle-btn" id="sidebar-btn-dark" onclick="setSidebarStyle('dark')">Dark Forest</button>
     <button class="style-toggle-btn" id="sidebar-btn-terracotta" onclick="setSidebarStyle('terracotta')">Terracotta</button>
     <button class="style-toggle-btn" id="sidebar-btn-gradient" onclick="setSidebarStyle('gradient')">Soft Gradient</button>
   </div>
-  <div class="style-toggle-wrap">
+  <div class="style-toggle-wrap" style="display:none">
     <span class="style-toggle-label">Home screen categories:</span>
     <button class="style-toggle-btn" id="home-cat-toggle-btn" onclick="toggleHomeCatPanel()">Choose Categories</button>
   </div>
-  <div class="home-cat-panel" id="home-cat-panel">
+  <div class="home-cat-panel" id="home-cat-panel" style="display:none">
     <label class="home-cat-option"><input type="checkbox" id="homecat-clothing" onchange="setHomeCategoryVisibility('clothing', this.checked)"><i data-lucide="shirt"></i>Clothing (Men's)</label>
     <label class="home-cat-option"><input type="checkbox" id="homecat-oral" onchange="setHomeCategoryVisibility('oral', this.checked)"><i data-lucide="smile"></i>Oral Care</label>
     <label class="home-cat-option"><input type="checkbox" id="homecat-water" onchange="setHomeCategoryVisibility('water', this.checked)"><i data-lucide="droplet"></i>Water</label>
