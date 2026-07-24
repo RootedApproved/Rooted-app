@@ -283,8 +283,8 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .mc-title{font-family:var(--font-d);font-size:16px;font-weight:700;color:var(--white);margin-bottom:3px;}
 .mc-sub{font-size:12.5px;color:rgba(255,255,255,.65);}
 .mc-link{display:inline-block;margin-top:11px;font-size:12px;font-weight:600;color:var(--white);border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:1px;}
-.cat-hd{padding:20px 18px 18px;border-bottom:1px solid var(--border);}
-.cat-back{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--teal);font-weight:500;cursor:pointer;background:none;border:none;padding:0;margin-bottom:10px;}
+.cat-hd{padding:68px 18px 18px;border-bottom:1px solid var(--border);}
+.cat-back{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--teal);font-weight:500;cursor:pointer;background:var(--cream);border:none;border-bottom:1px solid var(--border);padding:0 18px;position:fixed;top:var(--nav-h);left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:48px;z-index:150;box-sizing:border-box;}
 .cat-title{font-family:var(--font-d);font-size:27px;font-weight:900;color:var(--char);margin-bottom:5px;}
 .cat-desc{font-size:13.5px;color:var(--mid);line-height:1.6;}
 .subcat-grid{display:flex;flex-direction:column;gap:9px;padding:16px 18px 24px;}
@@ -617,6 +617,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   .desktop-sidebar{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:180px;background:var(--white);border-right:1px solid var(--border);padding:18px 8px 14px;z-index:300;transition:background .2s;}
   .top-nav{left:180px;padding:0 32px;}
   .pd-back{left:180px;transform:none;width:calc(100% - 180px);max-width:none;padding:0 32px;}
+  .cat-back{left:180px;transform:none;width:calc(100% - 180px);max-width:none;padding:0 32px;}
   .page{max-width:920px;margin:0 auto;padding-top:calc(var(--nav-h) + 8px);}
   .cat-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 32px 28px;}
   .home-new-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 32px 28px;}
@@ -1346,7 +1347,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <!-- ABOUT -->
 <div id="screen-about" class="screen">
 <div class="page">
-  <div style="padding:13px 18px 0"><button class="cat-back" onclick="goBackSmart()">← Back</button></div>
+  <div style="height:61px"><button class="cat-back" onclick="goBackSmart()">← Back</button></div>
   <div class="about-hero">
     <div class="eyebrow">Why We Exist</div>
     <h1 class="about-hl">The standard<br><em>has to come</em><br>from somewhere.</h1>
@@ -1392,7 +1393,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <!-- TIERS -->
 <div id="screen-tiers" class="screen">
 <div class="page">
-  <div style="padding:13px 18px 0"><button class="cat-back" onclick="goBackSmart()">← Back</button></div>
+  <div style="height:61px"><button class="cat-back" onclick="goBackSmart()">← Back</button></div>
   <div class="tier-page">
     <div class="tier-page-title">Standards &amp; Tiers</div>
     <p class="tier-page-sub">ROOTED is not a list of recommended products — it's the trusted standard for evaluating them. Every category is judged against its own published standard before a single product in it is rated. Standards come first. Products come second. People always.</p>
@@ -2232,7 +2233,7 @@ function renderRecommendations() {
   const saved = getSavedProducts();
   const recent = getRecentlyViewed();
 
-  let html = '<div style="padding:13px 18px 0"><button class="cat-back" onclick="goBackSmart()">← Back</button></div>';
+  let html = '<div style="height:61px"><button class="cat-back" onclick="goBackSmart()">← Back</button></div>';
   html += '<div style="padding:8px 18px 0"><div class="tier-page-title">Recommendations</div><p class="tier-page-sub">Your top Tier 1 picks, based on what you\'ve viewed and saved.</p></div>';
 
   if (!saved.length && !recent.length) {
