@@ -13,10 +13,14 @@ the elastic/trim is the only open question. Once a reply comes in:
 ---
 
 ## 1. Not Perfect Linen
-**Products:** Ontario ($139), Albury ($146) — men's linen pants
+**Products:** Ontario ($139), Albury ($146) — men's linen pants; Byron —
+men's linen shorts, price TBD, 100% European flax, coconut button
 **Sent to:** family@notperfectlinen.com (cc: orders@notperfectlinen.com)
 **Date sent:** 2026-07-26
 **Status:** Awaiting reply
+**Note:** Byron confirmed real (100% linen, elastic waist in back only)
+but not separately emailed about — same open elastic-composition
+question as Ontario/Albury, one reply should cover all three.
 **Note:** NPL's site has misrouted URLs twice this session (Albury, and a
 separate product "Quebec"), so re-verify URL directly from NPL once they
 reply — don't trust the URL on file without a fresh check.
