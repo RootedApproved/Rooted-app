@@ -687,6 +687,58 @@ body.style-photo .cat-photo-cycle{display:flex;}
   .chat-panel{bottom:88px;right:24px;}
   .chat-panel.fullscreen{bottom:0;}
 }
+/* ── ROOTED U — browse screen ───────────────────────────────────────── */
+.ru-hero{padding:18px 18px 8px;}
+.ru-hero-title{font-family:var(--font-d);font-weight:900;font-size:26px;color:var(--forest);margin-bottom:6px;}
+.ru-hero-sub{font-family:var(--font-b);font-size:14px;color:var(--mid);line-height:1.55;max-width:520px;}
+.ru-topic-group{padding:14px 18px 4px;}
+.ru-topic-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2px;}
+.ru-topic-title{font-family:var(--font-b);font-weight:800;font-size:16.5px;color:var(--char);}
+.ru-topic-count{font-family:var(--font-m);font-size:11.5px;color:var(--muted);}
+.ru-topic-desc{font-family:var(--font-b);font-size:13px;color:var(--mid);margin-bottom:10px;line-height:1.5;}
+.ru-module-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.ru-module-row::-webkit-scrollbar{display:none;}
+.ru-module-card{flex:0 0 auto;width:150px;border:1px solid var(--border);border-radius:12px;background:var(--white);padding:14px 13px;cursor:pointer;transition:border-color .15s,transform .15s;position:relative;}
+.ru-module-card:active{transform:scale(.97);}
+.ru-module-card.done{border-color:var(--sage);background:var(--cream2);}
+.ru-module-icon{width:34px;height:34px;border-radius:9px;background:var(--cream2);display:flex;align-items:center;justify-content:center;margin-bottom:10px;color:var(--forest);}
+.ru-module-icon i{width:18px;height:18px;stroke-width:1.75;}
+.ru-module-title{font-family:var(--font-b);font-weight:700;font-size:13.5px;color:var(--char);line-height:1.3;margin-bottom:4px;}
+.ru-module-teaser{font-family:var(--font-b);font-size:11.5px;color:var(--mid);line-height:1.4;margin-bottom:8px;min-height:30px;}
+.ru-module-meta{font-family:var(--font-m);font-size:10px;color:var(--muted);display:flex;align-items:center;gap:4px;}
+.ru-module-meta i{width:11px;height:11px;}
+.ru-module-check{position:absolute;top:10px;right:10px;color:var(--sage);}
+.ru-module-check i{width:16px;height:16px;}
+/* ── ROOTED U — swipeable module reader ─────────────────────────────── */
+.ru-reader{position:fixed;inset:0;z-index:600;background:var(--char);display:flex;flex-direction:column;}
+.ru-reader-progress{display:flex;gap:4px;padding:10px 12px 6px;flex-shrink:0;}
+.ru-reader-seg{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.25);overflow:hidden;}
+.ru-reader-seg-fill{height:100%;width:0%;background:var(--white);border-radius:2px;transition:width .2s linear;}
+.ru-reader-seg.filled .ru-reader-seg-fill{width:100%;transition:none;}
+.ru-reader-top{display:flex;align-items:center;justify-content:space-between;padding:4px 14px 14px;flex-shrink:0;}
+.ru-reader-topic{font-family:var(--font-m);font-size:11px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.05em;}
+.ru-reader-close{background:none;border:none;color:var(--white);padding:4px;cursor:pointer;}
+.ru-reader-close i{width:22px;height:22px;stroke-width:1.75;}
+.ru-reader-body{flex:1;display:flex;align-items:center;justify-content:center;position:relative;padding:0 26px;}
+.ru-slide{display:none;max-width:440px;width:100%;text-align:center;animation:ruFadeIn .25s ease;}
+.ru-slide.active{display:block;}
+@keyframes ruFadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.ru-slide-emoji{font-size:44px;margin-bottom:20px;line-height:1;}
+.ru-slide-kicker{font-family:var(--font-m);font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.ru-slide-headline{font-family:var(--font-d);font-weight:900;font-size:24px;color:var(--white);line-height:1.25;margin-bottom:16px;}
+.ru-slide-body{font-family:var(--font-b);font-size:15.5px;color:rgba(255,255,255,.85);line-height:1.6;}
+.ru-slide-body p{margin-bottom:12px;}
+.ru-slide-body p:last-child{margin-bottom:0;}
+.ru-slide-callout{margin-top:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:12px 14px;font-family:var(--font-b);font-size:13.5px;color:var(--white);text-align:left;line-height:1.5;}
+.ru-slide-callout b{color:var(--gold);}
+.ru-reader-tapzone{position:absolute;top:0;bottom:0;width:38%;z-index:2;}
+.ru-reader-tapzone.left{left:0;}
+.ru-reader-tapzone.right{right:0;}
+.ru-reader-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 22px;flex-shrink:0;gap:10px;}
+.ru-reader-navbtn{background:rgba(255,255,255,.1);border:none;color:var(--white);border-radius:20px;padding:10px 18px;font-family:var(--font-b);font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;}
+.ru-reader-navbtn:disabled{opacity:.3;}
+.ru-reader-navbtn i{width:15px;height:15px;}
+.ru-reader-navbtn.primary{background:var(--sage);}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -739,10 +791,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <div class="hnc-sub">Your top Tier 1 picks, based on what you've viewed and saved</div>
         <span class="hnc-link">See your picks →</span>
       </div>
-      <div class="hnc" onclick="showScreen('rooted-u-placeholder')">
+      <div class="hnc" onclick="showScreen('rooted-u')">
         <div class="hnc-img" id="rooted-u-img"></div>
         <div class="hnc-sub">Education modules</div>
-        <span class="hnc-link">Coming soon →</span>
+        <span class="hnc-link">Start learning →</span>
       </div>
       <div class="hnc" onclick="showTab('categories')">
         <div class="hnc-title">See More</div>
@@ -1496,13 +1548,37 @@ body.style-photo .cat-photo-cycle{display:flex;}
   </div>
 </div></div>
 
-<!-- PLACEHOLDER SCREENS — real, working links, honestly labeled as not built out yet -->
-<div id="screen-rooted-u-placeholder" class="screen"><div class="page">
-  <div class="placeholder-screen">
-    <span class="placeholder-back" onclick="goBackSmart()">← Back</span>
-    <div class="hnc-img" id="rooted-u-placeholder-img" style="max-width:320px;margin:24px auto;"></div>
-    <div class="placeholder-title">Rooted U</div>
-    <div class="placeholder-sub">Education modules — this page isn't built out yet, but the link works and this is exactly where it'll live once the 10-module curriculum is ready for each category.</div>
+<!-- ROOTED U — browse screen -->
+<div id="screen-rooted-u" class="screen"><div class="page">
+  <div class="cat-hd">
+    <button class="cat-back" onclick="goBackSmart()">← Back</button>
+    <div class="ru-hero">
+      <div class="ru-hero-title">Rooted U</div>
+      <p class="ru-hero-sub">Short, evidence-based lessons on the environmental inputs that actually move the needle — light, sleep, and the technology habits built around them. No fear-mongering, no hacks. Just what the research actually supports.</p>
+    </div>
+  </div>
+  <div id="rootedu-topic-list"></div>
+  <div class="divider"></div>
+  <div style="padding:18px 18px 32px;font-family:var(--font-m);font-size:11.5px;color:var(--muted);text-align:center;">More topics and modules are added regularly as the curriculum grows.</div>
+</div></div>
+
+<!-- ROOTED U — swipeable module reader -->
+<div id="screen-rooted-u-module" class="screen"><div class="page">
+  <div class="ru-reader">
+    <div class="ru-reader-progress" id="ru-progress-bar"></div>
+    <div class="ru-reader-top">
+      <div class="ru-reader-topic" id="ru-reader-topic-label">—</div>
+      <button class="ru-reader-close" onclick="closeRootedUModule()" aria-label="Close"><i data-lucide="x"></i></button>
+    </div>
+    <div class="ru-reader-body" id="ru-reader-body">
+      <div class="ru-reader-tapzone left" onclick="ruPrevSlide()"></div>
+      <div class="ru-reader-tapzone right" onclick="ruNextSlide()"></div>
+      <div id="ru-slides-container"></div>
+    </div>
+    <div class="ru-reader-nav" id="ru-reader-nav">
+      <button class="ru-reader-navbtn" id="ru-nav-back" onclick="ruPrevSlide()"><i data-lucide="chevron-left"></i>Back</button>
+      <button class="ru-reader-navbtn primary" id="ru-nav-next" onclick="ruNextSlide()">Next<i data-lucide="chevron-right"></i></button>
+    </div>
   </div>
 </div></div>
 
@@ -2529,7 +2605,7 @@ function showScreen(id){
   const currentId = currentActive ? currentActive.id.replace('screen-', '') : null;
   if (currentId && currentId !== id) previousScreen = currentId;
   imgFetchQueueIndex = 0;
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers')initFarmersMap();
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers')initFarmersMap();if(id==='rooted-u')renderRootedUTopics();
   // Home already shows the full italic "Rooted." wordmark prominently in its own hero,
   // so the nav icon there stays icon-only (no redundant "ROOTED" text) — every other
   // screen keeps the full icon + text brand mark since it's their only wordmark on screen.
@@ -4028,8 +4104,201 @@ function initRootedULogo() {
   // fixed choice, matching what J specifically asked for: capital R, capital U.
   const img = document.getElementById('rooted-u-img');
   if (img) img.innerHTML = ROOTED_U_LOGOS.v4;
-  const placeholderImg = document.getElementById('rooted-u-placeholder-img');
-  if (placeholderImg) placeholderImg.innerHTML = ROOTED_U_LOGOS.v4;
+}
+
+// ── ROOTED U — education modules ─────────────────────────────────────
+// Two topic areas live here for now: Lighting & Circadian Health (pairs with the
+// shoppable "Lighting & Circadian Health" product category, once built) and EMF & Tech
+// Hygiene (education-only by design — no product catalog for this one). Sun Exposure
+// and Thermal Health are planned as future topic areas, not built yet.
+const ROOTEDU_TOPICS = {
+  'lighting': {
+    title: 'Lighting & Circadian Health',
+    icon: 'sun',
+    desc: 'How light timing, not just brightness, runs your internal clock.',
+    modules: ['morning-light', 'blue-light-myths']
+  },
+  'emf-tech': {
+    title: 'EMF & Tech Hygiene',
+    icon: 'wifi',
+    desc: 'What the evidence actually supports on wireless radiation and device habits — no sensationalism.',
+    modules: ['emf-evidence']
+  }
+};
+
+const ROOTEDU_MODULES = {
+  'morning-light': {
+    topic: 'lighting', icon: 'sunrise', title: 'Morning Light',
+    teaser: 'Why the first few minutes outside matter more than any supplement.',
+    slides: [
+      {kicker:'Light as information', emoji:'☀️', headline:'Your body has a clock. Light sets it.',
+       body:['A tiny patch of cells in your retina does nothing for vision. Its only job is to tell your brain what time it is.']},
+      {kicker:'The mechanism', emoji:'👁️', headline:'Meet the ipRGC',
+       body:['These specialized retinal cells contain melanopsin and respond most strongly to the blue-shifted light found in outdoor morning sky.','They wire directly to your suprachiasmatic nucleus — your master clock — bypassing the visual cortex entirely.']},
+      {kicker:'What it triggers', emoji:'⚡', headline:'The cortisol awakening response',
+       body:['Within 30–45 minutes of waking, healthy cortisol naturally spikes to get you alert and moving. Bright light exposure in that early window measurably amplifies it.'],
+       callout:'This is a <b>healthy</b> spike tied to waking, not the same as chronic-stress cortisol. Timing is what makes the difference.'},
+      {kicker:'Why outside matters', emoji:'🪟', headline:'A window isn\u2019t the same as being outside',
+       body:['Ordinary glass filters out much of the short-wavelength light ipRGCs respond to, and typical indoor lighting is far dimmer than even an overcast sky.','Get outside, or at least open a window or door — don\u2019t rely on light through glass to do the job.']},
+      {kicker:'What to actually do', emoji:'🌤️', headline:'Look toward the sky, don\u2019t stare at the sun',
+       body:['Five to ten minutes outside within the first hour of waking, facing the general direction of the sky or horizon, is enough for the signal to register. More isn\u2019t meaningfully better once you\u2019re outside.'],
+       callout:'Cloudy days still work — overcast daylight is far brighter than any indoor lighting. Never stare directly at the sun.'},
+      {kicker:'Where the evidence stops', emoji:'📋', headline:'This supports your rhythm — it doesn\u2019t replace treatment',
+       body:['Morning light is a genuinely well-supported daily habit for circadian alignment.','It is not a treatment for clinical insomnia, major depressive disorder, or a diagnosed circadian rhythm disorder — those need a clinician, not just a habit.']}
+    ]
+  },
+  'blue-light-myths': {
+    topic: 'lighting', icon: 'moon', title: 'Blue Light Myths',
+    teaser: 'What blue light actually does — and where the marketing gets ahead of the science.',
+    slides: [
+      {kicker:'The claim vs. the evidence', emoji:'🔵', headline:'Blue light isn\u2019t one simple villain',
+       body:['Blue light gets blamed for eye damage, poor sleep, and more, often in the same breath — but the evidence for each claim is genuinely different in strength.']},
+      {kicker:'Where it\u2019s strong', emoji:'🌙', headline:'Evening blue light really does delay sleep signals',
+       body:['This part is well established: short-wavelength light in the evening suppresses melatonin more than longer wavelengths do, and can shift your body\u2019s clock later.','This is the same melanopsin/ipRGC pathway that makes morning light so useful — it just runs in reverse at night.']},
+      {kicker:'Where it\u2019s weaker', emoji:'👀', headline:'\u201CDigital eye strain\u201D isn\u2019t the same as retinal damage',
+       body:['Screen-related eye discomfort is real and common, but the leading research points to reduced blink rate and screen distance/posture as the main drivers — not blue light wavelength itself causing retinal harm.','Claims that ordinary screen use damages your retina go beyond what current evidence supports.']},
+      {kicker:'The product question', emoji:'🕶️', headline:'Do blue light glasses actually help?',
+       body:['For daytime wear, evidence for symptom or sleep benefit is thin — you\u2019re awash in far more blue light from the actual sky than any screen.','For evening use in the hour or two before bed, blocking blue-heavy wavelengths has more support, since that\u2019s exactly when the timing signal matters most.'],
+       callout:'If you want glasses, save them for evening screen use — not as an all-day accessory.'},
+      {kicker:'The higher-leverage fix', emoji:'💡', headline:'Dimming and warming your evening light matters more than any single gadget',
+       body:['Lowering overall brightness and shifting to warmer color temperatures in the 2–3 hours before bed addresses the same mechanism as blue-blocking glasses — for free, without wearing anything.']}
+    ]
+  },
+  'emf-evidence': {
+    topic: 'emf-tech', icon: 'radio', title: 'EMF: What the Evidence Says',
+    teaser: 'Not sensational, not dismissive — just what current research actually supports.',
+    slides: [
+      {kicker:'Setting the frame', emoji:'📶', headline:'Not all EMF is the same',
+       body:['\u201CEMF\u201D gets used as one blanket scary term, but power lines, WiFi, Bluetooth, and cellular signals are different frequencies with genuinely different physics and different evidence bases.','Lumping them all together is where most of the fear — and most of the false reassurance — comes from.']},
+      {kicker:'The actual classification', emoji:'📄', headline:'\u201CPossibly carcinogenic\u201D is a weaker label than it sounds',
+       body:['In 2011, the WHO\u2019s cancer research agency (IARC) classified radiofrequency EMF as Group 2B, \u201Cpossibly carcinogenic,\u201D based on limited evidence of increased brain tumor risk in heavy phone users.'],
+       callout:'Group 2B also includes pickled vegetables. It means <b>\u201Ccan\u2019t be ruled out,\u201D</b> not <b>\u201Cproven dangerous.\u201D</b>'},
+      {kicker:'What\u2019s genuinely uncertain', emoji:'❓', headline:'No causal link has been established',
+       body:['Large studies on phone use and brain tumors have produced mixed, often contradictory results.','Non-cancer symptoms some people report — headaches, fatigue — haven\u2019t been consistently reproduced in blinded trials where people don\u2019t know if a device is actually transmitting.']},
+      {kicker:'What\u2019s not in dispute', emoji:'📏', headline:'Distance is the one lever everyone agrees on',
+       body:['RF power density falls off with the square of distance — double the distance, and exposure drops to roughly a quarter. That\u2019s physics, not a health opinion.'],
+       callout:'A phone held against your body is a genuinely different exposure than the same phone across the room.'},
+      {kicker:'Low ROI', emoji:'🚫', headline:'Most anti-EMF products don\u2019t do what they claim',
+       body:['Stickers, pendants, and \u201Charmonizers\u201D have no engineering mechanism that could block or neutralize RF fields, and none have passed independent testing.','A product either has a shielding spec that\u2019s been independently measured, or it\u2019s decoration.']},
+      {kicker:'What actually moves the needle', emoji:'✅', headline:'Duration and distance, not fear',
+       body:['Use speakerphone or wired headphones for long calls, keep phones out of a pocket against skin when practical, and don\u2019t lose sleep over a router in the next room.','The dose is in the distance and the duration — not the mere presence of a signal.']}
+    ]
+  }
+};
+
+let ruCurrentModule = null;
+let ruCurrentSlide = 0;
+
+function getRootedUDoneModules() {
+  try { return JSON.parse(localStorage.getItem('rootedu-done') || '[]'); } catch(e) { return []; }
+}
+function markRootedUModuleDone(id) {
+  const done = getRootedUDoneModules();
+  if (!done.includes(id)) { done.push(id); try { localStorage.setItem('rootedu-done', JSON.stringify(done)); } catch(e) {} }
+}
+
+function renderRootedUTopics() {
+  const container = document.getElementById('rootedu-topic-list');
+  if (!container) return;
+  const doneModules = getRootedUDoneModules();
+  let html = '';
+  Object.keys(ROOTEDU_TOPICS).forEach(topicKey => {
+    const topic = ROOTEDU_TOPICS[topicKey];
+    html += `<div class="ru-topic-group"><div class="ru-topic-hd"><span class="ru-topic-title">${topic.title}</span><span class="ru-topic-count">${topic.modules.length} module${topic.modules.length===1?'':'s'}</span></div><div class="ru-topic-desc">${topic.desc}</div><div class="ru-module-row">`;
+    topic.modules.forEach(moduleId => {
+      const m = ROOTEDU_MODULES[moduleId];
+      if (!m) return;
+      const isDone = doneModules.includes(moduleId);
+      html += `<div class="ru-module-card${isDone?' done':''}" onclick="openRootedUModule('${moduleId}')">
+        ${isDone?'<div class="ru-module-check"><i data-lucide="check-circle"></i></div>':''}
+        <div class="ru-module-icon"><i data-lucide="${m.icon}"></i></div>
+        <div class="ru-module-title">${m.title}</div>
+        <div class="ru-module-teaser">${m.teaser}</div>
+        <div class="ru-module-meta"><i data-lucide="layers"></i>${m.slides.length} slides</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+  container.innerHTML = html;
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function openRootedUModule(moduleId) {
+  const m = ROOTEDU_MODULES[moduleId];
+  if (!m) return;
+  ruCurrentModule = moduleId;
+  ruCurrentSlide = 0;
+  const topicLabel = document.getElementById('ru-reader-topic-label');
+  if (topicLabel) topicLabel.textContent = m.title;
+  showScreen('rooted-u-module');
+  ruRenderProgress();
+  ruRenderSlides();
+  ruUpdateSlideView();
+}
+
+function ruRenderProgress() {
+  const m = ROOTEDU_MODULES[ruCurrentModule];
+  const bar = document.getElementById('ru-progress-bar');
+  if (!bar || !m) return;
+  bar.innerHTML = m.slides.map(() => `<div class="ru-reader-seg"><div class="ru-reader-seg-fill"></div></div>`).join('');
+}
+
+function ruRenderSlides() {
+  const m = ROOTEDU_MODULES[ruCurrentModule];
+  const container = document.getElementById('ru-slides-container');
+  if (!container || !m) return;
+  container.innerHTML = m.slides.map((s, i) => `
+    <div class="ru-slide" data-index="${i}">
+      <div class="ru-slide-emoji">${s.emoji || ''}</div>
+      <div class="ru-slide-kicker">${s.kicker || ''}</div>
+      <div class="ru-slide-headline">${s.headline || ''}</div>
+      <div class="ru-slide-body">${(s.body||[]).map(p=>`<p>${p}</p>`).join('')}</div>
+      ${s.callout ? `<div class="ru-slide-callout">${s.callout}</div>` : ''}
+    </div>
+  `).join('');
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function ruUpdateSlideView() {
+  const m = ROOTEDU_MODULES[ruCurrentModule];
+  if (!m) return;
+  document.querySelectorAll('#ru-slides-container .ru-slide').forEach((el, i) => {
+    el.classList.toggle('active', i === ruCurrentSlide);
+  });
+  document.querySelectorAll('#ru-progress-bar .ru-reader-seg').forEach((el, i) => {
+    el.classList.toggle('filled', i < ruCurrentSlide);
+    const fill = el.querySelector('.ru-reader-seg-fill');
+    if (i === ruCurrentSlide && fill) fill.style.width = '100%'; else if (i > ruCurrentSlide && fill) fill.style.width = '0%';
+  });
+  const backBtn = document.getElementById('ru-nav-back');
+  const nextBtn = document.getElementById('ru-nav-next');
+  if (backBtn) backBtn.disabled = (ruCurrentSlide === 0);
+  if (nextBtn) nextBtn.innerHTML = (ruCurrentSlide === m.slides.length - 1) ? 'Done<i data-lucide="check"></i>' : 'Next<i data-lucide="chevron-right"></i>';
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function ruNextSlide() {
+  const m = ROOTEDU_MODULES[ruCurrentModule];
+  if (!m) return;
+  if (ruCurrentSlide < m.slides.length - 1) {
+    ruCurrentSlide++;
+    ruUpdateSlideView();
+  } else {
+    markRootedUModuleDone(ruCurrentModule);
+    closeRootedUModule();
+  }
+}
+
+function ruPrevSlide() {
+  if (ruCurrentSlide > 0) {
+    ruCurrentSlide--;
+    ruUpdateSlideView();
+  }
+}
+
+function closeRootedUModule() {
+  showScreen('rooted-u');
+  renderRootedUTopics();
 }
 
 function initDevPanel() {
