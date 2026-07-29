@@ -3050,10 +3050,22 @@ function renderRecommendations() {
   html += '<div style="padding:8px 18px 0"><div class="tier-page-title">Recommendations</div><p class="tier-page-sub">Your top Tier 1 picks, based on what you\'ve viewed and saved.</p></div>';
 
   if (!saved.length && !recent.length) {
-    html += `<div style="padding:40px 24px;text-align:center;color:var(--mid);">
+    // Nothing personalized to show yet — rather than punting straight to the full,
+    // unfiltered catalog (which contradicted this page's own "top Tier 1 picks"
+    // promise), show actual curated Gold Standard picks as a real starting point.
+    const goldPicks = Object.entries(PRODUCTS)
+      .filter(([id, p]) => p.gold === true)
+      .slice(0, 12)
+      .map(([id, p]) => ({ id, p }));
+    html += `<div style="padding:24px 24px 4px;text-align:center;color:var(--mid);">
       <div style="font-size:34px;margin-bottom:10px;">🔍</div>
-      <p style="font-size:14px;">You haven't viewed or saved anything yet — explore a category and your personalized picks will show up here.</p>
-      <button class="btn-buy" style="margin-top:16px;" onclick="showTab('categories')">Browse Categories →</button>
+      <p style="font-size:14px;">You haven't viewed or saved anything yet — here are our current Gold Standard picks to get started.</p>
+    </div>`;
+    if (goldPicks.length) {
+      html += renderRecSection('Gold Standard Picks', goldPicks);
+    }
+    html += `<div style="padding:4px 24px 24px;text-align:center;">
+      <button class="btn-buy" onclick="showTab('categories')">Browse All Categories →</button>
     </div>`;
     container.innerHTML = html;
     return;
