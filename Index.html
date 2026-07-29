@@ -517,6 +517,11 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .mem-perk{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.4;}
 .mem-check{color:rgba(255,255,255,.55);flex-shrink:0;}
 .mem-cta{display:block;width:100%;background:var(--white);color:var(--forest);text-align:center;padding:12px;font-size:14px;font-weight:700;border-radius:3px;border:none;cursor:pointer;}
+.mem-card.mem-card-subtle{padding:12px 17px;}
+.mem-active-row{display:flex;align-items:center;gap:8px;}
+.mem-active-check{color:var(--white);font-size:15px;flex-shrink:0;}
+.mem-active-text{font-size:13.5px;font-weight:700;color:var(--white);}
+.mem-active-manage{display:inline-block;margin-top:8px;background:transparent;color:rgba(255,255,255,.7);padding:0;font-size:12px;font-weight:600;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
 .prof-sec{padding:16px 18px 0;}
 .prof-sec-title{font-family:var(--font-m);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:9px;}
 .prof-rows{display:flex;flex-direction:column;margin-bottom:22px;}
@@ -1537,26 +1542,36 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="profile-tier" id="profile-tier">Free Member</div>
     <button class="profile-join-btn" id="profile-action-btn" onclick="showScreen('signup')">Create Account / Log In</button>
   </div>
-  <div class="mem-card">
-    <div class="mem-eye">ROOTED Member — $10/mo</div>
-    <div class="mem-title">Unlock the full database</div>
-    <div class="mem-sub">Every product, every tier, every rationale.</div>
-    <div class="mem-perks">
-      <div class="mem-perk"><span class="mem-check">✓</span>Full product database — all 12 categories</div>
-      <div class="mem-perk"><span class="mem-check">✓</span>Buying frameworks for every category</div>
-      <div class="mem-perk"><span class="mem-check">✓</span>Tier update notifications</div>
-      <div class="mem-perk"><span class="mem-check">✓</span>Quarterly research reports</div>
-      <div class="mem-perk"><span class="mem-check">✓</span>Ad-free always</div>
+  <div class="mem-card" id="mem-card">
+    <div id="mem-card-pitch">
+      <div class="mem-eye">ROOTED Member — $10/mo</div>
+      <div class="mem-title">Unlock the full database</div>
+      <div class="mem-sub">Every product, every tier, every rationale.</div>
+      <div class="mem-perks">
+        <div class="mem-perk"><span class="mem-check">✓</span>Full product database — all 12 categories</div>
+        <div class="mem-perk"><span class="mem-check">✓</span>Buying frameworks for every category</div>
+        <div class="mem-perk"><span class="mem-check">✓</span>Tier update notifications</div>
+        <div class="mem-perk"><span class="mem-check">✓</span>Quarterly research reports</div>
+        <div class="mem-perk"><span class="mem-check">✓</span>Ad-free always</div>
+      </div>
+      <!-- Routes to Sign Up for now, since an account is needed before checkout either way.
+           Once Stripe is built, this should check login state: if already logged in, go
+           straight to Stripe Checkout for the Member plan instead of back to signup. -->
+      <button class="mem-cta" id="mem-cta-btn" onclick="showScreen('signup')">Join for $10/month →</button>
     </div>
-    <!-- Routes to Sign Up for now, since an account is needed before checkout either way.
-         Once Stripe is built, this should check login state: if already logged in, go
-         straight to Stripe Checkout for the Member plan instead of back to signup. -->
-    <button class="mem-cta" id="mem-cta-btn" onclick="showScreen('signup')">Join for $10/month →</button>
+    <!-- Subtle, low-key replacement shown instead of the full sales pitch once someone is
+         a confirmed paying member — no eyebrow price, no perks list, just a quiet
+         confirmation and a way to manage the subscription. Hidden by default; toggled on
+         by refreshMembershipStatus() once membership is confirmed. -->
+    <div id="mem-card-active" style="display:none;">
+      <div class="mem-active-row"><span class="mem-active-check">✓</span><span class="mem-active-text">You're a ROOTED Member</span></div>
+      <button class="mem-active-manage" id="mem-active-manage-btn" onclick="openBillingPortal(currentStripeCustomerId)">Manage membership →</button>
+    </div>
   </div>
   <div class="prof-sec">
     <div class="prof-sec-title">Account</div>
     <div class="prof-rows">
-      <div class="prof-row"><span class="prof-row-label">Membership</span><span class="prof-row-right">Free ›</span></div>
+      <div class="prof-row" onclick="handleMembershipRowClick()"><span class="prof-row-label">Membership</span><span class="prof-row-right" id="prof-membership-status">Free ›</span></div>
       <div class="prof-row" onclick="showRecommendations()"><span class="prof-row-label">Saved Products</span><span class="prof-row-right" id="prof-saved-count">0 ›</span></div>
       <div class="prof-row"><span class="prof-row-label">Notifications</span><span class="prof-row-right">Off ›</span></div>
     </div>
@@ -5394,6 +5409,10 @@ async function rootedSignOut() {
 // app (categories, Local Food Map, chat) can read it synchronously without re-querying
 // Supabase every time. Updated whenever auth state or subscription status changes.
 let currentMembershipTier = 'free';
+// Stripe customer ID for the signed-in user, set whenever refreshMembershipStatus runs —
+// needed by the Account > Membership row's click handler so it can open the billing
+// portal without re-querying Supabase.
+let currentStripeCustomerId = null;
 
 // The one function every gating check calls. Honors the master
 // REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS switch above — flip that to false and this
@@ -5428,11 +5447,22 @@ function updateProfileUIForAuthState(session) {
     const upgradeBtn = document.getElementById('nav-upgrade-btn');
     if (upgradeBtn) upgradeBtn.style.display = 'none';
     currentMembershipTier = 'free';
+    currentStripeCustomerId = null;
     nameEl.textContent = 'Guest';
     avEl.textContent = 'R';
     tierEl.textContent = 'Free Member';
     btnEl.textContent = 'Create Account / Log In';
     btnEl.onclick = () => showScreen('signup');
+    const rowStatusEl = document.getElementById('prof-membership-status');
+    if (rowStatusEl) rowStatusEl.textContent = 'Free ›';
+    const memCardEl = document.getElementById('mem-card');
+    const pitchEl = document.getElementById('mem-card-pitch');
+    const activeEl = document.getElementById('mem-card-active');
+    if (memCardEl && pitchEl && activeEl) {
+      memCardEl.classList.remove('mem-card-subtle');
+      pitchEl.style.display = '';
+      activeEl.style.display = 'none';
+    }
     if (memBtnEl) {
       memBtnEl.textContent = 'Join for $10/month →';
       memBtnEl.onclick = () => showScreen('signup');
@@ -5445,6 +5475,10 @@ function updateProfileUIForAuthState(session) {
 async function refreshMembershipStatus(userId) {
   const tierEl = document.getElementById('profile-tier');
   const memBtnEl = document.getElementById('mem-cta-btn');
+  const rowStatusEl = document.getElementById('prof-membership-status');
+  const memCardEl = document.getElementById('mem-card');
+  const pitchEl = document.getElementById('mem-card-pitch');
+  const activeEl = document.getElementById('mem-card-active');
   if (!rootedSupabase) { currentMembershipTier = 'free'; tierEl.textContent = 'Free Member'; updateUpgradePillVisibility(); return; }
   const { data, error } = await rootedSupabase
     .from('profiles')
@@ -5454,8 +5488,18 @@ async function refreshMembershipStatus(userId) {
   if (error || !data) { currentMembershipTier = 'free'; tierEl.textContent = 'Free Member'; updateUpgradePillVisibility(); return; }
   const isMember = data.subscription_tier === 'member';
   currentMembershipTier = isMember ? 'member' : 'free';
+  currentStripeCustomerId = data.stripe_customer_id || null;
   tierEl.textContent = isMember ? 'ROOTED Member' : 'Free Member';
   updateUpgradePillVisibility();
+  // Account > Membership row: reflects real status now, not a hardcoded "Free ›".
+  if (rowStatusEl) rowStatusEl.textContent = isMember ? 'Member ›' : 'Free ›';
+  // The big green sales-pitch card only makes sense for someone who isn't a member yet —
+  // once confirmed paying, swap it for the compact, low-key "you're a member" view instead.
+  if (memCardEl && pitchEl && activeEl) {
+    memCardEl.classList.toggle('mem-card-subtle', isMember);
+    pitchEl.style.display = isMember ? 'none' : '';
+    activeEl.style.display = isMember ? '' : 'none';
+  }
   if (memBtnEl) {
     if (isMember) {
       memBtnEl.textContent = 'Manage Membership →';
@@ -5464,6 +5508,17 @@ async function refreshMembershipStatus(userId) {
       memBtnEl.textContent = 'Join for $10/month →';
       memBtnEl.onclick = () => startCheckout(userId, null);
     }
+  }
+}
+
+// Account > Membership row click handler. A member goes straight to the billing portal;
+// a free (or signed-out) visitor goes to sign up, since an account is required either way
+// before checkout can start.
+function handleMembershipRowClick() {
+  if (currentMembershipTier === 'member' && currentStripeCustomerId) {
+    openBillingPortal(currentStripeCustomerId);
+  } else {
+    showScreen('signup');
   }
 }
 
