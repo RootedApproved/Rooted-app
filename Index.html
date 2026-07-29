@@ -1415,8 +1415,6 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <button class="fm-toggle active" id="fm-toggle-farmersmarket" onclick="toggleLocalFoodType('farmersmarket')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#2E7D7A"></span>Farmers Market</button>
         <button class="fm-toggle active" id="fm-toggle-onfarmmarket" onclick="toggleLocalFoodType('onfarmmarket')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#A0622D"></span>On-Farm Pickup</button>
         <button class="fm-toggle active" id="fm-toggle-csa" onclick="toggleLocalFoodType('csa')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#6B4C7A"></span>CSA</button>
-        <button class="fm-toggle active" id="fm-toggle-agritourism" onclick="toggleLocalFoodType('agritourism')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#5B8C3E"></span>Farm Visits</button>
-        <button class="fm-toggle active" id="fm-toggle-foodhub" onclick="toggleLocalFoodType('foodhub')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#4A6FA5"></span>Food Hub</button>
         <button class="fm-toggle active" id="fm-toggle-grocery" onclick="toggleLocalFoodType('grocery')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#B8860B"></span>Grocery Store</button>
         <button class="fm-toggle active" id="fm-toggle-restaurant" onclick="toggleLocalFoodType('restaurant')"><span class="fm-toggle-check">✓</span><span class="fm-legend-dot" style="background:#8B3A3A"></span>Restaurant</button>
       </div>
@@ -3619,8 +3617,6 @@ const LOCAL_FOOD_TYPES = {
   farmersmarket: { label: 'Farmers Market', icon: '🌾', color: '#2E7D7A' },
   onfarmmarket:  { label: 'On-Farm Pickup', icon: '🚜', color: '#A0622D' },
   csa:           { label: 'CSA',            icon: '📦', color: '#6B4C7A' },
-  agritourism:   { label: 'Farm Visits',    icon: '🌻', color: '#5B8C3E' },
-  foodhub:       { label: 'Food Hub',       icon: '🏭', color: '#4A6FA5' },
   grocery:       { label: 'Grocery Store',  icon: '🛒', color: '#B8860B' },
   restaurant:    { label: 'Restaurant',     icon: '🍽️', color: '#8B3A3A' },
 };
@@ -4233,10 +4229,10 @@ async function fetchFarmersMarkets(lat, lng, zipCode) {
   if (!USDA_API_KEY) {
     combined = MOCK_MARKETS.concat(nearbyCurated);
   } else {
-    // Query all five USDA directories in parallel. If one fails, the others still show —
+    // Query all three USDA directories in parallel. If one fails, the others still show —
     // a partial result set is far more useful than the whole search failing.
     // (grocery/restaurant are curated-only and never queried against the USDA API.)
-    const usdaTypes = ['farmersmarket', 'onfarmmarket', 'csa', 'agritourism', 'foodhub'];
+    const usdaTypes = ['farmersmarket', 'onfarmmarket', 'csa'];
     const results = await Promise.allSettled(usdaTypes.map(t => fetchOneDirectory(t, lat, lng, zipCode)));
     const usdaResults = results.filter(r => r.status === 'fulfilled').flatMap(r => r.value);
     const failed = results.filter(r => r.status === 'rejected');
@@ -4568,7 +4564,7 @@ function renderLocalFoodResults(rawMarkets) {
     document.getElementById('fm-results').innerHTML = '';
     if (USDA_API_KEY && lastFetchDiagnostics.length) {
       statusEl.innerHTML = 'No listings loaded — the USDA service returned an unexpected response for ' +
-        lastFetchDiagnostics.length + ' of 5 directories.' +
+        lastFetchDiagnostics.length + ' of 3 directories.' +
         '<div class="fm-debug-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">🔧 Show details</div>' +
         '<pre class="fm-debug-json" style="display:none">' + lastFetchDiagnostics.join('\n\n').replace(/</g, '&lt;') + '</pre>';
     } else {
