@@ -84,6 +84,7 @@ body.navstyle-drawer{padding-bottom:0;}
 .tb.t2{background:var(--sage);}
 .tb.t3{background:var(--earth);}
 .tb-gold{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 1px 4px rgba(0,0,0,.25);z-index:2;}
+.tb-budget{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--teal);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.25);z-index:2;}
 .gold-callout{display:flex;align-items:center;gap:11px;background:rgba(214,154,45,.1);border:1px solid var(--gold);border-radius:6px;padding:11px 13px;margin-bottom:14px;}
 .gold-callout-star{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--gold);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:15px;}
 .gold-callout-title{font-family:var(--font-d);font-weight:700;font-size:14px;color:var(--char);margin-bottom:2px;}
@@ -444,8 +445,8 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .pros .pcb-list li::before{content:'✓';position:absolute;left:0;top:6px;color:var(--forest);font-weight:700;font-size:10px;}
 .cons .pcb-list li::before{content:'—';position:absolute;left:0;top:6px;color:var(--earth);font-size:10px;}
 .alt-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:13px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:11px;cursor:pointer;}
-.alt-card-gold{border:1px solid var(--gold);border-left:3px solid var(--gold);background:rgba(214,154,45,.06);}
-.alt-badge-gold{background:var(--gold);color:var(--white);}
+.rec-gold-legend{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mid);margin-bottom:12px;}
+.tb-gold-inline{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--gold);color:var(--white);font-size:10px;flex-shrink:0;}
 .alt-name{font-weight:600;font-size:13px;color:var(--char);margin-bottom:3px;}
 .alt-note{font-size:12px;color:var(--mid);line-height:1.45;}
 .alt-badge{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:2px;flex-shrink:0;white-space:nowrap;}
@@ -2953,8 +2954,18 @@ function showSubcat(sub){
   const t1=subProds.filter(([k,p])=>p.tier==='1').length;
   const t2=subProds.filter(([k,p])=>p.tier==='2').length;
   const t3=subProds.filter(([k,p])=>p.tier==='3').length;
-  document.getElementById('sc-filters').innerHTML=`<button class="tf active" onclick="filterSubcat(this,'all')">All (${subProds.length})</button>${t1?`<button class="tf" onclick="filterSubcat(this,'1')">Tier 1 (${t1})</button>`:''}${t2?`<button class="tf" onclick="filterSubcat(this,'2')">Tier 2 (${t2})</button>`:''}${t3?`<button class="tf" onclick="filterSubcat(this,'3')">Tier 3 (${t3})</button>`:''}`;
-  document.getElementById('sc-prod-list').innerHTML=subProds.map(([id,p])=>buildProdCard(id,p)).join('');
+  // "Budget Tier 1" is defined relative to this specific subcategory, not a fixed global
+  // dollar amount — a $150 Tier 1 sauna accessory and a $15 Tier 1 dish towel are both
+  // legitimately "affordable" within their own category, but a single global threshold
+  // would misclassify one of them. Budget = at or below the median price among this
+  // subcat's Tier 1 items with a parseable price; unparseable prices are excluded from
+  // the threshold calculation entirely rather than guessed at.
+  const t1Prices = subProds.filter(([k,p])=>p.tier==='1').map(([k,p])=>parsePriceValue(p.price)).filter(v=>v!==null).sort((a,b)=>a-b);
+  const budgetThreshold = t1Prices.length ? t1Prices[Math.floor((t1Prices.length-1)/2)] : null;
+  const budgetIds = new Set(subProds.filter(([k,p])=>p.tier==='1' && budgetThreshold!==null && parsePriceValue(p.price)!==null && parsePriceValue(p.price)<=budgetThreshold).map(([k])=>k));
+  const budgetCount = budgetIds.size;
+  document.getElementById('sc-filters').innerHTML=`<button class="tf active" onclick="filterSubcat(this,'all')">All (${subProds.length})</button>${t1?`<button class="tf" onclick="filterSubcat(this,'1')">Tier 1 (${t1})</button>`:''}${budgetCount?`<button class="tf" onclick="filterSubcat(this,'budget')">Budget Tier 1 (${budgetCount})</button>`:''}${t2?`<button class="tf" onclick="filterSubcat(this,'2')">Tier 2 (${t2})</button>`:''}${t3?`<button class="tf" onclick="filterSubcat(this,'3')">Tier 3 (${t3})</button>`:''}`;
+  document.getElementById('sc-prod-list').innerHTML=subProds.map(([id,p])=>buildProdCard(id,p,budgetIds.has(id))).join('');
   document.getElementById('edu-standard').textContent=edu.standard;
   document.getElementById('edu-green').innerHTML=edu.greenFlags.map(f=>`<li>${f}</li>`).join('');
   document.getElementById('edu-red').innerHTML=edu.redFlags.map(f=>`<li>${f}</li>`).join('');
@@ -2974,10 +2985,23 @@ function showSubcat(sub){
   showScreen('subcat');
 }
 
-function buildProdCard(id,p){
+// Extracts a single comparable dollar figure from ROOTED's varied price string formats
+// ("$28–$36", "~$598", "$3.49 / 2-pack", "$59.95/year", "Free to join", etc.) by taking
+// the first dollar amount that appears — the entry-level price point in a range, which is
+// what matters for a "is this the affordable option" comparison. Returns null if no price
+// can be parsed at all (e.g. "Price varies"), so callers can skip those rather than guess.
+function parsePriceValue(priceStr) {
+  if (!priceStr) return null;
+  if (/^free\b/i.test(priceStr.trim())) return 0;
+  const match = priceStr.match(/\$([0-9]+(?:\.[0-9]+)?)/);
+  return match ? parseFloat(match[1]) : null;
+}
+
+function buildProdCard(id,p,isBudget){
   const imgHtml = buildImgEl(id, p, false);
   const tc=p.tier==='1'?'':p.tier==='2'?'t2':'t3';
-  return `<div class="pc" data-tier="${p.tier}" onclick="showProduct('${id}')">${p.gold ? '<span class="tb-gold" title="Gold Standard">★</span>' : ''}<div class="pc-img" style="padding:0;overflow:hidden">${imgHtml}</div><div class="pc-body"><div class="pc-brand">${p.brand}</div><div class="pc-name">${p.name}</div><div class="pc-verdict">${p.verdict}</div><div class="pc-meta"><span class="tb ${tc}"><span class="tn">TIER ${p.tier}</span> ${p.label}</span><span class="pc-price">${p.price}</span></div></div><span class="pc-arr">›</span></div>`;
+  const cornerBadge = p.gold ? '<span class="tb-gold" title="Gold Standard">★</span>' : (isBudget ? '<span class="tb-budget" title="Budget Pick">$</span>' : '');
+  return `<div class="pc" data-tier="${p.tier}" data-budget="${isBudget?'true':'false'}" onclick="showProduct('${id}')">${cornerBadge}<div class="pc-img" style="padding:0;overflow:hidden">${imgHtml}</div><div class="pc-body"><div class="pc-brand">${p.brand}</div><div class="pc-name">${p.name}</div><div class="pc-verdict">${p.verdict}</div><div class="pc-meta"><span class="tb ${tc}"><span class="tn">TIER ${p.tier}</span> ${p.label}</span><span class="pc-price">${p.price}</span></div></div><span class="pc-arr">›</span></div>`;
 }
 
 function toggleSubcatTab(tab){
@@ -2989,7 +3013,11 @@ function toggleSubcatTab(tab){
 
 function filterSubcat(btn,tier){
   document.getElementById('sc-filters').querySelectorAll('.tf').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
-  document.getElementById('sc-prod-list').querySelectorAll('.pc').forEach(card=>{card.style.display=(tier==='all'||card.dataset.tier===tier)?'flex':'none';});
+  document.getElementById('sc-prod-list').querySelectorAll('.pc').forEach(card=>{
+    if(tier==='all'){card.style.display='flex';}
+    else if(tier==='budget'){card.style.display=(card.dataset.budget==='true')?'flex':'none';}
+    else{card.style.display=(card.dataset.tier===tier)?'flex':'none';}
+  });
 }
 
 // ── PRODUCT DETAIL ───────────────────────────────────────────────────
@@ -3064,7 +3092,7 @@ function renderRecommendations() {
       <p style="font-size:14px;">You haven't viewed or saved anything yet — here are our current Gold Standard picks to get started.</p>
     </div>`;
     if (goldPicks.length) {
-      html += renderRecSection('Gold Standard Picks', goldPicks);
+      html += renderRecSection('Gold Standard Picks', goldPicks, { allGold: true });
     }
     html += `<div style="padding:4px 24px 24px;text-align:center;">
       <button class="btn-buy" onclick="showTab('categories')">Browse All Categories →</button>
@@ -3095,15 +3123,11 @@ function renderRecommendations() {
   container.innerHTML = html;
 }
 
-function renderRecSection(title, items) {
-  const cards = items.map(({ id, p }) => {
-    const ac = p.tier === '1' ? 'ab1' : p.tier === '2' ? 'ab2' : 'ab3';
-    const cardClass = p.gold ? 'alt-card alt-card-gold' : 'alt-card';
-    const badgeClass = p.gold ? 'alt-badge alt-badge-gold' : `alt-badge ${ac}`;
-    const badgeText = p.gold ? '★ Gold Standard' : `Tier ${p.tier}`;
-    return `<div class="${cardClass}" onclick="showProduct('${id}')"><div><div class="alt-name">${p.brand} — ${p.name}</div><div class="alt-note">${p.verdict.substring(0, 90)}...</div></div><span class="${badgeClass}">${badgeText}</span></div>`;
-  }).join('');
-  return `<div class="pd-sec"><div class="pd-eye">Recommended</div><div class="pd-sec-title">${title}</div>${cards}</div>`;
+function renderRecSection(title, items, opts) {
+  opts = opts || {};
+  const legend = opts.allGold ? `<div class="rec-gold-legend"><span class="tb-gold-inline">★</span> All picks below are Gold Standard — ROOTED's highest bar</div>` : '';
+  const cards = items.map(({ id, p }) => buildProdCard(id, p)).join('');
+  return `<div class="pd-sec"><div class="pd-eye">Recommended</div><div class="pd-sec-title">${title}</div>${legend}${cards}</div>`;
 }
 
 function showProduct(id){
