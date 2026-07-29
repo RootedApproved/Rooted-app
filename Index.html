@@ -444,6 +444,8 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .pros .pcb-list li::before{content:'✓';position:absolute;left:0;top:6px;color:var(--forest);font-weight:700;font-size:10px;}
 .cons .pcb-list li::before{content:'—';position:absolute;left:0;top:6px;color:var(--earth);font-size:10px;}
 .alt-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:13px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:11px;cursor:pointer;}
+.alt-card-gold{border:1px solid var(--gold);border-left:3px solid var(--gold);background:rgba(214,154,45,.06);}
+.alt-badge-gold{background:var(--gold);color:var(--white);}
 .alt-name{font-weight:600;font-size:13px;color:var(--char);margin-bottom:3px;}
 .alt-note{font-size:12px;color:var(--mid);line-height:1.45;}
 .alt-badge{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:2px;flex-shrink:0;white-space:nowrap;}
@@ -3096,7 +3098,10 @@ function renderRecommendations() {
 function renderRecSection(title, items) {
   const cards = items.map(({ id, p }) => {
     const ac = p.tier === '1' ? 'ab1' : p.tier === '2' ? 'ab2' : 'ab3';
-    return `<div class="alt-card" onclick="showProduct('${id}')"><div><div class="alt-name">${p.brand} — ${p.name}</div><div class="alt-note">${p.verdict.substring(0, 90)}...</div></div><span class="alt-badge ${ac}">Tier ${p.tier}</span></div>`;
+    const cardClass = p.gold ? 'alt-card alt-card-gold' : 'alt-card';
+    const badgeClass = p.gold ? 'alt-badge alt-badge-gold' : `alt-badge ${ac}`;
+    const badgeText = p.gold ? '★ Gold Standard' : `Tier ${p.tier}`;
+    return `<div class="${cardClass}" onclick="showProduct('${id}')"><div><div class="alt-name">${p.brand} — ${p.name}</div><div class="alt-note">${p.verdict.substring(0, 90)}...</div></div><span class="${badgeClass}">${badgeText}</span></div>`;
   }).join('');
   return `<div class="pd-sec"><div class="pd-eye">Recommended</div><div class="pd-sec-title">${title}</div>${cards}</div>`;
 }
