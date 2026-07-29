@@ -755,8 +755,8 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="nav-brand-text" style="display:none;">ROOTED</span></span>
   <div class="nav-right">
     <button class="nav-search" onclick="showTab('search')"><i data-lucide="search"></i><span class="nav-search-label">Search</span></button>
-    <button class="nav-login-link" id="nav-login-link" onclick="showScreen('login')">Log In</button>
-    <button class="nav-join" id="nav-join-btn" onclick="showScreen('login')">Log In</button>
+    <button class="nav-login-link" id="nav-login-link" onclick="showScreen('login')">Join</button>
+    <button class="nav-join" id="nav-join-btn" onclick="showScreen('login')">Join</button>
     <button class="nav-upgrade" id="nav-upgrade-btn" onclick="handleJoinClick()" style="display:none;">Full Access →</button>
   </div>
 </nav>
@@ -2053,7 +2053,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <a href="https://youtube.com/@rootedapproved" target="_blank" class="mobile-drawer-social" aria-label="YouTube"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="YouTube"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
   </div>
   <div class="mobile-drawer-actions">
-    <button class="mobile-drawer-join" id="mobile-drawer-join-btn" onclick="showScreen('login');toggleMobileDrawer()">Log In</button>
+    <button class="mobile-drawer-join" id="mobile-drawer-join-btn" onclick="showScreen('login');toggleMobileDrawer()">Join</button>
     <a href="mailto:team@rootedapproved.com" class="mobile-drawer-contact"><i data-lucide="mail"></i>Contact</a>
   </div>
   <div class="contact-email-line">team@rootedapproved.com</div>
@@ -2077,7 +2077,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <a href="https://youtube.com/@rootedapproved" target="_blank" class="sidebar-social" aria-label="YouTube"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="YouTube"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
   </div>
   <div class="sidebar-actions">
-    <button class="sidebar-join" id="sidebar-join-btn" onclick="showScreen('login')">Log In</button>
+    <button class="sidebar-join" id="sidebar-join-btn" onclick="showScreen('login')">Join</button>
     <a href="mailto:team@rootedapproved.com" class="sidebar-contact-btn" aria-label="Contact Us"><i data-lucide="mail"></i>Contact</a>
   </div>
   <div class="contact-email-line">team@rootedapproved.com</div>
@@ -2890,12 +2890,15 @@ function showAbout(){showScreen('about');}
 function showTierPage(){showScreen('tiers');}
 
 // ── SUBCAT ───────────────────────────────────────────────────────────
-// Live, on-page status indicator (no second page, no localStorage round-trip) so we can
-// see directly whether image fetches are even being scheduled/completing at all. Shows
-// briefly in the corner whenever a subcategory page has uncached images to load.
+// Was a live, on-page status indicator ("Images: X/Y done...") in the bottom-right corner
+// for debugging whether image fetches were completing. Now hidden from public view now that
+// the site is live — this function still tracks stats internally (imgFetchStats), just no
+// longer renders the visible banner. To bring the visible debug view back temporarily,
+// uncomment the DOM-creation block below.
 let imgFetchStats = { scheduled: 0, succeeded: 0, failed: 0 };
 function updateImgFetchStatusUI() {
-  let el = document.getElementById('img-fetch-status');
+  return; // public-facing banner disabled as of launch — see comment above to re-enable
+  /* let el = document.getElementById('img-fetch-status');
   if (imgFetchStats.scheduled === 0) { if (el) el.remove(); return; }
   if (!el) {
     el = document.createElement('div');
@@ -2903,7 +2906,7 @@ function updateImgFetchStatusUI() {
     el.style.cssText = 'position:fixed;bottom:70px;right:14px;background:#1A1A1A;color:#fff;padding:8px 12px;border-radius:8px;font-size:11px;font-family:monospace;z-index:9999;opacity:.9;';
     document.body.appendChild(el);
   }
-  el.textContent = `Images: ${imgFetchStats.succeeded + imgFetchStats.failed}/${imgFetchStats.scheduled} done (${imgFetchStats.succeeded} ok, ${imgFetchStats.failed} failed)`;
+  el.textContent = `Images: ${imgFetchStats.succeeded + imgFetchStats.failed}/${imgFetchStats.scheduled} done (${imgFetchStats.succeeded} ok, ${imgFetchStats.failed} failed)`; */
 }
 
 function showSubcat(sub){
