@@ -1399,7 +1399,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <div class="cat-hd">
     <button class="cat-back" onclick="goHome()">← Home</button>
     <div class="cat-title">Local Food Map</div>
-    <p class="cat-desc">Search farmers markets, farms offering direct pickup, and CSAs nationwide via USDA data — plus ROOTED-vetted grocery stores and restaurants in select areas, starting with Santa Monica.</p>
+    <p class="cat-desc">Search by city, zip code, or address — or just pan and zoom the map to explore farmers markets, farms offering direct pickup, and CSAs nationwide via USDA data, plus ROOTED-vetted grocery stores and restaurants in select areas.</p>
   </div>
 
   <div class="fm-flex-layout search-above legend-above" id="fm-flex-layout">
@@ -1421,7 +1421,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     </div>
     <div style="padding:0 18px 4px" id="fm-search-section">
       <div class="fm-search-row">
-        <input type="text" id="fm-zip-input" class="fm-zip-input" placeholder="Enter zip code" inputmode="numeric" maxlength="5" onkeydown="if(event.key==='Enter')searchFarmersMarkets()">
+        <input type="text" id="fm-zip-input" class="fm-zip-input" placeholder="Search city, zip code, or address" onkeydown="if(event.key==='Enter')searchFarmersMarkets()">
         <button class="fm-search-btn" onclick="searchFarmersMarkets()">Search</button>
       </div>
       <button class="fm-locate-btn" onclick="useMyLocationForMarkets()">📍 Use My Location</button>
@@ -1430,7 +1430,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
       <div id="fm-map" class="fm-map"></div>
       <button class="fm-map-expand-btn" onclick="toggleMapFullscreen()" aria-label="Expand map"><i data-lucide="maximize-2"></i></button>
     </div>
-    <div id="fm-status" class="fm-status">Enter a zip code or use your location to find nearby farms, markets, and CSAs.</div>
+    <div id="fm-status" class="fm-status">Search a city, zip code, or address — or just pan and zoom the map below to explore listings anywhere.</div>
     <div id="fm-results" class="fm-results"></div>
   </div>
 
@@ -4072,6 +4072,67 @@ function toggleMapFullscreen() {
   setTimeout(() => { if (fmMap) fmMap.invalidateSize(); }, 150);
 }
 
+// ── AUTO-EXPLORE STATE (Google-Maps-style "pan/zoom to see more" behavior) ──
+// Tracks every map center we've already fetched USDA/curated data for, so panning
+// within an already-loaded area doesn't waste API calls re-fetching the same region.
+let fmFetchedCenters = [];
+const FM_FETCH_DEDUP_RADIUS_MILES = 40; // a single USDA fetch already covers a 100mi radius;
+                                         // re-fetching only kicks in once you've moved well past that.
+let fmMoveDebounceTimer = null;
+let fmAutoFetchInFlight = false;
+let fmSkippedInitialMove = false; // the very first moveend fires from the map's own initial
+                                   // setView() during construction, before the user does anything —
+                                   // skip that one so we don't background-fetch for the center of Kansas.
+
+function fmAlreadyCovered(lat, lng) {
+  return fmFetchedCenters.some(c => haversineMiles(lat, lng, c.lat, c.lng) < FM_FETCH_DEDUP_RADIUS_MILES);
+}
+
+// Adds newly-fetched listings to whatever's already on the map, rather than replacing it —
+// this is what makes panning/zooming feel like exploring (results accumulate) instead of
+// each move wiping out what you'd already found, the way a fresh explicit search should.
+function mergeNewMarkets(rawMarkets) {
+  if (!rawMarkets || !rawMarkets.length) return;
+  const existingKeys = new Set(lastNormalizedMarkets.map(mk => mk.name + '|' + mk.lat.toFixed(3) + '|' + mk.lng.toFixed(3)));
+  const incoming = rawMarkets.map(normalizeListing);
+  const genuinelyNew = incoming.filter(mk => !existingKeys.has(mk.name + '|' + mk.lat.toFixed(3) + '|' + mk.lng.toFixed(3)));
+  lastNormalizedMarkets = lastNormalizedMarkets.concat(genuinelyNew);
+}
+
+async function autoFetchForCurrentView() {
+  if (!fmMap || fmAutoFetchInFlight) return;
+  const center = fmMap.getCenter();
+  if (isNaN(center.lat) || isNaN(center.lng) || fmAlreadyCovered(center.lat, center.lng)) return;
+  fmAutoFetchInFlight = true;
+  const statusEl = document.getElementById('fm-status');
+  const previousStatus = statusEl ? statusEl.textContent : '';
+  if (statusEl) statusEl.textContent = 'Loading more listings in this area...';
+  try {
+    const rawMarkets = await fetchFarmersMarkets(center.lat, center.lng, null);
+    fmFetchedCenters.push({ lat: center.lat, lng: center.lng });
+    mergeNewMarkets(rawMarkets);
+    renderMarkersForActiveTypes();
+    updateListForViewport();
+  } catch (e) {
+    // A failed background auto-fetch shouldn't alarm the user — just quietly restore
+    // whatever the status line said before, and let them keep browsing normally.
+    if (statusEl) statusEl.textContent = previousStatus;
+    console.warn('ROOTED local food map — auto-fetch for current view failed:', e.message);
+  } finally {
+    fmAutoFetchInFlight = false;
+  }
+}
+
+// Fires on every pan/zoom: instantly re-filters the list to what's visible (no network
+// needed, uses whatever's already loaded), then — after a short pause once movement stops —
+// checks whether this area needs fresh data and fetches it in the background if so.
+function onFarmersMapMoveEnd() {
+  if (!fmSkippedInitialMove) { fmSkippedInitialMove = true; return; }
+  updateListForViewport();
+  clearTimeout(fmMoveDebounceTimer);
+  fmMoveDebounceTimer = setTimeout(autoFetchForCurrentView, 700);
+}
+
 function initFarmersMap() {
   if (fmMap || typeof L === 'undefined') return;
   fmMap = L.map('fm-map', { attributionControl: true, zoomControl: false }).setView([39.8283, -98.5795], 4);
@@ -4081,11 +4142,10 @@ function initFarmersMap() {
     maxZoom: 20
   }).addTo(fmMap);
   L.control.zoom({ position: 'bottomright' }).addTo(fmMap);
-  // Panning or zooming the map re-filters the results list to whatever's currently visible —
-  // no new search needed, since every fetched listing's marker already exists on the map.
-  fmMap.on('moveend zoomend', () => {
-    if (lastNormalizedMarkets.length) updateListForViewport();
-  });
+  // Panning or zooming the map re-filters the results list to whatever's currently visible,
+  // and automatically loads fresh listings in the background once you explore somewhere new —
+  // no search box needed, the same way Google Maps reveals more as you move around.
+  fmMap.on('moveend zoomend', onFarmersMapMoveEnd);
 }
 
 function clearFarmersMarkers() {
@@ -4094,43 +4154,42 @@ function clearFarmersMarkers() {
 }
 
 async function searchFarmersMarkets() {
-  const zip = document.getElementById('fm-zip-input').value.trim();
+  const query = document.getElementById('fm-zip-input').value.trim();
   const statusEl = document.getElementById('fm-status');
-  if (!/^\d{5}$/.test(zip)) {
-    statusEl.textContent = 'Enter a valid 5-digit zip code.';
+  if (!query) {
+    statusEl.textContent = 'Enter a city, zip code, or address to search.';
     return;
   }
-  statusEl.textContent = 'Looking up that zip code...';
+  statusEl.textContent = 'Looking up that location...';
   try {
-    // Resolve the zip to real coordinates first (free, no-key, CORS-enabled service) so that
-    // curated-listing distance filtering works correctly regardless of USDA's own zip handling.
-    const res = await fetch('https://api.zippopotam.us/us/' + zip);
-    if (!res.ok) throw new Error('zip not found');
-    const data = await res.json();
-    const place = data.places && data.places[0];
-    const lat = place ? parseFloat(place.latitude) : null;
-    const lng = place ? parseFloat(place.longitude) : null;
-    if (lat == null || lng == null || isNaN(lat) || isNaN(lng)) throw new Error('no coordinates for zip');
-    return runFarmersSearch(lat, lng, zip);
+    // Nominatim (OpenStreetMap's geocoder) resolves city names, addresses, and zip codes all
+    // through the same free endpoint — this replaces the old zip-only lookup so people can type
+    // "Austin, TX" or "90210" or a full address interchangeably in the same field.
+    const url = 'https://nominatim.openstreetmap.org/search?format=json&countrycodes=us&limit=1&q=' + encodeURIComponent(query);
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('geocoding service unavailable');
+    const results = await res.json();
+    const place = results && results[0];
+    const lat = place ? parseFloat(place.lat) : null;
+    const lng = place ? parseFloat(place.lon) : null;
+    if (lat == null || lng == null || isNaN(lat) || isNaN(lng)) throw new Error('location not found');
+    return runFarmersSearch(lat, lng, query);
   } catch (e) {
-    console.warn('ROOTED local food map — zip-to-coordinates lookup failed, falling back to zip-only search:', e.message);
-    // Fall back to the old behavior: pass the zip directly and let USDA attempt its own zip
-    // handling. Curated-listing distance filtering won't work in this fallback case, but the
-    // USDA-sourced results (if that service is up) still have a chance to come through.
-    return runFarmersSearch(null, null, zip);
+    console.warn('ROOTED local food map — location search failed:', e.message);
+    statusEl.textContent = "Couldn't find that location. Try a different city, zip code, or address.";
   }
 }
 
 function useMyLocationForMarkets() {
   const statusEl = document.getElementById('fm-status');
   if (!navigator.geolocation) {
-    statusEl.textContent = 'Location services are not available on this device. Try a zip code instead.';
+    statusEl.textContent = 'Location services are not available on this device. Try searching a city or zip code instead.';
     return;
   }
   statusEl.textContent = 'Finding your location...';
   navigator.geolocation.getCurrentPosition(
     pos => runFarmersSearch(pos.coords.latitude, pos.coords.longitude, null),
-    () => { statusEl.textContent = 'Could not access your location. Try entering a zip code instead.'; },
+    () => { statusEl.textContent = 'Could not access your location. Try searching a city or zip code instead.'; },
     { timeout: 8000 }
   );
 }
@@ -4344,14 +4403,18 @@ function renderLocalFoodResults(rawMarkets) {
   updateListForViewport();
 }
 
-async function runFarmersSearch(lat, lng, zip) {
+async function runFarmersSearch(lat, lng, query) {
   const statusEl = document.getElementById('fm-status');
   const resultsEl = document.getElementById('fm-results');
   statusEl.textContent = 'Searching...';
   resultsEl.innerHTML = '';
   initFarmersMap();
+  // An explicit search (typed location or "Use My Location") is a fresh start — reset what
+  // we've already auto-fetched so panning afterward correctly explores outward from here,
+  // rather than thinking the whole country is already "covered" from a prior search elsewhere.
+  fmFetchedCenters = (lat != null && lng != null) ? [{ lat, lng }] : [];
   try {
-    const rawMarkets = await fetchFarmersMarkets(lat, lng, zip);
+    const rawMarkets = await fetchFarmersMarkets(lat, lng, query);
     lastRawListings = rawMarkets || [];
     renderLocalFoodResults(lastRawListings);
   } catch (e) {
