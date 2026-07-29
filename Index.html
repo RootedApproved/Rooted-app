@@ -3136,9 +3136,8 @@ function renderSearch(query){
 // ── ROOTED ASSISTANT CHAT ─────────────────────────────────────────────
 // Set this to your deployed Cloudflare Worker URL once it's live (see worker.js).
 const CHAT_WORKER_URL = 'https://rootedchat.team-ce0.workers.dev';
-// Same pattern as CHAT_WORKER_URL above — swap this for the real rooted-stripe Worker URL
-// once it's deployed (see rooted-stripe-worker.js). Until then, checkout is disabled with
-// an honest message rather than silently failing.
+// Deployed rooted-stripe Cloudflare Worker URL (source: rooted-stripe-worker.js, hosted
+// separately from this repo). Verify it's actually live via /debug-stripe.html before launch.
 const STRIPE_WORKER_URL = 'https://rooted-stripe.team-ce0.workers.dev';
 let chatHistory = [];
 let chatOpen = false;
