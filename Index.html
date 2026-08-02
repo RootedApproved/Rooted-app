@@ -3204,6 +3204,9 @@ let chatHistory = [];
 // follow-up question ("why is that better than X?") gets an upsell that references the
 // product actually under discussion, instead of a generic "ask about a product by name".
 let lastChatProductMatch = null;
+// The brand or category last discussed, when the answer was a list rather than a single
+// product. Lets a follow-up ("which of those is better?") stay on topic.
+let lastChatContextLabel = null;
 let chatOpen = false;
 
 let chatScrollY = 0;
@@ -3427,38 +3430,14 @@ function findRelevantProducts(query) {
 // "tell" and "about" get scored as if they identified a product.
 const CHAT_STOPWORDS = new Set(['tell','about','the','and','for','are','you','your','can','what','which','how','why','who','whom','does','did','was','were','have','has','had','with','from','into','this','that','these','those','they','them','there','then','than','but','not','any','all','some','more','most','best','good','great','get','got','give','show','know','think','need','want','like','say','see','look','find','help','please','info','information','anything','something','recommend','recommendation','thoughts','opinion','review','reviews']);
 
-// Splits a string into comparable word tokens. Punctuation and hyphens become
-// separators, so a query for "cast-iron" matches a product named "Cast Iron".
+// Splits a string into comparable word tokens. Punctuation and hyphens become separators,
+// so a query for "cast-iron" matches a product named "Cast Iron".
 function chatTokens(str) {
   return String(str || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').split(' ').filter(Boolean);
 }
 
-// Product named in the free-tier prompt. Resolved at runtime against the real catalog so
-// this copy can never reference something that isn't actually listed — the previous
-// hard-coded "SAXX Ballpark Boxer Briefs" example named a brand the site doesn't carry.
-const CHAT_EXAMPLE_PRODUCT_ID = 'cook-castiron-lodge';
-
-function chatExampleProductName() {
-  const preferred = PRODUCTS[CHAT_EXAMPLE_PRODUCT_ID];
-  const p = (preferred && preferred.subcat !== 'unassigned')
-    ? preferred
-    : Object.values(PRODUCTS).find(x => x.tier === '1' && x.subcat !== 'unassigned');
-  // Strip quote characters — product names containing an inch mark (e.g. 10.25") would
-  // otherwise render as nested quotes inside the surrounding (like "...") phrasing.
-  return p ? `${p.brand} ${p.name}`.replace(/["\u201C\u201D]/g, '').replace(/\s+/g, ' ').trim() : 'a specific product';
-}
-
-// Text a product should be findable by: its name, its brand, AND the subcategory it lives
-// in. Subcategory matters because people ask by category ("Ryker underwear") and the
-// category word appears nowhere in the product's name or brand.
-function productSearchText(p) {
-  const sub = SUBCAT_EDU[p.subcat];
-  const subTitle = (sub && sub.title) ? String(sub.title).replace(/&amp;/g, '&') : '';
-  return p.name + ' ' + p.brand + ' ' + subTitle;
-}
-
 // Crude but effective singular/plural normalisation, applied to BOTH sides of every
-// comparison so "filters" matches "filter" and "briefs" matches "brief".
+// comparison so "filters" matches "Filtration" and "briefs" matches "Brief".
 function chatStem(w) {
   if (w.length <= 3) return w;
   if (/ies$/.test(w)) return w.slice(0, -3) + 'y';
@@ -3475,12 +3454,28 @@ function chatMeaningfulWords(str) {
   return chatTokens(str).filter(w => w.length > 2 && !CHAT_STOPWORDS.has(w));
 }
 
-// Returns EVERY product tied at the best score, not just one. A question like
-// "Ryker underwear" legitimately has two answers, and listing both is a better reply
-// than either guessing one or refusing to answer.
+// Text a product is findable by: name, brand, AND the subcategory it lives in. Category
+// matters because people ask by category ("Ryker underwear") and the category word
+// appears nowhere in the product's name or brand.
+function productSearchText(p) {
+  const sub = SUBCAT_EDU[p.subcat];
+  const subTitle = (sub && sub.title) ? String(sub.title).replace(/&amp;/g, '&') : '';
+  return p.name + ' ' + p.brand + ' ' + subTitle;
+}
+
+// Returns EVERY product tied at the best score, not just one.
+//
+// Single-word questions are allowed. A distinctive word like "Titan" names exactly one
+// product and must resolve to it — previously any one-word question was rejected outright,
+// so "Titan" failed while "Ryker Titan" succeeded, which read as the assistant
+// contradicting itself one message later. Generic single words ("cotton", "boxer") match
+// too many products and fall through to the brand/category paths below, so allowing them
+// costs nothing.
+const CHAT_MAX_LIST = 6;
+
 function findProductMatches(query) {
   const qWords = chatMeaningfulWords(query);
-  if (qWords.length < 2) return [];
+  if (!qWords.length) return [];
 
   const scored = Object.entries(PRODUCTS)
     .filter(([id, p]) => p.subcat !== 'unassigned')
@@ -3492,20 +3487,19 @@ function findProductMatches(query) {
     })
     .sort((a, b) => b.score - a.score);
 
-  const needed = Math.max(2, Math.ceil(qWords.length * 0.6));
+  const needed = qWords.length === 1 ? 1 : Math.max(2, Math.ceil(qWords.length * 0.6));
   const top = scored[0];
   if (!top || top.score < needed) return [];
   return scored.filter(x => x.score === top.score).map(x => x.p);
 }
 
-// Kept for the single-answer path and any existing callers.
 function findTopProductMatch(query) {
   const m = findProductMatches(query);
   return m.length === 1 ? m[0] : null;
 }
 
-// Every brand in the catalog, keyed by its full tokenized name, so "Ryker" or
-// "Heart Soil" in a question can be recognised even when no single product matches.
+// A brand named in the question. Requires every meaningful word of the brand to appear,
+// so "Field Company" is not matched by the word "company" alone.
 function chatFindBrand(query) {
   const qSet = chatStemSet(query);
   let best = null;
@@ -3513,8 +3507,6 @@ function chatFindBrand(query) {
     if (p.subcat === 'unassigned') return;
     const bTokens = chatTokens(p.brand).filter(t => t.length > 2 && !CHAT_STOPWORDS.has(t));
     if (!bTokens.length) return;
-    // Require every meaningful word of the brand to appear, so "Field Company" isn't
-    // matched by the word "company" alone.
     if (bTokens.every(t => qSet.has(chatStem(t)))) {
       if (!best || bTokens.length > best.tokens) best = { brand: p.brand, tokens: bTokens.length };
     }
@@ -3524,8 +3516,7 @@ function chatFindBrand(query) {
   return products.length ? { brand: best.brand, products } : null;
 }
 
-// Recognise a subcategory named in the question ("underwear", "cast iron") so a broad
-// question still gets a real, specific answer instead of a generic deflection.
+// A category named in the question ("underwear", "cast iron").
 function chatFindSubcat(query) {
   const qSet = new Set(chatMeaningfulWords(query).map(chatStem));
   if (!qSet.size) return null;
@@ -3541,56 +3532,93 @@ function chatFindSubcat(query) {
     return score ? { key, title, score, count: counts[key] } : null;
   }).filter(Boolean).sort((a, b) => b.score - a.score || b.count - a.count);
   if (!hits.length) return null;
-  // On an equal-score tie (e.g. "water filters" hits three water categories), prefer the
-  // one we actually rate the most products in. Only give up if that is also tied.
   if (hits[1] && hits[1].score === hits[0].score && hits[1].count === hits[0].count) return null;
   const products = Object.values(PRODUCTS).filter(p => p.subcat === hits[0].key);
   return { title: hits[0].title, key: hits[0].key, products };
 }
 
-function chatProductLine(p) {
-  return `<strong>${p.brand} ${p.name}</strong> — ${tierLabelText(p.tier)}`;
+// ── CONSISTENT REPLY FORMATTING ───────────────────────────────────────
+// Every list-shaped answer is built here so the assistant speaks in one voice. Previously
+// three separate code paths produced three different intros and three different closing
+// lines for what is fundamentally the same kind of answer.
+
+const CHAT_JOIN_LINK = '<span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="handleJoinClick()">Join for $10/month →</span>';
+
+function chatTierShort(tier) {
+  return ({ '1': 'Tier 1 · Rooted Approved', '2': 'Tier 2 · Good Option', '3': 'Tier 3 · Budget/Transitional' })[tier] || 'Unrated';
 }
 
-const CHAT_JOIN_LINK = '<span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="handleJoinClick()">join for $10/month →</span>';
+function chatProductLine(p) {
+  return `• <strong>${p.brand} ${p.name}</strong> — ${chatTierShort(p.tier)}`;
+}
 
-// Builds the free-tier reply when no single product answered the question. Works down
-// from most specific to least, so the response actually reflects what was asked instead
-// of repeating one fixed sentence.
+function chatPlural(n, word) {
+  return `${n} ${word}${n === 1 ? '' : 's'}`;
+}
+
+// One closing line for every list answer, so the call to action never changes shape.
+const CHAT_LIST_FOOTER = `Ask about any of these by name for the full breakdown. For side-by-side comparisons and a recommendation, ${CHAT_JOIN_LINK}`;
+
+function chatListReply(intro, products, note) {
+  const lines = products.map(chatProductLine).join('<br>');
+  return `${intro}<br><br>${lines}${note ? `<br><br>${note}` : ''}<br><br>${CHAT_LIST_FOOTER}`;
+}
+
+// Builds the reply when no single product answered the question, working from most
+// specific to least so the response always reflects what was actually asked.
 function chatUpsellMessage(message) {
-  // 1. A follow-up about the product we just answered on.
-  const p = lastChatProductMatch;
-  if (p) {
+  // 1. A follow-up about whatever we just answered on.
+  if (lastChatProductMatch) {
+    const p = lastChatProductMatch;
     const refersBack = /\b(it|its|that|this|they|them|those|these|one)\b/i.test(message);
     const productWords = chatTokens(productSearchText(p));
     const sharesWord = chatMeaningfulWords(message).some(w => productWords.includes(w));
     if (refersBack || sharesWord) {
-      return `Comparisons and the reasoning behind a rating are part of full access. To go deeper on the <strong>${p.brand} ${p.name}</strong> — how it stacks up against the alternatives, why it earned its tier, and what to watch for — ${CHAT_JOIN_LINK}`;
+      return `Comparisons and the reasoning behind a rating are part of full access. To go deeper on the <strong>${p.brand} ${p.name}</strong> — how it compares to the alternatives, why it earned its tier, and what to watch for — ${CHAT_JOIN_LINK}`;
     }
   }
-
-  // 2. A brand we carry, but the question didn't pin down which product.
-  const brandHit = chatFindBrand(message);
-  if (brandHit && brandHit.products.length <= 8) {
-    const lines = brandHit.products.map(x => '• ' + chatProductLine(x)).join('<br>');
-    return `We rate ${brandHit.products.length} ${brandHit.brand} product${brandHit.products.length === 1 ? '' : 's'}:<br><br>${lines}<br><br>Ask about any one by name for the full breakdown, or ${CHAT_JOIN_LINK} for comparisons and buying guidance.`;
+  if (lastChatContextLabel && /\b(it|its|that|this|they|them|those|these|one|instead|better|compare|difference)\b/i.test(message)) {
+    return `Comparisons within <strong>${lastChatContextLabel}</strong> — which one suits your use, how the materials differ, and what each trades off — are part of full access. ${CHAT_JOIN_LINK}`;
   }
 
-  // 3. A category we cover.
+  // 2. A brand we carry, without a specific product pinned down. Large brands are
+  //    summarised rather than skipped — an earlier cap silently dropped brands with more
+  //    than 8 products, so Rawganique (46) and ASKET (11) reported "nothing matches".
+  const brandHit = chatFindBrand(message);
+  if (brandHit) {
+    lastChatContextLabel = brandHit.brand;
+    lastChatProductMatch = null;
+    const all = brandHit.products;
+    const tier1 = all.filter(x => x.tier === '1');
+    const show = (tier1.length ? tier1 : all).slice(0, 5);
+    const intro = (tier1.length && all.length > show.length)
+      ? `ROOTED rates ${chatPlural(all.length, 'product')} from <strong>${brandHit.brand}</strong>. These earned Tier 1, the highest rating on the site:`
+      : `ROOTED rates ${chatPlural(all.length, 'product')} from <strong>${brandHit.brand}</strong>.`;
+    const remaining = all.length - show.length;
+    const note = remaining > 0 ? `Plus ${chatPlural(remaining, 'more product')} from ${brandHit.brand} across the catalog.` : '';
+    return chatListReply(intro, show, note);
+  }
+
+  // 3. A category we cover. Tier 1 is the answer to "what's best", so lead with it.
   const subHit = chatFindSubcat(message);
   if (subHit && subHit.products.length) {
+    lastChatContextLabel = subHit.title;
+    lastChatProductMatch = null;
     const tier1 = subHit.products.filter(x => x.tier === '1');
     const show = (tier1.length ? tier1 : subHit.products).slice(0, 4);
-    const lines = show.map(x => '• ' + chatProductLine(x)).join('<br>');
-    const more = subHit.products.length > show.length ? `<br><br>Plus ${subHit.products.length - show.length} more in ${subHit.title}.` : '';
-    return `In <strong>${subHit.title}</strong> we rate ${subHit.products.length} product${subHit.products.length === 1 ? '' : 's'}. ${tier1.length ? 'Top of the list' : 'Currently rated'}:<br><br>${lines}${more}<br><br>Ask about any one by name for the full breakdown, or ${CHAT_JOIN_LINK} for a ranked recommendation.`;
+    const intro = tier1.length
+      ? `ROOTED rates ${chatPlural(subHit.products.length, 'product')} in <strong>${subHit.title}</strong>. These earned Tier 1, the highest rating on the site:`
+      : `ROOTED rates ${chatPlural(subHit.products.length, 'product')} in <strong>${subHit.title}</strong>:`;
+    const remaining = subHit.products.length - show.length;
+    const note = remaining > 0 ? `Plus ${chatPlural(remaining, 'more option')} in ${subHit.title}.` : '';
+    return chatListReply(intro, show, note);
   }
 
-  // 4. Nothing recognised — still name the topic rather than deflecting blankly.
+  // 4. Nothing recognised — name the topic rather than deflecting blankly.
   const topic = chatMeaningfulWords(message).slice(0, 3).join(', ');
   return topic
-    ? `I don't have anything rated matching "${topic}" yet — every product on ROOTED is verified by hand before it goes up, so the catalog grows deliberately. Try a specific product or brand by name, or ${CHAT_JOIN_LINK} for full AI answers on anything.`
-    : `Try asking about a specific product by name (like "${chatExampleProductName()}"), or ${CHAT_JOIN_LINK} for full AI answers on anything.`;
+    ? `Nothing in the ROOTED catalog matches "${topic}" yet. Every product is verified by hand before it goes up, so the list grows deliberately. Try a product, brand, or category by name — or ${CHAT_JOIN_LINK} for full AI answers on anything.`
+    : `Ask about a product, brand, or category by name — or ${CHAT_JOIN_LINK} for full AI answers on anything.`;
 }
 
 function tierLabelText(tier) {
@@ -3616,18 +3644,33 @@ async function sendChatMessageCore(inputEl, messagesEl) {
   if (matches.length === 1) {
     const directMatch = matches[0];
     lastChatProductMatch = directMatch;
-    const reply = `<strong>${directMatch.brand} ${directMatch.name}</strong> — ${tierLabelText(directMatch.tier)}<br><br>${directMatch.verdict}${directMatch.price ? `<br><br>Price: ${directMatch.price}` : ''}`;
+    lastChatContextLabel = null;
+    const reply = `<strong>${directMatch.brand} ${directMatch.name}</strong> — ${chatTierShort(directMatch.tier)}<br><br>${directMatch.verdict}${directMatch.price ? `<br><br>Price: ${directMatch.price}` : ''}`;
     messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${reply}</div>`;
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return;
   }
 
-  // Several products answer the question equally well (e.g. "Ryker underwear" → two
-  // Ryker boxer briefs). Listing them is a real answer; guessing one, or refusing, is not.
-  if (matches.length >= 2 && matches.length <= 6) {
-    const lines = matches.map(x => '• ' + chatProductLine(x)).join('<br>');
-    const reply = `${matches.length} products match that:<br><br>${lines}<br><br>Ask about any one by name for the full breakdown.`;
-    messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${reply}</div>`;
+  // Several products answer the question equally well (e.g. "Ryker underwear" → two Ryker
+  // boxer briefs). Listing them is a real answer; guessing one, or refusing, is not.
+  // Formatted through the same helper as every other list reply so the voice is identical.
+  if (matches.length >= 2 && matches.length <= CHAT_MAX_LIST) {
+    const brands = [...new Set(matches.map(x => x.brand))];
+    const label = brands.length === 1 ? brands[0] : null;
+    lastChatProductMatch = null;
+    lastChatContextLabel = label;
+    // Distinguish "everything we carry from this brand" from "the subset that matched",
+    // so asking "Ryker" (5) and then "Ryker underwear" (2) doesn't read as a contradiction.
+    let intro;
+    if (label) {
+      const brandTotal = Object.values(PRODUCTS).filter(x => x.subcat !== 'unassigned' && x.brand === label).length;
+      intro = matches.length === brandTotal
+        ? `ROOTED rates ${chatPlural(matches.length, 'product')} from <strong>${label}</strong>.`
+        : `${chatPlural(matches.length, 'product')} from <strong>${label}</strong> match that, of ${brandTotal} we rate:`;
+    } else {
+      intro = `${chatPlural(matches.length, 'product')} match that:`;
+    }
+    messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${chatListReply(intro, matches)}</div>`;
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return;
   }
