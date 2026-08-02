@@ -3200,6 +3200,10 @@ const CHAT_WORKER_URL = 'https://rootedchat.team-ce0.workers.dev';
 // separately from this repo). Verify it's actually live via /debug-stripe.html before launch.
 const STRIPE_WORKER_URL = 'https://rooted-stripe.team-ce0.workers.dev';
 let chatHistory = [];
+// The last product the assistant successfully answered about in this session. Used so a
+// follow-up question ("why is that better than X?") gets an upsell that references the
+// product actually under discussion, instead of a generic "ask about a product by name".
+let lastChatProductMatch = null;
 let chatOpen = false;
 
 let chatScrollY = 0;
@@ -3460,6 +3464,41 @@ function findTopProductMatch(query) {
   return null;
 }
 
+// Product named in the free-tier prompt. Resolved at runtime against the real catalog so
+// this copy can never reference something that isn't actually listed — the previous
+// hard-coded "SAXX Ballpark Boxer Briefs" example named a brand the site doesn't carry.
+const CHAT_EXAMPLE_PRODUCT_ID = 'cook-castiron-lodge';
+
+function chatExampleProductName() {
+  const preferred = PRODUCTS[CHAT_EXAMPLE_PRODUCT_ID];
+  const p = (preferred && preferred.subcat !== 'unassigned')
+    ? preferred
+    : Object.values(PRODUCTS).find(x => x.tier === '1' && x.subcat !== 'unassigned');
+  // Strip quote characters — product names containing an inch mark (e.g. 10.25") would
+  // otherwise render as nested quotes inside the surrounding (like "...") phrasing.
+  return p ? `${p.brand} ${p.name}`.replace(/["\u201C\u201D]/g, '').replace(/\s+/g, ' ').trim() : 'a specific product';
+}
+
+const CHAT_JOIN_LINK = '<span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="handleJoinClick()">join for $10/month →</span>';
+
+// Builds the free-tier reply. When the question is a follow-up about a product we just
+// answered on, respond to THAT, rather than repeating a generic "look up a product by
+// name" prompt that ignores what was actually asked.
+function chatUpsellMessage(message) {
+  const p = lastChatProductMatch;
+  if (p) {
+    const refersBack = /\b(it|its|that|this|they|them|those|these|one)\b/i.test(message);
+    const productWords = chatTokens(p.name + ' ' + p.brand);
+    const sharesWord = chatTokens(message)
+      .filter(w => w.length > 2 && !CHAT_STOPWORDS.has(w))
+      .some(w => productWords.includes(w));
+    if (refersBack || sharesWord) {
+      return `Comparisons and the reasoning behind a rating are part of full access. To go deeper on the <strong>${p.brand} ${p.name}</strong> — how it stacks up against the alternatives, why it earned its tier, and what to watch for — ${CHAT_JOIN_LINK}`;
+    }
+  }
+  return `That's a bit more open-ended than I can answer for free — try asking about a specific product by name (like "${chatExampleProductName()}"), or ${CHAT_JOIN_LINK} for full AI answers on anything.`;
+}
+
 function tierLabelText(tier) {
   return { '1': 'Tier 1 — Rooted Approved', '2': 'Tier 2 — Good Option', '3': 'Tier 3 — Budget/Transitional' }[tier] || 'Unrated';
 }
@@ -3480,6 +3519,7 @@ async function sendChatMessageCore(inputEl, messagesEl) {
   const looksMultiPart = message.split('?').length > 2 || /\band also\b|\balso,?\s/i.test(message) || message.split(/\s+/).length > 12;
   const directMatch = looksMultiPart ? null : findTopProductMatch(message);
   if (directMatch) {
+    lastChatProductMatch = directMatch;
     const reply = `<strong>${directMatch.brand} ${directMatch.name}</strong> — ${tierLabelText(directMatch.tier)}<br><br>${directMatch.verdict}${directMatch.price ? `<br><br>Price: ${directMatch.price}` : ''}`;
     messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${reply}</div>`;
     messagesEl.scrollTop = messagesEl.scrollHeight;
@@ -3489,7 +3529,7 @@ async function sendChatMessageCore(inputEl, messagesEl) {
   // Free members only get the instant, zero-cost database lookup above. Anything more
   // open-ended requires the paid AI model, which is a ROOTED Member benefit.
   if (!hasFullAccess()) {
-    const upsellReply = `That's a bit more open-ended than I can answer for free — try asking about a specific product by name (like "SAXX Ballpark Boxer Briefs"), or <span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="handleJoinClick()">join for $10/month →</span> for full AI answers on anything.`;
+    const upsellReply = chatUpsellMessage(message);
     messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${upsellReply}</div>`;
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return;
