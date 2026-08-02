@@ -26,7 +26,11 @@ code = script_match.group(1)
 # so the feature can be re-enabled later without rebuilding it. Not a bug; allow it through
 # so the rest of verification (syntax + nav checks) still actually runs instead of exiting
 # early on this one known-safe case.
-KNOWN_SAFE_MISSING_IDS = {"chat-size-menu"}
+# pd-save-btn: rendered inside a template literal in the product-detail view, so the static
+#   id="..." scan can't see it. Its only reader (updateSaveButtonUI) guards with `if (!btn) return`.
+# img-fetch-status: the element-creating code is commented out (banner disabled at launch);
+#   the one live reference in showSubcat() guards with `if (el)`.
+KNOWN_SAFE_MISSING_IDS = {"chat-size-menu", "pd-save-btn", "img-fetch-status"}
 referenced = set(re.findall(r"getElementById\(['\"]([\w-]+)['\"]\)", code))
 missing = referenced - real_ids - KNOWN_SAFE_MISSING_IDS
 if missing:
@@ -59,6 +63,15 @@ global.window = {{ addEventListener: () => {{}}, scrollTo: () => {{}} }};
 global.document = {{
   getElementById: (id) => realIds.has(id) ? makeEl(id) : null,
   querySelectorAll: () => [],
+  // querySelector was missing from this stub, which made every nav simulation below throw
+  // "document.querySelector is not a function" — the checks looked like they were running
+  // but were actually failing for a stub reason, not a real code reason.
+  querySelector: (sel) => {{
+    const m = /^#([\\w-]+)$/.exec(sel);
+    if (m) return realIds.has(m[1]) ? makeEl(m[1]) : null;
+    return makeEl('__stub__' + sel);
+  }},
+  createElement: () => makeEl('__created__' + Math.random()),
   addEventListener: () => {{}},
   body: {{ classList: {{ add(){{}}, remove(){{}}, contains(){{ return false; }} }} }}
 }};
