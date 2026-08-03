@@ -415,6 +415,8 @@ and origin data are all retrievable directly. Scaling this needs no screenshots.
 | Blazers | 100% European Linen Blazer | $100.00 | **~$598 (sole product)** |
 | Dress Pants | 100% European Linen Tailored Dress Pants | $90.00 | $200 (sole product) |
 | Golf Pants | 100% European Linen Trousers | $60.00 | $139–$300 |
+| Golf Shorts | 100% European Linen Trouser Shorts, 7 inch | $44.00 | **$139.97–$180** |
+| Men's Shorts | 100% European Linen Shorts, 9 inch | $44.00 | $85–$99 |
 
 ### CORRECTION: Quince linen IS OEKO-TEX certified
 
