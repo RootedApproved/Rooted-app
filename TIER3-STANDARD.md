@@ -205,4 +205,20 @@ mainstream cleaners are built on undisclosed "fragrance."
 
 **Result: 0 added of 17.** Eleven substantive rejections, six needing verification.
 
-*(Remaining 85 subcategories across the other sections to be worked through and logged here.)*
+### Focused round — the five highest-value pending items
+
+Rather than sweep sections already predicted to yield nothing, these five were worked
+directly.
+
+| Item | Verdict | Detail |
+|---|---|---|
+| **Mattresses** | **Accept — added** | Tuft & Needle Original, Queen (~$945). Manufacturer states directly that the Original contains no fiberglass in any component; the fire barrier is a knit polyester/cotton blend treated with food-grade salt, meeting 16 CFR 1633 and 1632. CertiPUR-US and GREENGUARD Gold certified. Compromise: petroleum polyurethane foam throughout, ~6-year life against natural latex's far longer span, synthetic fire barrier, no GOTS/GOLS, 24–72h off-gassing. Closes a $2,799 → $945 gap. |
+| **Vacuums** | **Accept — added** | Shark Navigator Lift-Away Deluxe NV360 (~$180). Passes the sealed-system test that most budget vacuums fail: independent testing confirms the Anti-Allergen Complete Seal holds particulate rather than leaking it, where many sub-$200 vacuums have unsealed air paths and blow fine dust back into the room. Compromise: all-plastic, not serviceable, bagless re-exposure on emptying, shorter life. |
+| HVAC Filters | **Still pending** | A $3 fiberglass MERV 1–4 filter remains a legitimate Tier 3 in principle — worse but not harmful, strong teaching point ("protects your furnace, not your lungs"). Needs a specific product and current pricing. |
+| Paper Towels | **Still pending** | Real gap ($38–39 Tier 1 vs ~$20 mainstream). Virgin tree pulp is a nameable compromise. Needs a specific product and bleaching process verified. |
+| Dishwasher Tablets | **Still pending** | Real gap (~$0.50/tab vs ~$0.25). Fragrance-free mainstream tablets may clear the floor; needs label verification. |
+
+**Result: 2 added of 5**, both high-value. Three remain, all lower stakes than the two
+completed.
+
+*(Remaining 85 subcategories across the other sections still to be worked through.)*
