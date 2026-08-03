@@ -107,4 +107,16 @@ than guessing.
 | Intimate Cleansing | Mainstream washes commonly carry fragrance/parabens; needs per-product checking |
 | Intimate Lubrication | Mainstream lubricants vary widely on parabens and glycerin; needs per-product checking |
 
-*(Remaining 131 subcategories across the other sections to be worked through and logged here.)*
+### Oral Care
+
+| Subcategory | Candidate | Verdict | Reason |
+|---|---|---|---|
+| Electric Toothbrushes | Oral-B Pro 1000 (~$40) | **Accept — added** | Largest price gap in the section: Tier 1/2 are $90–$105 with nothing below. Compromise: battery is soldered in (iFixit teardown confirms desoldering required), so the handle becomes e-waste; all-plastic with no take-back; proprietary nylon heads every 3 months. |
+| Mouthwash | ACT Anticavity Fluoride, Mint (~$6/18oz) | **Accept — added** | Clears floor: alcohol-free, no parabens/phthalates/formaldehyde donors. Compromise: cetylpyridinium chloride is a broad antimicrobial that doesn't spare beneficial oral flora — directly counter to the "balancing" premise of the Tier 1 options; Green 3 + Yellow 5 cosmetic dyes; saccharin. Source: DailyMed + actoralcare.com |
+| Miswak | — | **Reject — no gap** | Sole listing is $1.50/stick, already the cheapest item on the entire site. Nothing meaningful sits below it. |
+| Floss | — | **Reject — floor + no gap** | Mainstream budget floss is PTFE-coated (Glide and equivalents) = floor. Non-PTFE options are already covered at $1.00 (GUM threaders, Tier 1) and $2.70 (REACH, Tier 2). |
+| Tongue Cleaning | — | **Reject — no gap** | Tier 1 stainless is $11 and lasts indefinitely. A ~$3 plastic scraper is worse lifetime value, not better access. |
+| Retainer Cases | — | **Reject — no gap** | Sole listing is $27.99 for a 24-pack, about $1.17 per case. Already at floor pricing. |
+| Gum/Mints | — | **Needs research** | Real price gap exists (Tier 1 Spry is ~$0.11/piece vs ~$0.03 mainstream). Mainstream gum uses aspartame, acesulfame K, BHT and titanium dioxide — none on the floor list per the Crest precedent — but requires per-product label verification before any entry. |
+
+*(Remaining 124 subcategories across the other sections to be worked through and logged here.)*
