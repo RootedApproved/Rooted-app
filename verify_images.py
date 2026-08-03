@@ -40,6 +40,15 @@ FLAGGED_IMG_PATTERNS = [
 # Signals that a `url:` field is a category/collection/listing page rather than a
 # specific product page. Any one of these patterns is a strong signal, not a
 # guarantee — always eyeball a flagged URL before deciding what to do with it.
+# Domains whose PRODUCT pages legitimately use a /men/<slug> or /women/<slug> shape,
+# which would otherwise trip the category-page pattern below. Each verified individually
+# by fetching a URL of that shape and confirming it renders a single product (price, size
+# selector, add-to-bag) rather than a listing. Do not add a domain here without doing that.
+PRODUCT_URL_SHAPE_EXCEPTIONS = (
+    'quince.com',   # verified 2026-08-02: /men/mongolian-cashmere-polo-sweater is a product page
+)
+
+
 CATEGORY_PAGE_URL_PATTERNS = [
     r'/c/[\w-]+/?(\?|$)',                          # generic /c/category style
     r'/collections/[\w-]+/?(\?|$)',                # Shopify collection page with nothing after it
@@ -81,6 +90,8 @@ def check_category_page_urls(block):
     all_entries = re.findall(r"'([\w-]+)':\{brand:'([^']*)'.*?url:'([^']*)'", block)
     problems = []
     for eid, brand, url in all_entries:
+        if any(d in url for d in PRODUCT_URL_SHAPE_EXCEPTIONS):
+            continue
         for pattern in CATEGORY_PAGE_URL_PATTERNS:
             if re.search(pattern, url, re.IGNORECASE):
                 problems.append((eid, brand, url))

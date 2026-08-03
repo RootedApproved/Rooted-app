@@ -367,3 +367,54 @@ identified for formalwear or knitwear.
 actually serves them.**
 
 *(Remaining 50 subcategories: Cookware 29, Lighting 12, Supplements 9.)*
+
+
+---
+
+## Quince — approved by J for broad inclusion (Tier 2 / Tier 3 by standard)
+
+J's direction: add Quince widely, tiered on where each product actually lands. Everlane and
+Uniqlo to be assessed on the same basis. Quince was already on the site at Tier 2 (organic
+percale sheet set and duvet cover), so the precedent exists.
+
+**Why Quince generally lands at Tier 2, not Tier 1:**
+
+Verified on the cashmere polo sweater ($99.90): 100% Grade-A Mongolian cashmere, no
+synthetic content at all, with micron count (15.8–16.2), gauge (12) and fiber length
+(34–36mm) all published — unusual specificity at any price. Cashmere combed rather than
+sheared, sourced direct from Inner Mongolia herder cooperatives, full per-unit cost
+breakdown published openly.
+
+What holds it out of Tier 1 is what's missing, not what's present: **BSCI certification is
+a factory social audit covering labour conditions — it says nothing about materials or
+chemistry.** No GOTS, no OEKO-TEX, no Good Cashmere Standard. Dye process undisclosed.
+Supply chain spans Mongolia → China/Cambodia.
+
+That is exactly Tier 2: excellent material, real transparency on specs and cost, no
+third-party materials verification.
+
+**Quince product pages fetch cleanly**, unlike Pact's — full price, composition, factory
+and origin data are all retrievable directly. Scaling this needs no screenshots.
+
+### Added so far
+
+| Subcategory | Product | Tier | Price |
+|---|---|---|---|
+| Golf Polos | Mongolian Cashmere Polo Sweater | 2 | $99.90 |
+
+### Queued for the next Quince pass
+
+Golf Sweaters, Golf Quarter-Zips, Golf Shorts, Golf Pants, Lightweight Sweaters, Heavy
+Sweaters, Dress Pants, Blazers, Suits, Beach Cover-Ups, Base Layers — the large-gap
+subcategories Pact could not serve. Quince carries Italian wool suiting, European linen
+and cashmere/merino knitwear across all of them.
+
+### Note on verify_images.py
+
+Quince product URLs use a `/men/<slug>` shape, which collided with the category-page
+pattern written for `brooksbrothers.com/mens/sport-coats`. Added a documented
+`PRODUCT_URL_SHAPE_EXCEPTIONS` allowlist rather than weakening the pattern.
+
+**Known tradeoff:** the exception is domain-wide, so a genuine Quince *category* URL such
+as `quince.com/men/polos` would no longer be caught. Every Quince URL added must therefore
+be eyeballed as a real product page manually. Flagged rather than left implicit.
