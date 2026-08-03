@@ -410,6 +410,27 @@ and origin data are all retrievable directly. Scaling this needs no screenshots.
 | Dress Pants | 100% European Linen Tailored Dress Pants | $90.00 | $200 (sole product) |
 | Golf Pants | 100% European Linen Trousers | $60.00 | $139–$300 |
 
+### CORRECTION: Quince linen IS OEKO-TEX certified
+
+Found while working the shorts category. Quince's 100% European linen carries **OEKO-TEX
+Standard 100 certification with a published certificate number (BJ015 226317)** — an
+independent test for hazardous substances.
+
+Three entries had already been written with the con "No GOTS, OEKO-TEX or European Flax
+certification published." That was **factually wrong** and has been corrected on all three
+(linen blazer, linen tailored dress pants, linen trousers). OEKO-TEX now appears in their
+`certs`, in `composition`, and as a pro.
+
+The revised distinction, which is accurate: OEKO-TEX Standard 100 covers **chemical
+safety** — what is in the finished fabric. It does not cover **farming practice**. Quince
+linen has no GOTS or European Flax organic certification. That is a real difference from
+Rawganique's Tier 1 organic linen, and is what keeps Quince linen at Tier 2 rather than
+Tier 1.
+
+**Lesson: the tier reasoning must be checked per product line, not per brand.** The
+cashmere and merino lines carry only BSCI; the linen line carries OEKO-TEX as well. Writing
+one set of cons for "Quince" produced a false claim on three live products.
+
 ### TRAP: a Quince product name saying "Organic Cotton" does not mean it is only cotton
 
 Found in the pants category. **"Organic Cotton Coolmax® Chino" ($52)** — Coolmax is a
