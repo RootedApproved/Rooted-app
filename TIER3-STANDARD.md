@@ -214,11 +214,13 @@ directly.
 |---|---|---|
 | **Mattresses** | **Accept — added** | Tuft & Needle Original, Queen (~$945). Manufacturer states directly that the Original contains no fiberglass in any component; the fire barrier is a knit polyester/cotton blend treated with food-grade salt, meeting 16 CFR 1633 and 1632. CertiPUR-US and GREENGUARD Gold certified. Compromise: petroleum polyurethane foam throughout, ~6-year life against natural latex's far longer span, synthetic fire barrier, no GOTS/GOLS, 24–72h off-gassing. Closes a $2,799 → $945 gap. |
 | **Vacuums** | **Accept — added** | Shark Navigator Lift-Away Deluxe NV360 (~$180). Passes the sealed-system test that most budget vacuums fail: independent testing confirms the Anti-Allergen Complete Seal holds particulate rather than leaking it, where many sub-$200 vacuums have unsealed air paths and blow fine dust back into the room. Compromise: all-plastic, not serviceable, bagless re-exposure on emptying, shorter life. |
-| HVAC Filters | **Still pending** | A $3 fiberglass MERV 1–4 filter remains a legitimate Tier 3 in principle — worse but not harmful, strong teaching point ("protects your furnace, not your lungs"). Needs a specific product and current pricing. |
-| Paper Towels | **Still pending** | Real gap ($38–39 Tier 1 vs ~$20 mainstream). Virgin tree pulp is a nameable compromise. Needs a specific product and bleaching process verified. |
-| Dishwasher Tablets | **Still pending** | Real gap (~$0.50/tab vs ~$0.25). Fragrance-free mainstream tablets may clear the floor; needs label verification. |
+| HVAC Filters | **Reject — the gap is an illusion** | Fiberglass MERV 1–4 costs $1–3 but must be changed roughly every 30 days; pleated MERV 8 costs $5–15 and lasts about 90 days. Annualised, the cost is close to identical — while fiberglass lets roughly 80% of airborne particles through against about 85% captured by pleated. There is no accessibility gain to justify the loss, which is the whole basis for a Tier 3 entry. Worth noting the reasoning is genuinely useful education even though no product results. |
+| Paper Towels | **Needs SKU verification** | The gap is real and larger than first estimated: Cloud Paper is $38.99 for 6 rolls (~$6.50/roll) against ~$1.50–2.00/roll mainstream. Virgin tree pulp is a legitimate compromise — worse, not harmful. Requires a specific unscented, undyed SKU verified (scented paper towels would breach the fragrance floor). |
+| Dishwasher Tablets | **Needs SKU verification** | Modest gap: Tier 2 ATTITUDE is $0.50/tab. Mainstream Cascade is ~$0.30–0.40 but carries fragrance and dyes (floor). A fragrance-free budget tablet could clear it. Requires a specific product label verified. |
 
-**Result: 2 added of 5**, both high-value. Three remain, all lower stakes than the two
-completed.
+**Result: 2 added of 5, 1 rejected, 2 needing a specific SKU verified.** The two additions
+(mattress, vacuum) were the high-value items. HVAC filters is a substantive rejection.
+The remaining two are small-ticket consumables where the entry is only worth making with
+the exact product confirmed.
 
 *(Remaining 85 subcategories across the other sections still to be worked through.)*
