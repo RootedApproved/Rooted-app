@@ -119,4 +119,14 @@ than guessing.
 | Retainer Cases | — | **Reject — no gap** | Sole listing is $27.99 for a 24-pack, about $1.17 per case. Already at floor pricing. |
 | Gum/Mints | — | **Needs research** | Real price gap exists (Tier 1 Spry is ~$0.11/piece vs ~$0.03 mainstream). Mainstream gum uses aspartame, acesulfame K, BHT and titanium dioxide — none on the floor list per the Crest precedent — but requires per-product label verification before any entry. |
 
-*(Remaining 124 subcategories across the other sections to be worked through and logged here.)*
+### Water
+
+| Subcategory | Candidate | Verdict | Reason |
+|---|---|---|---|
+| Home Drinking Water Filtration | Brita Elite Filter Pitcher, 10-cup (~$40) | **Accept — added** | Largest accessibility gap on the site: Tier 1 runs $375–$695. The Elite filter carries NSF/ANSI 53 certification for 99% lead reduction plus 42 and 401 — real independent verification, which is the bar. Compromise: not RO (no fluoride, nitrates, dissolved solids), not certified for microplastics, plastic housing in contact with drinking water, ongoing filter waste. **Critical distinction captured in the verdict: the white Standard filter is NSF 42 only — chlorine taste, nothing health-related.** Source: brita.com, NSF standards |
+| Electrolytes & Remineralization | — | **Reject — no gap** | Tier 1 Redmond Real Salt is $15.99 for 26oz, which is months of use at pennies per serving. Plain mineral salt already *is* the budget electrolyte, and it is already Tier 1. |
+| Containers & Hydration | — | **Reject — no gap** | Tier 1 Klean Kanteen is $24.95 for a stainless bottle that lasts a decade. Cheaper bottles are plastic or unlined aluminium — worse on both standards and lifetime cost. |
+| Bottled & Travel Water | — | **Reject — conflicts with premise** | Tier 1 Mountain Valley is $2.99 in glass. The only thing cheaper is spring water in PET plastic, which fails the reason this category exists. A "budget" entry here would recommend the exact thing the category warns against. |
+| Shower Water Filtration | — | **Needs research** | Genuine gap ($99–$149 Tier 1/2 vs ~$25–35 mainstream inline filters), but budget shower filters overwhelmingly carry no third-party certification, and the Tier 1 Weddell is listed specifically *for* being NSF/ANSI 177 certified. Needs a search for a certified budget option (Sprite and others may qualify) rather than listing an uncertified claim. |
+
+*(Remaining 119 subcategories across the other sections to be worked through and logged here.)*
