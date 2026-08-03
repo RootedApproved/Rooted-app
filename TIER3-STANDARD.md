@@ -408,6 +408,24 @@ and origin data are all retrievable directly. Scaling this needs no screenshots.
 | Heavy Sweaters | Alpaca-Wool Hooded Sweater | $82.00 | $169–$395 |
 | Blazers | 100% European Linen Blazer | $100.00 | **~$598 (sole product)** |
 | Dress Pants | 100% European Linen Tailored Dress Pants | $90.00 | $200 (sole product) |
+| Golf Pants | 100% European Linen Trousers | $60.00 | $139–$300 |
+
+### TRAP: a Quince product name saying "Organic Cotton" does not mean it is only cotton
+
+Found in the pants category. **"Organic Cotton Coolmax® Chino" ($52)** — Coolmax is a
+branded polyester fibre. The product name leads with "Organic Cotton" and the material is
+part synthetic. Others in the same vein: "Organic Cotton Stretch Chino" and "Ultra-Stretch
+24/7 Smart Chinos".
+
+Of 108 items in the men's pants category, the genuinely untreated natural-fibre products
+are a small minority: the 100% European Linen Pants, Trousers, Beach Pants and Tailored
+Dress Pants, and the Mongolian Cashmere Jogger. Almost everything else is ProTech,
+Performance, Stretch, Coolmax or Traveler — synthetic or synthetic-blended.
+
+**Rule: read the composition, never the product name.** "Organic Cotton" in a Quince title
+is a marketing lead, not a statement of full composition. Anything with ProTech,
+Performance, Stretch, Coolmax, Traveler or Smart in the name needs the material list read
+before it goes anywhere near Tier 2.
 
 ### Quince splits cleanly into two ranges — and only one belongs at Tier 2
 
