@@ -290,4 +290,55 @@ Not decided here. It follows directly from J's seed-oil ruling but is not settle
 **Result: 0 added of 11 this pass.** Two rejected on the seed oil floor (condiments,
 cooking fats), four rejected on substance, four blocked pending the feed question above.
 
-*(Remaining 74 subcategories across the other sections still to be worked through.)*
+### Apparel (Golf, Workout, Sweaters & Jackets, Suits, Swim, Shorts)
+
+The largest concentration of legitimate Tier 3 opportunity left on the site. Unlike Air,
+Bed and Cleaning, the gaps here are real *and* the shape is already proven — Pact accounts
+for five of the ten original Tier 3 entries, so the editorial pattern needs no invention.
+
+Pact's profile is verified: GOTS-certified organic cotton, Fair Trade USA factories,
+95.1% organic cotton across the line, low-impact dyes at facilities recycling 98% of
+wastewater, prices roughly $15–$40. The known compromises are already written into the
+existing entries — undisclosed thread composition, unspecified dye certification, some
+elastane content, lighter construction than Tier 1.
+
+**Blocked on a data-access limit, not a judgement call.** Pact's site is JavaScript-
+rendered, so category pages return no product data to a fetch, and search does not surface
+individual SKU pages with current prices. Listing a product requires an exact name and
+price, so these cannot be written from inference.
+
+**Subcategories with a genuine gap, pending Pact (or equivalent) SKU + price:**
+
+| Subcategory | Tier 1/2 floor | Gap |
+|---|---|---|
+| Golf Quarter-Zips | $230 | Very large |
+| Golf Pants | $139 | Large |
+| Golf Shorts | $139.97 | Large |
+| Golf Sweaters | $119 | Large |
+| Golf Polos | $55.90 | Moderate |
+| Men's Shorts | $85 | Large |
+| Workout Shorts | $59.95 | Moderate |
+| Casual Jackets | $169 | Large |
+| Lightweight Sweaters | $155 (single product) | Large |
+| Quarter-Zips | $129 (single product) | Large |
+| Heavy Sweaters | $169 | Large |
+| Sweatshirts & Hoodies | $64.95 | Moderate |
+| Base Layers | $48.90 | Moderate |
+| Beach Cover-Ups | $98 | Large |
+| Dress Pants | $200 (single product) | Large |
+| Blazers | ~$598 (single product) | Very large |
+| Suits | $1,498 (single product) | Very large |
+| Ties | $95 (single product) | Large |
+
+**Rejected — no gap:**
+
+| Subcategory | Reason |
+|---|---|
+| Workout Tops | Tier 1 Rawganique SONOMA organic cotton crewneck is already $29.95. |
+| Swim Briefs & Jammers | Tier 1 is $41.95 and Tier 2 $33.95. Already accessible. |
+| Weather & Cold-Weather Jackets | Technical outerwear. Budget options are synthetic shells with DWR finishes, which need PFAS verification (floor) that budget brands do not provide. Reject on the verifiability rule. |
+
+**Result: 0 added this pass, 3 rejected, 18 pending SKU data.** This is the highest-yield
+remaining work on the site by a wide margin.
+
+*(Remaining 50 subcategories: Cookware 29, Lighting 12, Supplements 9.)*
