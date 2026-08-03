@@ -3516,27 +3516,6 @@ function chatFindBrand(query) {
   return products.length ? { brand: best.brand, products } : null;
 }
 
-// A category named in the question ("underwear", "cast iron").
-function chatFindSubcat(query) {
-  const qSet = new Set(chatMeaningfulWords(query).map(chatStem));
-  if (!qSet.size) return null;
-  const counts = {};
-  Object.values(PRODUCTS).forEach(p => { if (p.subcat !== 'unassigned') counts[p.subcat] = (counts[p.subcat] || 0) + 1; });
-  const hits = Object.keys(counts).map(key => {
-    const sub = SUBCAT_EDU[key];
-    if (!sub || !sub.title) return null;
-    const title = String(sub.title).replace(/&amp;/g, '&');
-    const tTokens = chatMeaningfulWords(title);
-    if (!tTokens.length) return null;
-    const score = tTokens.filter(t => qSet.has(chatStem(t))).length;
-    return score ? { key, title, score, count: counts[key] } : null;
-  }).filter(Boolean).sort((a, b) => b.score - a.score || b.count - a.count);
-  if (!hits.length) return null;
-  if (hits[1] && hits[1].score === hits[0].score && hits[1].count === hits[0].count) return null;
-  const products = Object.values(PRODUCTS).filter(p => p.subcat === hits[0].key);
-  return { title: hits[0].title, key: hits[0].key, products };
-}
-
 // ── CONSISTENT REPLY FORMATTING ───────────────────────────────────────
 // Every list-shaped answer is built here so the assistant speaks in one voice. Previously
 // three separate code paths produced three different intros and three different closing
@@ -3548,20 +3527,83 @@ function chatTierShort(tier) {
   return ({ '1': 'Tier 1 · Rooted Approved', '2': 'Tier 2 · Good Option', '3': 'Tier 3 · Budget/Transitional' })[tier] || 'Unrated';
 }
 
-function chatProductLine(p) {
-  return `• <strong>${p.brand} ${p.name}</strong> — ${chatTierShort(p.tier)}`;
+// All subcategories tied at the best score. A question like "water filters" legitimately
+// spans Home Drinking Water Filtration, Shower Water Filtration and Bottled & Travel
+// Water — showing one and hiding the others misrepresents the catalog.
+function chatFindSubcats(query) {
+  const qSet = new Set(chatMeaningfulWords(query).map(chatStem));
+  if (!qSet.size) return [];
+  const counts = {};
+  Object.values(PRODUCTS).forEach(p => { if (p.subcat !== 'unassigned') counts[p.subcat] = (counts[p.subcat] || 0) + 1; });
+  const hits = Object.keys(counts).map(key => {
+    const sub = SUBCAT_EDU[key];
+    if (!sub || !sub.title) return null;
+    const title = String(sub.title).replace(/&amp;/g, '&');
+    const tTokens = chatMeaningfulWords(title);
+    if (!tTokens.length) return null;
+    const score = tTokens.filter(t => qSet.has(chatStem(t))).length;
+    return score ? { key, title, score, count: counts[key] } : null;
+  }).filter(Boolean).sort((a, b) => b.score - a.score || b.count - a.count);
+  if (!hits.length) return [];
+  return hits.filter(h => h.score === hits[0].score).slice(0, 3)
+    .map(h => Object.assign({}, h, { products: Object.values(PRODUCTS).filter(p => p.subcat === h.key) }));
+}
+
+// A one-line differentiator drawn from the product's own verified `pros`. Picks the pro
+// that says something the product NAME doesn't already say and that its siblings in the
+// same list don't also claim, so a list of same-tier products is actually decidable.
+// Never generates new claims — it only selects among copy already on the product.
+function chatDistinguisher(p, siblings) {
+  const pros = (Array.isArray(p.pros) ? p.pros : []).map(x => String(x).trim()).filter(Boolean);
+  if (!pros.length) return '';
+  const nameWords = new Set(chatTokens(p.name + ' ' + p.brand).map(chatStem));
+  const others = (siblings || []).filter(s => s !== p);
+  const scored = pros.map(pro => {
+    const words = chatMeaningfulWords(pro).map(chatStem);
+    const novel = words.length ? words.filter(w => !nameWords.has(w)).length / words.length : 0;
+    const shared = others.filter(s => (s.pros || []).some(x => String(x).trim().toLowerCase() === pro.toLowerCase())).length;
+    return { pro, score: (novel * 2) - (shared * 0.6) - (pro.length > 95 ? 1 : 0) };
+  }).sort((a, b) => b.score - a.score);
+  let out = scored[0].pro;
+  if (out.length > 78) out = out.slice(0, 75).replace(/[\s,;:\u2014-]+$/, '') + '\u2026';
+  return out;
+}
+
+function chatProductLine(p, siblings) {
+  const note = chatDistinguisher(p, siblings);
+  return `• <strong>${p.brand} ${p.name}</strong> — ${chatTierShort(p.tier)}`
+    + (note ? `<br><span style="opacity:.72;">   ${note}</span>` : '');
 }
 
 function chatPlural(n, word) {
-  return `${n} ${word}${n === 1 ? '' : 's'}`;
+  if (n === 1) return `${n} ${word}`;
+  // "category" -> "categories", not "categorys"
+  const plural = /[^aeiou]y$/.test(word) ? word.slice(0, -1) + 'ies' : word + 's';
+  return `${n} ${plural}`;
 }
 
 // One closing line for every list answer, so the call to action never changes shape.
 const CHAT_LIST_FOOTER = `Ask about any of these by name for the full breakdown. For side-by-side comparisons and a recommendation, ${CHAT_JOIN_LINK}`;
 
+function chatSubcatTitle(key) {
+  const sub = SUBCAT_EDU[key];
+  return (sub && sub.title) ? String(sub.title).replace(/&amp;/g, '&') : '';
+}
+
 function chatListReply(intro, products, note) {
-  const lines = products.map(chatProductLine).join('<br>');
-  return `${intro}<br><br>${lines}${note ? `<br><br>${note}` : ''}<br><br>${CHAT_LIST_FOOTER}`;
+  const groups = [];
+  products.forEach(p => {
+    let g = groups.find(x => x.key === p.subcat);
+    if (!g) { g = { key: p.subcat, items: [] }; groups.push(g); }
+    g.items.push(p);
+  });
+  const body = groups.length > 1
+    ? groups.map(g => {
+        const title = chatSubcatTitle(g.key);
+        return (title ? `<strong>${title}</strong><br>` : '') + g.items.map(x => chatProductLine(x, g.items)).join('<br>');
+      }).join('<br><br>')
+    : products.map(x => chatProductLine(x, products)).join('<br>');
+  return `${intro}<br><br>${body}${note ? `<br><br>${note}` : ''}<br><br>${CHAT_LIST_FOOTER}`;
 }
 
 // Builds the reply when no single product answered the question, working from most
@@ -3599,11 +3641,25 @@ function chatUpsellMessage(message) {
     return chatListReply(intro, show, note);
   }
 
-  // 3. A category we cover. Tier 1 is the answer to "what's best", so lead with it.
-  const subHit = chatFindSubcat(message);
-  if (subHit && subHit.products.length) {
-    lastChatContextLabel = subHit.title;
+  // 3. A category we cover. Where a question spans several equally-matching categories
+  //    ("water filters"), show them all grouped rather than silently picking one.
+  const subHits = chatFindSubcats(message);
+  if (subHits.length) {
+    lastChatContextLabel = subHits.map(h => h.title).join(' / ');
     lastChatProductMatch = null;
+    if (subHits.length > 1) {
+      const picks = [];
+      subHits.forEach(h => {
+        const t1 = h.products.filter(x => x.tier === '1');
+        picks.push(...(t1.length ? t1 : h.products).slice(0, 3));
+      });
+      const total = subHits.reduce((n, h) => n + h.products.length, 0);
+      const remaining = total - picks.length;
+      const intro = `That spans ${chatPlural(subHits.length, 'category')} on ROOTED \u2014 ${chatPlural(total, 'product')} in total:`;
+      const note = remaining > 0 ? `Plus ${chatPlural(remaining, 'more product')} across those categories.` : '';
+      return chatListReply(intro, picks, note);
+    }
+    const subHit = subHits[0];
     const tier1 = subHit.products.filter(x => x.tier === '1');
     const show = (tier1.length ? tier1 : subHit.products).slice(0, 4);
     const intro = tier1.length
@@ -3649,6 +3705,21 @@ async function sendChatMessageCore(inputEl, messagesEl) {
     messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${reply}</div>`;
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return;
+  }
+
+  // A narrow product match can hide the fact that the question spans several categories —
+  // "water filters" matched only the shower filters, because those are the products with
+  // the literal word "Filter" in their names. Only applies to purely categorical questions:
+  // if the question names a brand ("ASKET The Shorts") the product matches are precise and
+  // must not be replaced by a broad category view.
+  if (matches.length !== 1 && !chatFindBrand(message)) {
+    const spanning = chatFindSubcats(message);
+    const covered = new Set(matches.map(m => m.subcat));
+    if (spanning.length > 1 && spanning.some(h => !covered.has(h.key))) {
+      messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${chatUpsellMessage(message)}</div>`;
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return;
+    }
   }
 
   // Several products answer the question equally well (e.g. "Ryker underwear" → two Ryker
