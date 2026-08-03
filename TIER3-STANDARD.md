@@ -85,7 +85,26 @@ This is the audit trail.
 |---|---|---|---|
 | Skin & Body Care | Vanicream Moisturizing Cream (~$13/16oz) | **Accept** | Clears floor: no fragrance, parabens, dyes, formaldehyde releasers. Compromise: petrolatum base, ceteareth-20 + PEG-30 stearate (ethoxylated, 1,4-dioxane risk), BHT, purely occlusive. Source: vanicream.com |
 | Sun Protection | Neutrogena Sheer Zinc SPF 50 (~$11) | **Accept** | Clears floor: zinc oxide 21.6% sole active, no oxybenzone/octinoxate, paraben- and fragrance-free. Compromise: five silicones, styrene/acrylates copolymer film-former, zinc particle size undisclosed, phenoxyethanol + chlorphenesin. Source: DailyMed |
-| Deodorant & Antiperspirant | — | **Pending** | Mainstream default is aluminum = floor. Needs review of unscented budget non-aluminum options. |
-| Fragrance & Perfume | — | **Likely none** | Mass-market perfume relies on undisclosed "parfum" = floor. Expect no valid Tier 3. |
+| Hair & Scalp Care | Vanicream Shampoo for Sensitive Skin (~$12/12oz) | **Accept — added** | Clears floor: no fragrance, parabens, formaldehyde releasers, sulfates. Compromise: entirely synthetic glucoside system, acrylates copolymer, disodium EDTA, plastic bottle, no sourcing certification. Source: vanicream.com |
+| Bath & Body Extras | — | **Reject — no gap** | Tier 1 Epsoak Epsom salt is $9.95 and Ancient Minerals flakes $12.95/8lb. Nothing cheaper is meaningfully more accessible; a Tier 3 here would exist only to fill the slot. |
+| Hand Hygiene | — | **Reject — no gap** | Tier 1 already spans $8.95–$10.98 (ATTITUDE, Meliora, Dr. Bronner's). Accessibility is already solved at Tier 1. |
+| Grooming Tools & Accessories | — | **Reject — no gap** | Tier 1 clippers are $18–$22 and last decades. A plated carbon-steel budget clipper is worse value, not better access. |
+| Foot Care | — | **Reject — no gap** | Tier 1 is $10–$14. No meaningful accessibility gap to close. |
+| Deodorant & Antiperspirant | — | **Reject — floor** | The mainstream default is aluminum antiperspirant, which is floor. Budget "natural" alternatives at drugstore price overwhelmingly use undisclosed fragrance, also floor. Revisit only if a specific unscented, non-aluminum, fully-disclosed budget option is identified. |
+| Fragrance & Perfume | — | **Reject — floor** | Mass-market perfume is built on undisclosed "parfum." No mainstream budget option can clear the floor by definition. |
 
-*(Remaining 143 subcategories to be worked through and logged here.)*
+### Needs dedicated research (next round)
+
+Not rejected — not yet verified to the required standard. Listing them honestly rather
+than guessing.
+
+| Subcategory | Why it needs real research |
+|---|---|
+| Cosmetics & Makeup | Budget clean makeup exists but talc, undisclosed fragrance and dye systems need per-product label verification |
+| Nail Care & Color | Mainstream polish carries toluene/formaldehyde/DBP (floor); budget "5-free" options need individual confirmation |
+| Menstrual Care | Conventional unscented tampons may clear the floor; rayon/viscose processing and applicator plastics need verification |
+| Hygiene Disposables & Reusables | Conventional recycled toilet paper needs confirmation on PFAS in recycled pulp — a real and documented risk |
+| Intimate Cleansing | Mainstream washes commonly carry fragrance/parabens; needs per-product checking |
+| Intimate Lubrication | Mainstream lubricants vary widely on parabens and glycerin; needs per-product checking |
+
+*(Remaining 131 subcategories across the other sections to be worked through and logged here.)*
