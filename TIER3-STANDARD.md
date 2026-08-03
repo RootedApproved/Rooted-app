@@ -129,4 +129,23 @@ than guessing.
 | Bottled & Travel Water | — | **Reject — conflicts with premise** | Tier 1 Mountain Valley is $2.99 in glass. The only thing cheaper is spring water in PET plastic, which fails the reason this category exists. A "budget" entry here would recommend the exact thing the category warns against. |
 | Shower Water Filtration | — | **Needs research** | Genuine gap ($99–$149 Tier 1/2 vs ~$25–35 mainstream inline filters), but budget shower filters overwhelmingly carry no third-party certification, and the Tier 1 Weddell is listed specifically *for* being NSF/ANSI 177 certified. Needs a search for a certified budget option (Sprite and others may qualify) rather than listing an uncertified claim. |
 
-*(Remaining 119 subcategories across the other sections to be worked through and logged here.)*
+### Air Quality
+
+This section establishes an important boundary: **Tier 3 means worse. It does not mean
+actively harmful, and it does not mean self-defeating within its own category.** Most
+budget options in air quality fail on one of those two grounds rather than on the floor.
+
+| Subcategory | Candidate | Verdict | Reason |
+|---|---|---|---|
+| Humidifiers | Budget ultrasonic (~$35) | **Reject — self-defeating** | EPA and CPSC studies find ultrasonic and cool-mist units disperse minerals *and* microorganisms from the tank into indoor air as breathable PM2.5; evaporative units trap them in the wick. A product that adds particulate to the air cannot be a budget option in an air-quality section. The Tier 2 Honeywell evaporative is $70, so the gap being closed is small and the health tradeoff is real. |
+| Portable Air Purifiers | — | **Reject — no gap** | Tier 2 Levoit Core 300-P is already $89.99. Below that the market is ionisers and ozone generators, which add pollutants, or units without true HEPA, which do not filter. Neither is a tier — both are a no. |
+| Radon Detectors | — | **Reject — no gap** | Tier 2 First Alert RD1 is $23.89. Already at floor pricing for the category. |
+| Dehumidifiers | — | **Reject — doesn't work** | Tier 1 and Tier 2 are both ~$200. The cheaper tier is Peltier/thermoelectric mini units (~$40) that extract a few ounces a day and cannot dehumidify a real room. Listing one would imply it substitutes for a compressor unit. It does not. |
+| Whole-Home Ventilation (ERV/HRV) | — | **Reject — no equivalent** | $609–$1,037, professionally installed. There is no budget product that performs balanced whole-home heat/energy recovery. An exhaust fan is a different function, not a cheaper version. |
+| Air Quality Monitors | — | **Needs research** | Real gap ($209–$299 Tier 1/2 vs ~$60–100 consumer monitors). But the Tier 1 PurpleAir is listed for calibrated laser particle counting, and budget monitors typically publish no accuracy validation. Needs a search for one with published, independent calibration data rather than an unverified sensor claim. |
+| HVAC Filters | — | **Needs research** | Genuine gap: Tier 2 is ~$10/filter (MERV 8). The mainstream default is a $3 fiberglass MERV 1–4 filter, which is a legitimate Tier 3 in principle — it is worse, not harmful, and the teaching point is strong ("this protects your furnace, not your lungs"). Needs a specific product and current pricing verified before listing. |
+
+**Result: 0 added of 7.** Recorded deliberately. Five are rejections on substance; two
+need verification rather than a guess.
+
+*(Remaining 112 subcategories across the other sections to be worked through and logged here.)*
