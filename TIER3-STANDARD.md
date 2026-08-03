@@ -406,6 +406,46 @@ and origin data are all retrievable directly. Scaling this needs no screenshots.
 | Quarter-Zips | 100% Organic Cotton Quarter-Zip Sweater | $62.00 | $129 (sole product) |
 | Lightweight Sweaters | 100% Organic Cotton Crewneck Sweater | $49.90 | $155 (sole product) |
 | Heavy Sweaters | Alpaca-Wool Hooded Sweater | $82.00 | $169–$395 |
+| Blazers | 100% European Linen Blazer | $100.00 | **~$598 (sole product)** |
+| Dress Pants | 100% European Linen Tailored Dress Pants | $90.00 | $200 (sole product) |
+
+### Quince splits cleanly into two ranges — and only one belongs at Tier 2
+
+The suiting category made this explicit. Quince sells the same garment in two constructions:
+
+**Untreated natural fiber — Tier 2, added:**
+100% European Linen Blazer ($100), 100% European Linen Tailored Dress Pants ($90),
+100% Mongolian Cashmere Blazer ($300), 100% European Linen Tailored Blazer ($150),
+Boiled Wool Cashmere Blazer ($230), Organic Cotton Cashmere Blazer ($230),
+Cotton Pique Knit Blazer ($104).
+
+**Stretch / synthetic / performance-finished — NOT Tier 2:**
+Stretch Wool Blazer ($180) and Stretch Wool Dress Pants ($102) are wool + spandex.
+Performance Stretch Dress Pants ($49.90). **Recycled Polyester Stretch Tech Blazer ($100)
+is entirely synthetic.** Organic Cotton Oxford **Non-Iron** Dress Shirt ($49.90) and 100%
+European Linen **Wrinkle-Resistant** Dress Shirt ($50) both carry a performance finish.
+
+Every Quince product must be checked for these words before listing. The brand name is not
+a sufficient signal, and a category page mixes both constructions freely.
+
+### OPEN QUESTION FOR J — non-iron / wrinkle-resistant finishes
+
+The floor includes formaldehyde donors. Non-iron and wrinkle-resistant cotton finishes are
+commonly formaldehyde-based resins, and manufacturers rarely itemise the chemistry.
+
+The existing Brooks Brothers Stretch Supima Non-Iron Oxford sits at **Tier 3** with the con
+"chemical resin finish, not just a weave property" and "finish composition not itemized on
+the care label" — so precedent says Tier 3, not floor.
+
+But that entry predates the **verifiability rule** ("absence of a floor ingredient must be
+verifiable, not merely unstated"). Applied strictly, an unspecified wrinkle-resistant
+finish cannot be cleared, and the Brooks Brothers entry would itself need review.
+
+Two coherent positions; not resolved here:
+- **Precedent holds** — non-iron is a Tier 3 compromise, named plainly. Quince's non-iron
+  shirts become Tier 3 entries.
+- **Verifiability holds** — an unspecified resin finish cannot clear the floor. Quince's
+  non-iron shirts are not listed, and Brooks Brothers comes down or gets re-verified.
 
 ### Scope note — "every men's product" is not the right target
 
