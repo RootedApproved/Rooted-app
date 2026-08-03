@@ -396,11 +396,28 @@ third-party materials verification.
 **Quince product pages fetch cleanly**, unlike Pact's — full price, composition, factory
 and origin data are all retrievable directly. Scaling this needs no screenshots.
 
-### Added so far
+### Added so far — 6 products, all Tier 2
 
-| Subcategory | Product | Tier | Price |
+| Subcategory | Product | Price | Tier 1/2 floor it undercuts |
 |---|---|---|---|
-| Golf Polos | Mongolian Cashmere Polo Sweater | 2 | $99.90 |
+| Golf Polos | Mongolian Cashmere Polo Sweater | $99.90 | $94.95–$148 |
+| Golf Quarter-Zips | Mongolian Cashmere Quarter Zip Sweater | $99.90 | **$230–$368** |
+| Golf Sweaters | Australian Merino Wool Cable Crewneck | $82.00 | $119–$198 |
+| Quarter-Zips | 100% Organic Cotton Quarter-Zip Sweater | $62.00 | $129 (sole product) |
+| Lightweight Sweaters | 100% Organic Cotton Crewneck Sweater | $49.90 | $155 (sole product) |
+| Heavy Sweaters | Alpaca-Wool Hooded Sweater | $82.00 | $169–$395 |
+
+### Scope note — "every men's product" is not the right target
+
+The sweaters category alone lists **161 items**. That is not 161 products: the Mongolian
+Cashmere Crewneck appears four separate times in four colours. Across the men's range
+(sweaters, tees, polos, shirts, pants, shorts, suiting, jackets, swim, activewear, shoes,
+accessories) Quince likely lists well over a thousand items representing perhaps 150–250
+distinct products.
+
+ROOTED lists one entry per product, not per colourway, and a category page showing eight
+near-identical cashmere crewnecks would be worse for a reader than one. **The target is
+therefore every distinct Quince product that fills a real gap — not every SKU.**
 
 ### Queued for the next Quince pass
 
