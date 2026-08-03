@@ -3428,7 +3428,7 @@ function findRelevantProducts(query) {
 // Only proceeds to the paid API when there's no confident single match (i.e., a genuinely open question).
 // Conversational filler that carries no product meaning. Without this, words like
 // "tell" and "about" get scored as if they identified a product.
-const CHAT_STOPWORDS = new Set(['tell','about','the','and','for','are','you','your','can','what','which','how','why','who','whom','does','did','was','were','have','has','had','with','from','into','this','that','these','those','they','them','there','then','than','but','not','any','all','some','more','most','best','good','great','get','got','give','show','know','think','need','want','like','say','see','look','find','help','please','info','information','anything','something','recommend','recommendation','thoughts','opinion','review','reviews']);
+const CHAT_STOPWORDS = new Set(['tell','about','the','and','for','are','you','your','can','what','which','how','why','who','whom','does','did','was','were','have','has','had','with','from','into','this','that','these','those','they','them','there','then','than','but','not','any','all','some','more','most','best','good','great','get','got','give','show','know','think','need','want','like','say','see','look','find','help','please','info','information','anything','something','recommend','recommendation','thoughts','opinion','review','reviews','tier','tiers','budget','cheap','cheaper','cheapest','affordable','option','options','pick','picks']);
 
 // Splits a string into comparable word tokens. Punctuation and hyphens become separators,
 // so a query for "cast-iron" matches a product named "Cast Iron".
@@ -3569,6 +3569,28 @@ function chatDistinguisher(p, siblings) {
   return out;
 }
 
+// An explicit tier asked for in the question. "Tier 3 budget options for shirts" must
+// return Tier 3 products, not the Tier 1 list the category path leads with by default.
+function chatTierIntent(message) {
+  const m = /\btier\s*\.?\s*([123])\b/i.exec(String(message || ''));
+  if (m) return m[1];
+  if (/\b(budget|cheap|cheaper|cheapest|affordable|entry.?level|starter|least expensive)\b/i.test(message)) return '3';
+  return null;
+}
+
+// Narrows a candidate list to the tier asked for. If that tier isn't represented, says so
+// plainly rather than quietly returning a different tier as though it answered.
+function chatApplyTier(products, tierWant) {
+  if (!tierWant) return { list: products, tierNote: '', satisfied: true };
+  const hit = products.filter(x => x.tier === tierWant);
+  if (hit.length) return { list: hit, tierNote: '', satisfied: true };
+  return {
+    list: products,
+    tierNote: `Nothing here is rated Tier ${tierWant} \u2014 everything currently listed meets a higher standard. Showing what is rated:`,
+    satisfied: false
+  };
+}
+
 function chatProductLine(p, siblings) {
   const note = chatDistinguisher(p, siblings);
   return `• <strong>${p.brand} ${p.name}</strong> — ${chatTierShort(p.tier)}`
@@ -3609,6 +3631,7 @@ function chatListReply(intro, products, note) {
 // Builds the reply when no single product answered the question, working from most
 // specific to least so the response always reflects what was actually asked.
 function chatUpsellMessage(message) {
+  const tierWant = chatTierIntent(message);
   // 1. A follow-up about whatever we just answered on.
   if (lastChatProductMatch) {
     const p = lastChatProductMatch;
@@ -3631,7 +3654,8 @@ function chatUpsellMessage(message) {
     lastChatContextLabel = brandHit.brand;
     lastChatProductMatch = null;
     const all = brandHit.products;
-    const tier1 = all.filter(x => x.tier === '1');
+    const bt = chatApplyTier(all, tierWant);
+    const tier1 = (tierWant && bt.satisfied) ? bt.list : all.filter(x => x.tier === '1');
     const show = (tier1.length ? tier1 : all).slice(0, 5);
     const intro = (tier1.length && all.length > show.length)
       ? `ROOTED rates ${chatPlural(all.length, 'product')} from <strong>${brandHit.brand}</strong>. These earned Tier 1, the highest rating on the site:`
@@ -3649,23 +3673,45 @@ function chatUpsellMessage(message) {
     lastChatProductMatch = null;
     if (subHits.length > 1) {
       const picks = [];
+      let anyTierHit = false;
       subHits.forEach(h => {
+        const t = chatApplyTier(h.products, tierWant);
+        if (tierWant && t.satisfied) anyTierHit = true;
         const t1 = h.products.filter(x => x.tier === '1');
-        picks.push(...(t1.length ? t1 : h.products).slice(0, 3));
+        const pool = (tierWant && t.satisfied) ? t.list : (t1.length ? t1 : h.products);
+        picks.push(...pool.slice(0, 3));
       });
       const total = subHits.reduce((n, h) => n + h.products.length, 0);
       const remaining = total - picks.length;
-      const intro = `That spans ${chatPlural(subHits.length, 'category')} on ROOTED \u2014 ${chatPlural(total, 'product')} in total:`;
-      const note = remaining > 0 ? `Plus ${chatPlural(remaining, 'more product')} across those categories.` : '';
+      let intro;
+      if (tierWant && anyTierHit) {
+        intro = `Tier ${tierWant} options across ${chatPlural(subHits.length, 'category')}:`;
+      } else if (tierWant) {
+        intro = `Nothing across those ${chatPlural(subHits.length, 'category')} is rated Tier ${tierWant} \u2014 everything listed meets a higher standard. What is rated:`;
+      } else {
+        intro = `That spans ${chatPlural(subHits.length, 'category')} on ROOTED \u2014 ${chatPlural(total, 'product')} in total:`;
+      }
+      const note = (!tierWant && remaining > 0) ? `Plus ${chatPlural(remaining, 'more product')} across those categories.` : '';
       return chatListReply(intro, picks, note);
     }
     const subHit = subHits[0];
-    const tier1 = subHit.products.filter(x => x.tier === '1');
-    const show = (tier1.length ? tier1 : subHit.products).slice(0, 4);
-    const intro = tier1.length
-      ? `ROOTED rates ${chatPlural(subHit.products.length, 'product')} in <strong>${subHit.title}</strong>. These earned Tier 1, the highest rating on the site:`
-      : `ROOTED rates ${chatPlural(subHit.products.length, 'product')} in <strong>${subHit.title}</strong>:`;
-    const remaining = subHit.products.length - show.length;
+    const t = chatApplyTier(subHit.products, tierWant);
+    let show, intro;
+    if (tierWant && t.satisfied) {
+      show = t.list.slice(0, 5);
+      intro = `${chatPlural(t.list.length, 'product')} in <strong>${subHit.title}</strong> ${t.list.length === 1 ? 'is' : 'are'} rated Tier ${tierWant}:`;
+    } else if (tierWant) {
+      const lowest = ['3', '2', '1'].find(x => subHit.products.some(y => y.tier === x));
+      show = subHit.products.filter(x => x.tier === lowest).slice(0, 5);
+      intro = `Nothing in <strong>${subHit.title}</strong> is rated Tier ${tierWant} \u2014 the lowest tier listed there is Tier ${lowest}:`;
+    } else {
+      const tier1 = subHit.products.filter(x => x.tier === '1');
+      show = (tier1.length ? tier1 : subHit.products).slice(0, 4);
+      intro = tier1.length
+        ? `ROOTED rates ${chatPlural(subHit.products.length, 'product')} in <strong>${subHit.title}</strong>. These earned Tier 1, the highest rating on the site:`
+        : `ROOTED rates ${chatPlural(subHit.products.length, 'product')} in <strong>${subHit.title}</strong>:`;
+    }
+    const remaining = tierWant ? 0 : subHit.products.length - show.length;
     const note = remaining > 0 ? `Plus ${chatPlural(remaining, 'more option')} in ${subHit.title}.` : '';
     return chatListReply(intro, show, note);
   }
