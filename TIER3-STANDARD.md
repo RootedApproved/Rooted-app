@@ -338,7 +338,32 @@ price, so these cannot be written from inference.
 | Swim Briefs & Jammers | Tier 1 is $41.95 and Tier 2 $33.95. Already accessible. |
 | Weather & Cold-Weather Jackets | Technical outerwear. Budget options are synthetic shells with DWR finishes, which need PFAS verification (floor) that budget brands do not provide. Reject on the verifiability rule. |
 
-**Result: 0 added this pass, 3 rejected, 18 pending SKU data.** This is the highest-yield
-remaining work on the site by a wide margin.
+**Update after J supplied Pact screenshots — the opportunity is much smaller than modelled.**
+
+Pact's men's range turns out to be narrow: underwear, tees, sweatshirts/hoodies, and
+pants. **No polos, no shorts, no sweaters, no quarter-zips, no outerwear.** It therefore
+cannot fill the large-gap subcategories at all.
+
+The second surprise: **Pact's regular prices are not budget prices.** The steep figures
+($29, $40, $23) are all limited-time sale prices against list prices of $98, $72 and $58.
+Judged at list — which is the only honest basis for a catalog entry — Pact frequently sits
+at or above ROOTED's existing Tier 1. Its Brushed Fleece Pullover Hoodie lists at $64
+against a $64.95 Tier 1 Rawganique hoodie: no gap at all.
+
+Usable outcome from the screenshots:
+
+| Action | Detail |
+|---|---|
+| **Added** | Pact Organic Stretch Twill 5-Pocket Pant, $98, into Golf Pants. Genuine gap against a $139–$300 Tier 1/2 range. Compromise: undisclosed stretch fiber, thread and dye certification unstated, casual 5-pocket cut rather than a true chino. |
+| **Price corrected** | The listed Pact Everyday Boxer Brief 4-Pack was $56. J's screenshot confirms the current list price is **$72**. Corrected. Caught only because the screenshots were checked against existing entries rather than only mined for new ones. |
+| **Closed** | Sweatshirts & Hoodies — Pact's hoodie lists at $64 against a $64.95 Tier 1. No gap. |
+
+**The remaining large-gap apparel subcategories need a different brand.** Pact is not it.
+Suits ($1,498), Blazers (~$598), Golf Quarter-Zips ($230), Dress Pants ($200), Golf Shorts
+($139.97) and Sweaters ($119) all remain open, and no verified budget brand has been
+identified for formalwear or knitwear.
+
+**Result: 1 added, 1 price corrected, 4 rejected, ~14 still open pending a brand that
+actually serves them.**
 
 *(Remaining 50 subcategories: Cookware 29, Lighting 12, Supplements 9.)*
