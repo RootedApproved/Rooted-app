@@ -21,6 +21,12 @@ become a Tier 3 "budget" option. It is simply absent.
   floor, not Tier 3)
 - **Seed oils, in food** (decided explicitly — soybean, canola, corn, sunflower,
   safflower, cottonseed, grapeseed, rice bran. Never listed at any tier.)
+- **Seed oils in animal feed** (decided explicitly — an animal product whose feed includes
+  seed oils is not listed. Eggland's Best, the default "premium" supermarket egg, feeds
+  canola oil and rice bran.)
+- **Non-iron / wrinkle-resistant chemical finishes** (decided explicitly — these are
+  commonly formaldehyde-based resins and are not itemised on care labels, so they can
+  never clear the verifiability rule. Not a Tier 3 compromise.)
 
 ### Food-specific principle: whole foods and minimal ingredients
 
@@ -467,7 +473,28 @@ European Linen **Wrinkle-Resistant** Dress Shirt ($50) both carry a performance 
 Every Quince product must be checked for these words before listing. The brand name is not
 a sufficient signal, and a category page mixes both constructions freely.
 
-### OPEN QUESTION FOR J — non-iron / wrinkle-resistant finishes
+### RESOLVED BY J — non-iron / wrinkle-resistant finishes are FLOOR
+
+J's ruling: neither non-iron finishes nor seed-oil-fed animal products deserve a place on
+the site at any tier. Both added to the hard floor above.
+
+**Consequence, actioned:** the existing **Brooks Brothers Stretch Supima Cotton Non-Iron
+Royal Oxford Dress Shirt ($128), previously Tier 3, has been REMOVED.** It carried exactly
+the compromise now ruled out — "chemical resin finish, not just a weave property", with the
+finish composition not itemised on the care label. Dress Shirts now holds a single Tier 1
+product, the Brooks Brothers 100% Cotton Oxford. That is the honest state.
+
+**Also excluded from the Quince pass:** their Organic Cotton Oxford Non-Iron Dress Shirt
+($49.90) and 100% European Linen Wrinkle-Resistant Dress Shirt ($50). Quince's untreated
+linen shirts remain eligible.
+
+**Food closes almost entirely.** With seed oils in feed on the floor, and given that
+conventional feed is overwhelmingly corn/soy/canola based and rarely disclosed, the egg,
+poultry, pork and dairy subcategories yield nothing. Combined with the earlier rejections,
+**Food & Diet is complete at 0 of 11.** That is a coherent outcome for a whole-foods
+platform, not a gap.
+
+### Superseded — the original open question
 
 The floor includes formaldehyde donors. Non-iron and wrinkle-resistant cotton finishes are
 commonly formaldehyde-based resins, and manufacturers rarely itemise the chemistry.
