@@ -175,4 +175,34 @@ where budget products most often carry an undisclosed floor item.
 **Result: 0 added of 10.** Four substantive rejections, six requiring specific product
 verification. Mattresses is the single highest-value pending item across the whole site.
 
-*(Remaining 102 subcategories across the other sections to be worked through and logged here.)*
+### Cleaning & Home
+
+The section-level finding matters more than any individual entry: **ROOTED's cleaning
+recommendations are already budget products.** Tier 1 here includes Bar Keeper's Friend at
+$2.29, If You Care gloves at $5.29, and ATTITUDE cleaners at $6.95. There is very little
+room beneath them, and what does sit beneath fails on the floor rather than on price —
+mainstream cleaners are built on undisclosed "fragrance."
+
+| Subcategory | Verdict | Reason |
+|---|---|---|
+| Metal Polish & Specialty | **Reject — no gap** | Tier 1 Bar Keeper's Friend is $2.29. Nothing meaningful sits below it. |
+| All-Purpose & Multi-Surface | **Reject — floor** | Tier 1 ATTITUDE is $6.95. Mainstream alternatives (~$4) are built on undisclosed fragrance. ~$3 saved is not worth a floor breach. |
+| Bathroom, Tile & Grout | **Reject — floor** | Same: $6.95 Tier 1, mainstream is fragranced. |
+| Glass & Mirror | **Reject — floor** | Same: $6.95 Tier 2, mainstream adds fragrance and dyes. |
+| Floor Care | **Reject — floor** | Same: $9.95 Tier 2, mainstream is fragranced. |
+| Dish Soaps & Bars | **Reject — floor** | Tier 2 ATTITUDE is $5.95 against ~$4 mainstream, which is fragranced. |
+| Textile & Upholstery Care | **Reject — no gap** | Tier 1 Molly's Suds stain remover is $7.99. |
+| Gloves & Cleaning Storage | **Reject — floor** | Tier 1 natural rubber is $5.29. Cheaper vinyl gloves are PVC, a phthalate risk, undisclosed. |
+| Boosters, Stain Care & Dryer | **Reject — floor** | The mainstream cheaper option is dryer sheets, which are a fragrance delivery system by design. |
+| Food Wraps & Storage | **Reject — conflicts with premise** | Tier 2 parchment is $4.99. The only cheaper option is plastic cling film, which is what the category exists to replace. |
+| Odor Control | **Reject — floor** | Mainstream is Febreze-class fragranced sprays. (Note: plain sodium bicarbonate at ~$1 genuinely works here and clears the floor entirely — arguably a Tier 1 candidate rather than Tier 3. Flagged for J.) |
+| Laundry Detergents & Soaps | **Needs research** | Tier 1 Molly's Suds is $0.18/load, already cheap. But fragrance-free/dye-free mainstream detergents run ~$0.12/load and would clear the floor. Modest gap; needs label verification on a specific product. |
+| Dishwasher Detergents | **Needs research** | Real gap: Tier 2 is ~$0.50/tab vs ~$0.25 mainstream. Fragrance-free mainstream tablets may clear the floor; needs verification. |
+| Cloths, Sponges & Brushes | **Needs research** | Tier 1 Skoy is $10.05 for 4. Cheaper cellulose sponges exist, but many mainstream sponges are treated with triclosan (floor) and do not always disclose it. |
+| Paper Towels & Napkins | **Needs research** | Real gap: Tier 1 is $38–$39 vs ~$20 mainstream. Virgin tree pulp is a legitimate Tier 3 compromise — worse, not harmful. Needs a specific product and bleaching process verified. |
+| Trash & Compost Bags | **Needs research** | Modest gap: $17.99–$18 Tier 1/2 vs ~$12 mainstream. Virgin plastic is a nameable compromise. |
+| **Vacuums & Floor Machines** | **Needs research — high value** | Second-widest gap on the site: $399 Tier 2, $799 Tier 1, nothing beneath. A budget vacuum is a legitimate Tier 3 *only if* it has genuine sealed HEPA filtration — an unsealed vacuum re-emits fine particulate into the room, which is the self-defeating failure mode established in Air Quality. Needs verification of a sealed system, not just a "HEPA filter" label. |
+
+**Result: 0 added of 17.** Eleven substantive rejections, six needing verification.
+
+*(Remaining 85 subcategories across the other sections to be worked through and logged here.)*
