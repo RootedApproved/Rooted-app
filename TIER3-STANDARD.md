@@ -67,6 +67,12 @@ Non-negotiable, and the reason this cannot be batch-generated:
 4. Product confirmed currently available and not reformulated.
 5. Price marked `~$` until J confirms via screenshot.
 
+6. **Absence of a floor ingredient must be verifiable, not merely unstated.** If a
+   product category routinely contains a floor item and the specific product does not
+   disclose either way, it cannot be listed. Silence is not clearance. (Established in
+   Bed & Bedding: conventional sheets are widely finished with formaldehyde resin for
+   wrinkle resistance, and budget sets almost never disclose the finish either way.)
+
 **If no candidate in a subcategory clears the floor, nothing is added.** An empty Tier 3
 is a correct outcome and the chat already reports it honestly ("Nothing in X is rated
 Tier 3 — the lowest tier listed there is Tier N"). Forcing an entry to fill a gap is the
@@ -148,4 +154,25 @@ budget options in air quality fail on one of those two grounds rather than on th
 **Result: 0 added of 7.** Recorded deliberately. Five are rejections on substance; two
 need verification rather than a guess.
 
-*(Remaining 112 subcategories across the other sections to be worked through and logged here.)*
+### Bed & Bedding
+
+The widest price gaps on the site — mattresses start at $2,799 — but also the section
+where budget products most often carry an undisclosed floor item.
+
+| Subcategory | Candidate | Verdict | Reason |
+|---|---|---|---|
+| Sleep Masks | — | **Reject — no gap** | Tier 1 is $16.95, Tier 2 $18. Already at floor pricing. |
+| Sheets & Pillowcases | — | **Reject — unverifiable** | Tier 2 Quince organic percale is already $79.90. Below that, conventional sheets are routinely finished with formaldehyde resin for wrinkle resistance ("easy care", "wrinkle-free", "no-iron") — a floor item — and budget sets almost never disclose the finish either way. Absence cannot be verified, so nothing can be listed. |
+| Curtains | — | **Reject — unverifiable** | Same problem. Budget blackout curtains typically use PVC or acrylic-foam backing; PVC carries phthalate risk (floor) and budget listings do not disclose the backing composition. |
+| Mattress Protectors | — | **Reject — unverifiable** | Budget waterproof protectors use PVC or polyurethane laminate. PVC is a phthalate risk and the laminate type is rarely specified at this price point. |
+| **Mattresses** | — | **Needs research — highest value pending item on the site** | The gap is enormous: Tier 1/2 are $2,799–$4,399 with nothing beneath. But a 2026 NapLab analysis of 395 mattresses found the ~10% containing fiberglass fire barriers were overwhelmingly the under-$600 imports, and the California Department of Public Health has confirmed glass fiber in specific budget models. Fiberglass sealed inside an intact cover is low risk; the failure mode is a removed or torn cover, which contaminates a home and costs thousands to remediate. **A fiberglass-free budget mattress is a legitimate and valuable Tier 3** — rayon-silica and wool barriers add only ~$40–80 in unit cost, so options exist in the $600–1,200 range. This needs careful single-product verification (law tag composition, CertiPUR-US, current model), not a fast pick. Getting it wrong here is expensive and health-relevant. |
+| Pillows | — | **Needs research** | Real gap ($105–$139 Tier 1). A polyester-fill pillow is a legitimate Tier 3 by precedent (synthetics are accepted at Tier 3), but needs a specific product with disclosed fill and no added flame-retardant treatment. |
+| Blankets & Comforters | — | **Needs research** | Real gap ($225–$512 Tier 1). Same requirement: disclosed fill and no flame-retardant or wrinkle-resist finish. |
+| Mattress Toppers | — | **Needs research** | Real gap ($245–$399 Tier 1). Budget toppers are polyurethane foam; CertiPUR-US at minimum, and off-gassing named as the compromise. |
+| Duvet Covers | — | **Needs research** | Tier 2 Quince is $79.90. A cheaper plain cotton cover could qualify if the finish is disclosed. |
+| Bedroom Rugs | — | **Needs research** | Only one product listed ($235). Budget rugs are typically polypropylene with latex backing; needs verification of backing adhesives. |
+
+**Result: 0 added of 10.** Four substantive rejections, six requiring specific product
+verification. Mattresses is the single highest-value pending item across the whole site.
+
+*(Remaining 102 subcategories across the other sections to be worked through and logged here.)*
