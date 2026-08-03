@@ -19,6 +19,23 @@ become a Tier 3 "budget" option. It is simply absent.
 - Undisclosed "fragrance" / "parfum"
 - **Aluminum antiperspirant** (decided explicitly — the mainstream deodorant default is
   floor, not Tier 3)
+- **Seed oils, in food** (decided explicitly — soybean, canola, corn, sunflower,
+  safflower, cottonseed, grapeseed, rice bran. Never listed at any tier.)
+
+### Food-specific principle: whole foods and minimal ingredients
+
+Food is judged first on whether it is a whole food with a short ingredient list, and only
+then on production method. This produces two different answers that look inconsistent but
+are not:
+
+- **A conventional egg, or conventional ground beef, is still a one-ingredient whole
+  food.** The compromise is production method — feedlot finishing, no pasture access, a
+  different fatty-acid profile — and that is a legitimate Tier 3 compromise, nameable and
+  disclosed by the label system.
+- **A budget mayonnaise is a multi-ingredient processed product built on seed oil.** That
+  is a floor breach, not a compromise, and no price makes it a tier.
+
+The test is not "is it cheap" but "is it still the food, with the tradeoff stated."
 
 ## What Tier 3 actually is
 
@@ -230,34 +247,47 @@ $13.99/lb against ~$5–6 conventional, pasture-raised eggs at $6.99–$8.00/doz
 ~$3–4, pastured chicken at $12.99–$16.95/lb against ~$4. Food is also where a budget tier
 matters most to an actual person's week.
 
-**Blocked on a question only J can answer: are seed oils floor, or a Tier 3 compromise?**
+**Resolved by J: seed oils are floor. Prioritise whole foods and minimal ingredients.**
 
-The existing floor list was derived from personal care and says nothing about food. But
-seed oils appear repeatedly in ROOTED's flags, and the Tier 1 condiments (Primal Kitchen
-avocado oil mayo and ketchup) are chosen specifically *because* they avoid them. Nearly
-every budget condiment, mayo, dressing and sauce is soybean or canola based.
-
-- If seed oils are **floor**: Condiments, and much of Cooking Fats, yield nothing. That is
-  a coherent and defensible position for an ancestral-standards platform.
-- If seed oils are a **Tier 3 compromise** (parallel to SLS in Crest — named plainly, not
-  hidden): those subcategories open up substantially.
-
-This is a brand-defining call, not a technical one, so it is not being made here.
+This closes Condiments entirely and narrows Cooking Fats to non-seed-oil options only. It
+also clarifies the meat, egg and dairy subcategories rather than closing them — a
+conventional egg is still a one-ingredient whole food, so its compromise is production
+method, which is a legitimate Tier 3 position.
 
 | Subcategory | Verdict | Reason |
 |---|---|---|
-| Pastured Eggs | **Strong candidate — needs SKU verification** | Best Tier 3 opportunity in the section. Penn State research (Karsten et al., 2010) anchors the compromise factually: pasture-raised eggs carry roughly double the omega-3 and double the vitamin E, and conventional eggs can reach an omega-6:omega-3 ratio of 20:1 against roughly 2:1–3:1 for pastured. A named national brand at ~$4–5/dozen is a legitimate Tier 3 — the compromise is real, disclosed by the label system, and nothing on the floor applies. Needs a specific brand verified rather than "supermarket eggs". |
+| Pastured Eggs | **Blocked — open question on feed** | Best Tier 3 opportunity in the section. Penn State research (Karsten et al., 2010) anchors the compromise factually: pasture-raised eggs carry roughly double the omega-3 and double the vitamin E, and conventional eggs can reach an omega-6:omega-3 ratio of 20:1 against roughly 2:1–3:1 for pastured. A named national brand at ~$4–5/dozen is a legitimate Tier 3 — the compromise is real, disclosed by the label system, and nothing on the floor applies. Needs a specific brand verified rather than "supermarket eggs". |
 | Beef & Bison | **Candidate — needs SKU verification** | Conventional grain-finished ground beef ~$5–6/lb against $9.99 Tier 1. Compromise: feedlot finishing, no regenerative practice, different fatty-acid profile. Nothing on the floor applies. Needs a specific national brand. |
 | Poultry / Pork | **Candidate — needs SKU verification** | Same shape, larger gap (~$4/lb vs $12.99–$16.95). |
-| Condiments & Sauces | **Blocked on seed oil question** | Budget mayo, ketchup and dressings are overwhelmingly soybean or canola based. |
-| Cooking Fats & Oils | **Blocked on seed oil question**, plus a second problem | Budget "extra virgin olive oil" is subject to well-documented adulteration and mislabelling, so a cheap uncertified EVOO cannot clear the independent-verification bar regardless of the seed oil answer. |
+| Condiments & Sauces | **Reject — floor** | Budget mayo, ketchup and dressings are overwhelmingly soybean or canola based. Seed oils are floor, so nothing here qualifies at any price. |
+| Cooking Fats & Oils | **Reject — floor + unverifiable** | Budget cooking oil is seed oil (floor). The remaining option, cheap "extra virgin olive oil", is subject to well-documented adulteration and mislabelling, so it cannot clear the independent-verification bar either. Both routes close. |
 | Salt & Seasonings | **Reject — no gap** | Tier 1 Redmond is $10.29/16oz, which is months of use. Cheaper table salt adds anti-caking agents for no benefit. |
 | Grass-Fed & Raw Dairy | **Candidate — needs SKU verification** | $8.79/48oz Tier 1 against ~$4/half gallon conventional. Compromise: grain-fed, conventional A1 protein, no regenerative practice. |
 | Wild-Caught Seafood | **Needs research** | Tier 1 is $145 for a 12-pack box. Canned wild salmon at Tier 2 is already $6.67/portion. Budget canned salmon may qualify; farmed salmon likely does not (feed inputs, antibiotics). |
 | Meat Delivery Services | **Reject — category is inherently premium** | Delivery services carry a structural cost floor. The budget answer is a local grocery, not a cheaper delivery box. |
 | Grocery & Meal Delivery | **Reject — no gap** | Tier 2 Azure Standard is already free to join. |
 
-**Result: 0 added of 11 this pass.** Four strong candidates pending SKU verification, two
-blocked on the seed oil question, four rejected on substance.
+### Open question for J: are seed oils floor in FEED as well as in the product?
+
+Surfaced while verifying the strongest candidate. Eggland's Best — the default mainstream
+"premium" supermarket egg — states on its own site that its hens are fed "healthy grains,
+canola oil, and supplements of rice bran, alfalfa, and sea kelp." Canola and rice bran are
+both seed oils.
+
+This matters because ROOTED already treats feed as part of the standard: Sonny's Farm
+products are listed specifically as "Corn & Soy Free."
+
+- **If feed counts as floor:** essentially no budget egg, poultry, pork or dairy qualifies,
+  since nearly all conventional feed is corn/soy/canola based. Food yields close to nothing.
+  A coherent purist position.
+- **If feed does not count as floor:** the product itself remains a one-ingredient whole
+  food containing no seed oil, and the feed becomes the named Tier 3 compromise
+  ("grain-and-seed-fed, not foraged"). Four subcategories open with large accessibility
+  gains.
+
+Not decided here. It follows directly from J's seed-oil ruling but is not settled by it.
+
+**Result: 0 added of 11 this pass.** Two rejected on the seed oil floor (condiments,
+cooking fats), four rejected on substance, four blocked pending the feed question above.
 
 *(Remaining 74 subcategories across the other sections still to be worked through.)*
