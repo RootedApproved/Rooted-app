@@ -223,4 +223,41 @@ directly.
 The remaining two are small-ticket consumables where the entry is only worth making with
 the exact product confirmed.
 
-*(Remaining 85 subcategories across the other sections still to be worked through.)*
+### Food & Diet
+
+The largest real-world accessibility gaps on the site — grass-fed ground beef at $9.99–
+$13.99/lb against ~$5–6 conventional, pasture-raised eggs at $6.99–$8.00/dozen against
+~$3–4, pastured chicken at $12.99–$16.95/lb against ~$4. Food is also where a budget tier
+matters most to an actual person's week.
+
+**Blocked on a question only J can answer: are seed oils floor, or a Tier 3 compromise?**
+
+The existing floor list was derived from personal care and says nothing about food. But
+seed oils appear repeatedly in ROOTED's flags, and the Tier 1 condiments (Primal Kitchen
+avocado oil mayo and ketchup) are chosen specifically *because* they avoid them. Nearly
+every budget condiment, mayo, dressing and sauce is soybean or canola based.
+
+- If seed oils are **floor**: Condiments, and much of Cooking Fats, yield nothing. That is
+  a coherent and defensible position for an ancestral-standards platform.
+- If seed oils are a **Tier 3 compromise** (parallel to SLS in Crest — named plainly, not
+  hidden): those subcategories open up substantially.
+
+This is a brand-defining call, not a technical one, so it is not being made here.
+
+| Subcategory | Verdict | Reason |
+|---|---|---|
+| Pastured Eggs | **Strong candidate — needs SKU verification** | Best Tier 3 opportunity in the section. Penn State research (Karsten et al., 2010) anchors the compromise factually: pasture-raised eggs carry roughly double the omega-3 and double the vitamin E, and conventional eggs can reach an omega-6:omega-3 ratio of 20:1 against roughly 2:1–3:1 for pastured. A named national brand at ~$4–5/dozen is a legitimate Tier 3 — the compromise is real, disclosed by the label system, and nothing on the floor applies. Needs a specific brand verified rather than "supermarket eggs". |
+| Beef & Bison | **Candidate — needs SKU verification** | Conventional grain-finished ground beef ~$5–6/lb against $9.99 Tier 1. Compromise: feedlot finishing, no regenerative practice, different fatty-acid profile. Nothing on the floor applies. Needs a specific national brand. |
+| Poultry / Pork | **Candidate — needs SKU verification** | Same shape, larger gap (~$4/lb vs $12.99–$16.95). |
+| Condiments & Sauces | **Blocked on seed oil question** | Budget mayo, ketchup and dressings are overwhelmingly soybean or canola based. |
+| Cooking Fats & Oils | **Blocked on seed oil question**, plus a second problem | Budget "extra virgin olive oil" is subject to well-documented adulteration and mislabelling, so a cheap uncertified EVOO cannot clear the independent-verification bar regardless of the seed oil answer. |
+| Salt & Seasonings | **Reject — no gap** | Tier 1 Redmond is $10.29/16oz, which is months of use. Cheaper table salt adds anti-caking agents for no benefit. |
+| Grass-Fed & Raw Dairy | **Candidate — needs SKU verification** | $8.79/48oz Tier 1 against ~$4/half gallon conventional. Compromise: grain-fed, conventional A1 protein, no regenerative practice. |
+| Wild-Caught Seafood | **Needs research** | Tier 1 is $145 for a 12-pack box. Canned wild salmon at Tier 2 is already $6.67/portion. Budget canned salmon may qualify; farmed salmon likely does not (feed inputs, antibiotics). |
+| Meat Delivery Services | **Reject — category is inherently premium** | Delivery services carry a structural cost floor. The budget answer is a local grocery, not a cheaper delivery box. |
+| Grocery & Meal Delivery | **Reject — no gap** | Tier 2 Azure Standard is already free to join. |
+
+**Result: 0 added of 11 this pass.** Four strong candidates pending SKU verification, two
+blocked on the seed oil question, four rejected on substance.
+
+*(Remaining 74 subcategories across the other sections still to be worked through.)*
