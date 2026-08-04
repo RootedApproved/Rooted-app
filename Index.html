@@ -379,6 +379,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .plain-amp{font-family:var(--font-b);font-weight:inherit;}
 .sc-name{font-family:var(--font-d);font-size:16px;font-weight:700;color:var(--char);flex:1;}
 .sc-count{font-size:12px;color:var(--muted);margin-right:4px;}
+.cs-soon{font-style:italic;opacity:.75;}
 .sc-arr{color:var(--muted);font-size:18px;flex-shrink:0;}
 .tog-bar{display:flex;background:var(--cream2);border-bottom:1px solid var(--border);padding:0 18px;}
 .tog{flex:1;background:none;border:none;border-bottom:2.5px solid transparent;padding:12px 0;font-family:var(--font-b);font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;transition:color .15s,border-color .15s;}
@@ -1191,11 +1192,11 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="subcat-card" onclick="showSubcat('supp-organ')"><span class="sc-icon"><i data-lucide="beef"></i></span><div class="sc-name">Organ <span class="plain-amp">&amp;</span> Nose-to-Tail</div><div class="sc-count" id="count-supp-organ">0 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" onclick="showSubcat('supp-electrolyte')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Electrolytes <span class="plain-amp">&amp;</span> Hydration</div><div class="sc-count" id="count-supp-electrolyte">0 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" onclick="showSubcat('supp-creatine')"><span class="sc-icon"><i data-lucide="zap"></i></span><div class="sc-name">Creatine</div><div class="sc-count" id="count-supp-creatine">0 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-group-title">Male-Specific</div>
-    <div class="subcat-card" onclick="showSubcat('supp-male-testosterone')"><span class="sc-icon"><i data-lucide="flame"></i></span><div class="sc-name">Testosterone <span class="plain-amp">&amp;</span> Hormone Support</div><div class="sc-count" id="count-supp-male-testosterone">0 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('supp-male-prostate')"><span class="sc-icon"><i data-lucide="shield"></i></span><div class="sc-name">Prostate Health</div><div class="sc-count" id="count-supp-male-prostate">0 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('supp-male-vitality')"><span class="sc-icon"><i data-lucide="activity"></i></span><div class="sc-name">Male Vitality <span class="plain-amp">&amp;</span> Performance</div><div class="sc-count" id="count-supp-male-vitality">0 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('supp-male-hair')"><span class="sc-icon"><i data-lucide="sparkles"></i></span><div class="sc-name">Hair <span class="plain-amp">&amp;</span> Scalp Support</div><div class="sc-count" id="count-supp-male-hair">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-group-title" id="subcat-group-title-suppmale">Male-Specific</div>
+    <div class="subcat-card" id="subcat-card-suppmale1" onclick="showSubcat('supp-male-testosterone')"><span class="sc-icon"><i data-lucide="flame"></i></span><div class="sc-name">Testosterone <span class="plain-amp">&amp;</span> Hormone Support</div><div class="sc-count" id="count-supp-male-testosterone">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" id="subcat-card-suppmale2" onclick="showSubcat('supp-male-prostate')"><span class="sc-icon"><i data-lucide="shield"></i></span><div class="sc-name">Prostate Health</div><div class="sc-count" id="count-supp-male-prostate">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" id="subcat-card-suppmale3" onclick="showSubcat('supp-male-vitality')"><span class="sc-icon"><i data-lucide="activity"></i></span><div class="sc-name">Male Vitality <span class="plain-amp">&amp;</span> Performance</div><div class="sc-count" id="count-supp-male-vitality">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" id="subcat-card-suppmale4" onclick="showSubcat('supp-male-hair')"><span class="sc-icon"><i data-lucide="sparkles"></i></span><div class="sc-name">Hair <span class="plain-amp">&amp;</span> Scalp Support</div><div class="sc-count" id="count-supp-male-hair">0 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title" id="subcat-group-title-suppfemale">Female-Specific</div>
     <div class="subcat-card" id="subcat-card-suppfemale1" onclick="showSubcat('supp-female-prenatal')"><span class="sc-icon"><i data-lucide="heart-pulse"></i></span><div class="sc-name">Prenatal <span class="plain-amp">&amp;</span> Pregnancy</div><div class="sc-count" id="count-supp-female-prenatal">0 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" id="subcat-card-suppfemale2" onclick="showSubcat('supp-female-hormonal')"><span class="sc-icon"><i data-lucide="moon"></i></span><div class="sc-name">Menstrual <span class="plain-amp">&amp;</span> Hormonal Health</div><div class="sc-count" id="count-supp-female-hormonal">0 rated</div><span class="sc-arr">›</span></div>
@@ -4088,6 +4089,7 @@ function imgFallback(img, emoji, size) {
 const SHOW_WOMENS_CARE = false;   // Menstrual Care + Intimate Cleansing
 const SHOW_INTIMATE_LUBE = false; // Intimate Lubrication & Sexual Wellness — independent of the flag above
 const SHOW_SUPP_FEMALE = false;   // Supplement/Detox Female-Specific group (Prenatal, Menstrual/Hormonal, Menopause) — 0 products in all 3, archived until populated
+const SHOW_SUPP_MALE = false;     // Supplement/Detox Male-Specific group (Testosterone, Prostate, Vitality, Hair) — 1 product each, archived until further researched and built out
 
 const USDA_API_KEY = 'hoiSwsOw7I';
 let fmMap = null;
@@ -5263,6 +5265,25 @@ function updateProductCounts() {
     if (el) el.textContent = bySubcat[subcat] + ' rated';
   });
 
+  // "More ratings coming soon" — applied dynamically to every count-<subcat> element
+  // found in the DOM (not just ones with matching PRODUCTS entries, so genuinely empty
+  // 0-product subcats get flagged too), rather than hand-tagging each sparse subcat
+  // individually across 150+ entries. Threshold is <=2 products — deliberately not "any
+  // product at all," since a lone item doesn't yet represent real category coverage.
+  // Sitewide and self-maintaining: as products get added, subcats naturally drop out of
+  // this list on their own with no further edits needed here.
+  const COMING_SOON_THRESHOLD = 2;
+  const GROUP_TOTAL_IDS = new Set(['count-pants', 'count-golf', 'count-workout', 'count-suits', 'count-swim']);
+  document.querySelectorAll('[id^="count-"]').forEach(el => {
+    if (GROUP_TOTAL_IDS.has(el.id)) return; // these get their own aggregated total below, not a per-subcat count
+    const subcat = el.id.replace(/^count-/, '');
+    if (subcat === 'underwear-inline') return; // different format, handled separately below
+    const n = bySubcat[subcat] || 0;
+    if (n <= COMING_SOON_THRESHOLD) {
+      el.innerHTML = `${n} rated <span class="cs-soon">· More coming soon</span>`;
+    }
+  });
+
   // count-underwear-inline holds just the bare number (used inline in a sentence:
   // "<span>11</span> products rated"), unlike the "N rated" format above - this was
   // the source of a real drift bug (hardcoded "10" left behind after an 11th product
@@ -6223,6 +6244,16 @@ function applyFeatureFlags() {
   if (suppFemale2) suppFemale2.style.display = SHOW_SUPP_FEMALE ? 'flex' : 'none';
   if (suppFemale3) suppFemale3.style.display = SHOW_SUPP_FEMALE ? 'flex' : 'none';
   if (suppFemaleGroupTitle) suppFemaleGroupTitle.style.display = SHOW_SUPP_FEMALE ? 'block' : 'none';
+  const suppMale1 = document.getElementById('subcat-card-suppmale1');
+  const suppMale2 = document.getElementById('subcat-card-suppmale2');
+  const suppMale3 = document.getElementById('subcat-card-suppmale3');
+  const suppMale4 = document.getElementById('subcat-card-suppmale4');
+  const suppMaleGroupTitle = document.getElementById('subcat-group-title-suppmale');
+  if (suppMale1) suppMale1.style.display = SHOW_SUPP_MALE ? 'flex' : 'none';
+  if (suppMale2) suppMale2.style.display = SHOW_SUPP_MALE ? 'flex' : 'none';
+  if (suppMale3) suppMale3.style.display = SHOW_SUPP_MALE ? 'flex' : 'none';
+  if (suppMale4) suppMale4.style.display = SHOW_SUPP_MALE ? 'flex' : 'none';
+  if (suppMaleGroupTitle) suppMaleGroupTitle.style.display = SHOW_SUPP_MALE ? 'block' : 'none';
 }
 
 window.addEventListener('DOMContentLoaded', initFeaturedImages);
