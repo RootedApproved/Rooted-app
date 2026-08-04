@@ -66,6 +66,8 @@ should not be revisited without new evidence.
 | Huarache Farms | Added as CSA — confirmed on the CDFA register |
 | Something Good Organics (John Givens Farm) | Added as CSA — note the CSA runs under a *different name* than the farm |
 | The Farm Box Collective | Added as CSA — aggregated collective, formerly Ellwood Canyon Farms |
+| Fifth Crow Farm | Added as CSA — certified organic **and** Real Organic Project listed |
+| Homeless Garden Project | Added as CSA — nonprofit, transitional employment; site copy lags, season unconfirmed |
 
 ---
 
@@ -88,8 +90,8 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 12 of 115 core-California farms
-- **Added:** 6
+- **Checked:** 14 of 115 core-California farms
+- **Added:** 8
 - **Rejected:** 3
 - **Held for contact:** 4
 
