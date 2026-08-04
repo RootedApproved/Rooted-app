@@ -2935,16 +2935,16 @@ const CATEGORY_LABELS = {
 function showPaywall(featureName) {
   document.getElementById('paywall-title').textContent = 'Members Only';
   document.getElementById('paywall-message').textContent =
-    `${featureName} is part of ROOTED Membership. Join for full access to every category.`;
+    `${featureName} is part of ROOTED Membership. Every product rating is free \u2014 membership adds the full Local Food Map, personalised recommendations, and unlimited AI answers.`;
   showScreen('paywall');
 }
 
 function showCategory(cat){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  if (!hasFullAccess() && !FREE_CATEGORIES.includes(cat)) {
-    showPaywall(CATEGORY_LABELS[cat] || 'This category');
-    return;
-  }
+  // Every product category is open to everyone. The ratings, standards and reasoning are
+  // ROOTED's marketing and its search surface — gating them suppressed exactly the traffic
+  // the platform needs. What's paid is the recurring-use tooling: the grocery layer of the
+  // Local Food Map, Recommendations, and open-ended AI. Information is free; tools are paid.
   showScreen(cat);
 }
 function showPantsHub(){showScreen('pants-hub');}
@@ -3706,11 +3706,11 @@ function chatMembershipAnswer() {
     return `You already have full access \u2014 all <strong>${totalProducts}</strong> rated products and all <strong>${mapTotal}</strong> verified places on the Local Food Map are open to you, along with unlimited AI answers. Ask me anything.`;
   }
 
-  return `Here's exactly what a membership opens up:<br><br>`
-    + `\u2022 <strong>All ${totalProducts} rated products</strong> \u2014 full standards, ingredient breakdowns, pros and cons, and side-by-side comparisons. Free access shows single-product lookups only.<br>`
-    + `\u2022 <strong>The full Local Food Map</strong> \u2014 ${mapTotal} hand-verified farms, markets, CSAs and groceries. Free access shows ${freeMapTotal} of them.<br>`
+  return `All <strong>${totalProducts}</strong> product ratings are free \u2014 every standard, ingredient breakdown and tier reason. Membership adds the tools:<br><br>`
+    + `\u2022 <strong>The full Local Food Map</strong> \u2014 every verified grocery store, not just markets and restaurants.<br>`
+    + `\u2022 <strong>Personalised recommendations</strong> \u2014 your Tier 1 picks based on what you've viewed and saved.<br>`
     + `\u2022 <strong>Unlimited AI answers</strong> \u2014 comparisons, "which should I buy", and anything open-ended, instead of name-a-product lookups.<br><br>`
-    + `Every listing is verified by hand before it goes up, and ROOTED takes no payment from any brand to be rated. ${CHAT_JOIN_LINK}`;
+    + `You can see <strong>${freeMapTotal}</strong> of <strong>${mapTotal}</strong> places on the map today. Every listing is verified by hand, and ROOTED takes no payment from any brand to be rated. ${CHAT_JOIN_LINK}`;
 }
 
 function chatUpsellMessage(message) {
@@ -4986,8 +4986,8 @@ function showFoodMapGateIfNeeded() {
     '<div class="fmg-row"><span class="fmg-tick">✓</span><div><b>' + (counts[t] || 0) + ' '
     + LOCAL_FOOD_TYPES[t].label + (String(LOCAL_FOOD_TYPES[t].label).endsWith('s') ? '' : 's')
     + '</b> ' + LOCAL_FOOD_TYPES[t].icon + '</div></div>');
-  rows.push('<div class="fmg-row"><span class="fmg-tick">✓</span><div><b>Every product rating</b> — the full ROOTED database, standards and comparisons</div></div>');
-  rows.push('<div class="fmg-row"><span class="fmg-tick">✓</span><div><b>Unlimited AI answers</b> — not just single-product lookups</div></div>');
+  rows.push('<div class="fmg-row"><span class="fmg-tick">✓</span><div><b>Personalised recommendations</b> — your Tier 1 picks based on what you\'ve viewed and saved</div></div>');
+  rows.push('<div class="fmg-row"><span class="fmg-tick">✓</span><div><b>Unlimited AI answers</b> — comparisons and buying guidance, not just single-product lookups</div></div>');
   listEl.innerHTML = rows.join('');
 
   overlay.classList.add('show');
@@ -5849,11 +5849,18 @@ try {
 // add or remove ids from this list — nothing else needs to change.
 // All category ids: 'clothing','oral','food','cookware','water','personal',
 // 'textiles','cleaning','air','lighting','sunlight','supplements'
-const FREE_CATEGORIES = ['clothing', 'cookware', 'food'];
+// Retained deliberately as an empty list rather than deleted: re-gating categories later
+// is a one-line change (add category keys here and restore the check in showCategory).
+// Every category is currently free.
+const FREE_CATEGORIES = [];
 
 // Local Food Map listing types free members can see (everything else shows a
 // paywall prompt instead). Options: 'farmersmarket','onfarmmarket','csa','grocery','restaurant'
-const FREE_FOOD_MAP_TYPES = ['restaurant'];
+// Farmers markets, CSAs and on-farm pickup are free: they're the shareable, screenshot-able
+// part of the map and the reason someone tells a friend about ROOTED. Grocery stores stay
+// members-only — they're 482 of the 607 listings and the daily-use asset the subscription
+// actually rests on.
+const FREE_FOOD_MAP_TYPES = ['restaurant', 'farmersmarket', 'csa', 'onfarmmarket'];
 
 let rootedSupabase = null;
 try {
