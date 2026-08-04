@@ -77,6 +77,19 @@ should not be revisited without new evidence.
   limited-income shares and SNAP still available?"
 - **Contact:** agroecology.ucsc.edu
 
+### 7. Ananda Valley Farm — Half Moon Bay
+- **What it is:** 67 acres north of Half Moon Bay, two miles from the beach, farmed for
+  over 100 years, watered year-round from a mountain-top spring. Annual CSA subscriptions,
+  8–12 vegetables per weekly box, serving Coastside and the Peninsula.
+- **Genuinely distinctive:** they state they choose all non-GMO varieties and select for
+  *best tasting* rather than fastest growing — an unusual thing to say out loud.
+- **Confirmed:** the farm and its CSA model are well documented.
+- **Unconfirmed:** whether subscriptions are currently open. The detailed description comes
+  from a tourism-board listing with no date, and no current-season signal was found. Not
+  on the CDFA register.
+- **Ask:** "Are CSA subscriptions open for this season, and which pickup or delivery areas
+  are you serving?"
+
 ---
 
 ## Resolved — added to the map
@@ -93,6 +106,7 @@ should not be revisited without new evidence.
 | Shumei Santa Cruz Farm | Added as CSA — "beyond organic": no pesticides, herbicides **or fertilisers of any kind** |
 | Live Earth Farm | Added as CSA — year-round, customisable box, 800+ member households |
 | Hidden Villa | Added as CSA — 25% of annual harvest donated to a food bank |
+| Spade & Plow Organics | Added as CSA — verified to August 2026; discloses its food-hub cross-docking openly |
 
 ---
 
@@ -115,10 +129,10 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 19 of 115 core-California farms
-- **Added:** 11
+- **Checked:** 21 of 115 core-California farms
+- **Added:** 12
 - **Rejected:** 3
-- **Held for contact:** 6
+- **Held for contact:** 7
 
 Running hit rate is roughly 50%. On that basis, expect **50–60 genuine additions** from the
 115-farm list, not 115.
