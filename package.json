@@ -1,0 +1,22 @@
+{
+  "name": "rooted-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ROOTED — standards-based product ratings and a verified local food map. Mobile shell configuration.",
+  "scripts": {
+    "build:www": "node scripts/build-www.js",
+    "sync": "npm run build:www && npx cap sync",
+    "open:ios": "npx cap open ios",
+    "open:android": "npx cap open android",
+    "verify": "python3 verify.py && python3 verify_images.py"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.4.2"
+  },
+  "dependencies": {
+    "@capacitor/core": "^8.4.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

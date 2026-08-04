@@ -1,0 +1,36 @@
+# ROOTED — Netlify configuration
+#
+# THIS FILE EXISTS TO PROTECT THE LIVE SITE.
+#
+# rootedapproved.com is a single static Index.html with no build step. Netlify has
+# always just served it. But Netlify auto-detects a package.json and, finding one,
+# will assume the site needs building — it would try to run a build, fail, and stop
+# publishing. A package.json was added for Capacitor (the iOS/Android wrapper), which
+# is purely a local/CI tool and has nothing to do with how the website is served.
+#
+# So the build command is pinned to an explicit no-op and the publish directory is
+# pinned to the repo root. Netlify keeps doing exactly what it did before.
+#
+# If a real web build step is ever introduced, change `command` here deliberately —
+# do not remove this file.
+
+[build]
+  command = "echo 'ROOTED: static site, no build step required.'"
+  publish = "."
+
+[build.environment]
+  # Skip dependency installation entirely. Capacitor's dependencies are only needed
+  # when building the mobile apps, never when serving the website.
+  NETLIFY_SKIP_NPM_INSTALL = "true"
+  NODE_VERSION = "22"
+
+# Native mobile project folders must never be published to the web.
+[[headers]]
+  for = "/ios/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/android/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

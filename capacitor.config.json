@@ -1,0 +1,12 @@
+{
+  "appId": "com.rootedapproved.app",
+  "appName": "ROOTED",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#F5F0E6"
+  },
+  "ios": {
+    "backgroundColor": "#F5F0E6",
+    "contentInset": "always"
+  }
+}
