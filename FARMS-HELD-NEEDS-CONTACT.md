@@ -114,6 +114,7 @@ should not be revisited without new evidence.
 | Spade & Plow Organics | Added as CSA — verified to August 2026; discloses its food-hub cross-docking openly |
 | Serendipity Farms | Added as CSA — selects heirlooms for pigmentation/vitamin content, not yield |
 | Knoll Farms | Added as **on-farm market**, not CSA — their own site describes a farm stand; CSA is stated in future tense |
+| Pie Ranch | Added as **on-farm market** — nonprofit educational farm; all farmstand profits fund its programmes |
 
 ---
 
@@ -136,10 +137,23 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 23 of 115 core-California farms
-- **Added:** 14
+- **Checked:** 24 of 115 core-California farms
+- **Added:** 15
 - **Rejected:** 3
 - **Held for contact:** 7
+
+### Leads found along the way (not on J's list, worth checking later)
+
+Surfaced while verifying other farms. Each looked credible but has not been researched.
+
+| Farm | Why it looked worth a look |
+|---|---|
+| Simms Organics (Pescadero) | 20-acre CCOF certified organic; farmers markets, weekly box service **and** a CSA |
+| Root Down Farm (Pescadero) | Pastured meats |
+| Fogline Farms (Pescadero) | Organically fed pastured poultry on 40 acres beside Año Nuevo; own certified butchery in Santa Cruz |
+| Markegard Family Grass-Fed (San Gregorio) | Certified grass-finished beef and lamb, pastured poultry and pork |
+| Brisa Ranch, Huertos del Pacifico, Gavilanes Farm (Pescadero) | All started by graduates of Pie Ranch's farmer-training programme |
+| Tomatero Organic Farm, High Ground Organics (Santa Cruz) | Appeared repeatedly in current Yelp CSA rankings |
 
 Running hit rate is roughly 50%. On that basis, expect **50–60 genuine additions** from the
 115-farm list, not 115.
