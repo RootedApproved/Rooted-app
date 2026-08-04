@@ -95,6 +95,17 @@ should not be revisited without new evidence.
 - **Ask:** "Are CSA subscriptions open for this season, and which pickup or delivery areas
   are you serving?"
 
+### 8. Tierra Madre Farm — Santa Cruz (1861 Jarvis Rd)
+- **What it is:** listed as "Rare & Heirloom Fruit Trees and Vegetable Seeds", described
+  elsewhere as producing 600 rare and heirloom varieties.
+- **Confirmed:** essentially nothing. The only sources are a Bhumi profile explicitly marked
+  "not verified" and a bare name in a LocalHarvest index.
+- **Unconfirmed:** whether it operates at all, whether it sells produce or only trees and
+  seeds, and whether any CSA exists. Not on either CDFA register.
+- **Ask:** "Do you sell produce or a farm box, or is the business fruit trees and seeds?
+  Is anything open to the public?"
+- **Note:** if it is trees and seeds only, it is a nursery and does not belong on this map.
+
 ---
 
 ## Resolved — added to the map
@@ -126,6 +137,8 @@ should not be revisited without new evidence.
 | **Belcampo Farms** (Gazelle) | Retail operation collapsed in 2021 after its butcher shops were found selling conventional meat as their own grass-fed product. A company that misrepresented its sourcing cannot sit on a platform built on verified sourcing. |
 | **Rio Gozo Farm** (Ojai) | **Domain hijacked.** `riogozofarm.com` now serves an Indonesian gambling site — the signature of a lapsed domain resold to spammers. LocalHarvest listing last updated January 2025 and offers a "report as inactive" link. Not on the CDFA register. Strong evidence the farm stopped operating. Re-check only if the farm resurfaces under a new domain. |
 
+| **Love Apple Farms** (Santa Cruz) | Yelp lists the business as **CLOSED**, updated April 2026. Even when trading, the farm at Vine Hill Road was *"the exclusive, private kitchen garden for Manresa restaurant"* and explicitly **not open to the general public** — so it was never a public food source. The Manresa relationship also ended when that restaurant closed in 2022. A LocalHarvest listing still advertises a 25-member CSA; it is undated and contradicted by every current source. |
+
 ### A new red flag worth knowing
 
 **A farm website that now serves unrelated spam — gambling, pharma, crypto — means the
@@ -137,10 +150,10 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 24 of 115 core-California farms
+- **Checked:** 26 of 115 core-California farms
 - **Added:** 15
-- **Rejected:** 3
-- **Held for contact:** 7
+- **Rejected:** 4
+- **Held for contact:** 8
 
 ### Leads found along the way (not on J's list, worth checking later)
 
