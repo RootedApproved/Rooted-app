@@ -3678,6 +3678,41 @@ function chatListReply(intro, products, note) {
 
 // Builds the reply when no single product answered the question, working from most
 // specific to least so the response always reflects what was actually asked.
+// Questions ABOUT ROOTED itself — membership, pricing, what's included — are not product
+// lookups and must never be run through the catalog matcher. Asking "what am I missing out
+// on without the membership" previously returned "Nothing in the ROOTED catalog matches
+// 'missing, out, without'", which is both useless and actively off-putting at exactly the
+// moment someone is considering paying.
+function chatMembershipIntent(message) {
+  const m = String(message || '').toLowerCase();
+  const asksAboutAccess = /\b(member|membership|subscrib\w*|premium|upgrade|paywall|paid|pay|paying|pricing|cost|costs|free version|free tier|sign up|signup|join|joining|unlock|worth it|included|benefits?|perks?)\b/.test(m)
+    || /\bfree\b[\s\S]{0,20}\b(vs|versus|or)\b/.test(m)
+    || /\bwhat\b[\s\S]{0,30}\b(get|miss|missing)\b/.test(m);
+  if (!asksAboutAccess) return null;
+  // "how much is the Lodge skillet" mentions cost but is a product question.
+  if (/\b(this|that|it)\b/.test(m) && lastChatProductMatch) return null;
+  return true;
+}
+
+function chatMembershipAnswer() {
+  const totalProducts = Object.values(PRODUCTS).filter(p => p.subcat !== 'unassigned').length;
+  const counts = {};
+  CURATED_LISTINGS.forEach(l => { counts[l._type] = (counts[l._type] || 0) + 1; });
+  const freeMapTotal = Object.keys(LOCAL_FOOD_TYPES).filter(t => canSeeListingType(t))
+    .reduce((n, t) => n + (counts[t] || 0), 0);
+  const mapTotal = CURATED_LISTINGS.length;
+
+  if (hasFullAccess()) {
+    return `You already have full access \u2014 all <strong>${totalProducts}</strong> rated products and all <strong>${mapTotal}</strong> verified places on the Local Food Map are open to you, along with unlimited AI answers. Ask me anything.`;
+  }
+
+  return `Here's exactly what a membership opens up:<br><br>`
+    + `\u2022 <strong>All ${totalProducts} rated products</strong> \u2014 full standards, ingredient breakdowns, pros and cons, and side-by-side comparisons. Free access shows single-product lookups only.<br>`
+    + `\u2022 <strong>The full Local Food Map</strong> \u2014 ${mapTotal} hand-verified farms, markets, CSAs and groceries. Free access shows ${freeMapTotal} of them.<br>`
+    + `\u2022 <strong>Unlimited AI answers</strong> \u2014 comparisons, "which should I buy", and anything open-ended, instead of name-a-product lookups.<br><br>`
+    + `Every listing is verified by hand before it goes up, and ROOTED takes no payment from any brand to be rated. ${CHAT_JOIN_LINK}`;
+}
+
 function chatUpsellMessage(message) {
   const tierWant = chatTierIntent(message);
   // 1. A follow-up about whatever we just answered on.
@@ -3788,6 +3823,13 @@ async function sendChatMessageCore(inputEl, messagesEl) {
   // Only take the free instant-match shortcut for short, clearly single-part questions —
   // otherwise a longer or multi-part message (e.g. "X, and also Y?") could silently get
   // answered with just a product lookup while the rest of the question gets dropped.
+  // Checked before any catalog lookup: a question about membership is not a product search.
+  if (chatMembershipIntent(message)) {
+    messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${chatMembershipAnswer()}</div>`;
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return;
+  }
+
   const looksMultiPart = message.split('?').length > 2 || /\band also\b|\balso,?\s/i.test(message) || message.split(/\s+/).length > 12;
   const matches = looksMultiPart ? [] : findProductMatches(message);
 
