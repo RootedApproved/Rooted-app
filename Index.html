@@ -342,6 +342,12 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .fm-toggle{display:flex;align-items:center;gap:4px;font-size:10.5px;color:var(--muted);font-weight:700;font-family:var(--font-b);background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:5px 9px;cursor:pointer;transition:all .15s;min-height:auto;}
 .fm-toggle.active{color:var(--char);border-color:var(--char);background:var(--white);box-shadow:0 2px 6px rgba(0,0,0,.1);}
 .fm-toggle:active{transform:scale(.96);}
+.fm-member-banner{display:none;margin:0 18px 10px;padding:12px 14px;background:#FFF6E5;border:1.5px solid #E0B44A;border-radius:10px;font-size:13px;line-height:1.45;color:#6B4E12;}
+.fm-member-banner.show{display:block;}
+.fm-member-banner .fmb-hd{font-weight:800;display:flex;align-items:center;gap:6px;margin-bottom:3px;}
+.fm-member-banner .fmb-join{color:var(--forest);font-weight:800;cursor:pointer;text-decoration:underline;}
+.fm-toggle.locked{opacity:.5;}
+.fm-toggle.locked .fm-toggle-check{background:var(--border)!important;color:transparent!important;}
 .fm-toggle-check{display:inline-flex;align-items:center;justify-content:center;width:12px;height:12px;border-radius:50%;background:var(--border);color:transparent;font-size:8px;font-weight:900;flex-shrink:0;transition:all .15s;}
 .fm-toggle.active .fm-toggle-check{background:var(--forest);color:var(--white);}
 .fm-legend-dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0;}
@@ -1414,6 +1420,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
   </div>
 
   <div class="fm-flex-layout search-above legend-above" id="fm-flex-layout">
+    <div class="fm-member-banner" id="fm-member-banner">
+      <div class="fmb-hd">🔒 <span>You're seeing a limited map</span></div>
+      <div id="fm-member-banner-body">Farmers markets, CSAs, on-farm pickup and grocery stores are members-only. Restaurants are shown to everyone. <span class="fmb-join" onclick="handleJoinClick()">Join for $10/month →</span></div>
+    </div>
     <div class="fm-legend-wrap" id="fm-legend-section">
       <div class="fm-legend-hd">
         <span class="fm-legend-hd-label">👆 Tap a category to show or hide it on the map</span>
@@ -4756,6 +4766,7 @@ function mergeNewMarkets(rawMarkets) {
   const incoming = rawMarkets.map(normalizeListing);
   const genuinelyNew = incoming.filter(mk => !existingKeys.has(mk.name + '|' + mk.lat.toFixed(3) + '|' + mk.lng.toFixed(3)));
   lastNormalizedMarkets = lastNormalizedMarkets.concat(genuinelyNew);
+  updateFoodMapAccessUI();
 }
 
 async function autoFetchForCurrentView() {
@@ -4875,6 +4886,37 @@ let activeLocalFoodTypes = new Set(Object.keys(LOCAL_FOOD_TYPES));
 function canSeeListingType(type) {
   return hasFullAccess() || FREE_FOOD_MAP_TYPES.includes(type);
 }
+
+// Shows a persistent banner and greys out the gated legend toggles whenever the viewer
+// can't see every listing type. Without this, a locked map is indistinguishable from a
+// broken one: the legend advertised all five categories, tapping them did nothing, and the
+// empty state told the user to "enable more categories" that were already enabled.
+function updateFoodMapAccessUI() {
+  const locked = Object.keys(LOCAL_FOOD_TYPES).filter(t => !canSeeListingType(t));
+  const banner = document.getElementById('fm-member-banner');
+  if (banner) banner.classList.toggle('show', locked.length > 0);
+
+  Object.keys(LOCAL_FOOD_TYPES).forEach(t => {
+    const btn = document.getElementById('fm-toggle-' + t);
+    if (!btn) return;
+    const isLocked = locked.includes(t);
+    btn.classList.toggle('locked', isLocked);
+    btn.title = isLocked ? 'Members only — join to see these on the map' : '';
+  });
+
+  // Once results exist, say how many are actually being withheld — a concrete number is
+  // far more persuasive, and more honest, than a generic "some listings are hidden".
+  const body = document.getElementById('fm-member-banner-body');
+  if (body && locked.length) {
+    const hidden = lastNormalizedMarkets.filter(mk => !canSeeListingType(mk.type)).length;
+    const lockedLabels = locked.map(t => LOCAL_FOOD_TYPES[t].label.toLowerCase()).join(', ');
+    body.innerHTML = (hidden > 0
+        ? '<strong>' + hidden + ' listing' + (hidden === 1 ? '' : 's') + ' near you ' + (hidden === 1 ? 'is' : 'are') + ' hidden.</strong> '
+        : '')
+      + 'Members-only categories: ' + lockedLabels + '. '
+      + '<span class="fmb-join" onclick="handleJoinClick()">Join for $10/month \u2192</span>';
+  }
+}
 let lastRawListings = null;
 let lastNormalizedMarkets = [];
 
@@ -4932,6 +4974,7 @@ function normalizeListing(m) {
 // map's current viewport. Leaflet only visually shows markers within the current view anyway, so
 // panning/zooming the map naturally reveals more without needing to recreate anything.
 function renderMarkersForActiveTypes() {
+  updateFoodMapAccessUI();
   clearFarmersMarkers();
   lastNormalizedMarkets.forEach(mk => {
     if (!activeLocalFoodTypes.has(mk.type) || !canSeeListingType(mk.type)) return;
@@ -4966,9 +5009,14 @@ function updateListForViewport() {
     }
   }
   if (!byType.length) {
-    statusEl.textContent = lastNormalizedMarkets.length
-      ? 'No listings match your current filters — try enabling more categories above.'
-      : 'No markets found in that area. Try a wider search.';
+    // Distinguish "your filters hid everything" from "membership is hiding everything" —
+    // telling someone to enable categories they already enabled is a dead end.
+    const gatedAway = lastNormalizedMarkets.filter(mk => activeLocalFoodTypes.has(mk.type) && !canSeeListingType(mk.type)).length;
+    statusEl.textContent = gatedAway > 0
+      ? gatedAway + ' listing' + (gatedAway === 1 ? '' : 's') + ' found nearby, but farmers markets, CSAs and groceries are members-only.'
+      : (lastNormalizedMarkets.length
+          ? 'No listings match your current filters — try enabling more categories above.'
+          : 'No markets found in that area. Try a wider search.');
     return;
   }
 
@@ -5045,6 +5093,7 @@ function renderLocalFoodResults(rawMarkets) {
   }
 
   lastNormalizedMarkets = rawMarkets.map(normalizeListing);
+  updateFoodMapAccessUI();
   renderMarkersForActiveTypes();
 
   // Initial zoom: fit to the nearest ~15 results (or fewer if that's all there is) so the first
@@ -5580,6 +5629,7 @@ function initCardStyle() {
 // currently visible gated content immediately so the effect is visible without a reload.
 function setPaywallEnabled(enabled) {
   REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS = enabled;
+  updateFoodMapAccessUI();
   try { localStorage.setItem('rooted-paywall-enabled', enabled ? '1' : '0'); } catch (e) {}
   document.getElementById('paywall-btn-on')?.classList.toggle('active', enabled);
   document.getElementById('paywall-btn-off')?.classList.toggle('active', !enabled);
@@ -5870,6 +5920,7 @@ async function refreshMembershipStatus(userId) {
   if (error || !data) { currentMembershipTier = 'free'; tierEl.textContent = 'Free Member'; updateUpgradePillVisibility(); return; }
   const isMember = data.subscription_tier === 'member';
   currentMembershipTier = isMember ? 'member' : 'free';
+  updateFoodMapAccessUI();
   currentStripeCustomerId = data.stripe_customer_id || null;
   tierEl.textContent = isMember ? 'ROOTED Member' : 'Free Member';
   updateUpgradePillVisibility();
