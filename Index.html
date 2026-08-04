@@ -4924,7 +4924,7 @@ function showFoodMapGateIfNeeded() {
   try { if (sessionStorage.getItem('rooted-foodmap-gate') === '1') return; } catch (e) {}
 
   const overlay = document.getElementById('fm-gate-overlay');
-  const listEl = document.getElementById('fm-gate-list') || document.getElementById('fmg-list');
+  const listEl = document.getElementById('fmg-list');
   const subEl = document.getElementById('fmg-sub');
   if (!overlay || !listEl) return;
 
