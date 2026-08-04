@@ -8,13 +8,18 @@ would settle each one in minutes.
 should not be revisited without new evidence.
 
 **Verification order for any farm on this list:**
-1. **CDFA Monthly CSA Paid Listing** — `cdfa.ca.gov/is/pdfs/MonthlyCSA-PaidListing.pdf`
+1. **CDFA Certified Producer Certificates** — `cdfa.ca.gov/is/i_&_c/pdfs/CFM-CertifiedProducersByCounty.pdf`
+   Updated far more often than the CSA list (current edition dated 1 July 2026). Covers any
+   farm selling at certified farmers markets, so it catches farms that sell direct without
+   running a CSA. **Check this first.**
+2. **CDFA Monthly CSA Paid Listing** — `cdfa.ca.gov/is/pdfs/MonthlyCSA-PaidListing.pdf`
    Registering is a *legal requirement* to run a CSA in California, so absence from this
    register is a strong signal and presence is near-conclusive. This beats any directory:
    a farm can sit on LocalHarvest for a decade after closing (Muir Ranch did), but it
    cannot stay on a paid state register.
-2. The farm's own site, checked for a **current-season** signal.
-3. A second independent recent source (Yelp, findhelp, social posts).
+3. The farm's own site, checked for a **current-season** signal.
+4. A second independent recent source (Yelp, findhelp, social posts, regional tourism
+   boards — `seemonterey.com` and similar are updated surprisingly often).
 
 ---
 
@@ -107,6 +112,8 @@ should not be revisited without new evidence.
 | Live Earth Farm | Added as CSA — year-round, customisable box, 800+ member households |
 | Hidden Villa | Added as CSA — 25% of annual harvest donated to a food bank |
 | Spade & Plow Organics | Added as CSA — verified to August 2026; discloses its food-hub cross-docking openly |
+| Serendipity Farms | Added as CSA — selects heirlooms for pigmentation/vitamin content, not yield |
+| Knoll Farms | Added as **on-farm market**, not CSA — their own site describes a farm stand; CSA is stated in future tense |
 
 ---
 
@@ -129,8 +136,8 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 21 of 115 core-California farms
-- **Added:** 12
+- **Checked:** 23 of 115 core-California farms
+- **Added:** 14
 - **Rejected:** 3
 - **Held for contact:** 7
 
