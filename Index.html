@@ -342,6 +342,19 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .fm-toggle{display:flex;align-items:center;gap:4px;font-size:10.5px;color:var(--muted);font-weight:700;font-family:var(--font-b);background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:5px 9px;cursor:pointer;transition:all .15s;min-height:auto;}
 .fm-toggle.active{color:var(--char);border-color:var(--char);background:var(--white);box-shadow:0 2px 6px rgba(0,0,0,.1);}
 .fm-toggle:active{transform:scale(.96);}
+.fmg-overlay{position:fixed;inset:0;background:rgba(20,28,24,.62);z-index:4000;display:none;align-items:center;justify-content:center;padding:20px;}
+.fmg-overlay.show{display:flex;}
+.fmg-card{background:var(--cream);border-radius:16px;max-width:400px;width:100%;max-height:88vh;overflow-y:auto;padding:26px 22px 20px;box-shadow:0 18px 50px rgba(0,0,0,.34);text-align:center;}
+.fmg-lock{font-size:30px;line-height:1;margin-bottom:8px;}
+.fmg-title{font-family:'Playfair Display',Georgia,serif;font-size:23px;font-weight:800;color:var(--forest);margin-bottom:7px;line-height:1.2;}
+.fmg-sub{font-size:13.5px;color:var(--mid);line-height:1.5;margin-bottom:16px;}
+.fmg-list{text-align:left;margin:0 0 18px;padding:14px 14px 10px;background:var(--white);border-radius:11px;border:1px solid var(--border);}
+.fmg-row{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px;font-size:13px;color:var(--dark);line-height:1.4;}
+.fmg-row:last-child{margin-bottom:0;}
+.fmg-row b{font-weight:800;color:var(--forest);}
+.fmg-tick{color:var(--forest);font-weight:900;flex-shrink:0;}
+.fmg-cta{display:block;width:100%;background:var(--forest);color:var(--white);border:none;border-radius:24px;padding:13px;font-size:14.5px;font-weight:800;cursor:pointer;margin-bottom:9px;}
+.fmg-dismiss{background:none;border:none;color:var(--mid);font-size:12.5px;cursor:pointer;text-decoration:underline;padding:5px;}
 .fm-member-banner{display:none;margin:0 18px 10px;padding:12px 14px;background:#FFF6E5;border:1.5px solid #E0B44A;border-radius:10px;font-size:13px;line-height:1.45;color:#6B4E12;}
 .fm-member-banner.show{display:block;}
 .fm-member-banner .fmb-hd{font-weight:800;display:flex;align-items:center;gap:6px;margin-bottom:3px;}
@@ -1420,6 +1433,16 @@ body.style-photo .cat-photo-cycle{display:flex;}
   </div>
 
   <div class="fm-flex-layout search-above legend-above" id="fm-flex-layout">
+    <div class="fmg-overlay" id="fm-gate-overlay" onclick="if(event.target===this)dismissFoodMapGate()">
+      <div class="fmg-card">
+        <div class="fmg-lock">🔒</div>
+        <div class="fmg-title">You're seeing a fraction of the map</div>
+        <div class="fmg-sub" id="fmg-sub">Free access shows restaurants only.</div>
+        <div class="fmg-list" id="fmg-list"></div>
+        <button class="fmg-cta" onclick="handleJoinClick()">Unlock the full map — $10/month</button>
+        <button class="fmg-dismiss" onclick="dismissFoodMapGate()">Keep looking around</button>
+      </div>
+    </div>
     <div class="fm-member-banner" id="fm-member-banner">
       <div class="fmb-hd">🔒 <span>You're seeing a limited map</span></div>
       <div id="fm-member-banner-body">Farmers markets, CSAs, on-farm pickup and grocery stores are members-only. Restaurants are shown to everyone. <span class="fmb-join" onclick="handleJoinClick()">Join for $10/month →</span></div>
@@ -2829,7 +2852,7 @@ function showScreen(id){
   const currentId = currentActive ? currentActive.id.replace('screen-', '') : null;
   if (currentId && currentId !== id) previousScreen = currentId;
   imgFetchQueueIndex = 0;
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers')initFarmersMap();if(id==='rooted-u')renderRootedUTopics();
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers'){initFarmersMap();showFoodMapGateIfNeeded();}if(id==='rooted-u')renderRootedUTopics();
   // Home already shows the full italic "Rooted." wordmark prominently in its own hero,
   // so the nav icon there stays icon-only (no redundant "ROOTED" text) — every other
   // screen keeps the full icon + text brand mark since it's their only wordmark on screen.
@@ -4891,6 +4914,50 @@ function canSeeListingType(type) {
 // can't see every listing type. Without this, a locked map is indistinguishable from a
 // broken one: the legend advertised all five categories, tapping them did nothing, and the
 // empty state told the user to "enable more categories" that were already enabled.
+// One-time modal shown to non-members when they open the Local Food Map. The banner alone
+// explained that listings were missing; this explains what joining actually gets you, with
+// counts computed live from CURATED_LISTINGS so the numbers can never go stale.
+let foodMapGateShown = false;
+
+function showFoodMapGateIfNeeded() {
+  if (hasFullAccess() || foodMapGateShown) return;
+  try { if (sessionStorage.getItem('rooted-foodmap-gate') === '1') return; } catch (e) {}
+
+  const overlay = document.getElementById('fm-gate-overlay');
+  const listEl = document.getElementById('fm-gate-list') || document.getElementById('fmg-list');
+  const subEl = document.getElementById('fmg-sub');
+  if (!overlay || !listEl) return;
+
+  const counts = {};
+  CURATED_LISTINGS.forEach(l => { counts[l._type] = (counts[l._type] || 0) + 1; });
+  const locked = Object.keys(LOCAL_FOOD_TYPES).filter(t => !canSeeListingType(t));
+  const lockedTotal = locked.reduce((n, t) => n + (counts[t] || 0), 0);
+  const freeTotal = Object.keys(LOCAL_FOOD_TYPES).filter(t => canSeeListingType(t))
+    .reduce((n, t) => n + (counts[t] || 0), 0);
+
+  if (subEl) {
+    subEl.innerHTML = 'You can see <b>' + freeTotal + '</b> of the <b>' + CURATED_LISTINGS.length
+      + '</b> hand-verified places on this map. Membership opens the rest.';
+  }
+
+  const rows = locked.map(t =>
+    '<div class="fmg-row"><span class="fmg-tick">✓</span><div><b>' + (counts[t] || 0) + ' '
+    + LOCAL_FOOD_TYPES[t].label + (String(LOCAL_FOOD_TYPES[t].label).endsWith('s') ? '' : 's')
+    + '</b> ' + LOCAL_FOOD_TYPES[t].icon + '</div></div>');
+  rows.push('<div class="fmg-row"><span class="fmg-tick">✓</span><div><b>Every product rating</b> — the full ROOTED database, standards and comparisons</div></div>');
+  rows.push('<div class="fmg-row"><span class="fmg-tick">✓</span><div><b>Unlimited AI answers</b> — not just single-product lookups</div></div>');
+  listEl.innerHTML = rows.join('');
+
+  overlay.classList.add('show');
+  foodMapGateShown = true;
+}
+
+function dismissFoodMapGate() {
+  const overlay = document.getElementById('fm-gate-overlay');
+  if (overlay) overlay.classList.remove('show');
+  try { sessionStorage.setItem('rooted-foodmap-gate', '1'); } catch (e) {}
+}
+
 function updateFoodMapAccessUI() {
   const locked = Object.keys(LOCAL_FOOD_TYPES).filter(t => !canSeeListingType(t));
   const banner = document.getElementById('fm-member-banner');
