@@ -1,0 +1,79 @@
+# Held — Needs Direct Contact
+
+Farms from the Localize app list that could **not** be resolved from public sources alone.
+Each is a real operation, but something specific is unconfirmed. A phone call or email
+would settle each one in minutes.
+
+**Nothing here is rejected.** Rejections live at the bottom of this file with reasons, and
+should not be revisited without new evidence.
+
+**Verification order for any farm on this list:**
+1. **CDFA Monthly CSA Paid Listing** — `cdfa.ca.gov/is/pdfs/MonthlyCSA-PaidListing.pdf`
+   Registering is a *legal requirement* to run a CSA in California, so absence from this
+   register is a strong signal and presence is near-conclusive. This beats any directory:
+   a farm can sit on LocalHarvest for a decade after closing (Muir Ranch did), but it
+   cannot stay on a paid state register.
+2. The farm's own site, checked for a **current-season** signal.
+3. A second independent recent source (Yelp, findhelp, social posts).
+
+---
+
+## Needs a call
+
+### 1. EarthWorks Farm & Garden — South El Monte
+- **What it is:** 4.9-acre working farm inside Whittier Narrows Recreation Area, run by the
+  San Gabriel Valley Conservation Corps. Job training and education for at-risk youth.
+- **Confirmed:** the farm and the SGVCC program exist.
+- **Unconfirmed:** whether there is a *public* CSA or produce box. Not on the CDFA register.
+- **Ask:** "Do you sell produce boxes or run a CSA open to the public, or is the farm only
+  for the training program? If you sell produce, where and when?"
+- **If yes:** likely an on-farm pickup listing rather than a CSA.
+- **Contact:** via San Gabriel Valley Conservation Corps
+
+### 2. Silver Lake Farms — Los Angeles
+- **What it is:** small Silver Lake urban farm, historically flower-focused. Listed as
+  "visits by appointment only."
+- **Confirmed:** the business exists.
+- **Unconfirmed:** whether a produce CSA still runs, or whether it is now flowers,
+  workshops and events only. Not on the CDFA register.
+- **Ask:** "Do you currently offer a vegetable or produce subscription, or is it flowers
+  and events only now?"
+
+### 3. LA Farms CSA — Los Angeles (3010 Glendale Blvd)
+- **What it is:** listed as a community-based CSA venture.
+- **Why held:** its own public description is written entirely in **future tense** — "we
+  have goals of establishing a sustainable CSA-model", "the program will also generate
+  local jobs." That reads as a concept, not an operating business. Not on the CDFA register.
+- **Ask:** "Is the CSA currently running and taking subscribers?"
+- **Note:** treat as unlaunched until proven otherwise. Lowest priority of the three.
+
+---
+
+## Resolved — added to the map
+
+| Farm | Outcome |
+|---|---|
+| Sarvodaya Farms & Nursery | Added as **on-farm pickup**, not CSA — it runs a nursery, free farmstand and U-pick, with no farm box |
+| Huerta del Valle | Added as CSA — income-scaled pricing, verified via Yelp Feb 2026 + findhelp Jun 2026 |
+| Huarache Farms | Added as CSA — confirmed on the CDFA register |
+
+---
+
+## Rejected — do not revisit without new evidence
+
+| Farm | Reason |
+|---|---|
+| **Muir Ranch CSA** (Pasadena) | Shut down by Pasadena Unified School District. Their spokesperson: *"Effective June 30, 2018, PUSD will end its relationship with the program."* Still listed as active on LocalHarvest, rootseller.app, la2050 and Localize — eight years after closure. |
+| **Belcampo Farms** (Gazelle) | Retail operation collapsed in 2021 after its butcher shops were found selling conventional meat as their own grass-fed product. A company that misrepresented its sourcing cannot sit on a platform built on verified sourcing. |
+
+---
+
+## Progress
+
+- **Checked:** 8 of 115 core-California farms
+- **Added:** 4
+- **Rejected:** 2
+- **Held for contact:** 3
+
+Running hit rate is roughly 50%. On that basis, expect **50–60 genuine additions** from the
+115-farm list, not 115.
