@@ -8,5 +8,12 @@
   "ios": {
     "backgroundColor": "#F5F0E6",
     "contentInset": "always"
+  },
+  "plugins": {
+    "Geolocation": {
+      "_comment": "Permission strings are injected into Info.plist / AndroidManifest.xml when 'npx cap add ios|android' runs. Apple rejects apps whose location purpose string is vague, so this states the actual use.",
+      "iosLocationWhenInUseUsageDescription": "ROOTED uses your location to show verified farms, farmers markets, CSAs and grocery stores near you on the Local Food Map.",
+      "androidLocationPermission": "ACCESS_COARSE_LOCATION"
+    }
   }
 }

@@ -4869,18 +4869,90 @@ async function searchFarmersMarkets() {
   }
 }
 
-function useMyLocationForMarkets() {
-  const statusEl = document.getElementById('fm-status');
-  if (!navigator.geolocation) {
-    statusEl.textContent = 'Location services are not available on this device. Try searching a city or zip code instead.';
-    return;
+// ── LOCATION ──────────────────────────────────────────────────────────
+// One entry point for "where am I", with a genuinely native path.
+//
+// Inside the iOS/Android shell, Capacitor injects a global bridge, so the native
+// Geolocation plugin is reachable without any bundler — which matters here, since the
+// whole app is a single unbuilt HTML file. Natively this gets real CoreLocation /
+// FusedLocationProvider access with a proper OS permission prompt, meaningfully better
+// accuracy indoors and in cities, and the ability to distinguish "denied" from "failed".
+// On the web it falls back to navigator.geolocation, so nothing regresses for browser
+// users.
+
+function isNativeShell() {
+  return !!(window.Capacitor && typeof window.Capacitor.isNativePlatform === 'function'
+    && window.Capacitor.isNativePlatform());
+}
+
+function nativeGeolocation() {
+  return (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Geolocation) || null;
+}
+
+// Resolves to {lat, lng}; rejects with an Error carrying a `.reason` of
+// 'denied' | 'unavailable' | 'timeout' | 'error' so the caller can say something useful.
+async function getRootedPosition() {
+  const opts = { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 };
+
+  const geo = isNativeShell() ? nativeGeolocation() : null;
+  if (geo) {
+    try {
+      // Ask explicitly first. On iOS this is what triggers the system prompt, and it
+      // lets us tell a refusal apart from a hardware failure.
+      if (typeof geo.checkPermissions === 'function') {
+        let perm = await geo.checkPermissions();
+        if (perm.location === 'prompt' || perm.location === 'prompt-with-rationale') {
+          perm = await geo.requestPermissions();
+        }
+        if (perm.location === 'denied') {
+          const e = new Error('Location permission denied'); e.reason = 'denied'; throw e;
+        }
+      }
+      const pos = await geo.getCurrentPosition(opts);
+      return { lat: pos.coords.latitude, lng: pos.coords.longitude };
+    } catch (err) {
+      if (err && err.reason) throw err;
+      const e = new Error('Native location failed'); e.reason = 'error'; throw e;
+    }
   }
-  statusEl.textContent = 'Finding your location...';
-  navigator.geolocation.getCurrentPosition(
-    pos => runFarmersSearch(pos.coords.latitude, pos.coords.longitude, null),
-    () => { statusEl.textContent = 'Could not access your location. Try searching a city or zip code instead.'; },
-    { timeout: 8000 }
-  );
+
+  if (!navigator.geolocation) {
+    const e = new Error('No geolocation'); e.reason = 'unavailable'; throw e;
+  }
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      pos => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+      err => {
+        const e = new Error('Browser location failed');
+        e.reason = (err && err.code === 1) ? 'denied' : (err && err.code === 3) ? 'timeout' : 'error';
+        reject(e);
+      },
+      opts
+    );
+  });
+}
+
+const LOCATION_ERRORS = {
+  denied: 'Location access is off for ROOTED. Turn it on in your device settings, or search a city or zip code instead.',
+  unavailable: 'This device does not support location. Try searching a city or zip code instead.',
+  timeout: 'Finding your location took too long. Try again, or search a city or zip code instead.',
+  error: 'Could not get your location. Try searching a city or zip code instead.'
+};
+
+async function useMyLocationForMarkets() {
+  const statusEl = document.getElementById('fm-status');
+  const btn = document.querySelector('.fm-locate-btn');
+  const label = btn ? btn.textContent : null;
+  if (statusEl) statusEl.textContent = 'Finding your location\u2026';
+  if (btn) { btn.disabled = true; btn.textContent = '\ud83d\udccd Locating\u2026'; }
+  try {
+    const { lat, lng } = await getRootedPosition();
+    runFarmersSearch(lat, lng, null);
+  } catch (err) {
+    if (statusEl) statusEl.textContent = LOCATION_ERRORS[(err && err.reason) || 'error'] || LOCATION_ERRORS.error;
+  } finally {
+    if (btn) { btn.disabled = false; if (label) btn.textContent = label; }
+  }
 }
 
 function pick(obj, ...keys) {
