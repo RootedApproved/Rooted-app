@@ -47,6 +47,14 @@ should not be revisited without new evidence.
 - **Ask:** "Is the CSA currently running and taking subscribers?"
 - **Note:** treat as unlaunched until proven otherwise. Lowest priority of the three.
 
+### 4. Avogadros Garden Farm — Upper Ojai
+- **What it is:** Upper Ojai Valley farm, farmer Peter Willsrud, heirloom organic
+  vegetables, flowers and herbs.
+- **Confirmed:** the farm exists and grows heirloom organic produce.
+- **Unconfirmed:** whether a CSA is currently running. Only source found is a LocalHarvest
+  listing with no date. Not on the CDFA register.
+- **Ask:** "Is the CSA taking subscribers this season, and where is pickup?"
+
 ---
 
 ## Resolved — added to the map
@@ -56,6 +64,8 @@ should not be revisited without new evidence.
 | Sarvodaya Farms & Nursery | Added as **on-farm pickup**, not CSA — it runs a nursery, free farmstand and U-pick, with no farm box |
 | Huerta del Valle | Added as CSA — income-scaled pricing, verified via Yelp Feb 2026 + findhelp Jun 2026 |
 | Huarache Farms | Added as CSA — confirmed on the CDFA register |
+| Something Good Organics (John Givens Farm) | Added as CSA — note the CSA runs under a *different name* than the farm |
+| The Farm Box Collective | Added as CSA — aggregated collective, formerly Ellwood Canyon Farms |
 
 ---
 
@@ -65,15 +75,23 @@ should not be revisited without new evidence.
 |---|---|
 | **Muir Ranch CSA** (Pasadena) | Shut down by Pasadena Unified School District. Their spokesperson: *"Effective June 30, 2018, PUSD will end its relationship with the program."* Still listed as active on LocalHarvest, rootseller.app, la2050 and Localize — eight years after closure. |
 | **Belcampo Farms** (Gazelle) | Retail operation collapsed in 2021 after its butcher shops were found selling conventional meat as their own grass-fed product. A company that misrepresented its sourcing cannot sit on a platform built on verified sourcing. |
+| **Rio Gozo Farm** (Ojai) | **Domain hijacked.** `riogozofarm.com` now serves an Indonesian gambling site — the signature of a lapsed domain resold to spammers. LocalHarvest listing last updated January 2025 and offers a "report as inactive" link. Not on the CDFA register. Strong evidence the farm stopped operating. Re-check only if the farm resurfaces under a new domain. |
+
+### A new red flag worth knowing
+
+**A farm website that now serves unrelated spam — gambling, pharma, crypto — means the
+domain lapsed and was bought.** Businesses that are still trading renew their domains.
+This is a faster and more reliable death signal than a stale directory listing, and it is
+worth checking the actual website loads correctly for any farm before listing it.
 
 ---
 
 ## Progress
 
-- **Checked:** 8 of 115 core-California farms
-- **Added:** 4
-- **Rejected:** 2
-- **Held for contact:** 3
+- **Checked:** 12 of 115 core-California farms
+- **Added:** 6
+- **Rejected:** 3
+- **Held for contact:** 4
 
 Running hit rate is roughly 50%. On that basis, expect **50–60 genuine additions** from the
 115-farm list, not 115.
