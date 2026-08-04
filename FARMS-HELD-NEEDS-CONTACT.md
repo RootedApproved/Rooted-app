@@ -106,6 +106,29 @@ should not be revisited without new evidence.
   Is anything open to the public?"
 - **Note:** if it is trees and seeds only, it is a nursery and does not belong on this map.
 
+### 9. Dig Deep Farms — San Leandro / Ashland / Cherryland
+- **What it is:** substantial social enterprise founded 2010, run through the Alameda County
+  Deputy Sheriff's Activities League. Roughly 8 acres of urban farm across three parcels,
+  plus a 500-tree orchard at City View Farm. Creates jobs and runs re-entry internships
+  aimed at reducing recidivism. Historically sold "grub boxes" as a CSA and ran farm stands
+  in Hayward and Oakland.
+- **Confirmed:** the organisation is real, county-backed, and substantial.
+- **Unconfirmed:** whether the CSA and farm stands are currently open to the general public,
+  or whether the operation has shifted entirely to food-bank distribution. Every detailed
+  source found dates from 2012–2020. Not on either CDFA register.
+- **Ask:** "Can a member of the public buy a produce box or shop a farm stand, and where?"
+- **Worth the call** — if public sales are running, the recidivism-reduction model is one of
+  the strongest stories available for this map.
+
+### 10. Cooper's Harvest — Brentwood
+- **What it is:** a First Generation Farmers incubator plot. Description reads *"Beginning in
+  2019, Farmer Erin will be farming 1/2 acres"* — half an acre, written in future tense
+  seven years ago.
+- **Unconfirmed:** whether it ever scaled past the incubator stage, or still exists. No
+  recent signal, not on either CDFA register.
+- **Ask:** "Is Cooper's Harvest still farming, and do you sell produce boxes?"
+- **Note:** lowest priority. Half an acre is unlikely to support a public CSA.
+
 ---
 
 ## Resolved — added to the map
@@ -126,6 +149,7 @@ should not be revisited without new evidence.
 | Serendipity Farms | Added as CSA — selects heirlooms for pigmentation/vitamin content, not yield |
 | Knoll Farms | Added as **on-farm market**, not CSA — their own site describes a farm stand; CSA is stated in future tense |
 | Pie Ranch | Added as **on-farm market** — nonprofit educational farm; all farmstand profits fund its programmes |
+| APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
 
@@ -150,10 +174,10 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 26 of 115 core-California farms
-- **Added:** 15
+- **Checked:** 29 of 115 core-California farms
+- **Added:** 16
 - **Rejected:** 4
-- **Held for contact:** 8
+- **Held for contact:** 10
 
 ### Leads found along the way (not on J's list, worth checking later)
 
