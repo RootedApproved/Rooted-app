@@ -55,6 +55,28 @@ should not be revisited without new evidence.
   listing with no date. Not on the CDFA register.
 - **Ask:** "Is the CSA taking subscribers this season, and where is pickup?"
 
+### 5. Freewheelin' Farm — Santa Cruz
+- **What it is:** small coastal farm founded 2002, growing ~40 heirloom crops. Genuinely
+  distinctive: CSA shares are hauled **six miles into Santa Cruz by bicycle-drawn trailer**,
+  and the farm was built deliberately with almost no motorised vehicles.
+- **Confirmed:** the farm existed and the bicycle-delivery model is well documented.
+- **Unconfirmed:** whether it still operates. Every source found is old — Ecology Center
+  listing dated 5/27/2011, a UCSC oral-history piece, and a Bhumi profile marked "not
+  verified". No current-season signal anywhere. Not on the CDFA register.
+- **Ask:** "Is the CSA running this season, and is bicycle delivery still how shares reach
+  Santa Cruz?"
+- **Worth the call** — if it is still going, this is one of the best stories on the map.
+
+### 6. UCSC Farm & Garden CSA — Santa Cruz
+- **What it is:** CSA run through the UCSC Agroecology programme, historically ~22 weeks
+  June–October, around $25/week, with limited-income shares and SNAP accepted.
+- **Confirmed:** the UCSC agroecology programme and farm exist.
+- **Unconfirmed:** current season, price and whether the CSA still runs. The detailed
+  figures found date from 2012.
+- **Ask:** "Is the CSA running this season, what are the dates and cost, and are
+  limited-income shares and SNAP still available?"
+- **Contact:** agroecology.ucsc.edu
+
 ---
 
 ## Resolved — added to the map
@@ -68,6 +90,7 @@ should not be revisited without new evidence.
 | The Farm Box Collective | Added as CSA — aggregated collective, formerly Ellwood Canyon Farms |
 | Fifth Crow Farm | Added as CSA — certified organic **and** Real Organic Project listed |
 | Homeless Garden Project | Added as CSA — nonprofit, transitional employment; site copy lags, season unconfirmed |
+| Shumei Santa Cruz Farm | Added as CSA — "beyond organic": no pesticides, herbicides **or fertilisers of any kind** |
 
 ---
 
@@ -90,10 +113,10 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 14 of 115 core-California farms
-- **Added:** 8
+- **Checked:** 17 of 115 core-California farms
+- **Added:** 9
 - **Rejected:** 3
-- **Held for contact:** 4
+- **Held for contact:** 6
 
 Running hit rate is roughly 50%. On that basis, expect **50–60 genuine additions** from the
 115-farm list, not 115.
