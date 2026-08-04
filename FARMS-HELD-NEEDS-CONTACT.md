@@ -91,6 +91,8 @@ should not be revisited without new evidence.
 | Fifth Crow Farm | Added as CSA — certified organic **and** Real Organic Project listed |
 | Homeless Garden Project | Added as CSA — nonprofit, transitional employment; site copy lags, season unconfirmed |
 | Shumei Santa Cruz Farm | Added as CSA — "beyond organic": no pesticides, herbicides **or fertilisers of any kind** |
+| Live Earth Farm | Added as CSA — year-round, customisable box, 800+ member households |
+| Hidden Villa | Added as CSA — 25% of annual harvest donated to a food bank |
 
 ---
 
@@ -113,8 +115,8 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 17 of 115 core-California farms
-- **Added:** 9
+- **Checked:** 19 of 115 core-California farms
+- **Added:** 11
 - **Rejected:** 3
 - **Held for contact:** 6
 
