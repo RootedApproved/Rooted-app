@@ -7,6 +7,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="ROOTED">
+<meta name="theme-color" content="#2D5016">
+<meta name="description" content="Standards-based product ratings and a verified local food map. No brand pays to be listed on ROOTED.">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
 <title>ROOTED — The Standard for Healthy Living</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -6255,6 +6260,39 @@ function handleEmailSubmit(event){
   document.getElementById('email-form').style.display='none';
   document.getElementById('email-thanks').style.display='block';
   return true; // allow the real form POST to Mailchimp to proceed via the hidden iframe
+}
+
+// ── ANALYTICS ─────────────────────────────────────────────────────────
+// Cloudflare Web Analytics: free, cookieless, no consent banner required, and it
+// runs on the Cloudflare account that already hosts the ROOTED workers.
+//
+// TO ENABLE: dash.cloudflare.com → Analytics & Logs → Web Analytics → Add a site
+// (rootedapproved.com). Copy the token out of the snippet it gives you and paste it
+// between the quotes below. Nothing loads until a token is present, so shipping this
+// with an empty string is harmless.
+const CF_ANALYTICS_TOKEN = '';
+
+if (CF_ANALYTICS_TOKEN) {
+  window.addEventListener('load', function () {
+    const a = document.createElement('script');
+    a.defer = true;
+    a.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    a.setAttribute('data-cf-beacon', JSON.stringify({ token: CF_ANALYTICS_TOKEN }));
+    document.body.appendChild(a);
+  });
+}
+
+// ── PWA ───────────────────────────────────────────────────────────────
+// Registered after load so it never competes with first paint. The worker is
+// network-first for the app shell, so a registered worker cannot pin users to a
+// stale build — see sw.js for why that matters on a single-file app that deploys
+// several times a day.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js').catch(function (err) {
+      console.warn('ROOTED: service worker registration failed —', err);
+    });
+  });
 }
 </script>
 </body>

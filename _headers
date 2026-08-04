@@ -6,3 +6,16 @@
 
 /index.html
   Cache-Control: no-cache, must-revalidate
+
+# Icons and the manifest are static and content-stable between deploys, so they can
+# cache hard. Index.html above stays no-cache so every deploy is picked up instantly.
+/icons/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/manifest.webmanifest
+  Cache-Control: public, max-age=86400
+
+# The service worker itself must never be cached, or a broken worker could pin
+# itself in place with no way to ship a replacement.
+/sw.js
+  Cache-Control: no-cache, must-revalidate
