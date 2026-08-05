@@ -179,6 +179,7 @@ farm. Re-check held entries with different search terms before treating a hold a
 | Farm Fresh To You (Capay Organic) | Added as CSA — entry states plainly it is a **large delivery service** (~15,000 boxes/week), not a single-farm share |
 | The Natural Trading Company | Added as CSA — under a **permanent agricultural conservation easement** since 2010 |
 | Mountain Bounty Farm | Added as CSA — oldest CSA in the Sierras; unlimited vacation holds; 32 of 50 acres left as managed forest |
+| 24 Carrot Farm | Added as **on-farm market** — certified organic **and** Real Organic Project listed; farm stand and U-pick lead, CSA alongside |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -246,10 +247,24 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 43 of 115 core-California farms
-- **Added:** 29 (plus 1 existing entry corrected)
+- **Checked:** 44 of 115 core-California farms
+- **Added:** 30 (plus 1 existing entry corrected)
 - **Rejected:** 4
 - **Held for contact:** 9
+
+### The Real Organic Project directory is a high-signal source
+
+`realorganicproject.org/directory` lists farms certified to an add-on standard requiring
+produce to be grown **in soil** rather than hydroponically — something USDA organic alone
+does not guarantee, since hydroponic operations can and do carry the organic seal.
+
+Two farms on this map now hold it: Fifth Crow Farm and 24 Carrot Farm. The directory
+entries also carry structured fields — whether the farm sells CSA, wholesale, at farmers
+markets, or runs an on-farm store — plus exact coordinates, which is more than most
+directories give.
+
+**Worth mining directly** once the Localize list is finished. Every farm in it clears a
+higher bar than "organic" by default.
 
 ### Land protection is worth recording where it exists
 
