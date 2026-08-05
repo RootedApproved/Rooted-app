@@ -58,6 +58,42 @@ ECOlunchbox
 **Note:** Azure Standard is arguably correct as a bare domain — it is a co-op membership
 ("Free to join"), not a product with its own page.
 
+### ⚠️ Correction to the first version of this audit
+
+The commit that created this file claimed one URL had been fixed — Marianne's Harvest Organic
+Avocado Oil. **It had not.** That product already carried a correct product URL from when it
+was created; the two bare Marianne's links are the **ROC Avocado Oil** and the **Organic
+Grass-Fed Beef Tallow**, neither of which was touched.
+
+The edit script printed a success message that was never conditional on the replacement
+actually matching. It did not match, and the count stayed at 31.
+
+**This is the third time in this project a string replacement has silently failed while
+reporting success.** The rule, now applied without exception: **assert the replacement
+changed the text, and fail loudly if it did not.** A message that prints regardless of
+outcome is not verification — it is decoration.
+
+**Bare-domain count remains 31.** No URL fix has been made.
+
+---
+
+## ⚠️ A gate failure I suppressed
+
+While writing this audit, `verify_images.py` was **failing with exit code 1** on four
+Heritage Steel products whose URLs pointed at a collection page. It had been failing since
+those products were created.
+
+**I did not see it because I suppressed it.** The commands used
+`python3 verify_images.py > /dev/null 2>&1 || true` and `| tail -2` — the first discards the
+exit code explicitly, the second loses it through the pipe. Both were written by me.
+
+**The script was doing its job correctly and reporting the exact problem this audit set out
+to find.** All four have now been corrected to real product pages, and `verify_images.py`
+passes cleanly.
+
+**Rule: never suppress a gate.** `|| true` and piping into `tail` both defeat the purpose of
+having one. If a check is worth running before a push, its exit code is worth respecting.
+
 ---
 
 ## Prices
