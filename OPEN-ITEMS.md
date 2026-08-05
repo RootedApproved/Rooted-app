@@ -123,3 +123,23 @@ restaurant's own site → recent local food press → **recent reviews for closu
    Mexican kitchens are almost universally soybean or canola based.
 
 **Pace:** roughly 2 clusters per exchange, 4–6 restaurants each.
+
+### Two warnings surfaced while starting this work
+
+**1. "Seed oil free" is often only partly true, and in specific predictable ways.** An
+industry source quoted by Fox News named the two most common failures: *"They are using beef
+tallow in their fryers, but it is cut with soy and stabilizers"*, and *"they don't examine
+the products they bring in, offering burgers on seed oil-laden buns."* Fryer fat is the
+visible claim; **the bun and the condiments are where it actually breaks.** Momolicious was
+listed specifically because it addresses the sauces.
+
+**2. Restaurants revert.** **sweetgreen went seed oil free for several months and then
+reverted to sunflower oil.** That is the clearest possible argument for two things: never
+list a chain on a temporary reformulation, and tell every reader to confirm current fats
+directly. **sweetgreen is excluded from this map for that reason** despite appearing on
+seed-oil-free directories.
+
+### Bay Area candidates identified, not yet verified
+Velo City Pizza (San Mateo) · The Park Street Tavern (Alameda) · Manzanita (Milpitas) ·
+Estero Cafe (Valley Ford) · Ristorante Allegria (Napa — EVOO, avocado oil, Snake River
+tallow, Clover butter) · Walrus Alley · Caffe Central (SF)
