@@ -190,6 +190,20 @@ researched — the certificate proves they sell to the public, not how they farm
 | **True Grass Farms** | Marin | 3 Jul 2026 (lapsed) | Guido Frosini — grass-fed |
 | Heart T Hogs | Modoc | 27 Jun 2026 | Pork — far north, check scope |
 
+### A stale copyright year is NOT evidence a business has closed
+
+Rainbow Ranch Farms' site footer reads "©1991–2024", which looks like a staleness signal and
+is not one. Footer years are typically hardcoded once and never touched.
+
+**What actually indicates a live operation:** a working cart, a newsletter signup, an active
+social page with a call button, a current phone number, and named service areas — all
+present. Confirmed further by a directory profile updated **16 June 2026** and a farm stand
+page stating it is open to members.
+
+**The reverse also holds** — a freshly generated page proves nothing, which is how
+`beefnear.me` still shows Tara Firma's closed CSA. **Check the operational signals, not the
+chrome.**
+
 ### ❌ Metzer Farms rejected — certificate ≠ standard
 
 Metzer holds a valid CDFA certificate to sell direct. What it sells does not meet the
@@ -215,7 +229,7 @@ public — nothing more.** It is necessary, not sufficient.
 | **Rossotti Ranch** | Petaluma | Pasture-raised, **grain-free** |
 | ~~True Grass Farms~~ | Valley Ford | **ADDED** — Animal Welfare Approved, farm store, cabins on site |
 | **Honest Fish Farm** | CA Delta | Pigs on pasture moved every 3–5 days, **soy-free**, organically fed |
-| **Rainbow Ranch Farms** | Southern California | **STRICTEST FEED STANDARD FOUND ANYWHERE.** States: no grains at all — no rice, soy, corn, wheat, barley, oats, rye — no legumes, nuts or seed oils. Heritage breeds on species-specific diets. Also states vaccine-free, antibiotic-free, drug-free. ⚠️ **HELD: no street address published.** Cannot map a farm without one — same reason LADS Home Ranch is held. Needs a call or a better source |
+| ~~Rainbow Ranch Farms~~ | Piñon Hills | **ADDED** — address supplied by J. Strictest stated feed standard on the map, but self-declared rather than certified |
 | ~~Marin Sun Farms~~ | Pt. Reyes + Oakland | **ADDED (2 pins)** — operates the last USDA-inspected slaughterhouse in the Bay Area |
 | **Pasture Fresh Eggs** | Tomales | Organic pasture-raised eggs |
 | **SonRise Ranch** | — | Hogs on pasture fed raw milk from their own cows |
