@@ -123,7 +123,7 @@ distinguishing fact remain.
 - [ ] Three Sisters Farm
 - [ ] UC Davis Student Farm — Market Garden
 - [x] Urban Tilth — Farm to Table CSA — **ADDED** (sliding-scale CSA, 5 free farm stands, free harvest access)
-- [ ] West County Community Farm *(2026 CSA full, waitlist — strong signal)*
+- [x] West County Community Farm — **ADDED** (free-choice harvest model; also corrected a Laguna Farm data mix-up)
 
 **28 pre-validated farms from a single fetch**, against roughly 1–2 leads per search under
 the old method.
