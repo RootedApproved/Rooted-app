@@ -495,3 +495,49 @@ the duplicate Primally Pure entry. Each needs its own Drug Facts panel read dire
 **Expected outcome when they are checked:** all three land at **Tier 2** — genuine mineral
 sunscreens with verified SPF, marked down for a high-PUFA base in a product worn under UV.
 That is a useful listing, not a rejection, and worth completing.
+
+
+---
+
+## Sky & Sol sunscreen — assessed on request. NOT LISTED.
+
+**The formula, if the reported ingredients are accurate, would be excellent** — arguably
+better designed than anything currently listed:
+
+- 100% grass-fed and grass-finished Australian tallow, jojoba oil, jojoba ester, lecithin,
+  kaith bark, babassu starch, water
+- **No high-PUFA oils at all** — same clean position as Primally Pure
+- Non-nano zinc oxide, no chemical UV filters, no fragrance or parabens
+- **JOJOBA-COATED ZINC** — this is genuinely interesting. Coated zinc disperses better and is
+  less photocatalytic than uncoated, which is precisely the concern raised against Badger.
+  If real, it is a better solution than anything else in the category.
+
+**It is not listed, and the reasons are about verification, not ingredients.**
+
+**1. They do not publish a full INCI ingredient list.** The site's own *"Show Me All The
+Ingredients!"* link leads to a list of ingredients the product does **not** contain —
+"Avobenzone, Dicaprylyl Ether, Dimethicone, Glyceryl Stearate… are ingredients you will never
+find in our products." Being told what is absent is not disclosure. The ingredient list
+above comes from a reviewer, not the brand.
+
+**2. No SPF test data or Drug Facts panel found.** ROOTED's sunscreen standard ranks
+**verified finished-product SPF and broad-spectrum testing first** — ahead of ingredient
+purity. This fails at that hurdle.
+
+**3. Water-based with "no harsh preservatives" stated and none disclosed.** The same
+unanswered question flagged on Waxhead, and more pressing in an emulsion.
+
+**4. A knowledgeable reviewer flagged a performance inconsistency.** Organic Beauty Lover,
+who tests many mineral sunscreens, wrote that 25% zinc oxide should produce a heavy white
+cast and *"there's no way to avoid it. So I do think that they've added some other UV filters
+in there."* That is **speculation, not evidence**, and the brand's jojoba-coated zinc
+explanation is a plausible real mechanism. But it is a substantive observation from someone
+with relevant experience, and it can only be resolved by a published Drug Facts panel.
+
+**On the "Chinese white-label" claim:** that came from a competing tallow brand's review of
+its rivals. **It is not repeated here as fact** — it is unverified and the source has an
+obvious interest. It played no part in this decision.
+
+**What would change the answer:** a published full INCI list, a Drug Facts panel, and SPF
+and broad-spectrum test results. **Ask for those three things.** If they arrive, this
+plausibly becomes a Tier 1 listing and possibly the best-designed sunscreen on the map.
