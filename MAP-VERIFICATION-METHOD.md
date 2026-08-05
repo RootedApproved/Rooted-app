@@ -122,7 +122,7 @@ distinguishing fact remain.
 - [ ] Tanaka Farms
 - [ ] Three Sisters Farm
 - [ ] UC Davis Student Farm — Market Garden
-- [ ] Urban Tilth — Farm to Table CSA
+- [x] Urban Tilth — Farm to Table CSA — **ADDED** (sliding-scale CSA, 5 free farm stands, free harvest access)
 - [ ] West County Community Farm *(2026 CSA full, waitlist — strong signal)*
 
 **28 pre-validated farms from a single fetch**, against roughly 1–2 leads per search under
