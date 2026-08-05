@@ -101,7 +101,7 @@ distinguishing fact remain.
 - [ ] Borba Farms
 - [x] Brown Girl Farms — **ADDED** (African American heritage crops; detail thin, CDFA-verified)
 - [~] Capay Canyon Ranch — **HELD**: almond growing, handling and marketing for a worldwide market, plus a Davis Farmers Market stall selling almonds, organic grapes and raisins. CDFA-registered but no consumer CSA found. Same direct-order question as Massa Organics.
-- [ ] Christine's Garden
+- [x] Christine's Garden — **ADDED** (Modesto; Mediterranean varietals; detail thin)
 - [ ] City of Cotati Farm Share (Veronda-Falletti Ranch)
 - [x] The Cloverleaf Farm CSA — **ADDED** (fruit-only CSA; Ugly Fruit Club; stated living wage)
 - [x] Da-Le Ranch — **ADDED** (first meat CSA on the map; pork/poultry feed undisclosed, flagged)
@@ -111,7 +111,7 @@ distinguishing fact remain.
 - [ ] Feed and be Fed
 - [ ] Girl and Her Dog Farm
 - [x] Grub CSA Farm — **ADDED** (Chico; members gather their own share from tables, not pre-boxed)
-- [ ] Heritage Valley Family Orchard
+- [x] Heritage Valley Family Orchard — **ADDED** (single-crop heirloom avocado CSA, shipped)
 - [ ] Kimberley Wine Vinegars
 - [ ] Lads Home Ranch
 - [ ] Mellor Ranch
@@ -134,6 +134,17 @@ distinguishing fact remain.
 | Cloverfield Organic Farm (El Sobrante) | U-pick, online store, tours |
 | Massa Natural Meats (N. California) | Grass-fed beef and lamb, pasture-raised heritage pork and chicken |
 | Yolo Land & Cattle Co (Woodland) | 100% grass-fed Angus beef |
+| **Tara Firma Farms** (Petaluma) | **Pastured-meat CSA and farm store** — would be only the second meat CSA on the map |
+| Stemple Creek Ranch (Tomales) | Grass-fed beef, lamb and pork |
+| SoMar Farms (W. Petaluma) | Grass-fed beef and lamb, pickup at farm or Oakland |
+| Silver Springs Beef / Alhambra Valley (Martinez) | 100% grass-fed beef and lamb, heritage pork, bulk or cuts |
+| Galaxy Farm (Woodland) | Organic-fed lamb |
+| Twisted Fields | Pasture-raised rainbow hen eggs, rotational grazing |
+| Front Porch Farm (Sonoma) | 110 acres — heritage vegetables, olives, heirloom polenta corn, flowers |
+
+**The meat leads are now the largest gap-filling opportunity on the map.** There is one meat
+CSA listed (Da-Le Ranch) against 63 produce CSAs, and seven credible grass-fed operations
+are captured above.
 | Santa Cruz Permaculture | Organic fruit, vegetables, flowers, herbs |
 
 **28 pre-validated farms from a single fetch**, against roughly 1–2 leads per search under
