@@ -113,10 +113,10 @@ distinguishing fact remain.
 - [x] Grub CSA Farm — **ADDED** (Chico; members gather their own share from tables, not pre-boxed)
 - [x] Heritage Valley Family Orchard — **ADDED** (single-crop heirloom avocado CSA, shipped)
 - [ ] Kimberley Wine Vinegars
-- [ ] Lads Home Ranch
+- [~] Lads Home Ranch — **HELD**: site is live and states regenerative practice, organic seed and organic compost, plus handcrafted spice blends. But NO LOCATION is published anywhere found, and a farm cannot go on a map without one. Needs a call.
 - [ ] Mellor Ranch
 - [x] Old Grove Orange — **ADDED** (5th-gen farm + food hub supplying 50+ school districts)
-- [ ] Outer Aisle Food Hub
+- [~] Outer Aisle Food Hub — **HELD**: operates as a Farmigo-based buying platform ("ditch the supermarket, buy from local farmers") rather than a farm. Aggregator, not a producer — same direct-order question as Massa.
 - [x] Talley Farms — **ADDED** as Talley Farms Fresh Harvest (large grower; CSA on its ~100 certified organic acres)
 - [ ] Tami Lyon
 - [x] Tanaka Farms — **ADDED** (4th-gen family farm; 10% of each box funds the host school/church)
@@ -141,6 +141,10 @@ distinguishing fact remain.
 | Galaxy Farm (Woodland) | Organic-fed lamb |
 | Hole-In-One Ranch (Janesville) | Grass-fed beef, lamb and pork |
 | Dare 2 Dream Farms (Lompoc) | Free-range eggs, organic produce, backyard chickens — CSA currently sold out |
+| **Tara Firma Farms** (Petaluma) | Grass-fed/pastured poultry, beef and pork; CSA members also get vegetables, fruit, eggs, dairy and bread, plus **Sunday farm visits to hike and fish** |
+| **Farm to My Neighborhood** | Nonprofit tech platform letting very small organic farmers sell direct — no weekly commitment, neighbourhood drop sites. Described as a top recommendation by Edible East Bay |
+| South Central Farmers (LA / Bakersfield) | CSA boxes into greater LA with UCLA drop points |
+| Esperanza's 7 Plus Organics Co-op | Co-op of small farmers of colour in the Pajaro/Salinas Valleys |
 | Twisted Fields | Pasture-raised rainbow hen eggs, rotational grazing |
 | Front Porch Farm (Sonoma) | 110 acres — heritage vegetables, olives, heirloom polenta corn, flowers |
 
