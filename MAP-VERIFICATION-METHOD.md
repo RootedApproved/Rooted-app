@@ -99,7 +99,7 @@ distinguishing fact remain.
 - [x] Alma Backyard Farms — **ADDED** (re-entry employment urban farm, Compton)
 - [ ] Black Urban Farmers Association
 - [ ] Borba Farms
-- [ ] Brown Girl Farms
+- [x] Brown Girl Farms — **ADDED** (African American heritage crops; detail thin, CDFA-verified)
 - [ ] Capay Canyon Ranch
 - [ ] Christine's Garden
 - [ ] City of Cotati Farm Share (Veronda-Falletti Ranch)
@@ -119,7 +119,7 @@ distinguishing fact remain.
 - [ ] Outer Aisle Food Hub
 - [ ] Talley Farms
 - [ ] Tami Lyon
-- [ ] Tanaka Farms
+- [x] Tanaka Farms — **ADDED** (4th-gen family farm; 10% of each box funds the host school/church)
 - [ ] Three Sisters Farm
 - [ ] UC Davis Student Farm — Market Garden
 - [x] Urban Tilth — Farm to Table CSA — **ADDED** (sliding-scale CSA, 5 free farm stands, free harvest access)
