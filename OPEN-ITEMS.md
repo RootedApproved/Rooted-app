@@ -139,7 +139,23 @@ list a chain on a temporary reformulation, and tell every reader to confirm curr
 directly. **sweetgreen is excluded from this map for that reason** despite appearing on
 seed-oil-free directories.
 
-### Bay Area candidates identified, not yet verified
-Velo City Pizza (San Mateo) · The Park Street Tavern (Alameda) · Manzanita (Milpitas) ·
-Estero Cafe (Valley Ford) · Ristorante Allegria (Napa — EVOO, avocado oil, Snake River
-tallow, Clover butter) · Walrus Alley · Caffe Central (SF)
+### Bay Area candidates still to verify
+The Park Street Tavern (Alameda — marked **Chain**, treat with the sweetgreen caution) ·
+Manzanita (Milpitas) · Ristorante Allegria (Napa — EVOO, avocado oil, Snake River tallow,
+Clover butter) · Musubi Libre (Hayward) · The Green Enchilada (Pacifica) · Long Bridge Pizza
+(SF) · Eve's Waterfront (Oakland) · Local Union 271 (Palo Alto) · The Midwife and The Baker
+(Mountain View) · Maison Alyzee (Mountain View) · Napoletana Pizzeria (Mountain View) ·
+The Press Artisan Cafe (Pleasanton) · 4505 Burgers & BBQ (SF) · Caffe Central (SF)
+
+**Chains appearing on seed-oil-free directories and excluded:** sweetgreen (reverted to
+sunflower), Buffalo Wild Wings (cooking oils differ between the US and Canada, so a Canadian
+data point does not describe the US kitchens), Five Guys, True Food Kitchen. A chain-wide
+claim is only as good as its least careful franchise, and reformulations reverse.
+
+### Category-specific questions worth asking
+
+Different cuisines fail in different places. Ask about:
+- **Pizza** → the DOUGH, not the finishing oil. Commercial dough very often contains soybean oil.
+- **Burgers** → the BUN. Named as one of the two commonest failure points.
+- **Anything fried** → whether the tallow is cut with soy or stabilisers.
+- **Everything** → the CONDIMENTS. Commercial mayo and ketchup are almost always soybean or canola.
