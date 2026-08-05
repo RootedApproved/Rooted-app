@@ -138,3 +138,30 @@ No change to the tier.
   glycol, PEG-30 stearate, BHT). Far from "minimal, naturally derived", but Tier 3 is
   *Budget / Transitional* and it is genuinely fragrance-free and dermatologist-recommended
   for reactive skin. The tier is doing its job; no change proposed.
+
+
+---
+
+## ⚠️ Category hazard: tallow skincare is flooded with white-label sellers
+
+Researching this category surfaced a problem worth recording before more products are added.
+
+Searches for tallow balm return overwhelmingly **unbranded or thinly-branded listings** on
+Walmart, eBay and Etsy — AJOMED, LUEZKYOIG, ATOANY, Lhopebk, "Based Supplies" — with
+near-identical descriptions, no sourcing information, and prices from $8.99 to $30 for
+visually identical jars. One industry review explicitly identifies at least one competitor
+as *"a Chinese white-label brand under a US-facing storefront"*.
+
+**Practical rules for this category:**
+1. **Require a real brand with a product line and a traceable identity.** A single SKU with
+   a randomly generated brand name is a reseller, not a producer.
+2. **"Grass-fed" with no farm, country or supplier named means nothing here.** Tallow
+   sourcing is the entire quality question and the cheap listings never state it.
+3. **Be wary of review-site sources that are themselves brands.** The most detailed 2026
+   tallow comparison found was published by a tallow brand reviewing its own competitors.
+
+**Also note:** tallow is an **occlusive, not a humectant.** It seals in moisture already
+present rather than adding any, so applied to fully dry skin it can leave skin drier over
+time. Every tallow entry should say to apply it to damp skin. Products pairing tallow with a
+humectant — raw honey, glycerin, aloe — are more complete barrier products, and that is a
+real differentiator rather than a marketing one.
