@@ -228,11 +228,12 @@ public — nothing more.** It is necessary, not sufficient.
 | **Chino Valley Ranchers** | Colton | Organic **soy-free corn-free** eggs, flax-fed, 225mg ALA each, 70+ year family business, widely stocked in stores. ⚠️ Housing is *free-roaming/cage-free*, NOT pasture-raised — would fail the egg standard's red flag on cage-free alone. Accessible but a weaker standard; worth listing only with that stated |
 | **Rossotti Ranch** | Petaluma | Pasture-raised, **grain-free** |
 | ~~True Grass Farms~~ | Valley Ford | **ADDED** — Animal Welfare Approved, farm store, cabins on site |
-| **Honest Fish Farm** | CA Delta | Pigs on pasture moved every 3–5 days, **soy-free**, organically fed |
+| **Honest Fish Farm** | CA Delta | Pigs pastured and moved every 3–5 days, broilers in mobile coops moved DAILY, organically fed and **soy-free**, no animal by-products. Family farm — Jeremy, Elizabeth and two daughters. ⚠️ **HELD: no street address published**, only "the Delta" as a region. Same blocker as LADS Home Ranch. Needs a call |
+| ~~Farm Lot 59~~ | Long Beach | **NOT A MEAT LISTING.** 2714 California Ave, nonprofit urban farm founded 2010 by Sasha Kanno. Its commercial product is **cut flowers**; the vegetables are **donated to food pantries** rather than sold. Genuinely good work, but not a place to buy food |
 | ~~Rainbow Ranch Farms~~ | Piñon Hills | **ADDED** — address supplied by J. Strictest stated feed standard on the map, but self-declared rather than certified |
 | ~~Marin Sun Farms~~ | Pt. Reyes + Oakland | **ADDED (2 pins)** — operates the last USDA-inspected slaughterhouse in the Bay Area |
 | **Pasture Fresh Eggs** | Tomales | Organic pasture-raised eggs |
-| **SonRise Ranch** | — | Hogs on pasture fed raw milk from their own cows |
+| ~~SonRise Ranch~~ | San Diego / Miramar | **ADDED** — publishes petroleum-per-calorie figure; states plainly it is NOT certified organic |
 | Pajaro Pastures / Your Family Farm | Paicines | Eggs and pasture-raised Berkshire hogs |
 
 **These are a better lead pool than the beefnear.me set** — most name a specific feed
