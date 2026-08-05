@@ -218,3 +218,43 @@ recording.
 **No tallow balm reviewed carries verified organic certification across every component.**
 Strong sourcing claims are common; third-party certification is not. Entries should say
 which they are relying on rather than blurring the two.
+
+
+---
+
+## ⚠️ Verification finding: Swiss Based has no plain version
+
+J's ranking placed **Swiss Based at #3**, as the *"best documented organic-sourcing
+candidate"*, with the advice to *"choose the plainest unscented tallow-and-honey formula
+rather than the heavily infused versions."*
+
+**Checked against their own product page: there is no plain version.** Their flagship
+Tallow & Honey Balm contains **seven ingredients**:
+
+> Organic grass-fed and finished local Swiss beef tallow · beeswax · cold-pressed
+> extra-virgin olive oil · **jojoba oil** · **almond oil** · local Swiss honey ·
+> **essential oils of vanilla and Swiss cedarwood**
+
+The infusion is not confined to the specialist formulas — it is in the bestseller. Almond
+oil is a nut oil at roughly 20–25% linoleic acid, and essential oils are present in every
+variant found.
+
+**Not listed, pending J's call.** It would sit at **Tier 2** at best on ingredient count and
+the presence of a nut oil in a leave-on product. Swiss organic sourcing is genuinely strong,
+but the formula does not match the description the ranking was based on.
+
+### The ranking inverts on verification
+
+| | J's rank | Ingredients | Unscented? |
+|---|---|---|---|
+| **The Maple Valley** | 6th | **3** | Yes |
+| Swiss Based | 3rd | **7** (incl. nut oil + essential oils) | No |
+
+**The Maple Valley — ranked 6th — turns out to have the simplest formula of any balm
+reviewed.** Given J's stated first priority is *ingredient simplicity*, it moves up
+substantially. It is now listed at Tier 1.
+
+The trade-off is real and recorded in its entry: **Maple Valley has the cleanest formula but
+the weakest sourcing transparency** — no named farm, no region, no suet-versus-trim
+statement. LASSO and Ancestral name every component's origin but carry more ingredients.
+Neither is strictly better; they optimise for different halves of the same standard.
