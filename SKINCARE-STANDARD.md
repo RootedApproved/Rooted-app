@@ -366,3 +366,42 @@ Per J's own checklist, and applied strictly: **Organic Jaguar, Terra Lotus** and
 small-batch "tallow sunscreen" should not be listed with an SPF claim without finished-product
 SPF testing, broad-spectrum results, and water-resistance data where claimed. *(Terra Lotus is
 separately rejected outright — see the tallow section.)*
+
+
+## The Badger / Primally Pure split is real, and the oxidation argument sharpens it
+
+J's ranking put **Primally Pure first for daily use** and noted **Badger may outrank it for
+prolonged exposure**. Verification supports that split — but for a stronger reason than the
+document gave.
+
+| | Badger Adventure SPF 50 | Primally Pure Sun Cream SPF 30 |
+|---|---|---|
+| Tested SPF | **50**, broad spectrum, 80 min water resistant | 30, broad spectrum |
+| Zinc | 25%, **uncoated** | 25%, non-nano |
+| Base oils | **Organic sunflower oil — sole base, high-PUFA** | Fractionated palm, tallow, beeswax, coconut, mango butter — **all stable** |
+| High-PUFA content | Yes | **None** |
+
+**Primally Pure contains no high-PUFA oil at all.** Badger's sole base oil is sunflower.
+Under the oxidative-stability rule, that is a material difference in exactly the product
+category where it matters most — sun and heat are what drive lipid peroxidation.
+
+**So the split is:** Primally Pure for daily face and body, on formulation. Badger for beach,
+altitude and long exposure, on tested SPF 50 and 80-minute water resistance. Neither is
+strictly better, and the entries say so.
+
+### ⚠️ Brand-level assumptions fail here
+
+**Primally Pure's Sun Cream contains no seed oils. Primally Pure's TINTED Sun Serum contains
+borage, camellia, moringa, raspberry and sea buckthorn seed oils** — five high-PUFA oils, in
+a sun product.
+
+Same brand, opposite formulations. **Every SKU must be checked individually**, and the Sun
+Cream entry says so explicitly.
+
+### A published-review error worth knowing
+
+Multiple reviews describe Primally Pure's caprylic/capric triglyceride as **"fractionated
+coconut oil"**. Primally Pure's own label states it is **from RSPO certified palm oil**.
+Caprylic/capric triglyceride can be derived from either, so reviewers assumed. **The brand's
+own label is the source of record** — the same rule already applied to the Ancestral
+Cosmetics Amazon discrepancy.
