@@ -223,6 +223,35 @@ livestock)* · Hog Wild Holding Co. *(pork, no practice detail found yet)* · Ma
 Eggs · Bloom Ranch · Monkey Flower Ranch · Woolly Egg Ranch · True Grass Farms *(added)* ·
 Fallon Hills Ranch · Heart T Hogs.
 
+### 3.3c Grass-Fed Meat: 28 listings — calling this category done
+
+From 0 to 28 in one session, covering beef, lamb, goat, veal, pork, chicken, duck, turkey,
+game birds, chicken eggs, duck eggs, turkey eggs and sheep cheese, across every California
+region.
+
+**Stopping here deliberately.** The remaining leads all come from a single LocalHarvest
+directory entry each, with one-line descriptions and no corroboration. That is exactly the
+source profile that produced the Tara Firma error — a directory listing that was years stale
+— and the marginal value of a thin twenty-ninth listing is lower than the risk of an
+inaccurate one.
+
+**Leads recorded, not added.** Each needs its own site checked before listing:
+
+| Farm | Where | What the directory says |
+|---|---|---|
+| **Pasture Chick Ranch** | Santa Ana Valley, Hollister | The most interesting of these — pastured eggs and broilers, turkeys, **Cashmere goats** for meat and yarn, **Merino sheep** for meat and yarn, and **French Alpine dairy goats for RAW MILK and cheese**. Laying flock named as Red Stars and American hens |
+| **Turning Leaf Ranch** | San Benito | Slow-grown lamb and goat, 100% pasture raised, intensive rotational grazing |
+| **Casey Redtail Ranch** | Southern Monterey County | 100% grass-fed and finished Angus cross |
+| **Star Creek Ranch** | Hollister | Grass-fed lamb and goat, run explicitly to improve land biodiversity |
+| **BeeWench Farm** | Shandon, 10 acres | Pastured chicken, heritage pork, dairy goats, laying hens |
+
+**Pasture Chick Ranch is the one worth chasing** if this resumes — raw goat milk plus
+fibre-and-meat dual-purpose breeds is a genuinely unusual combination, and it would extend
+the dairy coverage that currently rests on Claravale and Monkeyflower alone.
+
+**Still unresolved from the CDFA list:** Hog Wild Holding Co. and Heart T Hogs, neither of
+which has produced any practice detail across several searches.
+
 ### 3.4 Dairy and raw milk — currently ZERO on the map
 A conspicuous gap given ROOTED's standards. No source identified yet; start with the
 Weston A. Price chapter listings and CDFA's raw milk permit register.
