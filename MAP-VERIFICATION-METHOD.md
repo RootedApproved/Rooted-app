@@ -129,7 +129,7 @@ distinguishing fact remain.
 
 | Farm | Why it matters |
 |---|---|
-| **Engler Beef** (Sonoma) | Chicken raised with **NO CORN OR SOY**, grass-fed and finished beef, monthly beef box. Directly answers the feed standard — almost no poultry producer can say this |
+| ~~Engler Beef~~ | **ADDED** — Sonora (not Sonoma). Selectively bred for grass finishing; California start to finish; no-corn-no-soy chicken flagged as needing confirmation |
 | **Casa Rosa Farms** (Capay Valley) | CSA of olive oil, grass-fed beef and lamb, pastured pork and eggs, fresh herbs. Bay Area pickups |
 | Cloverfield Organic Farm (El Sobrante) | U-pick, online store, tours |
 | Massa Natural Meats (N. California) | Grass-fed beef and lamb, pasture-raised heritage pork and chicken |
