@@ -110,7 +110,7 @@ distinguishing fact remain.
 - [ ] Eat! By Food Access Los Angeles *(multiple registered producers)*
 - [ ] Feed and be Fed
 - [ ] Girl and Her Dog Farm
-- [ ] Grub CSA Farm
+- [x] Grub CSA Farm — **ADDED** (Chico; members gather their own share from tables, not pre-boxed)
 - [ ] Heritage Valley Family Orchard
 - [ ] Kimberley Wine Vinegars
 - [ ] Lads Home Ranch
@@ -120,7 +120,7 @@ distinguishing fact remain.
 - [x] Talley Farms — **ADDED** as Talley Farms Fresh Harvest (large grower; CSA on its ~100 certified organic acres)
 - [ ] Tami Lyon
 - [x] Tanaka Farms — **ADDED** (4th-gen family farm; 10% of each box funds the host school/church)
-- [ ] Three Sisters Farm
+- [x] Three Sisters Farm — **ADDED** (certified organic 2008; only 2 of 20 acres cultivated, rest habitat)
 - [ ] UC Davis Student Farm — Market Garden
 - [x] Urban Tilth — Farm to Table CSA — **ADDED** (sliding-scale CSA, 5 free farm stands, free harvest access)
 - [x] West County Community Farm — **ADDED** (free-choice harvest model; also corrected a Laguna Farm data mix-up)
@@ -132,6 +132,8 @@ distinguishing fact remain.
 | **Engler Beef** (Sonoma) | Chicken raised with **NO CORN OR SOY**, grass-fed and finished beef, monthly beef box. Directly answers the feed standard — almost no poultry producer can say this |
 | **Casa Rosa Farms** (Capay Valley) | CSA of olive oil, grass-fed beef and lamb, pastured pork and eggs, fresh herbs. Bay Area pickups |
 | Cloverfield Organic Farm (El Sobrante) | U-pick, online store, tours |
+| Massa Natural Meats (N. California) | Grass-fed beef and lamb, pasture-raised heritage pork and chicken |
+| Yolo Land & Cattle Co (Woodland) | 100% grass-fed Angus beef |
 | Santa Cruz Permaculture | Organic fruit, vegetables, flowers, herbs |
 
 **28 pre-validated farms from a single fetch**, against roughly 1–2 leads per search under
