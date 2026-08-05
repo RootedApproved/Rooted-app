@@ -291,6 +291,32 @@ suspended — would be precisely the failure the platform is built to prevent.
 
 **Always open the certification record and read the status line.**
 
+Note: CCOF's own directory page states that every farm in it is "100% certified". Bounty of
+the Valley, with three suspended certifications, is still listed there. **The status field
+is the truth; directory presence is not.**
+
+#### Audit of existing listings — status verified
+
+Of 58 farm-direct listings, 24 make a formal certification claim and 6 name CCOF
+specifically, which makes them checkable. Results:
+
+| Farm | Status | Verified |
+|---|---|---|
+| Full Belly Farm | **Certified** — Crops & USDA NOP since Mar 1985, Handling 2004, Livestock 2006 | May 2026 ✅ |
+| Terra Firma Farm | **Certified** — Crops & USDA NOP since Mar 1988, Handling 2010 | Jun 2026 ✅ |
+| Shumei Santa Cruz Farm | Current directory member | Mar 2026 — *presence confirmed, status line not read* |
+| Say Hay Farms | Current directory member | Dec 2025 — *presence confirmed, status line not read* |
+| The Natural Trading Company | Current directory member | Jul 2026 — *presence confirmed, status line not read* |
+| Blosser Urban Garden | Certified since 1996 per own site | *status line not read* |
+
+**Outstanding:** the four marked above were verified as present in the CCOF directory but
+their status lines were not individually read — which, after Bounty of the Valley, is no
+longer sufficient. Worth closing.
+
+The other 18 certification claims name no certifying body ("certified organic" only), so
+there is no single record to check. Lower priority, but the same principle applies if any
+is ever challenged.
+
 ### A new red flag worth knowing
 
 **A farm website that now serves unrelated spam — gambling, pharma, crypto — means the
