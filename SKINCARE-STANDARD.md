@@ -258,3 +258,48 @@ The trade-off is real and recorded in its entry: **Maple Valley has the cleanest
 the weakest sourcing transparency** — no named farm, no region, no suet-versus-trim
 statement. LASSO and Ancestral name every component's origin but carry more ingredients.
 Neither is strictly better; they optimise for different halves of the same standard.
+
+
+---
+
+## ❌ REJECTED: Terra Lotus — contradicts its own ingredient list
+
+J ranked it 8th with the note that *"some pages on the site appear to display inconsistent
+ingredient information."* Verification confirms it, and it is worse than inconsistency
+between pages.
+
+**Terra Lotus states two different formulas on its own site:**
+
+> "Grass-fed tallow, raw honey, cold-pressed olive oil, and beeswax — **nothing else**."
+
+> "Our formula contains **only tallow, lavender essential oil, and beeswax**."
+
+Those are not variants of each other. The second contains an essential oil and omits both
+honey and olive oil, while the first says "nothing else". Both appear under the same brand
+on `terralotus.shop`.
+
+**Second problem: "Independent lab confirmed. No marketing claims, just proof."** No lab is
+named, no test is named, no result is published. Under ROOTED's own red flags, unsupported
+claim language *"should reduce confidence"* — and this one is specifically a claim about
+verification, which makes it worse than a vague wellness adjective.
+
+**Not listed, and should not be revisited without a published lab report and a single
+consistent ingredient list.** A brand whose premise is purity but which cannot state its own
+formula consistently fails the most basic version of this standard. J's "pending
+clarification" was the right instinct; the clarification came back negative.
+
+---
+
+## Not findable: Feathers and Damn Good
+
+**Feathers Tallow & Honey Skin Balm** did not surface across four separate searches. It may
+be misnamed, very small, or trading under a different storefront.
+
+**However** — a brand matching J's description of it almost exactly did surface:
+**Untamed Organics** (California), *"just three whole ingredients — grass-fed tallow, raw
+beeswax, and wild raw honey… no synthetics, no essential oils."* That is the same
+three-ingredient, wild-honey, unscented profile. It is now listed on its own merits.
+
+**Damn Good Grass-Fed Beef Tallow & Raw Honey Balm** also did not surface. J's own note
+flagged an unusually high displayed price and weaker sourcing transparency than the top
+options, so this is a low-priority gap.
