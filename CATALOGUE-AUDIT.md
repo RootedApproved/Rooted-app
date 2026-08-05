@@ -125,3 +125,40 @@ fetching all 475, and pages move without notice.
 **The practical mitigation already in place:** `verify_images.py` runs before every push and
 rejects category and collection pages, which is where most link rot originates. Bare domains
 are the remaining gap, and they degrade gracefully — a homepage is a poor landing, not a 404.
+
+
+---
+
+## ★ Category finding: premium cast iron is seasoned with seed oils — all of it
+
+Verified directly from three brands' own product pages:
+
+| Brand | Seasoning oil |
+|---|---|
+| **Smithey** | 2–3 coats of pure **grapeseed** |
+| **FINEX** | Organic **flaxseed** |
+| **Stargazer** | **Canola, grapeseed and sunflower** |
+
+**This is not brands cutting corners.** Polyunsaturated oils **polymerise hardest**, which is
+precisely what a seasoning layer must do — the oil is cross-linked into a solid surface, not
+consumed. Flax polymerises best of all, which is why FINEX uses it.
+
+**A seed oil in a seasoning is a different question from a seed oil in a pan.** The parallel
+is exact to the sunscreen finding: seed oils are the *default* in that category too, for
+sound technical reasons, and the useful response is to explain the mechanism rather than
+condemn the category.
+
+**Recorded in the Smithey entry**, with the practical note that anyone still uncomfortable
+can strip and re-season with tallow — the iron underneath is unaffected.
+
+---
+
+## Fetching prices at scale does not work
+
+Two attempts, both with `text_content_token_limit` set aggressively low. **The limit was not
+honoured** — both returned the complete page, roughly 15k tokens each. The price does sit in
+the metadata header (`meta-og:price:amount`), but it arrives with the entire page attached.
+
+**At that rate the remaining ~60 estimates would consume several times this session's total
+context.** Screenshots resolved nine products in one message at negligible cost. That is the
+efficient channel, and it is not a matter of preference.
