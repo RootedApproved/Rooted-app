@@ -129,6 +129,22 @@ should not be revisited without new evidence.
 - **Ask:** "Is Cooper's Harvest still farming, and do you sell produce boxes?"
 - **Note:** lowest priority. Half an acre is unlikely to support a public CSA.
 
+### 9. Olson Farms — address conflict
+- **The problem:** J's list gives 4725 West Street, **Oakland**. LocalHarvest describes
+  Olson Farms as *"located in Petaluma, 50 miles outside of San Francisco, comprised of 7
+  acres of vegetables."*
+- **Likely explanation:** the Oakland address is a CSA drop point, not the farm.
+- **Why it matters:** pinning it in Oakland would put a farm marker on a city street with
+  no farm. Pinning it in Petaluma might put it far from where members actually collect.
+- **Ask:** "Where is the farm, and where do members pick up?"
+
+### 10. Formation Farm — Sebastopol
+- **What it is:** describes itself as *"a socially and ecologically regenerative CSA farm in
+  the San Francisco Bay Area"* practising *"natural regenerative agriculture that promotes
+  life in our soil."* Strong fit on stated practice.
+- **Unconfirmed:** no current-season signal found, and not on either CDFA register.
+- **Ask:** "Is the CSA taking members this season, and where is pickup?"
+
 ---
 
 ## Resolved — added to the map
@@ -149,6 +165,7 @@ should not be revisited without new evidence.
 | Serendipity Farms | Added as CSA — selects heirlooms for pigmentation/vitamin content, not yield |
 | Knoll Farms | Added as **on-farm market**, not CSA — their own site describes a farm stand; CSA is stated in future tense |
 | Pie Ranch | Added as **on-farm market** — nonprofit educational farm; all farmstand profits fund its programmes |
+| Dig Deep Farms | Added as CSA — urban regenerative farm running re-entry internships to reduce recidivism |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
