@@ -303,3 +303,66 @@ three-ingredient, wild-honey, unscented profile. It is now listed on its own mer
 **Damn Good Grass-Fed Beef Tallow & Raw Honey Balm** also did not surface. J's own note
 flagged an unusually high displayed price and weaker sourcing transparency than the top
 options, so this is a low-priority gap.
+
+
+---
+
+# Sun Protection
+
+## J's framework, adopted as the subcategory standard
+
+**Rank in this order:** verified finished-product SPF and broad-spectrum testing → ingredient
+purity → non-nano zinc → organic inactive ingredients → fragrance-free → water resistance →
+packaging.
+
+**This is the one category where laboratory testing outranks ingredient philosophy.** A balm
+made with excellent tallow, beeswax and 20% zinc has not been tested. Zinc dispersion is a
+manufacturing problem, and uneven dispersion creates invisible patches with little or no
+protection — undetectable until the burn appears. **A homemade or untested zinc balm is not
+sunscreen.**
+
+**No mineral sunscreen can be "fully organic"** — zinc oxide is a mineral, not an
+agricultural ingredient. 98% organic is the realistic ceiling.
+
+---
+
+## ⚠️ A tension in the ranking, found on verification
+
+J's document penalised **Raw Elements (#3)** for using sunflower oil: *"Sunflower oil is a
+seed oil… it may still conflict with your preferred ingredient philosophy."*
+
+**But Badger Adventure SPF 50 — ranked #2 with the highest score in the document, 9.7 — uses
+organic sunflower oil as its SOLE base oil.** It is one of the four ingredients the ranking
+praises. The same objection applies with more force, since there is no other oil in the
+formula.
+
+**And there is a second, compounding factor the ranking did not surface: Badger's zinc is
+UNCOATED.**
+
+Uncoated zinc oxide is **photocatalytic under UV** — it can generate reactive oxygen species.
+Cosmetic-grade zinc is usually surface-coated specifically to suppress this. So the formula
+pairs a photocatalyst with a high-PUFA oil, on skin, in direct sunlight. In theory that is
+the least oxidatively stable combination you could design.
+
+**The counterweight, stated fairly:**
+- The formula includes **sunflower vitamin E**, an antioxidant present to mitigate precisely
+  this
+- The finished product has **passed SPF and broad-spectrum testing** with decades of use
+- Under J's own priority order, **verified protection ranks above ingredient purity**
+
+**Resolution applied:** Badger is listed at Tier 1, because it wins on the criterion J placed
+first — but the flags state the tension plainly rather than burying it. A reader choosing a
+sunscreen for daily facial use may reasonably prefer a tallow-based formula; a reader
+choosing for a day on the water should take the tested one.
+
+**Worth asking Badger:** why uncoated rather than coated zinc, and whether they have
+oxidative stability data on the finished product.
+
+---
+
+## Products requiring evidence before listing
+
+Per J's own checklist, and applied strictly: **Organic Jaguar, Terra Lotus** and any
+small-batch "tallow sunscreen" should not be listed with an SPF claim without finished-product
+SPF testing, broad-spectrum results, and water-resistance data where claimed. *(Terra Lotus is
+separately rejected outright — see the tallow section.)*
