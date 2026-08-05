@@ -100,12 +100,12 @@ distinguishing fact remain.
 - [ ] Black Urban Farmers Association
 - [ ] Borba Farms
 - [x] Brown Girl Farms — **ADDED** (African American heritage crops; detail thin, CDFA-verified)
-- [ ] Capay Canyon Ranch
+- [~] Capay Canyon Ranch — **HELD**: almond growing, handling and marketing for a worldwide market, plus a Davis Farmers Market stall selling almonds, organic grapes and raisins. CDFA-registered but no consumer CSA found. Same direct-order question as Massa Organics.
 - [ ] Christine's Garden
 - [ ] City of Cotati Farm Share (Veronda-Falletti Ranch)
 - [x] The Cloverleaf Farm CSA — **ADDED** (fruit-only CSA; Ugly Fruit Club; stated living wage)
-- [ ] Da-Le Ranch
-- [ ] Deepseeded Farm
+- [x] Da-Le Ranch — **ADDED** (first meat CSA on the map; pork/poultry feed undisclosed, flagged)
+- [~] Deepseeded Farm — **OUT OF SCOPE**: serves the Humboldt Bay area, which J deprioritised when choosing core California only. Revisit if the map expands north.
 - [ ] Donald J. Crouch
 - [ ] Eat! By Food Access Los Angeles *(multiple registered producers)*
 - [ ] Feed and be Fed
@@ -124,6 +124,15 @@ distinguishing fact remain.
 - [ ] UC Davis Student Farm — Market Garden
 - [x] Urban Tilth — Farm to Table CSA — **ADDED** (sliding-scale CSA, 5 free farm stands, free harvest access)
 - [x] West County Community Farm — **ADDED** (free-choice harvest model; also corrected a Laguna Farm data mix-up)
+
+### Strong leads surfaced during the queue (not from J's list)
+
+| Farm | Why it matters |
+|---|---|
+| **Engler Beef** (Sonoma) | Chicken raised with **NO CORN OR SOY**, grass-fed and finished beef, monthly beef box. Directly answers the feed standard — almost no poultry producer can say this |
+| **Casa Rosa Farms** (Capay Valley) | CSA of olive oil, grass-fed beef and lamb, pastured pork and eggs, fresh herbs. Bay Area pickups |
+| Cloverfield Organic Farm (El Sobrante) | U-pick, online store, tours |
+| Santa Cruz Permaculture | Organic fruit, vegetables, flowers, herbs |
 
 **28 pre-validated farms from a single fetch**, against roughly 1–2 leads per search under
 the old method.
