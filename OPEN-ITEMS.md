@@ -178,17 +178,49 @@ researched — the certificate proves they sell to the public, not how they farm
 
 | Farm | County | Valid to | What |
 |---|---|---|---|
-| **Sunrise Pasture-Poultry Farm** | Monterey | 26 Feb 2027 | Pastured poultry |
+| ~~Sunrise Pasture-Poultry Farm~~ | Monterey | 26 Feb 2027 | **ADDED** — CCOF certified organic livestock since 2015 |
 | **Hog Wild Holding Co.** | Monterey | 10 Apr 2027 | Pork |
 | **Hilliker's Egg Ranch** | San Diego | 7 Jan 2027 | Eggs |
 | **Mariposa Ranch Eggs** | Los Angeles | 11 Mar 2027 | Eggs |
-| **Metzer Farms** | Monterey | 25 Feb 2027 | Ducks and poultry |
+| ~~Metzer Farms~~ | Monterey | 25 Feb 2027 | **REJECTED** — see below |
 | **Fallon Hills Ranch** | Marin | 14 Jan 2027 | Kevin Maloney |
 | **Bloom Ranch** | Los Angeles | 4 Mar 2027 | Bill Releford |
 | **Monkey Flower Ranch** | Monterey | 19 Aug 2026 | Rebecca King — sheep |
 | **The Woolly Egg Ranch** | Marin | 21 Jul 2026 | Eggs |
 | **True Grass Farms** | Marin | 3 Jul 2026 (lapsed) | Guido Frosini — grass-fed |
 | Heart T Hogs | Modoc | 27 Jun 2026 | Pork — far north, check scope |
+
+### ❌ Metzer Farms rejected — certificate ≠ standard
+
+Metzer holds a valid CDFA certificate to sell direct. What it sells does not meet the
+standard. A supplier who stocks their duck eggs states plainly: *"These are NOT organic
+fed/certified organic or pasture-raised… They ARE CAGE-FREE, raised in open sided… layer
+buildings… They are local, but they are conventionally raised."* They moved the flock
+indoors permanently as avian-flu biosecurity.
+
+The egg subcategory standard explicitly red-flags **"cage-free alone"**. Metzer is also
+primarily a **hatchery** selling day-old ducklings, not a food producer. Duck eggs now sell
+under the separate **Olinday Farms** brand.
+
+**This is the cleanest demonstration yet that a state certificate proves a farm sells to the
+public — nothing more.** It is necessary, not sufficient.
+
+### Rich new protein leads found alongside (all corn/soy-free or equivalent)
+
+| Farm | Where | Why |
+|---|---|---|
+| **Tomales Bay Pastures** | Pt. Reyes | Pasture-raised eggs, **corn & soy free** |
+| **Rossotti Ranch** | Petaluma | Pasture-raised, **grain-free** |
+| **True Grass Farms** | Valley Ford | Certified Organic, **Animal Welfare Approved**, heritage pork and fowl |
+| **Honest Fish Farm** | CA Delta | Pigs on pasture moved every 3–5 days, **soy-free**, organically fed |
+| **Rainbow Ranch Farms** | SoCal | Corn-, soy- and wheat-free heritage meat, poultry and eggs |
+| **Marin Sun Farms** | Pt. Reyes | Pastured meat and eggs, operates its own harvesting facility |
+| **Pasture Fresh Eggs** | Tomales | Organic pasture-raised eggs |
+| **SonRise Ranch** | — | Hogs on pasture fed raw milk from their own cows |
+| Pajaro Pastures / Your Family Farm | Paicines | Eggs and pasture-raised Berkshire hogs |
+
+**These are a better lead pool than the beefnear.me set** — most name a specific feed
+standard, which is the thing that actually separates pastured operations.
 
 **On Bounty of the Valley:** it appears here as a certified direct-sale producer valid to
 21 Jan 2027. That does **not** overturn its rejection. It was rejected for **suspended
