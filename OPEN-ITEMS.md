@@ -121,11 +121,36 @@ subscription.
 "places you buy from", which is J's call — but four verified farms are sitting idle without
 it, and the meat type has now proven the pattern works cleanly.
 
-**Next candidates for the Grass-Fed Meat type**, all already researched: Big Bluff Ranch
-(certified organic pastured chicken, vetted by Stemple Creek), Pomponio Ranch, Fogline
-Farms, SoMar Farms, Silver Springs Beef, Galaxy Farm, Yolo Land & Cattle, Spreadwing Farm,
-Farm Lot 59, plus the four USDA-verified ranches: Cahuilla Mountain, Hunt Road Cattle
-Company, Gamble Ranch and Delta Diversified.
+### Grass-Fed Meat: 9 listed. The remaining leads are NOT yet verifiable.
+
+**Added:** Stemple Creek, Markegard, Engler, Da-Le, Casa Rosa, Talley Ranch, Cahuilla
+Mountain, Fogline Farms, Pomponio Ranch.
+
+**⚠️ `beefnear.me` is a proven-unreliable source and must not be used alone.** It still
+lists **Tara Firma Farms** as running CSA subscriptions — that programme ended 3 July 2026.
+Everything below currently rests on that one directory, which is exactly the single-aggregator
+failure already documented for `rootseller.app`.
+
+| Lead | Status | What would verify it |
+|---|---|---|
+| Paicines Ranch | Single source (beefnear.me) | Their own site showing a live store and shipping |
+| Hearst Ranch Beef | Single source + a 2018 article | Own site; searches are drowned by Hearst Ranch **Winery**, a different business |
+| Morris Grassfed | 2018 article, price likely stale | Own site, current pricing |
+| **J&J Grassfed Beef** (Tehachapi) | 2018 article — but **grain-free** and monthly delivery to 50+ SoCal locations | Worth a dedicated lookup; grain-free is directly relevant to the feed floor |
+| Richards Grassfed Beef | Single source | Own site |
+| Fox Sparrow Farm, Turner Grass Fed | Single source | Own sites |
+| Big Bluff Ranch | Red Bluff — likely outside core California scope | Confirm scope first |
+| SoMar, Silver Springs, Galaxy, Yolo Land & Cattle, Spreadwing, Farm Lot 59 | Single Weston A. Price chapter listing | Dedicated lookups |
+
+**USDA-verified but held on direct sales:** Gamble Ranch (Winton) and Hunt Road Cattle
+(Copperopolis) hold federal grass-fed certificates but no evidence they sell to the public.
+Delta Diversified (Walnut Grove) is unchecked. **Federal verification proves the claim, not
+that anyone can buy the meat** — the Love Apple lesson.
+
+**Better next source than chasing these one by one:** the CDFA Certified Producer
+Certificates register, current to 1 July 2026, organised by county. Every entry is a farm
+legally certified to sell direct at farmers markets — which is precisely the missing proof
+for most of the list above.
 
 ---
 
