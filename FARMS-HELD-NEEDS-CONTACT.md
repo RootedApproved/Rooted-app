@@ -144,6 +144,24 @@ map** and removed from this list.
 Worth remembering: "no recent sources found" is a statement about the search, not about the
 farm. Re-check held entries with different search terms before treating a hold as final.
 
+### 12. The Steward Sustainable Farm — Crows Landing
+- **What it is:** established by **Colton Melo, a 14-year-old third-generation farmer**,
+  described as raising food the old-fashioned way. Beef, chicken, eggs, turkey and a CSA
+  farm box.
+- **Why it is worth chasing:** if accurate and current, a teenage third-generation farmer
+  running a pastured meat and produce operation is one of the better stories available for
+  this map, and Central Valley has almost no farm-direct coverage.
+- **Unconfirmed:** whether it currently sells to the public, and how old the description is
+  — Colton would no longer be 14. Not on either CDFA register.
+- **Ask:** "Is the farm selling boxes or meat to the public right now, and where?"
+
+### 13. Contented Acres Produce — Gustine
+- **What it is:** describes itself as practising **regenerative farming to improve and
+  maintain healthy soil and farm ecosystem**, selling to local customers. Strong fit on
+  stated practice.
+- **Unconfirmed:** no current-season signal, no website found, not on either CDFA register.
+- **Ask:** "Is the CSA or farm box currently available, and where do people collect?"
+
 ---
 
 ## Resolved — added to the map
@@ -182,6 +200,7 @@ farm. Re-check held entries with different search terms before treating a hold a
 | 24 Carrot Farm | Added as **on-farm market** — certified organic **and** Real Organic Project listed; farm stand and U-pick lead, CSA alongside |
 | Clark Valley Organic Farm | Added as CSA under its **current name, Los Osos Valley Organic Farm** — same farm, same address, renamed |
 | Blosser Urban Garden | Added as CSA — CCOF certified since **1996**; discloses it grows 85% of each bag |
+| Raw Roots Farm | Added as CSA — 4 acres, Catheys Valley. Verified via CDFA register; entry is honest that detail is thin |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -249,10 +268,10 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 46 of 115 core-California farms
-- **Added:** 32 (plus 1 existing entry corrected)
+- **Checked:** 49 of 115 core-California farms
+- **Added:** 33 (plus 1 existing entry corrected)
 - **Rejected:** 4
-- **Held for contact:** 9
+- **Held for contact:** 11
 
 ### The grown-versus-sourced ratio is the tell
 
