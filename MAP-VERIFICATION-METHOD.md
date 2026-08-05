@@ -164,7 +164,7 @@ distinguishing fact remain.
 - [x] Grub CSA Farm — **ADDED** (Chico; members gather their own share from tables, not pre-boxed)
 - [x] Heritage Valley Family Orchard — **ADDED** (single-crop heirloom avocado CSA, shipped)
 - [~] Kimberley Wine Vinegars — **NOT A FARM LISTING** — a vinegar producer. Belongs in the product catalogue if anywhere, not the food map
-- [~] Lads Home Ranch — **HELD**: site is live and states regenerative practice, organic seed and organic compost, plus handcrafted spice blends. But NO LOCATION is published anywhere found, and a farm cannot go on a map without one. Needs a call.
+- [~] Lads Home Ranch — **STILL HELD after a second attempt.** Site is live and states regenerative practice, organic seed and organic compost, plus handcrafted spice blends. NO LOCATION published anywhere found — not on the site, not in any directory. A farm cannot go on a map without one. **This needs a phone call or an email; further searching will not resolve it.**
 - [~] Mellor Ranch — **HELD** — nothing verifiable beyond the CDFA registration
 - [x] Old Grove Orange — **ADDED** (5th-gen farm + food hub supplying 50+ school districts)
 - [~] Outer Aisle Food Hub — **HELD**: operates as a Farmigo-based buying platform ("ditch the supermarket, buy from local farmers") rather than a farm. Aggregator, not a producer — same direct-order question as Massa.
