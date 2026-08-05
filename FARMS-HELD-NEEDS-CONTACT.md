@@ -175,6 +175,8 @@ farm. Re-check held entries with different search terms before treating a hold a
 | Say Hay Farms | Added as CSA — soy-free pastured egg option. A stale 2014 Yelp listing marked CLOSED is a *former address*, not the farm |
 | Soil Born Farms | **Already listed** as a farmers market — recategorised to CSA and enriched. See note below |
 | Eatwell Farm | Added as CSA — 105 acres organic, 30+ years, integrated pastured hens, Care Share donation programme |
+| Full Belly Farm | Added as CSA — 300+ acres, organic since 1985, owner-operated. **Ended home delivery June 2026** — pickup only |
+| Farm Fresh To You (Capay Organic) | Added as CSA — entry states plainly it is a **large delivery service** (~15,000 boxes/week), not a single-farm share |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -242,10 +244,20 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 39 of 115 core-California farms
-- **Added:** 25 (plus 1 existing entry corrected)
+- **Checked:** 41 of 115 core-California farms
+- **Added:** 27 (plus 1 existing entry corrected)
 - **Rejected:** 4
 - **Held for contact:** 9
+
+### Scale should be stated, not hidden
+
+"CSA" now covers everything from a half-acre neighbourhood plot to a 500-acre operation
+shipping 15,000 boxes a week. Both can be genuinely organic and worth listing, but they are
+not the same product and a reader choosing between them deserves to know which is which.
+
+Entries should say plainly when a listing is an aggregated delivery service rather than a
+share in one farm — see Farm Fresh To You. This is the same principle already applied to
+Spade & Plow's food-hub disclosure and Frog Hollow's partner-grown vegetable box.
 
 ### Watch list — verified, but at risk
 
