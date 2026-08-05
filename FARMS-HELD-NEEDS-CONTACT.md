@@ -106,21 +106,7 @@ should not be revisited without new evidence.
   Is anything open to the public?"
 - **Note:** if it is trees and seeds only, it is a nursery and does not belong on this map.
 
-### 9. Dig Deep Farms — San Leandro / Ashland / Cherryland
-- **What it is:** substantial social enterprise founded 2010, run through the Alameda County
-  Deputy Sheriff's Activities League. Roughly 8 acres of urban farm across three parcels,
-  plus a 500-tree orchard at City View Farm. Creates jobs and runs re-entry internships
-  aimed at reducing recidivism. Historically sold "grub boxes" as a CSA and ran farm stands
-  in Hayward and Oakland.
-- **Confirmed:** the organisation is real, county-backed, and substantial.
-- **Unconfirmed:** whether the CSA and farm stands are currently open to the general public,
-  or whether the operation has shifted entirely to food-bank distribution. Every detailed
-  source found dates from 2012–2020. Not on either CDFA register.
-- **Ask:** "Can a member of the public buy a produce box or shop a farm stand, and where?"
-- **Worth the call** — if public sales are running, the recidivism-reduction model is one of
-  the strongest stories available for this map.
-
-### 10. Cooper's Harvest — Brentwood
+### 9. Cooper's Harvest — Brentwood
 - **What it is:** a First Generation Farmers incubator plot. Description reads *"Beginning in
   2019, Farmer Erin will be farming 1/2 acres"* — half an acre, written in future tense
   seven years ago.
@@ -129,7 +115,7 @@ should not be revisited without new evidence.
 - **Ask:** "Is Cooper's Harvest still farming, and do you sell produce boxes?"
 - **Note:** lowest priority. Half an acre is unlikely to support a public CSA.
 
-### 9. Olson Farms — address conflict
+### 10. Olson Farms — address conflict
 - **The problem:** J's list gives 4725 West Street, **Oakland**. LocalHarvest describes
   Olson Farms as *"located in Petaluma, 50 miles outside of San Francisco, comprised of 7
   acres of vegetables."*
@@ -138,12 +124,25 @@ should not be revisited without new evidence.
   no farm. Pinning it in Petaluma might put it far from where members actually collect.
 - **Ask:** "Where is the farm, and where do members pick up?"
 
-### 10. Formation Farm — Sebastopol
+### 11. Formation Farm — Sebastopol
 - **What it is:** describes itself as *"a socially and ecologically regenerative CSA farm in
   the San Francisco Bay Area"* practising *"natural regenerative agriculture that promotes
   life in our soil."* Strong fit on stated practice.
 - **Unconfirmed:** no current-season signal found, and not on either CDFA register.
 - **Ask:** "Is the CSA taking members this season, and where is pickup?"
+
+---
+
+### Note on Dig Deep Farms — resolved by a later session
+
+Dig Deep Farms was held here on the basis that every detailed source dated 2012–2020. A
+later verification round found **three independent 2026 sources** — a volunteer directory
+dated April 2026, Nourish Wellness with a site updated May 2026, and Yelp updated June
+2026 — confirming current CSA bags and five weekday farm stands. It has been **added to the
+map** and removed from this list.
+
+Worth remembering: "no recent sources found" is a statement about the search, not about the
+farm. Re-check held entries with different search terms before treating a hold as final.
 
 ---
 
@@ -165,7 +164,8 @@ should not be revisited without new evidence.
 | Serendipity Farms | Added as CSA — selects heirlooms for pigmentation/vitamin content, not yield |
 | Knoll Farms | Added as **on-farm market**, not CSA — their own site describes a farm stand; CSA is stated in future tense |
 | Pie Ranch | Added as **on-farm market** — nonprofit educational farm; all farmstand profits fund its programmes |
-| Dig Deep Farms | Added as CSA — urban regenerative farm running re-entry internships to reduce recidivism |
+| Dig Deep Farms | Added as CSA — urban regenerative farm running re-entry internships to reduce recidivism. *Initially held by a parallel session; resolved with 2026 sources.* |
+| APC Farm2Market | Added as CSA — social enterprise of Alameda Point Collaborative; employs residents leaving homelessness |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -191,10 +191,14 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 29 of 115 core-California farms
-- **Added:** 16
+- **Checked:** 30 of 115 core-California farms
+- **Added:** 17
 - **Rejected:** 4
-- **Held for contact:** 10
+- **Held for contact:** 9
+
+> **Note:** two chat sessions have been working this list concurrently. Always `git pull`
+> before starting a batch, and check this file before researching a farm — it may already
+> have been resolved or held elsewhere.
 
 ### Leads found along the way (not on J's list, worth checking later)
 
