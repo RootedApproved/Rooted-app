@@ -130,7 +130,7 @@ distinguishing fact remain.
 | Farm | Why it matters |
 |---|---|
 | ~~Engler Beef~~ | **ADDED** — Sonora (not Sonoma). Selectively bred for grass finishing; California start to finish; no-corn-no-soy chicken flagged as needing confirmation |
-| **Casa Rosa Farms** (Capay Valley) | CSA of olive oil, grass-fed beef and lamb, pastured pork and eggs, fresh herbs. Bay Area pickups |
+| ~~Casa Rosa Farms~~ | **ADDED** — 1840s olive grove, livestock grazed inside the orchards, beef bacon |
 | Cloverfield Organic Farm (El Sobrante) | U-pick, online store, tours |
 | Massa Natural Meats (N. California) | Grass-fed beef and lamb, pasture-raised heritage pork and chicken |
 | Yolo Land & Cattle Co (Woodland) | 100% grass-fed Angus beef |
