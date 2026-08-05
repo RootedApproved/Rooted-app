@@ -446,3 +446,52 @@ differ between butter, stick, kids and lotion products."*
 already established twice in this project** — the Ancestral/Amazon discrepancy and the
 Primally Pure palm-versus-coconut error. **The brand's own product page is the source of
 record.** Held until it can be read directly.
+
+
+## ★ The finding that closes this category: seed oils are the DEFAULT base in mineral sunscreen
+
+Every remaining product on J's list uses a high-PUFA oil as its base. Checked across every
+SKU that surfaced:
+
+| Product | Base oil |
+|---|---|
+| Badger Adventure SPF 50 | Organic **sunflower** — sole base |
+| Badger Active SPF 30 | Organic **sunflower** — sole base |
+| Raw Elements Face + Body | **Sunflower** |
+| Raw Elements Daily Face Tint | **Hemp seed, argan, sunflower** |
+| Earth Mama Baby Face Stick SPF 40 | Coconut + **sunflower** |
+| Earth Mama Baby Lotion SPF 40 | **Raspberry seed, pomegranate seed** |
+| Stream2Sea Sport Zinc Balm | **Sweet almond** |
+| **Primally Pure Sun Cream SPF 30** | **NONE — tallow, coconut, mango butter, fractionated palm** |
+
+**Seed oils are not an oversight in this category. They are the default**, because they are
+cheap, light-textured, and disperse zinc well — zinc dispersion being the hard formulation
+problem in mineral sunscreen.
+
+**That reframes Primally Pure entirely.** It is not merely the cleanest option on the list;
+it is close to the only mineral sunscreen that solved the texture-and-dispersion problem
+using oxidatively stable fats. The tallow is doing real formulation work, not signalling.
+
+**And it sharpens the Badger trade-off.** Badger is not careless — it is doing what
+essentially the whole category does. Its advantage is a *tested* SPF 50 with 80-minute water
+resistance, which Primally Pure does not offer. The split stands.
+
+---
+
+## Held rather than listed from the wrong SKU
+
+**Raw Elements Face + Body Tin SPF 30, Earth Mama Baby Mineral Lotion SPF 40, and
+Stream2Sea Sport Zinc Balm SPF 40** are all held.
+
+The data that surfaced was for **adjacent SKUs** — the Raw Elements *Cream* and *Face Tint*,
+the Earth Mama *Face Stick* — not the exact products J named. J's own note warned:
+*"verify each exact SKU because formulas differ between butter, stick, kids and lotion
+products."*
+
+**Listing from an adjacent SKU would repeat an error this project has already made three
+times:** the Ancestral/Amazon discrepancy, the Primally Pure palm-versus-coconut mix-up, and
+the duplicate Primally Pure entry. Each needs its own Drug Facts panel read directly.
+
+**Expected outcome when they are checked:** all three land at **Tier 2** — genuine mineral
+sunscreens with verified SPF, marked down for a high-PUFA base in a product worn under UV.
+That is a useful listing, not a rejection, and worth completing.
