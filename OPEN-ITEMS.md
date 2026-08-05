@@ -107,13 +107,25 @@ subscription and no storefront. Currently unlistable. Blocked and waiting:
 | **Outer Aisle Food Hub** | Farmigo buying platform |
 | **Heritage Valley Family Orchard** | Listed as CSA, but the model is really a shipped single-crop subscription |
 
-**B. A `meat` type.** Six meat operations are filed as `csa`, which understates them: Da-Le
-Ranch, Engler Beef, Stemple Creek, Markegard, Casa Rosa, Talley Ranch. A user looking for
-grass-fed beef cannot currently filter for it.
+**B. ✅ DONE — `meat` type added, labelled "Grass-Fed Meat".** J approved. Six operations
+moved from `csa`: Da-Le Ranch, Engler Beef, Stemple Creek, Markegard, Casa Rosa, Talley
+Ranch. Own filter toggle, own colour (#4A6741) and icon. Free tier, curated-only (never
+queried against the USDA API, like grocery and restaurant).
 
-**Recommendation:** add both. `meat` is unambiguous and immediately useful. `directorder`
-shifts the map slightly from "places you go" to "places you buy from", which is J's call —
-but four verified farms are sitting idle without it.
+**Still open: whether `directorder` should exist.** Four verified farms remain unlistable
+without it — Massa Organics, Capay Canyon Ranch, Outer Aisle Food Hub, and arguably Heritage
+Valley Family Orchard, currently filed as a CSA though its model is a shipped single-crop
+subscription.
+
+**Remaining recommendation:** `directorder` shifts the map slightly from "places you go" to
+"places you buy from", which is J's call — but four verified farms are sitting idle without
+it, and the meat type has now proven the pattern works cleanly.
+
+**Next candidates for the Grass-Fed Meat type**, all already researched: Big Bluff Ranch
+(certified organic pastured chicken, vetted by Stemple Creek), Pomponio Ranch, Fogline
+Farms, SoMar Farms, Silver Springs Beef, Galaxy Farm, Yolo Land & Cattle, Spreadwing Farm,
+Farm Lot 59, plus the four USDA-verified ranches: Cahuilla Mountain, Hunt Road Cattle
+Company, Gamble Ranch and Delta Diversified.
 
 ---
 
