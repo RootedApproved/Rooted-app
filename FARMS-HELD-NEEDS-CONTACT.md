@@ -170,6 +170,7 @@ farm. Re-check held entries with different search terms before treating a hold a
 | Laguna Farm | Added as CSA — 400+ member households; 200+ crop varieties |
 | Tierra Vegetables | Added as CSA — heirloom beans, grains and corn. **Publicly described its future as uncertain in late 2025**; still trading 2026 |
 | Petaluma Bounty Farm | Added as CSA — nonprofit educational urban farm |
+| Gospel Flat Farm Stand | Added as **on-farm market** — 24/7 honour-system stand. CSA claim not treated as confirmed (see note) |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -184,6 +185,17 @@ farm. Re-check held entries with different search terms before treating a hold a
 
 | **Love Apple Farms** (Santa Cruz) | Yelp lists the business as **CLOSED**, updated April 2026. Even when trading, the farm at Vine Hill Road was *"the exclusive, private kitchen garden for Manresa restaurant"* and explicitly **not open to the general public** — so it was never a public food source. The Manresa relationship also ended when that restaurant closed in 2022. A LocalHarvest listing still advertises a 25-member CSA; it is undated and contradicted by every current source. |
 
+### Aggregators that cannot be trusted alone
+
+`rootseller.app` has now been wrong twice in this project. It listed **Muir Ranch** as an
+active CSA eight years after Pasadena Unified shut it down, and it is the only source
+claiming **Gospel Flat Farm** runs a CSA. Gospel Flat was therefore listed as a farm stand —
+the thing that is verifiable across multiple current sources — rather than as a CSA on one
+aggregator's word.
+
+The general rule this suggests: **a claim that appears on exactly one aggregator and
+nowhere else, including the farm's own site, is not a fact.** List what is corroborated.
+
 ### A new red flag worth knowing
 
 **A farm website that now serves unrelated spam — gambling, pharma, crypto — means the
@@ -195,8 +207,8 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 34 of 115 core-California farms
-- **Added:** 21
+- **Checked:** 35 of 115 core-California farms
+- **Added:** 22
 - **Rejected:** 4
 - **Held for contact:** 9
 
