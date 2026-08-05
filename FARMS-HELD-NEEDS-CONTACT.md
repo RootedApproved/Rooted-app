@@ -282,6 +282,7 @@ the miscategorisation this file already documents twice.
 |---|---|
 | **Muir Ranch CSA** (Pasadena) | Shut down by Pasadena Unified School District. Their spokesperson: *"Effective June 30, 2018, PUSD will end its relationship with the program."* Still listed as active on LocalHarvest, rootseller.app, la2050 and Localize — eight years after closure. |
 | **Belcampo Farms** (Gazelle) | Retail operation collapsed in 2021 after its butcher shops were found selling conventional meat as their own grass-fed product. A company that misrepresented its sourcing cannot sit on a platform built on verified sourcing. |
+| **Tara Firma Farms** (Petaluma) — CSA only | **CSA ENDED 3 JULY 2026**, confirmed by the Petaluma Argus-Courier on 15 July 2026 and by Sonoma County Farm Trails. The 260-acre farm remains open for events and farm-based activities, and may still run its farm store — that part is unconfirmed and would need a call. Do not list the CSA. **The owners themselves recommend customers turn to Stemple Creek Ranch**, which is now the top meat lead on their recommendation. |
 | **Bounty of the Valley Farms** (Greenfield) | Organic certification **SUSPENDED** — USDA NOP suspended 25 November 2020, Handling and Crops suspended 3 September 2020, per its own CCOF record. Still described as "a small organic farm" across CAFF, GreenTowns and other directories, and still listed as running a CSA. No current-season signal found. Not listable as organic, and a suspension rather than a lapse warrants caution generally. Re-check only if CCOF shows certification restored. |
 | **Rio Gozo Farm** (Ojai) | **Domain hijacked.** `riogozofarm.com` now serves an Indonesian gambling site — the signature of a lapsed domain resold to spammers. LocalHarvest listing last updated January 2025 and offers a "report as inactive" link. Not on the CDFA register. Strong evidence the farm stopped operating. Re-check only if the farm resurfaces under a new domain. |
 
@@ -328,6 +329,26 @@ aggregator's word.
 
 The general rule this suggests: **a claim that appears on exactly one aggregator and
 nowhere else, including the farm's own site, is not a fact.** List what is corroborated.
+
+### A six-month-old glowing writeup is not verification
+
+Tara Firma Farms was the strongest lead on the meat list. Edible East Bay's CSA guide,
+published January 2026, described it in detail: grass-fed and pastured poultry, beef and
+pork, with CSA members also getting vegetables, fruit, eggs, dairy and bread, plus Sunday
+farm visits to hike and fish. Yelp, CAFF, GO LOCAL and Sonoma County Tourism all carried
+positive current-sounding listings, and it had over 600 active CSA members.
+
+**The CSA ended on 3 July 2026.** Only a local newspaper report from 15 July surfaced it.
+
+Two lessons:
+1. **A detailed, enthusiastic, recent-looking writeup is not a current-status check.** Six
+   months is long enough for a programme to close entirely.
+2. **Search local news, not just directories.** A regional paper reported this within two
+   weeks; no directory had caught up a month later.
+
+This is the highest-value catch of the project. Listing Tara Firma would have sent people to
+a subscription that no longer exists, on the strength of five sources that all still say it
+does.
 
 ### Check certification STATUS, not just presence in a directory
 

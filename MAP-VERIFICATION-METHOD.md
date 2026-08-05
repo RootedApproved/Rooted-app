@@ -134,14 +134,14 @@ distinguishing fact remain.
 | Cloverfield Organic Farm (El Sobrante) | U-pick, online store, tours |
 | Massa Natural Meats (N. California) | Grass-fed beef and lamb, pasture-raised heritage pork and chicken |
 | Yolo Land & Cattle Co (Woodland) | 100% grass-fed Angus beef |
-| **Tara Firma Farms** (Petaluma) | **Pastured-meat CSA and farm store** — would be only the second meat CSA on the map |
+| ~~Tara Firma Farms~~ | **REJECTED — CSA ended 3 July 2026.** Farm open for events; store status unconfirmed. Owners recommend Stemple Creek Ranch instead |
 | Stemple Creek Ranch (Tomales) | Grass-fed beef, lamb and pork |
 | SoMar Farms (W. Petaluma) | Grass-fed beef and lamb, pickup at farm or Oakland |
 | Silver Springs Beef / Alhambra Valley (Martinez) | 100% grass-fed beef and lamb, heritage pork, bulk or cuts |
 | Galaxy Farm (Woodland) | Organic-fed lamb |
 | Hole-In-One Ranch (Janesville) | Grass-fed beef, lamb and pork |
 | Dare 2 Dream Farms (Lompoc) | Free-range eggs, organic produce, backyard chickens — CSA currently sold out |
-| **Tara Firma Farms** (Petaluma) | Grass-fed/pastured poultry, beef and pork; CSA members also get vegetables, fruit, eggs, dairy and bread, plus **Sunday farm visits to hike and fish** |
+| ~~Tara Firma Farms~~ | **REJECTED — CSA ended 3 July 2026** |
 | **Farm to My Neighborhood** | Nonprofit tech platform letting very small organic farmers sell direct — no weekly commitment, neighbourhood drop sites. Described as a top recommendation by Edible East Bay |
 | South Central Farmers (LA / Bakersfield) | CSA boxes into greater LA with UCLA drop points |
 | Esperanza's 7 Plus Organics Co-op | Co-op of small farmers of colour in the Pajaro/Salinas Valleys |
@@ -203,7 +203,10 @@ time.
    practices does not need dedicated research — the register already proved existence.
    Reserve deep digging for ambiguity, certification claims, or anything that will be
    asserted as fact in an entry.
-4. **Shorter commit messages.** Reasoning belongs in the entry and the standards docs, which
+4. **Check local news for anything high-value.** A regional newspaper caught Tara Firma's
+   CSA closing within two weeks; no directory had updated a month later. For any lead that
+   would become a flagship listing, search the local paper before writing the entry.
+5. **Shorter commit messages.** Reasoning belongs in the entry and the standards docs, which
    are what get read. A commit message does not need to restate them.
 
 **Batching by region also improves accuracy.** The Laguna / West County conflation was
