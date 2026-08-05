@@ -170,16 +170,44 @@ reliably stay attached to the right restaurant.** Observed directly:
 - **Kitava Mission** and **Kitava Oakland** carry markedly different oil lists — which may be
   genuine, or may be bleed.
 
-**Rule: do not state a specific fat list from a Local Fats search snippet unless the same
-list appears on at least two independent pages.** The *"100% Seed Oil Free"* flag itself is
-consistent and can be used; the oil breakdown and the `Chain` tag cannot be trusted at the
-entry level. Fetch the restaurant's own profile page or site for specifics.
+**CONFIRMED WORSE ON A SECOND PASS.** The identical tag string *"Beef Tallow Butter Ghee
+Pork Lard Olive Oil Coconut Oil more"* appears verbatim against **Kitava Oakland** and
+**Calibur Burger**, and *"Chain 100% Seed Oil Free Olive Oil Coconut Oil Avocado Oil"*
+appears verbatim against both **Eve's Waterfront** and **Long Bridge Pizza Co.** These are
+repeating template fragments, not per-restaurant data.
+
+**Rule, hardened: the oil lists in Local Fats search snippets are UNUSABLE.** Do not cite
+them at all, even with two matching pages — matching pages are exactly what a repeating
+template produces. Only the presence of a restaurant in the directory, its name, and its
+city can be taken from a snippet. For fats, fetch the restaurant's own profile page or its
+website, or use the Seed Oil Free Alliance below.
 
 **Already corrected:** Casey's Pizza, which had cited a specific fat list.
 
 This is the third instance of the same underlying failure — directory listings merging
 adjacent entries — after the CAFF page that put West County Community Farm's address into
 Laguna Farm, and the Open Silo snippet that ran ALMA's description into Farm Lot 59's.
+
+### ★ THE SEED OIL FREE ALLIANCE — the certification this category was missing
+
+Founded 2023 by Corey Nelson and Jonathan Rubin, explicitly because **no certification
+existed to verify that foods are actually seed-oil free.** They certify restaurants and
+packaged products, and they **test the oils**.
+
+Why this matters more than any directory: in certifying their first restaurant, the Alliance
+had already **rejected another applicant for oil adulteration** — a supplier's "clean" oil
+that turned out not to be. That is precisely the failure the industry source named earlier:
+*tallow cut with soy and stabilisers.* A restaurant cannot detect that by trusting its
+supplier; only testing catches it.
+
+**This is the restaurant equivalent of CCOF for organic and the USDA SVS register for
+grass-fed** — the third source of its kind found in this project, and the pattern holds:
+**a directory tells you a claim exists; a certifier tells you it was checked.**
+
+**NEXT ACTION for the restaurant category:** find and mine the Alliance's certified-business
+directory. A California list from it would be worth more than the remaining twelve Local
+Fats candidates combined, and every entry could carry a verified certification rather than a
+community-submitted claim.
 
 ### Category-specific questions worth asking
 
