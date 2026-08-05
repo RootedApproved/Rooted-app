@@ -305,14 +305,20 @@ specifically, which makes them checkable. Results:
 | Full Belly Farm | **Certified** — Crops & USDA NOP since Mar 1985, Handling 2004, Livestock 2006 | May 2026 ✅ |
 | Terra Firma Farm | **Certified** — Crops & USDA NOP since Mar 1988, Handling 2010 | Jun 2026 ✅ |
 | Shumei Santa Cruz Farm | **SURRENDERED** — USDA NOP & Crops 25 Dec 2017, Handling Jan 2018 | Aug 2026 ⚠️ **entry corrected** |
-| Say Hay Farms | Current directory member | Dec 2025 — *presence confirmed, status line not read* |
-| The Natural Trading Company | Current directory member | Jul 2026 — *presence confirmed, status line not read* |
-| Blosser Urban Garden | Certified since 1996 per own site | *status line not read* |
+| Say Hay Farms | **No certification records shown** on its CCOF page — neither Certified nor Suspended nor Surrendered | Aug 2026 ⚠️ *entry softened* |
+| The Natural Trading Company | **Certified** — USDA NOP & Crops since 14 Nov 2002, Handling 2005. CCOF record updated 1 Aug 2026 | Aug 2026 ✅ |
+| Blosser Urban Garden | Certified since 1996 per own site | *still unread — open `ccof.org/directory-member/blosser-urban-garden/`* |
 
-**Outstanding:** Say Hay Farms, The Natural Trading Company and Blosser Urban Garden were
-confirmed present in the CCOF directory but their status lines have not been read. Search
-snippets truncate before the certification block, so each needs its CCOF page opened
-directly — `ccof.org/directory-member/<farm-slug>/`.
+**Outstanding:** Blosser Urban Garden only. Its CCOF page has not been opened.
+
+**A fourth case, worth naming: an EMPTY certification block.** Say Hay Farms is in the CCOF
+directory, but its page lists no certification records at all — not Certified, not
+Suspended, not Surrendered. Every other CCOF farm checked shows dated entries. What an empty
+block means is genuinely unclear, so the listing was softened to say the certification could
+not be confirmed from the record rather than asserting or denying it.
+
+That is the honest position: **absence of a record is not evidence either way, and should be
+reported as absence rather than resolved in the farm's favour or against it.**
 
 #### The audit caught a live error
 
