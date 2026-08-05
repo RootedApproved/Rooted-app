@@ -181,6 +181,7 @@ farm. Re-check held entries with different search terms before treating a hold a
 | Mountain Bounty Farm | Added as CSA — oldest CSA in the Sierras; unlimited vacation holds; 32 of 50 acres left as managed forest |
 | 24 Carrot Farm | Added as **on-farm market** — certified organic **and** Real Organic Project listed; farm stand and U-pick lead, CSA alongside |
 | Clark Valley Organic Farm | Added as CSA under its **current name, Los Osos Valley Organic Farm** — same farm, same address, renamed |
+| Blosser Urban Garden | Added as CSA — CCOF certified since **1996**; discloses it grows 85% of each bag |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -248,10 +249,21 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 45 of 115 core-California farms
-- **Added:** 31 (plus 1 existing entry corrected)
+- **Checked:** 46 of 115 core-California farms
+- **Added:** 32 (plus 1 existing entry corrected)
 - **Rejected:** 4
 - **Held for contact:** 9
+
+### The grown-versus-sourced ratio is the tell
+
+Five farms now on this map state plainly what proportion of a box they actually grow:
+Blosser (85%), Eatwell (90%+), Fifth Crow, Frog Hollow (vegetables grown by named partners),
+Spade & Plow (discloses its food-hub cross-docking). Farm Fresh To You is listed with its
+scale stated because it does not.
+
+Nobody is required to disclose this, and most aggregated boxes never do. **A farm that
+volunteers the ratio is telling you something about how it handles every other claim.**
+Worth asking for, and worth recording in the entry either way.
 
 ### Farms get renamed, and directories keep the old name
 
