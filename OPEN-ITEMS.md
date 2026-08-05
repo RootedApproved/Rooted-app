@@ -92,160 +92,39 @@ ruling, that is worth a direct question. It is flagged in the entry rather than 
 
 **Raw Farm is NOT listed** and should not be added without a further decision.
 
-## 2. THE TYPE DECISION — highest-leverage single call
+## 2. ✅ TYPE DECISIONS — BOTH CLOSED
 
-The map has five listing types: `grocery`, `farmersmarket`, `restaurant`, `csa`,
-`onfarmmarket`. Two gaps have appeared repeatedly:
+**`meat` — ADDED.** Labelled "Grass-Fed Meat", 18 listings, own filter, colour and icon.
 
-**A. Direct-order farms** — verified California farms selling by post or online, with no box
-subscription and no storefront. Currently unlistable. Blocked and waiting:
+**`directorder` — DECIDED: NO.** The map answers *"where can I go?"* The product catalogue
+answers *"what should I buy?"* A farm that ships nationwide is the second question wearing
+the first one's clothes — pinning Massa Organics to Hamilton City tells a user in San Diego
+nothing useful, and it quietly changes what the map means.
 
-| Farm | What it is |
+### Where the four blocked entries go instead
+
+| Entry | Resolution |
 |---|---|
-| **Massa Organics** | CCOF certified. Sheep graze the almond orchard; ducks in the rice fields. Organic brown rice, almonds, almond butter |
-| **Capay Canyon Ranch** | Fifth generation, organic grapes and raisins, almonds |
-| **Outer Aisle Food Hub** | Farmigo buying platform |
-| **Heritage Valley Family Orchard** | Listed as CSA, but the model is really a shipped single-crop subscription |
+| **Heritage Valley Family Orchard** | **No change.** Already listed as a CSA and correctly so — it is a recurring seasonal membership from one orchard |
+| **Outer Aisle Food Hub** | → product catalogue, **`food-grocery-delivery`** (exists, 2 products). It is a Farmigo buying platform, which is exactly what that subcategory is for |
+| **Massa Organics** | → product catalogue. **BLOCKED — see below** |
+| **Capay Canyon Ranch** | → product catalogue. **BLOCKED — see below** |
 
-**B. ✅ DONE — `meat` type added, labelled "Grass-Fed Meat".** J approved. Six operations
-moved from `csa`: Da-Le Ranch, Engler Beef, Stemple Creek, Markegard, Casa Rosa, Talley
-Ranch. Own filter toggle, own colour (#4A6741) and icon. Free tier, curated-only (never
-queried against the USDA API, like grocery and restaurant).
+### ⚠️ A subcategory that does not exist yet — J's call
 
-**Still open: whether `directorder` should exist.** Four verified farms remain unlistable
-without it — Massa Organics, Capay Canyon Ranch, Outer Aisle Food Hub, and arguably Heritage
-Valley Family Orchard, currently filed as a CSA though its model is a shipped single-crop
-subscription.
+Massa Organics sells **organic brown rice, almonds and almond butter.** Capay Canyon sells
+**almonds, organic grapes and raisins.** The Seed Oil Free Certified directory also has
+**Daily Crunch Snacks** and **Seed & Shell** (nuts and nut butters) with nowhere to go.
 
-**Remaining recommendation:** `directorder` shifts the map slightly from "places you go" to
-"places you buy from", which is J's call — but four verified farms are sitting idle without
-it, and the meat type has now proven the pattern works cleanly.
+The eleven Food & Diet subcategories are meat ×5, dairy ×2, and pantry ×3 (fats, salt,
+condiments) plus grocery delivery. **There is no home for nuts, grains, or shelf staples.**
 
-### Grass-Fed Meat: 9 listed. The remaining leads are NOT yet verifiable.
+**Proposed:** a `food-pantry-staples` subcategory — "Nuts, Grains & Pantry Staples". It would
+open immediately with Massa's rice and almond butter, Capay Canyon's almonds, Daily Crunch
+and Seed & Shell, and it is the natural home for the certified snack brands already
+identified.
 
-**Added:** Stemple Creek, Markegard, Engler, Da-Le, Casa Rosa, Talley Ranch, Cahuilla
-Mountain, Fogline Farms, Pomponio Ranch.
-
-**⚠️ `beefnear.me` is a proven-unreliable source and must not be used alone.** It still
-lists **Tara Firma Farms** as running CSA subscriptions — that programme ended 3 July 2026.
-Everything below currently rests on that one directory, which is exactly the single-aggregator
-failure already documented for `rootseller.app`.
-
-| Lead | Status | What would verify it |
-|---|---|---|
-| Paicines Ranch | Single source (beefnear.me) | Their own site showing a live store and shipping |
-| Hearst Ranch Beef | Single source + a 2018 article | Own site; searches are drowned by Hearst Ranch **Winery**, a different business |
-| Morris Grassfed | 2018 article, price likely stale | Own site, current pricing |
-| **J&J Grassfed Beef** (Tehachapi) | 2018 article — but **grain-free** and monthly delivery to 50+ SoCal locations | Worth a dedicated lookup; grain-free is directly relevant to the feed floor |
-| Richards Grassfed Beef | Single source | Own site |
-| Fox Sparrow Farm, Turner Grass Fed | Single source | Own sites |
-| Big Bluff Ranch | Red Bluff — likely outside core California scope | Confirm scope first |
-| SoMar, Silver Springs, Galaxy, Yolo Land & Cattle, Spreadwing, Farm Lot 59 | Single Weston A. Price chapter listing | Dedicated lookups |
-
-**USDA-verified but held on direct sales:** Gamble Ranch (Winton) and Hunt Road Cattle
-(Copperopolis) hold federal grass-fed certificates but no evidence they sell to the public.
-Delta Diversified (Walnut Grove) is unchecked. **Federal verification proves the claim, not
-that anyone can buy the meat** — the Love Apple lesson.
-
-### ✅ CDFA Certified Producer register pulled and cross-checked (edition: 1 May 2026)
-
-**It independently confirmed 12 farms already on ROOTED**, each holding a live state
-certificate to sell direct — the strongest validation of existing work available:
-
-Borba Farms · Mountain Bounty Farm · The Natural Trading Company · Sage Mountain Farm ·
-Huerta del Valle · Huarache Farms · J.R. Organics · Frog Hollow Farm · Knoll Farms ·
-Da-Le Ranch · Alexandre Family Farm · Serendipity Farms
-
-**⚠️ Three show certificates that had lapsed by the register date:**
-
-| Farm | Expired | Note |
-|---|---|---|
-| **Da-Le Ranch** | 4 May 2026 | On the map. Register is a 1 May snapshot, so a later renewal would not appear |
-| Serendipity Farms | 9 Jun 2026 | On the map |
-| Alexandre Family Farm | 1 May 2026 | Product listing, not a map pin |
-
-Not an emergency and not evidence of a problem — small farms renew late routinely. Worth a
-check before anyone drives out, which the entries already advise.
-
-**Resolves a standing hold:** *Feed and Be Fed* (Los Angeles, Linda O'Brien-Rothe) IS a
-certified producer, expired 20 May 2026. It exists and sells direct; the entry needs only
-current-season detail.
-
-### New protein leads WITH confirmed direct-sale certification
-
-These carry the proof the beefnear.me leads lacked. Each still needs its practices
-researched — the certificate proves they sell to the public, not how they farm.
-
-| Farm | County | Valid to | What |
-|---|---|---|---|
-| ~~Sunrise Pasture-Poultry Farm~~ | Monterey | 26 Feb 2027 | **ADDED** — CCOF certified organic livestock since 2015 |
-| **Hog Wild Holding Co.** | Monterey | 10 Apr 2027 | Pork |
-| **Hilliker's Egg Ranch** | San Diego | 7 Jan 2027 | Eggs |
-| **Mariposa Ranch Eggs** | Los Angeles | 11 Mar 2027 | Eggs |
-| ~~Metzer Farms~~ | Monterey | 25 Feb 2027 | **REJECTED** — see below |
-| **Fallon Hills Ranch** | Marin | 14 Jan 2027 | Kevin Maloney |
-| **Bloom Ranch** | Los Angeles | 4 Mar 2027 | Bill Releford |
-| **Monkey Flower Ranch** | Monterey | 19 Aug 2026 | Rebecca King — sheep |
-| **The Woolly Egg Ranch** | Marin | 21 Jul 2026 | Eggs |
-| **True Grass Farms** | Marin | 3 Jul 2026 (lapsed) | Guido Frosini — grass-fed |
-| Heart T Hogs | Modoc | 27 Jun 2026 | Pork — far north, check scope |
-
-### A stale copyright year is NOT evidence a business has closed
-
-Rainbow Ranch Farms' site footer reads "©1991–2024", which looks like a staleness signal and
-is not one. Footer years are typically hardcoded once and never touched.
-
-**What actually indicates a live operation:** a working cart, a newsletter signup, an active
-social page with a call button, a current phone number, and named service areas — all
-present. Confirmed further by a directory profile updated **16 June 2026** and a farm stand
-page stating it is open to members.
-
-**The reverse also holds** — a freshly generated page proves nothing, which is how
-`beefnear.me` still shows Tara Firma's closed CSA. **Check the operational signals, not the
-chrome.**
-
-### ❌ Metzer Farms rejected — certificate ≠ standard
-
-Metzer holds a valid CDFA certificate to sell direct. What it sells does not meet the
-standard. A supplier who stocks their duck eggs states plainly: *"These are NOT organic
-fed/certified organic or pasture-raised… They ARE CAGE-FREE, raised in open sided… layer
-buildings… They are local, but they are conventionally raised."* They moved the flock
-indoors permanently as avian-flu biosecurity.
-
-The egg subcategory standard explicitly red-flags **"cage-free alone"**. Metzer is also
-primarily a **hatchery** selling day-old ducklings, not a food producer. Duck eggs now sell
-under the separate **Olinday Farms** brand.
-
-**This is the cleanest demonstration yet that a state certificate proves a farm sells to the
-public — nothing more.** It is necessary, not sufficient.
-
-### Rich new protein leads found alongside (all corn/soy-free or equivalent)
-
-| Farm | Where | Why |
-|---|---|---|
-| ~~Tomales Bay Pastures~~ | Marshall | **ADDED** — 100% corn & soy free eggs, MALT-protected land, integrated cattle-then-hens grazing |
-| **Rossotti Ranch** | Petaluma | Pasture-raised, **grain-free**. Same single-source position as above |
-| **Chino Valley Ranchers** | Colton | Organic **soy-free corn-free** eggs, flax-fed, 225mg ALA each, 70+ year family business, widely stocked in stores. ⚠️ Housing is *free-roaming/cage-free*, NOT pasture-raised — would fail the egg standard's red flag on cage-free alone. Accessible but a weaker standard; worth listing only with that stated |
-| **Rossotti Ranch** | Petaluma | Pasture-raised, **grain-free** |
-| ~~True Grass Farms~~ | Valley Ford | **ADDED** — Animal Welfare Approved, farm store, cabins on site |
-| ~~Honest Fish Farm~~ | Isleton | **ADDED** — address found: the old Collins ranch between Walnut Grove and Isleton. Organic, corn AND soy free feed |
-| ~~Farm Lot 59~~ | Long Beach | **NOT A MEAT LISTING.** 2714 California Ave, nonprofit urban farm founded 2010 by Sasha Kanno. Its commercial product is **cut flowers**; the vegetables are **donated to food pantries** rather than sold. Genuinely good work, but not a place to buy food |
-| ~~Rainbow Ranch Farms~~ | Piñon Hills | **ADDED** — address supplied by J. Strictest stated feed standard on the map, but self-declared rather than certified |
-| ~~Marin Sun Farms~~ | Pt. Reyes + Oakland | **ADDED (2 pins)** — operates the last USDA-inspected slaughterhouse in the Bay Area |
-| **Pasture Fresh Eggs** | Tomales | Organic pasture-raised eggs |
-| **Farmer Joy** (Chileno Valley, Marin) | **Sixth-generation** duck farmer on her family's farm — supplies The Local Butcher Shop. Duck eggs are a gap on this map |
-| ~~SonRise Ranch~~ | San Diego / Miramar | **ADDED** — publishes petroleum-per-calorie figure; states plainly it is NOT certified organic |
-| Pajaro Pastures / Your Family Farm | Paicines | Eggs and pasture-raised Berkshire hogs |
-
-**These are a better lead pool than the beefnear.me set** — most name a specific feed
-standard, which is the thing that actually separates pastured operations.
-
-**On Bounty of the Valley:** it appears here as a certified direct-sale producer valid to
-21 Jan 2027. That does **not** overturn its rejection. It was rejected for **suspended
-organic certification**, not for whether it sells direct. Both are true at once, and the
-organic claim is the one that failed.
-
----
+**Not creating it without your say-so** — new subcategories are your call, not mine.
 
 ## 3. Next work, in priority order
 
