@@ -175,6 +175,55 @@ farm. Re-check held entries with different search terms before treating a hold a
 
 ---
 
+## A QUESTION FOR J — the map has no type for direct-order farms
+
+**Massa Organics** (Hamilton City, Glenn County) is fully verified and an excellent fit for
+ROOTED's standards — but it does not fit any existing listing type, so it has not been added.
+
+**What it is:** Greg Massa and Raquel Krach farm roughly 300 acres of organic rice, 30 acres
+of almonds and 11 acres of mandarins in the Sacramento Valley. Fourth-generation rice
+farmers. CCOF certified — Crops and USDA NOP since 25 June 2002, Handling since 2022, all
+current, verified directly. Record filed under the legal entity **CGD Farms dba Massa
+Organics**, which is the second case of the legal-name trap in two days.
+
+**Why it fits ROOTED unusually well:**
+- Genuinely regenerative, and honest about it. Greg: *"We've been doing these practices
+  forever — crop rotation, cover crops, animals on our farm — without knowing that other
+  people had come up with names and put it all together under this umbrella called
+  Regenerative Ag."*
+- **Dorper sheep graze the almond orchard** instead of herbicides. They eat about half the
+  groundcover and trample the rest into a permanent mat that conserves water; their hooves
+  increase infiltration.
+- **Ducks are raised in the rice fields**, eating weeds and insects and fertilising the crop.
+- Sells organic brown rice, raw and roasted almonds, **almond butter** and satsuma mandarins
+  direct — products that are genuinely hard to source to this standard.
+
+**The problem:** it has no CSA box, no farm stand, and no on-farm shop. It sells through an
+online store and two Berkeley farmers markets. The existing types are `grocery`,
+`farmersmarket`, `restaurant`, `csa` and `onfarmmarket`, and none is honest.
+
+**The question:** should the Local Food Map carry a **direct-order farm** type — California
+farms selling verified product by post or online, without a box or a storefront? There are
+likely many, and they solve a real problem for anyone outside a CSA delivery zone. But it
+also changes the map from "places you go" to "places you buy from", which is a different
+product.
+
+**Not added pending J's decision.** Forcing it into `csa` or `onfarmmarket` would be exactly
+the miscategorisation this file already documents twice.
+
+### 16. Live Power Community Farm — Covelo
+- **What it is:** 40-acre **biodynamic** and organic community-supported farm founded in
+  1973 — one of the oldest CSAs in the United States if still running as such. Horse-powered
+  historically.
+- **Confirmed:** an active Facebook presence with event posts.
+- **Unconfirmed:** current CSA season, share availability, and whether biodynamic
+  certification (Demeter) is current. Not on either CDFA register.
+- **Ask:** "Is the CSA taking members this season, and is the farm still Demeter certified
+  biodynamic?"
+- **Worth the call** — a 1973 biodynamic CSA would be the oldest farm on this map.
+
+---
+
 ## Resolved — added to the map
 
 | Farm | Outcome |
@@ -376,10 +425,11 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 53 of 115 core-California farms
+- **Checked:** 55 of 115 core-California farms
 - **Added:** 34 (plus 1 existing entry corrected)
 - **Rejected:** 5
-- **Held for contact:** 13
+- **Held for contact:** 14
+- **Blocked on a product decision:** 1 (Massa Organics — see above)
 
 ### Halfway marker — 50 of 115 checked
 
