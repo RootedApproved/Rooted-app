@@ -137,7 +137,11 @@ separately) · Capay Hills Orchard (raw almonds, stone-ground almond butter). **
 - **Capay Canyon Ranch** — did not surface. Note the near-miss: **Capay Hills Orchard** is a
   *different farm* in the same valley, and is the one now listed. Do not conflate them.
 
-**⚠️ THE CHIP BRANDS DO NOT BELONG HERE.** The Good Crisp (stacked potato crisp), Artisan
+**✅ RESOLVED — `food-pantry-snacks` created, "Chips & Savoury Snacks", opened with 3
+products.** Beefy's Own (T1), Artisan Tropic (T1), The Good Crisp (T2). Still to add:
+Magos Chips, Sweetpotato Awesome, Crunchmaster.
+
+~~**THE CHIP BRANDS DO NOT BELONG HERE.**~~ The Good Crisp (stacked potato crisp), Artisan
 Tropic (plantain chips), Beefy's Own Tallow Chips, Magos Chips, Sweetpotato Awesome and
 Crunchmaster are **snacks, not pantry staples.** Filing them under "Nuts, Grains & Pantry
 Staples" would be the same miscategorisation already corrected twice on the map (Soil Born,
