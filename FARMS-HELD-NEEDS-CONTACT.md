@@ -177,6 +177,8 @@ farm. Re-check held entries with different search terms before treating a hold a
 | Eatwell Farm | Added as CSA — 105 acres organic, 30+ years, integrated pastured hens, Care Share donation programme |
 | Full Belly Farm | Added as CSA — 300+ acres, organic since 1985, owner-operated. **Ended home delivery June 2026** — pickup only |
 | Farm Fresh To You (Capay Organic) | Added as CSA — entry states plainly it is a **large delivery service** (~15,000 boxes/week), not a single-farm share |
+| The Natural Trading Company | Added as CSA — under a **permanent agricultural conservation easement** since 2010 |
+| Mountain Bounty Farm | Added as CSA — oldest CSA in the Sierras; unlimited vacation holds; 32 of 50 acres left as managed forest |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -244,10 +246,21 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 41 of 115 core-California farms
-- **Added:** 27 (plus 1 existing entry corrected)
+- **Checked:** 43 of 115 core-California farms
+- **Added:** 29 (plus 1 existing entry corrected)
 - **Rejected:** 4
 - **Held for contact:** 9
+
+### Land protection is worth recording where it exists
+
+The Natural Trading Company sits under a permanent agricultural conservation easement,
+established February 2010 with Placer Legacy, the California Department of Conservation and
+Placer Land Trust, legally prohibiting development that would impair its agricultural value.
+
+That is a stronger long-term guarantee than any growing certification: certifications can
+lapse and practices can change, but the land cannot be built on. Worth checking for and
+recording on any farm where it applies — county land trust and open-space district sites
+are where it shows up.
 
 ### Scale should be stated, not hidden
 
