@@ -166,6 +166,8 @@ farm. Re-check held entries with different search terms before treating a hold a
 | Pie Ranch | Added as **on-farm market** — nonprofit educational farm; all farmstand profits fund its programmes |
 | Dig Deep Farms | Added as CSA — urban regenerative farm running re-entry internships to reduce recidivism. *Initially held by a parallel session; resolved with 2026 sources.* |
 | APC Farm2Market | Added as CSA — social enterprise of Alameda Point Collaborative; employs residents leaving homelessness |
+| Singing Frogs Farm | Added as CSA — no-till; one of the most studied market farms in the US |
+| Laguna Farm | Added as CSA — 400+ member households; 200+ crop varieties |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -191,8 +193,8 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 30 of 115 core-California farms
-- **Added:** 17
+- **Checked:** 32 of 115 core-California farms
+- **Added:** 19
 - **Rejected:** 4
 - **Held for contact:** 9
 
@@ -212,6 +214,15 @@ Surfaced while verifying other farms. Each looked credible but has not been rese
 | Markegard Family Grass-Fed (San Gregorio) | Certified grass-finished beef and lamb, pastured poultry and pork |
 | Brisa Ranch, Huertos del Pacifico, Gavilanes Farm (Pescadero) | All started by graduates of Pie Ranch's farmer-training programme |
 | Tomatero Organic Farm, High Ground Organics (Santa Cruz) | Appeared repeatedly in current Yelp CSA rankings |
+| EARTHseed Farm (Sebastopol) | 14-acre **solar-powered** organic farm, established March 2021; studied alongside Singing Frogs by UC Berkeley |
+| Green Star Farm (West Sonoma) | 85-acre pasture-based livestock — pastured eggs, chicken, pork, lamb and goat year-round |
+| Foggy River Farm, Deep Roots Farm, Gold Ridge Organic Farms, Four Oak Farm, Wise Acre Farm (Sonoma) | All ranked in Yelp's Santa Rosa CSA list, updated June 2026 |
+| Grounded Grassfed (Sonoma) | Grass-fed meat; would be a rare category on this map |
+
+**Best single source found for Sonoma:** the CAFF (Community Alliance with Family Farmers)
+directory at `caff.org/directory/` — a curated, region-filterable family-farm register with
+practice descriptions written by the farms themselves. Higher signal than any general
+directory used so far.
 
 Running hit rate is roughly 50%. On that basis, expect **50–60 genuine additions** from the
 115-farm list, not 115.
