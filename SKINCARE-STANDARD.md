@@ -179,7 +179,8 @@ differ materially.
 
 1. **Suet or trim fat?** Suet — the fat from around the kidneys — is firmer, more saturated
    and more stable. Trim fat is the cheaper default. *Ancestral Cosmetics and LASSO both
-   specify suet; most brands do not say.*
+   specify suet, as does Cinder Brands; most brands do not say. Where three careful brands
+   volunteer the same detail and the rest stay silent, the silence is informative.*
 2. **Rendered in-house, or bought in?** *Ancestral renders its own from fat delivered weekly
    by local farms and states it is never frozen or stored for months.* Bought-in tallow may
    have sat for months before formulation, which matters directly for oxidation — the actual
@@ -188,6 +189,18 @@ differ materially.
 4. **Rendering method and temperature** — wet or dry, and how hot.
 5. **Contaminant testing** — heavy metals, pesticides, microbial, oxidation markers.
 6. **Lid and jar contact materials**, not just "glass".
+7. **Clear glass or AMBER?** Amber glass blocks light-driven oxidation. Given that
+   oxidative stability is this standard's actual basis, amber is a meaningful upgrade over
+   clear, and almost nobody mentions it. *LASSO hot-pours into amber on some formats.*
+
+### Naming each ingredient's origin separately is the strongest transparency signal
+
+Most brands describe the product's provenance. **LASSO names the source of every component
+individually** — tallow from Wisconsin family farms, Manuka honey from New Zealand, beeswax
+from Wisconsin, frankincense resin from Oman. That is materially harder to fake than a
+general "ethically sourced" claim, and rarer than a short ingredient list.
+
+**Worth treating as a green flag in its own right.**
 
 ### ⚠️ Marketplace copy overstates what brands claim
 
