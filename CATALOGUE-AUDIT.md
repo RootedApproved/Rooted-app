@@ -162,3 +162,38 @@ the metadata header (`meta-og:price:amount`), but it arrives with the entire pag
 **At that rate the remaining ~60 estimates would consume several times this session's total
 context.** Screenshots resolved nine products in one message at negligible cost. That is the
 efficient channel, and it is not a matter of preference.
+
+
+---
+
+## Batch 3: a two-thirds failure rate, and what it actually meant
+
+The browser agent flagged that batch 3 failed on 9 of 14, against near-zero in batches 1–2,
+and was right to treat that as a pattern rather than noise. Investigated rather than acted on.
+
+**The four "unreachable" sites were not one problem but several:**
+
+| Site | Reported | Actual |
+|---|---|---|
+| **vanmansnaturals.com** | Unreachable | **DOMAIN MOVED.** The brand is alive and trading at **vanman.shop** — their own pages say to use it for all future purchases. Fixed |
+| waxheadsundefense.com | Unreachable | Unconfirmed — needs independent check |
+| bellemainshop.com | No DNS | Unconfirmed — needs independent check |
+| ecolunchbox.com | Certificate error | Unconfirmed. A cert error is a real site fault, not an agent fault |
+
+**One agent session reporting a site down is not proof a business has closed.** Vanman's
+proves the point exactly — the listing looked dead and the company is fine. Three remain to
+be checked before any removal.
+
+**The other five failures are structural, and retrying will not fix them:**
+
+- **RSVP International** (both SKUs) — wholesale-login gated, $250 minimum, no consumer price
+  exists to find
+- **Rösle** — rosle.com redirects to roesle.com, which returns *Seite nicht gefunden* on
+  every US path. Their US web presence appears broken
+- **Marianne's Harvest** — homepage shows product tiles with **no prices and no product
+  links**. The ROC avocado oil is a Sprouts exclusive, which may explain it
+- **Weck** — no tulip or mould jar on the homepage; my instruction named a product they may
+  not front
+
+**Rule for the agent going forward: do not retry a site that failed twice.** Report it and
+move on. The failures are information, and they cost more to chase than they return.
