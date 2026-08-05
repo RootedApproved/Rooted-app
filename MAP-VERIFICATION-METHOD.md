@@ -106,19 +106,19 @@ distinguishing fact remain.
 - [x] The Cloverleaf Farm CSA — **ADDED** (fruit-only CSA; Ugly Fruit Club; stated living wage)
 - [x] Da-Le Ranch — **ADDED** (first meat CSA on the map; pork/poultry feed undisclosed, flagged)
 - [~] Deepseeded Farm — **OUT OF SCOPE**: serves the Humboldt Bay area, which J deprioritised when choosing core California only. Revisit if the map expands north.
-- [ ] Donald J. Crouch
+- [~] Donald J. Crouch — **HELD** — registered under an individual's name; no farm identity findable
 - [ ] Eat! By Food Access Los Angeles *(multiple registered producers)*
 - [~] Feed and be Fed — **HELD**: nothing verifiable surfaced beyond the CDFA registration. Needs a dedicated lookup or a call.
-- [ ] Girl and Her Dog Farm
+- [~] Girl and Her Dog Farm — **HELD** — no California presence findable. Searches return out-of-state farms with similar names (Four Dog Farm NC, Two Dog Farms MS, Red Dog Farm WA)
 - [x] Grub CSA Farm — **ADDED** (Chico; members gather their own share from tables, not pre-boxed)
 - [x] Heritage Valley Family Orchard — **ADDED** (single-crop heirloom avocado CSA, shipped)
-- [ ] Kimberley Wine Vinegars
+- [~] Kimberley Wine Vinegars — **NOT A FARM LISTING** — a vinegar producer. Belongs in the product catalogue if anywhere, not the food map
 - [~] Lads Home Ranch — **HELD**: site is live and states regenerative practice, organic seed and organic compost, plus handcrafted spice blends. But NO LOCATION is published anywhere found, and a farm cannot go on a map without one. Needs a call.
-- [ ] Mellor Ranch
+- [~] Mellor Ranch — **HELD** — nothing verifiable beyond the CDFA registration
 - [x] Old Grove Orange — **ADDED** (5th-gen farm + food hub supplying 50+ school districts)
 - [~] Outer Aisle Food Hub — **HELD**: operates as a Farmigo-based buying platform ("ditch the supermarket, buy from local farmers") rather than a farm. Aggregator, not a producer — same direct-order question as Massa.
 - [x] Talley Farms — **ADDED** as Talley Farms Fresh Harvest (large grower; CSA on its ~100 certified organic acres)
-- [ ] Tami Lyon
+- [~] Tami Lyon — **HELD** — registered under an individual's name; no farm identity findable
 - [x] Tanaka Farms — **ADDED** (4th-gen family farm; 10% of each box funds the host school/church)
 - [x] Three Sisters Farm — **ADDED** (certified organic 2008; only 2 of 20 acres cultivated, rest habitat)
 - [ ] UC Davis Student Farm — Market Garden
@@ -152,6 +152,32 @@ distinguishing fact remain.
 CSA listed (Da-Le Ranch) against 63 produce CSAs, and seven credible grass-fed operations
 are captured above.
 | Santa Cruz Permaculture | Organic fruit, vegetables, flowers, herbs |
+
+### CDFA queue: CLOSED
+
+**Resolved 28 of 28.** Outcome:
+
+| Result | Count |
+|---|---|
+| **Added to the map** | 13 |
+| Already on ROOTED | 1 |
+| Held — real but unverifiable, or no published location | 8 |
+| Held — aggregator or direct-order, pending the type decision | 3 |
+| Not a farm listing | 1 |
+| Out of scope (Humboldt) | 1 |
+| Duplicate registrations of farms already added | 1 |
+
+**13 additions from 28 candidates — 46%.** Lower than it looks in one respect and better in
+another: nothing on this list turned out to be *defunct*. Every hold was an information gap,
+not a dead business. That is the difference between working from a state register and
+working from an app directory, where a third of entries were closed or wrong.
+
+The remaining holds cluster into two kinds, and neither is worth more searching:
+- **Registered under an individual's name** (Tami Lyon, Donald J. Crouch) with no farm
+  identity to find.
+- **No published location** (LADS Home Ranch), which makes a map listing impossible.
+
+Both need a phone call, not another lookup.
 
 **28 pre-validated farms from a single fetch**, against roughly 1–2 leads per search under
 the old method.
