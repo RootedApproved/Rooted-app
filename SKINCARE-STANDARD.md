@@ -165,3 +165,43 @@ present rather than adding any, so applied to fully dry skin it can leave skin d
 time. Every tallow entry should say to apply it to damp skin. Products pairing tallow with a
 humectant — raw honey, glycerin, aloe — are more complete barrier products, and that is a
 real differentiator rather than a marketing one.
+
+
+---
+
+## Tallow-specific questions worth asking a brand
+
+Verification of J's ranking surfaced that the meaningful differences between tallow balms are
+mostly **upstream of the ingredient list**. Two brands can list identical ingredients and
+differ materially.
+
+**Ask about:**
+
+1. **Suet or trim fat?** Suet — the fat from around the kidneys — is firmer, more saturated
+   and more stable. Trim fat is the cheaper default. *Ancestral Cosmetics and LASSO both
+   specify suet; most brands do not say.*
+2. **Rendered in-house, or bought in?** *Ancestral renders its own from fat delivered weekly
+   by local farms and states it is never frozen or stored for months.* Bought-in tallow may
+   have sat for months before formulation, which matters directly for oxidation — the actual
+   basis of this standard.
+3. **Grass-FINISHED, or only grass-fed?** Grass-fed alone routinely means grain-finished.
+4. **Rendering method and temperature** — wet or dry, and how hot.
+5. **Contaminant testing** — heavy metals, pesticides, microbial, oxidation markers.
+6. **Lid and jar contact materials**, not just "glass".
+
+### ⚠️ Marketplace copy overstates what brands claim
+
+**Ancestral Cosmetics' Amazon storefront describes its olive oil as "cold-pressed organic".
+The brand's own product page says only "cold-pressed extra-virgin".** Marketplace listings
+are often written by resellers or optimised for search, and they drift from the real
+formulation.
+
+**Rule: take ingredient lists from the brand's own product page, never from Amazon, Walmart
+or a stockist.** Where they disagree, the brand's page wins and the discrepancy is worth
+recording.
+
+### On organic certification in this category
+
+**No tallow balm reviewed carries verified organic certification across every component.**
+Strong sourcing claims are common; third-party certification is not. Entries should say
+which they are relying on rather than blurring the two.
