@@ -215,8 +215,8 @@ public — nothing more.** It is necessary, not sufficient.
 | **Rossotti Ranch** | Petaluma | Pasture-raised, **grain-free** |
 | ~~True Grass Farms~~ | Valley Ford | **ADDED** — Animal Welfare Approved, farm store, cabins on site |
 | **Honest Fish Farm** | CA Delta | Pigs on pasture moved every 3–5 days, **soy-free**, organically fed |
-| **Rainbow Ranch Farms** | SoCal | Corn-, soy- and wheat-free heritage meat, poultry and eggs |
-| **Marin Sun Farms** | Pt. Reyes | Pastured meat and eggs, operates its own harvesting facility |
+| **Rainbow Ranch Farms** | Southern California | **STRICTEST FEED STANDARD FOUND ANYWHERE.** States: no grains at all — no rice, soy, corn, wheat, barley, oats, rye — no legumes, nuts or seed oils. Heritage breeds on species-specific diets. Also states vaccine-free, antibiotic-free, drug-free. ⚠️ **HELD: no street address published.** Cannot map a farm without one — same reason LADS Home Ranch is held. Needs a call or a better source |
+| ~~Marin Sun Farms~~ | Pt. Reyes + Oakland | **ADDED (2 pins)** — operates the last USDA-inspected slaughterhouse in the Bay Area |
 | **Pasture Fresh Eggs** | Tomales | Organic pasture-raised eggs |
 | **SonRise Ranch** | — | Hogs on pasture fed raw milk from their own cows |
 | Pajaro Pastures / Your Family Farm | Paicines | Eggs and pasture-raised Berkshire hogs |
