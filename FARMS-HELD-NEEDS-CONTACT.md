@@ -307,9 +307,15 @@ specifically, which makes them checkable. Results:
 | Shumei Santa Cruz Farm | **SURRENDERED** — USDA NOP & Crops 25 Dec 2017, Handling Jan 2018 | Aug 2026 ⚠️ **entry corrected** |
 | Say Hay Farms | **No certification records shown** on its CCOF page — neither Certified nor Suspended nor Surrendered | Aug 2026 ⚠️ *entry softened* |
 | The Natural Trading Company | **Certified** — USDA NOP & Crops since 14 Nov 2002, Handling 2005. CCOF record updated 1 Aug 2026 | Aug 2026 ✅ |
-| Blosser Urban Garden | Certified since 1996 per own site | *still unread — open `ccof.org/directory-member/blosser-urban-garden/`* |
+| Blosser Urban Garden | **Certified** — USDA NOP & Crops since 26 Oct 1995, Handling 2009. Record held under legal name **TKP Farms, Inc.** | Aug 2026 ✅ |
 
-**Outstanding:** Blosser Urban Garden only. Its CCOF page has not been opened.
+**AUDIT COMPLETE.** All six CCOF-named listings checked directly.
+
+**A naming trap found while closing it:** Blosser Urban Garden's CCOF record is filed under
+its legal entity name, **TKP Farms, Inc.** Searching or guessing the URL from the trading
+name returns nothing, which could easily be misread as "not certified". When a farm's
+certification record cannot be found, search for the **legal entity** before concluding
+anything — DBA and trading names frequently differ from the certified entity.
 
 **A fourth case, worth naming: an EMPTY certification block.** Say Hay Farms is in the CCOF
 directory, but its page lists no certification records at all — not Certified, not
@@ -319,6 +325,17 @@ not be confirmed from the record rather than asserting or denying it.
 
 That is the honest position: **absence of a record is not evidence either way, and should be
 reported as absence rather than resolved in the farm's favour or against it.**
+
+#### Audit outcome: 6 checked, 4 confirmed, 2 corrections
+
+| Result | Farms |
+|---|---|
+| Certified, verified | Full Belly, Terra Firma, Natural Trading Company, Blosser (TKP Farms) |
+| **Corrected** | Shumei — surrendered 2017, entry rewritten |
+| **Softened** | Say Hay — no certification records shown, claim qualified |
+
+Two of six live claims on ROOTED were wrong or unsupportable. Certification-status checks
+should now be standard for any listing that names a certifying body.
 
 #### The audit caught a live error
 
