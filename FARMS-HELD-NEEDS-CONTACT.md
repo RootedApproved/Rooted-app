@@ -162,6 +162,17 @@ farm. Re-check held entries with different search terms before treating a hold a
 - **Unconfirmed:** no current-season signal, no website found, not on either CDFA register.
 - **Ask:** "Is the CSA or farm box currently available, and where do people collect?"
 
+### 14. TR Organics — Lockwood
+- **What it is:** listed as a CSA farm in Lockwood, southern Monterey County.
+- **Confirmed:** nothing beyond the name and address. No website, no directory description,
+  no certification record found, and not on either CDFA register.
+- **Ask:** "Do you run a CSA, and is it open?"
+
+### 15. Lazy Millennial Farms — Salinas area
+- **What it is:** listed with a CSA and produce, address given as Old Stage Rd.
+- **Confirmed:** nothing verifiable. No website or current listing found.
+- **Ask:** "Are you selling produce boxes, and where is pickup?"
+
 ---
 
 ## Resolved — added to the map
@@ -212,6 +223,7 @@ farm. Re-check held entries with different search terms before treating a hold a
 |---|---|
 | **Muir Ranch CSA** (Pasadena) | Shut down by Pasadena Unified School District. Their spokesperson: *"Effective June 30, 2018, PUSD will end its relationship with the program."* Still listed as active on LocalHarvest, rootseller.app, la2050 and Localize — eight years after closure. |
 | **Belcampo Farms** (Gazelle) | Retail operation collapsed in 2021 after its butcher shops were found selling conventional meat as their own grass-fed product. A company that misrepresented its sourcing cannot sit on a platform built on verified sourcing. |
+| **Bounty of the Valley Farms** (Greenfield) | Organic certification **SUSPENDED** — USDA NOP suspended 25 November 2020, Handling and Crops suspended 3 September 2020, per its own CCOF record. Still described as "a small organic farm" across CAFF, GreenTowns and other directories, and still listed as running a CSA. No current-season signal found. Not listable as organic, and a suspension rather than a lapse warrants caution generally. Re-check only if CCOF shows certification restored. |
 | **Rio Gozo Farm** (Ojai) | **Domain hijacked.** `riogozofarm.com` now serves an Indonesian gambling site — the signature of a lapsed domain resold to spammers. LocalHarvest listing last updated January 2025 and offers a "report as inactive" link. Not on the CDFA register. Strong evidence the farm stopped operating. Re-check only if the farm resurfaces under a new domain. |
 
 | **Love Apple Farms** (Santa Cruz) | Yelp lists the business as **CLOSED**, updated April 2026. Even when trading, the farm at Vine Hill Road was *"the exclusive, private kitchen garden for Manresa restaurant"* and explicitly **not open to the general public** — so it was never a public food source. The Manresa relationship also ended when that restaurant closed in 2022. A LocalHarvest listing still advertises a 25-member CSA; it is undated and contradicted by every current source. |
@@ -258,6 +270,27 @@ aggregator's word.
 The general rule this suggests: **a claim that appears on exactly one aggregator and
 nowhere else, including the farm's own site, is not a fact.** List what is corroborated.
 
+### Check certification STATUS, not just presence in a directory
+
+**Bounty of the Valley Farms** (Greenfield, Salinas Valley) appears in the CCOF directory,
+is described everywhere as "a small organic farm", and runs a CSA. Its CCOF record shows:
+
+| Certification | Status | Date |
+|---|---|---|
+| USDA NOP | **Suspended** | 25 November 2020 |
+| Handling | **Suspended** | 3 September 2020 |
+| Crops | **Suspended** | 3 September 2020 |
+
+A directory listing means a farm is *in the system*. It does not mean the certification is
+*current*. CCOF, CDFA and similar registers carry status and date fields, and those are the
+fields that matter.
+
+This matters more here than almost anywhere: ROOTED exists to verify claims. Listing a farm
+as organic when its organic certification has been formally **suspended** — not lapsed,
+suspended — would be precisely the failure the platform is built to prevent.
+
+**Always open the certification record and read the status line.**
+
 ### A new red flag worth knowing
 
 **A farm website that now serves unrelated spam — gambling, pharma, crypto — means the
@@ -269,10 +302,10 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 50 of 115 core-California farms
+- **Checked:** 53 of 115 core-California farms
 - **Added:** 34 (plus 1 existing entry corrected)
-- **Rejected:** 4
-- **Held for contact:** 11
+- **Rejected:** 5
+- **Held for contact:** 13
 
 ### Halfway marker — 50 of 115 checked
 
