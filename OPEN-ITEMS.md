@@ -138,8 +138,28 @@ separately) · Capay Hills Orchard (raw almonds, stone-ground almond butter). **
   *different farm* in the same valley, and is the one now listed. Do not conflate them.
 
 **✅ RESOLVED — `food-pantry-snacks` created, "Chips & Savoury Snacks", opened with 3
-products.** Beefy's Own (T1), Artisan Tropic (T1), The Good Crisp (T2). Still to add:
-Magos Chips, Sweetpotato Awesome, Crunchmaster.
+products.** Beefy's Own (T1), Artisan Tropic (T1), The Good Crisp (T2), Crunchmaster (T2).
+
+**Did not verify:** *Sweetpotato Awesome* — nothing beyond a category listing.
+*Magos* — turns out to be **MAGOS Egg Chips** (Austin, TX): gluten-free, seed-oil-free,
+no artificial ingredients, high-protein, low-carb. A chip made from egg is genuinely novel
+and would be unique here, but no ingredient list surfaced and the brand is very small
+(99 Instagram followers). Worth revisiting when they publish more.
+
+### ★ ROADMAP — the Seed Oil Free Certified directory is organised by category
+
+`seedoilfreecertified.com/product-category/<name>`. Every category is a ready-made,
+pre-verified worklist:
+
+**Oils & Fats** ✅ worked · **Chips & Snacks** ✅ worked · **Nut Butters** ✅ worked ·
+**Sauces** ✅ worked
+
+**Not yet worked:** Crackers · Dressings · Meals · Breakfast · Nuts & Seeds · Dips ·
+Plant Milk · Bars · Desserts · Meat · Fries · Baked Goods · Wholesale Oils
+
+**⚠️ BODY CARE is on that list too** — and ROOTED has a Personal Care category with
+several thin subcategories. A seed-oil-free certification applied to skincare is an angle
+worth checking, since most body lotions and balms are built on sunflower or safflower oil.
 
 ~~**THE CHIP BRANDS DO NOT BELONG HERE.**~~ The Good Crisp (stacked potato crisp), Artisan
 Tropic (plantain chips), Beefy's Own Tallow Chips, Magos Chips, Sweetpotato Awesome and
