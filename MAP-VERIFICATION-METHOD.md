@@ -48,6 +48,26 @@ on-farm store — **plus exact coordinates**, which no other source provides.
 **4. CCOF directory** — `ccof.org/directory-member/<slug>/`
 Not for discovery but for **status checking**. Carries certification type, status and date.
 
+**4b. USDA SVS Grass Fed Program — official listing of verified operations**
+`ams2.prod.usda.gov/sites/default/files/media/LSOfficialListingBeefGrassFedProgram.pdf`
+
+Federal verification of the *"USDA Grass (Forage) Fed"* claim for ruminant livestock, listing
+each operation with a **certificate number, effective date and renewal date**. Verified by the
+USDA Livestock and Poultry Program's Quality Assessment Division.
+
+**This is the meat equivalent of the CCOF status check, and it matters more than most.**
+"Grass-fed" is among the most abused label claims in food — unlike "organic" it can be used
+with no verification at all, and "grass-fed" without "grass-finished" routinely means
+grain-finished. A federal register with expiry dates is the only way to separate a verified
+claim from a marketing one.
+
+**OUTSTANDING AUDIT:** none of the five meat listings on ROOTED have been checked against
+this register. Da-Le Ranch, Engler Beef, Stemple Creek, Markegard and Casa Rosa all make
+grass-fed or grass-finished claims. Markegard says "certified grass-fed", which implies a
+certifying body that should be identifiable. This audit should be run before the meat
+category is considered finished — exactly as the CCOF audit was run after the Bounty of the
+Valley finding, and that one turned up two bad claims out of six.
+
 **5. CAFF directory** — `caff.org/directory/`
 Region-filterable, with practice descriptions written by the farms themselves.
 
@@ -136,11 +156,12 @@ distinguishing fact remain.
 | Yolo Land & Cattle Co (Woodland) | 100% grass-fed Angus beef |
 | ~~Tara Firma Farms~~ | **REJECTED — CSA ended 3 July 2026.** Farm open for events; store status unconfirmed. Owners recommend Stemple Creek Ranch instead |
 | ~~Stemple Creek Ranch~~ | **ADDED** — Marin Carbon Project demo farm, national stewardship award Jan 2026, discloses pork feed and partner-sourced chicken |
-| SoMar Farms (W. Petaluma) | Grass-fed beef and lamb, pickup at farm or Oakland |
-| Silver Springs Beef / Alhambra Valley (Martinez) | 100% grass-fed beef and lamb, heritage pork, bulk or cuts |
+| SoMar Farms (W. Petaluma) | Grass-fed beef and lamb, pickup at farm or Oakland. **Nothing beyond a single chapter listing found — needs a dedicated lookup** |
+| Silver Springs Beef / Alhambra Valley (Martinez) | 100% grass-fed beef and lamb, heritage pork. **Local pickup required. Nothing beyond a single chapter listing — needs a dedicated lookup** |
 | **Big Bluff Ranch** | **Certified organic pasture-raised chicken** — Stemple Creek's own chicken partner, so already vetted by a ranch that discloses carefully |
 | Galaxy Farm (Woodland) | Organic-fed lamb |
-| Hole-In-One Ranch (Janesville) | Grass-fed beef, lamb and pork |
+| Hole-In-One Ranch (Janesville) | Grass-fed beef, lamb and pork. Janesville is Lassen County, far north — likely out of scope |
+| Spreadwing Farm | Pasture-raised chicken — whole birds, feet, backs and liver, which suggests genuine whole-bird selling rather than breast-only |
 | Dare 2 Dream Farms (Lompoc) | Free-range eggs, organic produce, backyard chickens — CSA currently sold out |
 | ~~Tara Firma Farms~~ | **REJECTED — CSA ended 3 July 2026** |
 | **Farm to My Neighborhood** | Nonprofit tech platform letting very small organic farmers sell direct — no weekly commitment, neighbourhood drop sites. Described as a top recommendation by Edible East Bay |
