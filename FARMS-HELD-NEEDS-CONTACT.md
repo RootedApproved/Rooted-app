@@ -180,6 +180,7 @@ farm. Re-check held entries with different search terms before treating a hold a
 | The Natural Trading Company | Added as CSA — under a **permanent agricultural conservation easement** since 2010 |
 | Mountain Bounty Farm | Added as CSA — oldest CSA in the Sierras; unlimited vacation holds; 32 of 50 acres left as managed forest |
 | 24 Carrot Farm | Added as **on-farm market** — certified organic **and** Real Organic Project listed; farm stand and U-pick lead, CSA alongside |
+| Clark Valley Organic Farm | Added as CSA under its **current name, Los Osos Valley Organic Farm** — same farm, same address, renamed |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -247,10 +248,24 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 44 of 115 core-California farms
-- **Added:** 30 (plus 1 existing entry corrected)
+- **Checked:** 45 of 115 core-California farms
+- **Added:** 31 (plus 1 existing entry corrected)
 - **Rejected:** 4
 - **Held for contact:** 9
+
+### Farms get renamed, and directories keep the old name
+
+J's list has "Clark Valley Organic Farm". That farm still operates at the same Clark Valley
+Road address but now trades as **Los Osos Valley Organic Farm** — confirmed by its own
+Facebook page, which states "Previously Clark Valley Organic Farm".
+
+Searching the old name surfaces pages last updated in 2012–2013 and reads like a dying
+business. Searching the new name finds a live 2026 site, an active CSA and current markets.
+
+**A farm that looks dormant may simply have been renamed.** Before writing something off,
+check whether a differently-named business operates at the same address. Related trap: the
+original founders sold this farm in 2008 and started Pozo Organic Farm elsewhere — so the
+same name can also point at two genuinely different businesses.
 
 ### The Real Organic Project directory is a high-signal source
 
