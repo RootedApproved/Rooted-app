@@ -115,7 +115,7 @@ distinguishing fact remain.
 - [ ] Kimberley Wine Vinegars
 - [ ] Lads Home Ranch
 - [ ] Mellor Ranch
-- [ ] Old Grove Orange
+- [x] Old Grove Orange — **ADDED** (5th-gen farm + food hub supplying 50+ school districts)
 - [ ] Outer Aisle Food Hub
 - [x] Talley Farms — **ADDED** as Talley Farms Fresh Harvest (large grower; CSA on its ~100 certified organic acres)
 - [ ] Tami Lyon
@@ -132,6 +132,32 @@ The register also confirmed 10 of 11 ROOTED farms it lists, which is independent
 corroboration of work already done.
 
 ---
+
+## Batching: the ceremony was the bottleneck, not the research
+
+Through the first 60 farms, each one got its own verify → gate → commit → push cycle. That
+overhead is identical whether one farm is added or eight, and it was most of the elapsed
+time.
+
+**From here:**
+
+1. **Batch commits — 6–8 farms per gate/commit cycle.** Per-farm verification is unchanged;
+   only the ceremony is amortised.
+2. **Fetch directory and register pages, not farm pages.** A regional directory returns
+   15–25 farms with practice text written by the farms themselves. One lookup, many farms.
+3. **Tier the depth.** A farm that is CDFA-registered, has a live site and states its own
+   practices does not need dedicated research — the register already proved existence.
+   Reserve deep digging for ambiguity, certification claims, or anything that will be
+   asserted as fact in an entry.
+4. **Shorter commit messages.** Reasoning belongs in the entry and the standards docs, which
+   are what get read. A commit message does not need to restate them.
+
+**Batching by region also improves accuracy.** The Laguna / West County conflation was
+caught precisely because the two were worked adjacently. Density surfaces errors that
+isolated checking misses.
+
+**Honest limit:** searching several farm names at once does not work — results collapse onto
+whichever farm has the strongest web presence. Batch by *source*, not by query.
 
 ## Directory snippets can merge two farms — read for the seam
 
