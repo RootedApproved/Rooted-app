@@ -173,6 +173,7 @@ farm. Re-check held entries with different search terms before treating a hold a
 | Gospel Flat Farm Stand | Added as **on-farm market** — 24/7 honour-system stand. CSA claim not treated as confirmed (see note) |
 | Good Humus Produce | Added as CSA — organic since **1976**, CSA since 1993, second generation joined 2016 |
 | Say Hay Farms | Added as CSA — soy-free pastured egg option. A stale 2014 Yelp listing marked CLOSED is a *former address*, not the farm |
+| Soil Born Farms | **Already listed** as a farmers market — recategorised to CSA and enriched. See note below |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -186,6 +187,23 @@ farm. Re-check held entries with different search terms before treating a hold a
 | **Rio Gozo Farm** (Ojai) | **Domain hijacked.** `riogozofarm.com` now serves an Indonesian gambling site — the signature of a lapsed domain resold to spammers. LocalHarvest listing last updated January 2025 and offers a "report as inactive" link. Not on the CDFA register. Strong evidence the farm stopped operating. Re-check only if the farm resurfaces under a new domain. |
 
 | **Love Apple Farms** (Santa Cruz) | Yelp lists the business as **CLOSED**, updated April 2026. Even when trading, the farm at Vine Hill Road was *"the exclusive, private kitchen garden for Manresa restaurant"* and explicitly **not open to the general public** — so it was never a public food source. The Manresa relationship also ended when that restaurant closed in 2022. A LocalHarvest listing still advertises a 25-member CSA; it is undated and contradicted by every current source. |
+
+### Check whether a farm is ALREADY on the map before researching it
+
+Soil Born Farms was already in `CURATED_LISTINGS` — filed as a **farmers market**, with a
+one-line description and no website. It was nearly added a second time as a CSA.
+
+Two lessons:
+- **Search the existing catalog by name before researching.** A duplicate is worse than a
+  missing entry, because it splits the record and looks careless on the map.
+- **Older entries may be miscategorised or thin.** This one was a nonprofit running a CSA,
+  a farm stand, a farmer-training programme and a city-wide gleaning operation, described
+  as "a Saturday farm-stand market". Re-checking an existing entry can be worth more than
+  adding a new one.
+
+A farm stand *at the farm* is an **on-farm market or CSA**, not a farmers market. A farmers
+market is a multi-vendor event. Worth auditing the other 60 `farmersmarket` entries for the
+same confusion at some point.
 
 ### A "CLOSED" marker is not always the current business
 
@@ -219,8 +237,8 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 37 of 115 core-California farms
-- **Added:** 24
+- **Checked:** 38 of 115 core-California farms
+- **Added:** 24 (plus 1 existing entry corrected)
 - **Rejected:** 4
 - **Held for contact:** 9
 
