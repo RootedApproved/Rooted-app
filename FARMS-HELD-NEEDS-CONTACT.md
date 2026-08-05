@@ -171,6 +171,8 @@ farm. Re-check held entries with different search terms before treating a hold a
 | Tierra Vegetables | Added as CSA — heirloom beans, grains and corn. **Publicly described its future as uncertain in late 2025**; still trading 2026 |
 | Petaluma Bounty Farm | Added as CSA — nonprofit educational urban farm |
 | Gospel Flat Farm Stand | Added as **on-farm market** — 24/7 honour-system stand. CSA claim not treated as confirmed (see note) |
+| Good Humus Produce | Added as CSA — organic since **1976**, CSA since 1993, second generation joined 2016 |
+| Say Hay Farms | Added as CSA — soy-free pastured egg option. A stale 2014 Yelp listing marked CLOSED is a *former address*, not the farm |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -184,6 +186,16 @@ farm. Re-check held entries with different search terms before treating a hold a
 | **Rio Gozo Farm** (Ojai) | **Domain hijacked.** `riogozofarm.com` now serves an Indonesian gambling site — the signature of a lapsed domain resold to spammers. LocalHarvest listing last updated January 2025 and offers a "report as inactive" link. Not on the CDFA register. Strong evidence the farm stopped operating. Re-check only if the farm resurfaces under a new domain. |
 
 | **Love Apple Farms** (Santa Cruz) | Yelp lists the business as **CLOSED**, updated April 2026. Even when trading, the farm at Vine Hill Road was *"the exclusive, private kitchen garden for Manresa restaurant"* and explicitly **not open to the general public** — so it was never a public food source. The Manresa relationship also ended when that restaurant closed in 2022. A LocalHarvest listing still advertises a 25-member CSA; it is undated and contradicted by every current source. |
+
+### A "CLOSED" marker is not always the current business
+
+Say Hay Farms appears on Yelp marked **CLOSED** — but that listing is dated 2014 and sits at
+a former address the farm has since left. The farm is demonstrably active: a current CCOF
+directory membership dated December 2025, an active Facebook page, and a running CSA.
+
+Businesses that relocate leave dead listings behind at the old address. **Check the date and
+the address on a "closed" marker before accepting it**, in the same way a fresh-looking
+directory entry is not proof a farm is alive. Both directions need the same scepticism.
 
 ### Aggregators that cannot be trusted alone
 
@@ -207,8 +219,8 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 35 of 115 core-California farms
-- **Added:** 22
+- **Checked:** 37 of 115 core-California farms
+- **Added:** 24
 - **Rejected:** 4
 - **Held for contact:** 9
 
