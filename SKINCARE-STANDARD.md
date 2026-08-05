@@ -541,3 +541,48 @@ obvious interest. It played no part in this decision.
 **What would change the answer:** a published full INCI list, a Drug Facts panel, and SPF
 and broad-spectrum test results. **Ask for those three things.** If they arrive, this
 plausibly becomes a Tier 1 listing and possibly the best-designed sunscreen on the map.
+
+
+---
+
+# Clippers & Shears — held, and worth explaining why
+
+## The Oster Classic 76: sources contradict each other on the basic fact
+
+The obvious ROOTED angle for a clipper is not ingredients but **serviceability** — a tool with
+detachable, replaceable blades and a rebuildable motor is a genuine buy-once object, and the
+Classic 76 has been in production since the 1920s.
+
+**But the housing material could not be confirmed, and the sources disagree:**
+
+| Source | Claim |
+|---|---|
+| A review site | *"The 76 body is made of **valox** material"* — Valox is a PBT thermoplastic, i.e. plastic |
+| An eBay listing | Material: **Metal** |
+| Another listing | *"Break Resistant Housing"* — neither confirms nor denies |
+
+**Worse, the reseller listings contain obvious copy-paste errors.** One lists a $158.95
+*corded* Classic 76 with features "Dual Voltage, Rechargeable, Adjustable Speed, **Cordless**".
+That listing is not describing the product it is selling.
+
+**Every source found was a reseller or an affiliate review blog. None was Oster.**
+
+## The honest position on this category
+
+Listing a professional tool whose central claim would be *"durable metal housing"* without
+being able to confirm the housing material would repeat the exact error already corrected
+three times in this project.
+
+**What this category actually needs is different research, not more searching:**
+- The manufacturer's own spec sheet for housing material and motor type
+- Confirmation that blades and parts remain available
+- Whether the unit can be serviced or only replaced
+
+**Andis, Wahl, and the Japanese shear makers (Mizutani, Yasaka, Joewell, Hikari) have the
+same problem** — they sell through professional distributors, and web search surfaces
+resellers rather than manufacturers.
+
+**Recommendation:** this is the weakest-value category for search-based research in the whole
+project. It is better served by J's own knowledge of the tools, or by contacting a
+professional supply house directly. Nothing is lost by leaving it — the map and catalogue
+have far higher-value gaps elsewhere.
