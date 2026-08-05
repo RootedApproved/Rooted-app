@@ -201,6 +201,7 @@ farm. Re-check held entries with different search terms before treating a hold a
 | Clark Valley Organic Farm | Added as CSA under its **current name, Los Osos Valley Organic Farm** — same farm, same address, renamed |
 | Blosser Urban Garden | Added as CSA — CCOF certified since **1996**; discloses it grows 85% of each bag |
 | Raw Roots Farm | Added as CSA — 4 acres, Catheys Valley. Verified via CDFA register; entry is honest that detail is thin |
+| Harvest Fields Organic Farm | Added as CSA — nonprofit on a school campus; materially supports other schools' gardens |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -268,10 +269,29 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 49 of 115 core-California farms
-- **Added:** 33 (plus 1 existing entry corrected)
+- **Checked:** 50 of 115 core-California farms
+- **Added:** 34 (plus 1 existing entry corrected)
 - **Rejected:** 4
 - **Held for contact:** 11
+
+### Halfway marker — 50 of 115 checked
+
+Roughly 68% of farms checked have produced a listing. The remaining 32% split between
+genuinely defunct (4), and unresolvable from public sources (11 held).
+
+**Coverage before this effort → now:**
+
+| Region | CSAs before | CSAs now |
+|---|---|---|
+| LA metro | 4 | 8 |
+| Bay Area | 1 | 9 |
+| San Diego | 1 | 5 |
+| Sacramento / Yolo | 1 | 9 |
+| Central Coast | 0 | 4 |
+| Central Valley | 2 | 4 |
+| Sierra foothills | 0 | 3 |
+
+Statewide CSAs: **9 → 51**. On-farm pickup: **2 → 7**.
 
 ### The grown-versus-sourced ratio is the tell
 
