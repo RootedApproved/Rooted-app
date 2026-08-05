@@ -140,6 +140,10 @@ directly. **sweetgreen is excluded from this map for that reason** despite appea
 seed-oil-free directories.
 
 ### Bay Area candidates still to verify
+Evvia Estiatorio (Palo Alto — Greek) · Eve's Waterfront (Oakland) · Long Bridge Pizza Co.
+(SF) · Terun (Palo Alto) · iTalico (Palo Alto) · The Good Salad (Palo Alto) · Hummus
+Mediterranean Kitchen (Palo Alto) · Flea Street (Menlo Park) · Stoa (SF) · Calibur Burger
+(SF) · GK Pastry (Mountain View) · Rebel Kitchen (Livermore) ·
 The Park Street Tavern (Alameda — marked **Chain**, treat with the sweetgreen caution) ·
 Manzanita (Milpitas) · Ristorante Allegria (Napa — EVOO, avocado oil, Snake River tallow,
 Clover butter) · Musubi Libre (Hayward) · The Green Enchilada (Pacifica) · Long Bridge Pizza
@@ -151,6 +155,31 @@ The Press Artisan Cafe (Pleasanton) · 4505 Burgers & BBQ (SF) · Caffe Central 
 sunflower), Buffalo Wild Wings (cooking oils differ between the US and Canada, so a Canadian
 data point does not describe the US kitchens), Five Guys, True Food Kitchen. A chain-wide
 claim is only as good as its least careful franchise, and reformulations reverse.
+
+### ⚠️ Local Fats snippet attributes BLEED between adjacent entries
+
+Local Fats search-result pages list restaurants in sequence with tags — `Chain`,
+`100% Seed Oil Free`, `Gluten Free Options`, and the oil list — and **those tags do not
+reliably stay attached to the right restaurant.** Observed directly:
+
+- **Evvia Estiatorio** shows "Duck Fat, Olive Oil, Avocado Oil" on one page and
+  "Chain … Olive Oil, Avocado Oil · 180 El Camino Real Ste 1140" on another — but that
+  address belongs to **Local Union 271**, stated explicitly elsewhere.
+- **Casey's Pizza** shows "Butter, Olive Oil, Avocado Oil" on one page and
+  "Chain … Olive Oil, Coconut Oil, Avocado Oil" on another.
+- **Kitava Mission** and **Kitava Oakland** carry markedly different oil lists — which may be
+  genuine, or may be bleed.
+
+**Rule: do not state a specific fat list from a Local Fats search snippet unless the same
+list appears on at least two independent pages.** The *"100% Seed Oil Free"* flag itself is
+consistent and can be used; the oil breakdown and the `Chain` tag cannot be trusted at the
+entry level. Fetch the restaurant's own profile page or site for specifics.
+
+**Already corrected:** Casey's Pizza, which had cited a specific fat list.
+
+This is the third instance of the same underlying failure — directory listings merging
+adjacent entries — after the CAFF page that put West County Community Farm's address into
+Laguna Farm, and the Open Silo snippet that ran ALMA's description into Farm Lot 59's.
 
 ### Category-specific questions worth asking
 
