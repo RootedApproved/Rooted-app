@@ -405,3 +405,44 @@ coconut oil"**. Primally Pure's own label states it is **from RSPO certified pal
 Caprylic/capric triglyceride can be derived from either, so reviewers assumed. **The brand's
 own label is the source of record** — the same rule already applied to the Ancestral
 Cosmetics Amazon discrepancy.
+
+
+## Water in a formula changes the preservation question entirely
+
+**Waxhead's Baby Sunscreen contains spring water and lists no preservative.**
+
+This is worth understanding as a general rule, because "no preservatives" reads as a virtue
+and here it is a question:
+
+- **Anhydrous products** — balms, butters, tallow salves, waterless creams — genuinely do not
+  need preservatives. Microbes need water to grow. Every tallow balm on this map is anhydrous,
+  which is why "no preservatives" is a legitimate claim for them.
+- **Once water is present**, a product needs a preservative system, aseptic manufacturing, or
+  a very short dated shelf life. There is no fourth option.
+
+**So "water-based and preservative-free" is not a cleaner formula — it is an unanswered
+question.** J's own document flagged this instinct correctly: *"water-containing formulas
+require careful manufacturing quality and stability."*
+
+Waxhead is listed at **Tier 2** for this reason alone; everything else about the formula is
+excellent. Their **standard waterless version** avoids the issue entirely and would rate
+higher on this point.
+
+**Add to the sunscreen checklist:** *does the formula contain water, and if so, what preserves
+it?*
+
+---
+
+## ⏸️ All Good SPF 50 Butter — held, and the reason is a rule already written
+
+J ranked it 4th. The only ingredient list found is a **blogger's transcription of a different
+SKU** — the SPF 50 *Kids* Mineral Sunscreen Butter *Stick* — not the SPF 50 Butter itself.
+
+That list looked good (calendula, beeswax, chamomile, coconut oil, jojoba, vitamin E, all
+organic, no seed oils). But J's own note warned: *"Verify each exact SKU because formulas
+differ between butter, stick, kids and lotion products."*
+
+**Listing a product from a third-party transcription of a different SKU would break the rule
+already established twice in this project** — the Ancestral/Amazon discrepancy and the
+Primally Pure palm-versus-coconut error. **The brand's own product page is the source of
+record.** Held until it can be read directly.
