@@ -147,10 +147,53 @@ failure already documented for `rootseller.app`.
 Delta Diversified (Walnut Grove) is unchecked. **Federal verification proves the claim, not
 that anyone can buy the meat** — the Love Apple lesson.
 
-**Better next source than chasing these one by one:** the CDFA Certified Producer
-Certificates register, current to 1 July 2026, organised by county. Every entry is a farm
-legally certified to sell direct at farmers markets — which is precisely the missing proof
-for most of the list above.
+### ✅ CDFA Certified Producer register pulled and cross-checked (edition: 1 May 2026)
+
+**It independently confirmed 12 farms already on ROOTED**, each holding a live state
+certificate to sell direct — the strongest validation of existing work available:
+
+Borba Farms · Mountain Bounty Farm · The Natural Trading Company · Sage Mountain Farm ·
+Huerta del Valle · Huarache Farms · J.R. Organics · Frog Hollow Farm · Knoll Farms ·
+Da-Le Ranch · Alexandre Family Farm · Serendipity Farms
+
+**⚠️ Three show certificates that had lapsed by the register date:**
+
+| Farm | Expired | Note |
+|---|---|---|
+| **Da-Le Ranch** | 4 May 2026 | On the map. Register is a 1 May snapshot, so a later renewal would not appear |
+| Serendipity Farms | 9 Jun 2026 | On the map |
+| Alexandre Family Farm | 1 May 2026 | Product listing, not a map pin |
+
+Not an emergency and not evidence of a problem — small farms renew late routinely. Worth a
+check before anyone drives out, which the entries already advise.
+
+**Resolves a standing hold:** *Feed and Be Fed* (Los Angeles, Linda O'Brien-Rothe) IS a
+certified producer, expired 20 May 2026. It exists and sells direct; the entry needs only
+current-season detail.
+
+### New protein leads WITH confirmed direct-sale certification
+
+These carry the proof the beefnear.me leads lacked. Each still needs its practices
+researched — the certificate proves they sell to the public, not how they farm.
+
+| Farm | County | Valid to | What |
+|---|---|---|---|
+| **Sunrise Pasture-Poultry Farm** | Monterey | 26 Feb 2027 | Pastured poultry |
+| **Hog Wild Holding Co.** | Monterey | 10 Apr 2027 | Pork |
+| **Hilliker's Egg Ranch** | San Diego | 7 Jan 2027 | Eggs |
+| **Mariposa Ranch Eggs** | Los Angeles | 11 Mar 2027 | Eggs |
+| **Metzer Farms** | Monterey | 25 Feb 2027 | Ducks and poultry |
+| **Fallon Hills Ranch** | Marin | 14 Jan 2027 | Kevin Maloney |
+| **Bloom Ranch** | Los Angeles | 4 Mar 2027 | Bill Releford |
+| **Monkey Flower Ranch** | Monterey | 19 Aug 2026 | Rebecca King — sheep |
+| **The Woolly Egg Ranch** | Marin | 21 Jul 2026 | Eggs |
+| **True Grass Farms** | Marin | 3 Jul 2026 (lapsed) | Guido Frosini — grass-fed |
+| Heart T Hogs | Modoc | 27 Jun 2026 | Pork — far north, check scope |
+
+**On Bounty of the Valley:** it appears here as a certified direct-sale producer valid to
+21 Jan 2027. That does **not** overturn its rejection. It was rejected for **suspended
+organic certification**, not for whether it sells direct. Both are true at once, and the
+organic claim is the one that failed.
 
 ---
 
