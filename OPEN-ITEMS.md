@@ -209,9 +209,11 @@ public — nothing more.** It is necessary, not sufficient.
 
 | Farm | Where | Why |
 |---|---|---|
-| **Tomales Bay Pastures** | Pt. Reyes | Pasture-raised eggs, **corn & soy free** |
+| **Tomales Bay Pastures** | Pt. Reyes | Pasture-raised eggs, **corn & soy free**. Only source is UC Cooperative Extension's Grown in Marin — authoritative but a single line. Needs their own site |
+| **Rossotti Ranch** | Petaluma | Pasture-raised, **grain-free**. Same single-source position as above |
+| **Chino Valley Ranchers** | Colton | Organic **soy-free corn-free** eggs, flax-fed, 225mg ALA each, 70+ year family business, widely stocked in stores. ⚠️ Housing is *free-roaming/cage-free*, NOT pasture-raised — would fail the egg standard's red flag on cage-free alone. Accessible but a weaker standard; worth listing only with that stated |
 | **Rossotti Ranch** | Petaluma | Pasture-raised, **grain-free** |
-| **True Grass Farms** | Valley Ford | Certified Organic, **Animal Welfare Approved**, heritage pork and fowl |
+| ~~True Grass Farms~~ | Valley Ford | **ADDED** — Animal Welfare Approved, farm store, cabins on site |
 | **Honest Fish Farm** | CA Delta | Pigs on pasture moved every 3–5 days, **soy-free**, organically fed |
 | **Rainbow Ranch Farms** | SoCal | Corn-, soy- and wheat-free heritage meat, poultry and eggs |
 | **Marin Sun Farms** | Pt. Reyes | Pastured meat and eggs, operates its own harvesting facility |
