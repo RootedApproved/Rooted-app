@@ -124,7 +124,19 @@ open immediately with Massa's rice and almond butter, Capay Canyon's almonds, Da
 and Seed & Shell, and it is the natural home for the certified snack brands already
 identified.
 
-**Not creating it without your say-so** — new subcategories are your call, not mine.
+**✅ CREATED — J approved.** `food-pantry-staples`, "Nuts, Grains & Pantry Staples", opened
+with Massa Organics' organic brown rice and almond butter. Massa and Capay Canyon are
+unblocked; Outer Aisle still to be added under `food-grocery-delivery`.
+
+**Still to fill it:** Capay Canyon almonds · Daily Crunch Snacks · Seed & Shell · The Good
+Crisp · Artisan Tropic · Beefy's Own Tallow Chips · Magos Chips · Sweetpotato Awesome ·
+Crunchmaster — all Seed Oil Free Certified.
+
+**A build note worth keeping:** creating a subcategory needs **nine** `SUBCAT_EDU` fields,
+not five. `title`, `desc`, `standard`, `greenFlags`, `redFlags`, **plus `whyTitle`, `why`,
+`avoid` and `backTitle`.** Omitting the last four passes a JavaScript syntax check and then
+throws at runtime when the page renders. `verify.py` caught it — that is precisely what it
+is for, and it is why it runs before every push.
 
 ## 3. Next work, in priority order
 
