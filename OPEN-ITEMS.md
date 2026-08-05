@@ -67,8 +67,30 @@ is a different kind of claim from approving an olive oil.
 3. **List no raw dairy** and rename the subcategory so it stops promising something it does
    not deliver.
 
-**My recommendation is 2, then 1 if nothing cleaner exists.** But it is your standard and
-your name on it.
+### ✅ RESOLVED — J chose option 2. Claravale Farm listed.
+
+**Claravale Farm** (Paicines, San Benito County) is listed at **Tier 2 / Good Option**,
+deliberately not Tier 1. Bottling raw Jersey milk since **1927**, certified organic pasture
+and hay, returnable glass bottles, nothing homogenised or standardised.
+
+**The record comparison that decided it:**
+
+| | Raw Farm | Claravale |
+|---|---|---|
+| Recalls since 2006 | 15 | 2 documented incidents |
+| Outbreaks | 7 (2006–2026) | 1 (2015 Campylobacter, 6 ill) |
+| Bird flu quarantine | Yes, Dec 2024 | No |
+| Paediatric hospitalisations | Repeatedly | None documented |
+| Operating since | 1916 (as Organic Pastures 2000) | 1927 |
+
+**Not spotless, and the entry says so** — the 2015 Campylobacter recall and quarantine and a
+2021 raw goat milk recall are both named in the listing, in the verdict as well as the flags.
+
+**One open question worth asking Claravale:** their feed includes "occasional non-GMO
+grain-based dairy feed" whose composition is not published. Given the seed-oils-in-feed floor
+ruling, that is worth a direct question. It is flagged in the entry rather than glossed.
+
+**Raw Farm is NOT listed** and should not be added without a further decision.
 
 ## 2. THE TYPE DECISION — highest-leverage single call
 
