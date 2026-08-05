@@ -223,7 +223,7 @@ public — nothing more.** It is necessary, not sufficient.
 
 | Farm | Where | Why |
 |---|---|---|
-| **Tomales Bay Pastures** | Pt. Reyes | Pasture-raised eggs, **corn & soy free**. Only source is UC Cooperative Extension's Grown in Marin — authoritative but a single line. Needs their own site |
+| ~~Tomales Bay Pastures~~ | Marshall | **ADDED** — 100% corn & soy free eggs, MALT-protected land, integrated cattle-then-hens grazing |
 | **Rossotti Ranch** | Petaluma | Pasture-raised, **grain-free**. Same single-source position as above |
 | **Chino Valley Ranchers** | Colton | Organic **soy-free corn-free** eggs, flax-fed, 225mg ALA each, 70+ year family business, widely stocked in stores. ⚠️ Housing is *free-roaming/cage-free*, NOT pasture-raised — would fail the egg standard's red flag on cage-free alone. Accessible but a weaker standard; worth listing only with that stated |
 | **Rossotti Ranch** | Petaluma | Pasture-raised, **grain-free** |
@@ -233,6 +233,7 @@ public — nothing more.** It is necessary, not sufficient.
 | ~~Rainbow Ranch Farms~~ | Piñon Hills | **ADDED** — address supplied by J. Strictest stated feed standard on the map, but self-declared rather than certified |
 | ~~Marin Sun Farms~~ | Pt. Reyes + Oakland | **ADDED (2 pins)** — operates the last USDA-inspected slaughterhouse in the Bay Area |
 | **Pasture Fresh Eggs** | Tomales | Organic pasture-raised eggs |
+| **Farmer Joy** (Chileno Valley, Marin) | **Sixth-generation** duck farmer on her family's farm — supplies The Local Butcher Shop. Duck eggs are a gap on this map |
 | ~~SonRise Ranch~~ | San Diego / Miramar | **ADDED** — publishes petroleum-per-calorie figure; states plainly it is NOT certified organic |
 | Pajaro Pastures / Your Family Farm | Paicines | Eggs and pasture-raised Berkshire hogs |
 
