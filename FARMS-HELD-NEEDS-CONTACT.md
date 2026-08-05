@@ -211,7 +211,16 @@ product.
 **Not added pending J's decision.** Forcing it into `csa` or `onfarmmarket` would be exactly
 the miscategorisation this file already documents twice.
 
-### 16. Live Power Community Farm — Covelo
+### 16. Red H Farm — Sebastopol
+- **What it is:** community-supported farm founded in Sebastopol in **2009**, specialising in
+  heirloom fruits and vegetables. States it uses agroecological practices focused on land
+  and water stewardship and **never uses chemicals**.
+- **Confirmed:** the farm and its stated practices are documented.
+- **Unconfirmed:** current season and whether the CSA is taking members. Not on either CDFA
+  register, no certification record found.
+- **Ask:** "Is the CSA open this season, and where is pickup?"
+
+### 17. Live Power Community Farm — Covelo
 - **What it is:** 40-acre **biodynamic** and organic community-supported farm founded in
   1973 — one of the oldest CSAs in the United States if still running as such. Horse-powered
   historically.
@@ -262,6 +271,7 @@ the miscategorisation this file already documents twice.
 | Blosser Urban Garden | Added as CSA — CCOF certified since **1996**; discloses it grows 85% of each bag |
 | Raw Roots Farm | Added as CSA — 4 acres, Catheys Valley. Verified via CDFA register; entry is honest that detail is thin |
 | Harvest Fields Organic Farm | Added as CSA — nonprofit on a school campus; materially supports other schools' gardens |
+| Coyote Family Farm | Added as CSA — certified organic 2022; farmer-owner of FEED Cooperative; 2026 sign-ups open |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -425,10 +435,10 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 55 of 115 core-California farms
-- **Added:** 34 (plus 1 existing entry corrected)
+- **Checked:** 57 of 115 core-California farms
+- **Added:** 35 (plus 1 existing entry corrected)
 - **Rejected:** 5
-- **Held for contact:** 14
+- **Held for contact:** 15
 - **Blocked on a product decision:** 1 (Massa Organics — see above)
 
 ### Halfway marker — 50 of 115 checked
@@ -536,6 +546,9 @@ Surfaced while verifying other farms. Each looked credible but has not been rese
 | Green Star Farm (West Sonoma) | 85-acre pasture-based livestock — pastured eggs, chicken, pork, lamb and goat year-round |
 | Foggy River Farm, Deep Roots Farm, Gold Ridge Organic Farms, Four Oak Farm, Wise Acre Farm (Sonoma) | All ranked in Yelp's Santa Rosa CSA list, updated June 2026 |
 | Grounded Grassfed (Sonoma) | Grass-fed meat; would be a rare category on this map |
+| West County Community Farm (Sebastopol) | 450+ CSA subscribers beside the Laguna de Santa Rosa. **2026 CSA currently FULL with a waitlist** — a strong signal of a well-run farm |
+| FEED Cooperative (Sonoma) | Farmer-owned co-op running a year-round multi-farm box with many Bay Area pickup sites |
+| Three Ox Farm, Coastal Hill Farm (poultry), Redwood Hill Farm (goat dairy), Solana Gold Organics (Sonoma) | All surfaced repeatedly in Sonoma CSA listings |
 | Deep Roots (Penngrove) | U-pick flowers and fruit, **farm boxes with egg, pork and poultry add-ons** |
 | Tenfold Farmstand (Petaluma), Duckworth Family Farm, Cassidy Ranch (Sonoma) | Farmstands and U-pick; would suit the thin on-farm pickup category |
 
