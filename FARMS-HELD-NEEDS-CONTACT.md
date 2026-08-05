@@ -174,6 +174,7 @@ farm. Re-check held entries with different search terms before treating a hold a
 | Good Humus Produce | Added as CSA — organic since **1976**, CSA since 1993, second generation joined 2016 |
 | Say Hay Farms | Added as CSA — soy-free pastured egg option. A stale 2014 Yelp listing marked CLOSED is a *former address*, not the farm |
 | Soil Born Farms | **Already listed** as a farmers market — recategorised to CSA and enriched. See note below |
+| Eatwell Farm | Added as CSA — 105 acres organic, 30+ years, integrated pastured hens, Care Share donation programme |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -202,8 +203,12 @@ Two lessons:
   adding a new one.
 
 A farm stand *at the farm* is an **on-farm market or CSA**, not a farmers market. A farmers
-market is a multi-vendor event. Worth auditing the other 60 `farmersmarket` entries for the
-same confusion at some point.
+market is a multi-vendor event.
+
+**Audit done.** All 59 remaining `farmersmarket` entries were scanned for the same
+confusion. Only one flagged, and it was a false positive (Santa Monica Farmers Market is
+genuinely multi-vendor). Soil Born was an isolated error, not a systemic one. No further
+action needed here.
 
 ### A "CLOSED" marker is not always the current business
 
@@ -237,8 +242,8 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 38 of 115 core-California farms
-- **Added:** 24 (plus 1 existing entry corrected)
+- **Checked:** 39 of 115 core-California farms
+- **Added:** 25 (plus 1 existing entry corrected)
 - **Rejected:** 4
 - **Held for contact:** 9
 
