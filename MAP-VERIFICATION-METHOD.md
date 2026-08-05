@@ -103,7 +103,7 @@ distinguishing fact remain.
 - [ ] Capay Canyon Ranch
 - [ ] Christine's Garden
 - [ ] City of Cotati Farm Share (Veronda-Falletti Ranch)
-- [ ] The Cloverleaf Farm CSA
+- [x] The Cloverleaf Farm CSA — **ADDED** (fruit-only CSA; Ugly Fruit Club; stated living wage)
 - [ ] Da-Le Ranch
 - [ ] Deepseeded Farm
 - [ ] Donald J. Crouch
