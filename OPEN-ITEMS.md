@@ -204,10 +204,47 @@ supplier; only testing catches it.
 grass-fed** — the third source of its kind found in this project, and the pattern holds:
 **a directory tells you a claim exists; a certifier tells you it was checked.**
 
-**NEXT ACTION for the restaurant category:** find and mine the Alliance's certified-business
-directory. A California list from it would be worth more than the remaining twelve Local
-Fats candidates combined, and every entry could carry a verified certification rather than a
-community-submitted claim.
+**Directory pulled.** `seedoilfreecertified.com/product-finder`
+
+**For restaurants it is disappointing — and that is worth knowing.** Only four certified
+restaurants exist: Just Be Kitchen (Colorado), Garden Butcher (Florida), Motek Cafe and
+Frites Street. **None in California.** Restaurant certification is genuinely new, so it
+cannot be used to build out the Bay Area. Local Fats remains the discovery source for
+restaurants; the Alliance is the standard to check against once a candidate is found.
+
+---
+
+## ★★ THE REAL FIND: this directory unlocks Food & Diet
+
+**Food & Diet was closed at 0 of 11 subcategories** because seed oils are floor and nothing
+could be verified to that bar. **This directory is the verification that was missing.**
+
+Roughly **50 brands** are certified under a physician-authored standard with **independent
+laboratory testing** and **supply-chain auditing for hidden seed oils in compound
+ingredients** — which is exactly the problem that closed the category. It is not a claim; it
+is a tested claim, and the Alliance has already rejected an applicant for oil adulteration.
+
+**Certified brands mapping onto ROOTED product categories:**
+
+| Category | Certified brands |
+|---|---|
+| **Cooking fats & oils** | Kettle & Fire (beef tallow) · Marianne's Harvest (organic avocado oil) · California Olive Ranch · Bono USA · AvoPacific Oils · Gemsa Oils · Daabon Organic · Zero Acre Farms · Algae Cooking Club |
+| **Chips & snacks** | The Good Crisp Company · Artisan Tropic · Beefy's Own Tallow Chips · Magos Chips · Sweetpotato Awesome · Crunchmaster |
+| **Nuts & nut butters** | Daily Crunch Snacks · Seed & Shell |
+| **Plant milks** | Elmhurst · New Barn Organics · Táche Pistachio Milk · Pecana Milk · Vita Coco |
+| **Sauces & dips** | Hoboken Farms · Habiza Hummus · Cedar's Foods · Eat Happy Kitchen |
+| **Bars & desserts** | TruBar · Patterbar · My Mochi · Everybody Eating |
+| **Breakfast & baked** | Purely Elizabeth · Atoria's Baking Company · Maria & Ricardo's Tortillas |
+| **Meat & meals** | Good Ranchers · Saffron Road · Little Spoon · Grazly |
+
+**Why this matters more than the next twenty restaurants:** every one of these is a
+*product* that can be rated in the catalogue, with a verification standard that already
+matches ROOTED's floor exactly. It reopens a category declared complete at zero.
+
+**Recommended next action, ahead of further restaurant work:** work the Seed Oil Free
+Certified directory into the Food & Diet product categories. Same discipline as everywhere
+else — the certification proves the seed-oil floor is cleared, but ROOTED's other standards
+(organic, ingredient quality, packaging) still need checking per product.
 
 ### Category-specific questions worth asking
 
