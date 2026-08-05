@@ -98,7 +98,7 @@ distinguishing fact remain.
 
 - [x] Alma Backyard Farms — **ADDED** (re-entry employment urban farm, Compton)
 - [ ] Black Urban Farmers Association
-- [ ] Borba Farms
+- [x] Borba Farms — **ADDED** as Borba Family Farms (4 generations, Blenheim apricots, certified organic)
 - [x] Brown Girl Farms — **ADDED** (African American heritage crops; detail thin, CDFA-verified)
 - [~] Capay Canyon Ranch — **HELD**: almond growing, handling and marketing for a worldwide market, plus a Davis Farmers Market stall selling almonds, organic grapes and raisins. CDFA-registered but no consumer CSA found. Same direct-order question as Massa Organics.
 - [x] Christine's Garden — **ADDED** (Modesto; Mediterranean varietals; detail thin)
@@ -139,6 +139,8 @@ distinguishing fact remain.
 | SoMar Farms (W. Petaluma) | Grass-fed beef and lamb, pickup at farm or Oakland |
 | Silver Springs Beef / Alhambra Valley (Martinez) | 100% grass-fed beef and lamb, heritage pork, bulk or cuts |
 | Galaxy Farm (Woodland) | Organic-fed lamb |
+| Hole-In-One Ranch (Janesville) | Grass-fed beef, lamb and pork |
+| Dare 2 Dream Farms (Lompoc) | Free-range eggs, organic produce, backyard chickens — CSA currently sold out |
 | Twisted Fields | Pasture-raised rainbow hen eggs, rotational grazing |
 | Front Porch Farm (Sonoma) | 110 acres — heritage vegetables, olives, heirloom polenta corn, flowers |
 
