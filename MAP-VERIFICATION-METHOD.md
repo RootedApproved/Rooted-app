@@ -96,7 +96,7 @@ Every farm below is a **legally registered California CSA producer as of 1 May 2
 is on ROOTED yet. Existence is already established; only fit, category and the
 distinguishing fact remain.
 
-- [ ] Alma Backyard Farms
+- [x] Alma Backyard Farms — **ADDED** (re-entry employment urban farm, Compton)
 - [ ] Black Urban Farmers Association
 - [ ] Borba Farms
 - [ ] Brown Girl Farms
@@ -132,6 +132,23 @@ The register also confirmed 10 of 11 ROOTED farms it lists, which is independent
 corroboration of work already done.
 
 ---
+
+## Directory snippets can merge two farms — read for the seam
+
+Twice now a search snippet has blended two different farms' details:
+
+- A CAFF page under the slug `green-valley-community-farm` carried **West County Community
+  Farm's** address and description while appearing beside **Laguna Farm's** text. West
+  County's 1720 Cooper Rd and its "200+ varieties" ended up in the Laguna Farm entry and had
+  to be corrected.
+- An Open Silo directory snippet ran **ALMA Backyard Farms'** description straight into
+  **Farm Lot 59's** — the "22-member CSA" and "60 animal-welfare approved hens" in that block
+  belong to Farm Lot, not ALMA. Caught before it reached the entry.
+
+**Watch for the seam.** A sentence that switches subject without naming the new one — "Farm
+Lot is a proud advocate…" mid-paragraph — means the snippet has moved on. Any number that
+appears without the farm being named alongside it should be traced to the farm's own source
+before use.
 
 ## Recommended split with the parallel session
 

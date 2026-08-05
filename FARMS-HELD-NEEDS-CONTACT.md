@@ -546,6 +546,7 @@ Surfaced while verifying other farms. Each looked credible but has not been rese
 | Green Star Farm (West Sonoma) | 85-acre pasture-based livestock — pastured eggs, chicken, pork, lamb and goat year-round |
 | Foggy River Farm, Deep Roots Farm, Gold Ridge Organic Farms, Four Oak Farm, Wise Acre Farm (Sonoma) | All ranked in Yelp's Santa Rosa CSA list, updated June 2026 |
 | Grounded Grassfed (Sonoma) | Grass-fed meat; would be a rare category on this map |
+| Farm Lot 59 (Long Beach) | Small CSA plus a flock of **animal-welfare approved** hens; donates 1,500 lb of produce a year through Plant a Row for the Hungry; helped pass AB 551 |
 | West County Community Farm (Sebastopol) | 450+ CSA subscribers beside the Laguna de Santa Rosa. **2026 CSA currently FULL with a waitlist** — a strong signal of a well-run farm |
 | FEED Cooperative (Sonoma) | Farmer-owned co-op running a year-round multi-farm box with many Bay Area pickup sites |
 | Three Ox Farm, Coastal Hill Farm (poultry), Redwood Hill Farm (goat dairy), Solana Gold Organics (Sonoma) | All surfaced repeatedly in Sonoma CSA listings |
