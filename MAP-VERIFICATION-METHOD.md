@@ -61,12 +61,43 @@ with no verification at all, and "grass-fed" without "grass-finished" routinely 
 grain-finished. A federal register with expiry dates is the only way to separate a verified
 claim from a marketing one.
 
-**OUTSTANDING AUDIT:** none of the five meat listings on ROOTED have been checked against
-this register. Da-Le Ranch, Engler Beef, Stemple Creek, Markegard and Casa Rosa all make
-grass-fed or grass-finished claims. Markegard says "certified grass-fed", which implies a
-certifying body that should be identifiable. This audit should be run before the meat
-category is considered finished — exactly as the CCOF audit was run after the Bounty of the
-Valley finding, and that one turned up two bad claims out of six.
+#### AUDIT COMPLETE — and the result must not be over-read
+
+The full register was pulled and read. **None of ROOTED's five meat listings appear on it:**
+Da-Le Ranch, Engler Beef, Stemple Creek, Markegard, Casa Rosa.
+
+**This is NOT a mark against any of them, and it would be a serious error to treat it as
+one.** The SVS Grass Fed Program is a small *voluntary* USDA verification scheme — roughly
+fifty operations **nationwide**, only five of them in California. Enrolment costs time and
+money, and most reputable grass-fed ranches either use other certifiers (American Grassfed
+Association, A Greener World) or rely on direct customer relationships instead.
+
+**The correct reading:**
+- **Presence on the register is strong positive evidence.** Federal verification with a
+  named certificate number and expiry date.
+- **Absence proves nothing at all.** With fifty operations nationwide, the overwhelming
+  majority of genuine grass-fed ranches are absent.
+
+This is the opposite of the CCOF situation, where a farm claiming CCOF certification but
+showing "Surrendered" was a real contradiction. No ROOTED meat listing claims USDA SVS
+verification, so nothing is contradicted.
+
+**One genuine open item remains:** Markegard states "certified grass-fed". That certifier is
+not USDA SVS and has not been identified. Worth pinning down, since a named certifier is
+checkable and an unnamed one is not.
+
+#### California operations that ARE federally verified
+
+| Ranch | Certificate | Valid to |
+|---|---|---|
+| **Talley Ranch** (Arroyo Grande) | GF5010MHA | 10 Jan 2027 — **ADDED** |
+| **Cahuilla Mountain Ranch** (Anza) | GF4214MHA | 1 Aug 2026 — lead; same area as Sage Mountain Farm |
+| Hunt Road Cattle Company (Copperopolis) | GF5041MHA | 10 Feb 2027 — lead |
+| Gamble Ranch (Winton) | GF4277MHB | 3 Oct 2026 — lead |
+| Delta Diversified Farming (Walnut Grove) | GF4320MHA | 15 Nov 2026 — lead |
+
+Five federally verified grass-fed operations in the entire state. All five are worth
+listing, and the register gives contact details for each.
 
 **5. CAFF directory** — `caff.org/directory/`
 Region-filterable, with practice descriptions written by the farms themselves.
