@@ -304,14 +304,39 @@ specifically, which makes them checkable. Results:
 |---|---|---|
 | Full Belly Farm | **Certified** — Crops & USDA NOP since Mar 1985, Handling 2004, Livestock 2006 | May 2026 ✅ |
 | Terra Firma Farm | **Certified** — Crops & USDA NOP since Mar 1988, Handling 2010 | Jun 2026 ✅ |
-| Shumei Santa Cruz Farm | Current directory member | Mar 2026 — *presence confirmed, status line not read* |
+| Shumei Santa Cruz Farm | **SURRENDERED** — USDA NOP & Crops 25 Dec 2017, Handling Jan 2018 | Aug 2026 ⚠️ **entry corrected** |
 | Say Hay Farms | Current directory member | Dec 2025 — *presence confirmed, status line not read* |
 | The Natural Trading Company | Current directory member | Jul 2026 — *presence confirmed, status line not read* |
 | Blosser Urban Garden | Certified since 1996 per own site | *status line not read* |
 
-**Outstanding:** the four marked above were verified as present in the CCOF directory but
-their status lines were not individually read — which, after Bounty of the Valley, is no
-longer sufficient. Worth closing.
+**Outstanding:** Say Hay Farms, The Natural Trading Company and Blosser Urban Garden were
+confirmed present in the CCOF directory but their status lines have not been read. Search
+snippets truncate before the certification block, so each needs its CCOF page opened
+directly — `ccof.org/directory-member/<farm-slug>/`.
+
+#### The audit caught a live error
+
+Shumei Santa Cruz Farm was listed on ROOTED as a "current CCOF directory member". It is in
+the directory, but it **surrendered** its USDA NOP and Crops certifications on 25 December
+2017 and its Handling certification in January 2018. The entry has been corrected to state
+this plainly.
+
+This is exactly the mistake the Bounty of the Valley finding predicted, made by us, on our
+own site, two days after writing the rule. Presence in a directory is not certification.
+
+**CCOF status vocabulary seen so far** — all four appear in live directory entries:
+
+| Status | Meaning |
+|---|---|
+| **Certified** | Current and valid |
+| **Suspended** | Revoked by the certifier, typically for cause |
+| **Surrendered** | Voluntarily given up by the farm |
+| **Withdrawn** | Application or certification withdrawn |
+
+Only **Certified** supports an organic claim. Surrendered is not necessarily damning —
+growers working beyond organic sometimes drop a standard that does not describe what they
+do, as Knoll Farms did deliberately in 2002 — but it must never be presented as current
+certification.
 
 The other 18 certification claims name no certifying body ("certified organic" only), so
 there is no single record to check. Lower priority, but the same principle applies if any
