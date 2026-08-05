@@ -20,6 +20,56 @@ hits the limit.
 
 ---
 
+## 1b. RAW DAIRY — a decision I am not making for you
+
+**The gap is real.** The subcategory is titled **"Grass-Fed & Raw Dairy"** and its standard
+explicitly says raw milk needs "its own explicit disclosure and, where legally sold, clear
+handling guidance." Both listed products are pasteurized. **There is no raw dairy on ROOTED
+at all.** California is one of the few states with legal retail raw milk, so for a
+California-focused platform that is a genuine hole.
+
+**The obvious candidate is Raw Farm LLC** (Fresno, formerly Organic Pastures) — the largest
+raw dairy producer in the United States, sold in hundreds of California retail outlets.
+
+**I did not add it, because the record needs your judgement rather than mine.**
+
+### What the record shows
+
+| | |
+|---|---|
+| Since 2006 | **15 recalls** — E. coli, Listeria, Salmonella, Campylobacter |
+| Outbreaks | **Seven** — 2006, 2011, 2012, 2016, 2023, 2024, 2026 |
+| Dec 2024 | **Bird flu (H5N1) detected** in retail product *and* at the bottling facility. Farm quarantined; CDPH secured a statewide recall of all milk and cream |
+| Early 2026 | E. coli outbreak linked to raw cheddar — 9 ill, 3 hospitalised, **one with HUS (kidney failure)**, across CA, FL and TX |
+| Reported pattern | **In each outbreak, children were a significant share of those sickened.** In the 2026 cluster, over half the patients were under five |
+
+### What the company's side shows, fairly stated
+
+- Raw Farm ran roughly **14,000 tests** from September to February, all negative for E. coli O157:H7, and published results as they accumulated
+- **California, Texas and Florida each tested the implicated batches independently — all negative**
+- The FDA could not issue a mandatory recall because FSMA requires demonstrated causation, which it did not have. The April 2026 recall was voluntary
+- The **recall was formally closed in May 2026 with no illness confirmed from recalled product**
+- Roughly $2M of product destroyed
+
+### Why this is your call
+
+ROOTED's entire premise is that a listing means something was checked. Raw dairy fits the
+ancestral philosophy, it is legal here, and plenty of people want it — but a "Rooted
+Approved" label on a producer with seven outbreaks and repeated paediatric hospitalisations
+is a different kind of claim from approving an olive oil.
+
+**Three honest options:**
+1. **List Raw Farm with the full record stated in the entry** — including the outbreak
+   history, the bird flu quarantine, and the company's testing response. Trusts the reader
+   with the facts.
+2. **Research other licensed California raw dairies** and list one with a cleaner record.
+   Raw Farm is the largest but not the only licensed producer.
+3. **List no raw dairy** and rename the subcategory so it stops promising something it does
+   not deliver.
+
+**My recommendation is 2, then 1 if nothing cleaner exists.** But it is your standard and
+your name on it.
+
 ## 2. THE TYPE DECISION — highest-leverage single call
 
 The map has five listing types: `grocery`, `farmersmarket`, `restaurant`, `csa`,
