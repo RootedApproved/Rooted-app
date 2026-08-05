@@ -168,6 +168,8 @@ farm. Re-check held entries with different search terms before treating a hold a
 | APC Farm2Market | Added as CSA — social enterprise of Alameda Point Collaborative; employs residents leaving homelessness |
 | Singing Frogs Farm | Added as CSA — no-till; one of the most studied market farms in the US |
 | Laguna Farm | Added as CSA — 400+ member households; 200+ crop varieties |
+| Tierra Vegetables | Added as CSA — heirloom beans, grains and corn. **Publicly described its future as uncertain in late 2025**; still trading 2026 |
+| Petaluma Bounty Farm | Added as CSA — nonprofit educational urban farm |
 | APC Farm2Market | Added as CSA — urban farm employing residents of supportive housing |
 
 ---
@@ -193,10 +195,16 @@ worth checking the actual website loads correctly for any farm before listing it
 
 ## Progress
 
-- **Checked:** 32 of 115 core-California farms
-- **Added:** 19
+- **Checked:** 34 of 115 core-California farms
+- **Added:** 21
 - **Rejected:** 4
 - **Held for contact:** 9
+
+### Watch list — verified, but at risk
+
+| Farm | Situation |
+|---|---|
+| **Tierra Vegetables** (Santa Rosa) | Publicly described its future as uncertain in October 2025 after 23 years on the site — wildfires, floods, pandemic losses and a ~$300,000 barn relocation. Fundraising and seeking successors. Still trading through 2026. **Re-check before each season.** |
 
 > **Note:** two chat sessions have been working this list concurrently. Always `git pull`
 > before starting a batch, and check this file before researching a farm — it may already
@@ -218,6 +226,8 @@ Surfaced while verifying other farms. Each looked credible but has not been rese
 | Green Star Farm (West Sonoma) | 85-acre pasture-based livestock — pastured eggs, chicken, pork, lamb and goat year-round |
 | Foggy River Farm, Deep Roots Farm, Gold Ridge Organic Farms, Four Oak Farm, Wise Acre Farm (Sonoma) | All ranked in Yelp's Santa Rosa CSA list, updated June 2026 |
 | Grounded Grassfed (Sonoma) | Grass-fed meat; would be a rare category on this map |
+| Deep Roots (Penngrove) | U-pick flowers and fruit, **farm boxes with egg, pork and poultry add-ons** |
+| Tenfold Farmstand (Petaluma), Duckworth Family Farm, Cassidy Ranch (Sonoma) | Farmstands and U-pick; would suit the thin on-farm pickup category |
 
 **Best single source found for Sonoma:** the CAFF (Community Alliance with Family Farmers)
 directory at `caff.org/directory/` — a curated, region-filterable family-farm register with
