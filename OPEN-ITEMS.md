@@ -128,9 +128,29 @@ identified.
 with Massa Organics' organic brown rice and almond butter. Massa and Capay Canyon are
 unblocked; Outer Aisle still to be added under `food-grocery-delivery`.
 
-**Still to fill it:** Capay Canyon almonds · Daily Crunch Snacks · Seed & Shell · The Good
-Crisp · Artisan Tropic · Beefy's Own Tallow Chips · Magos Chips · Sweetpotato Awesome ·
-Crunchmaster — all Seed Oil Free Certified.
+**Filled so far:** Massa Organics (rice, almond butter) · Daily Crunch (2, tiered
+separately) · Capay Hills Orchard (raw almonds, stone-ground almond butter). **6 products.**
+
+**Did NOT verify — do not re-research without a better source:**
+- **Seed & Shell** — nothing findable under that name. Searches return generic nut-butter
+  retailers. May be misnamed on the certified list.
+- **Capay Canyon Ranch** — did not surface. Note the near-miss: **Capay Hills Orchard** is a
+  *different farm* in the same valley, and is the one now listed. Do not conflate them.
+
+**⚠️ THE CHIP BRANDS DO NOT BELONG HERE.** The Good Crisp (stacked potato crisp), Artisan
+Tropic (plantain chips), Beefy's Own Tallow Chips, Magos Chips, Sweetpotato Awesome and
+Crunchmaster are **snacks, not pantry staples.** Filing them under "Nuts, Grains & Pantry
+Staples" would be the same miscategorisation already corrected twice on the map (Soil Born,
+Knoll Farms).
+
+**They need their own subcategory — J's call.** Proposed: `food-pantry-snacks`, "Chips &
+Savoury Snacks". It would open with six Seed Oil Free Certified brands, and it is arguably
+the single highest-value food subcategory ROOTED could have, because chips are where seed
+oils are most universal and where people most want an alternative.
+
+**Also surfaced, not on the certified list but worth checking:** NuttZo (7-nut organic
+butter, no added sugar or oils, dry roasted) · Mixed Up Foods (Vermont, palm-oil-free craft
+nut butters) · Wilderness Poets (Oregon, micro-batch organic).
 
 **A build note worth keeping:** creating a subcategory needs **nine** `SUBCAT_EDU` fields,
 not five. `title`, `desc`, `standard`, `greenFlags`, `redFlags`, **plus `whyTitle`, `why`,
