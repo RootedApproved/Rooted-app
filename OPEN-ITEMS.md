@@ -204,6 +204,25 @@ Big Bluff Ranch (certified organic pastured chicken, vetted by Stemple Creek) ·
 Ranch · Fogline Farms · SoMar Farms · Silver Springs Beef · Galaxy Farm · Yolo Land &
 Cattle · Spreadwing Farm · Farm Lot 59
 
+### 3.3b ❌ Protein leads REJECTED on practices — the certificate is never enough
+
+Both held a valid CDFA certificate confirming direct sales. Both failed on how the animals
+are actually raised. **The certificate answers "can I buy this", never "how was it raised".**
+
+| Farm | Why rejected |
+|---|---|
+| **Metzer Farms** (Monterey) | Supplier states plainly the duck eggs are *"NOT organic fed/certified organic or pasture-raised… cage-free, raised in open sided layer buildings… conventionally raised."* Flock moved permanently indoors as avian-flu biosecurity. Primarily a **hatchery** selling day-old ducklings, not a food producer |
+| **Hilliker's Egg Ranch** (Lakeside) | Their own site: *"cage-free, **vegetarian** eggs"* from *"3 cage-free… aviaries, each housing around 10,000 hens each."* Roughly **30,000 hens indoors.** Converting barns to cage-free since Proposition 2 — a real improvement on battery cages, and not pasture |
+
+**Neither is a bad operation.** Both are legitimate businesses doing better than the
+industry baseline. They simply do not meet a pasture standard, and the egg subcategory
+red-flags cage-free alone.
+
+**Still open from the CDFA list:** Sunrise Pasture-Poultry *(added — CCOF certified organic
+livestock)* · Hog Wild Holding Co. *(pork, no practice detail found yet)* · Mariposa Ranch
+Eggs · Bloom Ranch · Monkey Flower Ranch · Woolly Egg Ranch · True Grass Farms *(added)* ·
+Fallon Hills Ranch · Heart T Hogs.
+
 ### 3.4 Dairy and raw milk — currently ZERO on the map
 A conspicuous gap given ROOTED's standards. No source identified yet; start with the
 Weston A. Price chapter listings and CDFA's raw milk permit register.
