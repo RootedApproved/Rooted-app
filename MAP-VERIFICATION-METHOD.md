@@ -102,13 +102,13 @@ distinguishing fact remain.
 - [x] Brown Girl Farms — **ADDED** (African American heritage crops; detail thin, CDFA-verified)
 - [~] Capay Canyon Ranch — **HELD**: almond growing, handling and marketing for a worldwide market, plus a Davis Farmers Market stall selling almonds, organic grapes and raisins. CDFA-registered but no consumer CSA found. Same direct-order question as Massa Organics.
 - [x] Christine's Garden — **ADDED** (Modesto; Mediterranean varietals; detail thin)
-- [ ] City of Cotati Farm Share (Veronda-Falletti Ranch)
+- [x] City of Cotati Farm Share — **ADDED** as Cotati Farm Box (city-run, on permanently protected open space, ~half-share price)
 - [x] The Cloverleaf Farm CSA — **ADDED** (fruit-only CSA; Ugly Fruit Club; stated living wage)
 - [x] Da-Le Ranch — **ADDED** (first meat CSA on the map; pork/poultry feed undisclosed, flagged)
 - [~] Deepseeded Farm — **OUT OF SCOPE**: serves the Humboldt Bay area, which J deprioritised when choosing core California only. Revisit if the map expands north.
 - [ ] Donald J. Crouch
 - [ ] Eat! By Food Access Los Angeles *(multiple registered producers)*
-- [ ] Feed and be Fed
+- [~] Feed and be Fed — **HELD**: nothing verifiable surfaced beyond the CDFA registration. Needs a dedicated lookup or a call.
 - [ ] Girl and Her Dog Farm
 - [x] Grub CSA Farm — **ADDED** (Chico; members gather their own share from tables, not pre-boxed)
 - [x] Heritage Valley Family Orchard — **ADDED** (single-crop heirloom avocado CSA, shipped)
