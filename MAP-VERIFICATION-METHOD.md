@@ -135,9 +135,10 @@ distinguishing fact remain.
 | Massa Natural Meats (N. California) | Grass-fed beef and lamb, pasture-raised heritage pork and chicken |
 | Yolo Land & Cattle Co (Woodland) | 100% grass-fed Angus beef |
 | ~~Tara Firma Farms~~ | **REJECTED — CSA ended 3 July 2026.** Farm open for events; store status unconfirmed. Owners recommend Stemple Creek Ranch instead |
-| Stemple Creek Ranch (Tomales) | Grass-fed beef, lamb and pork |
+| ~~Stemple Creek Ranch~~ | **ADDED** — Marin Carbon Project demo farm, national stewardship award Jan 2026, discloses pork feed and partner-sourced chicken |
 | SoMar Farms (W. Petaluma) | Grass-fed beef and lamb, pickup at farm or Oakland |
 | Silver Springs Beef / Alhambra Valley (Martinez) | 100% grass-fed beef and lamb, heritage pork, bulk or cuts |
+| **Big Bluff Ranch** | **Certified organic pasture-raised chicken** — Stemple Creek's own chicken partner, so already vetted by a ranch that discloses carefully |
 | Galaxy Farm (Woodland) | Organic-fed lamb |
 | Hole-In-One Ranch (Janesville) | Grass-fed beef, lamb and pork |
 | Dare 2 Dream Farms (Lompoc) | Free-range eggs, organic produce, backyard chickens — CSA currently sold out |
