@@ -84,30 +84,52 @@ without purpose · heavy fragrance masking
 
 ---
 
-## Open question — the "no seed oil" rule applied to topicals
+## The oil rule — RESOLVED: oxidative stability, not "seed oil"
 
-The dietary case against seed oils is about oxidation and omega-6 load **when eaten**.
-Topically the picture differs: sunflower and safflower oil are high in linoleic acid, a
-normal component of healthy skin barrier lipids, and some dermatology research favours
-sunflower oil over olive oil for barrier repair.
+**The dietary argument does not transfer to skin.** The case against eating seed oils is
+about omega-6 load and metabolic effects. On skin, linoleic acid is a normal and *necessary*
+component of barrier lipids — linoleic acid deficiency causes scaly, compromised skin.
 
-J's ruling is that **no seed oil should be present**, within the broader minimal-ingredient
-frame. That is the standard applied here.
+**But a different concern is real: oxidative stability.** High-PUFA oils oxidise quickly, and
+an oxidised oil on skin generates lipid peroxides, which are irritating and
+pro-inflammatory. That is a genuine topical reason to avoid them, unrelated to the dietary
+case.
 
-**One existing listing conflicts** — see below.
+**This is why ROOTED's green flag list already works.** Tallow, shea, cocoa butter, mango
+butter, jojoba, squalane, beeswax — every one is low-PUFA, or in jojoba's case a wax ester
+that barely oxidises at all. The list was right; the mechanism just was not named.
 
----
+### The rule
+
+| Product type | Rule |
+|---|---|
+| **Leave-on** (moisturisers, balms, facial oils, lip balms) | **Stable fats only** — tallow, shea, cocoa, mango, jojoba, squalane, coconut, olive. High-PUFA oils are a downgrade |
+| **Wash-off** (soaps, cleansers, shampoos) | Stability is **largely irrelevant** — judge on ingredient count, fragrance and preservatives instead |
+
+**Exception:** a high-PUFA oil used deliberately **as the active** — rosehip for its
+retinoids being the clearest case — is acceptable **provided** it is packaged in dark glass,
+sold in small volume, and dated. Without that carve-out the standard would reject one of the
+better-evidenced natural actives on a technicality.
+
+**High-PUFA oils this covers:** hemp · flax · rosehip · evening primrose · grapeseed ·
+sunflower · safflower · walnut
+
+**Why this framing rather than "no seed oils":** it reaches the same practical outcome, it
+explains *why* the green flags are what they are, and it is defensible on skin — where the
+food argument is not.
 
 ## ⚠️ Audit finding on existing products
 
-**Dr. Bronner's Peppermint Pure-Castile Bar Soap — currently Tier 1.** Its ingredient list
-includes **Organic Hemp Seed Oil**. Hemp seed oil is a seed-derived, high-PUFA oil. It is not
-on the Seed Oil Free Alliance's disallowed list (canola, soybean, sunflower, corn,
-cottonseed, safflower, grapeseed, rice bran, peanut, flaxseed) — but flaxseed is, and hemp is
-compositionally its close relative.
+**Dr. Bronner's Peppermint Pure-Castile Bar Soap — RESOLVED, stays Tier 1.** Its list
+includes organic hemp seed oil, a high-PUFA seed oil. Under the stability rule the concern
+barely applies, for two reasons:
 
-**Needs J's ruling: does the no-seed-oil rule cover hemp seed oil?** The answer affects this
-listing's tier and will recur.
+1. **It is saponified.** In a bar soap the hemp oil is not free oil sitting on skin — it has
+   been converted to soap. Different molecule, different oxidation behaviour.
+2. **It is rinsed off in seconds.** Leave-on products are where oil stability matters. A
+   wash-off product is the weakest possible case for the rule.
+
+No change to the tier.
 
 **Two other existing listings, checked and consistent:**
 - *Primally Pure Everything Balm* (T1) — tallow, olive oil, emu oil, beeswax, disclosed
