@@ -117,7 +117,7 @@ distinguishing fact remain.
 - [ ] Mellor Ranch
 - [ ] Old Grove Orange
 - [ ] Outer Aisle Food Hub
-- [ ] Talley Farms
+- [x] Talley Farms — **ADDED** as Talley Farms Fresh Harvest (large grower; CSA on its ~100 certified organic acres)
 - [ ] Tami Lyon
 - [x] Tanaka Farms — **ADDED** (4th-gen family farm; 10% of each box funds the host school/church)
 - [ ] Three Sisters Farm
