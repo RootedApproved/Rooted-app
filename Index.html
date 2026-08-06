@@ -6451,25 +6451,34 @@ function initAuthState() {
   });
 }
 
-function initColorTheme() {
-  // Brand colour is Terracotta ('clay'). The theme was previously stored per-visitor in
-  // localStorage, which meant anyone who had loaded the site before kept whatever value
-  // was saved — usually 'coastal' — and never saw the brand colour at all. Changing the
-  // default alone did not reach them, because a stored value always wins.
-  //
-  // ONE-TIME MIGRATION: clear any previously stored theme once, then let the default
-  // apply. The flag means this runs a single time per browser and never fights the user
-  // afterwards, so the theme switcher still works normally if it is ever re-enabled.
-  try {
-    if (!localStorage.getItem('rooted-theme-migrated-2026-08')) {
-      localStorage.removeItem('rooted-color-theme');
-      localStorage.setItem('rooted-theme-migrated-2026-08', '1');
-    }
-  } catch (e) {}
+// Brand colour is VIEWPORT-DEPENDENT by design: Coastal Sage on desktop, Terracotta Clay
+// on mobile. The breakpoint is 1024px, matching the site's only existing media query so the
+// colour change lands at the same width as the layout change.
+const THEME_DESKTOP = 'coastal';
+const THEME_MOBILE  = 'clay';
+const DESKTOP_MQ = '(min-width:1024px)';
 
-  let saved = 'clay';
-  try { saved = localStorage.getItem('rooted-color-theme') || 'clay'; } catch (e) {}
-  setColorTheme(saved);
+function themeForViewport() {
+  try { return window.matchMedia(DESKTOP_MQ).matches ? THEME_DESKTOP : THEME_MOBILE; }
+  catch (e) { return THEME_MOBILE; }
+}
+
+function initColorTheme() {
+  // Viewport decides, not localStorage. The stored preference was removed deliberately:
+  // a saved value always beat the default, so returning visitors kept whatever theme they
+  // had loaded months ago and never saw the brand colour at all. The theme switcher is
+  // hidden (display:none) alongside the other dev toggles, so nothing is choosing a theme
+  // that this would override.
+  setColorTheme(themeForViewport());
+
+  // Re-evaluate on resize and on device rotation, so a tablet turned sideways or a browser
+  // window dragged wider picks up the right palette without a reload.
+  try {
+    const mq = window.matchMedia(DESKTOP_MQ);
+    const onChange = () => setColorTheme(themeForViewport());
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else if (mq.addListener) mq.addListener(onChange);
+  } catch (e) {}
 }
 
 function toggleMobileDrawer() {
