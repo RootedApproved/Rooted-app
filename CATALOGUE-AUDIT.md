@@ -197,3 +197,31 @@ be checked before any removal.
 
 **Rule for the agent going forward: do not retry a site that failed twice.** Report it and
 move on. The failures are information, and they cost more to chase than they return.
+
+
+---
+
+## GitHub token rotation — completed 5 Aug 2026
+
+Replaced a classic PAT (`rooted-claude-longlived`, scope `repo`) with a fine-grained token
+scoped to **Rooted-app only**, **Contents: read and write only**, **30-day expiry**.
+
+**Why it mattered more than a routine rotation.** The account also held a classic token named
+`Claude v1` carrying `admin:enterprise`, `admin:org`, `admin:public_key`,
+`admin:ssh_signing_key`, **`delete_repo`**, `workflow` and `write:packages`. It was marked
+**never used**. A token that can delete the repository was sitting live and doing nothing.
+
+Three unused fine-grained tokens were also present — `rooted-claude`, `Claude Token 2 Rooted`,
+`Claude-Rooted-App` — all created in earlier sessions, all never used, all live credentials
+serving no purpose.
+
+**The principle worth keeping:** `repo` scope on a classic token means *every repository on
+the account*. The replacement means one repo, one permission, thirty days. If the old one
+leaked, someone could touch everything. If this one leaks, someone can edit files in one
+repository until it expires.
+
+**Rotation order used, so access is never lost:** create the new token → test a real push →
+only then delete the old one.
+
+**Set a reminder:** this token expires in 30 days. Deploys will fail silently at the push
+step when it does.
