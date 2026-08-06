@@ -293,3 +293,52 @@ Two chats have been working this list concurrently and collided once. Suggested 
 - **This session:** the CDFA-verified queue above
 - **Other session:** the remaining Localize entries
 - **Always** `git pull` first and check `FARMS-HELD-NEEDS-CONTACT.md` before researching
+
+## Farmers markets: which ones go on the map
+
+The CDFA county register (`cdfa.ca.gov/is/docs/CurrentMrktsCounty.pdf`) is the source list
+for the `farmersmarket` type. Working it county by county is mechanical and pre-approved.
+Two inclusion rules have been decided, so they don't get re-litigated every county:
+
+**Hospital-campus markets are OUT.** — J, 6 Aug 2026
+
+The register carries roughly forty markets sited on hospital campuses, most of them Kaiser
+Permanente, spread across Napa, Alameda, Contra Costa, Los Angeles, Sacramento, Placer,
+Riverside, San Bernardino, Orange, Santa Clara and San Mateo. They are genuinely CDFA-certified
+and mostly open to the public, but they are staff-and-patient amenities sited for a captive
+weekday audience, not markets a person would travel to. A few are explicitly closed to the
+public (CSU Dominguez Hills is marked *NO OUTSIDE COMMUNITY ALLOWED* in the register itself).
+Skip the lot. Do not add them, do not flag them for review, do not raise the question again.
+
+Same reasoning extends to on-campus university markets that serve term-time students only —
+judge those individually, but the default is out.
+
+**A market whose season has ended still goes on, flagged.** — J, 6 Aug 2026
+
+Do not silently drop a market because it is between seasons. The map is a reference, not a
+what's-open-today feed, and a seasonal market that has closed for the year is still the
+answer to "what is there." Write the real dates, mark it `SEASONAL`, and where the register's
+dates are wrong say so in the entry.
+
+## The register itself goes stale
+
+Treat the CDFA register as a directory, not gospel. It is a snapshot, and operators change
+day, hours and format between snapshots without telling the state. Three errors found in
+Marin and Napa alone against the register current to 1 April 2026:
+
+- **Hamilton Landing, Novato** — register says Thursday. Operator and Marin County
+  agriculture both say Tuesday. Tuesday is correct.
+- **Downtown San Rafael Summer Market** — register says weekly Thursday 5:30–8:30pm.
+  AIM relaunched it in 2026 as a monthly Friday night market, 5–9pm.
+- **First Thursdays, Napa** — register says May 1 – Oct 9. DoNapa, who run it, list three
+  dates: May 7, June 4, July 2.
+
+**The check that catches these:** search the market name plus the current year, and prefer
+the operator's own page or the county agriculture department over the register. Same rule as
+brands — the operator's own page is the source of record. Run it on every market before
+committing, not just the ones that look odd. Two of the three above looked completely
+ordinary in the register.
+
+**Register versions:** a newer edition dated 1 July 2026 exists at the same URL. Entries
+committed before 6 Aug 2026 close with "current to 1 April 2026" and need re-dating once
+the July edition has been diffed against them.
