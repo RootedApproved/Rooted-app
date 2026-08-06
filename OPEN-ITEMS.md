@@ -634,6 +634,24 @@ serving two addresses rather than two farms 20m apart. Applying both would creat
 same-location pair and probably put at least one pin in the wrong field. Needs each farm's
 own page.
 
+### Batch 3 — 6 more fixed, and a name-collision trap
+
+Six corrected: Live Earth Farm 3.81 km, Fifth Crow Farm 3.58 km, Pie Ranch 2.85 km,
+Singing Frogs Farm 2.66 km, Huerta del Valle 2.05 km, Petaluma Bounty 0.71 km.
+Three were already accurate: both Trader Joe's (4-6 m) and The River Park Farmers
+Market (37 m).
+
+**HELD — Serendipity Farms.** The listing is *26500 Val Verde Dr, Carmel*. A places lookup
+on the farm name returned **"Serendipity u-pick farm, 6315 Park Ridge Dr, Anderson"** —
+a different farm 400 km north in Shasta County. Applying it would have relocated a Carmel
+CSA to the far end of the state.
+
+**This is the trap of the whole audit.** A geocoder answers the query it was given, not the
+question you meant. The rule that has held every time: query the ADDRESS, not the business
+name, and only accept a result whose returned address matches the address the listing
+already shows. Where they differ — GRUB, Serendipity, the two Cooper Rd farms — hold it and
+find the operator's own page.
+
 ### Still to audit
 
 - **Tier A remainder: 23 region-only listings.** No street address to geocode. Options are
