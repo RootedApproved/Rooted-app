@@ -541,3 +541,34 @@ That file already contains the annual-plan change, syntax-checked but **NOT yet 
 **Still to do in `Index.html`:** the upgrade UI only offers one option and does not send a
 `plan` field. Until it does, every checkout is monthly regardless. Deliberately not built
 yet — the pricing and the UI copy are J's calls, not mine.
+
+## Supplement / Detox — ARCHIVED FROM VIEW, 6 Aug 2026
+
+**Not deleted. Hidden.** `const SHOW_SUPPLEMENTS = false;` in Index.html. Flip to `true`
+to restore the whole category exactly as it was.
+
+J's call: the category is too thin to show. `supp-organ`, `supp-creatine` and
+`supp-electrolyte` have one product each, and the male- and female-specific groups were
+already archived behind their own flags for the same reason. A category page with one item
+reads as broken rather than curated.
+
+**Everything is retained:** all 14 products keep their `supp-*` subcats, the standard text,
+the subcategory cards, the icons and the photo variants. Nothing was deleted.
+
+**Four surfaces are hidden together**, which matters — hiding fewer would leave the category
+unreachable from one place and still reachable from another, which is worse than leaving it
+visible:
+1. `cat-card-supplements` — the category card on the home grid
+2. `cat-row-supplements` — the row in the category list
+3. `homecat-option-supplements` — the toggle in home-category settings
+4. `standard-supplements` — the card in the Standards screen
+
+Also set `HOME_CAT_DEFAULTS.supplements = false` so new visitors do not get it enabled.
+
+**To restore:** set `SHOW_SUPPLEMENTS = true` and `HOME_CAT_DEFAULTS.supplements = true`.
+Before doing so, populate the thin subcategories — the reason it was archived does not go
+away by unhiding it.
+
+**Known gap, deliberately left:** a direct link or old bookmark to `showCategory('supplements')`
+still works, because the category is hidden rather than disabled. Nothing on the site links
+there any more. If it should hard-block instead, that is a separate change.

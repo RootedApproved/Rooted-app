@@ -900,7 +900,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <label class="home-cat-option"><input type="checkbox" id="homecat-cleaning" onchange="setHomeCategoryVisibility('cleaning', this.checked)"><i data-lucide="brush-cleaning"></i>Cleaning <span class="plain-amp">&amp;</span> Home</label>
     <label class="home-cat-option"><input type="checkbox" id="homecat-air" onchange="setHomeCategoryVisibility('air', this.checked)"><i data-lucide="wind"></i>Air Quality</label>
     <label class="home-cat-option"><input type="checkbox" id="homecat-lighting" onchange="setHomeCategoryVisibility('lighting', this.checked)"><i data-lucide="lightbulb"></i>Lighting <span class="plain-amp">&amp;</span> Circadian Health</label>
-    <label class="home-cat-option"><input type="checkbox" id="homecat-supplements" onchange="setHomeCategoryVisibility('supplements', this.checked)"><i data-lucide="pill"></i>Supplement / Detox</label>
+    <label class="home-cat-option" id="homecat-option-supplements"><input type="checkbox" id="homecat-supplements" onchange="setHomeCategoryVisibility('supplements', this.checked)"><i data-lucide="pill"></i>Supplement / Detox</label>
   </div>
   </div>
   <div id="home-classic">
@@ -921,7 +921,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="cat-card" data-cat="cleaning" data-photo-variant="1" onclick="showCategory('cleaning')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('cleaning')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="brush-cleaning"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Cleaning <span class="plain-amp">&amp;</span> Home</div><div class="cat-ct js-cleaning-total">Coming soon</div></div></div>
     <div class="cat-card" data-cat="air" data-photo-variant="1" onclick="showCategory('air')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('air')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="wind"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Air Quality</div><div class="cat-ct js-air-total">Purifiers, ventilation, humidity</div></div></div>
     <div class="cat-card" data-cat="lighting" data-photo-variant="1" onclick="showCategory('lighting')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('lighting')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="lightbulb"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Lighting <span class="plain-amp">&amp;</span> Circadian Health</div><div class="cat-ct js-lighting-total">Coming soon</div></div></div>
-    <div class="cat-card" data-cat="supplements" data-photo-variant="1" onclick="showCategory('supplements')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('supplements')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="pill"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Supplement / Detox</div><div class="cat-ct js-supplements-total">5 products rated</div></div></div>
+    <div class="cat-card" id="cat-card-supplements" data-cat="supplements" data-photo-variant="1" onclick="showCategory('supplements')"><button class="cat-photo-cycle" onclick="event.stopPropagation();cyclePhoto('supplements')" aria-label="Next photo"><i data-lucide="refresh-cw"></i></button><span class="cat-icon"><i data-lucide="pill"></i></span><div class="cat-body"><div class="cat-lbl">Category</div><div class="cat-name">Supplement / Detox</div><div class="cat-ct js-supplements-total">5 products rated</div></div></div>
   </div>
   <div class="promise-strip">
     <div><div class="prom-num">12</div><div class="prom-lbl">Product categories<br>at launch</div></div>
@@ -1485,7 +1485,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="cat-row" onclick="showCategory('cleaning')"><span class="cat-row-icon"><i data-lucide="brush-cleaning"></i></span><div class="cat-row-info"><div class="cat-row-name">Cleaning <span class="plain-amp">&amp;</span> Home</div><div class="cat-row-sub js-cleaning-total">Dish soap, laundry, surfaces</div></div><span class="cat-row-arr">›</span></div>
     <div class="cat-row" onclick="showCategory('air')"><span class="cat-row-icon"><i data-lucide="wind"></i></span><div class="cat-row-info"><div class="cat-row-name">Air Quality</div><div class="cat-row-sub js-air-total">Purifiers, ventilation, humidity</div></div><span class="cat-row-arr">›</span></div>
     <div class="cat-row" onclick="showCategory('lighting')"><span class="cat-row-icon"><i data-lucide="lightbulb"></i></span><div class="cat-row-info"><div class="cat-row-name">Lighting <span class="plain-amp">&amp;</span> Circadian Health</div><div class="cat-row-sub js-lighting-total">Blue light, red light, circadian bulbs</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showCategory('supplements')"><span class="cat-row-icon"><i data-lucide="pill"></i></span><div class="cat-row-info"><div class="cat-row-name">Supplement / Detox</div><div class="cat-row-sub js-supplements-total">5 products rated</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" id="cat-row-supplements" onclick="showCategory('supplements')"><span class="cat-row-icon"><i data-lucide="pill"></i></span><div class="cat-row-info"><div class="cat-row-name">Supplement / Detox</div><div class="cat-row-sub js-supplements-total">5 products rated</div></div><span class="cat-row-arr">›</span></div>
   </div>
 </div>
 </div>
@@ -4072,6 +4072,9 @@ function imgFallback(img, emoji, size) {
 // search, counts) without touching or deleting any underlying product data.
 const SHOW_WOMENS_CARE = false;   // Menstrual Care + Intimate Cleansing
 const SHOW_INTIMATE_LUBE = false; // Intimate Lubrication & Sexual Wellness — independent of the flag above
+const SHOW_SUPPLEMENTS = false;   // ENTIRE Supplement/Detox category archived 6 Aug 2026 at J's
+                                  // request \u2014 hidden from view, code and products retained intact.
+                                  // Flip to true to restore. See OPEN-ITEMS.md.
 const SHOW_SUPP_FEMALE = false;   // Supplement/Detox Female-Specific group (Prenatal, Menstrual/Hormonal, Menopause) — 0 products in all 3, archived until populated
 const SHOW_SUPP_MALE = false;     // Supplement/Detox Male-Specific group (Testosterone, Prostate, Vitality, Hair) — 1 product each, archived until further researched and built out
 const SHOW_AIR_VENTILATION = false; // Whole-Home Ventilation (ERV/HRV) — archived per request, condensing Air Quality down to 2 visible subcategories
@@ -5733,7 +5736,7 @@ function cyclePhoto(cat) {
 // can be turned on the same way. Persists per-category so choices stick across visits.
 const HOME_CAT_DEFAULTS = {
   clothing: true, oral: true, water: true, food: true, cookware: true, personal: true,
-  textiles: false, cleaning: true, air: true, lighting: true, supplements: true
+  textiles: false, cleaning: true, air: true, lighting: true, supplements: false
 };
 
 function setHomeCategoryVisibility(cat, visible) {
@@ -6615,6 +6618,18 @@ function applyFeatureFlags() {
   if (suppMale3) suppMale3.style.display = SHOW_SUPP_MALE ? 'flex' : 'none';
   if (suppMale4) suppMale4.style.display = SHOW_SUPP_MALE ? 'flex' : 'none';
   if (suppMaleGroupTitle) suppMaleGroupTitle.style.display = SHOW_SUPP_MALE ? 'block' : 'none';
+  // Whole-category archive. Four surfaces show Supplement/Detox: the category card on the
+  // home grid, the row in the category list, the toggle in home-category settings, and the
+  // standard card. All four are hidden together, otherwise the category disappears from the
+  // grid but is still reachable from the list, which is worse than leaving it visible.
+  const suppCard = document.getElementById('cat-card-supplements');
+  const suppRow = document.getElementById('cat-row-supplements');
+  const suppHomeOpt = document.getElementById('homecat-option-supplements');
+  const suppStandard = document.getElementById('standard-supplements');
+  if (suppCard) suppCard.style.display = SHOW_SUPPLEMENTS ? '' : 'none';
+  if (suppRow) suppRow.style.display = SHOW_SUPPLEMENTS ? 'flex' : 'none';
+  if (suppHomeOpt) suppHomeOpt.style.display = SHOW_SUPPLEMENTS ? '' : 'none';
+  if (suppStandard) suppStandard.style.display = SHOW_SUPPLEMENTS ? '' : 'none';
   const airVent = document.getElementById('subcat-card-airvent');
   if (airVent) airVent.style.display = SHOW_AIR_VENTILATION ? 'flex' : 'none';
 }
