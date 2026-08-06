@@ -668,6 +668,39 @@ unverified one — writing the 4dp value is how "checked and correct" gets recor
 The chain/farm split keeps holding. Every chain grocery checked so far has been accurate;
 almost every farm and market has not.
 
+### Batch 5 — a held case turned out to be a CLOSED BUSINESS, not a coordinate problem
+
+**Laguna Farm REMOVED from the map.** It was held because it geocoded to within 20m of West
+County Community Farm and looked like a same-location conflict. It was not. Checking the
+operators' own pages:
+
+- West County Community Farm's site states they moved to the Laguna site in 2022 and
+  "operate on the former site and fields of Laguna Farm."
+- The Healdsburg Tribune reported Laguna Farm ended its CSA and Cooper Road farmstand, with
+  the lease concluded 1 April 2021.
+- Yelp lists Laguna Farm, 1764 Cooper Rd, as CLOSED.
+
+So the listing told users to visit a CSA that stopped operating five years ago, at an
+address now farmed by someone else. Both facts wrong. Removed; git history preserves it.
+
+**Nuance, so nobody re-adds it carelessly:** Laguna Farm as a business is not entirely gone.
+Ignacio Romero continued as sole proprietor on a smaller scale, selling at the Sebastopol
+Farmers Market and farming remaining acres on Sparks Road and Lyding Lane, and hoped to
+restart a CSA. If ROOTED ever lists Laguna Farm again it is that operation, at that address,
+and it is not a CSA at 1764 Cooper Rd.
+
+**West County Community Farm corrected** to 1720 Cooper Rd, its own stated address —
+was 2.7 km out.
+
+**This is the standing rename rule working in reverse.** The rule says check for a rename
+before rejecting a farm. Here the check found the opposite: a genuine closure and a
+succession, where the live listing was the successor and the stale one was still on the map.
+Two farms geocoding to the same spot was the SYMPTOM; a defunct listing was the cause.
+
+**Still held, needing operator pages: GRUB CSA Farm and Serendipity Farms.** Both are
+address conflicts rather than suspected closures, but Laguna Farm is the reason to check
+whether they are still trading before assuming a coordinate is all that is wrong.
+
 ### Still to audit
 
 - **Tier A remainder: 23 region-only listings.** No street address to geocode. Options are
