@@ -572,3 +572,50 @@ away by unhiding it.
 **Known gap, deliberately left:** a direct link or old bookmark to `showCategory('supplements')`
 still works, because the category is hidden rather than disabled. Nothing on the site links
 there any more. If it should hard-block instead, that is a separate change.
+
+## Coordinate audit — Tier A started 6 Aug 2026
+
+**Method:** geocode each listing's own stated street address, compare against the pinned
+coordinate, report drift, fix only where the geocoded address matches the address the
+listing displays. Never move a pin to an address different from the one shown.
+
+**Tier A = 36 listings pinned at <=2 decimal places (~1km grid).** Of those, 13 carry a real
+street address and are geocodable. The other 23 describe a region rather than an address
+("Chileno Valley, West Marin County"), where a coarse pin is honest rather than sloppy.
+
+### Result: 10 of 13 were over a kilometre wrong
+
+| Listing | Drift | Fixed |
+|---|---|---|
+| Eatwell Farm | 6.66 km | yes |
+| Talley Farms Fresh Harvest | 5.12 km | yes |
+| Fox Sparrow Farm | 4.49 km | yes |
+| GRUB CSA Farm | 4.37 km | **NO — see below** |
+| Tierra Vegetables | 3.34 km | yes |
+| Knoll Farms (Tairwa Produce) | 2.45 km | yes |
+| Three Sisters Farm | 2.39 km | yes |
+| Monterey Bay CFM (Aptos) | 2.37 km | yes |
+| Urban Tilth Farm to Table | 1.72 km | yes |
+| SLO Tuesday at Farm Supply | 1.10 km | yes |
+| St. Helena Farmers Market | 0.90 km | yes |
+| SLO Saturday Farmers Market | 0.40 km | yes |
+| Sunday Turtle Bay Market | 0.32 km | yes |
+
+**GRUB CSA Farm held.** The listing shows *3197 West Sacramento Ave, Chico*. The business
+listing puts the farm at *11630 Dairy Rd, Chico* — a different site, probably farm versus
+pickup point. Moving the pin would make it disagree with the address printed beside it,
+which is a worse defect than being 4km out. Needs the farm's own page to settle which
+address the listing should show.
+
+### Still to audit
+
+- **Tier A remainder: 23 region-only listings.** No street address to geocode. Options are
+  to leave them coarse (honest), or contact each operation. Mostly West Marin and Sonoma
+  ranches, plus multi-site CSAs where one pin is arguably the wrong model anyway.
+- **Tier B: 151 listings at 3 decimal places (~110m grid).** Far lower risk, but Stemple
+  Creek was at 3dp and 2.5km wrong, so precision does not imply accuracy. Worth sampling
+  ~20 before deciding whether to do all of them.
+- **617 listings at 4+ decimal places** are presumed geocoded and out of scope.
+
+**The lesson so far:** the drift is not rounding. A 6.6km error is a wrong location, not an
+imprecise one. Assume any listing pinned at 2dp is unverified rather than approximate.
