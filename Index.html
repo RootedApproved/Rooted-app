@@ -5519,6 +5519,22 @@ function updateProductCounts() {
     if (n <= COMING_SOON_THRESHOLD) {
       el.innerHTML = `${n} rated <span class="cs-soon">· More coming soon</span>`;
     }
+
+    // ARCHIVE EMPTY SUBCATEGORIES. A subcat with zero products was still rendering a
+    // clickable card reading "0 rated" that opened an empty page. Hide the whole card
+    // instead. This is self-maintaining in both directions: add a first product and the
+    // card returns on its own, remove the last one and it disappears again.
+    // Guard: only archive things that are ACTUAL subcategories. Several count- elements
+    // are hub-level or group totals (sweater-jacket, textiles) with no SUBCAT_EDU entry,
+    // and hiding those would remove working navigation.
+    if (n === 0 && SUBCAT_EDU[subcat]) {
+      const card = el.closest('.subcat-card');
+      if (card) card.style.display = 'none';
+      // "Start Here" feature callouts point at the same subcats and need hiding too
+      document.querySelectorAll(`.etc[onclick*="showSubcat('${subcat}')"]`).forEach(etc => {
+        etc.style.display = 'none';
+      });
+    }
   });
 
   // count-underwear-inline holds just the bare number (used inline in a sentence:
