@@ -607,6 +607,33 @@ pickup point. Moving the pin would make it disagree with the address printed bes
 which is a worse defect than being 4km out. Needs the farm's own page to settle which
 address the listing should show.
 
+### Tier B sampled, and Tier C cleared — 6 Aug 2026
+
+**Tier B (3dp, ~110m grid) is no better than Tier A.** Sampled 17 with street addresses:
+
+- **12 were over 1km out.** Worst: LADS Home Ranch 7.39 km, Route One Farmers Market
+  5.66 km, Carmel Valley CFM 5.28 km, Farm Fresh To You 4.00 km.
+- Average drift 2.1 km for farmers markets, 2.4 km for everything else — so this is not a
+  matter of old entries versus new. Both are wrong at roughly the same rate.
+- Only 3 of 17 were inside 300m.
+
+12 corrected. Two held, see below. Three were already fine (Jimbo's 4S Ranch 6m,
+Carpinteria 108m, Yountville 204m).
+
+**Tier C (4+ decimal places, 617 listings) is CLEAN.** Sampled 8: seven inside 300m, most
+inside 30m (Trader Joe's San Jose 0m, Erewhon Hollywood 3m, Whole Foods Coddingtown 26m).
+Only Erewhon Santa Monica drifted meaningfully at 638m. **4dp entries appear to be real
+geocodes and are out of scope.**
+
+**Conclusion: the defect is precision-bounded.** Anything stored at 3dp or coarser is
+unverified and should be assumed wrong. Anything at 4dp+ is fine.
+
+**HELD — Laguna Farm and West County Community Farm.** 1764 and 1720 Cooper Rd, Sebastopol.
+Both geocode to within ~20m of each other, which is almost certainly one parcel centroid
+serving two addresses rather than two farms 20m apart. Applying both would create a
+same-location pair and probably put at least one pin in the wrong field. Needs each farm's
+own page.
+
 ### Still to audit
 
 - **Tier A remainder: 23 region-only listings.** No street address to geocode. Options are
