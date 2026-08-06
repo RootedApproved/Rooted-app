@@ -6452,7 +6452,10 @@ async function handleJoinClick() {
   }
 }
 
-async function startCheckout(userId, email) {
+// plan is 'monthly' or 'annual'. The Worker resolves the key to a Stripe price ID
+// server-side, so the client never sends a price. Defaults to monthly, which keeps
+// every existing call site working unchanged.
+async function startCheckout(userId, email, plan) {
   if (STRIPE_WORKER_URL.includes('YOUR-SUBDOMAIN')) {
     alert('Membership checkout isn\'t connected yet — check back very soon!');
     return;
@@ -6469,7 +6472,7 @@ async function startCheckout(userId, email) {
     const res = await fetch(STRIPE_WORKER_URL + '/create-checkout-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId, email: userEmail }),
+      body: JSON.stringify({ userId, email: userEmail, plan: plan === 'annual' ? 'annual' : 'monthly' }),
     });
     const data = await res.json();
     if (data.url) { window.location.href = data.url; return; }

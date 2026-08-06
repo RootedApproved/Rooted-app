@@ -20,77 +20,54 @@ hits the limit.
 
 ---
 
-## 1b. RAW DAIRY — a decision I am not making for you
+## 1b. RAW DAIRY — RESOLVED. Do not reopen without reading this whole section.
 
-**The gap is real.** The subcategory is titled **"Grass-Fed & Raw Dairy"** and its standard
-explicitly says raw milk needs "its own explicit disclosure and, where legally sold, clear
-handling guidance." Both listed products are pasteurized. **There is no raw dairy on ROOTED
-at all.** California is one of the few states with legal retail raw milk, so for a
-California-focused platform that is a genuine hole.
+**Decision, 6 Aug 2026: Raw Farm LLC is NOT listed on ROOTED.** Claravale Farm remains the
+only raw dairy, at Tier 2. J deferred to the recommendation below after the facts were
+verified.
 
-**The obvious candidate is Raw Farm LLC** (Fresno, formerly Organic Pastures) — the largest
-raw dairy producer in the United States, sold in hundreds of California retail outlets.
+### This section previously contained three errors. All three were acted on before anyone
+### noticed. That is the lesson, more than the outcome.
 
-**I did not add it, because the record needs your judgement rather than mine.**
+1. **"There is no raw dairy on ROOTED at all."** False. `food-dairy-milk-claravale`,
+   Claravale Farm Raw Whole Jersey Milk, was already listed at Tier 2.
+2. **"Raw Farm is the obvious candidate."** A parallel session had already evaluated Raw
+   Farm and rejected it *in favour of Claravale, on safety grounds*, and wrote that
+   reasoning into the live product copy — where it sat, unread, while this file said the
+   opposite.
+3. **"15 recalls since 2006."** Unverified and not reproducible. Do not republish that
+   figure. What IS documented is below.
 
-### What the record shows
+J was asked to make a tier decision twice on the strength of points 1 and 2. Both times the
+premise was wrong. **Read the live catalogue before trusting this file.**
 
-| | |
-|---|---|
-| Since 2006 | **15 recalls** — E. coli, Listeria, Salmonella, Campylobacter |
-| Outbreaks | **Seven** — 2006, 2011, 2012, 2016, 2023, 2024, 2026 |
-| Dec 2024 | **Bird flu (H5N1) detected** in retail product *and* at the bottling facility. Farm quarantined; CDPH secured a statewide recall of all milk and cream |
-| Early 2026 | E. coli outbreak linked to raw cheddar — 9 ill, 3 hospitalised, **one with HUS (kidney failure)**, across CA, FL and TX |
-| Reported pattern | **In each outbreak, children were a significant share of those sickened.** In the 2026 cluster, over half the patients were under five |
+### What is actually documented about Raw Farm LLC
 
-### What the company's side shows, fairly stated
+- **Nov–Dec 2024, bird flu.** Escalating recalls ending in CDPH securing a voluntary recall
+  of *all* Raw Farm raw milk and cream on retail shelves. Virus was detected not only in
+  retail samples but at the farm's own dairy storage and bottling sites. CDFA placed the
+  farm under quarantine. CDPH advised avoiding every Raw Farm product for human
+  consumption, plus the pet-food lines.
+- **Sept 2025 – Feb 2026, E. coli.** Multi-state outbreak across CA, FL and TX. Whole-genome
+  sequencing linked the isolates. Every interviewed patient had eaten Raw Farm raw cheddar.
+  Seven batches recalled; investigation still open as of April 2026.
+- Reporting in April 2026 put the two outbreaks together at **at least 29 people sickened in
+  four months.**
 
-- Raw Farm ran roughly **14,000 tests** from September to February, all negative for E. coli O157:H7, and published results as they accumulated
-- **California, Texas and Florida each tested the implicated batches independently — all negative**
-- The FDA could not issue a mandatory recall because FSMA requires demonstrated causation, which it did not have. The April 2026 recall was voluntary
-- The **recall was formally closed in May 2026 with no illness confirmed from recalled product**
-- Roughly $2M of product destroyed
+### Why not listed
 
-### Why this is your call
+Not a tier problem. Tier 2 is "Good Option", which is still an endorsement, and the most
+recent verified fact about this producer is an open multi-state outbreak investigation that
+ran into February 2026. The bottling-facility detections matter specifically for a milk
+listing: that is a plant-level finding, not a bad lot.
 
-ROOTED's entire premise is that a listing means something was checked. Raw dairy fits the
-ancestral philosophy, it is legal here, and plenty of people want it — but a "Rooted
-Approved" label on a producer with seven outbreaks and repeated paediatric hospitalisations
-is a different kind of claim from approving an olive oil.
+The gap this was meant to fill does not exist. Claravale already covers raw milk, was
+chosen over Raw Farm deliberately, and its entry documents its own two incidents rather
+than pretending to a clean record.
 
-**Three honest options:**
-1. **List Raw Farm with the full record stated in the entry** — including the outbreak
-   history, the bird flu quarantine, and the company's testing response. Trusts the reader
-   with the facts.
-2. **Research other licensed California raw dairies** and list one with a cleaner record.
-   Raw Farm is the largest but not the only licensed producer.
-3. **List no raw dairy** and rename the subcategory so it stops promising something it does
-   not deliver.
-
-### ✅ RESOLVED — J chose option 2. Claravale Farm listed.
-
-**Claravale Farm** (Paicines, San Benito County) is listed at **Tier 2 / Good Option**,
-deliberately not Tier 1. Bottling raw Jersey milk since **1927**, certified organic pasture
-and hay, returnable glass bottles, nothing homogenised or standardised.
-
-**The record comparison that decided it:**
-
-| | Raw Farm | Claravale |
-|---|---|---|
-| Recalls since 2006 | 15 | 2 documented incidents |
-| Outbreaks | 7 (2006–2026) | 1 (2015 Campylobacter, 6 ill) |
-| Bird flu quarantine | Yes, Dec 2024 | No |
-| Paediatric hospitalisations | Repeatedly | None documented |
-| Operating since | 1916 (as Organic Pastures 2000) | 1927 |
-
-**Not spotless, and the entry says so** — the 2015 Campylobacter recall and quarantine and a
-2021 raw goat milk recall are both named in the listing, in the verdict as well as the flags.
-
-**One open question worth asking Claravale:** their feed includes "occasional non-GMO
-grain-based dairy feed" whose composition is not published. Given the seed-oils-in-feed floor
-ruling, that is worth a direct question. It is flagged in the entry rather than glossed.
-
-**Raw Farm is NOT listed** and should not be added without a further decision.
+**If this is ever revisited,** the bar is new evidence about Raw Farm specifically — a
+closed investigation, a clean interval, a change in practice — not a fresh opinion about
+raw milk in general. And check the live catalogue first.
 
 ## 2. ✅ TYPE DECISIONS — BOTH CLOSED
 
