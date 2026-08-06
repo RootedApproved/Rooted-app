@@ -6452,8 +6452,12 @@ function initAuthState() {
 }
 
 function initColorTheme() {
-  let saved = 'coastal';
-  try { saved = localStorage.getItem('rooted-color-theme') || 'coastal'; } catch (e) {}
+  // DEFAULT THEME for anyone with no saved preference. Was 'coastal' (sage-teal), now
+  // 'clay' (Terracotta) — the warm orange palette. Note the theme lives in localStorage
+  // per-visitor, so if your own browser storage is cleared the site reverts to this
+  // default; that is why the site can appear to change colour on its own.
+  let saved = 'clay';
+  try { saved = localStorage.getItem('rooted-color-theme') || 'clay'; } catch (e) {}
   setColorTheme(saved);
 }
 
