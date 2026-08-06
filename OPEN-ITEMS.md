@@ -506,3 +506,45 @@ was pinned 2.5km away at 38.246,-122.906. Now 38.2673,-122.8821, verified.
 which carries no street number is likely a town-centre estimate. That is a different job
 from the farmers market buildout, but it is the same class of defect: a pin that looks
 authoritative and is not.
+
+---
+
+## Admin — status as of 6 Aug 2026
+
+**DONE**
+- GitHub token rotated to a fine-grained, repo-scoped token. Old one revoked.
+- Cloudflare Analytics confirmed recording.
+- Workout Tops reclassification (item 1.4) — Wool&Prince, Son of a Tailor and Harvest & Mill
+  moved from `workout-tops` to `t-shirts`. Two remain in `workout-tops`: Icebreaker Merino
+  150 Tech Lite (a genuine technical tee) and **LOOW Merino T-shirt 135g Crew Neck — J to
+  confirm whether this is an everyday tee too and should follow the other three.**
+- Item 1.1 listing-type decision was already closed in §2; the §1 table was stale.
+- Item 1.3 "7 `~$` prices" was stale. Only two remain and both are FX conversions, not
+  estimates: LittleLeaf bedding (£158–£288) and Art of Vedas copper tongue scraper (€11).
+  Native currency is the source of truth; the `~$` is correctly approximate. No action.
+
+**Note for future edits:** the three moved products keep IDs beginning `workout-tops-`
+while sitting in `t-shirts`. IDs are referenced by `alts`, so renaming them means updating
+every referencing product in the same commit. Cosmetic only — left alone deliberately.
+
+## Stripe Worker — Premium tier is not wired
+
+Source retrieved directly from Cloudflare (`rooted-stripe`), so item 1.5 no longer needs J.
+
+The Worker hardcodes a single `STRIPE_PRICE_ID` and, on `checkout.session.completed`, always
+writes `subscription_tier: 'member'`. The header comment still describes it as "$10/mo".
+
+The pricing model is Free / Member $9 / Premium $19. **So Premium cannot currently be
+purchased** — any checkout produces a Member. Adding the annual plan and adding Premium are
+the same change:
+
+1. `createCheckoutSession` should accept a `priceId` (or a plan key) from the client instead
+   of always reading `env.STRIPE_PRICE_ID`.
+2. Validate it against an allow-list of known price IDs held in env vars, so the client
+   cannot pass an arbitrary price.
+3. Map price ID → tier, and write that tier in the webhook rather than the literal 'member'.
+4. `customer.subscription.updated` currently downgrades to 'free' on non-active status but
+   never re-reads which tier an active subscription belongs to — it needs the same mapping.
+
+Needs from J before implementing: the Stripe Price IDs for Member monthly, Premium monthly,
+and the annual plan(s), plus confirmation of the annual price (~$90 was mentioned).
