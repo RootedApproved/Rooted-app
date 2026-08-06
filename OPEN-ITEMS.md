@@ -438,3 +438,43 @@ Different cuisines fail in different places. Ask about:
 - **Burgers** → the BUN. Named as one of the two commonest failure points.
 - **Anything fried** → whether the tallow is cut with soy or stabilisers.
 - **Everything** → the CONDIMENTS. Commercial mayo and ketchup are almost always soybean or canola.
+
+---
+
+## Farmers markets — held, needs operator verification
+
+Four register entries could not be confirmed against an operator page and are
+NOT on the map. J's standing instruction is verify everything, so these wait
+rather than shipping under a closing line that claims verification.
+
+| Market | County | Register says | What's missing |
+|---|---|---|---|
+| Los Banos Downtown Farmers Market | Merced | 600 H St x 7th St, Thu 5–9pm, 16 May – 31 Oct | No operator page found. Both season dates fall on a Saturday in 2026 for a Thursday market |
+| Chowchilla Certified Farmer's Market | Madera | Veterans Memorial Park, 600 W Robertson Blvd, Fri 5–8pm, year-round | No operator page found. One directory puts it at Robertson Blvd & 6th St instead |
+| Neighborhood Farmers Market | Madera | 930 N Gateway Dr x Hwy 99, Thu 4–7pm, 13 Jun – 12 Sep | No operator page found. Register phone is a 209 area code in a 559 county |
+| Madera Farmers Market | Madera | 1604 Sunrise Ave x Tozer, Thu 3–6pm, 10 Jul – 25 Sep | Possible duplicate. Madera County Farm Bureau runs a "Madera Certified Farmers Market" and a directory lists a Madera County market at 210 W Yosemite — three addresses, unclear how many markets |
+
+**Where to look next:** Madera County Farm Bureau (maderafb.com) runs at least one
+of these and lists markets; City of Chowchilla and City of Los Banos event pages;
+Merced County Public Health, which co-runs Kind Neighbor and may list Los Banos.
+
+## The register carries stale 2025 season dates
+
+A pattern worth naming, found across four counties. Several seasonal date ranges
+give a start and end that **fall on the wrong weekday for the market's own listed
+day in 2026, but land correctly on that day in 2025**:
+
+- Lodi CFM — Thursday market, register says 15 May and 28 Aug, both Fridays in 2026
+- Kind Neighbor, Merced — Wednesday market, register says 28 May and 17 Sep, both
+  Thursdays in 2026 and both Wednesdays in 2025
+- Madera Farmers Market — Thursday market, register says 10 Jul and 25 Sep, both
+  Fridays in 2026 and both Thursdays in 2025
+- Los Banos Downtown — Thursday market, register says 16 May and 31 Oct, both
+  Saturdays in 2026
+
+**The check:** for any seasonal market, test whether the register's start and end
+dates actually fall on the market's stated day of the week in the current year. If
+they do not, the dates are carried over from a previous edition. Write the season
+as a month range rather than inventing exact dates, and say in the entry that the
+register's dates are stale. This is cheap — it is arithmetic, no search needed —
+and it caught four entries that otherwise looked clean.
