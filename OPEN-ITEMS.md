@@ -527,24 +527,40 @@ authoritative and is not.
 while sitting in `t-shirts`. IDs are referenced by `alts`, so renaming them means updating
 every referencing product in the same commit. Cosmetic only — left alone deliberately.
 
-## Stripe Worker — Premium tier is not wired
+## Stripe Worker — CORRECTION, and the annual plan
+
+**Retracted:** an earlier note in this file claimed Premium at $19 was unwired. That was
+written from a stale three-tier model. J confirmed the pricing is now **Free and Member at
+$10/month only** — no Premium. The deployed Worker, which reads one `STRIPE_PRICE_ID` and
+writes `subscription_tier: 'member'`, was therefore correct all along. No bug existed.
+Do not reintroduce a $19 Premium tier.
+
+## Stripe Worker — annual plan
 
 Source retrieved directly from Cloudflare (`rooted-stripe`), so item 1.5 no longer needs J.
 
-The Worker hardcodes a single `STRIPE_PRICE_ID` and, on `checkout.session.completed`, always
-writes `subscription_tier: 'member'`. The header comment still describes it as "$10/mo".
+**The Worker source is now version-controlled** at `workers/rooted-stripe.js`. It
+previously existed only inside Cloudflare, so there was no history and no diff. Edit the
+repo file and paste into Cloudflare, not the reverse.
 
-The pricing model is Free / Member $9 / Premium $19. **So Premium cannot currently be
-purchased** — any checkout produces a Member. Adding the annual plan and adding Premium are
-the same change:
+That file already contains the annual-plan change, syntax-checked but **NOT yet deployed**:
 
-1. `createCheckoutSession` should accept a `priceId` (or a plan key) from the client instead
-   of always reading `env.STRIPE_PRICE_ID`.
-2. Validate it against an allow-list of known price IDs held in env vars, so the client
-   cannot pass an arbitrary price.
-3. Map price ID → tier, and write that tier in the webhook rather than the literal 'member'.
-4. `customer.subscription.updated` currently downgrades to 'free' on non-active status but
-   never re-reads which tier an active subscription belongs to — it needs the same mapping.
+- `createCheckoutSession` accepts a `plan` key of `'monthly'` or `'annual'`
+- `resolvePriceId()` maps the key to `STRIPE_PRICE_ID` or `STRIPE_PRICE_ID_ANNUAL`
+  server-side. The client sends a KEY, never a raw price ID — otherwise anyone could open
+  devtools and check out against any price in the Stripe account
+- Anything unrecognised falls back to monthly, so an old cached client cannot break
+- The chosen plan is written to subscription metadata, so "monthly or annual?" is
+  answerable from Stripe alone
+- The webhook is unchanged on purpose: both plans grant the same access, so both write
+  `subscription_tier: 'member'`
 
-Needs from J before implementing: the Stripe Price IDs for Member monthly, Premium monthly,
-and the annual plan(s), plus confirmation of the annual price (~$90 was mentioned).
+**To go live, J needs to:**
+1. Create the annual recurring Price in Stripe and copy its `price_...` ID
+2. Add `STRIPE_PRICE_ID_ANNUAL` as a Worker secret in Cloudflare
+3. Paste `workers/rooted-stripe.js` into the `rooted-stripe` Worker and deploy
+4. Confirm the annual price point — not yet decided
+
+**Still to do in `Index.html`:** the upgrade UI only offers one option and does not send a
+`plan` field. Until it does, every checkout is monthly regardless. Deliberately not built
+yet — the pricing and the UI copy are J's calls, not mine.
