@@ -63,18 +63,66 @@ listings.forEach((l, i) => {
   else seen.set(key, i);
 });
 
-// 2b. Same name in same county-ish area at near-identical coords — catches a market
-//     re-added under a slightly different city string by a parallel session.
+// 2b. Near-duplicate detection by TOKEN OVERLAP, not substring.
+//     The substring version missed the real-world case: the CDFA register calls a market
+//     "Silver Lake Certified Farmers' Market Sat" while the map calls it "Silver Lake
+//     Farmers Market". Neither contains the other, so a substring test passes them both
+//     through as distinct pins at identical coordinates. Jaccard overlap on meaningful
+//     tokens catches it. 26 committed LA entries have register counterparts under a
+//     different name; this is the gate that stops them being added twice.
+const NAME_STOP = new Set(['certified', 'farmers', 'farmer', 'farmers\u2019', 'market',
+  'markets', 'cfm', 'the', 'of', 'at', 'a', 'and', 'inc', 'llc', 'community', 'downtown']);
+// Two real collisions slipped a plain token match and both are cheap to close:
+//   "Social District" vs "Social Districts"  -> plural only, 33% raw
+//   "LA City Hall"    vs "Los Angeles City Hall" -> abbreviation, 40% raw
+// Singularise, and expand the handful of abbreviations that actually appear in place names.
+const NAME_ALIAS = { la: 'losangeles', 'los angeles': 'losangeles', sf: 'sanfrancisco',
+  st: 'saint', mt: 'mount', ft: 'fort', n: 'north', s: 'south', e: 'east', w: 'west' };
+function singular(t) {
+  if (t.length > 3 && t.endsWith('ies')) return t.slice(0, -3) + 'y';
+  if (t.length > 3 && t.endsWith('es') && !t.endsWith('ses')) return t.slice(0, -2);
+  if (t.length > 3 && t.endsWith('s') && !t.endsWith('ss')) return t.slice(0, -1);
+  return t;
+}
+function nameTokens(s) {
+  let str = String(s || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ');
+  str = str.replace(/\blos angeles\b/g, 'losangeles').replace(/\bsan francisco\b/g, 'sanfrancisco');
+  const out = new Set();
+  str.split(/\s+/).forEach(t => {
+    if (!t) return;
+    t = NAME_ALIAS[t] || t;
+    t = singular(t);
+    if (!NAME_STOP.has(t)) out.add(t);
+  });
+  return out;
+}
+function jaccard(a, b) {
+  if (!a.size || !b.size) return 0;
+  let inter = 0;
+  a.forEach(t => { if (b.has(t)) inter++; });
+  return inter / (a.size + b.size - inter);
+}
+// ~1 mile in degrees at California latitudes
+const NEAR_DEG = 0.015;
+// Scope: chain grocery and restaurants legitimately cluster — three Trader Joe's inside a
+// mile of each other in San Francisco are three real shops, and they disambiguate by a
+// parenthetical suffix rather than by name. Running token overlap over them produced 20
+// false positives and zero true ones. The types below are the ones where two pins at the
+// same corner means an actual mistake, and they are the types being bulk-imported.
+const DEDUP_TYPES = new Set(['farmersmarket', 'csa', 'onfarmmarket', 'meat']);
 for (let i = 0; i < listings.length; i++) {
   for (let j = i + 1; j < listings.length; j++) {
     const a = listings[i], b = listings[j];
+    if (a._type !== b._type) continue;
+    if (!DEDUP_TYPES.has(a._type)) continue;
     if (typeof a.location_x !== 'number' || typeof b.location_x !== 'number') continue;
     const dx = Math.abs(a.location_x - b.location_x), dy = Math.abs(a.location_y - b.location_y);
-    if (dx < 0.004 && dy < 0.004) {
-      const an = (a.listing_name || '').toLowerCase(), bn = (b.listing_name || '').toLowerCase();
-      if (an === bn || an.includes(bn) || bn.includes(an)) {
-        fail.push('NEAR-DUPLICATE coords+name: "' + a.listing_name + '" (' + a.location_city + ') vs "' + b.listing_name + '" (' + b.location_city + ')');
-      }
+    if (dx > NEAR_DEG || dy > NEAR_DEG) continue;
+    const sim = jaccard(nameTokens(a.listing_name), nameTokens(b.listing_name));
+    if (sim >= 0.5) {
+      fail.push('NEAR-DUPLICATE (' + Math.round(sim * 100) + '% name overlap, <1mi): "'
+        + a.listing_name + '" (' + a.location_city + ') vs "'
+        + b.listing_name + '" (' + b.location_city + ')');
     }
   }
 }
