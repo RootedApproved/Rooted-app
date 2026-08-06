@@ -124,6 +124,17 @@ for (let i = 0; i < listings.length; i++) {
         + a.listing_name + '" (' + a.location_city + ') vs "'
         + b.listing_name + '" (' + b.location_city + ')');
     }
+    // Name matching alone has false NEGATIVES and one bit us: the map's "Larchmont Village
+    // Farmers Market" and the register's "Larchmont Sunday CFM" are the same car park at
+    // 209 N Larchmont Blvd, but share only one meaningful token and score 33%. So also flag
+    // ANY two same-type listings within ~150m regardless of name. Two genuinely different
+    // farmers markets that close together are rare enough to be worth a human look, and a
+    // silent duplicate pin is worse than a false alarm.
+    const SAME_SPOT = 0.0015;
+    if (dx < SAME_SPOT && dy < SAME_SPOT && sim < 0.5) {
+      fail.push('SAME-LOCATION, different names (<150m) \u2014 check for a duplicate: "'
+        + a.listing_name + '" vs "' + b.listing_name + '" (' + a.location_city + ')');
+    }
   }
 }
 

@@ -478,3 +478,31 @@ they do not, the dates are carried over from a previous edition. Write the seaso
 as a month range rather than inventing exact dates, and say in the entry that the
 register's dates are stale. This is cheap — it is arithmetic, no search needed —
 and it caught four entries that otherwise looked clean.
+
+## West Marin ranch coordinates are town-level estimates, not geocodes
+
+Surfaced by the new same-location check in `scripts/checks.js`, which flagged Stemple
+Creek Ranch and Fallon Hills Ranch as sitting 150m apart. They are not duplicates — they
+are two real, separate ranches — but their coordinates were estimates placed almost on
+top of each other.
+
+`CURATED_LISTINGS` documents this as an early deliberate choice ("Coordinates are
+reasonable estimates from known addresses, not precision-geocoded"), which was fine when
+the map was a rough guide. It is less fine now that the map is a destination tool.
+
+**Fixed:** Stemple Creek Ranch. Its entry carries an exact address, 900 Burbank Ln, and
+was pinned 2.5km away at 38.246,-122.906. Now 38.2673,-122.8821, verified.
+
+**Still estimated, in rough order of drift:**
+
+| Listing | Pinned at | Issue |
+|---|---|---|
+| True Grass Farms | 38.330, -122.910 | Business listing puts it at 2711 Middle Rd, Tomales (38.2650, -122.9274) — roughly 7km from the pin. The entry's address text says Valley Ford, so the town itself needs settling before the coordinate is moved |
+| Fallon Hills Ranch | 38.245, -122.905 | No street address in the entry and no business listing found. Coordinate appears to be Stemple Creek's nudged by 0.001. Needs a real location from the ranch directly |
+| Tomales Bay Pastures | 38.160, -122.890 | Rounded to 3dp, Marshall — plausible but unverified |
+| Markegard Family Grass-Fed | 37.320, -122.390 | Rounded to 2dp, and the entry says the operation spans San Gregorio and Half Moon Bay, so a single pin may be the wrong model here |
+
+**Worth a sweep:** any listing whose coordinates are round to 2 or 3 decimal places and
+which carries no street number is likely a town-centre estimate. That is a different job
+from the farmers market buildout, but it is the same class of defect: a pin that looks
+authoritative and is not.
