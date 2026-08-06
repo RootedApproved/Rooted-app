@@ -6452,10 +6452,21 @@ function initAuthState() {
 }
 
 function initColorTheme() {
-  // DEFAULT THEME for anyone with no saved preference. Was 'coastal' (sage-teal), now
-  // 'clay' (Terracotta) — the warm orange palette. Note the theme lives in localStorage
-  // per-visitor, so if your own browser storage is cleared the site reverts to this
-  // default; that is why the site can appear to change colour on its own.
+  // Brand colour is Terracotta ('clay'). The theme was previously stored per-visitor in
+  // localStorage, which meant anyone who had loaded the site before kept whatever value
+  // was saved — usually 'coastal' — and never saw the brand colour at all. Changing the
+  // default alone did not reach them, because a stored value always wins.
+  //
+  // ONE-TIME MIGRATION: clear any previously stored theme once, then let the default
+  // apply. The flag means this runs a single time per browser and never fights the user
+  // afterwards, so the theme switcher still works normally if it is ever re-enabled.
+  try {
+    if (!localStorage.getItem('rooted-theme-migrated-2026-08')) {
+      localStorage.removeItem('rooted-color-theme');
+      localStorage.setItem('rooted-theme-migrated-2026-08', '1');
+    }
+  } catch (e) {}
+
   let saved = 'clay';
   try { saved = localStorage.getItem('rooted-color-theme') || 'clay'; } catch (e) {}
   setColorTheme(saved);
