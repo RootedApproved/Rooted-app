@@ -652,6 +652,22 @@ name, and only accept a result whose returned address matches the address the li
 already shows. Where they differ — GRUB, Serendipity, the two Cooper Rd farms — hold it and
 find the operator's own page.
 
+### Batch 4 — 7 more fixed, 4 confirmed accurate and promoted out of the queue
+
+Fixed: Los Osos Valley Organic Farm 2.54 km, Huarache Farms 1.29 km, Dig Deep Farms
+0.99 km, Gospel Flat Farm Stand 0.97 km, Blosser Urban Garden 0.76 km, Pichudo Mexican
+Grill 0.41 km.
+
+**Four were already accurate and have been promoted to 4dp** so they stop reappearing in
+the candidate list: both Trader Joe's, Jimbo's 4S Ranch and The River Park Farmers Market,
+all within 35 m. Storing a verified coordinate at 3dp made it indistinguishable from an
+unverified one — writing the 4dp value is how "checked and correct" gets recorded.
+
+**Running total: 37 corrected, 4 held, 41 addressable listings left.**
+
+The chain/farm split keeps holding. Every chain grocery checked so far has been accurate;
+almost every farm and market has not.
+
 ### Still to audit
 
 - **Tier A remainder: 23 region-only listings.** No street address to geocode. Options are
