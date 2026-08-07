@@ -701,7 +701,66 @@ Two farms geocoding to the same spot was the SYMPTOM; a defunct listing was the 
 address conflicts rather than suspected closures, but Laguna Farm is the reason to check
 whether they are still trading before assuming a coordinate is all that is wrong.
 
+### Batch 6 — both held cases resolved, and the 4dp convention is hiding them
+
+**Both are still trading. Neither is a Laguna.** Checked because Laguna Farm taught us to,
+and in both cases the answer was the opposite: the business is fine and the *conflicting
+address was a mailing address*, not a second site.
+
+**GRUB CSA Farm — the listing's address is correct.** Their CSA membership page states
+pickup is "at the back barn down the driveway on 3197 West Sacramento," which is exactly
+what the listing already displays. 11630 Dairy Road, the address that triggered the hold,
+is where members post cheques. CSA runs mid-April to the week before Christmas, plus a
+winter share — active.
+*Residual ambiguity, not yet settled:* their Contact page and Facebook both say **3269** W
+Sacramento Ave, roughly a block from 3197. The Contact page is stale — it carries a 2019
+copyright and 2019 market dates — so the membership page wins and 3197 stands. Worth one
+phone call to close properly.
+
+**Serendipity Farms — still trading, pin is ~2.4 km out.** Their own site carries a 2026
+copyright. 26500 Val Verde Dr is a Friday produce stand, confirmed by their own Facebook.
+Their mailing address is PO Box 642, Aromas — which is all the "conflict" ever was. A
+third-party directory pairs the exact displayed address with 36.53934 / -121.90262. That is
+NOT a geocode and has not been applied; it needs a real one, matched to the displayed
+address, before the pin moves.
+
+**New rule, earned here:** before holding an address conflict, check whether the competing
+address is a PO box, a cheque address, or a business registration. Two of two holds so far
+were mailing addresses wearing a farm's name.
+
+### ⚠️ The "promote to 4dp" convention broke the precision filter
+
+Batch 4 promoted verified-accurate coordinates to 4dp "so they stop reappearing in the
+candidate list." The intention was right — a verified coordinate needs to look different
+from an unverified one — but padding with zeros is the wrong marker, and it has since been
+applied to entries that were never verified at all.
+
+**68 listings are stored at 4dp but carry ≤3dp of real information.** 23 carry only 2dp.
+Both held cases are among them: GRUB sits at `-121.8700, 39.7500` and Serendipity at
+`-121.8790, 36.5290`. **The two listings we explicitly flagged as unverified are parked in
+the tier this document calls "clean, out of scope."** So are all 23 region-only Tier A
+listings, which is why they vanished from the queue without anyone deciding anything.
+
+Any scan for "≤3dp" now misses them. The conclusion "4dp+ is presumed geocoded and out of
+scope" is no longer true and must not be relied on until a real marker exists.
+
+**This needs J's call, and nothing should be padded to 4dp in the meantime.** A verified
+coordinate should be recorded by something that cannot be produced by accident — an
+explicit field, not a digit count.
+
 ### Still to audit
+
+**⚠️ These figures are stale — recounted from the live catalogue 6 Aug 2026.** The
+catalogue is now **803 listings, not 607**; parallel sessions added roughly 200 while this
+audit was running. Recount, do not trust the numbers below:
+
+- **79 listings at ≤3dp WITH a street address** — not the ~39 this section implies. Almost
+  all are the newly added Central Coast and Northern California farmers markets, which
+  arrived at 3dp and were therefore never verified.
+- **Plus 68 padded 4dp entries** (above), of which 9 carry a street address and are
+  immediately geocodable. The rest are region-only.
+- Many of the 79 are intersections and block ranges ("900–1000 blocks of State St"), which
+  geocode less cleanly than a street number. Expect a lower fix rate and more holds.
 
 - **Tier A remainder: 23 region-only listings.** No street address to geocode. Options are
   to leave them coarse (honest), or contact each operation. Mostly West Marin and Sonoma
