@@ -73,7 +73,16 @@ def census_point(listing, addr_form=None):
         return None
     a = m[0]
     c = a['coordinates']
-    return (c['y'], c['x'], a.get('matchedAddress', ''))
+    matched = a.get('matchedAddress', '')
+    # Census normalises directionals away — it answered "777 W Cypress Ave, Redding
+    # 96003" with "777 CYPRESS AVE, REDDING, CA, 96001". The dropped "W" is invisible,
+    # but the postcode it matched is not, and here it is the postcode OF THE MATCHED
+    # ADDRESS rather than of a surrounding area, so a disagreement is real.
+    want = (listing.get('zipc') or '').split('-')[0].strip()
+    got = re.search(r'\b(\d{5})\b\s*$', matched.strip())
+    if want and got and got.group(1) != want:
+        return None
+    return (c['y'], c['x'], matched)
 
 
 def confirm_by_reverse(lat, lon, listing):
@@ -101,13 +110,27 @@ def confirm_by_reverse(lat, lon, listing):
     # different postcode — and the road "Cypress Avenue" agreed, which would have waved
     # through a pin in the wrong part of Redding. Locality disagreement is exactly the
     # failure this confirmation step exists to catch, so it is terminal.
-    if any(k in reason for k in ('postcode mismatch', 'city mismatch',
-                                 'not California')):
+    # POSTCODE IS NOT REVERSE'S TO JUDGE. Reverse returns the ZIP of the area polygon it
+    # lands in, which is routinely a post-office facility code: 95061 for Santa Cruz,
+    # 93102 for Santa Barbara, 92163 for San Diego, 95929 for Chico. Eight of seventeen
+    # corner results threw a "postcode mismatch" that way and every one was spurious.
+    # The Redding guard is real but belongs at the FORWARD layer, where Census reports
+    # the postcode of the address it actually matched — see census_point. Here, city and
+    # road are the signal.
+    if any(k in reason for k in ('city mismatch', 'not California')):
         return False, f'reverse disagrees on locality — {reason}'
     got = norm_street((r.get('address') or {}).get('road') or '')
-    want = norm_street(listing['addr'])
-    if got and want and (got in want or want in got):
-        return True, f'reverse road agrees ({r["address"].get("road")})'
+    # An address that names a CORNER names two streets, and reverse will land on whichever
+    # is nearer. "700-789 Cedar St at Lincoln St" was held because reverse returned Lincoln
+    # Street and only Cedar was compared — reverse was corroborating the address by naming
+    # the other half of the corner it displays. Compare against every street mentioned.
+    want_parts = [p for p in re.split(r'\s+(?:at|between|and|x)\s+|&|,',
+                                      listing['addr'] or '') if p.strip()]
+    wants = [norm_street(p) for p in want_parts]
+    wants.append(norm_street(listing['addr']))
+    for want in [w for w in wants if w]:
+        if got and (got in want or want in got):
+            return True, f'reverse road agrees ({r["address"].get("road")})'
     return False, f'reverse disagrees — {reason}'
 
 

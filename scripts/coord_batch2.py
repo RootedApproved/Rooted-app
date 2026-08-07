@@ -80,9 +80,14 @@ def resolve(r):
         if corner_failed:
             rs.insert(0, corner_failed)
         return dict(status='hold', reasons=rs)
+    # Census can match an INTERSECTION rather than a building ("CEDAR ST & LINCOLN ST").
+    # The displayed address may still carry a house number, so keying scope off the
+    # listing alone claims address precision for a corner. It would pass the precision
+    # floor and still be a false claim. Key off what was actually matched.
+    matched_corner = '&' in matched
+    scope = 'address' if (house_number(r['addr']) and not matched_corner) else 'block'
     return dict(status='ok', lat=lat, lon=lon, via='census+reverse',
-                detail=f'census: {matched} | {why}',
-                scope='address' if house_number(r['addr']) else 'block')
+                detail=f'census: {matched} | {why}', scope=scope)
 
 
 def main():
