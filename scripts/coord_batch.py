@@ -77,7 +77,7 @@ def main():
     # files are the record of what that is.
     import glob
     worked = set()
-    for f in glob.glob('/home/claude/audit-results/batch_*.json'):
+    for f in glob.glob('/home/claude/audit-results/run_*.json'):
         for r in json.load(open(f)):
             worked.add(r['name'])
     remaining = [r for r in queue if r['name'] not in worked]
