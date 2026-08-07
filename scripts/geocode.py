@@ -77,7 +77,22 @@ def norm_street(s):
 
 
 def house_number(s):
-    m = re.match(r'\s*(\d+)', s or '')
+    """
+    The house number, wherever it sits in the string.
+
+    Anchoring this to the start of the string was a silent hole. Listings routinely lead
+    with the venue — "Truckee River Regional Park, 10500 Brockway Rd" — so the anchored
+    version returned None, the "displayed house number must match" test was skipped
+    entirely, and a street-only match was accepted for an address that names a specific
+    building. Prefer the number in the comma-segment that actually looks like a street.
+    """
+    s = s or ''
+    for seg in s.split(','):
+        if STREET_WORD.search(seg):
+            m = re.search(r'\b(\d+)\b(?=\s+\S)', seg)
+            if m:
+                return m.group(1)
+    m = re.match(r'\s*(\d+)', s)
     return m.group(1) if m else None
 
 
