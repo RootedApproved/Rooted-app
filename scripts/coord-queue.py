@@ -52,7 +52,10 @@ def load(path=INDEX):
         out.append(dict(name=s('listing_name'), addr=s('location_address'),
                         city=s('location_city'), state=s('location_state'),
                         zipc=s('location_zipcode'), typ=t.group(1) if t else '?',
-                        x=x, y=y))
+                        x=x, y=y,
+                        verified='coord_verified:true' in line,
+                        scope=(re.search(r"coord_scope:'([^']*)'", line).group(1)
+                               if 'coord_scope' in line else '')))
     return out
 
 
@@ -78,12 +81,16 @@ def main():
         r['eff'] = max(effective_dp(r['x']), effective_dp(r['y']))
         r['geo'] = geocodable(r['addr'])
 
-    queue = sorted((r for r in rows if r['eff'] <= 3 and r['geo']),
+    # coord_verified is now the authority on whether a pin has been checked. Precision
+    # is only a heuristic for finding UNCHECKED ones, and a deliberately coarse 'block'
+    # or 'region' pin is verified without ever reaching 4dp. Filter on the field first.
+    queue = sorted((r for r in rows if not r['verified'] and r['eff'] <= 3 and r['geo']),
                    key=lambda r: (r['eff'], r['name']))
-    region = [r for r in rows if r['eff'] <= 3 and not r['geo']]
-    padded = [r for r in rows if r['stored'] >= 4 > r['eff']]
+    region = [r for r in rows if not r['verified'] and r['eff'] <= 3 and not r['geo']]
+    padded = [r for r in rows if not r['verified'] and r['stored'] >= 4 > r['eff']]
 
     print(f"catalogue: {len(rows)} listings")
+    print(f"VERIFIED (coord_verified:true): {sum(1 for r in rows if r['verified'])}")
     print(f"QUEUE  (effective <=3dp, has a street address): {len(queue)}")
     print(f"  of which stored at 4dp+ and therefore currently invisible: "
           f"{sum(1 for r in queue if r['stored'] >= 4)}")

@@ -151,19 +151,104 @@ def match_verdict(listing, result):
     return True, 'address matches'
 
 
+STREET_WORD = re.compile(
+    r'\b(st|street|ave|avenue|rd|road|blvd|boulevard|dr|drive|ln|lane|way|hwy|highway'
+    r'|pkwy|parkway|ct|court|pl|place|ter|terrace|cir|circle|sq|square|row|trail|trl'
+    r'|loop|alley|expy|expressway|fwy|freeway|mall)\b\.?', re.I)
+
+
+def query_forms(addr):
+    """
+    Progressively cleaner query strings for one displayed address.
+
+    Listing addresses are written for humans and carry things a geocoder takes literally:
+    cross streets ("632 East Alisal St AT PEARL ST"), block ranges ("800 BLOCK OF Linden
+    Ave"), venue prefixes ("Crane Park, 360 Crane Ave"), lot descriptors ("East Castle St
+    PARKING LOT"), and prose after an em-dash ("Lichau Road, Penngrove — AT THE FOOT OF
+    SONOMA MOUNTAIN"). Every one of those returned zero results when sent verbatim.
+
+    Cleaning only ever affects the QUERY. The match test still compares the result against
+    the address the listing displays, so a looser query cannot loosen the acceptance rule.
+    """
+    a = (addr or '').replace('\\u2014', '\u2014').replace('\\u2013', '\u2013')
+    # Prose after a dash describes pickup/delivery, never the location.
+    a = re.split(r'[\u2014\u2013]|(?<=\s)--(?=\s)', a)[0]
+    a = re.sub(r'\([^)]*\)', ' ', a)
+    a = re.sub(r'\s+', ' ', a).strip().strip(',')
+
+    forms = []
+
+    def add(s):
+        s = re.sub(r'\s+', ' ', (s or '')).strip().strip(',').strip()
+        if s and s.lower() not in {f.lower() for f in forms}:
+            forms.append(s)
+
+    add(a)
+
+    # Keep only the comma-segment that actually looks like a street, dropping venue
+    # prefixes ("Crane Park") and trailing locality repeats.
+    segs = [s.strip() for s in a.split(',') if s.strip()]
+    street_segs = [s for s in segs if STREET_WORD.search(s) or re.match(r'^\s*\d+\s', s)]
+    if street_segs:
+        add(street_segs[0])
+
+    base = street_segs[0] if street_segs else a
+    # Drop cross-street and block-range language.
+    cleaned = re.sub(r'\b(\d+)\s*(?:00)?\s*block of\b', '', base, flags=re.I)
+    # '&' is not a word character, so \b&\b does not behave — strip it separately.
+    cleaned = re.sub(r'\s*&.*$', '', cleaned)
+    cleaned = re.sub(r'\s+\b(?:at|x|between|and)\b\s+.*$', '', cleaned, flags=re.I)
+    cleaned = re.sub(r'\b(parking lot|parking structure|lot|car park|plaza level)\b', '',
+                     cleaned, flags=re.I)
+    cleaned = re.sub(r'#\s*\S+|\bsuite\b\s*\S+|\bste\b\s*\S+', '', cleaned, flags=re.I)
+    add(cleaned)
+
+    # House number + street only.
+    m = re.match(r'\s*(\d+)\s+(.+)$', cleaned)
+    if m:
+        m2 = STREET_WORD.search(m.group(2))
+        if m2:
+            add(f'{m.group(1)} {m.group(2)[:m2.end()]}')
+    # "800 block of Linden Ave" MEANS the 800 house numbers on Linden Ave, so ask for
+    # exactly that. It resolves to a building on the correct block where the bare street
+    # name resolves to the whole road or to nothing.
+    mb = re.search(r'\b(\d+)\s*block of\s+(.+)$', base, flags=re.I)
+    if mb:
+        add(f'{mb.group(1)} {mb.group(2)}')
+
+    # Street without a house number — the right form for a block range or a corner.
+    if cleaned:
+        nohn = re.sub(r'^\s*\d+\s+', '', cleaned)
+        m3 = STREET_WORD.search(nohn)
+        if m3:
+            add(nohn[:m3.end()])
+    return forms
+
+
+def has_street(addr):
+    """Is there anything here a geocoder could resolve, or is it a region description?"""
+    for f in query_forms(addr):
+        if STREET_WORD.search(f) or re.match(r'^\s*\d+\s', f):
+            return True
+    return False
+
+
 def geocode_listing(listing, limit=5):
     """
     listing: dict with addr, city, state, zipc (name is NOT sent to the geocoder).
     Returns dict(status='ok'|'hold', ...).
     """
     tried = []
-    # Structured query first — it is the least ambiguous form available.
-    queries = [
-        ('structured', dict(street=listing['addr'], city=listing['city'],
-                            state=listing.get('state') or 'CA', country='USA')),
-        ('freeform', dict(q=f"{listing['addr']}, {listing['city']}, "
-                            f"{listing.get('state') or 'CA'} {listing.get('zipc') or ''}".strip())),
-    ]
+    queries = []
+    for form in query_forms(listing['addr']):
+        # Structured first — it is the least ambiguous form available.
+        queries.append((f'structured[{form}]',
+                        dict(street=form, city=listing['city'],
+                             state=listing.get('state') or 'CA', country='USA')))
+        queries.append((f'freeform[{form}]',
+                        dict(q=f"{form}, {listing['city']}, "
+                               f"{listing.get('state') or 'CA'} "
+                               f"{listing.get('zipc') or ''}".strip())))
     for label, params in queries:
         p = dict(params, format='jsonv2', addressdetails=1, limit=limit,
                  countrycodes='us')
@@ -178,8 +263,23 @@ def geocode_listing(listing, limit=5):
         for r in res:
             ok, reason = match_verdict(listing, r)
             if ok:
+                # Did this land on a building, or merely on the road?
+                # A result with no house number is the road's representative point. For a
+                # long road that point is arbitrary: "El Camino Real, Atascadero" resolves
+                # 7.9 km from the El Camino Real / East Mall junction the listing means.
+                # Callers must treat street_only results as confirmation, not correction.
+                got_hn = (r.get('address') or {}).get('house_number')
+                extent = None
+                bb = r.get('boundingbox')
+                if bb and len(bb) == 4:
+                    try:
+                        s_, n_, w_, e_ = (float(v) for v in bb)
+                        extent = haversine_km(s_, w_, n_, e_)
+                    except (TypeError, ValueError):
+                        extent = None
                 return dict(status='ok', lat=float(r['lat']), lon=float(r['lon']),
                             display=r.get('display_name', ''), via=label,
+                            street_only=not bool(got_hn), extent_km=extent,
                             osm=f"{r.get('osm_type')}/{r.get('osm_id')}")
         tried.append(f'{label}: {len(res)} results, best rejected — '
                      + match_verdict(listing, res[0])[1])
