@@ -57,9 +57,19 @@ def scope_for(addr):
 
 
 def main():
-    start = int(sys.argv[1])
-    count = int(sys.argv[2])
-    apply_ = '--apply' in sys.argv
+    # Two modes, deliberately separated.
+    #   python3 scripts/coord_batch.py 12                -> geocode next 12, write a run file
+    #   python3 scripts/coord_batch.py --apply <runfile> -> apply the OK rows of THAT file
+    # They were one command that re-geocoded on apply, and the two runs diverged: the
+    # result file was keyed on a start offset that was always 0, so a second run
+    # overwrote the first's evidence, the skip-worked set inverted, and a listing nobody
+    # had reviewed got written. Applying now consumes evidence instead of regenerating it.
+    if sys.argv[1] == '--apply':
+        apply_run(sys.argv[2])
+        return
+    count = int(sys.argv[1])
+    start = 0
+    apply_ = False
 
     queue = build_queue()
     # Applied entries leave the queue but HOLD and REVIEW entries stay in it, so a plain
@@ -121,18 +131,25 @@ def main():
     review = [r for r in results if r['status'] == 'REVIEW']
     hold = [r for r in results if r['status'] == 'HOLD']
     print(f'OK {len(ok)} | REVIEW {len(review)} | FAR {len(far)} | HOLD {len(hold)}')
-    json.dump(results, open('/tmp/batch.json', 'w'), indent=1)
-    # Persist per-batch so the review/hold log can be regenerated from evidence rather
-    # than retyped, which is how tallies drift.
+    # Unique per run. Keying this on the start offset was the bug: under skip-worked the
+    # offset is always 0, so every run clobbered the last one's evidence.
     import os
+    import datetime
     os.makedirs('/home/claude/audit-results', exist_ok=True)
-    json.dump(results, open(f'/home/claude/audit-results/batch_{start:03d}.json', 'w'),
-              indent=1)
+    stamp = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
+    path = f'/home/claude/audit-results/run_{stamp}.json'
+    json.dump(results, open(path, 'w'), indent=1)
+    print(f'\nrun file: {path}')
 
-    if not apply_:
-        print('\n(report only — rerun with --apply to write)')
-        return
+    print(f'\nreview the above, then:  python3 scripts/coord_batch.py --apply {path}')
 
+
+def apply_run(path):
+    """Apply the OK rows of a run file. No geocoding happens here, so what was reviewed
+    is exactly what gets written."""
+    results = json.load(open(path))
+    ok = [r for r in results if r['status'] == 'OK']
+    print(f'{path}: {len(results)} rows, {len(ok)} OK')
     src = open('Index.html', encoding='utf-8').read()
     written = 0
     for r in ok:
