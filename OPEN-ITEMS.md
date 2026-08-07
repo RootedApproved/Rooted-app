@@ -744,9 +744,43 @@ listings, which is why they vanished from the queue without anyone deciding anyt
 Any scan for "≤3dp" now misses them. The conclusion "4dp+ is presumed geocoded and out of
 scope" is no longer true and must not be relied on until a real marker exists.
 
-**This needs J's call, and nothing should be padded to 4dp in the meantime.** A verified
-coordinate should be recorded by something that cannot be produced by accident — an
-explicit field, not a digit count.
+### ✅ RESOLVED 7 Aug 2026 — verification is a field, not a digit count
+
+J's call: two explicit fields on the listing, enforced by `checks.js`.
+
+| Field | Values | Meaning |
+|---|---|---|
+| `coord_verified` | `true` only | The pin was geocoded from the address the listing **displays**, and the returned address matched it. Absent means unverified. Strictly boolean — a string `'yes'` or a `1` fails the gate, so no truthy accident can creep back in. |
+| `coord_scope` | `'address'` | A specific street address point. Requires ≥4dp of real precision. |
+| | `'block'` | A block range or corner — no single true point exists. Requires ≥3dp. |
+| | `'region'` | Deliberately coarse; the listing names an area, not an address. No precision floor. |
+
+**Gate assertions** (each one negative-tested, not assumed):
+- `coord_verified` present ⇒ must be boolean `true`
+- `coord_verified` present ⇒ `coord_scope` must be present
+- `coord_scope` present ⇒ `coord_verified` must be present (scope describes a verified pin, it does not assert one)
+- `coord_scope` must be one of the three values
+- effective precision — decimal places **after stripping trailing zeros** — must meet the floor for the scope
+
+That last one is the whole point: `33.0190` carries 3dp of information, not 4. Padding can
+no longer inflate it, so the convention that broke cannot be re-created by accident.
+
+**Backfilled: 46 listings.** Sourced from the git diffs of the audit commits, not from the
+prose above. Three entries were verified-accurate but stored at their padded 3dp value and
+were re-geocoded so they could honestly carry `'address'` scope — all three confirmed the
+original finding (Trader Joe's Cerritos 5 m, Jimbo's 4S Ranch 15 m, Yountville 136 m).
+
+**Deliberately NOT backfilled, so nobody "corrects" this later:**
+- **Old Town Salinas Farmers Market** — its coordinate did change in `f8fb36c`, but as a
+  merge artefact: two register rows describing one market were collapsed and the survivor
+  inherited the deleted row's 3dp value. Nothing was geocoded. It belongs in the queue.
+- **Trader Joe's (San Jose)** — the Tier C sample records "San Jose 0 m" but the catalogue
+  holds **four** San Jose Trader Joe's and the note does not say which. Marking the wrong
+  one verified is worse than leaving all four unmarked.
+- **Erewhon (Santa Monica)** — sampled in Tier C at 638 m out. It was *measured*, never
+  corrected. Still unverified.
+- **GRUB CSA Farm, Serendipity Farms** — both resolved as still-trading with mailing-address
+  conflicts, but neither ever received an address-matched geocode.
 
 ### Still to audit
 

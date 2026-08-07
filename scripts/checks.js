@@ -151,6 +151,56 @@ listings.forEach(l => {
   }
 });
 
+// 3b. Coordinate verification schema.
+// The previous marker for "this pin was checked" was padding the coordinate to 4 decimal
+// places. It failed within days: padding is silent, is reproducible by accident, and got
+// applied to entries nobody had checked, so 68 listings sat at 4dp carrying 3dp or less of
+// real information — including the two explicitly flagged as UNVERIFIED. Verification is
+// now data, and these are the rules that keep it honest.
+const SCOPES = new Set(['address', 'block', 'region']);
+// Decimal places AFTER stripping trailing zeros. 33.0190 carries 3dp of information, not
+// 4, and this is the number that must not be inflatable by padding.
+function effectiveDp(v) {
+  const s = String(v);
+  if (!s.includes('.')) return 0;
+  return s.split('.')[1].replace(/0+$/, '').length;
+}
+const MIN_DP = { address: 4, block: 3, region: 0 };
+let verifiedCount = 0;
+listings.forEach(l => {
+  const n = l.listing_name || '(unnamed)';
+  const hasV = l.coord_verified !== undefined;
+  const hasS = l.coord_scope !== undefined;
+
+  if (hasV) {
+    // Strictly boolean true. A string 'yes' or a 1 would let a truthy accident back in.
+    if (l.coord_verified !== true) {
+      fail.push('coord_verified must be boolean true, got ' + JSON.stringify(l.coord_verified) + ': ' + n);
+    }
+    if (!hasS) fail.push('coord_verified with no coord_scope: ' + n);
+    verifiedCount++;
+  }
+  if (hasS) {
+    if (!SCOPES.has(l.coord_scope)) {
+      fail.push('unknown coord_scope ' + JSON.stringify(l.coord_scope) + ' (allowed: '
+        + [...SCOPES].join(', ') + '): ' + n);
+    } else if (hasV) {
+      // A pin claiming address-level scope must actually carry address-level precision.
+      // This is the assertion that would have caught the padding convention on day one.
+      const dp = Math.max(effectiveDp(l.location_x), effectiveDp(l.location_y));
+      const need = MIN_DP[l.coord_scope];
+      if (dp < need) {
+        fail.push('coord_scope "' + l.coord_scope + '" needs >=' + need
+          + 'dp of real precision but coordinate carries ' + dp + 'dp ('
+          + l.location_y + ', ' + l.location_x + '): ' + n);
+      }
+    }
+    if (!hasV) fail.push('coord_scope set without coord_verified — scope describes a '
+      + 'verified pin, it does not assert one: ' + n);
+  }
+});
+console.log('coordinates verified: ' + verifiedCount + ' of ' + listings.length);
+
 // 4. Every _type has LOCAL_FOOD_TYPES meta
 const usedTypes = new Set(listings.map(l => l._type));
 usedTypes.forEach(t => {
