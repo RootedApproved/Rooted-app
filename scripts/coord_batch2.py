@@ -60,16 +60,26 @@ def resolve(r):
         if c:
             return dict(status='ok', lat=c['lat'], lon=c['lon'], via='overpass-corner',
                         detail=c['detail'], scope='block', span_km=c.get('span_km'))
-        return dict(status='hold',
-                    reasons=['overpass: no crossing node found for the named streets'])
+        # Not every parse that LOOKS like a corner is one. "100 Corte Madera Town Center
+        # at Hwy 101" is an address beside a highway, not two crossing streets, and
+        # holding it on a failed crossing query wastes a perfectly good address. Fall
+        # through to Census rather than treating a mis-parse as an unresolvable corner.
+        corner_failed = 'overpass: no crossing node for the named streets'
+    else:
+        corner_failed = None
     got = census_point(r)
     if not got:
-        return dict(status='hold', reasons=['census: no match'])
+        rs = ['census: no match']
+        if corner_failed:
+            rs.insert(0, corner_failed)
+        return dict(status='hold', reasons=rs)
     lat, lon, matched = got
     ok, why = confirm_by_reverse(lat, lon, r)
     if not ok:
-        return dict(status='hold',
-                    reasons=[f'census matched "{matched}" but {why}'])
+        rs = [f'census matched "{matched}" but {why}']
+        if corner_failed:
+            rs.insert(0, corner_failed)
+        return dict(status='hold', reasons=rs)
     return dict(status='ok', lat=lat, lon=lon, via='census+reverse',
                 detail=f'census: {matched} | {why}',
                 scope='address' if house_number(r['addr']) else 'block')

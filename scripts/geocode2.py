@@ -138,8 +138,13 @@ def _osm_name_regex(name):
     e = expand(name)
     core = re.sub(r'\s+(Street|Avenue|Road|Boulevard|Drive|Lane|Place|Court|Circle|'
                   r'Parkway|Highway|Square|Terrace|Way)$', '', e, flags=re.I).strip()
-    return '^' + re.escape(core) + r'( (Street|Avenue|Road|Boulevard|Drive|Lane|Place|' \
-                                   r'Court|Circle|Parkway|Highway|Square|Terrace|Way))?$'
+    # A DIRECTIONAL PREFIX must be optional too. Listings write "2nd St" where OSM stores
+    # "West 2nd Street", so a suffix-only pattern missed the road entirely and the crossing
+    # query returned nothing — reported, of course, as "these streets do not cross".
+    core = re.sub(r'^(North|South|East|West|N|S|E|W)\s+', '', core, flags=re.I).strip()
+    return (r'^(North |South |East |West )?' + re.escape(core)
+            + r'( (Street|Avenue|Road|Boulevard|Drive|Lane|Place|'
+              r'Court|Circle|Parkway|Highway|Square|Terrace|Way))?$')
 
 
 class OverpassUnavailable(Exception):
