@@ -27,7 +27,8 @@ import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from geocode import haversine_km, house_number
-from geocode2 import census_point, confirm_by_reverse, corner_point, parse_corner
+from geocode2 import (census_point, confirm_by_reverse, corner_point,
+                      parse_corner, OverpassUnavailable)
 
 _spec = importlib.util.spec_from_file_location('cq', 'scripts/coord-queue.py')
 cq = importlib.util.module_from_spec(_spec)
@@ -50,7 +51,12 @@ def resolve(r):
     """Returns rec fields for one listing."""
     cur_y, cur_x = float(r['y']), float(r['x'])
     if parse_corner(r['addr']):
-        c = corner_point(r)
+        try:
+            c = corner_point(r)
+        except OverpassUnavailable as e:
+            # Distinct from a miss, and NOT recorded as worked — the listing must come
+            # back round rather than be filed as "no crossing node found".
+            return dict(status='error', reasons=[f'overpass unavailable: {e}'])
         if c:
             return dict(status='ok', lat=c['lat'], lon=c['lon'], via='overpass-corner',
                         detail=c['detail'], scope='block', span_km=c.get('span_km'))
@@ -75,6 +81,7 @@ def main():
         apply_run(sys.argv[2])
         return
     count = int(sys.argv[1])
+    census_only = '--census-only' in sys.argv
 
     worked = set()
     for f in glob.glob(WORKED + '/run_*.json'):
@@ -88,6 +95,8 @@ def main():
     results = []
     for i, r in enumerate(batch):
         cur_y, cur_x = float(r['y']), float(r['x'])
+        if census_only and parse_corner(r['addr']):
+            continue  # corner entries need Overpass; leave them queued
         g = resolve(r)
         rec = dict(idx=i, name=r['name'], addr=r['addr'], city=r['city'],
                    zipc=r['zipc'], typ=r['typ'], cur=(cur_y, cur_x))
@@ -96,6 +105,8 @@ def main():
             rec.update(new=(g['lat'], g['lon']), km=km, via=g['via'],
                        detail=g['detail'], scope=g['scope'])
             rec['status'] = 'FAR' if km > FAR_KM else 'OK'
+        elif g['status'] == 'error':
+            rec.update(status='ERROR', reasons=g['reasons'])
         else:
             rec.update(status='HOLD', reasons=g['reasons'])
         results.append(rec)
@@ -115,9 +126,14 @@ def main():
     ok = [x for x in results if x['status'] == 'OK']
     print(f"OK {len(ok)} | FAR {sum(1 for x in results if x['status'] == 'FAR')} | "
           f"HOLD {sum(1 for x in results if x['status'] == 'HOLD')}")
+    err = [x for x in results if x['status'] == 'ERROR']
+    if err:
+        print(f'ERROR {len(err)} — resolver unavailable; NOT recorded as worked')
     stamp = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
     path = f'{WORKED}/run_{stamp}.json'
-    json.dump(results, open(path, 'w'), indent=1)
+    # Errors are excluded from the evidence file so they re-enter the queue. A listing
+    # nobody could REACH must not be filed alongside one nobody could resolve.
+    json.dump([x for x in results if x['status'] != 'ERROR'], open(path, 'w'), indent=1)
     print(f'\nrun file: {path}')
     print(f'apply with: python3 scripts/coord_batch2.py --apply {path}')
 

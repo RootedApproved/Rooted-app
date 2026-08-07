@@ -94,8 +94,16 @@ def confirm_by_reverse(lat, lon, listing):
     if ok:
         return True, f'reverse confirms: {r.get("display_name", "")[:100]}'
     # Reverse lands on the nearest mapped feature, which for a large parcel can be the
-    # access road rather than the street named. Accept a road-name agreement alone,
-    # since the house number came from Census and is not reverse's to confirm.
+    # access road rather than the street named, so a road-name agreement is allowed to
+    # rescue a verdict that failed on street DETAIL. It must never rescue one that failed
+    # on LOCALITY. Saturday Redding Market displays "777 W Cypress Ave, Redding 96003";
+    # Census answered "777 CYPRESS AVE, REDDING, CA, 96001" — directional dropped and a
+    # different postcode — and the road "Cypress Avenue" agreed, which would have waved
+    # through a pin in the wrong part of Redding. Locality disagreement is exactly the
+    # failure this confirmation step exists to catch, so it is terminal.
+    if any(k in reason for k in ('postcode mismatch', 'city mismatch',
+                                 'not California')):
+        return False, f'reverse disagrees on locality — {reason}'
     got = norm_street((r.get('address') or {}).get('road') or '')
     want = norm_street(listing['addr'])
     if got and want and (got in want or want in got):
@@ -134,19 +142,64 @@ def _osm_name_regex(name):
                                    r'Court|Circle|Parkway|Highway|Square|Terrace|Way))?$'
 
 
+class OverpassUnavailable(Exception):
+    """Transport failure, NOT an empty result.
+
+    These used to be the same value. _overpass returned None when the API rate-limited
+    us and None when it answered honestly that two streets do not cross, so a 503 storm
+    was recorded as "no crossing node found" for five listings in a row. A failure that
+    reports itself as a negative result is the same defect as the anchored house-number
+    regex: the check did not fail, it did not run, and the output looked identical."""
+
+
 def _overpass(query):
+    last = None
     for url in OVERPASS:
         for attempt in range(3):
-            _throttle(2.0)
+            _throttle(3.0)
             req = urllib.request.Request(
                 url, data=urllib.parse.urlencode({'data': query}).encode(),
                 headers={'User-Agent': UA})
             try:
                 with urllib.request.urlopen(req, timeout=90) as r:
                     return json.loads(r.read().decode())
-            except Exception:
-                time.sleep(3 + attempt * 4)
-    return None
+            except Exception as e:
+                last = e
+                time.sleep(5 + attempt * 6)
+    raise OverpassUnavailable(str(last))
+
+
+_health = [None]
+
+
+def overpass_healthy():
+    """
+    Confirm Overpass answers a query whose answer is KNOWN before trusting an empty
+    result from it.
+
+    Necessary because Overpass returns HTTP 200 with an empty element list when its
+    own internal timeout fires, which is indistinguishable from an honest "these two
+    streets do not cross". During an outage that silently converts every corner listing
+    into a false hold - the listing gets filed as unresolvable and never revisited. A
+    probe with a guaranteed answer separates "down" from "no".
+    """
+    if _health[0] is not None:
+        return _health[0]
+    # The probe must have the SHAPE of a real query, not merely be a query. A trivial
+    # way-lookup passed while every actual crossing query timed out, so the first probe
+    # certified a degraded service as healthy. This asks for a crossing whose answer is
+    # known — 1st St and Spring St, downtown Los Angeles — so it fails when the service
+    # is too slow to answer the kind of question being asked of it.
+    q = ('[out:json][timeout:40];'
+         '(way(around:900,34.0537,-118.2468)["highway"]["name"="West 1st Street"];)->.A;'
+         '(way(around:900,34.0537,-118.2468)["highway"]["name"="North Spring Street"];)->.B;'
+         'node(w.A)->.na;node(w.B)->.nb;node.na.nb;out 3;')
+    try:
+        d = _overpass(q)
+        _health[0] = bool(d and d.get('elements'))
+    except OverpassUnavailable:
+        _health[0] = False
+    return _health[0]
 
 
 def crossing(street_a, street_b, lat, lon, radius=8000):
@@ -224,6 +277,9 @@ def corner_point(listing):
     parsed = parse_corner(listing['addr'])
     if not parsed:
         return None
+    if not overpass_healthy():
+        raise OverpassUnavailable('probe query returned nothing — service degraded, so '
+                                  'an empty result cannot be read as "no crossing"')
     primary, crosses = parsed
     lat0, lon0 = float(listing['y']), float(listing['x'])
     pts, named = [], []
