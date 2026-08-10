@@ -109,6 +109,16 @@ const NEAR_DEG = 0.015;
 // parenthetical suffix rather than by name. Running token overlap over them produced 20
 // false positives and zero true ones. The types below are the ones where two pins at the
 // same corner means an actual mistake, and they are the types being bulk-imported.
+// Pairs that LOOK like duplicates and are not. Each is recorded with the evidence that
+// settled it, so the gate stays strict and the exception stays auditable. Ojai runs two
+// separate markets 150 m apart: the Certified market at 300 E Matilija St on Sundays and
+// the Community market at 414 E Ojai Ave on Thursdays. Different operators, addresses
+// and days.
+const KNOWN_DISTINCT = new Set([
+  'Ojai Certified Farmers Market|Ojai Community Farmers\' Market',
+  'Ojai Community Farmers\' Market|Ojai Certified Farmers Market',
+]);
+
 const DEDUP_TYPES = new Set(['farmersmarket', 'csa', 'onfarmmarket', 'meat']);
 for (let i = 0; i < listings.length; i++) {
   for (let j = i + 1; j < listings.length; j++) {
@@ -120,6 +130,7 @@ for (let i = 0; i < listings.length; i++) {
     if (dx > NEAR_DEG || dy > NEAR_DEG) continue;
     const sim = jaccard(nameTokens(a.listing_name), nameTokens(b.listing_name));
     if (sim >= 0.5) {
+      if (KNOWN_DISTINCT.has(a.listing_name + '|' + b.listing_name)) continue;
       fail.push('NEAR-DUPLICATE (' + Math.round(sim * 100) + '% name overlap, <1mi): "'
         + a.listing_name + '" (' + a.location_city + ') vs "'
         + b.listing_name + '" (' + b.location_city + ')');
@@ -132,6 +143,7 @@ for (let i = 0; i < listings.length; i++) {
     // silent duplicate pin is worse than a false alarm.
     const SAME_SPOT = 0.0015;
     if (dx < SAME_SPOT && dy < SAME_SPOT && sim < 0.5) {
+      if (KNOWN_DISTINCT.has(a.listing_name + '|' + b.listing_name)) continue;
       fail.push('SAME-LOCATION, different names (<150m) \u2014 check for a duplicate: "'
         + a.listing_name + '" vs "' + b.listing_name + '" (' + a.location_city + ')');
     }
