@@ -54,6 +54,11 @@ SUFFIX = {
     'drive': 'dr', 'lane': 'ln', 'court': 'ct', 'place': 'pl', 'circle': 'cir',
     'terrace': 'ter', 'parkway': 'pkwy', 'highway': 'hwy', 'square': 'sq',
     'trail': 'trl', 'expressway': 'expy', 'freeway': 'fwy',
+    # Census returns USPS abbreviations the register spells out. Without these,
+    # "2000 El Cerrito Plaza" and "2000 EL CERRITO PLZ" read as different streets.
+    'plaza': 'plz', 'center': 'ctr', 'centre': 'ctr', 'junction': 'jct',
+    'crossing': 'xing', 'extension': 'ext', 'heights': 'hts', 'village': 'vlg',
+    'mount': 'mt', 'saint': 'st', 'fort': 'ft', 'point': 'pt',
 }
 DIRECTION = {'north': 'n', 'south': 's', 'east': 'e', 'west': 'w',
              'northeast': 'ne', 'northwest': 'nw',
