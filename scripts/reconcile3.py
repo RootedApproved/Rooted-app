@@ -158,6 +158,23 @@ def main():
             if best is not None and bestd <= 1.0:
                 cand = [best]
                 match_by = f'proximity {bestd*1000:.0f}m'
+        # A shared market name across two cities is not a match. California has a
+        # Brentwood in Contra Costa and a Brentwood in Los Angeles, and name matching
+        # paired them 520 km apart; "Bundy Triangle" paired with "Downtown L.A." at
+        # 19 km. Those are absent counterparts being reported as conflicts, which
+        # wrongly impugns a Census geocode that was correct. Drop a name match that
+        # lands implausibly far away rather than escalating it.
+        if cand and match_by == 'name' and 'cen_lat' in rec:
+            try:
+                dd = haversine_km(rec['cen_lat'], rec['cen_lon'],
+                                  float(cand[0]['y']), float(cand[0]['x']))
+                if dd > 5.0:
+                    rec['usda_rejected'] = (f"name-matched {cand[0]['name']!r} lies "
+                                            f"{dd:.0f} km away — different city, not a "
+                                            f"counterpart")
+                    cand = []
+            except (TypeError, ValueError):
+                pass
         if cand:
             rec['usda_match_by'] = match_by
             u = cand[0]

@@ -79,8 +79,22 @@ def audit(rows, catalogue_names, catalogue_pins):
         if not got_road:
             warns.append(f'{n}: point reverse-geocodes to no road')
         elif not any(got_road in w or w in got_road for w in wants):
-            fails.append(f'{n}: point sits on "{a.get("road")}" but the address names '
-                         f'{r["street"]!r}')
+            # A road's TYPE is the thing registers most often get wrong - Laguna Beach
+            # says "Forest Rd" for Forest Avenue, Pinole "Fernandez St" for Fernandez
+            # Avenue. If the distinctive part of the name agrees and only the suffix
+            # differs, that is a register defect and not a misplaced pin, so report it
+            # rather than blocking on it.
+            def bare(x):
+                return re.sub(r'\b(st|ave|rd|blvd|dr|ln|ct|pl|cir|ter|pkwy|hwy|sq|way|'
+                              r'trl|expy|fwy|mall)\b', '', x).strip()
+            gb = bare(got_road)
+            if gb and any(gb and (gb in bare(w) or bare(w) in gb) for w in wants):
+                infos.append(f'{n}: road type differs — point is on "{a.get("road")}", '
+                             f'register says {r["street"]!r}. Register type is likely '
+                             f'wrong; pin looks right.')
+            else:
+                fails.append(f'{n}: point sits on "{a.get("road")}" but the address '
+                             f'names {r["street"]!r}')
 
         # POSTCODE — from the point, never from the register
         pt_zip = (a.get('postcode') or '').split('-')[0]

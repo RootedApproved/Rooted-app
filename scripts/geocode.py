@@ -60,6 +60,16 @@ DIRECTION = {'north': 'n', 'south': 's', 'east': 'e', 'west': 'w',
              'southeast': 'se', 'southwest': 'sw'}
 
 
+ORDINAL = {'first': '1st', 'second': '2nd', 'third': '3rd', 'fourth': '4th',
+           'fifth': '5th', 'sixth': '6th', 'seventh': '7th', 'eighth': '8th',
+           'ninth': '9th', 'tenth': '10th', 'eleventh': '11th', 'twelfth': '12th',
+           'thirteenth': '13th', 'fourteenth': '14th', 'fifteenth': '15th',
+           'sixteenth': '16th', 'seventeenth': '17th', 'eighteenth': '18th',
+           'nineteenth': '19th', 'twentieth': '20th'}
+# Registers abbreviate directionals inconsistently: "So." for South, "No." for North.
+DIR_ABBR = {'so': 's', 'no': 'n', 'ea': 'e', 'we': 'w'}
+
+
 def norm_street(s):
     """Reduce a street string to comparable tokens: '1720 Cooper Road' -> 'cooper rd'."""
     s = (s or '').lower()
@@ -70,6 +80,10 @@ def norm_street(s):
     for t in s.split():
         if t.isdigit():
             continue                            # house numbers compared separately
+        # "100 S SECOND St" and "South 2ND Street" are the same road, and comparing them
+        # as written produced a wall of false failures — 10 of 14 in the first audit run.
+        t = ORDINAL.get(t, t)
+        t = DIR_ABBR.get(t, t)
         t = DIRECTION.get(t, t)
         t = SUFFIX.get(t, t)
         out.append(t)
