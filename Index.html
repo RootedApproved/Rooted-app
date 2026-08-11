@@ -324,6 +324,10 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .fm-card-detail strong{color:var(--char);}
 .fm-tag{display:inline-block;background:var(--cream2);color:var(--forest);font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;margin:2px 5px 2px 0;letter-spacing:.02em;}
 .fm-card-highlight{border:1.5px solid var(--sage);background:#FBFDF8;}
+.fm-popup-link{background:none;border:0;padding:0;font:inherit;font-weight:700;font-size:14px;color:var(--forest);cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:2px;line-height:1.35;}
+.fm-popup-link:hover{color:var(--teal);}
+.fm-popup-hint{margin-top:4px;font-size:11px;color:var(--mid);}
+.fm-card-focused{border-color:var(--teal)!important;box-shadow:0 0 0 3px rgba(0,128,128,.18);}
 .fm-badge{display:inline-block;background:var(--sage);color:var(--white);font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;margin-bottom:7px;letter-spacing:.03em;}
 .fm-debug-toggle{font-family:var(--font-m);font-size:10.5px;color:var(--muted);cursor:pointer;padding:8px 0;text-align:center;text-decoration:underline;}
 .fm-debug-json{background:var(--char);color:#8FE388;font-family:var(--font-m);font-size:10.5px;padding:12px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-top:4px;}
@@ -5846,6 +5850,35 @@ function normalizeListing(m) {
   };
 }
 
+// A listing needs a stable identity shared by its map marker and its result card, so
+// clicking one can find the other. Name alone is not unique — several markets share a
+// name across towns — so the coordinate is part of the key.
+function fmKey(mk) {
+  return mk.name + '|' + Number(mk.lat).toFixed(5) + ',' + Number(mk.lng).toFixed(5);
+}
+
+// Select the listing behind a marker: open its card, scroll it into view, flash it.
+// The list is filtered to the map viewport, so a card may not exist yet when the marker
+// sits just outside the current bounds; rebuild the list first in that case rather than
+// silently doing nothing.
+function focusLocalFoodListing(key) {
+  const resultsEl = document.getElementById('fm-results');
+  if (!resultsEl) return;
+  let card = resultsEl.querySelector('[data-fmkey="' + (window.CSS && CSS.escape ? CSS.escape(key) : key) + '"]');
+  if (!card) {
+    updateListForViewport();
+    card = resultsEl.querySelector('[data-fmkey="' + (window.CSS && CSS.escape ? CSS.escape(key) : key) + '"]');
+  }
+  if (!card) return;
+  resultsEl.querySelectorAll('.fm-card.expanded').forEach(c => {
+    if (c !== card) c.classList.remove('expanded');
+  });
+  card.classList.add('expanded');
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  card.classList.add('fm-card-focused');
+  setTimeout(() => card.classList.remove('fm-card-focused'), 1600);
+}
+
 // Creates markers for every fetched listing whose type is currently active — regardless of the
 // map's current viewport. Leaflet only visually shows markers within the current view anyway, so
 // panning/zooming the map naturally reveals more without needing to recreate anything.
@@ -5862,7 +5895,25 @@ function renderMarkersForActiveTypes() {
       iconSize: [26, 26],
       iconAnchor: [13, 26]
     });
-    const marker = L.marker([mk.lat, mk.lng], { icon }).addTo(fmMap).bindPopup(typeInfo.icon + ' ' + mk.name);
+    // Build the popup as a DOM element rather than an HTML string: listing names contain
+    // apostrophes ("Alameda Farmers' Market") which break an inline onclick, and escaping
+    // them by hand is the kind of thing that works until one name has a quote in it.
+    const popup = document.createElement('div');
+    popup.className = 'fm-popup';
+    const link = document.createElement('button');
+    link.type = 'button';
+    link.className = 'fm-popup-link';
+    link.textContent = typeInfo.icon + ' ' + mk.name;
+    link.addEventListener('click', () => {
+      focusLocalFoodListing(fmKey(mk));
+      if (fmMap) fmMap.closePopup();
+    });
+    popup.appendChild(link);
+    const hint = document.createElement('div');
+    hint.className = 'fm-popup-hint';
+    hint.textContent = 'Tap the name for full details';
+    popup.appendChild(hint);
+    const marker = L.marker([mk.lat, mk.lng], { icon }).addTo(fmMap).bindPopup(popup);
     fmMarkers.push(marker);
   });
 }
@@ -5917,6 +5968,7 @@ function updateListForViewport() {
     const typeInfo = LOCAL_FOOD_TYPES[mk.type];
     const card = document.createElement('div');
     card.className = 'fm-card' + (mk.score > 0 ? ' fm-card-highlight' : '');
+    card.setAttribute('data-fmkey', fmKey(mk));
     const practiceTags = String(mk.practices).split(',').map(p => p.trim()).filter(Boolean)
       .map(p => '<span class="fm-tag">' + p + '</span>').join('');
     card.innerHTML =
