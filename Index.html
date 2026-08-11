@@ -3911,8 +3911,24 @@ async function sendChatMessageCore(inputEl, messagesEl) {
       ),
       body: JSON.stringify({ message, history: chatHistory, productContext, listingContext })
     });
-    if (!res.ok) throw new Error('Assistant request failed: ' + res.status);
-    const data = await res.json();
+    // The Worker answers a refusal with a usable sentence - "sign in", "member feature",
+    // "daily limit reached" - and a matching status code. Throwing on !res.ok discarded
+    // all of it and showed "having trouble connecting", which is both wrong and
+    // undebuggable: a member who is being refused for a fixable reason is told the
+    // service is down. Read the body first and show what it actually says.
+    let data = null;
+    try { data = await res.json(); } catch (e) {}
+    if (!res.ok) {
+      const explained = data && (data.reply || data.error);
+      loadingEl.remove();
+      messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${
+        (explained || 'The assistant is unavailable right now (error ' + res.status + ').')
+          .replace(/</g, '&lt;')
+      }</div>`;
+      console.error('ROOTED Assistant refused:', res.status, data);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return;
+    }
     loadingEl.remove();
     messagesEl.innerHTML += `<div class="chat-msg chat-msg-bot">${(data.reply || '').replace(/</g, '&lt;')}</div>`;
     chatHistory.push({ role: 'user', content: message });
