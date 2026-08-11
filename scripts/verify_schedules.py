@@ -83,19 +83,27 @@ def parse_stored(text):
     from the end of the range, which is how people write it and how the register does.
     """
     out = {}
-    for seg in re.split(r'[;]', text or ''):
+    # Split on semicolons AND on commas that introduce a new day. Splitting on ';' alone
+    # read "Wed 1pm-5pm, Sun 10am-2pm" as a single Wednesday entry and silently dropped
+    # the Sunday, which then made Google look like it was ADDING a day we already listed.
+    # 27 false conflicts came from this one omission.
+    txt = re.sub(r',\s*(?=(?:mon|tues?|wed(?:nes)?|thur?s?|fri|sat(?:ur)?|sun)[a-z]*\b)',
+                 ';', (text or ''), flags=re.I)
+    for seg in re.split(r'[;]', txt):
         s = seg.strip().lower()
         if not s:
             continue
-        day = None
+        # "Wed & Sun 9am-1pm" and "Wed and Sun" give the SAME times to both days.
+        days_here = []
         for k in sorted(ABBR, key=len, reverse=True):
-            if re.search(r'\b' + k, s):
-                day = ABBR[k]
-                break
+            for mt in re.finditer(r'\b' + k + r'[a-z]*\b', s):
+                d = ABBR[k]
+                if d not in days_here:
+                    days_here.append(d)
         for d in DAYS:
-            if d[:-1] in s or d in s:
-                day = d
-                break
+            if re.search(r'\b' + d[:-1], s) and d not in days_here:
+                days_here.append(d)
+        day = days_here[0] if days_here else None
         if not day:
             continue
         m = re.search(r'(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\s*[-–—]\s*'
@@ -108,7 +116,9 @@ def parse_stored(text):
         ap1 = ap1 or ap2
         if not ap1 and not ap2:
             continue
-        out[day] = (to_minutes(h1, m1, ap1), to_minutes(h2, m2, ap2))
+        span = (to_minutes(h1, m1, ap1), to_minutes(h2, m2, ap2))
+        for d in days_here:
+            out[d] = span
     return out
 
 

@@ -245,6 +245,18 @@ listings.forEach(l => {
   schedVerified++;
 });
 
+// A listing cannot claim its hours are both confirmed and disputed.
+let schedDisputed = 0;
+listings.forEach(l => {
+  if (l.schedule_disputed === undefined) return;
+  schedDisputed++;
+  if (l.schedule_verified) {
+    fail.push('schedule_verified and schedule_disputed both set: '
+      + (l.listing_name || '(unnamed)'));
+  }
+});
+console.log('schedules disputed: ' + schedDisputed);
+
 // A field written INSIDE a string is invisible to a syntax check and to a schema check:
 // the file still parses, the listing still loads, and the value is quietly wrong. It
 // happened - an insertion regex of schedules:"[^"]*" stopped at an ESCAPED quote inside
