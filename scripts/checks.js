@@ -226,6 +226,41 @@ listings.forEach(l => {
 });
 console.log('coordinates verified: ' + verifiedCount + ' of ' + listings.length);
 
+// 3c. Schedule verification. Opening hours were the last field carrying a single source
+// - transcribed from the register once and never checked against anything. A market
+// moving from 9am to 10am produced no signal. schedule_verified records that the stored
+// hours were confirmed against an independent publisher, and like coord_verified it is
+// strictly boolean so no truthy accident can set it.
+let schedVerified = 0;
+listings.forEach(l => {
+  if (l.schedule_verified === undefined) return;
+  if (l.schedule_verified !== true) {
+    fail.push('schedule_verified must be boolean true, got '
+      + JSON.stringify(l.schedule_verified) + ': ' + (l.listing_name || '(unnamed)'));
+  }
+  if (!l.schedules || !String(l.schedules).trim()) {
+    fail.push('schedule_verified set but the listing has no schedule: '
+      + (l.listing_name || '(unnamed)'));
+  }
+  schedVerified++;
+});
+
+// A field written INSIDE a string is invisible to a syntax check and to a schema check:
+// the file still parses, the listing still loads, and the value is quietly wrong. It
+// happened - an insertion regex of schedules:"[^"]*" stopped at an ESCAPED quote inside
+// the Playa Vista schedule and wrote schedule_verified:true into the middle of the text.
+// Catch any field name appearing where only prose should be.
+listings.forEach(l => {
+  ['schedules', 'products', 'practices', 'location_address'].forEach(f => {
+    const v = l[f];
+    if (typeof v === 'string' && /(coord_verified|schedule_verified|location_[xy]|coord_scope):/.test(v)) {
+      fail.push('a field name appears inside the ' + f + ' text of '
+        + (l.listing_name || '(unnamed)') + ' - an insertion wrote into a string');
+    }
+  });
+});
+console.log('schedules verified: ' + schedVerified + ' of ' + listings.length);
+
 // 4. Every _type has LOCAL_FOOD_TYPES meta
 const usedTypes = new Set(listings.map(l => l._type));
 usedTypes.forEach(t => {
