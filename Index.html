@@ -817,7 +817,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="home-ai-widget">
       <div class="home-ai-input-row">
         <i data-lucide="sparkles"></i>
-        <input type="text" id="home-chat-input" class="home-ai-input" placeholder="Ask anything to get rooted..." onkeydown="if(event.key==='Enter')sendHomeChatMessage()">
+        <input type="search" id="home-chat-input" class="home-ai-input" name="rooted-question" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-form-type="other" data-lpignore="true" data-1p-ignore="true" placeholder="Ask anything to get rooted..." onkeydown="if(event.key==='Enter')sendHomeChatMessage()">
         <button class="home-ai-send" onclick="sendHomeChatMessage()" aria-label="Ask"><i data-lucide="send"></i></button>
       </div>
       <div class="home-ai-messages" id="home-ai-messages"></div>
@@ -2028,7 +2028,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="chat-msg chat-msg-bot">Hi! Ask me about any product, ingredient, or clean-living question — I'll answer using ROOTED's actual standards and ratings.</div>
   </div>
   <div class="chat-input-row">
-    <input type="text" class="chat-input" id="chat-input" placeholder="Ask about a product or ingredient..." onkeydown="if(event.key==='Enter')sendChatMessage()">
+    <input type="search" class="chat-input" id="chat-input" name="rooted-question-panel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-form-type="other" data-lpignore="true" data-1p-ignore="true" placeholder="Ask about a product or ingredient..." onkeydown="if(event.key==='Enter')sendChatMessage()">
     <button class="chat-send" onclick="sendChatMessage()"><i data-lucide="send"></i></button>
   </div>
 </div>
@@ -3437,27 +3437,40 @@ function findRelevantListings(query) {
 }
 
 function findRelevantProducts(query) {
-  const q = query.toLowerCase();
-  const words = q.split(/\s+/).filter(w => w.length > 2);
+  // BUG THIS FIXES: "tell me about the best underwear to get" returned NO products, so the
+  // paid model was told ROOTED has no underwear data and said so — while ROOTED rates 11.
+  //
+  // Two causes, both here. The word list was a raw split, so "tell/about/the/best/get"
+  // counted as content and pushed the match threshold to 2. And "underwear" appears only
+  // in the SUBCATEGORY — never in any product's name or brand — so the one real word in
+  // the question scored 1 and was discarded.
+  //
+  // Now: stopwords are stripped before counting, and a category hit is worth as much as a
+  // name hit. People ask by category far more often than by brand.
+  const words = chatMeaningfulWords(query);
   if (!words.length) return [];
 
   const scored = Object.entries(PRODUCTS).filter(([id, p]) => p.subcat !== 'unassigned').map(([id, p]) => {
     const nameField = (p.name + ' ' + p.brand).toLowerCase();
-    const otherFields = (p.subcat + ' ' + (p.composition || '') + ' ' + (p.verdict || '')).toLowerCase();
+    const sub = SUBCAT_EDU[p.subcat];
+    const subTitle = (sub && sub.title) ? String(sub.title).replace(/&amp;/g, '&') : '';
+    const catField = (p.subcat + ' ' + subTitle).toLowerCase();
+    const otherFields = ((p.composition || '') + ' ' + (p.verdict || '')).toLowerCase();
     let score = 0;
     words.forEach(w => {
-      if (nameField.includes(w)) score += 2; // name/brand matches count double — much more reliable signal
+      if (nameField.includes(w)) score += 2;
+      else if (catField.includes(w)) score += 2;   // asking by category is asking by name
       else if (otherFields.includes(w)) score += 1;
     });
     return { id, p, score };
   });
 
-  // Require matching more than just one coincidental word, unless the query itself is a single word.
-  const minScore = words.length === 1 ? 1 : 2;
+  // A single meaningful word is enough. "underwear" IS the question; requiring a second
+  // match is what silently emptied the context in the first place.
   return scored
-    .filter(s => s.score >= minScore)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 5)
+    .filter(s => s.score >= 2)
+    .sort((a, b) => b.score - a.score || a.p.tier - b.p.tier)
+    .slice(0, 8)
     .map(({ p }) => ({
       name: p.name, brand: p.brand, tier: p.tier, label: p.label,
       verdict: p.verdict, composition: p.composition, price: p.price
