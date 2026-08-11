@@ -134,6 +134,9 @@ body.navstyle-drawer{padding-bottom:0;}
 .home-ai-input-row>i{width:18px;height:18px;flex-shrink:0;color:var(--forest);}
 .home-ai-input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:var(--font-b);font-size:13.5px;color:var(--char);}
 .home-ai-input::placeholder{color:var(--muted);}
+[contenteditable][data-placeholder]:empty:before{content:attr(data-placeholder);color:var(--muted);pointer-events:none;}
+.home-ai-input[contenteditable]{white-space:pre-wrap;overflow-wrap:anywhere;max-height:96px;overflow-y:auto;line-height:1.35;}
+.chat-input[contenteditable]{white-space:pre-wrap;overflow-wrap:anywhere;max-height:120px;overflow-y:auto;line-height:1.35;}
 .home-ai-send{border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--forest);flex-shrink:0;padding:2px;}
 .home-ai-send i{width:18px;height:18px;}
 .home-ai-messages{display:none;flex-direction:column;gap:10px;margin-top:12px;max-height:360px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 2px;}
@@ -817,7 +820,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="home-ai-widget">
       <div class="home-ai-input-row">
         <i data-lucide="sparkles"></i>
-        <input type="search" readonly id="home-chat-input" class="home-ai-input" name="rooted-question" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-form-type="other" data-lpignore="true" data-1p-ignore="true" placeholder="Ask anything to get rooted..." onkeydown="if(event.key==='Enter')sendHomeChatMessage()">
+        <div id="home-chat-input" class="home-ai-input" contenteditable="true" role="textbox" aria-label="Ask anything to get rooted" data-placeholder="Ask anything to get rooted..." spellcheck="false"></div>
         <button class="home-ai-send" onclick="sendHomeChatMessage()" aria-label="Ask"><i data-lucide="send"></i></button>
       </div>
       <div class="home-ai-messages" id="home-ai-messages"></div>
@@ -2028,7 +2031,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="chat-msg chat-msg-bot">Hi! Ask me about any product, ingredient, or clean-living question — I'll answer using ROOTED's actual standards and ratings.</div>
   </div>
   <div class="chat-input-row">
-    <input type="search" readonly class="chat-input" id="chat-input" name="rooted-question-panel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-form-type="other" data-lpignore="true" data-1p-ignore="true" placeholder="Ask about a product or ingredient..." onkeydown="if(event.key==='Enter')sendChatMessage()">
+    <div id="chat-input" class="chat-input" contenteditable="true" role="textbox" aria-label="Ask about a product or ingredient" data-placeholder="Ask about a product or ingredient..." spellcheck="false"></div>
     <button class="chat-send" onclick="sendChatMessage()"><i data-lucide="send"></i></button>
   </div>
 </div>
@@ -5914,39 +5917,40 @@ function websiteLinkLabel(url) {
   return 'Visit website \u2192';
 }
 
-// CHROME AUTOFILL: the chat box kept filling with the signed-in member's email address on
-// every page load. autocomplete="off", a non-credential name, type="search" and the
-// password-manager ignore attributes were all set and all ignored — because this is not
-// ordinary form autofill. Chrome's PASSWORD manager fills a saved login into the first
-// visible eligible field on the page, and this page carries three email and four password
-// inputs inside auth modals that are hidden. The visible chat box wins by default.
+// The chat boxes are contenteditable divs rather than <input> elements, because Chrome's
+// password manager targets inputs and kept offering the signed-in member's saved login on
+// the ask-a-question box. autocomplete="off", type="search", a non-credential name,
+// readonly-until-focus and explicit autocomplete roles on the real login fields were all
+// tried and all ignored. A contenteditable is not an input, so there is nothing for a
+// password manager to attach to — which is why chat UIs generally use one.
 //
-// A readonly field is the one thing Chrome will not write into. Both inputs are readonly
-// at parse time and become writable the moment the user actually interacts with them, so
-// typing is unaffected and nothing about the field is really read-only in practice.
-function armChatInput(el) {
-  if (!el) return;
-  const unlock = () => {
-    if (!el.hasAttribute('readonly')) return;
-    el.removeAttribute('readonly');
-    // Chrome may already have written a value before we got here; clear it, but only if
-    // it looks like a credential rather than something the person typed.
-    if (/^\S+@\S+\.\S+$/.test(el.value.trim())) el.value = '';
-  };
-  ['focus', 'pointerdown', 'touchstart', 'keydown'].forEach(evt =>
-    el.addEventListener(evt, unlock, { passive: true }));
-  // Even unlocked, Chrome may still OFFER the saved login as a dropdown on focus. The
-  // suggestion list is keyed to the field's identity, so changing the name on first focus
-  // makes it a field Chrome has never seen a credential for. Done after unlock so the
-  // element is otherwise untouched.
-  el.addEventListener('focus', () => {
-    if (el.dataset.renamed) return;
-    el.dataset.renamed = '1';
-    el.setAttribute('name', 'q-' + Math.random().toString(36).slice(2, 9));
-  }, { passive: true });
+// Every caller reads el.value, so that property is defined on the element here and all the
+// existing send and clear code keeps working untouched.
+function makeEditableBehaveLikeInput(el, onEnter) {
+  if (!el || el.dataset.shimmed) return;
+  el.dataset.shimmed = '1';
+  Object.defineProperty(el, 'value', {
+    configurable: true,
+    get() { return this.textContent || ''; },
+    set(v) { this.textContent = v == null ? '' : String(v); },
+  });
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();          // a div would otherwise insert a newline
+      onEnter();
+    }
+  });
+  // Paste as plain text; a copied web page would otherwise arrive as styled HTML.
+  el.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const text = (e.clipboardData || window.clipboardData).getData('text');
+    document.execCommand('insertText', false, text);
+  });
 }
+
 document.addEventListener('DOMContentLoaded', () => {
-  ['home-chat-input', 'chat-input'].forEach(id => armChatInput(document.getElementById(id)));
+  makeEditableBehaveLikeInput(document.getElementById('home-chat-input'), sendHomeChatMessage);
+  makeEditableBehaveLikeInput(document.getElementById('chat-input'), sendChatMessage);
 });
 
 // A listing needs a stable identity shared by its map marker and its result card, so
