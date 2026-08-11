@@ -129,11 +129,18 @@ def audit(rows, catalogue_names, catalogue_pins):
         if key in seen_names:
             fails.append(f'{n}: duplicate name within this batch')
         seen_names[key] = n
-        if key in catalogue_names:
+        # An UPDATE re-verifies a row already in the catalogue, so of course its name is
+        # already there and of course it sits on top of itself. Running the insertion
+        # checks against an update reports every row as a duplicate of itself - which it
+        # did, 130 out of 130. Only insertions get the duplicate-name and self-proximity
+        # tests; updates still get address, locality and state.
+        if key in catalogue_names and not r.get('is_update'):
             fails.append(f'{n}: a listing with this name already exists')
 
         # PIN proximity
         for cn, clat, clon in catalogue_pins:
+            if r.get('is_update') and re.sub(r'[^a-z0-9]', '', cn.lower()) == key:
+                continue                      # the listing being updated is not its own neighbour
             if haversine_km(lat, lon, clat, clon) * 1000 < 150:
                 warns.append(f'{n}: within 150 m of existing listing {cn!r} — '
                              f'confirm it is a different venue, not a second day')
