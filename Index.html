@@ -5849,6 +5849,27 @@ function normalizeListing(m) {
   };
 }
 
+// Not every link on a listing is that business's own website. 89 farmers markets link to
+// the CDFA state register - the official record that the market is a Certified Farmers'
+// Market. Calling that "Visit website" is a small broken promise: the visitor expects the
+// market and gets a government database.
+//
+// It is also the strongest evidence ROOTED has. The claim is that listings are earned
+// through verification rather than paid for, and this is the state's own proof of exactly
+// that. So the link is kept and named for what it is.
+const LINK_LABELS = [
+  [/cdfa\.ca\.gov/i, "CDFA certification record \u2192"],
+  [/ccof\.org/i, 'CCOF organic certification \u2192'],
+  [/usdalocalfoodportal\.com|ams\..*usda\.gov|\busda\.gov/i, 'USDA listing \u2192'],
+  [/localharvest\.org|localfats\.com/i, 'Directory listing \u2192']
+];
+function websiteLinkLabel(url) {
+  for (const [re, label] of LINK_LABELS) {
+    if (re.test(url)) return label;
+  }
+  return 'Visit website \u2192';
+}
+
 // A listing needs a stable identity shared by its map marker and its result card, so
 // clicking one can find the other. Name alone is not unique — several markets share a
 // name across towns — so the coordinate is part of the key.
@@ -5980,7 +6001,7 @@ function updateListForViewport() {
         '<div><strong>Hours:</strong> ' + (mk.hours || 'Not listed') + '</div>' +
         '<div style="margin-top:6px"><strong>Products:</strong> ' + (mk.products || 'Not listed') + '</div>' +
         (practiceTags ? '<div style="margin-top:9px">' + practiceTags + '</div>' : '') +
-        (mk.website ? '<div style="margin-top:9px"><a href="' + mk.website + '" target="_blank" style="color:var(--teal);font-weight:600;">Visit website →</a></div>' : '') +
+        (mk.website ? '<div style="margin-top:9px"><a href="' + mk.website + '" target="_blank" style="color:var(--teal);font-weight:600;">' + websiteLinkLabel(mk.website) + '</a></div>' : '') +
       '</div>';
     card.onclick = () => card.classList.toggle('expanded');
     resultsEl.appendChild(card);
