@@ -817,7 +817,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="home-ai-widget">
       <div class="home-ai-input-row">
         <i data-lucide="sparkles"></i>
-        <input type="search" id="home-chat-input" class="home-ai-input" name="rooted-question" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-form-type="other" data-lpignore="true" data-1p-ignore="true" placeholder="Ask anything to get rooted..." onkeydown="if(event.key==='Enter')sendHomeChatMessage()">
+        <input type="search" readonly id="home-chat-input" class="home-ai-input" name="rooted-question" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-form-type="other" data-lpignore="true" data-1p-ignore="true" placeholder="Ask anything to get rooted..." onkeydown="if(event.key==='Enter')sendHomeChatMessage()">
         <button class="home-ai-send" onclick="sendHomeChatMessage()" aria-label="Ask"><i data-lucide="send"></i></button>
       </div>
       <div class="home-ai-messages" id="home-ai-messages"></div>
@@ -2028,7 +2028,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <div class="chat-msg chat-msg-bot">Hi! Ask me about any product, ingredient, or clean-living question — I'll answer using ROOTED's actual standards and ratings.</div>
   </div>
   <div class="chat-input-row">
-    <input type="search" class="chat-input" id="chat-input" name="rooted-question-panel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-form-type="other" data-lpignore="true" data-1p-ignore="true" placeholder="Ask about a product or ingredient..." onkeydown="if(event.key==='Enter')sendChatMessage()">
+    <input type="search" readonly class="chat-input" id="chat-input" name="rooted-question-panel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-form-type="other" data-lpignore="true" data-1p-ignore="true" placeholder="Ask about a product or ingredient..." onkeydown="if(event.key==='Enter')sendChatMessage()">
     <button class="chat-send" onclick="sendChatMessage()"><i data-lucide="send"></i></button>
   </div>
 </div>
@@ -5913,6 +5913,32 @@ function websiteLinkLabel(url) {
   }
   return 'Visit website \u2192';
 }
+
+// CHROME AUTOFILL: the chat box kept filling with the signed-in member's email address on
+// every page load. autocomplete="off", a non-credential name, type="search" and the
+// password-manager ignore attributes were all set and all ignored — because this is not
+// ordinary form autofill. Chrome's PASSWORD manager fills a saved login into the first
+// visible eligible field on the page, and this page carries three email and four password
+// inputs inside auth modals that are hidden. The visible chat box wins by default.
+//
+// A readonly field is the one thing Chrome will not write into. Both inputs are readonly
+// at parse time and become writable the moment the user actually interacts with them, so
+// typing is unaffected and nothing about the field is really read-only in practice.
+function armChatInput(el) {
+  if (!el) return;
+  const unlock = () => {
+    if (!el.hasAttribute('readonly')) return;
+    el.removeAttribute('readonly');
+    // Chrome may already have written a value before we got here; clear it, but only if
+    // it looks like a credential rather than something the person typed.
+    if (/^\S+@\S+\.\S+$/.test(el.value.trim())) el.value = '';
+  };
+  ['focus', 'pointerdown', 'touchstart', 'keydown'].forEach(evt =>
+    el.addEventListener(evt, unlock, { passive: true }));
+}
+document.addEventListener('DOMContentLoaded', () => {
+  ['home-chat-input', 'chat-input'].forEach(id => armChatInput(document.getElementById(id)));
+});
 
 // A listing needs a stable identity shared by its map marker and its result card, so
 // clicking one can find the other. Name alone is not unique — several markets share a
