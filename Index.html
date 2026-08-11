@@ -1602,9 +1602,9 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <label class="auth-field-label">Name</label>
     <input class="auth-field" type="text" id="signup-name" placeholder="Your name">
     <label class="auth-field-label">Email</label>
-    <input class="auth-field" type="email" id="signup-email" placeholder="you@email.com">
+    <input class="auth-field" type="email" id="signup-email" name="new-username" autocomplete="username" placeholder="you@email.com">
     <label class="auth-field-label">Password</label>
-    <input class="auth-field" type="password" id="signup-password" placeholder="At least 8 characters">
+    <input class="auth-field" type="password" id="signup-password" name="new-password" autocomplete="new-password" placeholder="At least 8 characters">
     <button class="auth-submit-btn auth-submit-btn-signup" onclick="rootedSignUp()">Create Account</button>
     <div class="auth-switch">Already have an account? <span onclick="showScreen('login')">Log in</span></div>
   </div>
@@ -1618,9 +1618,9 @@ body.style-photo .cat-photo-cycle{display:flex;}
     </div>
     <div id="login-error" class="auth-error"></div>
     <label class="auth-field-label">Email</label>
-    <input class="auth-field" type="email" id="login-email" placeholder="you@email.com">
+    <input class="auth-field" type="email" id="login-email" name="username" autocomplete="username" placeholder="you@email.com">
     <label class="auth-field-label">Password</label>
-    <input class="auth-field" type="password" id="login-password" placeholder="Your password">
+    <input class="auth-field" type="password" id="login-password" name="password" autocomplete="current-password" placeholder="Your password">
     <div class="auth-forgot" onclick="rootedForgotPassword()">Forgot password?</div>
     <button class="auth-submit-btn auth-submit-btn-login" onclick="rootedLogIn()">Log In</button>
     <div class="auth-switch">New to ROOTED? <span onclick="showScreen('signup')">Create an account</span></div>
@@ -1636,9 +1636,9 @@ body.style-photo .cat-photo-cycle{display:flex;}
     </div>
     <div id="reset-password-error" class="auth-error"></div>
     <label class="auth-field-label">New Password</label>
-    <input class="auth-field" type="password" id="reset-password-new" placeholder="At least 8 characters">
+    <input class="auth-field" type="password" id="reset-password-new" autocomplete="new-password" placeholder="At least 8 characters">
     <label class="auth-field-label">Confirm New Password</label>
-    <input class="auth-field" type="password" id="reset-password-confirm" placeholder="Re-enter new password">
+    <input class="auth-field" type="password" id="reset-password-confirm" autocomplete="new-password" placeholder="Re-enter new password">
     <button class="auth-submit-btn auth-submit-btn-login" onclick="rootedUpdatePassword()">Set New Password</button>
   </div>
 </div></div>
@@ -5935,6 +5935,15 @@ function armChatInput(el) {
   };
   ['focus', 'pointerdown', 'touchstart', 'keydown'].forEach(evt =>
     el.addEventListener(evt, unlock, { passive: true }));
+  // Even unlocked, Chrome may still OFFER the saved login as a dropdown on focus. The
+  // suggestion list is keyed to the field's identity, so changing the name on first focus
+  // makes it a field Chrome has never seen a credential for. Done after unlock so the
+  // element is otherwise untouched.
+  el.addEventListener('focus', () => {
+    if (el.dataset.renamed) return;
+    el.dataset.renamed = '1';
+    el.setAttribute('name', 'q-' + Math.random().toString(36).slice(2, 9));
+  }, { passive: true });
 }
 document.addEventListener('DOMContentLoaded', () => {
   ['home-chat-input', 'chat-input'].forEach(id => armChatInput(document.getElementById(id)));
