@@ -115,6 +115,13 @@ const NEAR_DEG = 0.015;
 // the Community market at 414 E Ojai Ave on Thursdays. Different operators, addresses
 // and days.
 const KNOWN_DISTINCT = new Set([
+  // Two different Santa Barbara markets on the same street, 177 m apart. The register
+  // puts one on the 600-800 blocks of State St and the other on the 900-1000 blocks
+  // at Cota. The proximity test compares degree deltas rather than true distance, so
+  // it flags them despite the real gap; they are distinct and confirmed against the
+  // register's own block ranges.
+  'Downtown Santa Barbara Farmers Market|State Street Farmers Market',
+  'State Street Farmers Market|Downtown Santa Barbara Farmers Market',
   'Ojai Certified Farmers Market|Ojai Community Farmers\' Market',
   'Ojai Community Farmers\' Market|Ojai Certified Farmers Market',
 ]);
