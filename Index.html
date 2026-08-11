@@ -3891,9 +3891,24 @@ async function sendChatMessageCore(inputEl, messagesEl) {
   try {
     const productContext = findRelevantProducts(message);
     const listingContext = findRelevantListings(message);
+    // The client-side hasFullAccess() check above stops an ordinary visitor reaching the
+    // paid model, but it cannot stop anyone who reads the page source: the Worker URL is
+    // public and was accepting unauthenticated POSTs from any origin. So the request now
+    // carries the caller's Supabase access token and the Worker re-checks membership
+    // itself. A gate that lives only in the browser is a suggestion, not a gate.
+    let accessToken = null;
+    try {
+      if (rootedSupabase) {
+        const { data } = await rootedSupabase.auth.getSession();
+        accessToken = data?.session?.access_token || null;
+      }
+    } catch (e) {}
     const res = await fetch(CHAT_WORKER_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: Object.assign(
+        { 'Content-Type': 'application/json' },
+        accessToken ? { 'Authorization': 'Bearer ' + accessToken } : {}
+      ),
       body: JSON.stringify({ message, history: chatHistory, productContext, listingContext })
     });
     if (!res.ok) throw new Error('Assistant request failed: ' + res.status);
