@@ -93,8 +93,25 @@ def parse_stored(text):
         s = seg.strip().lower()
         if not s:
             continue
-        # "Wed & Sun 9am-1pm" and "Wed and Sun" give the SAME times to both days.
+        # RANGES and "daily". Farmers markets trade on named single days, so the parser
+        # only ever needed those. Restaurants write "Daily 7am-9pm" and "Mon-Fri 10am-9pm",
+        # and neither parsed at all - 66 of 143 restaurant schedules came back unreadable
+        # and were about to be reported as unverifiable data rather than as a parser gap.
         days_here = []
+        if re.search(r'\b(daily|every ?day|7 days)\b', s):
+            days_here = list(DAYS)
+        rng = re.search(r'\b(mon|tues?|wed(?:nes)?|thur?s?|fri|sat(?:ur)?|sun)[a-z]*\s*'
+                        r'[-–—]\s*(mon|tues?|wed(?:nes)?|thur?s?|fri|sat(?:ur)?|sun)[a-z]*',
+                        s)
+        if rng:
+            a = ABBR.get(rng.group(1)[:4], ABBR.get(rng.group(1)[:3]))
+            b = ABBR.get(rng.group(2)[:4], ABBR.get(rng.group(2)[:3]))
+            if a in DAYS and b in DAYS:
+                i, j = DAYS.index(a), DAYS.index(b)
+                span = DAYS[i:j + 1] if i <= j else DAYS[i:] + DAYS[:j + 1]
+                for dd in span:
+                    if dd not in days_here:
+                        days_here.append(dd)
         for k in sorted(ABBR, key=len, reverse=True):
             for mt in re.finditer(r'\b' + k + r'[a-z]*\b', s):
                 d = ABBR[k]
@@ -106,10 +123,13 @@ def parse_stored(text):
         day = days_here[0] if days_here else None
         if not day:
             continue
+        if re.search(r'\bclosed\b', s):
+            continue
         m = re.search(r'(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\s*[-–—]\s*'
                       r'(\d{1,2})(?::(\d{2}))?\s*(am|pm)?', s)
         if not m:
-            out.setdefault(day, None)
+            for d in days_here:
+                out.setdefault(d, None)
             continue
         h1, m1, ap1, h2, m2, ap2 = m.groups()
         ap2 = ap2 or ap1
