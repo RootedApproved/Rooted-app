@@ -115,6 +115,12 @@ const NEAR_DEG = 0.015;
 // the Community market at 414 E Ojai Ave on Thursdays. Different operators, addresses
 // and days.
 const KNOWN_DISTINCT = new Set([
+  // Two Paso Robles markets 42 m apart, both held on the downtown City Park square:
+  // the Tuesday certified farmers market and a separate farm-and-craft market. One
+  // square hosting two markets is normal; the register lists them separately and they
+  // trade on different days.
+  'Paso Robles Tuesday Farmers Market|Country Farm and Craft Market',
+  'Country Farm and Craft Market|Paso Robles Tuesday Farmers Market',
   // Two different Santa Barbara markets on the same street, 177 m apart. The register
   // puts one on the 600-800 blocks of State St and the other on the 900-1000 blocks
   // at Cota. The proximity test compares degree deltas rather than true distance, so
