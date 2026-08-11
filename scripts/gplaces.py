@@ -119,6 +119,14 @@ def resolve(name, location_text, city, city_centre=None):
             if pl.get('businessStatus') == 'CLOSED_PERMANENTLY':
                 tried.append(f'"{pl["displayName"]["text"]}" is marked permanently closed')
                 continue
+            # A SUITE NUMBER means the match landed on a tenant of a building rather
+            # than on the place. Google returned "735 State St Ste 600" for a street
+            # market and "350 6th St Suite 102" for another - both in roughly the right
+            # area, so no distance check catches them. Refuse them outright.
+            if re.search(r'\b(ste|suite|unit|#)\s*\w+', street or '', re.I):
+                tried.append(f'"{pl["displayName"]["text"]}" resolved to a suite '
+                             f'({street}) - a building tenant, not the venue')
+                continue
             has_number = bool(re.match(r'^\s*\d', street or ''))
             return dict(status='ok', lat=lat, lon=lon, street=street, city=got_city or city,
                         zipc=zipc, formatted=fa, place=pl['displayName']['text'],

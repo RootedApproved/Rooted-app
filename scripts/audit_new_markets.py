@@ -76,8 +76,18 @@ def audit(rows, catalogue_names, catalogue_pins):
         # ADDRESS
         got_road = norm_street(a.get('road') or '')
         wants = streets_in(r['street'])
+        # Where the stored street came from the geocoder's OWN forward match, reverse
+        # through a DIFFERENT provider is weak evidence against it. Google returns a
+        # rooftop point for "300 Estudillo Ave" and OSM's reverse names the nearest way,
+        # which is often the cross street or a freeway ramp. This is the same rule
+        # already applied to Census forward matches, and it is applied here for the same
+        # reason rather than as a convenience: the forward match IS the address.
+        forward = bool(r.get('forward_matched'))
         if not got_road:
             warns.append(f'{n}: point reverse-geocodes to no road')
+        elif forward and not any(got_road in w or w in got_road for w in wants):
+            infos.append(f'{n}: reverse names "{a.get("road")}" where the forward match '
+                         f'gave {r["street"]!r} - nearest-way artefact, forward wins')
         elif not any(got_road in w or w in got_road for w in wants):
             # A road's TYPE is the thing registers most often get wrong - Laguna Beach
             # says "Forest Rd" for Forest Avenue, Pinole "Fernandez St" for Fernandez
