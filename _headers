@@ -25,3 +25,14 @@
 # itself in place with no way to ship a replacement.
 /sw.js
   Cache-Control: no-cache, must-revalidate
+
+# Browsers request /favicon.ico by path regardless of what the HTML declares, and Safari
+# uses it for search suggestions, bookmarks and history. It was returning 404, which is
+# why the old green icon persisted there after the app icon was changed.
+/favicon.ico
+  Content-Type: image/x-icon
+  Cache-Control: public, max-age=86400
+
+/icons/safari-pinned-tab.svg
+  Content-Type: image/svg+xml
+  Cache-Control: public, max-age=86400
