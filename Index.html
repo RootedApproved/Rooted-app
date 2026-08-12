@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="ROOTED">
-<meta name="theme-color" content="#2D5016">
+<meta name="theme-color" content="#B5563F">
 <meta name="description" content="Standards-based product ratings and a verified local food map. No brand pays to be listed on ROOTED.">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
@@ -77,6 +77,31 @@ body.navstyle-drawer{padding-bottom:0;}
 .nav-login-link{display:none;font-size:12.5px;font-weight:700;color:var(--forest);background:none;border:none;cursor:pointer;font-family:var(--font-b);}
 .nav-login-link:hover{text-decoration:underline;}
 .bottom-bar{position:fixed;bottom:0;left:0;right:0;height:var(--bar-h);background:var(--white);border-top:1px solid var(--border);display:flex;z-index:300;box-shadow:0 -2px 12px rgba(0,0,0,.06);}
+/* INSTALLED APP ONLY — never the website.
+   Launched from the home screen there is no Safari toolbar, so the tab bar sits directly
+   under the iPhone's home indicator: the bottom row of labels is clipped and the swipe-up
+   gesture area overlaps the tabs. display-mode:standalone is true only for the installed
+   app, so the website is untouched.
+   The padding uses env(safe-area-inset-bottom), which is the actual indicator height on
+   that specific device rather than a guessed number — 34px on a notched iPhone, 0 on a
+   device without one. */
+@media all and (display-mode: standalone){
+  .bottom-bar{
+    height:calc(var(--bar-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom:env(safe-area-inset-bottom, 0px);
+    align-items:flex-start;
+  }
+  .bottom-bar .tab{padding-top:6px;}
+  /* Anything that scrolls must clear the taller bar or its last row hides behind it. */
+  .screen, .app-main, body{--bar-h-safe:calc(var(--bar-h) + env(safe-area-inset-bottom, 0px));}
+}
+/* iOS <15.4 reports standalone only via navigator.standalone; the class is set in JS. */
+body.ios-standalone .bottom-bar{
+  height:calc(var(--bar-h) + env(safe-area-inset-bottom, 0px));
+  padding-bottom:env(safe-area-inset-bottom, 0px);
+  align-items:flex-start;
+}
+body.ios-standalone .bottom-bar .tab{padding-top:6px;}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;background:none;border:none;padding:0;color:var(--muted);transition:color .15s;}
 .tab.active{color:var(--forest);}
 .tab-icon{line-height:1;display:flex;}
@@ -5677,6 +5702,23 @@ async function searchFarmersMarkets() {
 //
 // On native the link therefore has to come back through the app's own URL scheme, which
 // iOS hands to the Capacitor App plugin rather than to a browser.
+// iOS below 15.4 does not support the display-mode:standalone media query, so the same
+// styling is applied via a class. navigator.standalone is true only when launched from a
+// home-screen icon, never in the browser, so the website never picks this up.
+(function markStandalone(){
+  // Guarded rather than assumed: this runs at parse time, and anything that touches
+  // window.navigator or matchMedia unguarded takes the whole script down with it if either
+  // is absent. A cosmetic tweak must never be able to stop the app loading.
+  var nav = (typeof window !== 'undefined' && window.navigator) || {};
+  var mm = (typeof window !== 'undefined' && window.matchMedia) ? window.matchMedia : null;
+  var standalone = (nav.standalone === true)
+    || !!(mm && mm('(display-mode: standalone)').matches);
+  if (standalone) document.documentElement.classList.add('ios-standalone-html');
+  document.addEventListener('DOMContentLoaded', function(){
+    if (standalone) document.body.classList.add('ios-standalone');
+  });
+})();
+
 const ROOTED_APP_SCHEME = 'com.rootedapproved.app';
 
 function authRedirectUrl() {

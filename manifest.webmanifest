@@ -1,5 +1,5 @@
 {
-  "name": "ROOTED — The Standard for Healthy Living",
+  "name": "ROOTED \u2014 The Standard for Healthy Living",
   "short_name": "ROOTED",
   "description": "Standards-based product ratings and a verified local food map. No brand pays to be listed.",
   "start_url": "/?source=pwa",
@@ -7,12 +7,37 @@
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#F5F0E6",
-  "theme_color": "#2D5016",
-  "categories": ["health", "lifestyle", "shopping", "food"],
+  "theme_color": "#B5563F",
+  "categories": [
+    "health",
+    "lifestyle",
+    "shopping",
+    "food"
+  ],
   "icons": [
-    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "/icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
-    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
