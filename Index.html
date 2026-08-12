@@ -5667,6 +5667,54 @@ async function searchFarmersMarkets() {
 // On the web it falls back to navigator.geolocation, so nothing regresses for browser
 // users.
 
+// WHERE A CONFIRMATION OR RESET EMAIL SHOULD SEND THE USER BACK TO.
+//
+// Supabase falls back to the Site URL configured in its dashboard when no redirect is
+// given, which is the web domain. Inside the app that is wrong in a way that looks like a
+// bug to the user: they tap "confirm your email", Safari opens, and the app they were
+// just in never learns they confirmed. They end up signed out in one place and signed in
+// in another.
+//
+// On native the link therefore has to come back through the app's own URL scheme, which
+// iOS hands to the Capacitor App plugin rather than to a browser.
+const ROOTED_APP_SCHEME = 'com.rootedapproved.app';
+
+function authRedirectUrl() {
+  return isNativeShell()
+    ? ROOTED_APP_SCHEME + '://auth-callback'
+    : window.location.origin;
+}
+
+// Supabase puts the session in the URL fragment. In a browser its client picks that up on
+// its own; in the app the URL arrives as an event instead, so it has to be handed over
+// deliberately. Without this the user returns to the app still signed out.
+function wireNativeAuthDeepLink() {
+  if (!isNativeShell()) return;
+  const appPlugin = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
+  if (!appPlugin || typeof appPlugin.addListener !== 'function') return;
+  appPlugin.addListener('appUrlOpen', async ({ url }) => {
+    if (!url || url.indexOf(ROOTED_APP_SCHEME) !== 0 || !rootedSupabase) return;
+    try {
+      const frag = url.split('#')[1] || '';
+      const params = new URLSearchParams(frag);
+      const access_token = params.get('access_token');
+      const refresh_token = params.get('refresh_token');
+      if (access_token && refresh_token) {
+        await rootedSupabase.auth.setSession({ access_token, refresh_token });
+      } else {
+        // PKCE / magic-link style: a code in the query string rather than tokens.
+        const code = new URLSearchParams((url.split('?')[1] || '').split('#')[0]).get('code');
+        if (code) await rootedSupabase.auth.exchangeCodeForSession(code);
+      }
+      // No UI call needed here: setSession and exchangeCodeForSession both fire
+      // onAuthStateChange, which already runs updateProfileUIForAuthState.
+    } catch (e) {
+      console.error('auth deep link failed', e);
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', wireNativeAuthDeepLink);
+
 function isNativeShell() {
   return !!(window.Capacitor && typeof window.Capacitor.isNativePlatform === 'function'
     && window.Capacitor.isNativePlatform());
@@ -6919,7 +6967,8 @@ async function rootedSignUp() {
   if (!name || !email || !password) { showAuthError('signup-error', 'Please fill in all fields.'); return; }
   if (password.length < 8) { showAuthError('signup-error', 'Password must be at least 8 characters.'); return; }
   const { data, error } = await rootedSupabase.auth.signUp({
-    email, password, options: { data: { full_name: name } }
+    email, password,
+    options: { data: { full_name: name }, emailRedirectTo: authRedirectUrl() }
   });
   if (error) { showAuthError('signup-error', error.message); return; }
   showScreen('profile');
@@ -6945,7 +6994,7 @@ async function rootedForgotPassword() {
   if (!rootedSupabase) return;
   const email = document.getElementById('login-email').value.trim();
   if (!email) { showAuthError('login-error', 'Enter your email above first, then tap "Forgot password?" again.'); return; }
-  const { error } = await rootedSupabase.auth.resetPasswordForEmail(email);
+  const { error } = await rootedSupabase.auth.resetPasswordForEmail(email, { redirectTo: authRedirectUrl() });
   clearAuthError('login-error');
   if (error) { showAuthError('login-error', error.message); return; }
   alert('Check your email for a password reset link.');
