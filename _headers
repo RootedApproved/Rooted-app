@@ -12,7 +12,13 @@
 /icons/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Netlify has no MIME mapping for .webmanifest and was serving it as
+# application/octet-stream. iOS Safari is strict about this: a manifest with the wrong
+# content type is ignored entirely, so "Add to Home Screen" silently degrades to a plain
+# bookmark — wrong icon, no standalone launch, no app-like behaviour. Nothing errors and
+# nothing warns; it just quietly is not a PWA.
 /manifest.webmanifest
+  Content-Type: application/manifest+json; charset=utf-8
   Cache-Control: public, max-age=86400
 
 # The service worker itself must never be cached, or a broken worker could pin
