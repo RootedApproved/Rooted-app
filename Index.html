@@ -6598,6 +6598,12 @@ function initRootedULogo() {
 // Hygiene (education-only by design — no product catalog for this one). Sun Exposure
 // and Thermal Health are planned as future topic areas, not built yet.
 const ROOTEDU_TOPICS = {
+  'clothing': {
+    title: 'Clothing & Natural Fibers',
+    icon: 'shirt',
+    desc: 'What\u2019s actually in your clothes — fibers, dyes, finishes — and how to shop smarter without the overwhelm.',
+    modules: ['polyester-truth', 'cotton-label-lie', 'certifications-decoded', 'wrinkle-free-secret', 'skin-contact-hierarchy', 'natural-fibers-101', 'stretch-problem', 'bamboo-greenwash', 'performance-fabric-myth', 'read-a-label']
+  },
   'lighting': {
     title: 'Lighting & Circadian Health',
     icon: 'sun',
@@ -6613,6 +6619,165 @@ const ROOTEDU_TOPICS = {
 };
 
 const ROOTEDU_MODULES = {
+  'polyester-truth': {
+    topic: 'clothing', icon: 'shirt', title: 'The Polyester Problem',
+    teaser: 'Your softest shirt might be plastic. Here\u2019s what that actually means.',
+    slides: [
+      {kicker:'The basics', emoji:'🧵', headline:'Polyester is plastic. Literally.',
+       body:['Polyester is PET — the same polymer as a water bottle, drawn into thread. About half of all clothing made today is plastic fiber.','That\u2019s not automatically a health crisis. But it\u2019s worth actually knowing what you\u2019re wearing.']},
+      {kicker:'The shedding', emoji:'🌀', headline:'Every wash sheds microplastic fibers',
+       body:['This part is well established: synthetic garments release microplastic fibers in the laundry, and washing machine studies have measured hundreds of thousands of fibers per load.','Textiles are considered one of the largest sources of microplastic pollution in the ocean.']},
+      {kicker:'The honest part', emoji:'⚖️', headline:'What it means for your body is less settled',
+       body:['Microplastics have been detected in human blood, lungs, and other tissues — that detection is real and replicated.','What those particles do to health long-term is still an open research question. Anyone claiming certainty in either direction is ahead of the science.'],
+       callout:'ROOTED\u2019s take: when the exposure is avoidable and the alternative is better anyway, you don\u2019t need to wait for perfect data.'},
+      {kicker:'The comfort case', emoji:'🌬️', headline:'Natural fibers win on performance too',
+       body:['Cotton, linen, hemp, and wool breathe, handle moisture, and resist odor in ways plastic fiber has to imitate with chemical coatings.','This isn\u2019t just a purity argument — it\u2019s usually a better shirt.']},
+      {kicker:'What to do', emoji:'✅', headline:'Start where contact is highest',
+       body:['You don\u2019t need to replace a whole closet. Start with what touches skin all day: underwear, undershirts, socks, sheets.','ROOTED\u2019s clothing tiers do that filtering for you — every listed product has verified fiber content.']}
+    ]
+  },
+  'cotton-label-lie': {
+    topic: 'clothing', icon: 'tag', title: 'What "100% Cotton" Hides',
+    teaser: 'The label covers the fabric. It doesn\u2019t cover the thread, dye, or finish.',
+    slides: [
+      {kicker:'The loophole', emoji:'🏷️', headline:'The label only has to describe the fabric',
+       body:['Fiber-content labels cover the shell fabric. Sewing thread, elastic, trims, and chemical finishes generally don\u2019t have to appear anywhere.','A \u201C100% cotton\u201D shirt sewn entirely with polyester thread is completely legal — and extremely common.']},
+      {kicker:'The thread', emoji:'🪡', headline:'Polyester thread is the industry default',
+       body:['Most garment factories sew everything — including organic cotton clothing — with polyester-core thread, because it\u2019s cheap and strong.','Brands that use 100% cotton thread almost always say so explicitly, because it costs them more. Silence usually means polyester.']},
+      {kicker:'The dye', emoji:'🎨', headline:'Dyes are chemistry the label never mentions',
+       body:['Synthetic dyes, optical brighteners, and softening agents are applied after weaving and don\u2019t appear on any tag.','This is exactly what OEKO-TEX and GOTS certifications exist to cover — they test the finished fabric, chemicals and all.']},
+      {kicker:'What to look for', emoji:'🔍', headline:'The brands doing it right tell you',
+       body:['Look for explicit statements: \u201C100% cotton thread,\u201D \u201Cundyed,\u201D \u201CGOTS-certified dyes,\u201D \u201Cno finishes.\u201D','On ROOTED, thread and dye disclosure is part of every product\u2019s rating — undisclosed thread is flagged as a con, every time.']}
+    ]
+  },
+  'certifications-decoded': {
+    topic: 'clothing', icon: 'badge-check', title: 'GOTS vs. OEKO-TEX, Decoded',
+    teaser: 'Two certifications you see everywhere — and they don\u2019t mean the same thing.',
+    slides: [
+      {kicker:'Why they exist', emoji:'📜', headline:'Certifications cover what labels don\u2019t',
+       body:['Fiber labels tell you what a fabric is made of. Certifications tell you what was (and wasn\u2019t) done to it — pesticides, dyes, finishing chemicals, factory conditions.']},
+      {kicker:'OEKO-TEX', emoji:'🧪', headline:'OEKO-TEX = the finished fabric is tested',
+       body:['OEKO-TEX Standard 100 tests the final product — fabric, thread, buttons, prints — against a list of hundreds of harmful substances.','It does NOT mean organic. A conventional polyester shirt can be OEKO-TEX certified if it passes the chemical tests.']},
+      {kicker:'GOTS', emoji:'🌱', headline:'GOTS = organic from farm to finished garment',
+       body:['GOTS requires certified-organic fiber (at least 70%, or 95% for the top label) AND restricts the chemicals used in every processing step, AND includes social criteria for factories.','It\u2019s the stricter, fuller standard — which is why it\u2019s rarer and costs brands more.'],
+       callout:'Quick version: <b>OEKO-TEX</b> = \u201Ctested safe.\u201D <b>GOTS</b> = \u201Corganic and tested, start to finish.\u201D'},
+      {kicker:'The catch', emoji:'⚠️', headline:'Check what the certificate actually covers',
+       body:['A brand can certify one fabric line and not another, or certify the fabric but not the finished garment.','\u201CMade with GOTS-certified cotton\u201D and \u201CGOTS-certified garment\u201D are different claims. The second is stronger.']},
+      {kicker:'How ROOTED uses them', emoji:'✅', headline:'Certifications are the floor, not the ceiling',
+       body:['ROOTED treats certifications as strong evidence, then verifies the details brands leave out — thread, elastic, colorway differences.','Some of the best small producers exceed GOTS standards without paying for the certificate. That\u2019s why products get verified individually.']}
+    ]
+  },
+  'wrinkle-free-secret': {
+    topic: 'clothing', icon: 'flask-conical', title: 'The Wrinkle-Free Secret',
+    teaser: '\u201CNon-iron\u201D isn\u2019t a weave. It\u2019s a chemical treatment most people have never heard of.',
+    slides: [
+      {kicker:'The surprise', emoji:'👔', headline:'\u201CNon-iron\u201D is chemistry, not fabric',
+       body:['Wrinkle-resistant cotton doesn\u2019t exist naturally. \u201CNon-iron\u201D and \u201Ceasy care\u201D shirts get there through a resin finish baked into the fabric.','The most common resins are formaldehyde-releasing compounds — which is why this matters.']},
+      {kicker:'The evidence', emoji:'📋', headline:'Formaldehyde is a known irritant and carcinogen',
+       body:['Formaldehyde is classified as a human carcinogen at occupational exposure levels, and textile finishes releasing it can cause skin irritation and allergic contact dermatitis in sensitive people.','The dose from a shirt is far below occupational exposure — but it\u2019s a genuinely avoidable exposure sitting directly on your skin all day.']},
+      {kicker:'The tell', emoji:'👃', headline:'That \u201Cnew shirt smell\u201D is a clue',
+       body:['The sharp chemical smell on some brand-new dress shirts and bedding is often the finish itself off-gassing.','Washing before wearing reduces it meaningfully — but doesn\u2019t remove a cured resin entirely. It\u2019s bonded to the fiber by design.']},
+      {kicker:'What to do', emoji:'✅', headline:'Buy the iron, skip the resin',
+       body:['If a shirt is marketed as \u201Cnon-iron,\u201D \u201Cwrinkle-free,\u201D or \u201Ceasy care,\u201D assume a resin finish unless the brand says otherwise.','Plain cotton wrinkles because nothing was done to it. That\u2019s the feature.'],
+       callout:'On ROOTED, \u201Cnon-iron\u201D finishes are flagged in every category where they appear — dress shirts are the biggest one.'}
+    ]
+  },
+  'skin-contact-hierarchy': {
+    topic: 'clothing', icon: 'layers', title: 'The Skin-Contact Hierarchy',
+    teaser: 'You don\u2019t need to replace everything. Here\u2019s the order that actually matters.',
+    slides: [
+      {kicker:'The principle', emoji:'🎯', headline:'Hours of contact beat minutes of contact',
+       body:['Exposure is a function of surface area, skin contact, warmth, and time. A waistband against your skin for 16 hours matters more than a jacket you wear twice a month.','This one idea turns an overwhelming closet overhaul into a short, ranked list.']},
+      {kicker:'Tier one', emoji:'🩲', headline:'Underwear and socks first',
+       body:['Direct skin contact, warm microclimate, worn every single day, often with elastic pressed against skin.','This is also where upgrading is cheapest — a few pairs, not a wardrobe.']},
+      {kicker:'Tier two', emoji:'🛏️', headline:'Sheets and sleepwear',
+       body:['Roughly a third of your life is spent in direct contact with bedding, in exactly the warm, humid conditions that increase transfer from fabric to skin.','One purchase covers eight hours a day for years.']},
+      {kicker:'Tier three', emoji:'👕', headline:'Daily base layers: tees, undershirts, workout gear',
+       body:['Worn against skin for full days, and workout gear adds sweat — which is exactly when synthetic fabrics and their coatings interact with skin the most.']},
+      {kicker:'Everything else', emoji:'🧥', headline:'Outerwear can wait',
+       body:['Jackets, sweaters over shirts, occasional-wear items — lowest contact, lowest priority. Replace them when they wear out, not before.'],
+       callout:'This is the exact order ROOTED built its clothing category in. Start at tier one and stop stressing about the rest.'}
+    ]
+  },
+  'natural-fibers-101': {
+    topic: 'clothing', icon: 'leaf', title: 'Natural Fibers 101',
+    teaser: 'Cotton, linen, hemp, wool — what each one\u2019s actually good at.',
+    slides: [
+      {kicker:'Cotton', emoji:'☁️', headline:'Cotton: the versatile default',
+       body:['Soft, breathable, easy to wash, works for almost everything. Organic matters here more than most crops — conventional cotton is one of the most pesticide-intensive crops in the world.','Weak spot: slow to dry, and holds moisture against skin when soaked.']},
+      {kicker:'Linen', emoji:'🌾', headline:'Linen: the summer specialist',
+       body:['Made from flax. The most breathable common natural fiber, dries fast, naturally somewhat antimicrobial, and gets softer with every wash.','Weak spot: wrinkles enthusiastically. (That\u2019s the look. Lean in.)']},
+      {kicker:'Hemp', emoji:'🌿', headline:'Hemp: the durable one',
+       body:['The strongest common plant fiber — hemp garments routinely outlast cotton equivalents. Grows with little water and few pesticides, naturally UV-resistant.','Weak spot: slightly rougher hand-feel until broken in, and harder to find.']},
+      {kicker:'Wool', emoji:'🐑', headline:'Merino: the temperature regulator',
+       body:['Fine merino wool regulates temperature in both directions, resists odor for days without washing, and handles moisture while still feeling dry.','Weak spot: price, care requirements, and finding it without synthetic blend fibers — most \u201Cmerino\u201D athletic wear is a blend.']},
+      {kicker:'The cheat sheet', emoji:'🗂️', headline:'Match the fiber to the job',
+       body:['Hot weather: linen. Hard wear: hemp. Training and travel: merino. Everything else: organic cotton.','Every fiber on this list beats polyester on breathability without needing a chemical coating to do it.']}
+    ]
+  },
+  'stretch-problem': {
+    topic: 'clothing', icon: 'move-horizontal', title: 'The Stretch Problem',
+    teaser: 'That 5% spandex is doing more than you think — and there are real alternatives.',
+    slides: [
+      {kicker:'The ingredient', emoji:'🧬', headline:'Spandex is polyurethane',
+       body:['Spandex (elastane, Lycra — same thing) is a polyurethane-based synthetic. Even \u201C95% cotton\u201D stretch garments weave it through the whole fabric.','It\u2019s also in places labels don\u2019t mention: waistbands, cuffs, and sock tops.']},
+      {kicker:'Why it\u2019s everywhere', emoji:'🏭', headline:'Stretch is cheaper than tailoring',
+       body:['Adding elastic fiber lets brands make one boxy pattern fit many bodies. It\u2019s a manufacturing shortcut that became the default.','Well-cut clothing in woven natural fabric fit people for centuries without it.']},
+      {kicker:'The alternatives', emoji:'🔄', headline:'Natural stretch solutions exist',
+       body:['Natural rubber elastic (often wrapped in organic cotton) does the waistband job without polyurethane.','Drawstrings, knit fabrics with mechanical stretch, and actual metal buttons and zippers cover the rest. Some brands even build \u201Cflex waists\u201D with zero elastic of any kind.']},
+      {kicker:'Where to be realistic', emoji:'⚖️', headline:'A little disclosed elastic beats a lot of hidden it',
+       body:['A sock with 5% covered natural rubber isn\u2019t the same problem as leggings that are one-quarter spandex.','ROOTED\u2019s tiers reflect this: fully elastic-free products earn Gold Standard, natural-rubber elastic is accepted with disclosure, and undisclosed stretch fiber gets flagged every time.']}
+    ]
+  },
+  'bamboo-greenwash': {
+    topic: 'clothing', icon: 'trees', title: 'The Bamboo Bait-and-Switch',
+    teaser: 'Bamboo the plant is great. Bamboo the fabric is usually something else entirely.',
+    slides: [
+      {kicker:'The pitch', emoji:'🎋', headline:'\u201CBamboo\u201D sounds perfect',
+       body:['Fast-growing, pesticide-free, renewable — the plant genuinely is all of those things. Which is exactly why the word sells so much fabric.']},
+      {kicker:'The switch', emoji:'⚗️', headline:'Almost all \u201Cbamboo fabric\u201D is viscose',
+       body:['To become soft fabric, bamboo is dissolved in chemical solvents — commonly carbon disulfide — and extruded into an entirely new fiber: viscose rayon.','The finished fiber contains nothing structurally bamboo. It\u2019s a semi-synthetic that started as bamboo pulp.']},
+      {kicker:'The receipts', emoji:'⚖️', headline:'Regulators have repeatedly called this out',
+       body:['The US FTC has taken enforcement action against multiple major retailers for labeling rayon as \u201Cbamboo\u201D — this isn\u2019t a fringe opinion, it\u2019s settled labeling law.','Legally, most of it must be called \u201Crayon made from bamboo.\u201D Marketing keeps trying anyway.']},
+      {kicker:'The nuance', emoji:'🔬', headline:'Lyocell is the honest middle ground',
+       body:['Lyocell (like TENCEL) uses a closed-loop solvent process that recaptures nearly all its chemicals — a genuinely cleaner version of the same idea.','It\u2019s still a processed semi-synthetic, not a natural fiber. Fine to wear knowingly; not fine to be sold as \u201Cnatural.\u201D']},
+      {kicker:'The rule', emoji:'✅', headline:'If it says bamboo and feels like silk, it\u2019s rayon',
+       body:['Actual mechanically-processed bamboo fiber (bamboo linen) is rare, rough, and expensive — you\u2019d know if you bought it.','ROOTED doesn\u2019t list bamboo viscose products as natural-fiber options, full stop.']}
+    ]
+  },
+  'performance-fabric-myth': {
+    topic: 'clothing', icon: 'zap', title: 'The Performance Fabric Myth',
+    teaser: '\u201CMoisture-wicking\u201D tech is mostly plastic plus marketing. Wool got there first.',
+    slides: [
+      {kicker:'The claim', emoji:'🏃', headline:'\u201CPerformance fabric\u201D means polyester, almost always',
+       body:['Moisture-wicking, quick-dry, anti-odor — the fabrics behind these claims are overwhelmingly polyester and nylon, often with chemical treatments layered on to deliver the promised feature.']},
+      {kicker:'The odor treatment', emoji:'🦠', headline:'\u201CAnti-odor\u201D often means antimicrobial chemicals',
+       body:['Polyester famously holds body odor, so brands add antimicrobial treatments — commonly silver-based compounds — to fight the smell the fabric itself causes.','Studies have shown these treatments wash out over time, ending up in wastewater. The stink resistance you paid for literally goes down the drain.']},
+      {kicker:'The original tech', emoji:'🐑', headline:'Merino wool does all of this naturally',
+       body:['Temperature regulation, moisture handling, and genuine multi-day odor resistance — merino does the whole \u201Cperformance\u201D checklist with zero coatings, because the fiber structure itself does the work.','This isn\u2019t nostalgia. It\u2019s why serious outdoor athletes quietly went back to wool base layers.']},
+      {kicker:'The honest tradeoff', emoji:'⚖️', headline:'Where synthetics genuinely still win',
+       body:['Durability-per-dollar and dry speed in soaking-wet conditions — a nylon rain shell has no natural equivalent, and nobody should pretend otherwise.','The question isn\u2019t \u201Cnever synthetic.\u201D It\u2019s whether a plastic shirt with chemical coatings deserves to be your daily training default when wool and cotton exist.']},
+      {kicker:'What ROOTED did', emoji:'✅', headline:'The workout category walks this talk',
+       body:['ROOTED\u2019s workout section is built on merino and organic cotton — and where no clean option exists yet in a subcategory, it says \u201Cno clean option\u201D instead of listing a compromise.']}
+    ]
+  },
+  'read-a-label': {
+    topic: 'clothing', icon: 'search', title: 'How to Read a Clothing Label',
+    teaser: 'Sixty seconds, five checks, and you\u2019ll shop better than 99% of people.',
+    slides: [
+      {kicker:'Check one', emoji:'1️⃣', headline:'Fiber content: the deal-breaker line',
+       body:['Find the percentage line. \u201C100% cotton/linen/hemp/wool\u201D is the green light. Any polyester, acrylic, or unexplained \u201Cother fibers\u201D — decide with eyes open.','Watch for stealth blends: \u201Ccotton-rich,\u201D \u201Ccotton blend,\u201D and \u201Ccotton-touch\u201D all mean not-100%-cotton.']},
+      {kicker:'Check two', emoji:'2️⃣', headline:'The magic words that aren\u2019t on the label',
+       body:['Wrinkle-free, easy care, non-iron, stain-resistant, anti-odor, quick-dry: every one of these signals a chemical treatment the fiber line doesn\u2019t show.','Untreated fabric doesn\u2019t need adjectives.']},
+      {kicker:'Check three', emoji:'3️⃣', headline:'Stretch means spandex, somewhere',
+       body:['If a woven garment stretches, elastic fiber is in it — even when the label rounds it away. Check waistbands, cuffs, and sock tops specifically.','\u201CDrawstring\u201D and \u201Cbutton fly\u201D in a product description are quiet good signs.']},
+      {kicker:'Check four', emoji:'4️⃣', headline:'Look for what proud brands volunteer',
+       body:['Thread content, dye certification, undyed options, GOTS/OEKO-TEX certificates — brands that do the work say so, in detail, because it costs them more.','Vague sustainability language with zero specifics is its own answer.']},
+      {kicker:'Check five', emoji:'5️⃣', headline:'Or skip all four checks',
+       body:['This is literally what ROOTED is — every product in the clothing category already went through these checks, plus price and image verification against the live brand page.','Use the tiers, read the flags, and spend your sixty seconds on something else.'],
+       callout:'Gold Standard = cleanest available. Tier 1 = Rooted Approved. Tier 2 = good option with disclosed tradeoffs. Tier 3 = budget/transitional, flags and all.'}
+    ]
+  },
   'morning-light': {
     topic: 'lighting', icon: 'sunrise', title: 'Morning Light',
     teaser: 'Why the first few minutes outside matter more than any supplement.',
