@@ -6604,6 +6604,12 @@ const ROOTEDU_TOPICS = {
     desc: 'What\u2019s actually in your clothes — fibers, dyes, finishes — and how to shop smarter without the overwhelm.',
     modules: ['polyester-truth', 'cotton-label-lie', 'certifications-decoded', 'wrinkle-free-secret', 'skin-contact-hierarchy', 'natural-fibers-101', 'stretch-problem', 'bamboo-greenwash', 'performance-fabric-myth', 'read-a-label']
   },
+  'cookware': {
+    title: 'Cookware & Kitchen',
+    icon: 'cooking-pot',
+    desc: 'What your pans are made of, what actually leaches, and what\u2019s just internet panic.',
+    modules: ['nonstick-story', 'cast-iron-101', 'stainless-decoded', 'ceramic-truth', 'aluminum-question', 'plastic-kitchen', 'overheated-pan', 'inert-options', 'scratched-pan', 'starter-kitchen']
+  },
   'lighting': {
     title: 'Lighting & Circadian Health',
     icon: 'sun',
@@ -6619,6 +6625,167 @@ const ROOTEDU_TOPICS = {
 };
 
 const ROOTEDU_MODULES = {
+  'nonstick-story': {
+    topic: 'cookware', icon: 'circle-slash', title: 'The Nonstick Story',
+    teaser: 'PFOA is gone. The story isn\u2019t over. Here\u2019s the honest version.',
+    slides: [
+      {kicker:'The material', emoji:'🍳', headline:'Nonstick = PTFE, a fluoropolymer',
+       body:['Classic nonstick coating is PTFE (Teflon is the brand name) — a member of the PFAS family, the \u201Cforever chemicals\u201D you keep hearing about.','The coating itself is remarkably inert at normal cooking temperatures. The story is in how it\u2019s made and what happens when it\u2019s abused.']},
+      {kicker:'The real scandal', emoji:'📜', headline:'PFOA was the manufacturing chemical',
+       body:['The health scandal that made headlines was about PFOA — a processing aid used to make PTFE, linked to serious health effects in exposed communities and phased out of US cookware manufacturing by around 2013.','\u201CPFOA-free\u201D on today\u2019s pans is true — and also the bare minimum, since it\u2019s been industry-wide for a decade.']},
+      {kicker:'What\u2019s still true', emoji:'🌡️', headline:'Overheating PTFE releases real fumes',
+       body:['Above roughly 500\u00B0F — an empty pan on high heat can get there in minutes — PTFE begins breaking down and releasing fumes that cause flu-like symptoms in humans and are famously lethal to pet birds.','That\u2019s not internet panic. It\u2019s well documented, and it\u2019s why nonstick and high-heat searing don\u2019t mix.']},
+      {kicker:'The lifecycle problem', emoji:'🔄', headline:'Every nonstick pan is temporary',
+       body:['Coatings scratch, degrade, and end up replaced every few years — shedding particles into food along the way and landfill forever after.','A cast iron or stainless pan is often a one-time purchase for life. The economics quietly favor the old technology.']},
+      {kicker:'The bottom line', emoji:'✅', headline:'You don\u2019t need it for 95% of cooking',
+       body:['Eggs and delicate fish are the honest use case people cite — and well-seasoned cast iron or carbon steel handles both with a little technique.','ROOTED\u2019s cookware category is built on uncoated materials first, with any coated option clearly flagged.']}
+    ]
+  },
+  'cast-iron-101': {
+    topic: 'cookware', icon: 'circle-dot', title: 'Cast Iron 101',
+    teaser: 'The 150-year-old pan that outperforms the marketing. Care is easier than you\u2019ve heard.',
+    slides: [
+      {kicker:'The material', emoji:'🪨', headline:'One material, zero coatings',
+       body:['Cast iron is just iron with a bit of carbon. The \u201Cnonstick\u201D surface is seasoning — polymerized cooking oil bonded to the metal by heat — which you can renew forever.','Nothing to chip off, nothing proprietary, nothing to replace.']},
+      {kicker:'The leaching question', emoji:'🩸', headline:'Yes, it adds iron to food — usually a feature',
+       body:['Cast iron measurably increases the iron content of food, especially acidic dishes cooked long. For most people — especially menstruating women, who skew iron-deficient — that\u2019s a mild benefit.','The exception is real: people with hemochromatosis (iron overload) should limit cast iron use. That\u2019s a genuine medical contraindication, not a footnote.']},
+      {kicker:'The care myth', emoji:'🧼', headline:'You can use soap. The internet lied.',
+       body:['Modern dish soap doesn\u2019t strip polymerized seasoning — that myth dates to lye-based soaps from generations ago.','Wash it, dry it promptly, rub a drop of oil in occasionally. That\u2019s the whole ritual.']},
+      {kicker:'The technique', emoji:'🔥', headline:'Preheat is the actual nonstick secret',
+       body:['Food sticks to cold cast iron. Give it a few minutes of medium heat before anything touches the surface, and eggs slide like the commercials.','Heavy, holds heat forever, goes stove-to-oven, and works on induction. One pan, most jobs.']},
+      {kicker:'Buying it', emoji:'💰', headline:'The $25 pan and the $200 pan cook the same',
+       body:['A basic Lodge performs within a hair of boutique brands — the premium buys smoother machining and lighter weight, not better food.','Vintage pans from thrift stores are often the best of all. This is the rare category where cheap is genuinely fine.']}
+    ]
+  },
+  'stainless-decoded': {
+    topic: 'cookware', icon: 'disc', title: 'Stainless Steel, Decoded',
+    teaser: 'What 18/10 means, the nickel question answered honestly, and why clad matters.',
+    slides: [
+      {kicker:'The numbers', emoji:'🔢', headline:'18/10 is chromium/nickel, not a grade of fanciness',
+       body:['\u201C18/10\u201D means 18% chromium (the \u201Cstainless\u201D part) and 10% nickel (corrosion resistance and shine).','It\u2019s the standard for good cookware. The numbers describe chemistry, not quality tiers.']},
+      {kicker:'The leaching question', emoji:'🔬', headline:'Nickel leaching is real, small, and mostly a sensitivity issue',
+       body:['Studies confirm small amounts of nickel and chromium migrate into food, most with acidic dishes and long cook times, most from brand-new pans, declining with use.','For the general population the amounts sit within normal dietary ranges. The people who genuinely need to care are those with nickel allergy or sensitivity — a real and fairly common condition.'],
+       callout:'Nickel-sensitive? Nickel-free stainless (18/0) exists, and cast iron, carbon steel, and enamel sidestep the question entirely.'},
+      {kicker:'The construction', emoji:'🥪', headline:'\u201CClad\u201D is the word worth paying for',
+       body:['Stainless alone conducts heat poorly. Quality pans sandwich aluminum or copper between stainless layers — \u201Ctri-ply\u201D or \u201Cfully clad\u201D — so the reactive metal never touches food but does the heating work.','Thin single-layer stainless is the stuff that scorches dinner and turns people off the material.']},
+      {kicker:'The technique', emoji:'💧', headline:'The water-drop test ends the sticking problem',
+       body:['Heat the dry pan on medium until a drop of water beads and skates like mercury — that\u2019s the Leidenfrost point. Add oil, then food. Sticking mostly solved.','Stainless rewards two minutes of patience the way nonstick rewards none.']},
+      {kicker:'The verdict', emoji:'✅', headline:'The workhorse for everything acidic and everything searing',
+       body:['Tomato sauces, wine deglazing, hard sears, dishwashers, metal utensils — stainless shrugs at all of it, for decades.','Pair one clad stainless pan with one cast iron and you\u2019ve covered nearly every technique in home cooking.']}
+    ]
+  },
+  'ceramic-truth': {
+    topic: 'cookware', icon: 'palette', title: 'The "Ceramic" Pan Truth',
+    teaser: 'That pastel pan isn\u2019t ceramic. Here\u2019s what it actually is — and how long it lasts.',
+    slides: [
+      {kicker:'The name game', emoji:'🏺', headline:'\u201CCeramic nonstick\u201D contains no ceramic',
+       body:['Those popular pastel pans are aluminum coated with a sol-gel — a sprayed-on silica-based layer that\u2019s ceramic-ish in chemistry, nothing like a kiln-fired pot.','The name is marketing. The coating is the product.']},
+      {kicker:'The honest positives', emoji:'👍', headline:'What it genuinely gets right',
+       body:['No PTFE and no PFAS — so no fume risk when overheated, which is a real advantage over classic nonstick.','Brand-new, it releases eggs beautifully. Nobody disputes the first six months.']},
+      {kicker:'The lifespan problem', emoji:'⏳', headline:'The slickness is designed to die',
+       body:['Sol-gel coatings lose their release properties dramatically faster than PTFE — often within a year or two of regular use, faster with high heat or the dishwasher.','Independent testing and owner reviews converge on the same arc: great, fine, sticky, replaced.']},
+      {kicker:'The disclosure gap', emoji:'❓', headline:'\u201CFree of\u201D lists aren\u2019t ingredient lists',
+       body:['Brands list what\u2019s absent (PFOA! Lead! Cadmium!) but rarely disclose what the sol-gel and its reinforcing additives actually contain.','An absence list is not transparency. It\u2019s a vibe.']},
+      {kicker:'The verdict', emoji:'⚖️', headline:'Fine as a stopgap, weak as a strategy',
+       body:['If you want coating-free cooking, ceramic nonstick is a detour, not a destination — you\u2019ll be buying pans on a subscription schedule.','Enameled cast iron gives you actual fired ceramic over iron, for life. That\u2019s the version of \u201Cceramic\u201D worth owning.']}
+    ]
+  },
+  'aluminum-question': {
+    topic: 'cookware', icon: 'layers-2', title: 'The Aluminum Question',
+    teaser: 'The Alzheimer\u2019s scare, what anodized means, and where aluminum actually belongs.',
+    slides: [
+      {kicker:'The fear', emoji:'🧠', headline:'The Alzheimer\u2019s link didn\u2019t hold up',
+       body:['The aluminum-Alzheimer\u2019s hypothesis from the 1960s\u201370s drove decades of worry. Major reviews since — including Alzheimer\u2019s research organizations themselves — have found no convincing causal evidence from cookware or normal dietary exposure.','Stating that plainly matters: ROOTED flags real risks, and this one mostly isn\u2019t.']},
+      {kicker:'What is true', emoji:'🍋', headline:'Bare aluminum + acid = metal in your food',
+       body:['Bare aluminum genuinely does react with acidic foods — tomato sauce simmered in an uncoated aluminum pot picks up measurable aluminum and often a metallic taste.','Your body clears most ingested aluminum, but there\u2019s no reason to cook acid in bare aluminum when better tools exist.']},
+      {kicker:'The fix', emoji:'🛡️', headline:'\u201CAnodized\u201D means the surface is sealed',
+       body:['Hard-anodized aluminum has been electrochemically converted to a hard, essentially non-reactive oxide layer — solving most of the leaching question while keeping aluminum\u2019s excellent heat conduction.','It\u2019s a legitimate mid-tier material, though the anodized layer isn\u2019t as bulletproof as stainless over a lifetime of scrubbing.']},
+      {kicker:'Where it hides', emoji:'🥡', headline:'Foil and disposable trays are the sneakier exposure',
+       body:['Acidic or salty food baked directly in foil transfers more aluminum than most cookware ever will — lemon fish in a foil packet is the textbook case.','Parchment first, foil outside, and the question disappears.']},
+      {kicker:'The verdict', emoji:'✅', headline:'Best supporting actor, not the lead',
+       body:['Aluminum\u2019s highest use is inside clad stainless — doing the heat conduction while never touching food.','Bare aluminum for boiling pasta water: fine. For tomato sauce: pick literally anything else.']}
+    ]
+  },
+  'plastic-kitchen': {
+    topic: 'cookware', icon: 'utensils', title: 'Plastic in the Kitchen',
+    teaser: 'The black spatula story, cutting board dust, and which swaps actually matter.',
+    slides: [
+      {kicker:'The hot zone', emoji:'🌡️', headline:'Heat + fat + plastic is the combination to break',
+       body:['Plastic utensils resting in a hot oily pan, plastic containers in the microwave — heat and fat are exactly the conditions that accelerate chemical migration out of plastic.','Room-temperature storage is a far smaller question than hot contact. Prioritize accordingly.']},
+      {kicker:'The utensil story', emoji:'🥄', headline:'Black plastic utensils earned their bad press',
+       body:['Studies found many black plastic kitchen items are made from recycled electronics casings, carrying flame retardants along for the ride.','One widely-shared 2024 study contained a math error that overstated the exposure — worth knowing — but the flame retardants themselves were really there. Wood and stainless utensils make the whole debate irrelevant for a few dollars.']},
+      {kicker:'The cutting board', emoji:'🔪', headline:'Plastic boards shed measurable microplastics',
+       body:['Research estimates plastic cutting boards shed tens of millions of microplastic particles per year into food during normal chopping — knife scars are the mechanism, and every board accumulates them.','Wood boards shed wood, and well-maintained wood performs as well or better on bacteria in head-to-head studies.']},
+      {kicker:'The microwave', emoji:'📦', headline:'\u201CMicrowave-safe\u201D means the container survives, not you',
+       body:['The label certifies the plastic won\u2019t melt — it says nothing about migration. Studies show even \u201Csafe\u201D containers release substantially more particles and compounds when heated.','Transferring to a plate or glass takes ten seconds. It\u2019s the single easiest swap in this entire module.']},
+      {kicker:'The ranked list', emoji:'✅', headline:'Three swaps, in order',
+       body:['1. Never microwave food in plastic. 2. Wood or steel utensils for hot pans. 3. Wood cutting board for daily chopping.','Cold storage containers can wait — or migrate to glass as the plastic ones wear out. No panic required.']}
+    ]
+  },
+  'overheated-pan': {
+    topic: 'cookware', icon: 'flame', title: 'The Overheated Pan',
+    teaser: 'Smoke points, oil breakdown, and the one nonstick rule that isn\u2019t negotiable.',
+    slides: [
+      {kicker:'The concept', emoji:'💨', headline:'Smoke point is a chemistry threshold, not a suggestion',
+       body:['When cooking fat visibly smokes, it\u2019s actively breaking down — generating acrolein and other degradation compounds that irritate lungs and taste acrid.','Occasional smoke isn\u2019t a crisis. Routinely cooking past the smoke point is a habit worth fixing.']},
+      {kicker:'The nonstick rule', emoji:'🚫', headline:'An empty nonstick pan on high heat is the one hard no',
+       body:['PTFE breakdown starts around 500\u00B0F, and an empty pan on a high burner gets there in under five minutes — no food to absorb the heat.','The fumes cause \u201Cpolymer fume fever\u201D in humans and kill pet birds outright. If you keep any nonstick: never preheat it empty, never high heat.']},
+      {kicker:'The fat hierarchy', emoji:'🫒', headline:'Match the fat to the heat',
+       body:['High-heat searing: avocado oil, ghee, tallow — stable fats with high smoke points.','Moderate sauté: olive oil is more heat-stable than its reputation suggests; extra-virgin handles normal pan cooking fine. Butter\u2019s milk solids burn first — that\u2019s what clarifying removes.']},
+      {kicker:'The ventilation habit', emoji:'🌬️', headline:'Run the hood like it matters — because it does',
+       body:['All high-heat cooking — any pan, any oil — generates ultrafine particles, and indoor cooking is one of the biggest sources of home air pollution.','Range hood on, vented outside if possible, every time you sear. It\u2019s the most underrated kitchen health habit there is.']},
+      {kicker:'The reframe', emoji:'✅', headline:'Uncoated pans make heat a technique, not a hazard',
+       body:['Cast iron and stainless can\u2019t be ruined by high heat — the same blast that destroys a nonstick coating is just Tuesday for cast iron.','Choose materials where your worst cooking day costs you a cleanup, not a pan.']}
+    ]
+  },
+  'inert-options': {
+    topic: 'cookware', icon: 'shield-check', title: 'Glass & Enamel: The Inert Options',
+    teaser: 'When you want zero material questions, these two end the conversation.',
+    slides: [
+      {kicker:'The concept', emoji:'🧊', headline:'\u201CInert\u201D means the material stays out of your food',
+       body:['Borosilicate glass and properly-made enamel are about as non-reactive as kitchen materials get — no seasoning, no leaching debates, no coating countdown clock.','This is why lab equipment is glass. Chemists picked it for exactly the reason you\u2019d want it.']},
+      {kicker:'Glass', emoji:'🫙', headline:'Glass: storage king, oven workhorse',
+       body:['Bakes, stores, reheats, and lets you see the food. Immune to acid, immune to staining, immune to the microwave-plastic problem entirely.','Limits are physical, not chemical: it can shatter with thermal shock, and it can\u2019t sear on a burner.']},
+      {kicker:'Enamel', emoji:'🍲', headline:'Enameled cast iron: real fired glass over iron',
+       body:['Enamel is actual vitreous glass fused to cast iron at kiln temperatures — this is the genuine \u201Cceramic\u201D cookware, unlike sol-gel sprayed pans.','Handles acid beautifully (no seasoning, no iron transfer), braises like a dream, lasts generations. The Dutch oven is its natural form.']},
+      {kicker:'The vintage caveat', emoji:'⚠️', headline:'The lead question is a vintage question',
+       body:['Modern enamel from reputable brands tests well below lead and cadmium limits — regulation and testing genuinely work here.','Vintage and imported decorated enamelware is the real caveat: old glazes, especially colorful interiors from decades past, have tested positive. Cook in modern; display the antiques.']},
+      {kicker:'The verdict', emoji:'✅', headline:'The zero-thought tier',
+       body:['Glass for storage and baking, enameled cast iron for braising and acid-heavy cooking — nothing to maintain, nothing to monitor, nothing to replace on schedule.','If decision fatigue is real for you, this is the pair that removes cookware from your worry list permanently.']}
+    ]
+  },
+  'scratched-pan': {
+    topic: 'cookware', icon: 'alert-triangle', title: 'The Scratched Pan Question',
+    teaser: 'Which scratches matter, which don\u2019t, and when a pan is actually done.',
+    slides: [
+      {kicker:'The triage', emoji:'🔍', headline:'A scratch means different things on different materials',
+       body:['The same scratch that\u2019s cosmetic on stainless is a retirement notice on nonstick. Material determines meaning.','Here\u2019s the honest rundown, pan by pan.']},
+      {kicker:'Nonstick', emoji:'🍳', headline:'Scratched nonstick: that\u2019s the exit sign',
+       body:['A scratched PTFE or ceramic coating is shedding flakes into food and degrading faster at the damage site — the coating\u2019s one job is being intact.','Recent research measured thousands to millions of microplastic particles released from damaged nonstick surfaces during cooking. A scratched coated pan is a finished pan.']},
+      {kicker:'Stainless & cast iron', emoji:'💪', headline:'Scratch these all you want',
+       body:['Stainless scratches are purely cosmetic — the metal is the same all the way through. Metal utensils, steel wool, go wild.','Cast iron \u201Cscratches\u201D are just seasoning marks that the next cook re-fills. Even rust sands off. These pans are functionally unkillable.']},
+      {kicker:'Enamel', emoji:'🍲', headline:'Enamel: chips at the food surface are the line',
+       body:['Small chips on rims or exteriors are cosmetic. A chipped or crazed interior cooking surface exposes bare iron and can keep chipping into food — that\u2019s worth retiring or relegating to display.','Modern enamel chips rarely with normal use; avoid thermal shock and metal-on-enamel scraping and it\u2019ll outlive you.']},
+      {kicker:'The takeaway', emoji:'✅', headline:'Buy pans where scratches don\u2019t matter',
+       body:['The deepest fix isn\u2019t babying a coating — it\u2019s owning cookware where the question never comes up.','Every coated pan carries a hidden replacement schedule. Uncoated metal carries none. That difference compounds for decades.']}
+    ]
+  },
+  'starter-kitchen': {
+    topic: 'cookware', icon: 'chef-hat', title: 'Build a Clean Kitchen in 5 Pieces',
+    teaser: 'The whole strategy: five pieces, no coatings, done for life.',
+    slides: [
+      {kicker:'The mindset', emoji:'🎯', headline:'Five pieces beat a fifteen-piece set',
+       body:['Boxed cookware sets sell quantity, usually coated, usually replaced within years. Five uncoated pieces cover essentially all home cooking — and never need replacing.','Buy once, cook forever. Here\u2019s the list.']},
+      {kicker:'Pieces 1\u20132', emoji:'🍳', headline:'One cast iron skillet + one clad stainless pan',
+       body:['Cast iron: searing, eggs, oven work, anything hot. Stainless: acid, sauces, deglazing, everyday sauté.','Between them, every stovetop technique is covered. Roughly $25 and $70\u2013100 respectively, both permanent.']},
+      {kicker:'Pieces 3\u20134', emoji:'🍲', headline:'One stainless stockpot + one enameled Dutch oven',
+       body:['Stockpot: pasta, stocks, batch cooking. Dutch oven: braises, soups, bread, and every acidic long-cook the cast iron skillet shouldn\u2019t do.','The Dutch oven is the splurge that\u2019s worth it — and budget brands now test as clean as the French icons.']},
+      {kicker:'Piece 5 + the smalls', emoji:'🔪', headline:'A glass baking dish, wood boards, steel utensils',
+       body:['Glass 9\u00D713 handles baking and roasting. Wood cutting boards and wood/stainless utensils close out the plastic-contact points from the earlier modules.','Nothing on this list has a coating, a countdown, or a chemistry debate attached.']},
+      {kicker:'The transition', emoji:'✅', headline:'Replace on failure, not on fear',
+       body:['No need to trash a working kitchen overnight. Retire coated pans as they scratch, swap plastic as it wears, and land on the five-piece core within a year or two at almost no extra cost.','ROOTED\u2019s cookware category has verified picks for every slot on this list — the research is already done.']}
+    ]
+  },
   'polyester-truth': {
     topic: 'clothing', icon: 'shirt', title: 'The Polyester Problem',
     teaser: 'Your softest shirt might be plastic. Here\u2019s what that actually means.',
