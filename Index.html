@@ -6616,6 +6616,12 @@ const ROOTEDU_TOPICS = {
     desc: 'How industrial oils are made, what the evidence actually shows, and what to cook with instead.',
     modules: ['what-is-seed-oil', 'how-oils-are-made', 'omega-shift', 'inflammation-question', 'oxidation-problem', 'restaurant-fryer', 'processed-vehicle', 'traditional-fats', 'oil-labels', 'swap-plan']
   },
+  'whole-food': {
+    title: 'The Whole Food Diet',
+    icon: 'apple',
+    desc: 'What \u201Cwhole food\u201D actually means, the evidence behind it, and how to eat this way without going broke.',
+    modules: ['what-whole-means', 'ultra-processed-evidence', 'protein-first', 'ingredient-rule', 'sugar-disguise', 'frozen-canned-truth', 'animal-quality', 'produce-pesticides', 'whole-food-budget', 'eighty-twenty']
+  },
   'lighting': {
     title: 'Lighting & Circadian Health',
     icon: 'sun',
@@ -6631,6 +6637,167 @@ const ROOTEDU_TOPICS = {
 };
 
 const ROOTEDU_MODULES = {
+  'what-whole-means': {
+    topic: 'whole-food', icon: 'apple', title: 'What "Whole Food" Actually Means',
+    teaser: 'It\u2019s not a vibe or a grocery store. There\u2019s a real definition \u2014 and a spectrum.',
+    slides: [
+      {kicker:'The definition', emoji:'🍎', headline:'Food that\u2019s still recognizable as what it was',
+       body:['A whole food is one ingredient: a steak, an egg, an apple, a potato. It grew, walked, or swam, and reached you without a factory reinventing it.','The useful question isn\u2019t \u201Cprocessed or not\u201D \u2014 it\u2019s \u201Chow far from the original is this?\u201D']},
+      {kicker:'The spectrum', emoji:'📶', headline:'Processing is a dial, not a switch',
+       body:['Researchers classify food in tiers: whole foods \u2192 processed culinary ingredients (olive oil, butter, salt) \u2192 processed foods (cheese, canned fish, sourdough) \u2192 ultra-processed formulations.','Cutting a vegetable is processing. So is turning corn into a neon cheese puff. Same word, different universes.']},
+      {kicker:'The real target', emoji:'🎯', headline:'Ultra-processed is the category that matters',
+       body:['Ultra-processed foods are industrial formulations \u2014 typically combining refined starches, sugars, seed oils, and additives into products no kitchen could make.','The test: could you make this from ingredients in a normal pantry? A stew, yes. A shelf-stable snack cake with 30 ingredients, no.']},
+      {kicker:'The scale', emoji:'📊', headline:'Over half of American calories are ultra-processed',
+       body:['Surveys consistently put ultra-processed food at 55\u201360% of US calorie intake \u2014 and higher for kids.','Eating whole foods isn\u2019t a niche optimization anymore. It\u2019s opting out of the default.']},
+      {kicker:'The reframe', emoji:'✅', headline:'Add before you subtract',
+       body:['The simplest start isn\u2019t banning anything \u2014 it\u2019s crowding out: build meals around meat, fish, eggs, produce, and potatoes, and the processed stuff loses its real estate.','The rest of this topic covers the evidence, the traps, and the budget math.']}
+    ]
+  },
+  'ultra-processed-evidence': {
+    topic: 'whole-food', icon: 'microscope', title: 'The Ultra-Processed Evidence',
+    teaser: 'One landmark trial locked people in a lab and proved the effect. Here\u2019s what it found.',
+    slides: [
+      {kicker:'The landmark', emoji:'🔬', headline:'The NIH ward study: same nutrients, different results',
+       body:['In 2019, researchers housed adults in a metabolic ward and fed them ultra-processed vs. whole-food diets matched for calories, sugar, fat, fiber, and macros \u2014 eat as much or little as you want.','On the ultra-processed diet, people spontaneously ate about 500 more calories per day and gained weight. Same people, whole-food phase: they lost it.'],
+       callout:'This was a randomized controlled trial \u2014 the strongest study design \u2014 not a food-diary survey.'},
+      {kicker:'Why it happens', emoji:'🧠', headline:'These products are engineered to be easy to overeat',
+       body:['Soft textures, fast eating speed, calorie density, and salt-sugar-fat combinations that rarely co-occur in nature \u2014 the design goals of the category are the mechanism.','It\u2019s not a willpower failure. It\u2019s a product working as intended.']},
+      {kicker:'The bigger picture', emoji:'📈', headline:'The population data points the same direction',
+       body:['Dozens of large cohort studies link higher ultra-processed intake with higher rates of obesity, type 2 diabetes, cardiovascular disease, and early mortality.','Honest caveat: cohort studies show association, not proof of cause \u2014 but stacked on top of the ward trial, the overall picture is unusually consistent for nutrition science.']},
+      {kicker:'The nuance', emoji:'⚖️', headline:'Not every processed food is equal',
+       body:['Within the \u201Cultra-processed\u201D bucket, sugary drinks and processed meats carry the worst associations; things like plain yogurt or whole-grain bread barely register.','The category is a strong screen, not a moral verdict on every barcode.']},
+      {kicker:'The takeaway', emoji:'✅', headline:'This is the best-supported idea in modern nutrition',
+       body:['Diet debates rage about macros and meal timing \u2014 but \u201Ceat mostly whole foods\u201D is the rare claim with a controlled trial, mechanisms, and population data all agreeing.','Everything else in this topic is just implementation.']}
+    ]
+  },
+  'protein-first': {
+    topic: 'whole-food', icon: 'beef', title: 'Protein First',
+    teaser: 'The most satiating macro, the anchor of every plate, and how much you actually need.',
+    slides: [
+      {kicker:'The principle', emoji:'🥩', headline:'Protein runs the satiety show',
+       body:['Calorie for calorie, protein is the most filling macronutrient \u2014 documented across decades of feeding studies. Meals anchored by protein quietly reduce grazing for hours.','It\u2019s also the most metabolically expensive to digest, burning 20\u201330% of its own calories in processing.']},
+      {kicker:'The number', emoji:'🔢', headline:'The RDA is a floor, not a target',
+       body:['The official 0.8 g/kg RDA was set to prevent deficiency \u2014 not to optimize muscle, satiety, or aging. Research on active people supports roughly 1.6\u20132.2 g/kg (about 0.7\u20131 g per pound).','For an athlete, that\u2019s a number worth actually hitting daily, not vaguely gesturing at.']},
+      {kicker:'The sources', emoji:'🍳', headline:'Whole-food protein comes with a built-in entourage',
+       body:['Meat, fish, eggs, and dairy bring complete amino acid profiles plus the nutrients hardest to find elsewhere: B12, heme iron, zinc, creatine, choline.','A steak is a protein supplement with a nutrient stack attached. The powder aisle is the imitation, not the original.']},
+      {kicker:'The practical move', emoji:'🍽️', headline:'Build every plate protein-out',
+       body:['Decide the protein first \u2014 then add produce and starch around it. One habit, and portion math mostly takes care of itself.','Breakfast is where most people are furthest behind: eggs beat cereal on this framework every single day.']},
+      {kicker:'The supplement link', emoji:'✅', headline:'Powder is a convenience, not a foundation',
+       body:['Whole food first; a clean protein powder fills gaps on heavy training days. ROOTED\u2019s supplement picks are vetted for exactly that role \u2014 NSF-certified, minimal-ingredient.','If most of your protein comes from a tub, the order is backwards.']}
+    ]
+  },
+  'ingredient-rule': {
+    topic: 'whole-food', icon: 'list', title: 'The Ingredient List Rule',
+    teaser: 'Ignore the front of the box. The back tells the truth in five seconds.',
+    slides: [
+      {kicker:'The rule', emoji:'📋', headline:'Short list, recognizable words',
+       body:['The fastest whole-food screen ever devised: flip the package, read the list. A handful of ingredients you\u2019d find in a kitchen \u2014 pass. A paragraph of chemistry \u2014 that\u2019s a formulation, not a food.','No app, no memorizing additives. Grandmother-recognizability is the test.']},
+      {kicker:'The front is marketing', emoji:'🎪', headline:'Health claims live on the front for a reason',
+       body:['\u201CNatural,\u201D \u201Cmulti-grain,\u201D \u201Cmade with real fruit,\u201D \u201Chigh in protein\u201D \u2014 front-of-package claims are legally squishy and strategically placed.','The most heavily-claimed products are usually the most processed. Carrots don\u2019t advertise.']},
+      {kicker:'The order matters', emoji:'🥇', headline:'Ingredients are listed by weight',
+       body:['First three ingredients = most of the product. \u201CWhole grain\u201D bread with sugar second and a seed oil third told you everything already.','This one fact turns every label into a ranked confession.']},
+      {kicker:'The overlap', emoji:'🔗', headline:'The same flags keep showing up together',
+       body:['Seed oils, added sugars under aliases, refined starches, gums, and \u201Cnatural flavors\u201D travel as a pack \u2014 find one and the others are usually nearby.','That\u2019s why one screen catches most of it: these ingredients exist to make cheap formulations palatable.']},
+      {kicker:'The takeaway', emoji:'✅', headline:'Most of your cart shouldn\u2019t have a label at all',
+       body:['Meat, fish, eggs, produce \u2014 the majority of a whole-food cart is label-free by definition. The rule only has to work on the minority that comes in packages.','Five seconds per package, and the pantry upgrades itself within a month.']}
+    ]
+  },
+  'sugar-disguise': {
+    topic: 'whole-food', icon: 'candy', title: 'Sugar in Disguise',
+    teaser: 'It has more than 50 names, and \u201Chealthy\u201D foods are where it hides best.',
+    slides: [
+      {kicker:'The aliases', emoji:'🕵️', headline:'Same molecule, fifty costumes',
+       body:['Cane juice, brown rice syrup, agave nectar, fruit juice concentrate, dextrose, maltodextrin, \u201Corganic coconut sugar\u201D \u2014 added sugar goes by dozens of names, and manufacturers can split it across several to push each one down the ingredient list.','Three different sugars listed fifth, seventh, and ninth can add up to sugar being ingredient number one.']},
+      {kicker:'The hiding spots', emoji:'🥣', headline:'\u201CHealthy\u201D aisles are the best camouflage',
+       body:['Flavored yogurt, granola, protein bars, smoothies, dried fruit, and salad dressings routinely carry dessert-level sugar behind health-first branding.','A flavored yogurt can out-sugar a candy bar. The label math is genuinely surprising the first time you run it.']},
+      {kicker:'The distinction', emoji:'🍏', headline:'Added sugar \u2260 fruit',
+       body:['Whole fruit packages its sugar with fiber, water, and volume that self-limit how much you eat \u2014 nobody overeats apples. Juice and syrups strip the packaging and keep the dose.','US labels now break out \u201CAdded Sugars\u201D on their own line. That line, not total sugar, is the one to read.']},
+      {kicker:'The honest part', emoji:'⚖️', headline:'The dose argument is real',
+       body:['A teaspoon of honey in tea is not a health event. The population problem is scale: average US added-sugar intake runs roughly triple what heart-health guidance suggests, mostly from drinks and packaged food.','Whole-food eating fixes this by default \u2014 not by discipline, but because the delivery vehicles are gone.']},
+      {kicker:'The move', emoji:'✅', headline:'Drinks first, then the fake-healthy five',
+       body:['Sugary drinks are the single largest source \u2014 handle those and you\u2019ve done half the work. Then check your yogurt, granola, bars, dressings, and sauces.','Buy plain versions and sweeten at home: you\u2019ll use a fraction of what the factory did.']}
+    ]
+  },
+  'frozen-canned-truth': {
+    topic: 'whole-food', icon: 'snowflake', title: 'The Frozen & Canned Truth',
+    teaser: 'Whole food doesn\u2019t mean farmers-market-only. Some of the best value is in the freezer aisle.',
+    slides: [
+      {kicker:'The myth', emoji:'❄️', headline:'\u201CFresh\u201D isn\u2019t automatically more nutritious',
+       body:['Frozen produce is typically picked ripe and flash-frozen within hours \u2014 while \u201Cfresh\u201D produce may travel for days and sit for more. Nutrient comparisons routinely find frozen equal, and sometimes better.','Frozen blueberries, spinach, and broccoli are whole foods. Full stop.']},
+      {kicker:'The canned aisle', emoji:'🥫', headline:'Canned fish is elite whole-food nutrition',
+       body:['Sardines, wild salmon, and mackerel in a can: complete protein, omega-3s, and (with bones) calcium, shelf-stable at a fraction of fresh-fish prices.','Canned tomatoes and beans pass the same test. Check for minimal ingredients and skip the syrup-packed fruit \u2014 that\u2019s the whole audit.']},
+      {kicker:'The one caveat', emoji:'🔍', headline:'Read the can\u2019s ingredient list like any other',
+       body:['\u201CCanned\u201D isn\u2019t the issue \u2014 what was added is. Fish in water or olive oil: great. Vegetables with just salt: great. Anything listing sugar, seed oils, or a flavor system: same rules as every package.','BPA-free lining is now common and worth preferring \u2014 a packaging note, not a reason to skip the category.']},
+      {kicker:'The strategy', emoji:'🧊', headline:'The freezer is your consistency engine',
+       body:['Whole-food eating fails on the busy nights. A freezer stocked with meat, fish, and vegetables means the fallback meal is still real food \u2014 no shopping trip required.','Buying meat in bulk on sale and freezing it is also the single biggest whole-food cost hack there is.']},
+      {kicker:'The takeaway', emoji:'✅', headline:'Judge food by ingredients, not by aisle temperature',
+       body:['Purity theater says everything must be fresh, local, and photogenic. The evidence says frozen spinach and canned sardines are doing more for your health than most of the fresh-adjacent products in the store.','Cheaper, easier, and just as whole. Take the win.']}
+    ]
+  },
+  'animal-quality': {
+    topic: 'whole-food', icon: 'beef', title: 'Meat, Eggs & Dairy Quality',
+    teaser: 'Grass-fed, pastured, organic \u2014 what the labels change, and by how much, honestly.',
+    slides: [
+      {kicker:'The baseline', emoji:'🥩', headline:'Conventional animal foods are still whole foods',
+       body:['Before any label upgrades: a regular egg or steak beats an ultra-processed meal on nutrition every time. Quality tiers are an optimization on top of a good decision, not the gate to it.','Getting this order right keeps budgets \u2014 and expectations \u2014 sane.']},
+      {kicker:'Grass-fed beef', emoji:'🌾', headline:'Real differences, honest magnitudes',
+       body:['Grass-fed and finished beef measurably carries more omega-3s and certain micronutrients \u2014 but from a small base; it won\u2019t replace fish for omega-3s.','The stronger arguments are often what it avoids (feedlot practices) and taste preference. \u201CGrass-fed\u201D alone can mean grain-finished \u2014 \u201Cgrass-finished\u201D is the complete claim.']},
+      {kicker:'Eggs', emoji:'🥚', headline:'\u201CPastured\u201D is the label that means something',
+       body:['\u201CCage-free\u201D mostly means a crowded barn instead of a cage; \u201Cfree-range\u201D requires only token outdoor access. \u201CPasture-raised\u201D \u2014 birds actually foraging outside \u2014 is where yolk nutrient differences show up in testing.','Backyard or farmers-market eggs are usually the real thing at a fair price.']},
+      {kicker:'Dairy & fish', emoji:'🐟', headline:'The quick versions',
+       body:['Dairy: full-fat and plain beats low-fat and flavored \u2014 the sugar swap ruined more yogurt than fat ever did. Grass-fed butter and whole milk are solid upgrades when the budget allows.','Fish: wild-caught for salmon where affordable, and small fish (sardines, mackerel) are cheap, low-mercury, and nutrient-dense at any label tier.']},
+      {kicker:'The spend order', emoji:'✅', headline:'Where upgrade dollars go furthest',
+       body:['1. Pastured eggs (small price gap, real difference). 2. Fattier cuts and dairy grass-fed (compounds concentrate in fat). 3. Grass-finished beef. Lean conventional cuts are the lowest-priority upgrade.','ROOTED\u2019s food picks and Local Food Map surface verified sources for all of these \u2014 the vetting is already done.']}
+    ]
+  },
+  'produce-pesticides': {
+    topic: 'whole-food', icon: 'carrot', title: 'Produce & the Pesticide Question',
+    teaser: 'Organic, washing, the \u201Cdirty dozen\u201D \u2014 graded honestly, panic-free.',
+    slides: [
+      {kicker:'The first rule', emoji:'🥦', headline:'Eating produce beats optimizing produce',
+       body:['Every credible analysis agrees: the health benefit of eating vegetables and fruit \u2014 any vegetables and fruit \u2014 dwarfs the measured differences between conventional and organic.','Skipping produce over pesticide anxiety is losing the war to win a skirmish.']},
+      {kicker:'What organic means', emoji:'🌱', headline:'Fewer synthetic residues, honestly modest nutrient gaps',
+       body:['Certified organic reliably means lower synthetic pesticide residues \u2014 that part delivers. Nutrient differences, where found, are small.','Organic farming uses approved pesticides too; \u201Cpesticide-free\u201D isn\u2019t the claim. \u201CFewer and different residues\u201D is the accurate version.']},
+      {kicker:'The dirty dozen', emoji:'📃', headline:'A useful shortcut with real critics',
+       body:['The famous list ranks produce by residue detections \u2014 but detections sit overwhelmingly below government safety limits, a caveat scientists regularly raise about the list\u2019s framing.','Fair use: prioritizing which items to buy organic (thin-skinned berries, greens) on a limited budget. Unfair use: fearing conventional strawberries as dangerous.']},
+      {kicker:'The kitchen sink', emoji:'🚿', headline:'Washing genuinely helps',
+       body:['Running water plus friction removes a meaningful share of surface residue \u2014 studies even show baking-soda soaks doing slightly better. No special produce sprays required.','Peeling removes more at the cost of fiber and nutrients. Wash-and-eat is the sensible default.']},
+      {kicker:'The priority order', emoji:'✅', headline:'Local season beats label anxiety',
+       body:['A farmers-market conventional peach in season beats a February organic one on flavor, freshness, and often residue too \u2014 direct-from-farm produce is exactly what ROOTED\u2019s Local Food Map tracks.','Order of operations: eat produce \u2192 wash it \u2192 buy seasonal/local \u2192 go organic on the thin-skinned stuff as budget allows.']}
+    ]
+  },
+  'whole-food-budget': {
+    topic: 'whole-food', icon: 'wallet', title: 'Whole Food on a Budget',
+    teaser: 'The \u201Ceating healthy is expensive\u201D math, actually run. It mostly isn\u2019t.',
+    slides: [
+      {kicker:'The reframe', emoji:'🧮', headline:'Compare cost per nourishment, not per calorie',
+       body:['Ultra-processed food wins on cents-per-calorie \u2014 empty ones. Run cost per gram of protein or per actual meal, and eggs, chicken thighs, canned fish, beans, rice, and potatoes crush takeout and snack food.','The expensive version of healthy eating is a marketing category, not a requirement.']},
+      {kicker:'The protein bargains', emoji:'🍗', headline:'The cheap proteins are elite',
+       body:['Eggs, whole chickens, chicken thighs, canned sardines, ground beef, and dried beans deliver complete nutrition at some of the lowest cost-per-protein-gram in the store.','A whole chicken is three meals plus bone broth. The thrifty cuts were the traditional ones all along.']},
+      {kicker:'The infrastructure', emoji:'❄️', headline:'The freezer is a savings account',
+       body:['Buy meat on markdown, freeze it. Buy frozen vegetables by default. Cook once, eat twice \u2014 batch cooking turns cheap ingredients into convenient ones, which is the actual contest with takeout.','Convenience, not price, is where whole-food eating usually loses. Solve for convenience.']},
+      {kicker:'The trap', emoji:'🚫', headline:'Skip the whole-food-flavored products',
+       body:['Grain-free granola, paleo cookies, $14 smoothies, collagen-infused anything \u2014 the \u201Chealthy processed\u201D aisle charges premium prices to imitate junk food with better branding.','That budget belongs in the meat and produce sections, where it buys actual food.']},
+      {kicker:'The starter cart', emoji:'✅', headline:'A week of whole food, corner-store cheap',
+       body:['Eggs, chicken thighs, ground beef, canned sardines, rice, potatoes, frozen vegetables, in-season fruit, butter, olive oil. That list feeds a person well for less than most people\u2019s delivery-app week.','Farmers markets at closing time and ROOTED\u2019s Food Map round out the sourcing at surprising prices.']}
+    ]
+  },
+  'eighty-twenty': {
+    topic: 'whole-food', icon: 'target', title: 'The 80/20 Transition',
+    teaser: 'How to actually get there \u2014 and stay \u2014 without becoming the person nobody invites to dinner.',
+    slides: [
+      {kicker:'The standard', emoji:'⚖️', headline:'Consistency beats purity, mathematically',
+       body:['Eighty percent whole food, sustained for years, outperforms one hundred percent sustained for six weeks followed by a collapse. The evidence on ultra-processed harm is about habitual intake \u2014 the pattern, not the exception.','Perfection isn\u2019t just unnecessary; it\u2019s usually the failure mode.']},
+      {kicker:'Week by week', emoji:'📅', headline:'One meal at a time, in impact order',
+       body:['Week 1: fix breakfast \u2014 eggs instead of cereal ends the day\u2019s first sugar spiral. Week 2: handle drinks \u2014 the largest sugar source, gone. Week 3: protein-anchor lunch and dinner. Week 4: apply the ingredient-list rule to your top five packaged repeats.','Four weeks, four habits, most of the transformation.']},
+      {kicker:'The social clause', emoji:'🍽️', headline:'Restaurants and birthdays are the 20',
+       body:['Eat the birthday cake. Order what you want at the anniversary dinner. Food is also culture, celebration, and connection \u2014 a framework that can\u2019t handle a wedding isn\u2019t a health plan, it\u2019s a personality problem.','The 80 happens at home, where you control the shopping. That\u2019s enough.']},
+      {kicker:'The maintenance secret', emoji:'🏠', headline:'Environment beats willpower',
+       body:['You eat what\u2019s in the house. The entire long-term system is: shop the whole-food cart, keep the freezer stocked, don\u2019t stock the pantry with things you\u2019re \u201Cresisting.\u201D','Decisions get made once a week at the store instead of forty times a day in the kitchen.']},
+      {kicker:'The full circle', emoji:'✅', headline:'Every ROOTED tool points at this',
+       body:['The Food Map finds the sourcing. The product tiers vet what comes in a package. RootedU explains the why. This module is the how.','Whole foods, mostly. Cooked at home, usually. Enjoyed with people, always. That\u2019s the entire diet.']}
+    ]
+  },
   'what-is-seed-oil': {
     topic: 'seed-oils', icon: 'droplets', title: 'What Is a Seed Oil, Actually?',
     teaser: 'The definition, the big eight, and why \u201Cvegetable oil\u201D contains no vegetables.',
