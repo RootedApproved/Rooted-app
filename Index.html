@@ -6610,6 +6610,12 @@ const ROOTEDU_TOPICS = {
     desc: 'What your pans are made of, what actually leaches, and what\u2019s just internet panic.',
     modules: ['nonstick-story', 'cast-iron-101', 'stainless-decoded', 'ceramic-truth', 'aluminum-question', 'plastic-kitchen', 'overheated-pan', 'inert-options', 'scratched-pan', 'starter-kitchen']
   },
+  'seed-oils': {
+    title: 'Seed Oils & Cooking Fats',
+    icon: 'droplets',
+    desc: 'How industrial oils are made, what the evidence actually shows, and what to cook with instead.',
+    modules: ['what-is-seed-oil', 'how-oils-are-made', 'omega-shift', 'inflammation-question', 'oxidation-problem', 'restaurant-fryer', 'processed-vehicle', 'traditional-fats', 'oil-labels', 'swap-plan']
+  },
   'lighting': {
     title: 'Lighting & Circadian Health',
     icon: 'sun',
@@ -6625,6 +6631,167 @@ const ROOTEDU_TOPICS = {
 };
 
 const ROOTEDU_MODULES = {
+  'what-is-seed-oil': {
+    topic: 'seed-oils', icon: 'droplets', title: 'What Is a Seed Oil, Actually?',
+    teaser: 'The definition, the big eight, and why \u201Cvegetable oil\u201D contains no vegetables.',
+    slides: [
+      {kicker:'The definition', emoji:'🌻', headline:'Oils pressed \u2014 or extracted \u2014 from seeds',
+       body:['Canola, soybean, corn, sunflower, safflower, cottonseed, grapeseed, and rice bran: the industrial seed oils that now dominate the food supply.','\u201CVegetable oil\u201D on a label is almost always soybean or a seed-oil blend. There are no vegetables involved.']},
+      {kicker:'The distinction', emoji:'🫒', headline:'Olive and avocado are fruit oils \u2014 different category',
+       body:['Olive oil and avocado oil are pressed from the fruit\u2019s flesh, can be extracted mechanically at low temperatures, and have been food for millennia.','Coconut oil sits with them: traditional extraction, long food history. The seed-oil conversation is about the industrial eight, not these.']},
+      {kicker:'The timeline', emoji:'📈', headline:'These oils are about a century old as food',
+       body:['Cottonseed oil entered the food supply around 1911 \u2014 originally an industrial waste product that found a market. Soybean oil\u2019s dominance came after WWII.','Whatever you conclude about them, they\u2019re among the newest foods humans eat at scale, and now supply a huge share of American calories.']},
+      {kicker:'The scale', emoji:'🏭', headline:'They\u2019re in nearly everything processed',
+       body:['Check any packaged snack, salad dressing, or restaurant fryer: soybean or canola oil is close to universal, because they\u2019re the cheapest calories in the building.','That ubiquity \u2014 not any single bottle \u2014 is why the topic matters.']},
+      {kicker:'Where ROOTED stands', emoji:'🌱', headline:'ROOTED cooks with traditional fats',
+       body:['ROOTED\u2019s position: prefer olive, avocado, butter, ghee, and tallow \u2014 fats with long food histories and minimal processing \u2014 and skip the industrial eight.','The next modules walk through the actual evidence, including where it\u2019s strong and where it\u2019s honestly still contested.']}
+    ]
+  },
+  'how-oils-are-made': {
+    topic: 'seed-oils', icon: 'factory', title: 'How Seed Oils Are Made',
+    teaser: 'Hexane baths, 400-degree deodorizing, bleaching clay. This is the part nobody disputes.',
+    slides: [
+      {kicker:'The problem', emoji:'🌰', headline:'Seeds don\u2019t want to give up their oil',
+       body:['An olive is about 20% oil and yields to a simple press. Soybeans are stingier and their oil is locked in tight \u2014 mechanical pressing alone leaves too much behind to be profitable.','So industry uses chemistry.']},
+      {kicker:'Step one', emoji:'⚗️', headline:'Hexane extraction',
+       body:['Crushed seeds are bathed in hexane \u2014 a petroleum-derived solvent \u2014 to dissolve out the oil, and the solvent is then boiled off.','Trace hexane residues in finished oil are legal and considered small. But \u201Cextracted with a petroleum solvent\u201D is simply a fact of how most seed oil is made, and it never appears on the label.']},
+      {kicker:'Steps two through five', emoji:'🔥', headline:'Refine, bleach, deodorize',
+       body:['The crude oil is degummed, neutralized with lye, bleached through clay, and finally deodorized with steam at temperatures around 400\u2013500\u00B0F to strip the smells and flavors that would make it unsellable.','That heat step matters: it\u2019s hot enough to create small amounts of trans fats and oxidation products before the bottle is ever opened.']},
+      {kicker:'The contrast', emoji:'🫒', headline:'\u201CCold-pressed\u201D exists because this process doesn\u2019t need to',
+       body:['Extra-virgin olive oil is legally required to be mechanically extracted without heat or solvents \u2014 the entire RBD process above simply doesn\u2019t happen.','When a label brags \u201Ccold-pressed\u201D or \u201Cexpeller-pressed,\u201D it\u2019s advertising the absence of this chapter.']},
+      {kicker:'The takeaway', emoji:'📋', headline:'The processing story is undisputed \u2014 and undisclosed',
+       body:['None of this is contested science; it\u2019s standard food engineering, documented in industry\u2019s own textbooks.','ROOTED\u2019s view: a fat that requires petroleum solvents and 400-degree deodorization to become edible starts the conversation with questions to answer.']}
+    ]
+  },
+  'omega-shift': {
+    topic: 'seed-oils', icon: 'trending-up', title: 'The Omega-6 Shift',
+    teaser: 'The food supply changed faster than any diet trend. Here\u2019s what\u2019s documented \u2014 and what\u2019s inferred.',
+    slides: [
+      {kicker:'The documented part', emoji:'📊', headline:'Linoleic acid intake roughly tripled in a century',
+       body:['US data shows omega-6 linoleic acid climbing from roughly 2\u20133% of calories in the early 1900s to 7%+ today \u2014 driven almost entirely by seed oils entering the food supply.','Body-fat biopsy studies confirm it: the linoleic acid stored in Americans\u2019 fat tissue has increased dramatically over decades. The shift itself is not in dispute.']},
+      {kicker:'The ratio idea', emoji:'⚖️', headline:'Omega-6 : omega-3 went from ~4:1 to ~15:1 or higher',
+       body:['Omega-6 and omega-3 fats compete for the same enzymes, and ancestral diets are estimated to have carried far more balanced ratios than the modern one.','The imbalance is real arithmetic. What that imbalance does is where the evidence gets more layered.']},
+      {kicker:'The honest caveat', emoji:'🔬', headline:'\u201CRatio\u201D as a health target is still debated',
+       body:['Some researchers argue absolute omega-3 intake matters more than the ratio itself, and mainstream bodies haven\u2019t adopted a target ratio.','What\u2019s broadly agreed: most people eating modern diets would benefit from more omega-3 \u2014 fatty fish being the strongest-evidence source \u2014 whatever their omega-6 math looks like.']},
+      {kicker:'The both-and', emoji:'🐟', headline:'Cutting seed oils and adding fish aren\u2019t competing ideas',
+       body:['Swapping seed oils for traditional fats lowers the omega-6 side; eating sardines, salmon, or mackerel raises the omega-3 side. Both moves push the same direction.','This is also why fish and omega-3 sourcing shows up across ROOTED\u2019s food and supplement picks.']},
+      {kicker:'The summary', emoji:'✅', headline:'The shift is fact; the mechanism debate continues',
+       body:['A century-long, food-supply-wide fat experiment happened without anyone signing up for it. That much is documented.','You don\u2019t need the mechanism debate settled to prefer the fats humans ate before the experiment started.']}
+    ]
+  },
+  'inflammation-question': {
+    topic: 'seed-oils', icon: 'scale', title: 'The Inflammation Question',
+    teaser: 'The most contested claim in the whole debate \u2014 graded honestly, both directions.',
+    slides: [
+      {kicker:'The claim', emoji:'🔥', headline:'\u201CSeed oils cause inflammation\u201D \u2014 the theory',
+       body:['The mechanism argument: linoleic acid converts to arachidonic acid, a precursor to inflammatory signaling molecules \u2014 so more omega-6 should mean more inflammation.','It\u2019s a coherent biochemical story. The question is what happens when it\u2019s actually tested in humans.']},
+      {kicker:'The uncomfortable data', emoji:'🧪', headline:'Controlled trials mostly haven\u2019t confirmed it',
+       body:['Multiple randomized trials and meta-analyses have found that raising dietary linoleic acid does not consistently raise measured inflammatory markers in humans, and the conversion step the theory depends on turns out to be tightly regulated.','ROOTED\u2019s content standards say state this plainly rather than bury it: the fresh-oil-causes-inflammation claim, as usually stated, runs ahead of the trial evidence.'],
+       callout:'An honest position beats a stronger-sounding one. If the trials change, this module changes.'},
+      {kicker:'What the critics say back', emoji:'🔎', headline:'The counter-arguments worth knowing',
+       body:['Skeptics of those trials note: blood markers are crude, trials are short, some landmark old studies had real flaws \u2014 and crucially, most trials test fresh oil, not the oxidized, repeatedly-heated oil people actually eat in fried and processed food.','That last point is where the strongest version of the seed-oil case actually lives \u2014 and it\u2019s the next module.']},
+      {kicker:'The reframe', emoji:'🎯', headline:'The best case was never about fresh oil in a bottle',
+       body:['Processing chemistry, oxidation under heat, and the junk-food vehicles seed oils arrive in \u2014 those arguments have meaningfully stronger evidence than \u201Clinoleic acid is inherently inflammatory.\u201D','Building the position on the strong pillars, not the contested one, is what keeps it standing.']},
+      {kicker:'ROOTED\u2019s position', emoji:'🌱', headline:'Same conclusion, honest reasoning',
+       body:['ROOTED still recommends traditional fats \u2014 for the processing, oxidation, and food-quality reasons, plus the simple fact that olive oil has outcome evidence seed oils can\u2019t match.','What ROOTED won\u2019t do is claim certainty the trials don\u2019t support. That\u2019s the difference between a standard and a slogan.']}
+    ]
+  },
+  'oxidation-problem': {
+    topic: 'seed-oils', icon: 'flame', title: 'Oxidation: The Strongest Case',
+    teaser: 'PUFAs + heat + time = aldehydes. This is where the chemistry gets genuinely concerning.',
+    slides: [
+      {kicker:'The chemistry', emoji:'🧬', headline:'Polyunsaturated fats are fragile by design',
+       body:['The double bonds that make a fat \u201Cpolyunsaturated\u201D are exactly where oxygen attacks. More double bonds, more fragility \u2014 and seed oils are mostly PUFA.','Saturated fats like tallow and ghee have no double bonds to attack. Their heat stability isn\u2019t marketing; it\u2019s structure.']},
+      {kicker:'What heat produces', emoji:'⚠️', headline:'Heated PUFAs generate toxic aldehydes',
+       body:['When seed oils are heated \u2014 especially repeatedly \u2014 they form lipid oxidation products including acrolein, 4-HNE, and related aldehydes, compounds studied for their roles in cellular damage.','This isn\u2019t fringe: it\u2019s standard lipid chemistry, measured directly in lab analyses of heated frying oils.']},
+      {kicker:'The dose story', emoji:'🍟', headline:'Time and reuse are the multipliers',
+       body:['Fresh oil, briefly heated once at home, generates far less than oil held at frying temperature for hours and reused for days \u2014 which is standard practice in commercial fryers.','Measured aldehyde levels climb steeply with each reuse cycle. The gap between a home saut\u00E9 and a week-old fryer is enormous.']},
+      {kicker:'Even before cooking', emoji:'🫙', headline:'Fragile fats age badly in the bottle too',
+       body:['PUFA-rich oils oxidize slowly during storage \u2014 accelerated by light, heat, and the months they sit in clear plastic on warm shelves.','It\u2019s another reason ROOTED\u2019s oil picks favor dark glass, harvest dates, and stable fats.']},
+      {kicker:'The ranking', emoji:'✅', headline:'Match fat stability to heat',
+       body:['High heat and frying: tallow, ghee, avocado oil. Moderate cooking: olive oil \u2014 more heat-stable than its reputation, per multiple studies. Cold: any good traditional fat.','The single biggest win isn\u2019t the bottle at home \u2014 it\u2019s what\u2019s covered next: the fryer.']}
+    ]
+  },
+  'restaurant-fryer': {
+    topic: 'seed-oils', icon: 'utensils-crossed', title: 'Inside the Restaurant Fryer',
+    teaser: 'The week-old oil problem, and why \u201Cseed-oil-free\u201D restaurants became a real category.',
+    slides: [
+      {kicker:'The economics', emoji:'💰', headline:'Fryer oil is managed like a cost, not an ingredient',
+       body:['Commercial fryer oil is expensive to replace, so it\u2019s standard practice to filter and reuse it \u2014 often for days, sometimes a week or more, held at 350\u00B0F for entire service shifts.','Every hour at temperature and every reuse cycle pushes the oxidation chemistry from the last module further along.']},
+      {kicker:'The measurements', emoji:'🔬', headline:'Aged fryer oil is a different substance than fresh oil',
+       body:['Studies of repeatedly-used frying oil measure steadily accumulating polar compounds and aldehydes \u2014 several countries actually regulate a maximum \u201Ctotal polar materials\u201D level at which fryer oil must legally be discarded.','The US has no such federal limit. Discard timing is a business decision.']},
+      {kicker:'What this means for the debate', emoji:'🎯', headline:'Most seed oil is eaten fried, not fresh',
+       body:['The trials finding fresh linoleic acid fairly benign didn\u2019t test what a fry cook serves on day five \u2014 nobody\u2019s running that RCT.','This is the honest core of the seed-oil position: the real-world exposure is oxidized oil in fried food, and that\u2019s the version with the ugliest chemistry.']},
+      {kicker:'The practical filter', emoji:'🗺️', headline:'This is literally why ROOTED\u2019s Food Map exists',
+       body:['ROOTED\u2019s Local Food Map tracks restaurants cooking in tallow, olive oil, and other traditional fats \u2014 because \u201Cwhat\u2019s in the fryer\u201D is the single highest-leverage question when eating out.','Beef-tallow fries aren\u2019t just nostalgia: saturated fat\u2019s stability means dramatically less oxidation at the same temperature.']},
+      {kicker:'The order of operations', emoji:'✅', headline:'Fried food first, pantry second',
+       body:['If you change one thing: cut or upgrade fried food from unknown fryers. It outweighs everything about the bottle in your cupboard.','That\u2019s an 80/20 most of the seed-oil conversation skips.']}
+    ]
+  },
+  'processed-vehicle': {
+    topic: 'seed-oils', icon: 'package', title: 'The Ultra-Processed Vehicle',
+    teaser: 'Seed oils rarely travel alone. What they arrive inside matters as much as the oil.',
+    slides: [
+      {kicker:'The pattern', emoji:'🛒', headline:'Find seed oil, and you\u2019ve usually found ultra-processed food',
+       body:['Chips, packaged pastries, fast food, shelf-stable dressings, frozen fried anything \u2014 seed oils are the fat phase of nearly all of it, because they\u2019re the cheapest option.','Foods that are just\u2026 food \u2014 meat, fish, eggs, produce, dairy \u2014 contain none.']},
+      {kicker:'The confounding', emoji:'🧩', headline:'This tangle cuts both ways in the science',
+       body:['Because seed oils and junk food travel together, population studies struggle to separate them \u2014 which honestly muddies claims in both directions.','What\u2019s not muddy: ultra-processed food as a category is linked to worse outcomes across dozens of studies, whatever share the oil deserves.']},
+      {kicker:'The elegant shortcut', emoji:'✂️', headline:'One rule handles both debates at once',
+       body:['\u201CAvoid seed oils\u201D functions as a shockingly effective ultra-processed-food filter \u2014 you can\u2019t follow it and still eat most junk food, because the oil is in almost all of it.','Even someone agnostic on the oil itself ends up eating dramatically better by following the rule.']},
+      {kicker:'The home version', emoji:'🏠', headline:'Cooking at home mostly solves it by default',
+       body:['A kitchen stocked with olive oil, butter, and real ingredients contains essentially zero seed oil without trying.','The exposure lives in packages and takeout \u2014 which is why label-reading (next module) matters more than pantry anxiety.']},
+      {kicker:'The takeaway', emoji:'✅', headline:'The oil is a marker as much as a mechanism',
+       body:['Whether seed oils are the villain or the accomplice, they reliably mark the foods worth skipping.','ROOTED\u2019s standard treats them as both: a processing concern in their own right, and the most useful single flag on an ingredient list.']}
+    ]
+  },
+  'traditional-fats': {
+    topic: 'seed-oils', icon: 'leaf', title: 'Traditional Fats 101',
+    teaser: 'Olive, avocado, butter, ghee, tallow, coconut \u2014 what each is actually for.',
+    slides: [
+      {kicker:'Olive oil', emoji:'🫒', headline:'The one with outcome evidence',
+       body:['Extra-virgin olive oil isn\u2019t just \u201Cnot a seed oil\u201D \u2014 it carries some of the strongest human outcome data of any food, including major randomized trials showing cardiovascular benefit.','Mechanically pressed, rich in polyphenols, more heat-stable than its reputation. The default for most cooking.']},
+      {kicker:'Avocado oil', emoji:'🥑', headline:'The high-heat fruit oil \u2014 with a fraud problem',
+       body:['Genuinely high smoke point and a neutral flavor \u2014 but studies have found a large share of retail avocado oil is adulterated or rancid.','Brand integrity matters more here than anywhere else in the oil aisle. ROOTED\u2019s picks lean on verified testing for exactly this reason.']},
+      {kicker:'Butter & ghee', emoji:'🧈', headline:'The flavor pair',
+       body:['Butter\u2019s milk solids burn around 350\u00B0F; ghee removes them and raises the ceiling past 450\u00B0F while keeping the flavor.','Grass-fed sourcing shifts the fat profile modestly \u2014 nice, not magic.']},
+      {kicker:'Tallow & coconut', emoji:'🥩', headline:'The stability champions',
+       body:['Beef tallow: mostly saturated, extremely heat-stable, the historical frying fat that fast food abandoned in the 1990s. Best fries you\u2019ll ever make.','Coconut oil: plant-based saturated stability, distinct flavor, solid at room temperature. Both shrug at heat that wrecks PUFAs.']},
+      {kicker:'The saturated-fat honesty', emoji:'⚖️', headline:'One debate at a time',
+       body:['Mainstream guidance still advises limiting saturated fat; parts of the ancestral community dispute that. It\u2019s a genuinely separate debate from seed oils \u2014 and olive and avocado oil are excellent regardless of where it lands.','ROOTED\u2019s picks work under either framework: olive-first for daily cooking, stable fats for high heat.']}
+    ]
+  },
+  'oil-labels': {
+    topic: 'seed-oils', icon: 'search', title: 'How to Read an Oil Label',
+    teaser: 'Cold-pressed, expeller-pressed, \u201Clight,\u201D blends \u2014 sixty seconds to fluency.',
+    slides: [
+      {kicker:'The extraction words', emoji:'🏷️', headline:'\u201CCold-pressed\u201D and \u201Cexpeller-pressed\u201D are the honest claims',
+       body:['Expeller-pressed: mechanically squeezed, no hexane. Cold-pressed: mechanical AND temperature-controlled. Both are meaningful, regulated-ish terms.','If a seed oil\u2019s label says neither, assume solvent extraction \u2014 the default process never advertises itself.']},
+      {kicker:'The junk words', emoji:'🗑️', headline:'\u201CLight,\u201D \u201Cpure,\u201D and \u201Cnatural\u201D mean nothing',
+       body:['\u201CLight\u201D olive oil describes flavor (heavily refined), not calories. \u201CPure\u201D and \u201Cnatural\u201D have no enforced definition on oil at all.','\u201CVegetable oil\u201D means soybean or a blend. \u201CBlended\u201D olive oil can be mostly seed oil with olive for the label.']},
+      {kicker:'The olive-specific checks', emoji:'🫒', headline:'Harvest date beats best-by date',
+       body:['Real EVOO quality signals: a harvest date (freshness you can verify), dark glass, a named region or estate, and certification seals like COOC or PDO.','Olive oil fraud is well-documented globally \u2014 these details are how legitimate producers separate themselves.']},
+      {kicker:'The restaurant question', emoji:'🍽️', headline:'\u201CWhat do you fry in?\u201D is a normal question now',
+       body:['Restaurants using tallow or olive oil almost always advertise it \u2014 it costs them more and they want credit.','No answer, or \u201Cvegetable oil,\u201D tells you what you need to know. ROOTED\u2019s Food Map exists so you don\u2019t have to ask.']},
+      {kicker:'The cheat sheet', emoji:'✅', headline:'Four checks, done',
+       body:['1. Named fat, not \u201Cvegetable.\u201D 2. Mechanical extraction stated. 3. Dark glass + harvest date for olive. 4. Ingredient list of one.','Every oil in ROOTED\u2019s food picks already passed all four \u2014 plus independent verification where fraud risk is real.']}
+    ]
+  },
+  'swap-plan': {
+    topic: 'seed-oils', icon: 'refresh-cw', title: 'The 30-Day Swap Plan',
+    teaser: 'The whole transition, ranked by impact. No pantry purge required.',
+    slides: [
+      {kicker:'The mindset', emoji:'🎯', headline:'Rank by exposure, not by outrage',
+       body:['The goal isn\u2019t purity \u2014 it\u2019s moving the big volumes: fried food, daily cooking fat, and the packaged foods you eat most.','Trace seed oil in an occasional condiment is a rounding error. The fryer is not.']},
+      {kicker:'Week one', emoji:'🍟', headline:'Handle the fried-food question',
+       body:['Unknown-fryer fried food is the single largest oxidized-oil exposure for most people. Cut the frequency, or move it to places frying in tallow or olive oil.','ROOTED\u2019s Food Map is built for exactly this search.']},
+      {kicker:'Week two', emoji:'🫒', headline:'Swap the daily cooking fat',
+       body:['One good extra-virgin olive oil for everyday cooking, one stable fat (ghee, tallow, or avocado oil) for high heat.','That\u2019s the entire home setup. Finish the old bottle or don\u2019t \u2014 the next purchase is what matters.']},
+      {kicker:'Week three', emoji:'🛒', headline:'Fix the top five packaged repeats',
+       body:['Check the five packaged foods you actually buy weekly \u2014 dressings, sauces, snacks. Swap the ones with seed oil first on the fat list for olive-oil or avocado-oil versions, which now exist for almost everything.','Five products cover most people\u2019s packaged-food oil intake.']},
+      {kicker:'Week four & forever', emoji:'✅', headline:'Settle into the 80/20',
+       body:['Home cooking: fully handled by week two. Eating out: prioritize the fryer question, shrug at the saut\u00E9 pan.','Perfection isn\u2019t the standard \u2014 the food supply makes it impossible anyway. Direction and volume win, and by now you\u2019ve moved both.']}
+    ]
+  },
   'nonstick-story': {
     topic: 'cookware', icon: 'circle-slash', title: 'The Nonstick Story',
     teaser: 'PFOA is gone. The story isn\u2019t over. Here\u2019s the honest version.',
