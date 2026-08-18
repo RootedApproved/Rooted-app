@@ -2509,6 +2509,111 @@ body.style-photo .cat-card::before{
   color:var(--muted);
 }
 
+
+/* ── 30. REVAMP PASS (2026, third round) ─────────────────────────────────────
+   Search opens on water and light; every subcategory becomes a photo tile;
+   product cards trim to name + one-line highlight; hero gains a scroll cue. */
+
+/* Hero scroll cue — same ghost language as the buttons beside it. */
+.rt-hero-down{
+  width:52px;height:52px;
+  border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.55);
+  background:transparent;
+  color:#fff;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:background .28s var(--ease),border-color .28s var(--ease),transform .28s var(--ease);
+}
+.rt-hero-down:hover{background:#fff;color:var(--char);border-color:#fff;transform:translateY(3px);}
+.rt-hero-down i,.rt-hero-down svg{width:20px;height:20px;}
+
+#ask-rooted{scroll-margin-top:calc(var(--nav-h) + 16px);}
+
+/* Search hero — waves and sunlight behind the headline. */
+.search-hero{
+  background-image:linear-gradient(to top,rgba(20,17,15,.55) 0%,rgba(20,17,15,.18) 55%,rgba(20,17,15,.12) 100%),url('/images/search-bg.jpg');
+  background-size:cover;
+  background-position:center 62%;
+  width:calc(100vw - var(--sbw) - var(--sidebar-w));
+  margin-left:calc(50% - (100vw - var(--sbw) - var(--sidebar-w))/2);
+  max-width:none;
+  padding:clamp(80px,13vw,180px) var(--gut) clamp(40px,6vw,72px);
+}
+.search-hero .search-title{color:#fff;text-shadow:0 1px 14px rgba(20,17,15,.4);}
+.search-hero .search-sub{color:rgba(255,255,255,.92);text-shadow:0 1px 10px rgba(20,17,15,.35);}
+.search-wrap{padding-top:clamp(28px,4vw,44px);}
+@media (min-width:1024px){
+  .search-hero{padding-left:var(--gut-lg);padding-right:var(--gut-lg);}
+}
+
+/* Subcategory photo tiles — a photograph per subcategory, name beneath. */
+.subcat-card{
+  --img:none;
+  border:none;
+  padding:0 0 18px;
+  min-height:0;
+}
+.subcat-card::before{
+  content:'';
+  display:block;
+  width:100%;
+  aspect-ratio:4/3;
+  background-color:var(--cream2);
+  background-image:var(--img);
+  background-size:cover;
+  background-position:center;
+  border-radius:2px;
+  margin-bottom:14px;
+  transition:filter .4s var(--ease);
+}
+.subcat-card:hover::before{filter:brightness(1.06) saturate(1.05);}
+.subcat-card:hover{border:none;}
+.sc-icon{display:none;}
+.sc-name{margin-bottom:6px;}
+
+/* Product cards — from 154px info rows with a gold edge to clean vertical
+   gallery tiles: big contained product image, name, one-line highlight, tier
+   stamp. filterSubcat() toggles display:flex, so the card stays flex and only
+   changes direction. */
+.pc{
+  height:auto;
+  flex-direction:column;
+  gap:0;
+  padding:0 0 20px;
+  background:transparent;
+  border:none;
+  border-radius:0;
+  align-items:stretch;
+}
+.pc:hover{border:none;box-shadow:none;transform:none;}
+.pc-img{
+  width:100%;
+  height:auto;
+  aspect-ratio:1/1;
+  align-self:stretch;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:2px;
+  transition:border-color .3s var(--ease);
+}
+.pc:hover .pc-img{border-color:var(--char);}
+.pc-img img{object-fit:contain;width:100%;height:100%;}
+.pc-body{padding-top:13px;}
+.pc-brand{margin-bottom:2px;}
+.pc-name{margin:0 0 5px;}
+.pc-verdict{
+  font-size:13px;
+  -webkit-line-clamp:1;
+  margin-bottom:10px;
+}
+.pc-meta{margin-top:2px;}
+.pc-arr{display:none;}
+/* Star / budget corner marks sit on the image tile. */
+.tb-gold,.tb-budget{top:10px;right:10px;}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -2520,7 +2625,7 @@ body.style-photo .cat-card::before{
 <div id="welcome-toast" class="welcome-toast"></div>
 <nav class="top-nav">
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileDrawer()" aria-label="Open menu"><i data-lucide="menu"></i></button>
-  <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="nav-brand-text" style="display:none;">ROOTED</span></span>
+  <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="42" y="64" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="46" fill="var(--white)">R</text><circle cx="69" cy="69" r="12" fill="var(--white)"/><path d="M63.5 69l3.5 3.5 7-7" stroke="var(--forest)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="nav-brand-text" style="display:none;">ROOTED</span></span>
   <div class="nav-right">
     <button class="nav-search" onclick="showTab('search')"><i data-lucide="search"></i><span class="nav-search-label">Search</span></button>
     <button class="nav-login-link" id="nav-login-link" onclick="showScreen('login')">Join</button>
@@ -2547,6 +2652,7 @@ body.style-photo .cat-card::before{
         <div class="rt-hero-actions">
           <button class="rt-btn rt-btn-primary" onclick="handleJoinClick()">Become a member</button>
           <button class="rt-btn rt-btn-ghost" onclick="showTab('categories')">Browse the standards</button>
+          <button class="rt-hero-down" onclick="scrollToAskRooted()" aria-label="Scroll down to Ask ROOTED"><i data-lucide="arrow-down"></i></button>
         </div>
       </div>
     </header>
@@ -2564,7 +2670,7 @@ body.style-photo .cat-card::before{
       <div class="home-new-wordmark" id="home-wordmark" style="display:none">Rooted.</div>
       <div class="home-new-tagline tag-v1" id="home-tagline"><span class="tag-word1">Rooted</span> <span class="tag-word2">Approved</span></div>
     </div>
-    <div class="sec-hd" data-reveal>
+    <div class="sec-hd" id="ask-rooted" data-reveal>
       <span class="sec-title">Ask ROOTED</span>
     </div>
     <div class="home-ai-widget" data-reveal>
@@ -2717,17 +2823,17 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Tap a category to see rated products and education.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('underwear')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Underwear</div><div class="sc-count" id="count-underwear">10 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('t-shirts')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">T-Shirts</div><div class="sc-count" id="count-t-shirts">5 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('long-sleeves')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Long Sleeves</div><div class="sc-count" id="count-long-sleeves">6 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('shorts')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Shorts</div><div class="sc-count" id="count-shorts">5 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showPantsHub()"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Pants</div><div class="sc-count" id="count-pants">8 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('socks')"><span class="sc-icon"><i data-lucide="footprints"></i></span><div class="sc-name">Socks</div><div class="sc-count" id="count-socks">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showGolfHub()"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Golf Apparel</div><div class="sc-count" id="count-golf">10 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSweaterJacketHub()"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Sweaters <span class="plain-amp">&amp;</span> Jackets</div><div class="sc-count" id="count-sweater-jacket">19 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showWorkoutHub()"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Workout</div><div class="sc-count" id="count-workout">10 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSuitsHub()"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Suits <span class="plain-amp">&amp;</span> Dress Clothes</div><div class="sc-count" id="count-suits">10 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSwimHub()"><span class="sc-icon"><i data-lucide="waves"></i></span><div class="sc-name">Swimsuits</div><div class="sc-count" id="count-swim">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('underwear')" style="--img:url('/images/sub-underwear.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Underwear</div><div class="sc-count" id="count-underwear">10 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('t-shirts')" style="--img:url('/images/sub-t-shirts.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">T-Shirts</div><div class="sc-count" id="count-t-shirts">5 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('long-sleeves')" style="--img:url('/images/sub-long-sleeves.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Long Sleeves</div><div class="sc-count" id="count-long-sleeves">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('shorts')" style="--img:url('/images/sub-shorts.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Shorts</div><div class="sc-count" id="count-shorts">5 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showPantsHub()" style="--img:url('/images/sub-hub-pants.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Pants</div><div class="sc-count" id="count-pants">8 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('socks')" style="--img:url('/images/sub-socks.jpg')"><span class="sc-icon"><i data-lucide="footprints"></i></span><div class="sc-name">Socks</div><div class="sc-count" id="count-socks">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showGolfHub()" style="--img:url('/images/sub-hub-golf.jpg')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Golf Apparel</div><div class="sc-count" id="count-golf">10 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSweaterJacketHub()" style="--img:url('/images/sub-hub-sweaters.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Sweaters <span class="plain-amp">&amp;</span> Jackets</div><div class="sc-count" id="count-sweater-jacket">19 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showWorkoutHub()" style="--img:url('/images/sub-hub-workout.jpg')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Workout</div><div class="sc-count" id="count-workout">10 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSuitsHub()" style="--img:url('/images/sub-hub-suits.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Suits <span class="plain-amp">&amp;</span> Dress Clothes</div><div class="sc-count" id="count-suits">10 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSwimHub()" style="--img:url('/images/sub-hub-swim.jpg')"><span class="sc-icon"><i data-lucide="waves"></i></span><div class="sc-name">Swimsuits</div><div class="sc-count" id="count-swim">6 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -2747,8 +2853,8 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Tailored trousers and relaxed joggers are judged on the same fiber standard — but the waistband is where they diverge. Tap in to see both.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('pants-trousers')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Trousers</div><div class="sc-count" id="count-pants-trousers">5 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('pants-joggers')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Joggers</div><div class="sc-count" id="count-pants-joggers">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('pants-trousers')" style="--img:url('/images/sub-pants-trousers.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Trousers</div><div class="sc-count" id="count-pants-trousers">5 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('pants-joggers')" style="--img:url('/images/sub-pants-joggers.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Joggers</div><div class="sc-count" id="count-pants-joggers">3 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -2766,12 +2872,12 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Easier to get right than swimwear or golf apparel, but hidden synthetics still hide in plain sight \u2014 polyester thread, nylon-core wool yarn, viscose lining, PFAS DWR. We audit the whole garment, not just the headline fiber.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('sj-sweaters')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Lightweight Sweaters</div><div class="sc-count" id="count-sj-sweaters">1 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('sj-quarterzip')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Quarter-Zips</div><div class="sc-count" id="count-sj-quarterzip">1 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('sj-heavy')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Heavy Sweaters <span class="plain-amp">&amp;</span> Cardigans</div><div class="sc-count" id="count-sj-heavy">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('sj-sweatshirt')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Cotton Sweatshirts <span class="plain-amp">&amp;</span> Hoodies</div><div class="sc-count" id="count-sj-sweatshirt">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('sj-casual')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Casual Jackets</div><div class="sc-count" id="count-sj-casual">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('sj-weather')"><span class="sc-icon"><i data-lucide="cloud-rain"></i></span><div class="sc-name">Weather <span class="plain-amp">&amp;</span> Cold-Weather Jackets</div><div class="sc-count" id="count-sj-weather">8 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('sj-sweaters')" style="--img:url('/images/sub-sj-sweaters.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Lightweight Sweaters</div><div class="sc-count" id="count-sj-sweaters">1 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('sj-quarterzip')" style="--img:url('/images/sub-sj-quarterzip.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Quarter-Zips</div><div class="sc-count" id="count-sj-quarterzip">1 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('sj-heavy')" style="--img:url('/images/sub-sj-heavy.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Heavy Sweaters <span class="plain-amp">&amp;</span> Cardigans</div><div class="sc-count" id="count-sj-heavy">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('sj-sweatshirt')" style="--img:url('/images/sub-sj-sweatshirt.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Cotton Sweatshirts <span class="plain-amp">&amp;</span> Hoodies</div><div class="sc-count" id="count-sj-sweatshirt">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('sj-casual')" style="--img:url('/images/sub-sj-casual.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Casual Jackets</div><div class="sc-count" id="count-sj-casual">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('sj-weather')" style="--img:url('/images/sub-sj-weather.jpg')"><span class="sc-icon"><i data-lucide="cloud-rain"></i></span><div class="sc-name">Weather <span class="plain-amp">&amp;</span> Cold-Weather Jackets</div><div class="sc-count" id="count-sj-weather">8 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -2789,11 +2895,11 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Golf runs on synthetic performance fabric more than any other category. Tap in to see where natural fiber still holds up — and where it doesn't.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('golf-polos')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Polos</div><div class="sc-count" id="count-golf-polos">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('golf-shorts')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Shorts</div><div class="sc-count" id="count-golf-shorts">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('golf-pants')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Pants</div><div class="sc-count" id="count-golf-pants">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('golf-sweaters')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Sweaters</div><div class="sc-count" id="count-golf-sweaters">7 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('golf-quarter-zips')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Quarter-Zips</div><div class="sc-count" id="count-golf-quarter-zips">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('golf-polos')" style="--img:url('/images/sub-golf-polos.jpg')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Polos</div><div class="sc-count" id="count-golf-polos">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('golf-shorts')" style="--img:url('/images/sub-golf-shorts.jpg')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Shorts</div><div class="sc-count" id="count-golf-shorts">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('golf-pants')" style="--img:url('/images/sub-golf-pants.jpg')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Pants</div><div class="sc-count" id="count-golf-pants">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('golf-sweaters')" style="--img:url('/images/sub-golf-sweaters.jpg')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Sweaters</div><div class="sc-count" id="count-golf-sweaters">7 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('golf-quarter-zips')" style="--img:url('/images/sub-golf-quarter-zips.jpg')"><span class="sc-icon"><i data-lucide="flag"></i></span><div class="sc-name">Quarter-Zips</div><div class="sc-count" id="count-golf-quarter-zips">2 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -2811,11 +2917,11 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Athletic wear runs almost entirely on synthetic performance fabric. We show you exactly where natural fiber still holds up — and what the tradeoffs really are.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('workout-tops')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Tops</div><div class="sc-count" id="count-workout-tops">6 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('workout-shorts')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Shorts</div><div class="sc-count" id="count-workout-shorts">7 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('workout-joggers')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Joggers <span class="plain-amp">&amp;</span> Sweatpants</div><div class="sc-count" id="count-workout-joggers">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('workout-baselayers')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Base Layers</div><div class="sc-count" id="count-workout-baselayers">5 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('workout-outerwear')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Outerwear</div><div class="sc-count" id="count-workout-outerwear">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('workout-tops')" style="--img:url('/images/sub-workout-tops.jpg')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Tops</div><div class="sc-count" id="count-workout-tops">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('workout-shorts')" style="--img:url('/images/sub-workout-shorts.jpg')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Shorts</div><div class="sc-count" id="count-workout-shorts">7 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('workout-joggers')" style="--img:url('/images/sub-workout-joggers.jpg')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Joggers <span class="plain-amp">&amp;</span> Sweatpants</div><div class="sc-count" id="count-workout-joggers">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('workout-baselayers')" style="--img:url('/images/sub-workout-baselayers.jpg')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Base Layers</div><div class="sc-count" id="count-workout-baselayers">5 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('workout-outerwear')" style="--img:url('/images/sub-workout-outerwear.jpg')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Outerwear</div><div class="sc-count" id="count-workout-outerwear">3 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -2833,11 +2939,11 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Formalwear is one of the easiest categories to find genuine natural fiber in — wool, cotton, and silk never really left. The compromises are chemical finishes and mass-market synthetic blends, not the fibers themselves.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('suits-suits')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Suits</div><div class="sc-count" id="count-suits-suits">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('suits-dress-shirts')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Dress Shirts</div><div class="sc-count" id="count-suits-dress-shirts">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('suits-dress-pants')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Dress Pants</div><div class="sc-count" id="count-suits-dress-pants">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('suits-blazers')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Blazers <span class="plain-amp">&amp;</span> Sport Coats</div><div class="sc-count" id="count-suits-blazers">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('suits-ties')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Ties</div><div class="sc-count" id="count-suits-ties">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('suits-suits')" style="--img:url('/images/sub-suits-suits.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Suits</div><div class="sc-count" id="count-suits-suits">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('suits-dress-shirts')" style="--img:url('/images/sub-suits-dress-shirts.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Dress Shirts</div><div class="sc-count" id="count-suits-dress-shirts">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('suits-dress-pants')" style="--img:url('/images/sub-suits-dress-pants.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Dress Pants</div><div class="sc-count" id="count-suits-dress-pants">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('suits-blazers')" style="--img:url('/images/sub-suits-blazers.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Blazers <span class="plain-amp">&amp;</span> Sport Coats</div><div class="sc-count" id="count-suits-blazers">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('suits-ties')" style="--img:url('/images/sub-suits-ties.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Ties</div><div class="sc-count" id="count-suits-ties">2 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -2855,8 +2961,8 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Honest heads up: genuine natural-fiber swimwear that you actually swim in doesn't really exist — cotton and wool don't perform wet. We focus on recycled vs. virgin synthetic as the real distinction here, and reserve natural fiber for what you wear before and after you're in the water.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('swim-trunks')"><span class="sc-icon"><i data-lucide="waves"></i></span><div class="sc-name">Board Shorts</div><div class="sc-count" id="count-swim-trunks">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('swim-coverups')"><span class="sc-icon"><i data-lucide="waves"></i></span><div class="sc-name">Beach Cover-Ups</div><div class="sc-count" id="count-swim-coverups">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('swim-trunks')" style="--img:url('/images/sub-swim-trunks.jpg')"><span class="sc-icon"><i data-lucide="waves"></i></span><div class="sc-name">Board Shorts</div><div class="sc-count" id="count-swim-trunks">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('swim-coverups')" style="--img:url('/images/sub-swim-coverups.jpg')"><span class="sc-icon"><i data-lucide="waves"></i></span><div class="sc-name">Beach Cover-Ups</div><div class="sc-count" id="count-swim-coverups">3 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -2924,16 +3030,16 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Effective plaque removal, healthy gums, and a balanced microbiome — without unnecessary plastic or chemical exposure.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('oral-toothbrush-electric')"><span class="sc-icon"><i data-lucide="zap"></i></span><div class="sc-name">Electric Toothbrushes</div><div class="sc-count" id="count-oral-toothbrush-electric">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('oral-toothbrush-manual')"><span class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="12" width="4" height="9" rx="1.5"/><rect x="6" y="7" width="12" height="5" rx="2"/><path d="M8 7 L8 4"/><path d="M11 7 L11 4"/><path d="M13 7 L13 4"/><path d="M16 7 L16 4"/></svg></span><div class="sc-name">Manual Toothbrushes</div><div class="sc-count" id="count-oral-toothbrush-manual">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('oral-floss')"><span class="sc-icon"><i data-lucide="waves"></i></span><div class="sc-name">Floss</div><div class="sc-count" id="count-oral-floss">5 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('oral-toothpaste')"><span class="sc-icon"><i data-lucide="smile"></i></span><div class="sc-name">Toothpaste</div><div class="sc-count" id="count-oral-toothpaste">5 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('oral-mouthwash')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Mouthwash</div><div class="sc-count" id="count-oral-mouthwash">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('oral-tongue')"><span class="sc-icon"><i data-lucide="smile"></i></span><div class="sc-name">Tongue Scrapers</div><div class="sc-count" id="count-oral-tongue">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('oral-retainer-clean')"><span class="sc-icon"><i data-lucide="sparkles"></i></span><div class="sc-name">Retainer Cleaning</div><div class="sc-count" id="count-oral-retainer-clean">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('oral-retainer-case')"><span class="sc-icon"><i data-lucide="package"></i></span><div class="sc-name">Retainer Cases</div><div class="sc-count" id="count-oral-retainer-case">1 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('oral-gum-mints')"><span class="sc-icon"><i data-lucide="candy"></i></span><div class="sc-name">Gum/Mints</div><div class="sc-count" id="count-oral-gum-mints">1 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('oral-miswak')"><span class="sc-icon"><i data-lucide="leaf"></i></span><div class="sc-name">Miswak</div><div class="sc-count" id="count-oral-miswak">1 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('oral-toothbrush-electric')" style="--img:url('/images/sub-oral-toothbrush-electric.jpg')"><span class="sc-icon"><i data-lucide="zap"></i></span><div class="sc-name">Electric Toothbrushes</div><div class="sc-count" id="count-oral-toothbrush-electric">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('oral-toothbrush-manual')" style="--img:url('/images/sub-oral-toothbrush-manual.jpg')"><span class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="12" width="4" height="9" rx="1.5"/><rect x="6" y="7" width="12" height="5" rx="2"/><path d="M8 7 L8 4"/><path d="M11 7 L11 4"/><path d="M13 7 L13 4"/><path d="M16 7 L16 4"/></svg></span><div class="sc-name">Manual Toothbrushes</div><div class="sc-count" id="count-oral-toothbrush-manual">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('oral-floss')" style="--img:url('/images/sub-oral-floss.jpg')"><span class="sc-icon"><i data-lucide="waves"></i></span><div class="sc-name">Floss</div><div class="sc-count" id="count-oral-floss">5 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('oral-toothpaste')" style="--img:url('/images/sub-oral-toothpaste.jpg')"><span class="sc-icon"><i data-lucide="smile"></i></span><div class="sc-name">Toothpaste</div><div class="sc-count" id="count-oral-toothpaste">5 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('oral-mouthwash')" style="--img:url('/images/sub-oral-mouthwash.jpg')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Mouthwash</div><div class="sc-count" id="count-oral-mouthwash">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('oral-tongue')" style="--img:url('/images/sub-oral-tongue.jpg')"><span class="sc-icon"><i data-lucide="smile"></i></span><div class="sc-name">Tongue Scrapers</div><div class="sc-count" id="count-oral-tongue">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('oral-retainer-clean')" style="--img:url('/images/sub-oral-retainer-clean.jpg')"><span class="sc-icon"><i data-lucide="sparkles"></i></span><div class="sc-name">Retainer Cleaning</div><div class="sc-count" id="count-oral-retainer-clean">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('oral-retainer-case')" style="--img:url('/images/sub-oral-retainer-case.jpg')"><span class="sc-icon"><i data-lucide="package"></i></span><div class="sc-name">Retainer Cases</div><div class="sc-count" id="count-oral-retainer-case">1 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('oral-gum-mints')" style="--img:url('/images/sub-oral-gum-mints.jpg')"><span class="sc-icon"><i data-lucide="candy"></i></span><div class="sc-name">Gum/Mints</div><div class="sc-count" id="count-oral-gum-mints">1 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('oral-miswak')" style="--img:url('/images/sub-oral-miswak.jpg')"><span class="sc-icon"><i data-lucide="leaf"></i></span><div class="sc-name">Miswak</div><div class="sc-count" id="count-oral-miswak">1 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -2950,11 +3056,11 @@ body.style-photo .cat-card::before{
   </div>
   <div class="subcat-grid">
     <div class="subcat-group-title">Universal</div>
-    <div class="subcat-card" onclick="showSubcat('supp-protein')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Protein Powders</div><div class="sc-count" id="count-supp-protein">0 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('supp-daily')"><span class="sc-icon"><i data-lucide="pill"></i></span><div class="sc-name">Daily Foundational</div><div class="sc-count" id="count-supp-daily">0 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('supp-organ')"><span class="sc-icon"><i data-lucide="beef"></i></span><div class="sc-name">Organ <span class="plain-amp">&amp;</span> Nose-to-Tail</div><div class="sc-count" id="count-supp-organ">0 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('supp-electrolyte')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Electrolytes <span class="plain-amp">&amp;</span> Hydration</div><div class="sc-count" id="count-supp-electrolyte">0 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('supp-creatine')"><span class="sc-icon"><i data-lucide="zap"></i></span><div class="sc-name">Creatine</div><div class="sc-count" id="count-supp-creatine">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('supp-protein')" style="--img:url('/images/sub-supp-protein.jpg')"><span class="sc-icon"><i data-lucide="dumbbell"></i></span><div class="sc-name">Protein Powders</div><div class="sc-count" id="count-supp-protein">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('supp-daily')" style="--img:url('/images/sub-supp-daily.jpg')"><span class="sc-icon"><i data-lucide="pill"></i></span><div class="sc-name">Daily Foundational</div><div class="sc-count" id="count-supp-daily">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('supp-organ')" style="--img:url('/images/sub-supp-organ.jpg')"><span class="sc-icon"><i data-lucide="beef"></i></span><div class="sc-name">Organ <span class="plain-amp">&amp;</span> Nose-to-Tail</div><div class="sc-count" id="count-supp-organ">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('supp-electrolyte')" style="--img:url('/images/sub-supp-electrolyte.jpg')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Electrolytes <span class="plain-amp">&amp;</span> Hydration</div><div class="sc-count" id="count-supp-electrolyte">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('supp-creatine')" style="--img:url('/images/sub-supp-creatine.jpg')"><span class="sc-icon"><i data-lucide="zap"></i></span><div class="sc-name">Creatine</div><div class="sc-count" id="count-supp-creatine">0 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title" id="subcat-group-title-suppmale">Male-Specific</div>
     <div class="subcat-card" id="subcat-card-suppmale1" onclick="showSubcat('supp-male-testosterone')"><span class="sc-icon"><i data-lucide="flame"></i></span><div class="sc-name">Testosterone <span class="plain-amp">&amp;</span> Hormone Support</div><div class="sc-count" id="count-supp-male-testosterone">0 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" id="subcat-card-suppmale2" onclick="showSubcat('supp-male-prostate')"><span class="sc-icon"><i data-lucide="shield"></i></span><div class="sc-name">Prostate Health</div><div class="sc-count" id="count-supp-male-prostate">0 rated</div><span class="sc-arr">›</span></div>
@@ -2979,13 +3085,13 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Every cleaning product should do its job while introducing the least possible toxic burden into the home — prioritizing ingredient transparency, fragrance-free formulas, and mechanical cleaning over chemical dependence.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('cleaning-laundrydetergent')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Laundry</div><div class="sc-count" id="count-cleaning-laundrydetergent">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('cleaning-dishsoap')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Dishwashing</div><div class="sc-count" id="count-cleaning-dishsoap">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('cleaning-allpurpose')"><span class="sc-icon"><i data-lucide="spray-can"></i></span><div class="sc-name">Surface Cleaners</div><div class="sc-count" id="count-cleaning-allpurpose">8 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('cleaning-floor')"><span class="sc-icon"><i data-lucide="layers"></i></span><div class="sc-name">Floor Care</div><div class="sc-count" id="count-cleaning-floor">5 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('cleaning-cloths')"><span class="sc-icon"><i data-lucide="square"></i></span><div class="sc-name">Cleaning Tools</div><div class="sc-count" id="count-cleaning-cloths">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('cleaning-foodwrap')"><span class="sc-icon"><i data-lucide="package-2"></i></span><div class="sc-name">Kitchen Disposables</div><div class="sc-count" id="count-cleaning-foodwrap">6 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('cleaning-textilecare')"><span class="sc-icon"><i data-lucide="sofa"></i></span><div class="sc-name">Textile <span class="plain-amp">&amp;</span> Odor Care</div><div class="sc-count" id="count-cleaning-textilecare">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cleaning-laundrydetergent')" style="--img:url('/images/sub-cleaning-laundrydetergent.jpg')"><span class="sc-icon"><i data-lucide="shirt"></i></span><div class="sc-name">Laundry</div><div class="sc-count" id="count-cleaning-laundrydetergent">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cleaning-dishsoap')" style="--img:url('/images/sub-cleaning-dishsoap.jpg')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Dishwashing</div><div class="sc-count" id="count-cleaning-dishsoap">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cleaning-allpurpose')" style="--img:url('/images/sub-cleaning-allpurpose.jpg')"><span class="sc-icon"><i data-lucide="spray-can"></i></span><div class="sc-name">Surface Cleaners</div><div class="sc-count" id="count-cleaning-allpurpose">8 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cleaning-floor')" style="--img:url('/images/sub-cleaning-floor.jpg')"><span class="sc-icon"><i data-lucide="layers"></i></span><div class="sc-name">Floor Care</div><div class="sc-count" id="count-cleaning-floor">5 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cleaning-cloths')" style="--img:url('/images/sub-cleaning-cloths.jpg')"><span class="sc-icon"><i data-lucide="square"></i></span><div class="sc-name">Cleaning Tools</div><div class="sc-count" id="count-cleaning-cloths">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cleaning-foodwrap')" style="--img:url('/images/sub-cleaning-foodwrap.jpg')"><span class="sc-icon"><i data-lucide="package-2"></i></span><div class="sc-name">Kitchen Disposables</div><div class="sc-count" id="count-cleaning-foodwrap">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cleaning-textilecare')" style="--img:url('/images/sub-cleaning-textilecare.jpg')"><span class="sc-icon"><i data-lucide="sofa"></i></span><div class="sc-name">Textile <span class="plain-amp">&amp;</span> Odor Care</div><div class="sc-count" id="count-cleaning-textilecare">4 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -3001,12 +3107,12 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Light is a genuine biological signal, not just illumination — the goal is bright, blue-shifted light in the morning and dim, warm light in the evening, matching what your circadian clock actually evolved to expect. Not every LED is a problem and not every incandescent bulb is automatically better; each product is judged on its own light output, not on category assumptions.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('lighting-bulbs-incandescent')"><span class="sc-icon"><i data-lucide="lightbulb"></i></span><div class="sc-name">Bulbs</div><div class="sc-count" id="count-lighting-bulbs-incandescent">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('lighting-lamps-desk')"><span class="sc-icon"><i data-lucide="lamp-desk"></i></span><div class="sc-name">Lamps</div><div class="sc-count" id="count-lighting-lamps-desk">6 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('lighting-portable-recharge')"><span class="sc-icon"><i data-lucide="flashlight"></i></span><div class="sc-name">Portable <span class="plain-amp">&amp;</span> Backup Lighting</div><div class="sc-count" id="count-lighting-portable-recharge">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('lighting-eyewear-bluelight')"><span class="sc-icon"><i data-lucide="glasses"></i></span><div class="sc-name">Blue Light Glasses</div><div class="sc-count" id="count-lighting-eyewear-bluelight">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('lighting-sleep-alarmclock')"><span class="sc-icon"><i data-lucide="alarm-clock"></i></span><div class="sc-name">Sleep <span class="plain-amp">&amp;</span> Wake</div><div class="sc-count" id="count-lighting-sleep-alarmclock">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('lighting-fixtures-shades')"><span class="sc-icon"><i data-lucide="lamp-ceiling"></i></span><div class="sc-name">Fixtures <span class="plain-amp">&amp;</span> Accessories</div><div class="sc-count" id="count-lighting-fixtures-shades">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('lighting-bulbs-incandescent')" style="--img:url('/images/sub-lighting-bulbs-incandescent.jpg')"><span class="sc-icon"><i data-lucide="lightbulb"></i></span><div class="sc-name">Bulbs</div><div class="sc-count" id="count-lighting-bulbs-incandescent">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('lighting-lamps-desk')" style="--img:url('/images/sub-lighting-lamps-desk.jpg')"><span class="sc-icon"><i data-lucide="lamp-desk"></i></span><div class="sc-name">Lamps</div><div class="sc-count" id="count-lighting-lamps-desk">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('lighting-portable-recharge')" style="--img:url('/images/sub-lighting-portable-recharge.jpg')"><span class="sc-icon"><i data-lucide="flashlight"></i></span><div class="sc-name">Portable <span class="plain-amp">&amp;</span> Backup Lighting</div><div class="sc-count" id="count-lighting-portable-recharge">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('lighting-eyewear-bluelight')" style="--img:url('/images/sub-lighting-eyewear-bluelight.jpg')"><span class="sc-icon"><i data-lucide="glasses"></i></span><div class="sc-name">Blue Light Glasses</div><div class="sc-count" id="count-lighting-eyewear-bluelight">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('lighting-sleep-alarmclock')" style="--img:url('/images/sub-lighting-sleep-alarmclock.jpg')"><span class="sc-icon"><i data-lucide="alarm-clock"></i></span><div class="sc-name">Sleep <span class="plain-amp">&amp;</span> Wake</div><div class="sc-count" id="count-lighting-sleep-alarmclock">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('lighting-fixtures-shades')" style="--img:url('/images/sub-lighting-fixtures-shades.jpg')"><span class="sc-icon"><i data-lucide="lamp-ceiling"></i></span><div class="sc-name">Fixtures <span class="plain-amp">&amp;</span> Accessories</div><div class="sc-count" id="count-lighting-fixtures-shades">4 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -3020,8 +3126,8 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Indoor air problems are almost always invisible without measurement — the goal is verified filtration and humidity performance over marketing claims. True HEPA with an independently confirmed CADR rating, no ozone or ionization side effects, and monitors/detectors whose accuracy has actually been checked against reference instruments, not just asserted by the brand.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('air-filters-hvac')"><span class="sc-icon"><i data-lucide="filter"></i></span><div class="sc-name">Filtration, Purification <span class="plain-amp">&amp;</span> Humidity Control</div><div class="sc-count" id="count-air-filters-hvac">9 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('air-monitors')"><span class="sc-icon"><i data-lucide="activity"></i></span><div class="sc-name">Air Quality <span class="plain-amp">&amp;</span> Radon Monitors</div><div class="sc-count" id="count-air-monitors">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('air-filters-hvac')" style="--img:url('/images/sub-air-filters-hvac.jpg')"><span class="sc-icon"><i data-lucide="filter"></i></span><div class="sc-name">Filtration, Purification <span class="plain-amp">&amp;</span> Humidity Control</div><div class="sc-count" id="count-air-filters-hvac">9 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('air-monitors')" style="--img:url('/images/sub-air-monitors.jpg')"><span class="sc-icon"><i data-lucide="activity"></i></span><div class="sc-name">Air Quality <span class="plain-amp">&amp;</span> Radon Monitors</div><div class="sc-count" id="count-air-monitors">4 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" id="subcat-card-airvent" onclick="showSubcat('air-ventilation')"><span class="sc-icon"><i data-lucide="house"></i></span><div class="sc-name">Whole-Home Ventilation (ERV/HRV)</div><div class="sc-count" id="count-air-ventilation">2 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
@@ -3036,11 +3142,11 @@ body.style-photo .cat-card::before{
     <p class="cat-desc">Maximizing contaminant removal while minimizing unnecessary chemical and material exposure — from what comes out of the tap to what you store it in.</p>
   </div>
   <div class="subcat-grid">
-    <div class="subcat-card" onclick="showSubcat('water-drinking')"><span class="sc-icon"><i data-lucide="filter"></i></span><div class="sc-name">Home Drinking Filtration</div><div class="sc-count" id="count-water-drinking">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('water-bottled')"><span class="sc-icon"><i data-lucide="package"></i></span><div class="sc-name">Bottled <span class="plain-amp">&amp;</span> Travel Water</div><div class="sc-count" id="count-water-bottled">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('water-containers')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Containers <span class="plain-amp">&amp;</span> Hydration</div><div class="sc-count" id="count-water-containers">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('water-shower')"><span class="sc-icon"><i data-lucide="shower-head"></i></span><div class="sc-name">Shower Filtration</div><div class="sc-count" id="count-water-shower">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('water-electrolytes')"><span class="sc-icon"><i data-lucide="flask-conical"></i></span><div class="sc-name">Electrolytes <span class="plain-amp">&amp;</span> Remineralization</div><div class="sc-count" id="count-water-electrolytes">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('water-drinking')" style="--img:url('/images/sub-water-drinking.jpg')"><span class="sc-icon"><i data-lucide="filter"></i></span><div class="sc-name">Home Drinking Filtration</div><div class="sc-count" id="count-water-drinking">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('water-bottled')" style="--img:url('/images/sub-water-bottled.jpg')"><span class="sc-icon"><i data-lucide="package"></i></span><div class="sc-name">Bottled <span class="plain-amp">&amp;</span> Travel Water</div><div class="sc-count" id="count-water-bottled">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('water-containers')" style="--img:url('/images/sub-water-containers.jpg')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Containers <span class="plain-amp">&amp;</span> Hydration</div><div class="sc-count" id="count-water-containers">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('water-shower')" style="--img:url('/images/sub-water-shower.jpg')"><span class="sc-icon"><i data-lucide="shower-head"></i></span><div class="sc-name">Shower Filtration</div><div class="sc-count" id="count-water-shower">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('water-electrolytes')" style="--img:url('/images/sub-water-electrolytes.jpg')"><span class="sc-icon"><i data-lucide="flask-conical"></i></span><div class="sc-name">Electrolytes <span class="plain-amp">&amp;</span> Remineralization</div><div class="sc-count" id="count-water-electrolytes">3 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -3057,22 +3163,22 @@ body.style-photo .cat-card::before{
   </div>
   <div class="subcat-grid">
     <div class="subcat-group-title">Meat <span class="plain-amp">&amp;</span> Protein</div>
-    <div class="subcat-card" onclick="showSubcat('food-meat-beef')"><span class="sc-icon"><i data-lucide="beef"></i></span><div class="sc-name">Beef <span class="plain-amp">&amp;</span> Bison</div><div class="sc-count" id="count-food-meat-beef">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('food-meat-poultry')"><span class="sc-icon"><i data-lucide="drumstick"></i></span><div class="sc-name">Poultry</div><div class="sc-count" id="count-food-meat-poultry">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('food-meat-pork')"><span class="sc-icon"><i data-lucide="ham"></i></span><div class="sc-name">Pork</div><div class="sc-count" id="count-food-meat-pork">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('food-meat-seafood')"><span class="sc-icon"><i data-lucide="fish"></i></span><div class="sc-name">Wild-Caught Seafood</div><div class="sc-count" id="count-food-meat-seafood">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('food-meat-delivery')"><span class="sc-icon"><i data-lucide="truck"></i></span><div class="sc-name">Meat Delivery Services</div><div class="sc-count" id="count-food-meat-delivery">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-meat-beef')" style="--img:url('/images/sub-food-meat-beef.jpg')"><span class="sc-icon"><i data-lucide="beef"></i></span><div class="sc-name">Beef <span class="plain-amp">&amp;</span> Bison</div><div class="sc-count" id="count-food-meat-beef">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-meat-poultry')" style="--img:url('/images/sub-food-meat-poultry.jpg')"><span class="sc-icon"><i data-lucide="drumstick"></i></span><div class="sc-name">Poultry</div><div class="sc-count" id="count-food-meat-poultry">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-meat-pork')" style="--img:url('/images/sub-food-meat-pork.jpg')"><span class="sc-icon"><i data-lucide="ham"></i></span><div class="sc-name">Pork</div><div class="sc-count" id="count-food-meat-pork">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-meat-seafood')" style="--img:url('/images/sub-food-meat-seafood.jpg')"><span class="sc-icon"><i data-lucide="fish"></i></span><div class="sc-name">Wild-Caught Seafood</div><div class="sc-count" id="count-food-meat-seafood">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-meat-delivery')" style="--img:url('/images/sub-food-meat-delivery.jpg')"><span class="sc-icon"><i data-lucide="truck"></i></span><div class="sc-name">Meat Delivery Services</div><div class="sc-count" id="count-food-meat-delivery">3 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title">Dairy <span class="plain-amp">&amp;</span> Eggs</div>
-    <div class="subcat-card" onclick="showSubcat('food-dairy-eggs')"><span class="sc-icon"><i data-lucide="egg"></i></span><div class="sc-name">Pastured Eggs</div><div class="sc-count" id="count-food-dairy-eggs">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('food-dairy-milk')"><span class="sc-icon"><i data-lucide="milk"></i></span><div class="sc-name">Grass-Fed <span class="plain-amp">&amp;</span> Raw Dairy</div><div class="sc-count" id="count-food-dairy-milk">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-dairy-eggs')" style="--img:url('/images/sub-food-dairy-eggs.jpg')"><span class="sc-icon"><i data-lucide="egg"></i></span><div class="sc-name">Pastured Eggs</div><div class="sc-count" id="count-food-dairy-eggs">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-dairy-milk')" style="--img:url('/images/sub-food-dairy-milk.jpg')"><span class="sc-icon"><i data-lucide="milk"></i></span><div class="sc-name">Grass-Fed <span class="plain-amp">&amp;</span> Raw Dairy</div><div class="sc-count" id="count-food-dairy-milk">2 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title">Pantry <span class="plain-amp">&amp;</span> Cooking</div>
-    <div class="subcat-card" onclick="showSubcat('food-pantry-fats')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Cooking Fats <span class="plain-amp">&amp;</span> Oils</div><div class="sc-count" id="count-food-pantry-fats">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('food-pantry-salt')"><span class="sc-icon"><i data-lucide="flask-conical"></i></span><div class="sc-name">Salt <span class="plain-amp">&amp;</span> Seasonings</div><div class="sc-count" id="count-food-pantry-salt">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('food-pantry-condiments')"><span class="sc-icon"><i data-lucide="package"></i></span><div class="sc-name">Condiments <span class="plain-amp">&amp;</span> Sauces</div><div class="sc-count" id="count-food-pantry-condiments">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('food-pantry-staples')"><span class="sc-icon"><i data-lucide="wheat"></i></span><div class="sc-name">Nuts, Grains <span class="plain-amp">&amp;</span> Pantry Staples</div><div class="sc-count" id="count-food-pantry-staples">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('food-pantry-snacks')"><span class="sc-icon"><i data-lucide="popcorn"></i></span><div class="sc-name">Chips <span class="plain-amp">&amp;</span> Savoury Snacks</div><div class="sc-count" id="count-food-pantry-snacks">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-pantry-fats')" style="--img:url('/images/sub-food-pantry-fats.jpg')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Cooking Fats <span class="plain-amp">&amp;</span> Oils</div><div class="sc-count" id="count-food-pantry-fats">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-pantry-salt')" style="--img:url('/images/sub-food-pantry-salt.jpg')"><span class="sc-icon"><i data-lucide="flask-conical"></i></span><div class="sc-name">Salt <span class="plain-amp">&amp;</span> Seasonings</div><div class="sc-count" id="count-food-pantry-salt">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-pantry-condiments')" style="--img:url('/images/sub-food-pantry-condiments.jpg')"><span class="sc-icon"><i data-lucide="package"></i></span><div class="sc-name">Condiments <span class="plain-amp">&amp;</span> Sauces</div><div class="sc-count" id="count-food-pantry-condiments">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-pantry-staples')" style="--img:url('/images/sub-food-pantry-staples.jpg')"><span class="sc-icon"><i data-lucide="wheat"></i></span><div class="sc-name">Nuts, Grains <span class="plain-amp">&amp;</span> Pantry Staples</div><div class="sc-count" id="count-food-pantry-staples">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-pantry-snacks')" style="--img:url('/images/sub-food-pantry-snacks.jpg')"><span class="sc-icon"><i data-lucide="popcorn"></i></span><div class="sc-name">Chips <span class="plain-amp">&amp;</span> Savoury Snacks</div><div class="sc-count" id="count-food-pantry-snacks">3 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title">Grocery <span class="plain-amp">&amp;</span> Meal Delivery</div>
-    <div class="subcat-card" onclick="showSubcat('food-grocery-delivery')"><span class="sc-icon"><i data-lucide="shopping-cart"></i></span><div class="sc-name">Grocery <span class="plain-amp">&amp;</span> Meal Delivery Services</div><div class="sc-count" id="count-food-grocery-delivery">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('food-grocery-delivery')" style="--img:url('/images/sub-food-grocery-delivery.jpg')"><span class="sc-icon"><i data-lucide="shopping-cart"></i></span><div class="sc-name">Grocery <span class="plain-amp">&amp;</span> Meal Delivery Services</div><div class="sc-count" id="count-food-grocery-delivery">2 rated</div><span class="sc-arr">›</span></div>
   </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -3089,19 +3195,19 @@ body.style-photo .cat-card::before{
   </div>
   <div class="subcat-grid">
     <div class="subcat-group-title">Cookware</div>    <div class="subcat-group-title">Cutlery</div>
-    <div class="subcat-card" onclick="showSubcat('cook-knives')"><span class="sc-icon"><i data-lucide="utensils"></i></span><div class="sc-name">Knives <span class="plain-amp">&amp;</span> Sharpening</div><div class="sc-count" id="count-cook-knives">5 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cook-knives')" style="--img:url('/images/sub-cook-knives.jpg')"><span class="sc-icon"><i data-lucide="utensils"></i></span><div class="sc-name">Knives <span class="plain-amp">&amp;</span> Sharpening</div><div class="sc-count" id="count-cook-knives">5 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title">Kitchen Tools <span class="plain-amp">&amp;</span> Gadgets</div>
-    <div class="subcat-card" onclick="showSubcat('cook-prep')"><span class="sc-icon"><i data-lucide="utensils"></i></span><div class="sc-name">Prep <span class="plain-amp">&amp;</span> Measuring Tools</div><div class="sc-count" id="count-cook-prep">8 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('cook-eggtools')"><span class="sc-icon"><i data-lucide="egg"></i></span><div class="sc-name">Specialty Food Tools</div><div class="sc-count" id="count-cook-eggtools">8 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('cook-utensils')"><span class="sc-icon"><i data-lucide="utensils"></i></span><div class="sc-name">Utensils <span class="plain-amp">&amp;</span> Cleaning Tools</div><div class="sc-count" id="count-cook-utensils">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cook-prep')" style="--img:url('/images/sub-cook-prep.jpg')"><span class="sc-icon"><i data-lucide="utensils"></i></span><div class="sc-name">Prep <span class="plain-amp">&amp;</span> Measuring Tools</div><div class="sc-count" id="count-cook-prep">8 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cook-eggtools')" style="--img:url('/images/sub-cook-eggtools.jpg')"><span class="sc-icon"><i data-lucide="egg"></i></span><div class="sc-name">Specialty Food Tools</div><div class="sc-count" id="count-cook-eggtools">8 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cook-utensils')" style="--img:url('/images/sub-cook-utensils.jpg')"><span class="sc-icon"><i data-lucide="utensils"></i></span><div class="sc-name">Utensils <span class="plain-amp">&amp;</span> Cleaning Tools</div><div class="sc-count" id="count-cook-utensils">6 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title">Tabletop <span class="plain-amp">&amp;</span> Dining</div>
-    <div class="subcat-card" onclick="showSubcat('cook-dinnerware')"><span class="sc-icon"><i data-lucide="circle"></i></span><div class="sc-name">Dinnerware, Flatware <span class="plain-amp">&amp;</span> Drinkware</div><div class="sc-count" id="count-cook-dinnerware">5 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cook-dinnerware')" style="--img:url('/images/sub-cook-dinnerware.jpg')"><span class="sc-icon"><i data-lucide="circle"></i></span><div class="sc-name">Dinnerware, Flatware <span class="plain-amp">&amp;</span> Drinkware</div><div class="sc-count" id="count-cook-dinnerware">5 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title">Prep <span class="plain-amp">&amp;</span> Storage</div>
-    <div class="subcat-card" onclick="showSubcat('cook-boards')"><span class="sc-icon"><i data-lucide="square"></i></span><div class="sc-name">Prep Boards <span class="plain-amp">&amp;</span> Bowls</div><div class="sc-count" id="count-cook-boards">5 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('cook-strainers')"><span class="sc-icon"><i data-lucide="utensils"></i></span><div class="sc-name">Strainers <span class="plain-amp">&amp;</span> Food Storage</div><div class="sc-count" id="count-cook-strainers">11 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('cook-mitts')"><span class="sc-icon"><i data-lucide="hand"></i></span><div class="sc-name">Oven Mitts <span class="plain-amp">&amp;</span> Pot Holders</div><div class="sc-count" id="count-cook-mitts">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cook-boards')" style="--img:url('/images/sub-cook-boards.jpg')"><span class="sc-icon"><i data-lucide="square"></i></span><div class="sc-name">Prep Boards <span class="plain-amp">&amp;</span> Bowls</div><div class="sc-count" id="count-cook-boards">5 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cook-strainers')" style="--img:url('/images/sub-cook-strainers.jpg')"><span class="sc-icon"><i data-lucide="utensils"></i></span><div class="sc-name">Strainers <span class="plain-amp">&amp;</span> Food Storage</div><div class="sc-count" id="count-cook-strainers">11 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cook-mitts')" style="--img:url('/images/sub-cook-mitts.jpg')"><span class="sc-icon"><i data-lucide="hand"></i></span><div class="sc-name">Oven Mitts <span class="plain-amp">&amp;</span> Pot Holders</div><div class="sc-count" id="count-cook-mitts">3 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title">Appliances</div>
-    <div class="subcat-card" onclick="showSubcat('cook-appliances')"><span class="sc-icon"><i data-lucide="plug"></i></span><div class="sc-name">Kitchen Appliances</div><div class="sc-count" id="count-cook-appliances">6 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('cook-appliances')" style="--img:url('/images/sub-cook-appliances.jpg')"><span class="sc-icon"><i data-lucide="plug"></i></span><div class="sc-name">Kitchen Appliances</div><div class="sc-count" id="count-cook-appliances">6 rated</div><span class="sc-arr">›</span></div>
 </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -3118,18 +3224,18 @@ body.style-photo .cat-card::before{
   </div>
   <div class="subcat-grid">
     <div class="subcat-group-title">Mattresses <span class="plain-amp">&amp;</span> Toppers</div>
-    <div class="subcat-card" onclick="showSubcat('bed-mattresses')"><span class="sc-icon"><i data-lucide="bed"></i></span><div class="sc-name">Mattresses</div><div class="sc-count" id="count-bed-mattresses">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('bed-toppers')"><span class="sc-icon"><i data-lucide="layers"></i></span><div class="sc-name">Mattress Toppers</div><div class="sc-count" id="count-bed-toppers">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('bed-protectors')"><span class="sc-icon"><i data-lucide="shield"></i></span><div class="sc-name">Mattress Protectors</div><div class="sc-count" id="count-bed-protectors">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('bed-mattresses')" style="--img:url('/images/sub-bed-mattresses.jpg')"><span class="sc-icon"><i data-lucide="bed"></i></span><div class="sc-name">Mattresses</div><div class="sc-count" id="count-bed-mattresses">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('bed-toppers')" style="--img:url('/images/sub-bed-toppers.jpg')"><span class="sc-icon"><i data-lucide="layers"></i></span><div class="sc-name">Mattress Toppers</div><div class="sc-count" id="count-bed-toppers">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('bed-protectors')" style="--img:url('/images/sub-bed-protectors.jpg')"><span class="sc-icon"><i data-lucide="shield"></i></span><div class="sc-name">Mattress Protectors</div><div class="sc-count" id="count-bed-protectors">2 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title">Sheets <span class="plain-amp">&amp;</span> Bedding</div>
-    <div class="subcat-card" onclick="showSubcat('bed-sheets')"><span class="sc-icon"><i data-lucide="bed-single"></i></span><div class="sc-name">Sheets <span class="plain-amp">&amp;</span> Pillowcases</div><div class="sc-count" id="count-bed-sheets">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('bed-pillows')"><span class="sc-icon"><i data-lucide="square"></i></span><div class="sc-name">Pillows</div><div class="sc-count" id="count-bed-pillows">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('bed-blankets')"><span class="sc-icon"><i data-lucide="waves"></i></span><div class="sc-name">Blankets <span class="plain-amp">&amp;</span> Comforters</div><div class="sc-count" id="count-bed-blankets">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('bed-duvets')"><span class="sc-icon"><i data-lucide="square"></i></span><div class="sc-name">Duvet Covers</div><div class="sc-count" id="count-bed-duvets">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('bed-sheets')" style="--img:url('/images/sub-bed-sheets.jpg')"><span class="sc-icon"><i data-lucide="bed-single"></i></span><div class="sc-name">Sheets <span class="plain-amp">&amp;</span> Pillowcases</div><div class="sc-count" id="count-bed-sheets">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('bed-pillows')" style="--img:url('/images/sub-bed-pillows.jpg')"><span class="sc-icon"><i data-lucide="square"></i></span><div class="sc-name">Pillows</div><div class="sc-count" id="count-bed-pillows">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('bed-blankets')" style="--img:url('/images/sub-bed-blankets.jpg')"><span class="sc-icon"><i data-lucide="waves"></i></span><div class="sc-name">Blankets <span class="plain-amp">&amp;</span> Comforters</div><div class="sc-count" id="count-bed-blankets">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('bed-duvets')" style="--img:url('/images/sub-bed-duvets.jpg')"><span class="sc-icon"><i data-lucide="square"></i></span><div class="sc-name">Duvet Covers</div><div class="sc-count" id="count-bed-duvets">2 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title">Room Extras</div>
-    <div class="subcat-card" onclick="showSubcat('bed-curtains')"><span class="sc-icon"><i data-lucide="blinds"></i></span><div class="sc-name">Curtains</div><div class="sc-count" id="count-bed-curtains">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('bed-rugs')"><span class="sc-icon"><i data-lucide="square"></i></span><div class="sc-name">Bedroom Rugs</div><div class="sc-count" id="count-bed-rugs">1 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('bed-sleepmasks')"><span class="sc-icon"><i data-lucide="eye-off"></i></span><div class="sc-name">Sleep Masks</div><div class="sc-count" id="count-bed-sleepmasks">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('bed-curtains')" style="--img:url('/images/sub-bed-curtains.jpg')"><span class="sc-icon"><i data-lucide="blinds"></i></span><div class="sc-name">Curtains</div><div class="sc-count" id="count-bed-curtains">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('bed-rugs')" style="--img:url('/images/sub-bed-rugs.jpg')"><span class="sc-icon"><i data-lucide="square"></i></span><div class="sc-name">Bedroom Rugs</div><div class="sc-count" id="count-bed-rugs">1 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('bed-sleepmasks')" style="--img:url('/images/sub-bed-sleepmasks.jpg')"><span class="sc-icon"><i data-lucide="eye-off"></i></span><div class="sc-name">Sleep Masks</div><div class="sc-count" id="count-bed-sleepmasks">2 rated</div><span class="sc-arr">›</span></div>
 </div>
   <div class="divider"></div>
   <div style="padding:18px 18px 24px">
@@ -3206,22 +3312,22 @@ body.style-photo .cat-card::before{
   </div>
   <div class="subcat-grid">
     <div class="subcat-group-title">Daily Essentials</div>
-    <div class="subcat-card" onclick="showSubcat('personal-skin')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Skin Care</div><div class="sc-count" id="count-personal-skin">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('personal-hair-shampoo')"><span class="sc-icon"><i data-lucide="droplets"></i></span><div class="sc-name">Shampoo <span class="plain-amp">&amp;</span> Conditioner</div><div class="sc-count" id="count-personal-hair-shampoo">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('personal-hair-oils')"><span class="sc-icon"><i data-lucide="leaf"></i></span><div class="sc-name">Scalp <span class="plain-amp">&amp;</span> Hair Oils</div><div class="sc-count" id="count-personal-hair-oils">3 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('personal-shaving')"><span class="sc-icon"><i data-lucide="scissors"></i></span><div class="sc-name">Shaving</div><div class="sc-count" id="count-personal-shaving">2 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('personal-deodorant')"><span class="sc-icon"><i data-lucide="leaf"></i></span><div class="sc-name">Deodorant</div><div class="sc-count" id="count-personal-deodorant">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('personal-sun')"><span class="sc-icon"><i data-lucide="sun"></i></span><div class="sc-name">Sun Care</div><div class="sc-count" id="count-personal-sun">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-skin')" style="--img:url('/images/sub-personal-skin.jpg')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Skin Care</div><div class="sc-count" id="count-personal-skin">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-hair-shampoo')" style="--img:url('/images/sub-personal-hair-shampoo.jpg')"><span class="sc-icon"><i data-lucide="droplets"></i></span><div class="sc-name">Shampoo <span class="plain-amp">&amp;</span> Conditioner</div><div class="sc-count" id="count-personal-hair-shampoo">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-hair-oils')" style="--img:url('/images/sub-personal-hair-oils.jpg')"><span class="sc-icon"><i data-lucide="leaf"></i></span><div class="sc-name">Scalp <span class="plain-amp">&amp;</span> Hair Oils</div><div class="sc-count" id="count-personal-hair-oils">3 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-shaving')" style="--img:url('/images/sub-personal-shaving.jpg')"><span class="sc-icon"><i data-lucide="scissors"></i></span><div class="sc-name">Shaving</div><div class="sc-count" id="count-personal-shaving">2 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-deodorant')" style="--img:url('/images/sub-personal-deodorant.jpg')"><span class="sc-icon"><i data-lucide="leaf"></i></span><div class="sc-name">Deodorant</div><div class="sc-count" id="count-personal-deodorant">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-sun')" style="--img:url('/images/sub-personal-sun.jpg')"><span class="sc-icon"><i data-lucide="sun"></i></span><div class="sc-name">Sun Care</div><div class="sc-count" id="count-personal-sun">2 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title" id="subcat-group-title-grooming" style="display:none">Grooming <span class="plain-amp">&amp;</span> Style</div>
     <div class="subcat-card" id="subcat-card-grooming" style="display:none" onclick="showSubcat('personal-grooming')"><span class="sc-icon"><i data-lucide="scissors"></i></span><div class="sc-name">Grooming Tools <span class="plain-amp">&amp;</span> Accessories</div><div class="sc-count" id="count-personal-grooming">3 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" id="subcat-card-nails" style="display:none" onclick="showSubcat('personal-nails')"><span class="sc-icon"><i data-lucide="sparkles"></i></span><div class="sc-name">Nail Care <span class="plain-amp">&amp;</span> Color</div><div class="sc-count" id="count-personal-nails">4 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" id="subcat-card-fragrance" style="display:none" onclick="showSubcat('personal-fragrance')"><span class="sc-icon"><i data-lucide="flower"></i></span><div class="sc-name">Fragrance <span class="plain-amp">&amp;</span> Perfume</div><div class="sc-count" id="count-personal-fragrance">0 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" id="subcat-card-cosmetics" style="display:none" onclick="showSubcat('personal-cosmetics')"><span class="sc-icon"><i data-lucide="sparkles"></i></span><div class="sc-name">Cosmetics <span class="plain-amp">&amp;</span> Makeup</div><div class="sc-count" id="count-personal-cosmetics">3 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title">Hygiene <span class="plain-amp">&amp;</span> Care Extras</div>
-    <div class="subcat-card" onclick="showSubcat('personal-bath')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Bath <span class="plain-amp">&amp;</span> Body Extras</div><div class="sc-count" id="count-personal-bath">0 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('personal-foot')"><span class="sc-icon"><i data-lucide="footprints"></i></span><div class="sc-name">Foot Care</div><div class="sc-count" id="count-personal-foot">0 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('personal-handhygiene')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Hand Hygiene</div><div class="sc-count" id="count-personal-handhygiene">4 rated</div><span class="sc-arr">›</span></div>
-    <div class="subcat-card" onclick="showSubcat('personal-disposables')"><span class="sc-icon"><i data-lucide="package"></i></span><div class="sc-name">Hygiene Disposables <span class="plain-amp">&amp;</span> Reusables</div><div class="sc-count" id="count-personal-disposables">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-bath')" style="--img:url('/images/sub-personal-bath.jpg')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Bath <span class="plain-amp">&amp;</span> Body Extras</div><div class="sc-count" id="count-personal-bath">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-foot')" style="--img:url('/images/sub-personal-foot.jpg')"><span class="sc-icon"><i data-lucide="footprints"></i></span><div class="sc-name">Foot Care</div><div class="sc-count" id="count-personal-foot">0 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-handhygiene')" style="--img:url('/images/sub-personal-handhygiene.jpg')"><span class="sc-icon"><i data-lucide="droplet"></i></span><div class="sc-name">Hand Hygiene</div><div class="sc-count" id="count-personal-handhygiene">4 rated</div><span class="sc-arr">›</span></div>
+    <div class="subcat-card" onclick="showSubcat('personal-disposables')" style="--img:url('/images/sub-personal-disposables.jpg')"><span class="sc-icon"><i data-lucide="package"></i></span><div class="sc-name">Hygiene Disposables <span class="plain-amp">&amp;</span> Reusables</div><div class="sc-count" id="count-personal-disposables">4 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-group-title" id="subcat-group-title-womens" style="display:none">Women's <span class="plain-amp">&amp;</span> Intimate Care</div>
     <div class="subcat-card" id="subcat-card-womens1" style="display:none" onclick="showSubcat('personal-menstrual')"><span class="sc-icon"><i data-lucide="flower-2"></i></span><div class="sc-name">Menstrual Care</div><div class="sc-count" id="count-personal-menstrual">4 rated</div><span class="sc-arr">›</span></div>
     <div class="subcat-card" id="subcat-card-womens2" style="display:none" onclick="showSubcat('personal-intimate')"><span class="sc-icon"><i data-lucide="flower-2"></i></span><div class="sc-name">Intimate Cleansing</div><div class="sc-count" id="count-personal-intimate">3 rated</div><span class="sc-arr">›</span></div>
@@ -3256,11 +3362,11 @@ body.style-photo .cat-card::before{
 <!-- SEARCH -->
 <div id="screen-search" class="screen">
 <div class="page">
+<div class="search-hero" role="img" aria-label="Gentle ocean waves rolling onto sand in warm golden-hour sunlight">
+  <h1 class="search-title">Search</h1>
+  <p class="search-sub">Every product, brand and standard in the ROOTED database.</p>
+</div>
 <div class="search-wrap">
-  <div class="search-hd">
-    <h1 class="search-title">Search</h1>
-    <p class="search-sub">Every product, brand and standard in the ROOTED database.</p>
-  </div>
   <div class="search-box">
     <span class="search-icon"><i data-lucide="search"></i></span>
     <input class="search-input" type="text" placeholder="Search products, brands..." id="search-input" oninput="handleSearch(this.value)">
@@ -3357,7 +3463,7 @@ body.style-photo .cat-card::before{
 <div id="screen-signup" class="screen"><div class="page">
   <div class="auth-card">
     <div class="auth-card-hd">
-      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="42" y="64" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="46" fill="var(--white)">R</text><circle cx="69" cy="69" r="12" fill="var(--white)"/><path d="M63.5 69l3.5 3.5 7-7" stroke="var(--forest)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="auth-card-title">Create your account</div>
       <div class="auth-card-sub">Standards first. Products second. People always.</div>
     </div>
@@ -3376,7 +3482,7 @@ body.style-photo .cat-card::before{
 <div id="screen-login" class="screen"><div class="page">
   <div class="auth-card">
     <div class="auth-card-hd">
-      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="42" y="64" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="46" fill="var(--white)">R</text><circle cx="69" cy="69" r="12" fill="var(--white)"/><path d="M63.5 69l3.5 3.5 7-7" stroke="var(--forest)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="auth-card-title">Welcome back</div>
     </div>
     <div id="login-error" class="auth-error"></div>
@@ -3393,7 +3499,7 @@ body.style-photo .cat-card::before{
 <div id="screen-reset-password" class="screen"><div class="page">
   <div class="auth-card">
     <div class="auth-card-hd">
-      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="42" y="64" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="46" fill="var(--white)">R</text><circle cx="69" cy="69" r="12" fill="var(--white)"/><path d="M63.5 69l3.5 3.5 7-7" stroke="var(--forest)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="auth-card-title">Set a new password</div>
       <div class="auth-card-sub">You're verified via your reset link — choose a new password below.</div>
     </div>
@@ -3832,7 +3938,7 @@ body.style-photo .cat-card::before{
 <!-- MOBILE SIDE MENU DRAWER (alternative to bottom bar, toggled via Mobile Navigation setting) -->
 <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" onclick="toggleMobileDrawer()"></div>
 <nav class="mobile-drawer" id="mobile-drawer">
-  <div class="mobile-drawer-brand"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
+  <div class="mobile-drawer-brand"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="42" y="64" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="46" fill="var(--white)">R</text><circle cx="69" cy="69" r="12" fill="var(--white)"/><path d="M63.5 69l3.5 3.5 7-7" stroke="var(--forest)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
   <div class="mobile-drawer-nav">
     <button class="tab mobile-drawer-tab active" data-tab="home" onclick="showTab('home');toggleMobileDrawer()"><i data-lucide="house"></i><span>Home</span></button>
     <button class="tab mobile-drawer-tab" data-tab="search" onclick="showTab('search');toggleMobileDrawer()"><i data-lucide="search"></i><span>Search</span></button>
@@ -3856,7 +3962,7 @@ body.style-photo .cat-card::before{
 
 <!-- DESKTOP SIDEBAR (desktop only, hidden on mobile via CSS) -->
 <nav class="desktop-sidebar">
-  <div class="sidebar-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
+  <div class="sidebar-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="42" y="64" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="46" fill="var(--white)">R</text><circle cx="69" cy="69" r="12" fill="var(--white)"/><path d="M63.5 69l3.5 3.5 7-7" stroke="var(--forest)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
   <div class="sidebar-nav">
     <button class="tab sidebar-tab active" data-tab="home" onclick="showTab('home')"><i data-lucide="house"></i><span>Home</span></button>
     <button class="tab sidebar-tab" data-tab="search" onclick="showTab('search')"><i data-lucide="search"></i><span>Search</span></button>
@@ -3961,6 +4067,11 @@ function initScrollbarWidth() {
    Two independent things: `nav-solid` once the page has scrolled at all, and
    `nav-over` while the home hero is still behind the nav (white-on-image).
    Read from a rAF-throttled scroll listener so this stays cheap. */
+function scrollToAskRooted() {
+  const el = document.getElementById('ask-rooted');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function initNavState() {
   let ticking = false;
   const navH = () => parseInt(getComputedStyle(document.documentElement)
@@ -4950,11 +5061,25 @@ function parsePriceValue(priceStr) {
   return match ? parseFloat(match[1]) : null;
 }
 
+// The list card shows a short highlight ("100% organic cotton"), not the full
+// verdict — that stays on the product detail screen. First sentence of the
+// verdict, word-capped so the card never wraps into a paragraph.
+function prodHighlight(p){
+  const v = (p.verdict || '').trim();
+  if (!v) return '';
+  let first = v.split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,'');
+  if (first.length > 72) {
+    const cut = first.slice(0, 72);
+    first = cut.slice(0, cut.lastIndexOf(' ') > 40 ? cut.lastIndexOf(' ') : 72) + '\u2026';
+  }
+  return first;
+}
+
 function buildProdCard(id,p,isBudget){
   const imgHtml = buildImgEl(id, p, false);
   const tc=p.tier==='1'?'':p.tier==='2'?'t2':'t3';
   const cornerBadge = p.gold ? '<span class="tb-gold" title="Gold Standard">★</span>' : (isBudget ? '<span class="tb-budget" title="Budget Pick">$</span>' : '');
-  return `<div class="pc" data-tier="${p.tier}" data-budget="${isBudget?'true':'false'}" onclick="showProduct('${id}')">${cornerBadge}<div class="pc-img" style="padding:0;overflow:hidden">${imgHtml}</div><div class="pc-body"><div class="pc-brand">${p.brand}</div><div class="pc-name">${p.name}</div><div class="pc-verdict">${p.verdict}</div><div class="pc-meta"><span class="tb ${tc}"><span class="tn">TIER ${p.tier}</span> ${p.label}</span><span class="pc-price">${p.price}</span></div></div><span class="pc-arr">›</span></div>`;
+  return `<div class="pc" data-tier="${p.tier}" data-budget="${isBudget?'true':'false'}" onclick="showProduct('${id}')">${cornerBadge}<div class="pc-img" style="padding:0;overflow:hidden">${imgHtml}</div><div class="pc-body"><div class="pc-brand">${p.brand}</div><div class="pc-name">${p.name}</div><div class="pc-verdict">${prodHighlight(p)}</div><div class="pc-meta"><span class="tb ${tc}"><span class="tn">TIER ${p.tier}</span> ${p.label}</span><span class="pc-price">${p.price}</span></div></div><span class="pc-arr">›</span></div>`;
 }
 
 function toggleSubcatTab(tab){
