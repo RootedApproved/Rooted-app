@@ -2848,8 +2848,25 @@ body.style-photo .cat-card::before{
   width:min(780px,calc(100% - 2*var(--gut)));
   margin-left:auto;
   margin-right:auto;
-  display:block;
 }
+/* The width rule above must not flatten the contact button to display:block —
+   it is a flex row (icon + label) and loses its centring without it. */
+#screen-profile .mem-card,
+#screen-profile .prof-sec{display:block;}
+#screen-profile .prof-contact-btn{
+  display:flex;
+  background:var(--terracotta);
+  border-radius:2px;
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:15px 16px;
+  transition:background .25s var(--ease);
+}
+#screen-profile .prof-contact-btn:hover{background:var(--terracotta-dk);}
+#screen-profile .prof-contact-btn i,
+#screen-profile .prof-contact-btn svg{width:15px;height:15px;}
 #screen-profile .mem-card{
   margin-top:-52px;
   position:relative;
