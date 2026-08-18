@@ -14,7 +14,7 @@
 //
 // Bumping CACHE_VERSION discards every previous cache on activate.
 
-const CACHE_VERSION = 'rooted-v1';
+const CACHE_VERSION = 'rooted-v2-redesign';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const ASSET_CACHE = CACHE_VERSION + '-assets';
 

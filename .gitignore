@@ -19,3 +19,4 @@ android/build/
 android/.gradle/
 android/local.properties
 __pycache__/
+.claude/

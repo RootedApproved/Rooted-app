@@ -7,8 +7,20 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="ROOTED">
-<meta name="theme-color" content="#B5563F">
-<meta name="description" content="Standards-based product ratings and a verified local food map. No brand pays to be listed on ROOTED.">
+<meta name="theme-color" content="#AB5546">
+<meta name="description" content="ROOTED is the independent clean living standard. We publish a vetted standard across 12 product categories — non-toxic products, full ingredient transparency, trusted product certification. No brand pays to be listed.">
+<meta name="keywords" content="non-toxic products, clean living standard, trusted product certification, healthy living guide, ingredient transparency">
+<link rel="canonical" href="https://rootedapproved.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROOTED">
+<meta property="og:url" content="https://rootedapproved.com/">
+<meta property="og:title" content="ROOTED — The Trusted Standard for Healthy Living">
+<meta property="og:description" content="Independently vetted standards across 12 product categories. Non-toxic products, ingredient transparency, and a verified local food map. No brand pays to be listed.">
+<meta property="og:image" content="https://rootedapproved.com/icons/icon-512.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ROOTED — The Trusted Standard for Healthy Living">
+<meta name="twitter:description" content="Independently vetted standards across 12 product categories. No pay-to-play. No sponsored placements.">
+<meta name="twitter:image" content="https://rootedapproved.com/icons/icon-512.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -16,25 +28,83 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png?v=2">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png?v=2">
 <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#B5563F">
-<title>ROOTED — The Standard for Healthy Living</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>ROOTED — The Trusted Standard for Healthy Living</title>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"ROOTED","alternateName":"Rooted Approved","url":"https://rootedapproved.com/","logo":"https://rootedapproved.com/icons/icon-512.png","email":"team@rootedapproved.com","description":"ROOTED publishes independently vetted standards across 12 product categories so people can trust what they put in and on their bodies. No brand pays to be listed.","sameAs":["https://instagram.com/rootedapproved","https://tiktok.com/@rootedapproved","https://x.com/rootedapproved","https://youtube.com/@rootedapproved"]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#F5F0E6;--cream2:#EDE7D9;--forest:#2D5016;--sage:#5C8A2E;--teal:#2E7D7A;--earth:#8B6914;--red:#B53A2F;--terracotta:#B5563F;--gold:#D69A2D;--char:#1A1A1A;--mid:#4A4A4A;--muted:#888;--border:#DDD8CE;--white:#FFFFFF;--bar-h:56px;--nav-h:52px;--font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',system-ui,sans-serif;--font-m:'DM Mono',monospace;}
-/* THEME 2 — Midnight: dark mode, inspired by Notion/Linear/Oura. Note --white is
-   intentionally redefined to a dark tone here, not literal white — it's used throughout
-   the site as "the contrast color for text sitting on top of saturated accent buttons",
-   so redefining it keeps that text readable against these brightened, dark-mode-tuned
-   accent colors instead of creating light-on-light contrast failures. */
-body.theme-midnight{--cream:#1C1B18;--cream2:#26241F;--forest:#6FA84F;--sage:#8FC468;--teal:#52ABA8;--earth:#C4934A;--red:#E0685A;--terracotta:#E0785D;--gold:#F0C158;--char:#F0EDE4;--mid:#C9C4B8;--muted:#8A8578;--border:#3A382F;--white:#1C1B18;}
-/* THEME 3 — Scandinavian Minimal: inspired by Apple.com/Muji/Everlane. Pure white,
-   near-black as the "primary" color instead of green, color used sparingly as accent only. */
-body.theme-minimal{--cream:#FFFFFF;--cream2:#F5F5F5;--forest:#2B2B2B;--sage:#6B8E5A;--teal:#4A7A78;--earth:#8B7355;--red:#B5453A;--terracotta:#A8695A;--gold:#B8934A;--char:#1A1A1A;--mid:#5A5A5A;--muted:#9A9A9A;--border:#E5E5E5;--white:#FFFFFF;}
-/* THEME 4 — Terracotta Clay: inspired by Aesop's warm ceramic-toned branding. Terracotta
-   becomes the dominant color throughout (logo, buttons, etc.), not just an accent. */
-body.theme-clay{--cream:#F5E8DD;--cream2:#EEDBC9;--forest:#B5563F;--sage:#A87A52;--teal:#6B8A82;--earth:#8B5A2E;--red:#9E4A3A;--terracotta:#C86B4F;--gold:#D6952D;--char:#3D2817;--mid:#6B5240;--muted:#A08870;--border:#DDC3AD;--white:#FFFFFF;}
-/* THEME 5 — Coastal Sage: inspired by Calm/Headspace's cool, calming wellness palettes.
-   Sage-teal dominant, cooler and quieter than the original warm earthy palette. */
-body.theme-coastal{--cream:#F0F5F2;--cream2:#E3ECE6;--forest:#4A8577;--sage:#6BA88F;--teal:#3D7A8C;--earth:#7A9285;--red:#B5544A;--terracotta:#C77A5E;--gold:#C9A24A;--char:#1E2E2A;--mid:#4A5E58;--muted:#8AA098;--border:#D0DDD6;--white:#FFFFFF;}
+/* ═══════════════════════════════════════════════════════════════════════════
+   ROOTED BRAND SYSTEM — single definitive identity.
+   Terracotta #AB5546 on off-white #F8F8F6. Playfair Display for display type,
+   DM Sans for everything else.
+
+   The five swappable colour themes that used to live here (Midnight, Minimal,
+   Clay, Coastal + original) were removed in the 2026 redesign: ROOTED now has
+   one brand look, the way a consumer brand does. setColorTheme() is kept as a
+   no-op in the script so any stored preference or stray call can't throw.
+
+   --forest is the PRIMARY token. It is misnamed by history — the whole
+   stylesheet reads it as "the brand's primary colour" for buttons, active
+   states, and the wordmark — so it is mapped to terracotta rather than renamed
+   across 461 selectors. --terracotta matches it; both are the brand accent.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  /* Surfaces */
+  --cream:#F8F8F6;        /* page base, off-white */
+  --cream2:#EFECE6;       /* raised/secondary surface, warm */
+  --white:#FFFFFF;
+  --ink-deep:#14110F;     /* near-black, warm — full-bleed dark bands */
+  --ink-deep-2:#221D1A;
+
+  /* Brand */
+  --forest:#AB5546;       /* PRIMARY (see note above) */
+  --terracotta:#AB5546;
+  --terracotta-dk:#8E4438;
+  --terracotta-lt:#C97867;
+
+  /* Supporting warm neutrals — tier badges, secondary accents.
+     --sage is the Tier 2 colour and carries white label text at 11px, so it is
+     kept dark enough to clear 4.5:1 against white rather than picked purely
+     for hue. */
+  --sage:#7D6E5B;
+  --teal:#8A6B5C;
+  --earth:#7C6A57;
+  --red:#A0392C;
+  --gold:#B3873C;
+
+  /* Type */
+  --char:#14110F;
+  --mid:#4E4741;
+  /* Darkened from the original #888. --muted carries most of the site's
+     secondary copy (perk descriptions, counts, metadata) at 11-14px, and the
+     old value only reached ~3.6:1 on the off-white base — under the 4.5:1 AA
+     bar for text that small. This clears it at ~5:1. */
+  --muted:#6F6861;
+  --border:#E3DFD7;
+  --border-strong:#D2CCC2;
+
+  /* Chrome */
+  --bar-h:56px;
+  --nav-h:64px;
+
+  /* Fonts */
+  --font-d:'Playfair Display',Georgia,serif;
+  --font-b:'DM Sans',system-ui,-apple-system,sans-serif;
+  --font-m:'DM Mono',monospace;
+
+  /* Motion — one easing curve everywhere keeps the whole site feeling like
+     a single object. Slow, confident, never bouncy. */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --dur:.5s;
+
+  /* Rhythm */
+  --gut:20px;             /* page gutter, mobile */
+  --gut-lg:56px;          /* page gutter, desktop */
+}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:var(--font-b);background:var(--cream);color:var(--char);font-size:15px;line-height:1.6;overflow-x:hidden;padding-top:var(--nav-h);padding-bottom:var(--bar-h);}
@@ -811,6 +881,1350 @@ body.style-photo .cat-photo-cycle{display:flex;}
 .ru-reader-navbtn:disabled{opacity:.3;}
 .ru-reader-navbtn i{width:15px;height:15px;}
 .ru-reader-navbtn.primary{background:var(--sage);}
+
+/* ╔═══════════════════════════════════════════════════════════════════════════╗
+   ║  ROOTED REDESIGN LAYER — 2026                                             ║
+   ║                                                                           ║
+   ║  Everything above this line is the original component stylesheet. It is   ║
+   ║  left intact deliberately: 461 classes are referenced from markup and     ║
+   ║  from JS template strings, and rewriting them wholesale would silently    ║
+   ║  break screens that only render at runtime. Instead the palette tokens    ║
+   ║  at the top were replaced (which recolours every one of those classes at  ║
+   ║  once, since they all read var()), and this layer rebuilds the components ║
+   ║  that actually carry the brand: type scale, spacing rhythm, full-bleed    ║
+   ║  imagery, and motion.                                                     ║
+   ║                                                                           ║
+   ║  Ordering is the mechanism — same-specificity rules here win on cascade   ║
+   ║  order, so overrides stay flat and predictable instead of escalating into ║
+   ║  !important.                                                              ║
+   ╚═══════════════════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --sidebar-w:0px;
+  --page-max:520px;
+  /* Width of the vertical scrollbar, measured at runtime by initScrollbarWidth().
+     100vw includes the scrollbar, so on platforms that reserve space for one
+     (Windows/Linux Chrome and Firefox) every full-bleed band would be ~15px too
+     wide and pushed off-centre. macOS overlay scrollbars measure 0, so this is
+     a no-op there. Defaults to 0 so the layout is correct before JS runs. */
+  --sbw:0px;
+  /* The recurring trust mark. Same geometry as the badge in the logo, so the
+     check reads as one motif whether it appears in the wordmark, on a tier
+     badge, or beside a membership perk. */
+  --check-badge:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11.5' fill='%23fff'/%3E%3Cpath d='M7 12.4l3.3 3.3L17.2 8.8' stroke='%23AB5546' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* ── 1. BASE & TYPE ──────────────────────────────────────────────────────────
+   The old scale was app-sized (33px headlines, 14px card titles). A consumer
+   brand front page needs display type that commits. clamp() carries it from
+   phone to desktop without a breakpoint per step. */
+
+body{
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  letter-spacing:-.005em;
+}
+.page{max-width:var(--page-max);}
+
+/* Display headline — the single most brand-defining element. Tight leading,
+   slight negative tracking, optical hanging punctuation off. */
+.rt-display{
+  font-family:var(--font-d);
+  font-weight:900;
+  line-height:.94;
+  letter-spacing:-.028em;
+  color:var(--char);
+  text-wrap:balance;
+}
+.rt-display em{font-style:italic;font-weight:700;}
+
+/* Eyebrow — mono, wide-tracked, the "technical/verified" voice.
+   Uses the darker terracotta: at 10.5px the mid-tone accent only reached
+   ~4.3:1 on the light surfaces these sit on. */
+.eyebrow,.rt-eyebrow{
+  font-family:var(--font-m);
+  font-size:10.5px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--terracotta-dk);
+  margin-bottom:14px;
+  font-weight:500;
+}
+/* ...but eyebrows that sit on a dark or brand-coloured ground invert.
+   .mission-card is deliberately NOT in this list — the redesign turned it from
+   a dark green block into a light cream one, so its eyebrow stays terracotta
+   (set in section 12). */
+.rt-hero .rt-eyebrow,
+.about-hero .eyebrow,
+.promise-strip .eyebrow{color:rgba(255,255,255,.85);}
+
+/* Section heading block */
+.sec-hd{
+  padding:clamp(44px,7vw,76px) var(--gut) 18px;
+  align-items:flex-end;
+}
+.sec-title{
+  font-family:var(--font-d);
+  font-size:clamp(26px,5.2vw,40px);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.05;
+  gap:0;
+}
+/* The old terracotta tick before every section title read as decoration.
+   Removed — hierarchy now comes from scale and space. */
+.sec-title::before{display:none;}
+.sec-link{
+  font-family:var(--font-b);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--char);
+  border-bottom:1.5px solid var(--char);
+  padding-bottom:2px;
+  transition:color .25s var(--ease),border-color .25s var(--ease);
+  white-space:nowrap;
+}
+.sec-link:hover{color:var(--terracotta);border-color:var(--terracotta);}
+
+/* ── 2. MOTION ───────────────────────────────────────────────────────────────
+   One reveal primitive, driven by IntersectionObserver. Elements are only
+   hidden once JS has confirmed it will run (html.js-reveal), so with JS
+   disabled or broken the content is simply visible rather than invisible. */
+
+html.js-reveal [data-reveal]{
+  opacity:0;
+  transform:translateY(26px);
+  transition:opacity .75s var(--ease),transform .75s var(--ease);
+  will-change:opacity,transform;
+}
+html.js-reveal [data-reveal].is-in{opacity:1;transform:none;}
+html.js-reveal [data-reveal-delay="1"]{transition-delay:.08s;}
+html.js-reveal [data-reveal-delay="2"]{transition-delay:.16s;}
+html.js-reveal [data-reveal-delay="3"]{transition-delay:.24s;}
+html.js-reveal [data-reveal-delay="4"]{transition-delay:.32s;}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  html.js-reveal [data-reveal]{opacity:1;transform:none;transition:none;}
+  *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+}
+
+/* ── 3. FULL-BLEED UTILITY ───────────────────────────────────────────────────
+   .page is a centred column; bands need to escape it. Width accounts for the
+   desktop sidebar so a "full width" band never slides under the nav. */
+
+.rt-bleed{
+  width:calc(100vw - var(--sbw) - var(--sidebar-w));
+  margin-left:calc(50% - (100vw - var(--sbw) - var(--sidebar-w))/2);
+  max-width:none;
+}
+
+/* ── 4. TOP NAV ──────────────────────────────────────────────────────────────
+   Sits over the hero transparently at rest, then solidifies on scroll. */
+
+.top-nav{
+  background:rgba(248,248,246,.86);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid transparent;
+  padding:0 var(--gut);
+  transition:background .35s var(--ease),border-color .35s var(--ease);
+}
+body.nav-solid .top-nav{
+  background:rgba(248,248,246,.94);
+  border-bottom-color:var(--border);
+}
+/* Over the hero image: white-on-image, no plate. */
+body.nav-over .top-nav{
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border-bottom-color:transparent;
+}
+body.nav-over .nav-brand,
+body.nav-over .nav-hamburger,
+body.nav-over .nav-login-link{color:#fff;}
+body.nav-over .nav-brand .brand-logo circle:first-of-type{fill:#fff;}
+body.nav-over .nav-brand .brand-logo text{fill:var(--terracotta);}
+
+.nav-brand{
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.01em;
+  gap:10px;
+}
+.brand-logo{width:30px;height:30px;}
+.nav-right{gap:18px;}
+
+.nav-join{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.13em;
+  border-radius:2px;
+  padding:11px 20px;
+  background:var(--terracotta);
+  transition:background .25s var(--ease),transform .25s var(--ease);
+}
+.nav-join:hover{background:var(--terracotta-dk);}
+.nav-join:active{transform:scale(.97);}
+body.nav-over .nav-join{background:#fff;color:var(--terracotta);}
+body.nav-over .nav-join:hover{background:rgba(255,255,255,.88);}
+
+.nav-login-link{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--char);
+}
+
+/* ── 5. HOME HERO ────────────────────────────────────────────────────────────
+   Full-bleed photograph, dark scrim for legibility, oversized serif statement.
+   Pulled up under the fixed nav via negative margin so no JS is needed to
+   manage layout — only the nav's colour state is scripted. */
+
+.rt-hero{
+  position:relative;
+  width:calc(100vw - var(--sbw) - var(--sidebar-w));
+  margin-left:calc(50% - (100vw - var(--sbw) - var(--sidebar-w))/2);
+  margin-top:calc(-1 * var(--nav-h));
+  min-height:clamp(560px,94svh,940px);
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+  background:var(--ink-deep);
+  isolation:isolate;
+}
+.rt-hero-media{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center 55%;
+  z-index:-2;
+  transform:scale(1.04);
+  animation:rtHeroIn 1.6s var(--ease) forwards;
+}
+@keyframes rtHeroIn{to{transform:scale(1);}}
+/* Two-stop scrim: heavy at the base where the type sits, light at the top so
+   the image still reads behind the nav. */
+.rt-hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(to bottom,rgba(20,17,15,.62) 0%,rgba(20,17,15,.22) 30%,rgba(20,17,15,.58) 72%,rgba(20,17,15,.88) 100%);
+}
+.rt-hero-inner{
+  position:relative;
+  padding:0 var(--gut) clamp(48px,8vw,88px);
+  width:100%;
+  max-width:1320px;
+  margin:0 auto;
+}
+.rt-hero .rt-eyebrow{color:rgba(255,255,255,.82);margin-bottom:18px;}
+.rt-hero-title{
+  font-family:var(--font-d);
+  font-weight:900;
+  color:#fff;
+  font-size:clamp(46px,10.5vw,124px);
+  line-height:.92;
+  letter-spacing:-.03em;
+  margin:0 0 22px;
+  max-width:15ch;
+  text-wrap:balance;
+}
+.rt-hero-title em{font-style:italic;font-weight:700;}
+.rt-hero-sub{
+  font-size:clamp(16px,2.1vw,21px);
+  color:rgba(255,255,255,.9);
+  max-width:46ch;
+  line-height:1.5;
+  margin-bottom:34px;
+  font-weight:300;
+}
+.rt-hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+
+/* ── 6. BUTTONS ──────────────────────────────────────────────────────────────
+   One button language: square-ish, uppercase, wide tracking. */
+
+.rt-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  font-family:var(--font-b);
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  padding:17px 34px;
+  border-radius:2px;
+  border:1.5px solid transparent;
+  cursor:pointer;
+  text-decoration:none;
+  transition:background .28s var(--ease),color .28s var(--ease),border-color .28s var(--ease),transform .18s var(--ease);
+}
+.rt-btn:active{transform:scale(.975);}
+.rt-btn-primary{background:var(--terracotta);color:#fff;}
+.rt-btn-primary:hover{background:var(--terracotta-dk);}
+.rt-btn-light{background:#fff;color:var(--char);}
+.rt-btn-light:hover{background:rgba(255,255,255,.86);}
+.rt-btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.55);}
+.rt-btn-ghost:hover{background:#fff;color:var(--char);border-color:#fff;}
+.rt-btn-dark{background:var(--char);color:#fff;}
+.rt-btn-dark:hover{background:var(--terracotta);}
+
+/* Legacy primary CTA, restyled in place so JS-rendered buttons inherit it. */
+.btn-buy{
+  background:var(--terracotta);
+  border-radius:2px;
+  padding:18px;
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  box-shadow:none;
+  transition:background .28s var(--ease),transform .18s var(--ease);
+}
+.btn-buy:hover{background:var(--terracotta-dk);}
+.btn-buy:active{transform:scale(.985);}
+
+/* ── 7. TRUST BAR ────────────────────────────────────────────────────────────
+   The no-pay-to-play promise, stated immediately under the hero. Deliberately
+   typographic and quiet — a loud badge would read like the sponsor treatments
+   the brand is defined against. */
+
+.rt-trustbar{
+  background:var(--ink-deep);
+  color:rgba(255,255,255,.78);
+  padding:20px var(--gut);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  text-align:center;
+}
+.rt-trustbar-mark{
+  width:19px;height:19px;flex-shrink:0;
+  background:var(--check-badge) center/contain no-repeat;
+}
+.rt-trustbar-tx{
+  font-family:var(--font-m);
+  font-size:11px;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+.rt-trustbar-tx strong{color:#fff;font-weight:500;}
+
+/* ── 8. CATEGORY CARDS ───────────────────────────────────────────────────────
+   Presented, not listed: tall image panels, scrim, serif name, slow zoom.
+   Photos are always on now (the colour/rect card styles were dev toggles), so
+   the existing per-category photo mappings above are simply always active. */
+
+.cat-grid{
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  padding:0 var(--gut) clamp(40px,6vw,72px);
+}
+.cat-card,
+body.style-photo .cat-card{
+  aspect-ratio:3/4;
+  border:none;
+  border-radius:3px;
+  background:var(--ink-deep);
+  box-shadow:none;
+  transition:transform .5s var(--ease);
+}
+.cat-card:hover{transform:none;box-shadow:none;}
+body.style-photo .cat-card::before{
+  opacity:1;
+  transform:scale(1);
+  transition:transform 1.1s var(--ease);
+  will-change:transform;
+}
+.cat-card:hover::before{transform:scale(1.07);}
+/* Scrim so the name stays legible on any photo. */
+.cat-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(20,17,15,.92) 0%,rgba(20,17,15,.46) 44%,rgba(20,17,15,.10) 100%);
+  z-index:1;
+  pointer-events:none;
+}
+.cat-body{position:relative;z-index:2;padding:0 16px 17px;}
+.cat-lbl{display:none;}
+.cat-name{
+  font-family:var(--font-d);
+  font-size:clamp(17px,2.5vw,23px);
+  font-weight:900;
+  line-height:1.06;
+  letter-spacing:-.015em;
+  color:#fff;
+  text-shadow:0 1px 12px rgba(20,17,15,.5);
+}
+.cat-ct{
+  font-family:var(--font-m);
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.72);
+  margin-top:7px;
+}
+.cat-icon{
+  top:16px;left:16px;
+  color:#fff;
+  z-index:2;
+  opacity:.92;
+}
+.cat-icon i{width:21px;height:21px;stroke-width:1.6;}
+/* Dev-only photo cycler — hidden on the live site. */
+.cat-photo-cycle{display:none !important;}
+
+/* ── 8b. ALL CATEGORIES GRID ─────────────────────────────────────────────────
+   The Categories tab was a stack of thin icon+chevron list rows — the most
+   "listed, not presented" surface on the site, and the one a visitor hits when
+   they want to see what ROOTED actually covers. Same markup, rebuilt as the
+   same tall image cards used everywhere else. data-cat was added to each row so
+   the photographs below can key off it. */
+
+.all-cats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  padding:0 var(--gut) clamp(40px,6vw,72px);
+}
+.cat-row{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  aspect-ratio:3/4;
+  border:none;
+  border-radius:3px;
+  background:var(--ink-deep);
+  overflow:hidden;
+  padding:0 16px 17px;
+  margin:0;
+  cursor:pointer;
+}
+.cat-row::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  transform:scale(1);
+  transition:transform 1.1s var(--ease);
+  will-change:transform;
+}
+.cat-row:hover::before{transform:scale(1.07);}
+.cat-row::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(20,17,15,.92) 0%,rgba(20,17,15,.46) 44%,rgba(20,17,15,.10) 100%);
+  pointer-events:none;
+}
+.cat-row>*{position:relative;z-index:2;}
+.cat-row-icon{
+  position:absolute;
+  top:16px;left:16px;
+  color:#fff;
+  opacity:.92;
+  background:none;
+  width:auto;height:auto;
+  padding:0;
+}
+.cat-row-icon i{width:21px;height:21px;stroke-width:1.6;filter:drop-shadow(0 1px 6px rgba(20,17,15,.55));}
+.cat-row-info{flex:0 0 auto;}
+.cat-row-name{
+  font-family:var(--font-d);
+  font-size:clamp(17px,2.1vw,22px);
+  font-weight:900;
+  line-height:1.06;
+  letter-spacing:-.015em;
+  color:#fff;
+  overflow-wrap:break-word;
+  /* Several category photos are very bright (bedding, a white bathroom, a plant
+     against a white wall). The scrim carries most of the contrast; this is the
+     backstop so the name never washes out on the lightest of them. */
+  text-shadow:0 1px 12px rgba(20,17,15,.5);
+}
+.cat-row-sub{
+  font-family:var(--font-m);
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.72);
+  margin-top:7px;
+}
+/* The chevron was the row's affordance; on a card the whole image is. */
+.cat-row-arr{display:none;}
+
+.cat-row[data-cat="clothing"]::before{background-image:url('https://images.unsplash.com/photo-1612654516785-0e1a96be21d1?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="oral"]::before{background-image:url('https://images.unsplash.com/photo-1553691158-91a7f9183156?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="food"]::before{background-image:url('https://images.unsplash.com/photo-1563865436874-9aef32095fad?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="cookware"]::before{background-image:url('https://images.unsplash.com/photo-1603038124597-2c5c207edf47?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="water"]::before{background-image:url('https://images.unsplash.com/photo-1599675267516-c502d37e40cb?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="personal"]::before{background-image:url('https://images.unsplash.com/photo-1748543668676-ea8241cb3886?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="textiles"]::before{background-image:url('https://images.unsplash.com/photo-1600494448655-ae58f58bb945?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="cleaning"]::before{background-image:url('https://images.unsplash.com/photo-1550963295-019d8a8a61c5?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="air"]::before{background-image:url('https://images.unsplash.com/photo-1766243062910-bda898a2470c?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="lighting"]::before{background-image:url('https://images.unsplash.com/photo-1631832293782-2eda7804489b?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="supplements"]::before{background-image:url('https://images.unsplash.com/photo-1757802412806-433e4e60eec7?auto=format&fit=crop&w=700&q=72');}
+
+/* ── 9. HOME FEATURE CARDS (.hnc) ────────────────────────────────────────────
+   The four pillars: Food Map, Recommendations, Rooted U, Browse all. */
+
+.home-new-grid{
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  padding:0 var(--gut) clamp(40px,6vw,72px);
+}
+.hnc{
+  border:none;
+  border-radius:3px;
+  padding:0;
+  min-height:0;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  background:var(--cream2);
+  justify-content:flex-end;
+  transition:none;
+}
+.hnc:hover{border-color:transparent;transform:none;}
+.hnc:active{transform:scale(.99);}
+.hnc-img{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  margin:0;
+  border-radius:0;
+  transition:transform 1.1s var(--ease);
+  will-change:transform;
+}
+.hnc:hover .hnc-img{transform:scale(1.07);}
+.hnc::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(20,17,15,.86) 0%,rgba(20,17,15,.3) 52%,rgba(20,17,15,.04) 100%);
+  pointer-events:none;
+}
+/* Cards with no photo (Recommendations, See More) get a flat brand ground
+   instead of a scrim over nothing. */
+.hnc:not(:has(.hnc-img))::after{
+  background:linear-gradient(150deg,var(--terracotta) 0%,var(--terracotta-dk) 100%);
+}
+/* The Rooted U card's image slot holds an injected SVG lettermark, not a
+   photograph, so it is centred on a light field instead of being stretched to
+   cover. The bottom scrim still darkens the text area underneath it. */
+.hnc-img:has(svg){
+  background:var(--cream2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hnc-img svg{width:auto;height:46%;max-width:76%;}
+/* ...and that card's scrim clears the top so the lettermark isn't greyed out,
+   while still darkening the bottom third for the white text. */
+.hnc:has(.hnc-img svg)::after{
+  background:linear-gradient(to top,rgba(20,17,15,.88) 0%,rgba(20,17,15,.34) 42%,rgba(20,17,15,0) 66%);
+}
+.hnc>*:not(.hnc-img){position:relative;z-index:2;}
+.hnc-title,.hnc-sub,.hnc-link{padding-left:16px;padding-right:16px;}
+/* The original card used `flex:1` on the subtitle to push the link to the bottom
+   while the title stayed at the top. The new card groups all three at the bottom
+   over the image, so the subtitle must size to its content and let
+   justify-content:flex-end do the positioning. */
+.hnc-sub{flex:0 0 auto;}
+.hnc-title{
+  font-family:var(--font-d);
+  /* "Recommendations" is one long unbreakable word and these cards are narrow
+     (2-up at 375px, 4-up on desktop). The lower bound is set so that word fits
+     on one line at the smallest card width instead of splitting mid-word;
+     break-word stays as a backstop for anything longer. */
+  font-size:clamp(15px,4vw,22px);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-.018em;
+  color:#fff;
+  margin-bottom:6px;
+  overflow-wrap:break-word;
+}
+.hnc-sub{
+  font-size:13px;
+  line-height:1.45;
+  color:rgba(255,255,255,.82);
+  margin-bottom:12px;
+}
+.hnc-link{
+  font-family:var(--font-b);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:#fff;
+  padding-bottom:17px;
+  display:inline-block;
+}
+.hnc-link::after{
+  content:'';
+  display:block;
+  height:1.5px;
+  background:#fff;
+  width:0;
+  transition:width .45s var(--ease);
+  margin-top:5px;
+}
+.hnc:hover .hnc-link::after{width:100%;}
+
+/* ── 10. AI ASSISTANT WIDGET ─────────────────────────────────────────────────
+   Given real presence as a product feature rather than a search box. */
+
+.home-ai-widget{
+  /* Sits directly under its own "Ask ROOTED" section heading, so it only needs
+     the small gap a heading implies, not a full section rhythm above it. */
+  margin:4px var(--gut) 0;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:8px;
+  box-shadow:0 1px 3px rgba(20,17,15,.04),0 10px 34px -14px rgba(20,17,15,.14);
+  transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
+}
+.home-ai-widget:focus-within{
+  border-color:var(--terracotta);
+  box-shadow:0 1px 3px rgba(20,17,15,.04),0 14px 40px -14px rgba(171,85,70,.28);
+}
+.home-ai-input-row{gap:12px;padding:6px 8px;}
+.home-ai-input-row>i,
+.home-ai-input-row [data-lucide]{color:var(--terracotta);}
+.home-ai-input{font-size:16px;}
+.home-ai-send{
+  background:var(--terracotta);
+  border-radius:2px;
+  transition:background .25s var(--ease);
+}
+.home-ai-send:hover{background:var(--terracotta-dk);}
+
+/* ── 11. PROMISE STRIP ───────────────────────────────────────────────────────
+   Full-bleed dark band. This is where "no pay-to-play" gets its weight. */
+
+.promise-strip{
+  background:var(--ink-deep);
+  padding:clamp(48px,7vw,84px) var(--gut);
+  grid-template-columns:repeat(2,1fr);
+  gap:clamp(30px,5vw,52px);
+  width:calc(100vw - var(--sbw) - var(--sidebar-w));
+  margin-left:calc(50% - (100vw - var(--sbw) - var(--sidebar-w))/2);
+  max-width:none;
+}
+.prom-num{
+  font-size:clamp(40px,7.5vw,72px);
+  font-weight:900;
+  letter-spacing:-.03em;
+  color:#fff;
+  margin-bottom:10px;
+}
+.prom-lbl{
+  font-family:var(--font-m);
+  font-size:10.5px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.62);
+  line-height:1.65;
+}
+
+/* ── 12. MISSION / EDITORIAL BAND ────────────────────────────────────────────*/
+
+.mission-card{
+  background:var(--cream2);
+  border-radius:3px;
+  padding:clamp(34px,5.5vw,64px);
+  margin:0 var(--gut) clamp(48px,7vw,88px);
+  border-left:3px solid var(--terracotta);
+  transition:background .3s var(--ease);
+}
+.mission-card:hover{background:#EAE6DE;}
+.mission-card .eyebrow{color:var(--terracotta);}
+.mc-title{
+  font-family:var(--font-d);
+  font-size:clamp(25px,4.6vw,42px);
+  font-weight:900;
+  line-height:1.06;
+  letter-spacing:-.022em;
+  color:var(--char);
+  margin-bottom:12px;
+}
+.mc-sub{
+  font-size:clamp(15px,1.9vw,18px);
+  color:var(--mid);
+  max-width:46ch;
+  line-height:1.55;
+  margin-bottom:22px;
+}
+.mc-link{
+  font-family:var(--font-b);
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--terracotta);
+  border-bottom:1.5px solid var(--terracotta);
+  padding-bottom:3px;
+}
+
+/* ── 13. LEGACY CLASSIC-HOME HEADINGS ────────────────────────────────────────*/
+
+.home-hero{padding:clamp(40px,6vw,72px) var(--gut) clamp(28px,4vw,44px);border-bottom:none;}
+.home-hl{
+  font-size:clamp(38px,8vw,76px);
+  font-weight:900;
+  line-height:.96;
+  letter-spacing:-.028em;
+  margin-bottom:18px;
+}
+.home-hl em{color:var(--terracotta);}
+.home-sub{font-size:clamp(15px,2vw,19px);color:var(--mid);max-width:46ch;font-weight:300;}
+/* Collapsed: its only visible child (the "Rooted." wordmark) is hidden now that
+   the hero carries the brand statement, so its padding would just be dead space.
+   It stays in the DOM as the positioning context for the dev-panel gear. */
+.home-new-hero{padding:0;}
+.home-new-wordmark{font-size:clamp(40px,8vw,68px);color:var(--terracotta);letter-spacing:-.02em;}
+
+/* ── 14. CATEGORY / SUBCATEGORY HUBS ─────────────────────────────────────────*/
+
+.cat-hd{padding:clamp(34px,5vw,60px) var(--gut) clamp(18px,3vw,30px);}
+.cat-title{
+  font-family:var(--font-d);
+  font-size:clamp(34px,6.5vw,62px);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-.028em;
+  margin-bottom:12px;
+}
+.cat-desc{font-size:clamp(14.5px,1.8vw,17px);color:var(--mid);max-width:52ch;font-weight:300;}
+.cats-title{
+  font-family:var(--font-d);
+  font-size:clamp(34px,6.5vw,62px);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-.028em;
+}
+.cats-hd{padding:clamp(34px,5vw,60px) var(--gut) clamp(18px,3vw,30px);}
+.cats-sub{font-size:clamp(14.5px,1.8vw,17px);color:var(--mid);max-width:52ch;font-weight:300;}
+
+.cat-back,.pd-back{
+  background:rgba(248,248,246,.94);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--border);
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+
+.subcat-grid{gap:10px;padding:8px var(--gut) clamp(40px,6vw,72px);}
+/* Rebuilt from a horizontal row (icon | name | count | chevron) into a vertical
+   card. The row layout could not survive a multi-column grid: .sc-name was
+   flex:1 with no min-width, so a long label like "Electric Toothbrushes" pushed
+   the count and chevron straight out past the card edge. Stacking also gives the
+   name room to breathe at the sizes the rest of the site uses. */
+.subcat-card{
+  border-radius:3px;
+  border:1px solid var(--border);
+  background:var(--white);
+  padding:20px 18px 18px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:0;
+  min-height:132px;
+  transition:border-color .3s var(--ease),background .3s var(--ease),transform .3s var(--ease);
+}
+.subcat-card:hover{border-color:var(--terracotta);background:var(--white);transform:translateY(-3px);}
+.sc-icon{width:auto;justify-content:flex-start;margin-bottom:14px;}
+.sc-name{
+  font-family:var(--font-d);
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:-.012em;
+  line-height:1.15;
+  flex:0 0 auto;
+  min-width:0;
+  overflow-wrap:break-word;
+  margin-bottom:8px;
+}
+.sc-icon i{color:var(--terracotta);}
+.sc-count{
+  font-family:var(--font-m);
+  font-size:10px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-right:0;
+  margin-top:auto;
+  line-height:1.5;
+}
+.sc-count em,.sc-count i{font-style:normal;display:block;}
+/* The chevron was the row's affordance; the card itself is now the target. */
+.sc-arr{display:none;}
+.subcat-group-title{
+  font-family:var(--font-m);
+  font-size:10.5px;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ── 15. PRODUCT CARDS & DETAIL ──────────────────────────────────────────────*/
+
+.prod-list{padding:0 var(--gut) clamp(36px,5vw,64px);gap:10px;}
+.pc{
+  border-radius:3px;
+  border:1px solid var(--border);
+  background:var(--white);
+  transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.pc:hover{
+  border-color:var(--border-strong);
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px -16px rgba(20,17,15,.22);
+}
+.pc-brand{
+  font-family:var(--font-m);
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.pc-name{
+  font-family:var(--font-d);
+  font-size:16.5px;
+  font-weight:700;
+  letter-spacing:-.012em;
+  line-height:1.22;
+}
+.pd-hero{background:var(--cream2);}
+.pd-name{
+  font-family:var(--font-d);
+  font-size:clamp(26px,4.4vw,40px);
+  font-weight:900;
+  line-height:1.04;
+  letter-spacing:-.024em;
+}
+.pd-brand{
+  font-family:var(--font-m);
+  font-size:11px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--terracotta);
+}
+.pd-sec-title{
+  font-family:var(--font-d);
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:-.015em;
+}
+
+/* Tier badges — flatter, more like a certification stamp than a sale tag. */
+.tb{
+  border-radius:2px;
+  font-size:9.5px;
+  letter-spacing:.13em;
+  padding:5px 9px 5px 6px;
+  font-weight:700;
+}
+.tb .tn{border-radius:1px;background:rgba(255,255,255,.28);}
+
+/* ── 16. THE STANDARD (TIERS) ────────────────────────────────────────────────*/
+
+.tier-page{padding-bottom:clamp(48px,7vw,88px);}
+.tier-page-title{
+  font-family:var(--font-d);
+  font-size:clamp(34px,6.5vw,62px);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-.028em;
+  margin-bottom:14px;
+}
+.tier-page-sub{font-size:clamp(15px,2vw,18px);color:var(--mid);max-width:52ch;font-weight:300;line-height:1.55;}
+.tier-blk{
+  border-radius:3px;
+  border:1px solid var(--border);
+  background:var(--white);
+  overflow:hidden;
+}
+.tier-blk-name{
+  font-family:var(--font-d);
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:-.018em;
+}
+.tier-blk-num{
+  font-family:var(--font-m);
+  font-size:10.5px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  /* Was rgba(255,255,255,.7) on the tier-2/3 warm neutrals — ~4.1:1 at this
+     size. Near-opaque clears AA on all three tier colours. */
+  color:rgba(255,255,255,.95);
+}
+.standard-card{border-radius:3px;transition:border-color .3s var(--ease);}
+.standard-card:hover{border-color:var(--border-strong);}
+.standard-card-name{
+  font-family:var(--font-d);
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:-.012em;
+}
+.standard-sec-title{
+  font-family:var(--font-d);
+  font-size:clamp(22px,3.6vw,32px);
+  font-weight:900;
+  letter-spacing:-.02em;
+}
+
+/* ── 17. MEMBERSHIP / PAYWALL ────────────────────────────────────────────────*/
+
+.rt-mem{
+  padding:clamp(56px,9vw,110px) var(--gut) clamp(48px,7vw,88px);
+  max-width:760px;
+  margin:0 auto;
+}
+.rt-mem-mark{
+  width:52px;height:52px;
+  background:var(--terracotta);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:26px;
+}
+.rt-mem-mark::after{
+  content:'';
+  width:30px;height:30px;
+  background:var(--check-badge) center/contain no-repeat;
+}
+.rt-mem-title{
+  font-family:var(--font-d);
+  font-size:clamp(36px,7vw,68px);
+  font-weight:900;
+  line-height:.98;
+  letter-spacing:-.03em;
+  margin-bottom:18px;
+  text-wrap:balance;
+}
+.rt-mem-sub{
+  font-size:clamp(16px,2.1vw,20px);
+  color:var(--mid);
+  line-height:1.55;
+  max-width:48ch;
+  margin-bottom:38px;
+  font-weight:300;
+}
+.rt-mem-price{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  padding:26px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  margin-bottom:32px;
+}
+.rt-mem-price-amt{
+  font-family:var(--font-d);
+  font-size:clamp(40px,7vw,60px);
+  font-weight:900;
+  letter-spacing:-.03em;
+  line-height:1;
+  color:var(--char);
+}
+.rt-mem-price-note{
+  font-family:var(--font-m);
+  font-size:10.5px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.rt-mem-perks{list-style:none;margin:0 0 36px;padding:0;display:grid;gap:16px;}
+.rt-mem-perk{display:flex;gap:14px;align-items:flex-start;}
+.rt-mem-perk::before{
+  content:'';
+  width:21px;height:21px;flex-shrink:0;
+  margin-top:1px;
+  background:var(--check-badge) center/contain no-repeat;
+  filter:drop-shadow(0 0 0 var(--terracotta));
+  border-radius:50%;
+  box-shadow:inset 0 0 0 1px var(--border);
+}
+.rt-mem-perk-tx{font-size:16px;line-height:1.5;color:var(--char);}
+.rt-mem-perk-tx b{font-weight:600;}
+.rt-mem-perk-tx span{display:block;color:var(--muted);font-size:14px;margin-top:2px;}
+.rt-mem-cta{width:100%;}
+.rt-mem-fine{
+  margin-top:18px;
+  font-size:13px;
+  color:var(--muted);
+  text-align:center;
+}
+.rt-mem-promise{
+  margin-top:44px;
+  padding:26px;
+  background:var(--ink-deep);
+  border-radius:3px;
+  color:rgba(255,255,255,.76);
+}
+.rt-mem-promise-hd{
+  font-family:var(--font-m);
+  font-size:10.5px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#fff;
+  margin-bottom:10px;
+}
+.rt-mem-promise-tx{font-size:15px;line-height:1.6;}
+
+/* Legacy membership card, kept in sync with the new look. */
+.mem-card{border-radius:3px;border:1px solid var(--border);}
+.mem-title{
+  font-family:var(--font-d);
+  font-size:clamp(24px,4vw,34px);
+  font-weight:900;
+  letter-spacing:-.022em;
+  line-height:1.06;
+}
+.mem-cta{border-radius:2px;letter-spacing:.13em;text-transform:uppercase;font-size:12.5px;font-weight:700;}
+
+/* ── 18. ABOUT / MISSION PAGE ────────────────────────────────────────────────*/
+
+/* Terracotta band, edge to edge. The heading and subtitle sit ON the brand
+   colour, so both stay light — the section-8 defaults elsewhere in this layer
+   assume an off-white ground and would make the subtitle near-black here. */
+.about-hero{
+  padding:clamp(56px,8vw,110px) var(--gut) clamp(40px,6vw,80px);
+  width:calc(100vw - var(--sbw) - var(--sidebar-w));
+  margin-left:calc(50% - (100vw - var(--sbw) - var(--sidebar-w))/2);
+  max-width:none;
+}
+.about-hl{
+  font-family:var(--font-d);
+  font-size:clamp(36px,7vw,74px);
+  font-weight:900;
+  line-height:.97;
+  letter-spacing:-.03em;
+  text-wrap:balance;
+  color:#fff;
+}
+.about-hero-sub{
+  font-size:clamp(16px,2.1vw,20px);
+  color:rgba(255,255,255,.82);
+  font-weight:300;
+  max-width:50ch;
+  line-height:1.55;
+  margin-top:18px;
+}
+.about-body{padding:0 var(--gut) clamp(48px,7vw,88px);max-width:720px;margin:0 auto;}
+.about-p{font-size:clamp(16px,1.95vw,18.5px);line-height:1.72;color:var(--mid);margin-bottom:22px;}
+.about-p strong{color:var(--char);font-weight:600;}
+.ab1,.ab2,.ab3{
+  font-family:var(--font-d);
+  font-size:clamp(24px,4vw,36px);
+  font-weight:900;
+  letter-spacing:-.022em;
+  line-height:1.1;
+  color:var(--char);
+}
+
+/* ── 19. ROOTED U ────────────────────────────────────────────────────────────*/
+
+.ru-hero{padding:clamp(44px,6.5vw,84px) var(--gut) clamp(24px,3.5vw,40px);}
+.ru-hero-title{
+  font-family:var(--font-d);
+  font-size:clamp(34px,6.5vw,62px);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-.028em;
+}
+.ru-hero-sub{font-size:clamp(15px,2vw,18px);color:var(--mid);font-weight:300;max-width:50ch;}
+.ru-topic-title{
+  font-family:var(--font-d);
+  font-size:clamp(21px,3.2vw,28px);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+}
+.ru-topic-desc{font-size:14.5px;color:var(--mid);line-height:1.5;}
+.ru-topic-count{
+  font-family:var(--font-m);
+  font-size:10px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.ru-module-card{
+  border-radius:3px;
+  transition:border-color .3s var(--ease),transform .3s var(--ease);
+}
+.ru-module-card:hover{border-color:var(--terracotta);transform:translateY(-2px);}
+.ru-module-title{
+  font-family:var(--font-d);
+  font-size:16.5px;
+  font-weight:700;
+  letter-spacing:-.012em;
+  line-height:1.2;
+}
+.ru-slide-headline{
+  font-size:clamp(26px,4.6vw,40px);
+  letter-spacing:-.024em;
+  line-height:1.06;
+}
+.ru-slide-kicker{color:var(--terracotta-lt);letter-spacing:.17em;}
+
+/* ── 20. SEARCH ──────────────────────────────────────────────────────────────*/
+
+.search-wrap{padding:clamp(40px,6vw,72px) var(--gut) 18px;}
+.search-box{
+  border-radius:3px;
+  border:1px solid var(--border);
+  background:var(--white);
+  padding:6px 14px;
+  transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
+}
+.search-box:focus-within{
+  border-color:var(--terracotta);
+  box-shadow:0 10px 34px -16px rgba(171,85,70,.32);
+}
+.search-input{font-size:17px;}
+.search-icon{color:var(--terracotta);}
+
+/* ── 21. LOCAL FOOD MAP ──────────────────────────────────────────────────────*/
+
+.fm-map{border-radius:3px;overflow:hidden;border:1px solid var(--border);}
+.fm-card{
+  border-radius:3px;
+  transition:border-color .3s var(--ease),transform .3s var(--ease);
+}
+.fm-card:hover{border-color:var(--terracotta);transform:translateY(-2px);}
+.fm-card-name{
+  font-family:var(--font-d);
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:-.012em;
+}
+.fm-zip-input{border-radius:2px;font-size:16px;}
+.fm-search-btn{border-radius:2px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;font-size:11.5px;}
+
+/* ── 22. AUTH ────────────────────────────────────────────────────────────────*/
+
+.auth-card{
+  border-radius:3px;
+  border:1px solid var(--border);
+  padding:clamp(30px,5vw,48px);
+  box-shadow:0 20px 50px -30px rgba(20,17,15,.3);
+}
+.auth-card-title{
+  font-family:var(--font-d);
+  font-size:clamp(27px,4.4vw,38px);
+  font-weight:900;
+  letter-spacing:-.024em;
+  line-height:1.05;
+}
+.auth-card-sub{color:var(--mid);font-size:15.5px;}
+.auth-field{border-radius:2px;font-size:16px;transition:border-color .25s var(--ease);}
+.auth-field:focus{border-color:var(--terracotta);outline:none;}
+.auth-field-label{
+  font-family:var(--font-m);
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.auth-submit-btn{
+  border-radius:2px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  font-weight:700;
+  font-size:12.5px;
+  padding:17px;
+  background:var(--terracotta);
+  transition:background .25s var(--ease);
+}
+.auth-submit-btn:hover{background:var(--terracotta-dk);}
+
+/* ── 23. PROFILE ─────────────────────────────────────────────────────────────*/
+
+.profile-name{
+  font-family:var(--font-d);
+  font-size:clamp(24px,4vw,34px);
+  font-weight:900;
+  letter-spacing:-.022em;
+}
+.prof-sec-title{
+  font-family:var(--font-m);
+  font-size:10.5px;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.prof-row{transition:background .2s var(--ease);}
+.prof-row:hover{background:var(--cream2);}
+
+/* ── 24. CHAT ASSISTANT ──────────────────────────────────────────────────────*/
+
+.chat-fab{
+  background:var(--terracotta);
+  box-shadow:0 8px 28px -8px rgba(171,85,70,.55);
+  transition:background .25s var(--ease),transform .25s var(--ease);
+}
+.chat-fab:hover{background:var(--terracotta-dk);transform:translateY(-2px);}
+.chat-panel{border-radius:4px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(20,17,15,.4);}
+.chat-panel-hd{background:var(--ink-deep);}
+.chat-panel-title{font-family:var(--font-d);font-weight:700;}
+.chat-msg-user{background:var(--terracotta);}
+.chat-send{background:var(--terracotta);}
+
+/* ── 25. NAV CHROME (bottom bar, drawer, sidebar) ────────────────────────────*/
+
+.bottom-bar{
+  background:rgba(255,255,255,.94);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  box-shadow:none;
+  border-top:1px solid var(--border);
+}
+.tab-label{font-size:9px;letter-spacing:.09em;}
+.tab.active{color:var(--terracotta);}
+.mobile-drawer{padding:26px 20px;}
+.mobile-drawer-brand{font-size:22px;color:var(--terracotta);}
+.mobile-drawer-join{
+  background:var(--terracotta);
+  border-radius:2px;
+  letter-spacing:.11em;
+  font-size:11.5px;
+}
+.mobile-drawer-contact{background:var(--char);border-radius:2px;letter-spacing:.09em;font-size:11.5px;}
+.mobile-drawer-tab.active{background:var(--cream2);color:var(--terracotta);}
+.mobile-drawer-tab.active i{color:var(--terracotta);}
+
+/* Products / Education toggle on subcategory screens. The active label and its
+   underline used mid-terracotta, which lands at ~4.3:1 at 14px. */
+.tog.active{color:var(--terracotta-dk);}
+.tog-bar .tog.active{border-bottom-color:var(--terracotta-dk);}
+
+/* ── 26. MISC LEGACY POLISH ──────────────────────────────────────────────────*/
+
+.divider{background:var(--border);}
+.feat-card{border-radius:3px;border:1px solid var(--border);transition:border-color .3s var(--ease),transform .3s var(--ease);}
+.feat-card:hover{border-color:var(--terracotta);transform:translateY(-2px);}
+.feat-name{font-family:var(--font-d);font-size:18px;font-weight:700;letter-spacing:-.014em;}
+.feat-brand{font-family:var(--font-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.email-strip{background:var(--cream2);border-radius:3px;}
+.email-strip-title{font-family:var(--font-d);font-size:clamp(21px,3.4vw,30px);font-weight:900;letter-spacing:-.02em;}
+.email-input{border-radius:2px;font-size:16px;}
+.email-submit{border-radius:2px;background:var(--terracotta);letter-spacing:.11em;text-transform:uppercase;font-weight:700;font-size:11.5px;}
+.chip{border-radius:2px;font-family:var(--font-m);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;}
+.status-pill,.cert-pill{border-radius:2px;font-family:var(--font-m);letter-spacing:.09em;text-transform:uppercase;}
+.welcome-toast{border-radius:3px;}
+.callout{border-radius:3px;border-left:3px solid var(--terracotta);}
+.gold-callout{border-radius:3px;}
+.dev-toggle-panel{border-radius:3px;}
+.placeholder-title{font-family:var(--font-d);font-size:clamp(26px,4.4vw,38px);font-weight:900;letter-spacing:-.024em;}
+
+/* ── 27. TABLET ──────────────────────────────────────────────────────────────
+   The original stylesheet jumped straight from a 480px column to the 1024px
+   desktop layout, so tablets rendered a narrow strip in a sea of empty space. */
+
+@media (min-width:640px) and (max-width:1023px){
+  :root{--gut:36px;--page-max:100%;}
+  .page{max-width:100%;padding-left:0;padding-right:0;}
+  .cat-grid,.home-new-grid,.all-cats{grid-template-columns:repeat(3,1fr);gap:12px;}
+  .subcat-grid{grid-template-columns:repeat(2,1fr);}
+  .prod-list{display:grid;grid-template-columns:repeat(2,1fr);}
+  .promise-strip{grid-template-columns:repeat(4,1fr);}
+  .about-body,.rt-mem{padding-left:36px;padding-right:36px;}
+}
+
+/* ── 28. DESKTOP ─────────────────────────────────────────────────────────────
+   Full-bleed bands, wider grid, roomier sidebar. */
+
+@media (min-width:1024px){
+  :root{--sidebar-w:220px;--gut:var(--gut-lg);--page-max:1320px;}
+
+  body{padding-left:220px;}
+  .top-nav{left:220px;padding:0 var(--gut-lg);}
+  .pd-back,.cat-back{left:220px;width:calc(100% - 220px);padding:0 var(--gut-lg);}
+  .desktop-sidebar{width:220px;background:var(--cream);border-right:1px solid var(--border);padding:26px 16px;}
+
+  /* body padding-top is 0 at this breakpoint (the sidebar layout takes over),
+     so the nav offset moves onto .page. Keeping it on every screen — including
+     home — means the hero's negative margin always has exactly one nav-height
+     of padding to cancel, on both mobile and desktop. */
+  .page{max-width:1320px;padding-top:var(--nav-h);}
+
+  .sidebar-brand{font-size:19px;color:var(--terracotta);padding:0 8px 28px;}
+  .sidebar-brand .brand-logo{width:26px;height:26px;}
+  .sidebar-tab{
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.03em;
+    padding:10px 10px;
+    border-radius:3px;
+    margin-bottom:2px;
+    transition:background .2s var(--ease),color .2s var(--ease);
+  }
+  .sidebar-tab i{width:16px;height:16px;}
+  .sidebar-tab:hover{background:var(--cream2);}
+  .sidebar-tab.active{background:var(--cream2);color:var(--terracotta);}
+  .sidebar-join{
+    background:var(--terracotta);
+    border-radius:2px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-weight:700;
+    font-size:11px;
+    padding:12px;
+    transition:background .25s var(--ease);
+  }
+  .sidebar-join:hover{background:var(--terracotta-dk);}
+  .sidebar-contact-btn{background:var(--char);border-radius:2px;letter-spacing:.1em;text-transform:uppercase;font-size:11px;font-weight:700;}
+
+  .cat-grid,.all-cats{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 var(--gut-lg) 84px;}
+  .home-new-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 var(--gut-lg) 84px;}
+  .subcat-grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:12px var(--gut-lg) 84px;}
+  .prod-list{grid-template-columns:repeat(3,1fr);gap:14px;padding:0 var(--gut-lg) 64px;}
+  .promise-strip{grid-template-columns:repeat(4,1fr);}
+  .home-ai-widget{margin-left:var(--gut-lg);margin-right:var(--gut-lg);max-width:820px;}
+  .cat-hd,.sec-hd,.cats-hd,.ru-hero,.about-hero,.search-wrap{padding-left:var(--gut-lg);padding-right:var(--gut-lg);}
+  .mission-card{margin-left:var(--gut-lg);margin-right:var(--gut-lg);}
+  .fm-map{margin:0 var(--gut-lg) 16px;}
+  .fm-legend-wrap,.fm-results{margin-left:var(--gut-lg);margin-right:var(--gut-lg);}
+  .about-body{padding-left:var(--gut-lg);padding-right:var(--gut-lg);}
+
+  /* Hero type gets room to breathe at desktop scale. */
+  .rt-hero-inner{padding-left:var(--gut-lg);padding-right:var(--gut-lg);}
+  .rt-hero-title{max-width:17ch;}
+
+  /* Hover affordances only where a real pointer exists. */
+  .cat-card,.hnc{cursor:pointer;}
+}
+
+@media (min-width:1440px){
+  :root{--gut-lg:80px;}
+}
+
+/* Touch devices: kill hover transforms that would stick after a tap. */
+@media (hover:none){
+  .cat-card:hover::before,.cat-row:hover::before,.hnc:hover .hnc-img{transform:none;}
+  .subcat-card:hover,.pc:hover,.fm-card:hover,.ru-module-card:hover,.feat-card:hover{transform:none;}
+}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -835,6 +2249,28 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <div id="screen-home" class="screen active">
 <div class="page">
   <div id="home-new">
+    <!-- FULL-BLEED HERO. Escapes the .page column via .rt-hero's viewport-width
+         rule and sits under the fixed nav via a negative top margin, so the nav
+         only has to manage its own colour state (body.nav-over) — no JS is
+         involved in the layout itself. -->
+    <header class="rt-hero">
+      <div class="rt-hero-media" role="img" aria-label="Fresh whole vegetables — cabbage, broccoli, root vegetables and fennel — in warm natural light"
+           style="background-image:url('https://images.unsplash.com/photo-1605279682024-5a25531582dc?auto=format&amp;fit=crop&amp;w=1800&amp;q=70')"></div>
+      <div class="rt-hero-inner">
+        <p class="rt-eyebrow">Standards · Education · Products</p>
+        <h1 class="rt-hero-title">The <em>trusted</em> standard for healthy living.</h1>
+        <p class="rt-hero-sub">Every product rated against a published standard. No guesswork.</p>
+        <div class="rt-hero-actions">
+          <button class="rt-btn rt-btn-primary" onclick="handleJoinClick()">Become a member</button>
+          <button class="rt-btn rt-btn-ghost" onclick="showTab('categories')">Browse the standards</button>
+        </div>
+      </div>
+    </header>
+    <!-- The trust promise, stated before anything is asked of the visitor. -->
+    <div class="rt-trustbar rt-bleed">
+      <span class="rt-trustbar-mark" aria-hidden="true"></span>
+      <span class="rt-trustbar-tx"><strong>No pay-to-play.</strong> No sponsored placements. No brand pays to be listed.</span>
+    </div>
     <div class="home-new-hero">
       <!-- Settings gear opens dev-toggle-panel: Membership Paywall on/off, home layout,
            card style, color theme, etc. Hidden again as of site launch — it was briefly
@@ -843,10 +2279,16 @@ body.style-photo .cat-photo-cycle{display:flex;}
            been reverted to display:none now that the site is live. Panel and all its
            functionality remain intact in the DOM for Claude/dev use going forward. -->
       <span class="dev-panel-gear" style="position:absolute;right:18px;top:14px;" onclick="toggleDevPanel()" title="Site settings"><i data-lucide="settings"></i></span>
-      <div class="home-new-wordmark" id="home-wordmark">Rooted.</div>
+      <!-- The standalone "Rooted." wordmark that used to sit here is redundant now
+           that the hero carries the brand statement, so it is hidden rather than
+           deleted (the tagline picker in the dev panel still targets it). -->
+      <div class="home-new-wordmark" id="home-wordmark" style="display:none">Rooted.</div>
       <div class="home-new-tagline tag-v1" id="home-tagline"><span class="tag-word1">Rooted</span> <span class="tag-word2">Approved</span></div>
     </div>
-    <div class="home-ai-widget">
+    <div class="sec-hd" data-reveal>
+      <span class="sec-title">Ask ROOTED</span>
+    </div>
+    <div class="home-ai-widget" data-reveal>
       <div class="home-ai-input-row">
         <i data-lucide="sparkles"></i>
         <div id="home-chat-input" class="home-ai-input" contenteditable="true" role="textbox" aria-label="Ask anything to get rooted" data-placeholder="Ask anything to get rooted..." spellcheck="false"></div>
@@ -854,24 +2296,28 @@ body.style-photo .cat-photo-cycle{display:flex;}
       </div>
       <div class="home-ai-messages" id="home-ai-messages"></div>
     </div>
+    <div class="sec-hd" data-reveal>
+      <span class="sec-title">Where to start</span>
+    </div>
     <div class="home-new-grid">
-      <div class="hnc" onclick="showScreen('farmers')">
-        <div class="hnc-img" style="background-image:url('https://images.unsplash.com/photo-1757609909192-0246239198c0?auto=format&fit=crop&w=600&q=80')"></div>
+      <div class="hnc" onclick="showScreen('farmers')" data-reveal>
+        <div class="hnc-img" style="background-image:url('https://images.unsplash.com/photo-1757609909192-0246239198c0?auto=format&fit=crop&w=700&q=72')"></div>
         <div class="hnc-title">Local Food Finder</div>
         <div class="hnc-sub">Farms, markets, CSAs <span class="plain-amp">&amp;</span> more</div>
         <span class="hnc-link">Explore the Map →</span>
       </div>
-      <div class="hnc" id="recs-card" onclick="showRecommendations()">
+      <div class="hnc" id="recs-card" onclick="showRecommendations()" data-reveal data-reveal-delay="1">
         <div class="hnc-title">Recommendations</div>
         <div class="hnc-sub">Your top Tier 1 picks, based on what you've viewed and saved</div>
         <span class="hnc-link">See your picks →</span>
       </div>
-      <div class="hnc" onclick="showScreen('rooted-u')">
+      <div class="hnc" onclick="showScreen('rooted-u')" data-reveal data-reveal-delay="2">
         <div class="hnc-img" id="rooted-u-img"></div>
+        <div class="hnc-title">Rooted U</div>
         <div class="hnc-sub">Education modules</div>
         <span class="hnc-link">Start learning →</span>
       </div>
-      <div class="hnc" onclick="showTab('categories')">
+      <div class="hnc" onclick="showTab('categories')" data-reveal data-reveal-delay="3">
         <div class="hnc-title">See More</div>
         <div class="hnc-sub">Every category, every product, every standard — the full ROOTED database in one place</div>
         <span class="hnc-link">Browse all categories →</span>
@@ -1425,13 +2871,13 @@ body.style-photo .cat-photo-cycle{display:flex;}
         <div class="fmg-title">You're seeing a fraction of the map</div>
         <div class="fmg-sub" id="fmg-sub">Free access shows restaurants only.</div>
         <div class="fmg-list" id="fmg-list"></div>
-        <button class="fmg-cta" onclick="handleJoinClick()">Unlock the full map — $10/month</button>
+        <button class="fmg-cta" onclick="handleJoinClick()">Unlock the full map — <span data-price="monthly">$10/month</span></button>
         <button class="fmg-dismiss" onclick="dismissFoodMapGate()">Keep looking around</button>
       </div>
     </div>
     <div class="fm-member-banner" id="fm-member-banner">
       <div class="fmb-hd">🔒 <span>You're seeing a limited map</span></div>
-      <div id="fm-member-banner-body">Farmers markets, CSAs, on-farm pickup and grocery stores are members-only. Restaurants are shown to everyone. <span class="fmb-join" onclick="handleJoinClick()">Join for $10/month →</span></div>
+      <div id="fm-member-banner-body">Farmers markets, CSAs, on-farm pickup and grocery stores are members-only. Restaurants are shown to everyone. <span class="fmb-join" onclick="handleJoinClick()" data-price="joinCta">Join for $10/month →</span></div>
     </div>
     <div class="fm-legend-wrap" id="fm-legend-section">
       <div class="fm-legend-hd">
@@ -1511,17 +2957,17 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <div class="page">
   <div class="cats-hd"><div class="cats-title">All Categories</div><p class="cats-sub">12 categories at launch. Standards first, products second.</p></div>
   <div class="all-cats">
-    <div class="cat-row" onclick="showCategory('clothing')"><span class="cat-row-icon"><i data-lucide="shirt"></i></span><div class="cat-row-info"><div class="cat-row-name">Clothing (Men's)</div><div class="cat-row-sub js-clothing-total">127 products rated</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showCategory('oral')"><span class="cat-row-icon"><i data-lucide="smile"></i></span><div class="cat-row-info"><div class="cat-row-name">Oral Care</div><div class="cat-row-sub js-oral-total">10 products rated</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showCategory('food')"><span class="cat-row-icon"><i data-lucide="beef"></i></span><div class="cat-row-info"><div class="cat-row-name">Food <span class="plain-amp">&amp;</span> Diet</div><div class="cat-row-sub js-food-total">Sourcing, ingredients, grocery</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showCategory('cookware')"><span class="cat-row-icon"><i data-lucide="cooking-pot"></i></span><div class="cat-row-info"><div class="cat-row-name">Cookware <span class="plain-amp">&amp;</span> Kitchen</div><div class="cat-row-sub js-cookware-total">20 products rated</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showCategory('water')"><span class="cat-row-icon"><i data-lucide="droplet"></i></span><div class="cat-row-info"><div class="cat-row-name">Water</div><div class="cat-row-sub js-water-total">10 products rated</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showCategory('personal')"><span class="cat-row-icon"><i data-lucide="sparkles"></i></span><div class="cat-row-info"><div class="cat-row-name">Personal Care</div><div class="cat-row-sub js-personal-total">8 products rated</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showCategory('textiles')"><span class="cat-row-icon"><i data-lucide="bed"></i></span><div class="cat-row-info"><div class="cat-row-name">Bedroom Textiles</div><div class="cat-row-sub js-textiles-total">22 products rated</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showCategory('cleaning')"><span class="cat-row-icon"><i data-lucide="brush-cleaning"></i></span><div class="cat-row-info"><div class="cat-row-name">Cleaning <span class="plain-amp">&amp;</span> Home</div><div class="cat-row-sub js-cleaning-total">Dish soap, laundry, surfaces</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showCategory('air')"><span class="cat-row-icon"><i data-lucide="wind"></i></span><div class="cat-row-info"><div class="cat-row-name">Air Quality</div><div class="cat-row-sub js-air-total">Purifiers, ventilation, humidity</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" onclick="showCategory('lighting')"><span class="cat-row-icon"><i data-lucide="lightbulb"></i></span><div class="cat-row-info"><div class="cat-row-name">Lighting <span class="plain-amp">&amp;</span> Circadian Health</div><div class="cat-row-sub js-lighting-total">Blue light, red light, circadian bulbs</div></div><span class="cat-row-arr">›</span></div>
-    <div class="cat-row" id="cat-row-supplements" onclick="showCategory('supplements')"><span class="cat-row-icon"><i data-lucide="pill"></i></span><div class="cat-row-info"><div class="cat-row-name">Supplement / Detox</div><div class="cat-row-sub js-supplements-total">5 products rated</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" data-cat="clothing" onclick="showCategory('clothing')"><span class="cat-row-icon"><i data-lucide="shirt"></i></span><div class="cat-row-info"><div class="cat-row-name">Clothing (Men's)</div><div class="cat-row-sub js-clothing-total">127 products rated</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" data-cat="oral" onclick="showCategory('oral')"><span class="cat-row-icon"><i data-lucide="smile"></i></span><div class="cat-row-info"><div class="cat-row-name">Oral Care</div><div class="cat-row-sub js-oral-total">10 products rated</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" data-cat="food" onclick="showCategory('food')"><span class="cat-row-icon"><i data-lucide="beef"></i></span><div class="cat-row-info"><div class="cat-row-name">Food <span class="plain-amp">&amp;</span> Diet</div><div class="cat-row-sub js-food-total">Sourcing, ingredients, grocery</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" data-cat="cookware" onclick="showCategory('cookware')"><span class="cat-row-icon"><i data-lucide="cooking-pot"></i></span><div class="cat-row-info"><div class="cat-row-name">Cookware <span class="plain-amp">&amp;</span> Kitchen</div><div class="cat-row-sub js-cookware-total">20 products rated</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" data-cat="water" onclick="showCategory('water')"><span class="cat-row-icon"><i data-lucide="droplet"></i></span><div class="cat-row-info"><div class="cat-row-name">Water</div><div class="cat-row-sub js-water-total">10 products rated</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" data-cat="personal" onclick="showCategory('personal')"><span class="cat-row-icon"><i data-lucide="sparkles"></i></span><div class="cat-row-info"><div class="cat-row-name">Personal Care</div><div class="cat-row-sub js-personal-total">8 products rated</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" data-cat="textiles" onclick="showCategory('textiles')"><span class="cat-row-icon"><i data-lucide="bed"></i></span><div class="cat-row-info"><div class="cat-row-name">Bedroom Textiles</div><div class="cat-row-sub js-textiles-total">22 products rated</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" data-cat="cleaning" onclick="showCategory('cleaning')"><span class="cat-row-icon"><i data-lucide="brush-cleaning"></i></span><div class="cat-row-info"><div class="cat-row-name">Cleaning <span class="plain-amp">&amp;</span> Home</div><div class="cat-row-sub js-cleaning-total">Dish soap, laundry, surfaces</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" data-cat="air" onclick="showCategory('air')"><span class="cat-row-icon"><i data-lucide="wind"></i></span><div class="cat-row-info"><div class="cat-row-name">Air Quality</div><div class="cat-row-sub js-air-total">Purifiers, ventilation, humidity</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" data-cat="lighting" onclick="showCategory('lighting')"><span class="cat-row-icon"><i data-lucide="lightbulb"></i></span><div class="cat-row-info"><div class="cat-row-name">Lighting <span class="plain-amp">&amp;</span> Circadian Health</div><div class="cat-row-sub js-lighting-total">Blue light, red light, circadian bulbs</div></div><span class="cat-row-arr">›</span></div>
+    <div class="cat-row" id="cat-row-supplements" data-cat="supplements" onclick="showCategory('supplements')"><span class="cat-row-icon"><i data-lucide="pill"></i></span><div class="cat-row-info"><div class="cat-row-name">Supplement / Detox</div><div class="cat-row-sub js-supplements-total">5 products rated</div></div><span class="cat-row-arr">›</span></div>
   </div>
 </div>
 </div>
@@ -1568,7 +3014,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
   </div>
   <div class="mem-card" id="mem-card">
     <div id="mem-card-pitch">
-      <div class="mem-eye">ROOTED Member — $10/mo</div>
+      <div class="mem-eye">ROOTED Member — <span data-price="monthlyShort">$10/mo</span></div>
       <div class="mem-title">Unlock the full database</div>
       <div class="mem-sub">Every product, every tier, every rationale.</div>
       <div class="mem-perks">
@@ -1581,7 +3027,7 @@ body.style-photo .cat-photo-cycle{display:flex;}
       <!-- Routes to Sign Up for now, since an account is needed before checkout either way.
            Once Stripe is built, this should check login state: if already logged in, go
            straight to Stripe Checkout for the Member plan instead of back to signup. -->
-      <button class="mem-cta" id="mem-cta-btn" onclick="showScreen('signup')">Join for $10/month →</button>
+      <button class="mem-cta" id="mem-cta-btn" onclick="showScreen('signup')" data-price="joinCta">Join for $10/month →</button>
     </div>
     <!-- Subtle, low-key replacement shown instead of the full sales pitch once someone is
          a confirmed paying member — no eyebrow price, no perks list, just a quiet
@@ -2032,12 +3478,37 @@ body.style-photo .cat-photo-cycle{display:flex;}
 <!-- PAYWALL -->
 <div id="screen-paywall" class="screen">
 <div class="page">
-  <div style="padding:70px 24px 24px;text-align:center;">
-    <div style="font-size:38px;margin-bottom:14px;">🔒</div>
-    <div class="tier-page-title" id="paywall-title">Members Only</div>
-    <p class="tier-page-sub" id="paywall-message">This is part of ROOTED Membership.</p>
-    <button class="btn-buy" style="margin-top:10px;" onclick="handleJoinClick()">Join for $10/month →</button>
-    <div style="margin-top:16px;"><span class="sec-link" onclick="showTab('home')">← Back to Home</span></div>
+  <!-- MEMBERSHIP. #paywall-title and #paywall-message are written to by JS
+       depending on which gated surface sent the visitor here, so both IDs and
+       their default copy are preserved exactly. Everything around them is the
+       actual pitch, which this screen previously did not make. -->
+  <div class="rt-mem">
+    <div class="rt-mem-mark" aria-hidden="true"></div>
+    <p class="rt-eyebrow">ROOTED Membership</p>
+    <h1 class="rt-mem-title" id="paywall-title">Members Only</h1>
+    <p class="rt-mem-sub" id="paywall-message">This is part of ROOTED Membership.</p>
+
+    <div class="rt-mem-price">
+      <span class="rt-mem-price-amt" data-price="price">$10</span>
+      <span class="rt-mem-price-note">per month · cancel anytime</span>
+    </div>
+
+    <ul class="rt-mem-perks">
+      <li class="rt-mem-perk"><span class="rt-mem-perk-tx"><b>Every standard, all 12 categories</b><span>The full published standard and the rationale behind every rating.</span></span></li>
+      <li class="rt-mem-perk"><span class="rt-mem-perk-tx"><b>The full product database</b><span>Every product, every tier, and why it landed there.</span></span></li>
+      <li class="rt-mem-perk"><span class="rt-mem-perk-tx"><b>ROOTED AI Assistant</b><span>Ask about any product or ingredient and get an answer from the standard.</span></span></li>
+      <li class="rt-mem-perk"><span class="rt-mem-perk-tx"><b>The complete Local Food Map</b><span>Farmers markets, CSAs, on-farm pickup and verified grocers near you.</span></span></li>
+      <li class="rt-mem-perk"><span class="rt-mem-perk-tx"><b>Rooted U</b><span>Education modules for every category.</span></span></li>
+      <li class="rt-mem-perk"><span class="rt-mem-perk-tx"><b>Ad-free, always</b><span>No ads, no sponsored placements, no exceptions.</span></span></li>
+    </ul>
+
+    <button class="rt-btn rt-btn-primary rt-mem-cta" onclick="handleJoinClick()" data-price="joinCta">Join for $10/month →</button>
+    <p class="rt-mem-fine"><span class="sec-link" onclick="showTab('home')">← Back to Home</span></p>
+
+    <div class="rt-mem-promise">
+      <div class="rt-mem-promise-hd">Why we charge</div>
+      <p class="rt-mem-promise-tx">Membership is the only thing that funds ROOTED. No brand pays to be listed, no brand pays to rank higher, and there are no sponsored placements anywhere on this site. Your membership is what keeps the standard independent.</p>
+    </div>
   </div>
 </div>
 </div>
@@ -2122,6 +3593,119 @@ body.style-photo .cat-photo-cycle{display:flex;}
   <div class="contact-email-line">team@rootedapproved.com</div>
 </nav>
 <script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   MEMBERSHIP PRICING — single source of truth.
+
+   The price used to be typed out in eight places across markup and JS, which
+   made a price change a find-and-replace across a 2.4MB file. Change `amount`
+   (or `interval`) here and every surface updates: the paywall, the profile
+   membership card, the food-map upsells, the chat assistant's join link, and
+   the nav.
+
+   Anything in the MARKUP carries a data-price attribute instead of a literal,
+   and applyPricing() fills it on load. Anything in JS reads ROOTED_PRICING.
+
+   NOTE: this controls DISPLAY only. The actual amount charged lives in the
+   Stripe price object referenced by workers/rooted-stripe.js — update both,
+   or the page will advertise a price the checkout does not honour.
+   ═══════════════════════════════════════════════════════════════════════════ */
+const ROOTED_PRICING = {
+  amount: 10,
+  currency: '$',
+  interval: 'month',
+  intervalShort: 'mo',
+  get price()        { return this.currency + this.amount; },              // "$10"
+  get monthly()      { return this.price + '/' + this.interval; },         // "$10/month"
+  get monthlyShort() { return this.price + '/' + this.intervalShort; },    // "$10/mo"
+  get joinCta()      { return 'Join for ' + this.monthly + ' →'; }    // "Join for $10/month →"
+};
+
+// Fills every [data-price] element in the markup from the config above.
+// Called on DOM ready, and safe to call again after injecting new markup.
+function applyPricing(root) {
+  const scope = root || document;
+  scope.querySelectorAll('[data-price]').forEach(el => {
+    const key = el.getAttribute('data-price');
+    const val = ROOTED_PRICING[key];
+    if (typeof val === 'string') el.textContent = val;
+  });
+}
+
+/* ── SCROLL REVEAL ──────────────────────────────────────────────────────────
+   Elements marked [data-reveal] fade and rise once as they enter the viewport.
+   The html.js-reveal class is what actually hides them, and it is only added
+   here — so if this script fails to run, or IntersectionObserver is missing,
+   the content stays plainly visible instead of being stuck at opacity 0.
+   Honours prefers-reduced-motion via the stylesheet. */
+function initReveal() {
+  if (!('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js-reveal');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      io.unobserve(entry.target);   // reveal once; never re-hide on scroll back up
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+  window.__rootedRevealIO = io;
+}
+
+// Screens are swapped in and out rather than navigated to, so anything revealed
+// on a screen that was hidden at load needs observing when that screen appears.
+function observeReveals(container) {
+  const io = window.__rootedRevealIO;
+  if (!io || !container) return;
+  container.querySelectorAll('[data-reveal]:not(.is-in)').forEach(el => io.observe(el));
+}
+
+/* Publishes the vertical scrollbar's width to CSS as --sbw. The full-bleed
+   bands subtract it from 100vw; see the note on --sbw in the stylesheet. */
+function initScrollbarWidth() {
+  const set = () => {
+    const w = window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.style.setProperty('--sbw', (w > 0 ? w : 0) + 'px');
+  };
+  set();
+  window.addEventListener('resize', set, { passive: true });
+}
+
+/* ── NAV STATE ──────────────────────────────────────────────────────────────
+   Two independent things: `nav-solid` once the page has scrolled at all, and
+   `nav-over` while the home hero is still behind the nav (white-on-image).
+   Read from a rAF-throttled scroll listener so this stays cheap. */
+function initNavState() {
+  let ticking = false;
+  const navH = () => parseInt(getComputedStyle(document.documentElement)
+    .getPropertyValue('--nav-h'), 10) || 64;
+  const update = () => {
+    ticking = false;
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    const home = document.getElementById('screen-home');
+    const onHome = !!(home && home.classList.contains('active'));
+    // Measure the hero rather than assuming it is one viewport tall — it is
+    // clamped between 560px and 940px, so on a short landscape phone or a very
+    // tall desktop window a viewport-fraction guess would flip the nav at the
+    // wrong moment. Hand the plate back just before the image bottom reaches
+    // the nav so the text never sits on a busy edge.
+    const hero = onHome ? document.querySelector('.rt-hero') : null;
+    const overHero = !!hero && hero.getBoundingClientRect().bottom > (navH() + 24);
+    document.body.classList.toggle('nav-solid', y > 8);
+    document.body.classList.toggle('nav-over', overHero);
+  };
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  window.__rootedNavUpdate = update;
+  update();
+}
+
 const PRODUCTS = {
   'supp-organ-heartsoil-beeforgans':{brand:'Heart & Soil',tier:'1',label:'Rooted Approved',name:'Beef Organs',price:'$52',url:'https://shop.heartandsoil.co/products/beef-organs',subcat:'supp-organ',emoji:'🫀',img:'https://shop.heartandsoil.co/cdn/shop/files/Beef-Organs_600x600.webp?v=1771346360',verdict:'Grass-fed, grass-finished beef liver, heart, pancreas, spleen, and kidney - freeze-dried and Informed Sport Certified, tested every batch against 200+ substances banned by WADA, NCAA, and every major pro league. No testicle/gonad tissue in this formula, unlike some organ blends, so it does not carry the naturally-occurring-hormone risk that affects other organ products.',composition:'500mg per capsule, 180 capsules per bottle · Grass-fed, grass-finished bovine liver, heart, pancreas, spleen, kidney · Freeze-dried · 100% preservative, antibiotic, pesticide, and GMO-free · No added hormones',flags:null,pros:['Informed Sport Certified - every batch tested against 200+ banned substances (WADA, NCAA, NFL, MLB, NHL, PGA/LPGA)','Grass-fed and grass-finished source','Freeze-dried to preserve bioactivity, not high-heat processed','No testicle/gonad tissue - avoids the natural-hormone drug-test risk some organ blends carry','100% preservative, antibiotic, pesticide, and GMO-free','Founded by Paul Saladino, MD'],cons:['Capsule form only, no unflavored powder option','Organ supplements have a real "start slow" adjustment period per the brand\'s own dosing guidance','Premium price relative to some competitors'],certs:['Informed Sport Certified'],alts:[]},
   'supp-protein-promix-oneingredient':{brand:'ProMix Nutrition',tier:'1',label:'Rooted Approved',name:'One Ingredient Whey Protein Powder',price:'$64',url:'https://promixnutrition.com/products/one-ingredient-whey-protein-powder',subcat:'supp-protein',emoji:'🥛',img:'https://promixnutrition.com/cdn/shop/products/promix-single-ingredient-grass-fed-whey-2-2lb_500x.png?v=1762197965',verdict:'Genuinely one ingredient: grass-fed whey, unsweetened, unflavored, nothing else. NSF Certified for Sport - every batch tested against 280+ banned substances, heavy metals, and contaminants. 25g protein per serving.',composition:'One ingredient: whey protein concentrate from certified grass-fed cows · 25g protein / 5.1g BCAA per serving · Cold-processed and minimally filtered · No sweeteners, flavors, or additives of any kind',flags:null,pros:['NSF Certified for Sport - tested against 280+ banned substances, heavy metals, and contaminants','Genuinely one ingredient - nothing added, not even natural flavors','Grass-fed, hormone-free, antibiotic-free source','No gums, gluten, soy, GMOs, or artificial anything','94% of ingredients sourced from North America','90-day guarantee'],cons:['Unflavored/unsweetened only in this specific SKU - some prefer flavor for daily use','Whey-based, not suitable for dairy-free or vegan diets','Premium price relative to mass-market whey'],certs:['NSF Certified for Sport'],alts:[]},
@@ -2873,6 +4457,13 @@ function showScreen(id){
   // screen keeps the full icon + text brand mark since it's their only wordmark on screen.
   const brandTextEl = document.getElementById('nav-brand-text');
   if (brandTextEl) brandTextEl.style.display = (id === 'home') ? 'none' : '';
+
+  // Screens are shown/hidden rather than navigated to, so anything marked
+  // [data-reveal] on a screen that was hidden at load has to be handed to the
+  // observer now — otherwise it would sit at opacity 0 forever.
+  if (el) observeReveals(el);
+  // The nav is transparent only over the home hero; recompute on every change.
+  if (window.__rootedNavUpdate) window.__rootedNavUpdate();
 }
 
 // Use this instead of a hardcoded goHome()/showTab('home') on any back button that's
@@ -3607,7 +5198,7 @@ function chatFindBrand(query) {
 // three separate code paths produced three different intros and three different closing
 // lines for what is fundamentally the same kind of answer.
 
-const CHAT_JOIN_LINK = '<span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="handleJoinClick()">Join for $10/month →</span>';
+const CHAT_JOIN_LINK = '<span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="handleJoinClick()">' + ROOTED_PRICING.joinCta + '</span>';
 
 function chatTierShort(tier) {
   return ({ '1': 'Tier 1 · Rooted Approved', '2': 'Tier 2 · Good Option', '3': 'Tier 3 · Budget/Transitional' })[tier] || 'Unrated';
@@ -5934,7 +7525,7 @@ function updateFoodMapAccessUI() {
         ? '<strong>' + hidden + ' listing' + (hidden === 1 ? '' : 's') + ' near you ' + (hidden === 1 ? 'is' : 'are') + ' hidden.</strong> '
         : '')
       + 'Members-only categories: ' + lockedLabels + '. '
-      + '<span class="fmb-join" onclick="handleJoinClick()">Join for $10/month \u2192</span>';
+      + '<span class="fmb-join" onclick="handleJoinClick()">' + ROOTED_PRICING.joinCta + '</span>';
   }
 }
 let lastRawListings = null;
@@ -6128,7 +7719,7 @@ function updateListForViewport() {
     if (hiddenCount > 0) {
       const upsell = document.createElement('div');
       upsell.style.cssText = 'padding:12px 16px;margin-bottom:10px;background:var(--cream2);border-radius:8px;font-size:12.5px;color:var(--mid);text-align:center;';
-      upsell.innerHTML = `${hiddenCount} more listing${hiddenCount === 1 ? '' : 's'} (farmers markets, CSAs, groceries) are members-only. <span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="handleJoinClick()">Join for $10/month →</span>`;
+      upsell.innerHTML = `${hiddenCount} more listing${hiddenCount === 1 ? '' : 's'} (farmers markets, CSAs, groceries) are members-only. <span style="color:var(--forest);font-weight:700;cursor:pointer;" onclick="handleJoinClick()">${ROOTED_PRICING.joinCta}</span>`;
       resultsEl.appendChild(upsell);
     }
   }
@@ -7502,13 +9093,11 @@ function initPhotoVariants() {
 }
 
 function initCardStyle() {
-  let saved = 'rect';
-  try { saved = localStorage.getItem('rooted-card-style') || 'rect'; } catch (e) {}
-  // Both 'default' (removed previously) and 'photo' (the old default, now retired in favor
-  // of Rectangle) get migrated forward automatically - otherwise anyone with either value
-  // already saved in their own browser would keep seeing the old look with no visible change.
-  if (saved === 'default' || saved === 'photo') saved = 'rect';
-  setCardStyle(saved);
+  // The 2026 redesign makes image-led category cards the brand look rather than
+  // one of three dev-panel options, so this no longer reads the saved value —
+  // 'photo' is pinned. The stored key is deliberately NOT cleared: setCardStyle()
+  // and the toggle buttons still work if the panel is ever reopened for dev use.
+  setCardStyle('photo');
 }
 
 // New 4-card AI-forward home layout vs. the original hero + full category grid layout.
@@ -7569,9 +9158,11 @@ function setSidebarStyle(style) {
 }
 
 function initSidebarStyle() {
-  let saved = 'dark';
-  try { saved = localStorage.getItem('rooted-sidebar-style') || 'dark'; } catch (e) {}
-  setSidebarStyle(saved);
+  // Pinned to 'plain' by the 2026 redesign: the sidebar is now off-white with a
+  // terracotta active state, and the old dark/terracotta/gradient fills fight
+  // that. setSidebarStyle() still works for dev-panel use; only the saved value
+  // is ignored, so anyone carrying the old 'dark' default gets the new look.
+  setSidebarStyle('plain');
 }
 
 // Lets the user compare bottom tab bar vs. side drawer navigation on mobile — same
@@ -7597,14 +9188,16 @@ function initMobileNavStyle() {
 // re-colors everything at once, including the logo SVG, with no per-component CSS needed.
 const COLOR_THEMES = ['original', 'midnight', 'minimal', 'clay', 'coastal'];
 
+// ROOTED now has a single brand identity, so the five swappable colour themes
+// were removed in the 2026 redesign along with their CSS blocks. This is kept as
+// a no-op rather than deleted because it is still referenced by initColorTheme()
+// and by the dev panel's (hidden) theme buttons — and because anyone who picked a
+// theme before the redesign still has 'rooted-color-theme' in localStorage. The
+// stale class removal below makes sure such a visitor lands on the new brand look
+// instead of a half-applied old theme.
 function setColorTheme(theme) {
-  if (!COLOR_THEMES.includes(theme)) theme = 'original';
   document.body.classList.remove('theme-midnight', 'theme-minimal', 'theme-clay', 'theme-coastal');
-  if (theme !== 'original') document.body.classList.add('theme-' + theme);
-  document.querySelectorAll('[id^="theme-btn-"]').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById('theme-btn-' + theme);
-  if (btn) btn.classList.add('active');
-  try { localStorage.setItem('rooted-color-theme', theme); } catch (e) {}
+  try { localStorage.removeItem('rooted-color-theme'); } catch (e) {}
 }
 
 // ── SUPABASE AUTH ──────────────────────────────────────────────────────
@@ -7796,7 +9389,7 @@ function updateProfileUIForAuthState(session) {
       activeEl.style.display = 'none';
     }
     if (memBtnEl) {
-      memBtnEl.textContent = 'Join for $10/month →';
+      memBtnEl.textContent = ROOTED_PRICING.joinCta;
       memBtnEl.onclick = () => showScreen('signup');
     }
   }
@@ -7838,7 +9431,7 @@ async function refreshMembershipStatus(userId) {
       memBtnEl.textContent = 'Manage Membership →';
       memBtnEl.onclick = () => openBillingPortal(data.stripe_customer_id);
     } else {
-      memBtnEl.textContent = 'Join for $10/month →';
+      memBtnEl.textContent = ROOTED_PRICING.joinCta;
       memBtnEl.onclick = () => startCheckout(userId, null);
     }
   }
@@ -8066,6 +9659,12 @@ window.addEventListener('DOMContentLoaded', initHomeCategoryVisibility);
 window.addEventListener('DOMContentLoaded', initSidebarStyle);
 window.addEventListener('DOMContentLoaded', initMobileNavStyle);
 window.addEventListener('DOMContentLoaded', initColorTheme);
+// Redesign (2026): pricing is config-driven, and the scroll/nav motion is set up
+// after the rest of init so every screen's markup already exists to be observed.
+window.addEventListener('DOMContentLoaded', () => applyPricing());
+window.addEventListener('DOMContentLoaded', initScrollbarWidth);
+window.addEventListener('DOMContentLoaded', initNavState);
+window.addEventListener('DOMContentLoaded', initReveal);
 window.addEventListener('DOMContentLoaded', initDevPanel);
 window.addEventListener('DOMContentLoaded', initRootedULogo);
 window.addEventListener('DOMContentLoaded', initAuthState);
