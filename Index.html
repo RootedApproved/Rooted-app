@@ -2875,11 +2875,13 @@ body.style-photo .cat-card::before{
 #screen-profile .prof-contact-btn:hover{background:var(--terracotta-dk);}
 #screen-profile .prof-contact-btn i,
 #screen-profile .prof-contact-btn svg{width:15px;height:15px;}
+/* No overlap onto the hero photograph — the card was riding up over the image
+   and covering it on both mobile and desktop. It now sits fully below the band
+   with normal rhythm. */
 #screen-profile .mem-card{
-  margin-top:-52px;
+  margin-top:clamp(18px,3vw,28px);
   position:relative;
-  z-index:5;
-  box-shadow:0 28px 70px -28px rgba(20,17,15,.45);
+  box-shadow:0 18px 50px -24px rgba(20,17,15,.3);
 }
 #screen-profile .prof-sec{
   background:var(--white);
