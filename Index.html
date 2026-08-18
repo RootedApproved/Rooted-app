@@ -34,7 +34,6 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://images.unsplash.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -1367,17 +1366,17 @@ body.style-photo .cat-card::before{
 /* The chevron was the row's affordance; on a card the whole image is. */
 .cat-row-arr{display:none;}
 
-.cat-row[data-cat="clothing"]::before{background-image:url('https://images.unsplash.com/photo-1612654516785-0e1a96be21d1?auto=format&fit=crop&w=700&q=72');}
-.cat-row[data-cat="oral"]::before{background-image:url('https://images.unsplash.com/photo-1553691158-91a7f9183156?auto=format&fit=crop&w=700&q=72');}
-.cat-row[data-cat="food"]::before{background-image:url('https://images.unsplash.com/photo-1563865436874-9aef32095fad?auto=format&fit=crop&w=700&q=72');}
-.cat-row[data-cat="cookware"]::before{background-image:url('https://images.unsplash.com/photo-1603038124597-2c5c207edf47?auto=format&fit=crop&w=700&q=72');}
-.cat-row[data-cat="water"]::before{background-image:url('https://images.unsplash.com/photo-1599675267516-c502d37e40cb?auto=format&fit=crop&w=700&q=72');}
-.cat-row[data-cat="personal"]::before{background-image:url('https://images.unsplash.com/photo-1748543668676-ea8241cb3886?auto=format&fit=crop&w=700&q=72');}
-.cat-row[data-cat="textiles"]::before{background-image:url('https://images.unsplash.com/photo-1600494448655-ae58f58bb945?auto=format&fit=crop&w=700&q=72');}
-.cat-row[data-cat="cleaning"]::before{background-image:url('https://images.unsplash.com/photo-1550963295-019d8a8a61c5?auto=format&fit=crop&w=700&q=72');}
-.cat-row[data-cat="air"]::before{background-image:url('https://images.unsplash.com/photo-1766243062910-bda898a2470c?auto=format&fit=crop&w=700&q=72');}
-.cat-row[data-cat="lighting"]::before{background-image:url('https://images.unsplash.com/photo-1631832293782-2eda7804489b?auto=format&fit=crop&w=700&q=72');}
-.cat-row[data-cat="supplements"]::before{background-image:url('https://images.unsplash.com/photo-1757802412806-433e4e60eec7?auto=format&fit=crop&w=700&q=72');}
+.cat-row[data-cat="clothing"]::before{background-image:url('/images/cat-clothing.jpg');}
+.cat-row[data-cat="oral"]::before{background-image:url('/images/cat-oral.jpg');}
+.cat-row[data-cat="food"]::before{background-image:url('/images/cat-food.jpg');}
+.cat-row[data-cat="cookware"]::before{background-image:url('/images/cat-cookware.jpg');}
+.cat-row[data-cat="water"]::before{background-image:url('/images/cat-water.jpg');}
+.cat-row[data-cat="personal"]::before{background-image:url('/images/cat-personal.jpg');}
+.cat-row[data-cat="textiles"]::before{background-image:url('/images/cat-textiles.jpg');}
+.cat-row[data-cat="cleaning"]::before{background-image:url('/images/cat-cleaning.jpg');}
+.cat-row[data-cat="air"]::before{background-image:url('/images/cat-air.jpg');}
+.cat-row[data-cat="lighting"]::before{background-image:url('/images/cat-lighting.jpg');}
+.cat-row[data-cat="supplements"]::before{background-image:url('/images/cat-supplements.jpg');}
 
 /* ── 9. HOME FEATURE CARDS (.hnc) ────────────────────────────────────────────
    The four pillars: Food Map, Recommendations, Rooted U, Browse all. */
@@ -2254,8 +2253,8 @@ body.style-photo .cat-card::before{
          only has to manage its own colour state (body.nav-over) — no JS is
          involved in the layout itself. -->
     <header class="rt-hero">
-      <div class="rt-hero-media" role="img" aria-label="Fresh whole vegetables — cabbage, broccoli, root vegetables and fennel — in warm natural light"
-           style="background-image:url('https://images.unsplash.com/photo-1605279682024-5a25531582dc?auto=format&amp;fit=crop&amp;w=1800&amp;q=70')"></div>
+      <div class="rt-hero-media" role="img" aria-label="Kitchen counter in warm morning light with fresh whole foods — heirloom tomatoes, leafy greens, olive oil in glass and a cast iron pan on linen"
+           style="background-image:url('/images/hero-home.jpg')"></div>
       <div class="rt-hero-inner">
         <p class="rt-eyebrow">Standards · Education · Products</p>
         <h1 class="rt-hero-title">The <em>trusted</em> standard for healthy living.</h1>
@@ -2301,7 +2300,7 @@ body.style-photo .cat-card::before{
     </div>
     <div class="home-new-grid">
       <div class="hnc" onclick="showScreen('farmers')" data-reveal>
-        <div class="hnc-img" style="background-image:url('https://images.unsplash.com/photo-1757609909192-0246239198c0?auto=format&fit=crop&w=700&q=72')"></div>
+        <div class="hnc-img" role="img" aria-label="Farmers market produce stand with wooden crates of seasonal vegetables in warm morning light" style="background-image:url('/images/cat-farmers.jpg')"></div>
         <div class="hnc-title">Local Food Finder</div>
         <div class="hnc-sub">Farms, markets, CSAs <span class="plain-amp">&amp;</span> more</div>
         <span class="hnc-link">Explore the Map →</span>
