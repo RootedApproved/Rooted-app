@@ -2224,6 +2224,291 @@ body.style-photo .cat-card::before{
   .subcat-card:hover,.pc:hover,.fm-card:hover,.ru-module-card:hover,.feat-card:hover{transform:none;}
 }
 
+
+/* ── 29. EDITORIAL POLISH PASS (2026, second round) ──────────────────────────
+   Requested direction: quieter, less generic-app, more editorial. Boxes and
+   pills give way to hairlines and type; every remaining flat-colour card gets
+   a photograph; the sidebar becomes a calm uppercase index. */
+
+/* Sidebar — icon row chrome out, tracked-uppercase index in. */
+@media (min-width:1024px){
+  .desktop-sidebar{padding:40px 26px 26px;background:var(--cream);}
+  .sidebar-brand{font-size:20px;color:var(--char);padding:0 0 36px;gap:11px;}
+  .sidebar-brand .brand-logo{width:34px;height:34px;}
+  .sidebar-tab{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--muted);
+    padding:11px 0 11px 14px;
+    border-left:2px solid transparent;
+    border-radius:0;
+    margin-bottom:4px;
+    transition:color .25s var(--ease),border-color .25s var(--ease);
+  }
+  /* The icon column read as app chrome; the words carry the nav now. */
+  .sidebar-tab i,.sidebar-tab svg{display:none;}
+  .sidebar-tab:hover{background:none;color:var(--char);}
+  .sidebar-tab.active{background:none;color:var(--terracotta);border-left-color:var(--terracotta);}
+  .sidebar-footer{border-top:1px solid var(--border);padding:20px 0 16px;gap:16px;}
+  .sidebar-social svg{width:17px;height:17px;opacity:.45;transition:opacity .25s var(--ease);}
+  .sidebar-social:hover svg{opacity:1;}
+  .sidebar-actions{flex-direction:column;gap:8px;}
+  .sidebar-join{padding:13px;}
+  .sidebar-contact-btn{background:transparent;color:var(--char);border:1.5px solid var(--border-strong);}
+  .sidebar-contact-btn:hover{border-color:var(--char);}
+  .contact-email-line{color:var(--muted);}
+}
+
+/* Ask ROOTED — box removed; a bare editorial input line. */
+.home-ai-widget{background:transparent;border:none;box-shadow:none;padding:0;border-radius:0;}
+.home-ai-widget:focus-within{border:none;box-shadow:none;}
+.home-ai-input-row{
+  background:transparent;
+  border:none;
+  border-radius:0;
+  border-bottom:1.5px solid var(--border-strong);
+  padding:12px 2px;
+  gap:14px;
+  transition:border-color .3s var(--ease);
+}
+.home-ai-send{
+  background:var(--terracotta);
+  color:#fff;
+}
+.home-ai-send:hover{background:var(--terracotta-dk);}
+.home-ai-send i,.home-ai-send svg{width:17px;height:17px;}
+.home-ai-widget:focus-within .home-ai-input-row{border-color:var(--terracotta);}
+.home-ai-input{font-family:var(--font-d);font-size:clamp(17px,2.2vw,22px);}
+.home-ai-send{width:40px;height:40px;border-radius:50%;flex-shrink:0;}
+
+/* Category hub headers — each category opens on its own photograph. */
+#screen-food{--band:url('/images/cat-food.jpg');}
+#screen-clothing{--band:url('/images/cat-clothing.jpg');}
+#screen-cookware{--band:url('/images/cat-cookware.jpg');}
+#screen-water{--band:url('/images/cat-water.jpg');}
+#screen-lighting{--band:url('/images/cat-lighting.jpg');}
+#screen-oral{--band:url('/images/cat-oral.jpg');}
+#screen-personal{--band:url('/images/cat-personal.jpg');}
+#screen-textiles{--band:url('/images/cat-textiles.jpg');}
+#screen-cleaning{--band:url('/images/cat-cleaning.jpg');}
+#screen-air{--band:url('/images/cat-air.jpg');}
+#screen-supplements{--band:url('/images/cat-supplements.jpg');}
+#screen-farmers{--band:url('/images/cat-farmers.jpg');}
+/* Clothing sub-hubs share the clothing photograph. */
+#screen-pants-hub,#screen-golf-hub,#screen-suits-hub,#screen-swim-hub,
+#screen-sweater-jacket-hub,#screen-workout-hub{--band:url('/images/cat-clothing.jpg');}
+
+:where(#screen-food,#screen-clothing,#screen-cookware,#screen-water,#screen-lighting,
+#screen-oral,#screen-personal,#screen-textiles,#screen-cleaning,#screen-air,
+#screen-supplements,#screen-farmers,#screen-pants-hub,#screen-golf-hub,
+#screen-suits-hub,#screen-swim-hub,#screen-sweater-jacket-hub,#screen-workout-hub) .cat-hd{
+  background-image:linear-gradient(to top,rgba(20,17,15,.88) 0%,rgba(20,17,15,.44) 55%,rgba(20,17,15,.30) 100%),var(--band);
+  background-size:cover;
+  /* The band is a wide crop of a 3:4 portrait; biasing below centre keeps the
+     subject (which these photographs place in their lower half) in frame. */
+  background-position:center 68%;
+  width:calc(100vw - var(--sbw) - var(--sidebar-w));
+  margin-left:calc(50% - (100vw - var(--sbw) - var(--sidebar-w))/2);
+  max-width:none;
+  /* Top padding clears the fixed back bar (48px) before the display type starts. */
+  padding:calc(48px + clamp(44px,8vw,104px)) var(--gut) clamp(30px,5vw,56px);
+}
+:where(#screen-food,#screen-clothing,#screen-cookware,#screen-water,#screen-lighting,
+#screen-oral,#screen-personal,#screen-textiles,#screen-cleaning,#screen-air,
+#screen-supplements,#screen-farmers,#screen-pants-hub,#screen-golf-hub,
+#screen-suits-hub,#screen-swim-hub,#screen-sweater-jacket-hub,#screen-workout-hub) .cat-title{
+  color:#fff;
+  text-shadow:0 1px 14px rgba(20,17,15,.45);
+}
+:where(#screen-food,#screen-clothing,#screen-cookware,#screen-water,#screen-lighting,
+#screen-oral,#screen-personal,#screen-textiles,#screen-cleaning,#screen-air,
+#screen-supplements,#screen-farmers,#screen-pants-hub,#screen-golf-hub,
+#screen-suits-hub,#screen-swim-hub,#screen-sweater-jacket-hub,#screen-workout-hub) .cat-desc{
+  color:rgba(255,255,255,.88);
+}
+@media (min-width:1024px){
+  :where(#screen-food,#screen-clothing,#screen-cookware,#screen-water,#screen-lighting,
+  #screen-oral,#screen-personal,#screen-textiles,#screen-cleaning,#screen-air,
+  #screen-supplements,#screen-farmers,#screen-pants-hub,#screen-golf-hub,
+  #screen-suits-hub,#screen-swim-hub,#screen-sweater-jacket-hub,#screen-workout-hub) .cat-hd{
+    padding-left:var(--gut-lg);
+    padding-right:var(--gut-lg);
+  }
+}
+.cat-back,.pd-back{color:var(--char);}
+
+/* Subcategory cards — from white boxes to hairline editorial tiles. */
+.subcat-card{
+  border:none;
+  border-top:1px solid var(--border-strong);
+  border-radius:0;
+  background:transparent;
+  padding:18px 2px 20px;
+  min-height:120px;
+  transition:border-color .3s var(--ease);
+}
+.subcat-card:hover{background:transparent;transform:none;border-top-color:var(--terracotta);}
+.subcat-card:hover .sc-name{color:var(--terracotta);}
+.sc-icon{margin-bottom:12px;}
+.sc-icon i,.sc-icon svg{width:18px;height:18px;color:var(--char);opacity:.7;}
+.sc-name{transition:color .3s var(--ease);}
+
+/* Product cards — flatter, gallery-like. */
+.pc{border-radius:0;}
+.pc:hover{box-shadow:none;border-color:var(--char);transform:none;}
+.pc-verdict{font-family:var(--font-d);font-style:italic;color:var(--mid);}
+.pd-verdict-box{border-left:3px solid var(--terracotta);border-radius:0;}
+
+/* Search — a headline and a bare line, not a widget. */
+.search-hd{padding:0 0 30px;}
+.search-title{
+  font-family:var(--font-d);
+  font-size:clamp(34px,6.5vw,62px);
+  font-weight:900;
+  letter-spacing:-.028em;
+  line-height:1;
+  margin-bottom:10px;
+}
+.search-sub{color:var(--mid);font-weight:300;font-size:clamp(14.5px,1.8vw,17px);}
+.search-box{
+  border:none;
+  border-bottom:1.5px solid var(--border-strong);
+  border-radius:0;
+  background:transparent;
+  padding:10px 2px;
+  box-shadow:none;
+}
+.search-box:focus-within{border-color:var(--terracotta);box-shadow:none;}
+.search-input{background:transparent;font-family:var(--font-d);font-size:clamp(18px,2.4vw,24px);}
+.search-icon i,.search-icon svg{width:20px;height:20px;color:var(--terracotta);}
+.search-empty-icon i,.search-empty-icon svg{width:34px;height:34px;color:var(--muted);margin-bottom:10px;}
+.sugg-lbl{color:var(--muted);margin-top:36px;}
+.chip{
+  border:none;
+  border-bottom:1px solid var(--border-strong);
+  border-radius:0;
+  background:transparent;
+  padding:6px 2px;
+  font-family:var(--font-b);
+  font-size:14px;
+  letter-spacing:0;
+  text-transform:none;
+  color:var(--char);
+  transition:color .25s var(--ease),border-color .25s var(--ease);
+}
+.chip:hover{color:var(--terracotta);border-color:var(--terracotta);background:transparent;}
+
+/* Local Food Map — legend as a quiet index line, banner off the warning palette. */
+.fm-legend-wrap{
+  background:transparent;
+  border-radius:0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:14px 0 12px;
+  margin:0 var(--gut) 14px;
+}
+.fm-legend-hd-label{
+  font-family:var(--font-m);
+  font-size:10px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:500;
+}
+.fm-legend-action{
+  color:var(--terracotta-dk);
+  background:none;
+  border:none;
+  border-radius:0;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:3px 0;
+}
+.fm-toggle{
+  border-radius:2px;
+  border:1px solid var(--border-strong);
+  background:transparent;
+  font-family:var(--font-m);
+  font-size:10px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  font-weight:500;
+}
+.fm-member-banner{
+  background:var(--cream2);
+  border:none;
+  border-left:3px solid var(--terracotta);
+  border-radius:0;
+  color:var(--mid);
+}
+.fm-member-banner .fmb-hd{color:var(--char);}
+.fm-member-banner .fmb-join{color:var(--terracotta-dk);}
+.fm-zip-input{
+  border:none;
+  border-bottom:1.5px solid var(--border-strong);
+  border-radius:0;
+  background:transparent;
+  padding:10px 2px;
+}
+.fm-zip-input:focus{border-color:var(--terracotta);}
+.fmg-card{border-radius:3px;}
+.fmg-lock svg{display:block;margin:0 auto;}
+
+.fm-locate-btn{display:flex;align-items:center;justify-content:center;gap:7px;}
+.fm-locate-btn i,.fm-locate-btn svg{width:14px;height:14px;}
+
+/* Profile — left-aligned editorial header, membership card on the ink ground. */
+.profile-hd{
+  text-align:left;
+  padding:clamp(36px,6vw,64px) var(--gut) 26px;
+}
+.profile-av{
+  width:72px;
+  height:72px;
+  font-size:28px;
+  background:var(--terracotta);
+  margin:0 0 16px;
+}
+.profile-tier{
+  font-family:var(--font-m);
+  font-size:10.5px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.profile-join-btn{
+  background:var(--terracotta);
+  border-radius:2px;
+  padding:13px 26px;
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-top:16px;
+  transition:background .25s var(--ease);
+}
+.profile-join-btn:hover{background:var(--terracotta-dk);}
+.mem-card{background:var(--ink-deep);border:none;border-radius:3px;padding:clamp(24px,4vw,40px);}
+.mem-eye{color:var(--terracotta-lt);font-size:10px;letter-spacing:.16em;}
+.mem-sub{color:rgba(255,255,255,.72);}
+.mem-perk{color:rgba(255,255,255,.85);font-size:13.5px;}
+.mem-check{color:var(--terracotta-lt);}
+.prof-row{padding:15px 0;}
+.prof-row:hover{background:transparent;}
+.prof-row:hover .prof-row-label{color:var(--terracotta);}
+.prof-row-label{font-size:14.5px;transition:color .25s var(--ease);}
+.prof-row-right{
+  font-family:var(--font-m);
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -2235,7 +2520,7 @@ body.style-photo .cat-card::before{
 <div id="welcome-toast" class="welcome-toast"></div>
 <nav class="top-nav">
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileDrawer()" aria-label="Open menu"><i data-lucide="menu"></i></button>
-  <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="nav-brand-text" style="display:none;">ROOTED</span></span>
+  <span class="nav-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="nav-brand-text" style="display:none;">ROOTED</span></span>
   <div class="nav-right">
     <button class="nav-search" onclick="showTab('search')"><i data-lucide="search"></i><span class="nav-search-label">Search</span></button>
     <button class="nav-login-link" id="nav-login-link" onclick="showScreen('login')">Join</button>
@@ -2265,11 +2550,6 @@ body.style-photo .cat-card::before{
         </div>
       </div>
     </header>
-    <!-- The trust promise, stated before anything is asked of the visitor. -->
-    <div class="rt-trustbar rt-bleed">
-      <span class="rt-trustbar-mark" aria-hidden="true"></span>
-      <span class="rt-trustbar-tx"><strong>No pay-to-play.</strong> No sponsored placements. No brand pays to be listed.</span>
-    </div>
     <div class="home-new-hero">
       <!-- Settings gear opens dev-toggle-panel: Membership Paywall on/off, home layout,
            card style, color theme, etc. Hidden again as of site launch — it was briefly
@@ -2306,17 +2586,19 @@ body.style-photo .cat-card::before{
         <span class="hnc-link">Explore the Map →</span>
       </div>
       <div class="hnc" id="recs-card" onclick="showRecommendations()" data-reveal data-reveal-delay="1">
+        <div class="hnc-img" role="img" aria-label="Curated wooden shelf of unbranded healthy-living staples in warm natural light" style="background-image:url('/images/card-recs.jpg')"></div>
         <div class="hnc-title">Recommendations</div>
         <div class="hnc-sub">Your top Tier 1 picks, based on what you've viewed and saved</div>
         <span class="hnc-link">See your picks →</span>
       </div>
       <div class="hnc" onclick="showScreen('rooted-u')" data-reveal data-reveal-delay="2">
-        <div class="hnc-img" id="rooted-u-img"></div>
+        <div class="hnc-img" id="rooted-u-img" role="img" aria-label="Open linen-bound book beside dried botanicals in soft morning light" style="background-image:url('/images/card-rootedu.jpg')"></div>
         <div class="hnc-title">Rooted U</div>
         <div class="hnc-sub">Education modules</div>
         <span class="hnc-link">Start learning →</span>
       </div>
       <div class="hnc" onclick="showTab('categories')" data-reveal data-reveal-delay="3">
+        <div class="hnc-img" role="img" aria-label="Overhead arrangement of healthy-living essentials on warm off-white plaster" style="background-image:url('/images/card-seemore.jpg')"></div>
         <div class="hnc-title">See More</div>
         <div class="hnc-sub">Every category, every product, every standard — the full ROOTED database in one place</div>
         <span class="hnc-link">Browse all categories →</span>
@@ -2866,7 +3148,7 @@ body.style-photo .cat-card::before{
   <div class="fm-flex-layout search-above legend-above" id="fm-flex-layout">
     <div class="fmg-overlay" id="fm-gate-overlay" onclick="if(event.target===this)dismissFoodMapGate()">
       <div class="fmg-card">
-        <div class="fmg-lock">🔒</div>
+        <div class="fmg-lock" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40"><circle cx="12" cy="12" r="11.5" fill="var(--terracotta)"/><path d="M7 12.4l3.3 3.3L17.2 8.8" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="fmg-title">You're seeing a fraction of the map</div>
         <div class="fmg-sub" id="fmg-sub">Free access shows restaurants only.</div>
         <div class="fmg-list" id="fmg-list"></div>
@@ -2880,7 +3162,7 @@ body.style-photo .cat-card::before{
     </div>
     <div class="fm-legend-wrap" id="fm-legend-section">
       <div class="fm-legend-hd">
-        <span class="fm-legend-hd-label">👆 Tap a category to show or hide it on the map</span>
+        <span class="fm-legend-hd-label">Tap a category to show or hide it on the map</span>
         <div class="fm-legend-actions">
           <button class="fm-legend-action" onclick="setAllLocalFoodTypes(true)">Show All</button>
           <button class="fm-legend-action" onclick="setAllLocalFoodTypes(false)">Hide All</button>
@@ -2900,7 +3182,7 @@ body.style-photo .cat-card::before{
         <input type="text" id="fm-zip-input" class="fm-zip-input" placeholder="Search city, zip code, or address" onkeydown="if(event.key==='Enter')searchFarmersMarkets()">
         <button class="fm-search-btn" onclick="searchFarmersMarkets()">Search</button>
       </div>
-      <button class="fm-locate-btn" onclick="useMyLocationForMarkets()">📍 Use My Location</button>
+      <button class="fm-locate-btn" onclick="useMyLocationForMarkets()"><i data-lucide="map-pin"></i>Use My Location</button>
     </div>
     <div class="fm-map-wrap" id="fm-map-wrap">
       <div id="fm-map" class="fm-map"></div>
@@ -2975,8 +3257,12 @@ body.style-photo .cat-card::before{
 <div id="screen-search" class="screen">
 <div class="page">
 <div class="search-wrap">
+  <div class="search-hd">
+    <h1 class="search-title">Search</h1>
+    <p class="search-sub">Every product, brand and standard in the ROOTED database.</p>
+  </div>
   <div class="search-box">
-    <span class="search-icon">🔍</span>
+    <span class="search-icon"><i data-lucide="search"></i></span>
     <input class="search-input" type="text" placeholder="Search products, brands..." id="search-input" oninput="handleSearch(this.value)">
   </div>
   <div id="search-initial">
@@ -3071,7 +3357,7 @@ body.style-photo .cat-card::before{
 <div id="screen-signup" class="screen"><div class="page">
   <div class="auth-card">
     <div class="auth-card-hd">
-      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="auth-card-title">Create your account</div>
       <div class="auth-card-sub">Standards first. Products second. People always.</div>
     </div>
@@ -3090,7 +3376,7 @@ body.style-photo .cat-card::before{
 <div id="screen-login" class="screen"><div class="page">
   <div class="auth-card">
     <div class="auth-card-hd">
-      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="auth-card-title">Welcome back</div>
     </div>
     <div id="login-error" class="auth-error"></div>
@@ -3107,7 +3393,7 @@ body.style-photo .cat-card::before{
 <div id="screen-reset-password" class="screen"><div class="page">
   <div class="auth-card">
     <div class="auth-card-hd">
-      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="auth-card-title">Set a new password</div>
       <div class="auth-card-sub">You're verified via your reset link — choose a new password below.</div>
     </div>
@@ -3546,7 +3832,7 @@ body.style-photo .cat-card::before{
 <!-- MOBILE SIDE MENU DRAWER (alternative to bottom bar, toggled via Mobile Navigation setting) -->
 <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" onclick="toggleMobileDrawer()"></div>
 <nav class="mobile-drawer" id="mobile-drawer">
-  <div class="mobile-drawer-brand"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
+  <div class="mobile-drawer-brand"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
   <div class="mobile-drawer-nav">
     <button class="tab mobile-drawer-tab active" data-tab="home" onclick="showTab('home');toggleMobileDrawer()"><i data-lucide="house"></i><span>Home</span></button>
     <button class="tab mobile-drawer-tab" data-tab="search" onclick="showTab('search');toggleMobileDrawer()"><i data-lucide="search"></i><span>Search</span></button>
@@ -3570,7 +3856,7 @@ body.style-photo .cat-card::before{
 
 <!-- DESKTOP SIDEBAR (desktop only, hidden on mobile via CSS) -->
 <nav class="desktop-sidebar">
-  <div class="sidebar-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="var(--forest)"/><text x="30" y="70" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="58" fill="var(--white)">R</text><circle cx="74" cy="74" r="17" fill="var(--white)"/><path d="M67 74l5 5 10-10" stroke="var(--forest)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
+  <div class="sidebar-brand" onclick="goHome()"><svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="44" y="66" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="50" fill="var(--white)">R</text><circle cx="76" cy="76" r="15" fill="var(--white)"/><path d="M69.5 76l4.5 4.5 9-9" stroke="var(--forest)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>ROOTED</div>
   <div class="sidebar-nav">
     <button class="tab sidebar-tab active" data-tab="home" onclick="showTab('home')"><i data-lucide="house"></i><span>Home</span></button>
     <button class="tab sidebar-tab" data-tab="search" onclick="showTab('search')"><i data-lucide="search"></i><span>Search</span></button>
@@ -4752,7 +5038,7 @@ function renderRecommendations() {
       .slice(0, 12)
       .map(([id, p]) => ({ id, p }));
     html += `<div style="padding:24px 24px 4px;text-align:center;color:var(--mid);">
-      <div style="font-size:34px;margin-bottom:10px;">🔍</div>
+      <div class="search-empty-icon"><i data-lucide="search"></i></div>
       <p style="font-size:14px;">You haven't viewed or saved anything yet — here are our current Gold Standard picks to get started.</p>
     </div>`;
     if (goldPicks.length) {
@@ -8176,10 +8462,9 @@ function setRootedULogo(key, btn) {
 }
 
 function initRootedULogo() {
-  // Picker removed per request — v4 (the "RU" lettermark badge) is now the permanent,
-  // fixed choice, matching what J specifically asked for: capital R, capital U.
-  const img = document.getElementById('rooted-u-img');
-  if (img) img.innerHTML = ROOTED_U_LOGOS.v4;
+  // The Rooted U home card now carries a brand photograph (set inline in the
+  // markup), so the lettermark is no longer injected over it. ROOTED_U_LOGOS and
+  // setRootedULogo() are left intact for the dev panel's picker.
 }
 
 // ── ROOTED U — education modules ─────────────────────────────────────
