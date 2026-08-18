@@ -2734,6 +2734,210 @@ body.style-photo .cat-card::before{
 }
 .callout{border-radius:0;background:var(--cream2);}
 
+
+/* ── 32. SEARCH FILL, MAP CONSOLE, PROFILE COLUMN, ROOTED U (round five) ─────*/
+
+/* Search: category tiles fill the lower half. */
+.search-cats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-bottom:clamp(30px,5vw,52px);
+}
+.search-cat{
+  --img:none;
+  position:relative;
+  aspect-ratio:16/10;
+  border-radius:3px;
+  overflow:hidden;
+  cursor:pointer;
+  background-color:var(--ink-deep);
+  background-image:linear-gradient(to top,rgba(20,17,15,.72) 0%,rgba(20,17,15,.18) 55%),var(--img);
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:flex-end;
+  padding:14px 15px;
+  transition:filter .4s var(--ease);
+}
+.search-cat:hover{filter:brightness(1.08) saturate(1.05);}
+.search-cat span{
+  font-family:var(--font-d);
+  font-weight:900;
+  font-size:clamp(15px,1.8vw,19px);
+  letter-spacing:-.015em;
+  color:#fff;
+  text-shadow:0 1px 10px rgba(20,17,15,.5);
+}
+.search-cat-more{
+  background-image:linear-gradient(150deg,var(--terracotta) 0%,var(--terracotta-dk) 100%);
+}
+@media (min-width:768px){.search-cats{grid-template-columns:repeat(4,1fr);gap:12px;}}
+
+.search-band{
+  background:var(--cream2);
+  border-left:3px solid var(--terracotta);
+  padding:clamp(26px,4vw,44px);
+  margin-bottom:clamp(30px,5vw,52px);
+}
+.search-band-title{
+  font-family:var(--font-d);
+  font-size:clamp(22px,3.6vw,34px);
+  font-weight:900;
+  letter-spacing:-.02em;
+  margin-bottom:8px;
+}
+.search-band-sub{color:var(--mid);max-width:52ch;line-height:1.6;margin-bottom:16px;font-size:15px;}
+
+/* Food map: legend + search merge into one white console card above the map. */
+.fm-legend-wrap{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-bottom:none;
+  border-radius:4px 4px 0 0;
+  padding:16px 20px 12px;
+  margin-bottom:0;
+}
+#fm-search-section{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 4px 4px;
+  margin:0 var(--gut) 16px;
+  padding:2px 20px 14px !important;
+}
+.fm-search-row{gap:10px;margin-bottom:2px;}
+.fm-zip-input{font-size:16px;}
+.fm-search-btn{
+  background:var(--terracotta);
+  border-radius:2px;
+  padding:0 26px;
+  transition:background .25s var(--ease);
+}
+.fm-search-btn:hover{background:var(--terracotta-dk);}
+.fm-locate-btn{
+  width:100%;
+  background:transparent;
+  border:none;
+  color:var(--terracotta-dk);
+  font-family:var(--font-b);
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  padding:10px 0 4px;
+  cursor:pointer;
+}
+.fm-status{
+  font-family:var(--font-m);
+  font-size:10.5px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-align:center;
+}
+@media (min-width:1024px){
+  #fm-search-section{margin-left:var(--gut-lg);margin-right:var(--gut-lg);}
+}
+
+/* Profile: everything under the band pulls into one calm centred column of
+   white cards; the membership card overlaps the photograph. */
+#screen-profile .mem-card,
+#screen-profile .prof-sec,
+#screen-profile .prof-contact-btn{
+  width:min(780px,calc(100% - 2*var(--gut)));
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
+#screen-profile .mem-card{
+  margin-top:-52px;
+  position:relative;
+  z-index:5;
+  box-shadow:0 28px 70px -28px rgba(20,17,15,.45);
+}
+#screen-profile .prof-sec{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:20px 24px 8px;
+  margin-top:16px;
+  margin-bottom:0;
+}
+#screen-profile .prof-sec-title{margin-bottom:4px;}
+#screen-profile .prof-row:first-of-type{border-top:none;}
+#screen-profile .prof-contact-btn{margin-top:20px;margin-bottom:clamp(40px,7vw,80px);}
+
+/* Rooted U: photographic hero, banded topics, room to breathe. */
+.ru-hero{
+  background-image:linear-gradient(to bottom,rgba(20,17,15,.34),rgba(20,17,15,.6)),url('/images/card-rootedu.jpg');
+  background-size:cover;
+  background-position:center 30%;
+  width:calc(100vw - var(--sbw) - var(--sidebar-w));
+  margin-left:calc(50% - (100vw - var(--sbw) - var(--sidebar-w))/2);
+  max-width:none;
+  padding:calc(48px + clamp(44px,8vw,104px)) var(--gut) clamp(30px,5vw,56px);
+}
+.ru-hero-title{color:#fff;text-shadow:0 1px 14px rgba(20,17,15,.45);}
+.ru-hero-sub{color:rgba(255,255,255,.9);}
+@media (min-width:1024px){.ru-hero{padding-left:var(--gut-lg);padding-right:var(--gut-lg);}}
+
+.ru-topic-group{--timg:none;padding:clamp(30px,5vw,52px) var(--gut) 6px;}
+.ru-topic-group[data-topic="clothing"]{--timg:url('/images/cat-clothing.jpg');}
+.ru-topic-group[data-topic="cookware"]{--timg:url('/images/cat-cookware.jpg');}
+.ru-topic-group[data-topic="seed-oils"]{--timg:url('/images/sub-food-pantry-fats.jpg');}
+.ru-topic-group[data-topic="whole-food"]{--timg:url('/images/cat-food.jpg');}
+.ru-topic-group[data-topic="lighting"]{--timg:url('/images/cat-lighting.jpg');}
+.ru-topic-group[data-topic="emf-tech"]{--timg:url('/images/cat-air.jpg');}
+/* Topic banner: slim photographic strip with the serif title over it. */
+.ru-topic-hd{
+  position:relative;
+  align-items:flex-end;
+  min-height:130px;
+  border-radius:3px;
+  overflow:hidden;
+  background-color:var(--ink-deep);
+  background-image:linear-gradient(to top,rgba(20,17,15,.78) 0%,rgba(20,17,15,.22) 70%),var(--timg);
+  background-size:cover;
+  background-position:center 55%;
+  padding:14px 18px;
+  margin-bottom:0;
+}
+.ru-topic-title{
+  font-family:var(--font-d);
+  font-weight:900;
+  font-size:clamp(21px,3.2vw,30px);
+  letter-spacing:-.02em;
+  color:#fff;
+  text-shadow:0 1px 12px rgba(20,17,15,.5);
+}
+.ru-topic-count{color:rgba(255,255,255,.85);font-size:10px;letter-spacing:.13em;text-transform:uppercase;}
+.ru-topic-desc{
+  font-size:14px;
+  color:var(--mid);
+  padding:12px 2px 14px;
+  margin-bottom:0;
+  max-width:64ch;
+}
+/* Module cards: larger editorial tiles; grid on desktop, swipe on mobile. */
+.ru-module-card,
+html .ru-module-card{
+  width:230px;
+  border:1px solid var(--border);
+  border-radius:2px;
+  background:var(--white);
+  padding:18px 16px 14px;
+}
+.ru-module-icon i,.ru-module-icon svg{color:var(--terracotta);width:20px;height:20px;}
+.ru-module-title{font-size:16px;margin:8px 0 6px;}
+.ru-module-teaser{font-size:12.5px;color:var(--mid);line-height:1.5;}
+.ru-module-meta{font-family:var(--font-m);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);}
+@media (min-width:1024px){
+  .ru-module-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;overflow:visible;padding-bottom:0;}
+  .ru-module-card,html .ru-module-card{width:auto;}
+  .ru-topic-group{padding-left:var(--gut-lg);padding-right:var(--gut-lg);}
+}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -3383,7 +3587,7 @@ body.style-photo .cat-card::before{
       </div>
     </div>
     <div class="fm-member-banner" id="fm-member-banner">
-      <div class="fmb-hd">🔒 <span>You're seeing a limited map</span></div>
+      <div class="fmb-hd"><span>You're seeing a limited map</span></div>
       <div id="fm-member-banner-body">Farmers markets, CSAs, on-farm pickup and grocery stores are members-only. Restaurants are shown to everyone. <span class="fmb-join" onclick="handleJoinClick()" data-price="joinCta">Join for $10/month →</span></div>
     </div>
     <div class="fm-legend-wrap" id="fm-legend-section">
@@ -3507,6 +3711,23 @@ body.style-photo .cat-card::before{
     <div class="chips">
       <span class="chip" onclick="doSearch('tier1')">✓ Tier 1 — Rooted Approved</span>
       <span class="chip" onclick="doSearch('tier2')">Tier 2 — Good Option</span>
+    </div>
+    <div class="sugg-lbl">Browse by Category</div>
+    <div class="search-cats">
+      <div class="search-cat" onclick="showCategory('food')" style="--img:url('/images/cat-food.jpg')"><span>Food <span class="plain-amp">&amp;</span> Diet</span></div>
+      <div class="search-cat" onclick="showCategory('personal')" style="--img:url('/images/cat-personal.jpg')"><span>Personal Care</span></div>
+      <div class="search-cat" onclick="showCategory('cookware')" style="--img:url('/images/cat-cookware.jpg')"><span>Cookware <span class="plain-amp">&amp;</span> Kitchen</span></div>
+      <div class="search-cat" onclick="showCategory('water')" style="--img:url('/images/cat-water.jpg')"><span>Water</span></div>
+      <div class="search-cat" onclick="showCategory('clothing')" style="--img:url('/images/cat-clothing.jpg')"><span>Clothing</span></div>
+      <div class="search-cat" onclick="showCategory('textiles')" style="--img:url('/images/cat-textiles.jpg')"><span>Bedroom Textiles</span></div>
+      <div class="search-cat" onclick="showCategory('cleaning')" style="--img:url('/images/cat-cleaning.jpg')"><span>Cleaning <span class="plain-amp">&amp;</span> Home</span></div>
+      <div class="search-cat search-cat-more" onclick="showTab('categories')"><span>All 12 Categories →</span></div>
+    </div>
+    <div class="search-band">
+      <p class="rt-eyebrow">The Standard</p>
+      <div class="search-band-title">Not sure where to start?</div>
+      <p class="search-band-sub">Every product on ROOTED is rated against a published standard — read how the tiers work and what we look for.</p>
+      <span class="sec-link" onclick="showScreen('tiers')">Read the standard →</span>
     </div>
   </div>
   <div id="search-results" class="search-results" style="display:none"></div>
@@ -9480,7 +9701,7 @@ function renderRootedUTopics() {
   let html = '';
   Object.keys(ROOTEDU_TOPICS).forEach(topicKey => {
     const topic = ROOTEDU_TOPICS[topicKey];
-    html += `<div class="ru-topic-group"><div class="ru-topic-hd"><span class="ru-topic-title">${topic.title}</span><span class="ru-topic-count">${topic.modules.length} module${topic.modules.length===1?'':'s'}</span></div><div class="ru-topic-desc">${topic.desc}</div><div class="ru-module-row">`;
+    html += `<div class="ru-topic-group" data-topic="${topicKey}"><div class="ru-topic-hd"><span class="ru-topic-title">${topic.title}</span><span class="ru-topic-count">${topic.modules.length} module${topic.modules.length===1?'':'s'}</span></div><div class="ru-topic-desc">${topic.desc}</div><div class="ru-module-row">`;
     topic.modules.forEach(moduleId => {
       const m = ROOTEDU_MODULES[moduleId];
       if (!m) return;
