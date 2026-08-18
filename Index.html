@@ -2277,8 +2277,16 @@ body.style-photo .cat-card::before{
   background:var(--terracotta);
   color:#fff;
 }
-.home-ai-send:hover{background:var(--terracotta-dk);}
-.home-ai-send i,.home-ai-send svg{width:17px;height:17px;}
+.home-ai-send:hover{background:var(--terracotta-dk);transform:scale(1.06);}
+/* The row-wide icon tint (.home-ai-input-row [data-lucide] -> terracotta) was
+   out-specifying this button's white, leaving a terracotta send icon on a
+   terracotta circle — invisible. Matched specificity puts the white back. */
+.home-ai-input-row .home-ai-send [data-lucide],
+.home-ai-send i,.home-ai-send svg{width:18px;height:18px;color:#fff;stroke:#fff;}
+.home-ai-send{
+  box-shadow:0 6px 18px -6px rgba(171,85,70,.6);
+  transition:background .25s var(--ease),transform .25s var(--ease);
+}
 .home-ai-widget:focus-within .home-ai-input-row{border-color:var(--terracotta);}
 .home-ai-input{font-family:var(--font-d);font-size:clamp(17px,2.2vw,22px);}
 .home-ai-send{width:40px;height:40px;border-radius:50%;flex-shrink:0;}
