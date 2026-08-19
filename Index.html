@@ -3188,6 +3188,70 @@ html .ru-module-card{
 .standard-sec ul li:last-child{border-bottom:none;}
 .standard-sec p{font-size:13.5px;color:var(--mid);line-height:1.65;margin-bottom:10px;}
 
+
+/* ── 36. TIERS AS PHOTO CARDS, STANDARDS WITH THUMBNAILS (round eight) ───────*/
+
+/* Each tier column opens on its own photograph; the mono tier number sits on
+   the image. Tier 1 keeps the terracotta rule and a check-badge on its photo. */
+.tier-blk-photo{
+  position:relative;
+  aspect-ratio:3/2;
+  background-size:cover;
+  background-position:center;
+  background-color:var(--cream2);
+  border-radius:2px;
+  margin-bottom:0;
+}
+.tier-grid .tier-blk:nth-child(1) .tier-blk-photo{background-image:url('/images/tier-1.jpg');}
+.tier-grid .tier-blk:nth-child(2) .tier-blk-photo{background-image:url('/images/tier-2.jpg');}
+.tier-grid .tier-blk:nth-child(3) .tier-blk-photo{background-image:url('/images/tier-3.jpg');}
+.tier-blk-photo::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(20,17,15,.30),rgba(20,17,15,0) 45%);
+}
+.tier-grid .tier-blk:first-child .tier-blk-photo::before{
+  content:'';
+  position:absolute;
+  top:12px;right:12px;
+  width:30px;height:30px;
+  background:var(--check-badge) center/contain no-repeat;
+  filter:drop-shadow(0 2px 8px rgba(20,17,15,.35));
+  z-index:2;
+}
+
+/* Category standards rows carry their category photograph as a thumbnail. */
+.standard-card-hd-left::before{
+  content:'';
+  width:56px;height:56px;
+  flex-shrink:0;
+  border-radius:2px;
+  background-size:cover;
+  background-position:center;
+  background-color:var(--cream2);
+}
+.standard-card-hd-left{gap:16px;align-items:center;}
+.standard-card-icon{display:none;}
+#standard-clothing .standard-card-hd-left::before{background-image:url('/images/cat-clothing.jpg');}
+#standard-oral .standard-card-hd-left::before{background-image:url('/images/cat-oral.jpg');}
+#standard-cookware .standard-card-hd-left::before{background-image:url('/images/cat-cookware.jpg');}
+#standard-water .standard-card-hd-left::before{background-image:url('/images/cat-water.jpg');}
+#standard-food .standard-card-hd-left::before{background-image:url('/images/cat-food.jpg');}
+#standard-personal .standard-card-hd-left::before{background-image:url('/images/cat-personal.jpg');}
+#standard-textiles .standard-card-hd-left::before{background-image:url('/images/cat-textiles.jpg');}
+#standard-cleaning .standard-card-hd-left::before{background-image:url('/images/cat-cleaning.jpg');}
+#standard-air .standard-card-hd-left::before{background-image:url('/images/cat-air.jpg');}
+#standard-lighting .standard-card-hd-left::before{background-image:url('/images/cat-lighting.jpg');}
+#standard-supplements .standard-card-hd-left::before{background-image:url('/images/cat-supplements.jpg');}
+#standard-farmers .standard-card-hd-left::before{background-image:url('/images/cat-farmers.jpg');}
+#standard-sunlight .standard-card-hd-left::before{background-image:url('/images/cat-lighting.jpg');}
+/* Indent the row's supporting content to the text column, past the thumb. */
+.standard-card-summary,.standard-flags,.standard-card-toggle{margin-left:72px;}
+@media (max-width:640px){
+  .standard-card-summary,.standard-flags,.standard-card-toggle{margin-left:0;}
+}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -4056,7 +4120,7 @@ html .ru-module-card{
     <div class="auth-card-hd">
       <svg class="brand-logo" viewBox="0 0 100 100" width="44" height="44"><circle cx="50" cy="50" r="46" fill="var(--forest)"/><text x="42" y="64" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="46" fill="var(--white)">R</text><circle cx="69" cy="69" r="12" fill="var(--white)"/><path d="M63.5 69l3.5 3.5 7-7" stroke="var(--forest)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="auth-card-title">Create your account</div>
-      <div class="auth-card-sub">Standards first. Products second. People always.</div>
+      <div class="auth-card-sub">Standards first. Products second.</div>
     </div>
     <div id="signup-error" class="auth-error"></div>
     <label class="auth-field-label">Name</label>
@@ -4152,7 +4216,7 @@ html .ru-module-card{
   </div>
   <div class="about-body">
     <p class="about-p">Most people want to live healthier. The problem is not motivation — it is information. <strong>ROOTED cuts through that noise.</strong> We research every category deeply. We publish our standards publicly. We rate products against those standards with full rationale. We never accept payment from brands.</p>
-    <p class="about-p"><strong>Standards come first. Products come second. People always.</strong></p>
+    <p class="about-p"><strong>Standards come first. Products come second.</strong></p>
     <div class="pd-eye" style="padding:0;margin-bottom:9px;">Our 10 Principles</div>
     <ul class="principles">
       <li class="principle-row"><span class="pn">01</span><div class="pt"><strong>Transparency</strong>If we cannot verify it, we will not claim it.</div></li>
@@ -4194,13 +4258,13 @@ html .ru-module-card{
   <div class="tier-page">
     <div class="tiers-hero">
     <div class="tier-page-title">Standards <span class="plain-amp">&amp;</span> Tiers</div>
-    <p class="tier-page-sub">ROOTED is not a list of recommended products — it's the trusted standard for evaluating them. Every category is judged against its own published standard before a single product in it is rated. Standards come first. Products come second. People always.</p>
+    <p class="tier-page-sub">ROOTED is not a list of recommended products — it's the trusted standard for evaluating them. Every category is judged against its own published standard before a single product in it is rated. Standards come first. Products come second.</p>
     </div>
     <div class="eyebrow" style="margin-bottom:5px;">The Tier System</div>
     <p class="tier-page-sub">Products sit in one of three tiers based on ROOTED's published standards. Every placement includes a written rationale. No pay-to-play. Ever.</p>
-    <div class="tier-grid"><div class="tier-blk"><div class="tier-blk-hd"><span class="tier-blk-num">TIER 1</span><span class="tier-blk-name">Rooted Approved</span></div><div class="tier-blk-body"><div class="tier-blk-tag">No meaningful compromises. Would confidently recommend to a family member.</div><ul class="tier-blk-list"><li>Meets all primary ROOTED standards</li><li>Transparent sourcing and manufacturing</li><li>Third-party certification confirmed</li></ul></div></div>
-    <div class="tier-blk"><div class="tier-blk-hd"><span class="tier-blk-num">TIER 2</span><span class="tier-blk-name">Good Option</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Minor compromises — documented clearly. Still recommended for most people.</div><ul class="tier-blk-list"><li>Meets most ROOTED standards</li><li>One or two minor flags — always disclosed</li></ul></div></div>
-    <div class="tier-blk"><div class="tier-blk-hd"><span class="tier-blk-num">TIER 3</span><span class="tier-blk-name">Budget / Transitional</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Acceptable when cost limits better options. Not ideal long-term.</div><ul class="tier-blk-list"><li>Meets basic safety thresholds</li><li>Notable compromises — clearly disclosed</li></ul></div></div></div>
+    <div class="tier-grid"><div class="tier-blk"><div class="tier-blk-photo" role="img" aria-label="Pristine arrangement of certified-quality goods in golden morning light"></div><div class="tier-blk-hd"><span class="tier-blk-num">TIER 1</span><span class="tier-blk-name">Rooted Approved</span></div><div class="tier-blk-body"><div class="tier-blk-tag">No meaningful compromises. Would confidently recommend to a family member.</div><ul class="tier-blk-list"><li>Meets all primary ROOTED standards</li><li>Transparent sourcing and manufacturing</li><li>Third-party certification confirmed</li></ul></div></div>
+    <div class="tier-blk"><div class="tier-blk-photo" role="img" aria-label="Simple wholesome pantry staples in soft daylight"></div><div class="tier-blk-hd"><span class="tier-blk-num">TIER 2</span><span class="tier-blk-name">Good Option</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Minor compromises — documented clearly. Still recommended for most people.</div><ul class="tier-blk-list"><li>Meets most ROOTED standards</li><li>One or two minor flags — always disclosed</li></ul></div></div>
+    <div class="tier-blk"><div class="tier-blk-photo" role="img" aria-label="Practical budget staples on a plain counter"></div><div class="tier-blk-hd"><span class="tier-blk-num">TIER 3</span><span class="tier-blk-name">Budget / Transitional</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Acceptable when cost limits better options. Not ideal long-term.</div><ul class="tier-blk-list"><li>Meets basic safety thresholds</li><li>Notable compromises — clearly disclosed</li></ul></div></div></div>
     <div class="tier-rule">
       <div class="eyebrow" style="margin-bottom:5px;">The Rule</div>
       <p style="font-size:13px;color:var(--mid);line-height:1.65;">No brand can pay to improve their tier. If a brand reformulates, we update the rating with a date stamp. Tier assignments are living documents.</p>
