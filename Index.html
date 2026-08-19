@@ -3073,6 +3073,121 @@ html .ru-module-card{
 }
 .ru-module-card{position:relative;}
 
+
+/* ── 35. STANDARDS & TIERS — editorial rebuild (round seven) ─────────────────
+   Solid colour tier bars and pill-chip flags read as app UI. The page now
+   opens on a photograph; tiers stand side by side as rule-topped columns;
+   flags become quiet checked lines. */
+
+.tiers-hero{
+  background-image:linear-gradient(to top,rgba(20,17,15,.82) 0%,rgba(20,17,15,.38) 55%,rgba(20,17,15,.28) 100%),url('/images/standards-hero.jpg');
+  background-size:cover;
+  background-position:center 60%;
+  width:calc(100vw - var(--sbw) - var(--sidebar-w));
+  margin-left:calc(50% - (100vw - var(--sbw) - var(--sidebar-w))/2);
+  max-width:none;
+  padding:clamp(56px,9vw,120px) var(--gut) clamp(32px,5vw,56px);
+  margin-bottom:clamp(28px,4vw,44px);
+}
+.tiers-hero .tier-page-title{color:#fff;text-shadow:0 1px 14px rgba(20,17,15,.45);}
+.tiers-hero .tier-page-sub{color:rgba(255,255,255,.9);}
+@media (min-width:1024px){.tiers-hero{padding-left:var(--gut-lg);padding-right:var(--gut-lg);}}
+
+.tier-grid{display:grid;grid-template-columns:1fr;gap:clamp(18px,3vw,36px);margin:18px 0 8px;}
+@media (min-width:768px){.tier-grid{grid-template-columns:repeat(3,1fr);}}
+
+.tier-blk{border:none;border-radius:0;overflow:visible;margin-bottom:0;}
+.tier-blk-hd{
+  background:transparent;
+  padding:16px 0 4px;
+  border-top:2px solid var(--border-strong);
+  flex-direction:column;
+  align-items:flex-start;
+  gap:6px;
+}
+/* Tier 1 carries the brand rule; 2 and 3 stay neutral. */
+.tier-grid .tier-blk:first-child .tier-blk-hd{border-top-color:var(--terracotta);}
+.tier-grid .tier-blk:first-child .tier-blk-num{color:var(--terracotta-dk);}
+.tier-blk-num{
+  background:transparent;
+  color:var(--muted);
+  padding:0;
+  font-size:10.5px;
+  letter-spacing:.18em;
+}
+.tier-blk-name{color:var(--char);font-size:clamp(20px,2.6vw,25px);}
+.tier-blk-body{background:transparent;padding:6px 0 0;}
+.tier-blk-tag{font-size:14px;line-height:1.6;margin-bottom:10px;color:var(--mid);}
+.tier-blk-list li{
+  font-size:13.5px;
+  padding:9px 0 9px 22px;
+  border-bottom:1px solid var(--border);
+  line-height:1.5;
+}
+.tier-blk-list li:last-child{border-bottom:none;}
+.tier-blk-list li::before{content:'✓';left:0;color:var(--terracotta);font-size:11px;}
+
+.tier-rule{
+  background:var(--cream2);
+  border-left:3px solid var(--terracotta);
+  border-radius:0;
+  padding:clamp(20px,3vw,30px);
+  margin-top:clamp(20px,3vw,32px);
+}
+.tier-rule p{font-size:14.5px !important;}
+
+/* Category standards: boxes -> hairline editorial rows. */
+.standards-intro{font-size:14.5px;max-width:64ch;}
+.standard-card{
+  background:transparent;
+  border:none;
+  border-top:1px solid var(--border-strong);
+  border-radius:0;
+  margin-bottom:0;
+}
+.standard-card:hover{border-color:var(--border-strong);}
+.standard-card-hd{padding:20px 0 10px;}
+.standard-card-icon{color:var(--muted);width:17px;height:17px;}
+.standard-card-name{font-size:clamp(18px,2.2vw,22px);}
+.standard-card-summary{padding:0 0 14px;font-size:14px;max-width:70ch;line-height:1.65;}
+.standard-flags{padding:0 0 16px;gap:0 22px;row-gap:6px;}
+.standard-flag{
+  background:transparent !important;
+  border-radius:0;
+  padding:2px 0;
+  font-size:12.5px;
+  font-weight:500;
+  white-space:normal;
+  position:relative;
+  padding-left:16px;
+}
+.standard-flag::before{position:absolute;left:0;top:2px;font-size:10px;font-weight:700;}
+.standard-flag.green{color:var(--char);}
+.standard-flag.green::before{content:'✓';color:var(--terracotta);}
+.standard-flag.red{color:var(--muted);}
+.standard-flag.red::before{content:'✕';color:var(--muted);}
+.standard-card-toggle{
+  font-family:var(--font-b);
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--terracotta-dk);
+  padding:0 0 20px;
+}
+.standard-card-full{padding:0 0 10px;}
+.standard-sec{margin-bottom:22px;}
+.standard-sec ul{list-style:none;padding:0;}
+.standard-sec ul li{
+  font-size:13.5px;
+  color:var(--mid);
+  padding:8px 0;
+  border-bottom:1px solid var(--border);
+  line-height:1.55;
+}
+.standard-sec ul li:last-child{border-bottom:none;}
+.standard-sec p{font-size:13.5px;color:var(--mid);line-height:1.65;margin-bottom:10px;}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -4077,14 +4192,16 @@ html .ru-module-card{
 <div class="page">
   <div style="height:61px"><button class="cat-back" onclick="goBackSmart()">← Back</button></div>
   <div class="tier-page">
+    <div class="tiers-hero">
     <div class="tier-page-title">Standards <span class="plain-amp">&amp;</span> Tiers</div>
     <p class="tier-page-sub">ROOTED is not a list of recommended products — it's the trusted standard for evaluating them. Every category is judged against its own published standard before a single product in it is rated. Standards come first. Products come second. People always.</p>
+    </div>
     <div class="eyebrow" style="margin-bottom:5px;">The Tier System</div>
     <p class="tier-page-sub">Products sit in one of three tiers based on ROOTED's published standards. Every placement includes a written rationale. No pay-to-play. Ever.</p>
-    <div class="tier-blk"><div class="tier-blk-hd"><span class="tier-blk-num">TIER 1</span><span class="tier-blk-name">Rooted Approved</span></div><div class="tier-blk-body"><div class="tier-blk-tag">No meaningful compromises. Would confidently recommend to a family member.</div><ul class="tier-blk-list"><li>Meets all primary ROOTED standards</li><li>Transparent sourcing and manufacturing</li><li>Third-party certification confirmed</li></ul></div></div>
-    <div class="tier-blk"><div class="tier-blk-hd" style="background:var(--sage)"><span class="tier-blk-num">TIER 2</span><span class="tier-blk-name">Good Option</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Minor compromises — documented clearly. Still recommended for most people.</div><ul class="tier-blk-list"><li>Meets most ROOTED standards</li><li>One or two minor flags — always disclosed</li></ul></div></div>
-    <div class="tier-blk"><div class="tier-blk-hd" style="background:var(--earth)"><span class="tier-blk-num">TIER 3</span><span class="tier-blk-name">Budget / Transitional</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Acceptable when cost limits better options. Not ideal long-term.</div><ul class="tier-blk-list"><li>Meets basic safety thresholds</li><li>Notable compromises — clearly disclosed</li></ul></div></div>
-    <div style="background:var(--cream2);border-radius:6px;padding:14px;margin-top:8px;">
+    <div class="tier-grid"><div class="tier-blk"><div class="tier-blk-hd"><span class="tier-blk-num">TIER 1</span><span class="tier-blk-name">Rooted Approved</span></div><div class="tier-blk-body"><div class="tier-blk-tag">No meaningful compromises. Would confidently recommend to a family member.</div><ul class="tier-blk-list"><li>Meets all primary ROOTED standards</li><li>Transparent sourcing and manufacturing</li><li>Third-party certification confirmed</li></ul></div></div>
+    <div class="tier-blk"><div class="tier-blk-hd"><span class="tier-blk-num">TIER 2</span><span class="tier-blk-name">Good Option</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Minor compromises — documented clearly. Still recommended for most people.</div><ul class="tier-blk-list"><li>Meets most ROOTED standards</li><li>One or two minor flags — always disclosed</li></ul></div></div>
+    <div class="tier-blk"><div class="tier-blk-hd"><span class="tier-blk-num">TIER 3</span><span class="tier-blk-name">Budget / Transitional</span></div><div class="tier-blk-body"><div class="tier-blk-tag">Acceptable when cost limits better options. Not ideal long-term.</div><ul class="tier-blk-list"><li>Meets basic safety thresholds</li><li>Notable compromises — clearly disclosed</li></ul></div></div></div>
+    <div class="tier-rule">
       <div class="eyebrow" style="margin-bottom:5px;">The Rule</div>
       <p style="font-size:13px;color:var(--mid);line-height:1.65;">No brand can pay to improve their tier. If a brand reformulates, we update the rating with a date stamp. Tier assignments are living documents.</p>
     </div>
