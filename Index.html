@@ -3252,6 +3252,56 @@ html .ru-module-card{
   .standard-card-summary,.standard-flags,.standard-card-toggle{margin-left:0;}
 }
 
+
+/* ── 37. TIERS AS FULL-WIDTH BANDS, LARGER STANDARDS ROWS (round nine) ───────
+   The three small columns undersold the photography on desktop. Each tier is
+   now a full-width band — photograph on one side, text on the other,
+   alternating — and the category rows scale up to match. */
+
+.tier-grid{grid-template-columns:1fr;gap:0;margin:22px 0 8px;}
+.tier-blk{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(18px,3vw,52px);
+  align-items:center;
+  padding:clamp(26px,4vw,48px) 0;
+  border-top:1px solid var(--border-strong);
+}
+.tier-grid .tier-blk:first-child{border-top:2px solid var(--terracotta);}
+@media (min-width:768px){
+  /* Three children (photo, header, body) in a two-column band: the photo spans
+     both rows of one column; header and body stack in the other. Without the
+     explicit placement the body wraps under the photo. */
+  .tier-blk{grid-template-columns:1.05fr 1fr;grid-template-rows:auto auto;}
+  .tier-blk-photo{grid-column:1;grid-row:1 / span 2;}
+  .tier-blk-hd{grid-column:2;grid-row:1;align-self:end;}
+  .tier-blk-body{grid-column:2;grid-row:2;align-self:start;}
+  .tier-blk:nth-child(even) .tier-blk-photo{grid-column:2;}
+  .tier-blk:nth-child(even) .tier-blk-hd,
+  .tier-blk:nth-child(even) .tier-blk-body{grid-column:1;}
+}
+.tier-blk-photo{aspect-ratio:16/10;border-radius:2px;margin-bottom:0;}
+.tier-blk-hd{border-top:none;padding:0 0 2px;}
+.tier-grid .tier-blk:first-child .tier-blk-hd{border-top:none;}
+.tier-blk-name{font-size:clamp(24px,3.4vw,36px);}
+.tier-blk-tag{font-size:15.5px;max-width:52ch;}
+.tier-blk-list li{font-size:14.5px;padding:11px 0 11px 24px;}
+
+/* Category standards rows: larger thumbnails, roomier rhythm. */
+.standard-card-hd{padding:26px 0 12px;}
+.standard-card-hd-left::before{width:92px;height:92px;}
+.standard-card-hd-left{gap:20px;}
+.standard-card-name{font-size:clamp(21px,2.8vw,28px);}
+.standard-card-chevron{width:20px;height:20px;}
+.standard-card-summary{font-size:14.5px;}
+.standard-card-summary,.standard-flags,.standard-card-toggle{margin-left:112px;}
+.standard-flag{font-size:13px;}
+@media (max-width:640px){
+  .standard-card-hd-left::before{width:56px;height:56px;}
+  .standard-card-hd-left{gap:14px;}
+  .standard-card-summary,.standard-flags,.standard-card-toggle{margin-left:0;}
+}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
