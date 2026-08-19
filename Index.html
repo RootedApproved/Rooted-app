@@ -3254,72 +3254,62 @@ html .ru-module-card{
 
 
 
-/* ── 37. CATEGORY STANDARDS AS PHOTO-BANNER CARDS (round ten) ────────────────
-   Each category standard now opens on its own photographic banner — the same
-   language as the Rooted U topic banners — with the summary, flags and full
-   standard below. The tier system stays as the three-column photo cards. */
+
+/* ── 37. CATEGORY STANDARDS AS SPLIT EDITORIAL CARDS (round eleven) ──────────
+   The full-width banners forced 3:4 portrait photographs into 5:1 strips.
+   Each category is now a split card: the photograph at its natural portrait
+   ratio on one side, name / summary / flags beside it, and the full standard
+   expanding across the card's whole width. */
 
 .standard-card{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;
   border:none;
-  border-top:none;
-  margin-bottom:clamp(26px,4vw,40px);
-}
-.standard-card-hd{
-  position:relative;
-  min-height:clamp(140px,18vw,200px);
-  border-radius:3px;
-  overflow:hidden;
-  background:var(--ink-deep);
-  align-items:flex-end;
-  padding:18px 22px;
-}
-.standard-card-hd-left{position:static;gap:0;align-items:flex-end;}
-/* The row thumbnail becomes the full banner image... */
-.standard-card-hd-left::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  width:auto;
-  height:auto;
+  border-top:1px solid var(--border-strong);
   border-radius:0;
+  background:transparent;
+  padding:clamp(24px,4vw,44px) 0;
+  margin-bottom:0;
+}
+.standard-card-photo{
+  aspect-ratio:3/2;
+  border-radius:3px;
   background-size:cover;
-  background-position:center 55%;
+  background-position:center 45%;
+  background-color:var(--cream2);
+  margin-bottom:18px;
 }
-/* ...under a legibility scrim. */
-.standard-card-hd-left::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  z-index:0;
-  background:linear-gradient(to top,rgba(20,17,15,.78) 0%,rgba(20,17,15,.22) 60%,rgba(20,17,15,.12) 100%);
-}
-.standard-card-name{
-  position:relative;
-  z-index:1;
-  color:#fff;
-  font-size:clamp(22px,3.2vw,32px);
-  font-weight:900;
-  letter-spacing:-.02em;
-  text-shadow:0 1px 14px rgba(20,17,15,.5);
-}
-.standard-card-chevron{
-  position:relative;
-  z-index:1;
-  color:#fff;
-  width:22px;
-  height:22px;
-  filter:drop-shadow(0 1px 6px rgba(20,17,15,.5));
-}
-.standard-card-summary{
-  margin-left:0;
-  padding:18px 0 14px;
-  font-size:14.5px;
-  max-width:70ch;
-}
-.standard-flags{margin-left:0;padding:0 0 14px;}
+.standard-card-hd{padding:0 0 8px;cursor:pointer;}
+.standard-card-hd-left{gap:0;align-items:center;}
+.standard-card-hd-left::before{content:none;}
+.standard-card-name{font-size:clamp(22px,3vw,30px);font-weight:900;letter-spacing:-.02em;color:var(--char);}
+.standard-card-chevron{color:var(--muted);width:20px;height:20px;}
+.standard-card-summary{margin-left:0;padding:0 0 14px;font-size:14.5px;line-height:1.65;max-width:64ch;}
+.standard-flags{margin-left:0;padding:0 0 12px;}
 .standard-flag{font-size:13px;}
-.standard-card-toggle{margin-left:0;padding:0 0 6px;}
-.standard-card-full{padding:8px 0 4px;}
+.standard-card-toggle{margin-left:0;padding:0;}
+.standard-card-full{padding:16px 0 0;}
+
+@media (min-width:900px){
+  .standard-card{
+    grid-template-columns:minmax(240px,320px) 1fr;
+    column-gap:clamp(24px,4vw,52px);
+    grid-template-rows:auto auto auto auto 1fr;
+  }
+  .standard-card-photo{
+    grid-column:1;
+    grid-row:1 / span 5;
+    aspect-ratio:3/4;
+    margin-bottom:0;
+  }
+  .standard-card-hd,
+  .standard-card-summary,
+  .standard-flags,
+  .standard-card-toggle{grid-column:2;}
+  /* The expanded full standard uses the entire card width. */
+  .standard-card-full{grid-column:1 / -1;padding-top:clamp(20px,3vw,32px);}
+}
 
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -4341,7 +4331,7 @@ html .ru-module-card{
     <div class="divider" style="margin:26px 0 18px;"></div>
     <div class="eyebrow" style="margin-bottom:5px;">Category Standards</div>
     <p class="standards-intro">Every category is evaluated against its own published standard before any product in it is assigned a tier. Tap a category to see exactly what ROOTED looks for, what raises or lowers confidence, and how Tier 1/2/3 is defined specifically for that category.</p>
-  <div class="standard-card" id="standard-clothing">
+  <div class="standard-card" id="standard-clothing"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-clothing.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('clothing')">
       <div class="standard-card-hd-left"><i data-lucide="shirt" class="standard-card-icon"></i><span class="standard-card-name">Clothing (Men's)</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4360,7 +4350,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Monitoring PFAS regulation changes affecting "performance" fabric treatments.</li><li>Emerging natural performance fibers (merino blends, lyocell) need a clearer green-flag threshold.</li><li>Microplastic shedding from synthetic-blend garments during washing is an active research area.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-oral">
+  <div class="standard-card" id="standard-oral"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-oral.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('oral')">
       <div class="standard-card-hd-left"><i data-lucide="smile" class="standard-card-icon"></i><span class="standard-card-name">Oral Care</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4379,7 +4369,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Microplastic exposure from toothbrush bristle wear — limited current data.</li><li>Tracking independent (non-industry-funded) research on SLS irritation prevalence.</li><li>Silicone-based interdental tools need a clearer green/red-flag position as more appear.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-cookware">
+  <div class="standard-card" id="standard-cookware"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-cookware.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('cookware')">
       <div class="standard-card-hd-left"><i data-lucide="cooking-pot" class="standard-card-icon"></i><span class="standard-card-name">Cookware <span class="plain-amp">&amp;</span> Kitchen</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4398,7 +4388,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Tracking PFAS regulatory action (several states have passed or proposed cookware-specific bans).</li><li>"Ceramic non-stick" covers genuinely different chemistries — needs clearer sub-classification.</li><li>Aluminum core (anodized, sandwiched) cookware needs more specific criteria.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-water">
+  <div class="standard-card" id="standard-water"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-water.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('water')">
       <div class="standard-card-hd-left"><i data-lucide="droplet" class="standard-card-icon"></i><span class="standard-card-name">Water</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4417,7 +4407,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>PFAS-specific filtration certification is fast-moving; needs regular review.</li><li>Microplastic shedding from plastic filtration housings is an open research question.</li><li>Structured/hexagonal water claims currently lack independent scientific support.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-personal">
+  <div class="standard-card" id="standard-personal"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-personal.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('personal')">
       <div class="standard-card-hd-left"><i data-lucide="sparkles" class="standard-card-icon"></i><span class="standard-card-name">Personal Care</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4436,7 +4426,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Tracking FDA/EU regulatory divergence on flagged ingredients.</li><li>Nanoparticle mineral sunscreen absorption research is still developing.</li><li>"Fragrance-free" vs. "unscented" needs clearer, consistent evaluation language.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-farmers">
+  <div class="standard-card" id="standard-farmers"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-farmers.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('farmers')">
       <div class="standard-card-hd-left"><i data-lucide="wheat" class="standard-card-icon"></i><span class="standard-card-name">Local Food Map (CSA <span class="plain-amp">&amp;</span> Local Food Sourcing)</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4455,7 +4445,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Building a recurring re-verification cadence so listings don't silently go stale as the map grows.</li><li>Expanding beyond the current LA/Santa Monica curated layer into other cities.</li><li>Considering a "last verified" date shown per listing.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-food">
+  <div class="standard-card" id="standard-food"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-food.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('food')">
       <div class="standard-card-hd-left"><i data-lucide="beef" class="standard-card-icon"></i><span class="standard-card-name">Food <span class="plain-amp">&amp;</span> Diet</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4474,7 +4464,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Needs a clear internal position on contested topics (seed oils, saturated fat) — acknowledging genuine scientific debate rather than presenting one side as settled.</li><li>Regenerative agriculture certification is still maturing; needs periodic review.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-textiles">
+  <div class="standard-card" id="standard-textiles"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-textiles.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('textiles')">
       <div class="standard-card-hd-left"><i data-lucide="bed" class="standard-card-icon"></i><span class="standard-card-name">Bedroom Textiles</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4493,7 +4483,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Flame-retardant regulation varies by state; needs periodic review.</li><li>Bamboo fiber processing methods vary widely (mechanical vs. chemical/viscose) with very different safety profiles.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-cleaning">
+  <div class="standard-card" id="standard-cleaning"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-cleaning.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('cleaning')">
       <div class="standard-card-hd-left"><i data-lucide="brush-cleaning" class="standard-card-icon"></i><span class="standard-card-name">Cleaning <span class="plain-amp">&amp;</span> Home</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4512,7 +4502,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Indoor air quality research on VOC off-gassing is active and evolving.</li><li>EPA Safer Choice certification coverage is not universal across all subcategories yet.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-lighting">
+  <div class="standard-card" id="standard-lighting"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-lighting.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('lighting')">
       <div class="standard-card-hd-left"><i data-lucide="lightbulb" class="standard-card-icon"></i><span class="standard-card-name">Lighting <span class="plain-amp">&amp;</span> Circadian Health</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4531,7 +4521,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Research on low-level, non-visible PWM flicker's effects on sensitive individuals is still developing.</li><li>Melanopic lux as a standardized measurement is gaining adoption but isn't yet universal across product listings.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-air">
+  <div class="standard-card" id="standard-air"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-air.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('air')">
       <div class="standard-card-hd-left"><i data-lucide="wind" class="standard-card-icon"></i><span class="standard-card-name">Air Quality</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4550,7 +4540,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Needs a clear, written position on ionization technology generally.</li><li>Smart/connected purifiers and monitors with sensor-based operation may need their own evaluation criteria as the market matures.</li><li>Consumer-grade radon monitor accuracy compared to professional AARST-NRPP-certified testing needs periodic re-review.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-sunlight">
+  <div class="standard-card" id="standard-sunlight"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-lighting.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('sunlight')">
       <div class="standard-card-hd-left"><i data-lucide="sun" class="standard-card-icon"></i><span class="standard-card-name">Sunlight <span class="plain-amp">&amp;</span> Recovery</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
@@ -4569,7 +4559,7 @@ html .ru-module-card{
       <div class="standard-sec"><div class="standard-sec-title">Future Research Notes</div><ul><li>Grounding/earthing evidence quality should be reassessed periodically.</li><li>Contrast therapy protocols are an active research area; standard may eventually need protocol-level guidance.</li></ul></div>
     </div>
   </div>
-  <div class="standard-card" id="standard-supplements">
+  <div class="standard-card" id="standard-supplements"><div class="standard-card-photo" role="img" style="background-image:url('/images/cat-supplements.jpg')"></div>
     <div class="standard-card-hd" onclick="toggleStandardCard('supplements')">
       <div class="standard-card-hd-left"><i data-lucide="pill" class="standard-card-icon"></i><span class="standard-card-name">Supplement / Detox</span></div>
       <i data-lucide="chevron-down" class="standard-card-chevron"></i>
