@@ -3047,6 +3047,32 @@ html .ru-module-card{
 }
 .ru-module-icon{display:none;}
 
+
+/* ── 34. ROOTED U MODULE CARDS — a photograph per lesson ─────────────────────*/
+.ru-module-card,html .ru-module-card{padding:0 0 16px;overflow:hidden;}
+.ru-module-img{
+  width:100%;
+  aspect-ratio:3/2;
+  background-color:var(--cream2);
+  background-size:cover;
+  background-position:center;
+  margin-bottom:13px;
+  transition:filter .4s var(--ease);
+}
+.ru-module-card:hover .ru-module-img{filter:brightness(1.06) saturate(1.05);}
+.ru-module-num,.ru-module-title,.ru-module-teaser,.ru-module-meta{padding-left:16px;padding-right:16px;}
+.ru-module-check{
+  position:absolute;
+  top:10px;right:10px;
+  z-index:2;
+  background:#fff;
+  border-radius:50%;
+  display:flex;
+  padding:2px;
+  box-shadow:0 2px 10px rgba(20,17,15,.25);
+}
+.ru-module-card{position:relative;}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -9817,6 +9843,7 @@ function renderRootedUTopics() {
       const isDone = doneModules.includes(moduleId);
       html += `<div class="ru-module-card${isDone?' done':''}" onclick="openRootedUModule('${moduleId}')">
         ${isDone?'<div class="ru-module-check"><i data-lucide="check-circle"></i></div>':''}
+        <div class="ru-module-img" style="background-image:url('/images/ru-m-${moduleId}.jpg')"></div>
         <div class="ru-module-num">${String(mi+1).padStart(2,'0')}</div>
         <div class="ru-module-title">${m.title}</div>
         <div class="ru-module-teaser">${m.teaser}</div>
