@@ -3943,7 +3943,7 @@ html .ru-module-card{
 <!-- FARMERS MARKETS -->
 <div id="screen-farmers" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()">← Back</button>
     <div class="cat-title">Local Food Map</div>
     <p class="cat-desc">Search by city, zip code, or address — or just pan and zoom the map to explore farmers markets, farms offering direct pickup, and CSAs nationwide via USDA data, plus ROOTED-vetted grocery stores and restaurants in select areas.</p>
   </div>
@@ -5558,12 +5558,38 @@ const SUBCAT_EDU = {
 let previousScreen = 'home';
 const TAB_SCREEN_IDS = ['home', 'search', 'categories', 'farmers', 'profile'];
 
+/* ── NAVIGATION HISTORY & SCROLL MEMORY ─────────────────────────────────────
+   Screens are shown/hidden rather than URL-navigated, so "back" has to be
+   modelled explicitly. Three pieces:
+   - navHistory: a stack of {id, y} — every forward navigation pushes the
+     screen it LEFT, so goBackSmart() can return to the exact screen AND the
+     exact scroll position, repeatedly, like real browser back.
+   - screenScrollMemory: each screen's last scroll position, so switching
+     between the five main tabs restores where you were on that tab (the iOS
+     tab-bar convention) instead of resetting to the top.
+   - pendingScrollRestore: consumed once by showScreen — when set, the screen
+     appears at that offset instead of the default top-of-page. */
+const NAV_HISTORY_MAX = 50;
+let navHistory = [];
+let screenScrollMemory = {};
+let pendingScrollRestore = null;
+let suppressHistoryPush = false;   // true only while travelling backwards
+
 function showScreen(id){
   const currentActive = document.querySelector('.screen.active');
   const currentId = currentActive ? currentActive.id.replace('screen-', '') : null;
-  if (currentId && currentId !== id) previousScreen = currentId;
+  if (currentId && currentId !== id) {
+    previousScreen = currentId;
+    screenScrollMemory[currentId] = window.scrollY || 0;
+    if (!suppressHistoryPush) {
+      navHistory.push({ id: currentId, y: window.scrollY || 0 });
+      if (navHistory.length > NAV_HISTORY_MAX) navHistory.shift();
+    }
+  }
   imgFetchQueueIndex = 0;
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo(0,0);updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers'){initFarmersMap();showFoodMapGateIfNeeded();}if(id==='rooted-u')renderRootedUTopics();
+  const _restoreY = (pendingScrollRestore !== null) ? pendingScrollRestore : 0;
+  pendingScrollRestore = null;
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('screen-'+id);if(el)el.classList.add('active');window.scrollTo({top:_restoreY,left:0,behavior:'instant'});updateChatFabVisibility();updateNavJoinVisibility(id);if(id==='farmers'){initFarmersMap();showFoodMapGateIfNeeded();}if(id==='rooted-u')renderRootedUTopics();
   // Home already shows the full italic "Rooted." wordmark prominently in its own hero,
   // so the nav icon there stays icon-only (no redundant "ROOTED" text) — every other
   // screen keeps the full icon + text brand mark since it's their only wordmark on screen.
@@ -5583,11 +5609,16 @@ function showScreen(id){
 // showTab() rather than showScreen() when that previous screen is a main bottom-nav
 // tab, so the tab bar's highlighted icon stays correct too.
 function goBackSmart() {
-  if (TAB_SCREEN_IDS.includes(previousScreen)) {
-    showTab(previousScreen);
+  const prev = navHistory.pop();
+  if (!prev) { showTab('home'); return; }
+  suppressHistoryPush = true;          // backwards travel must not push forward entries
+  pendingScrollRestore = prev.y;
+  if (TAB_SCREEN_IDS.includes(prev.id)) {
+    showTab(prev.id);
   } else {
-    showScreen(previousScreen);
+    showScreen(prev.id);
   }
+  suppressHistoryPush = false;
 }
 
 // The top-right nav Log In button is the only login entry point on every screen except
@@ -5639,7 +5670,11 @@ function updateUpgradePillVisibility() {
   });
 }
 
-function showTab(tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab[data-tab="'+tab+'"]').forEach(b=>b.classList.add('active'));if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='farmers')showScreen('farmers');else if(tab==='profile')showScreen('profile');}
+function showTab(tab){
+  // Restore the tab's own last position — unless a back-navigation already
+  // queued an exact offset, which always wins.
+  if (pendingScrollRestore === null && screenScrollMemory[tab] !== undefined) pendingScrollRestore = screenScrollMemory[tab];
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab[data-tab="'+tab+'"]').forEach(b=>b.classList.add('active'));if(tab==='home')showScreen('home');else if(tab==='search')showScreen('search');else if(tab==='categories')showScreen('categories');else if(tab==='farmers')showScreen('farmers');else if(tab==='profile')showScreen('profile');}
 function goHome(){showTab('home');}
 // Human-readable names for the paywall message — kept in sync manually since there
 // are only a dozen categories total.
