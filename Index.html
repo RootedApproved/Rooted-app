@@ -885,11 +885,6 @@ body.style-photo .cat-photo-cycle{display:flex;}
     <span class="style-toggle-label">Product images:</span>
     <button class="style-toggle-btn" onclick="clearImageCache()">Clear Image Cache</button>
   </div>
-  <div class="style-toggle-wrap">
-    <span class="style-toggle-label">Membership Paywall:</span>
-    <button class="style-toggle-btn" id="paywall-btn-on" onclick="setPaywallEnabled(true)">On</button>
-    <button class="style-toggle-btn" id="paywall-btn-off" onclick="setPaywallEnabled(false)">Off (everyone full access)</button>
-  </div>
   <div class="style-toggle-wrap" style="display:none">
     <span class="style-toggle-label">Home layout:</span>
     <button class="style-toggle-btn" id="homelayout-btn-new" onclick="setHomeLayout('new')">New</button>
@@ -7514,21 +7509,10 @@ function initCardStyle() {
 // New 4-card AI-forward home layout vs. the original hero + full category grid layout.
 // New is the default; Classic remains fully intact and can be restored anytime via the
 // dev panel (gear icon) without losing any functionality — nothing was deleted, just hidden.
-// Membership paywall on/off toggle — persists across visits, and re-renders any
-// currently visible gated content immediately so the effect is visible without a reload.
-function setPaywallEnabled(enabled) {
-  REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS = enabled;
-  updateFoodMapAccessUI();
-  try { localStorage.setItem('rooted-paywall-enabled', enabled ? '1' : '0'); } catch (e) {}
-  document.getElementById('paywall-btn-on')?.classList.toggle('active', enabled);
-  document.getElementById('paywall-btn-off')?.classList.toggle('active', !enabled);
-  if (typeof lastNormalizedMarkets !== 'undefined' && lastNormalizedMarkets.length) updateListForViewport();
-}
-
-function initPaywallToggleUI() {
-  document.getElementById('paywall-btn-on')?.classList.toggle('active', REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS);
-  document.getElementById('paywall-btn-off')?.classList.toggle('active', !REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS);
-}
+// The former paywall on/off toggle (setPaywallEnabled / initPaywallToggleUI) was removed
+// deliberately: it shipped a publicly callable bypass in the page source. To disable the
+// paywall for local testing, edit REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS in the gating config
+// section directly — a code change, not a runtime switch.
 
 function setHomeLayout(layout) {
   document.body.classList.remove('home-layout-new', 'home-layout-classic');
@@ -7614,16 +7598,11 @@ function setColorTheme(theme) {
 const SUPABASE_URL = 'https://albpewafjrktxhuydzke.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsYnBld2FmanJrdHhodXlkemtlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzQxMTMsImV4cCI6MjA5OTg1MDExM30.OkD7_w-HQcGzV4gpNmiWa94XPCP0pH743_uRaBWwjfg';
 // ── MEMBERSHIP GATING CONFIG ──────────────────────────────────────────────
-// Master switch. Set the DEFAULT below to false to disable the paywall by default —
-// everyone gets full access regardless of membership tier. This can also be flipped
-// live via the dev panel toggle (Membership Paywall: On/Off), which persists across
-// visits — the toggle always wins over this default once someone's used it.
-const PAYWALL_DEFAULT = true;
-let REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS = PAYWALL_DEFAULT;
-try {
-  const savedPaywall = localStorage.getItem('rooted-paywall-enabled');
-  if (savedPaywall !== null) REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS = savedPaywall === '1';
-} catch (e) {}
+// Master switch. The runtime toggle and its localStorage override were removed
+// deliberately — they shipped a publicly callable paywall bypass in the page source,
+// and the localStorage read meant anyone who had ever flipped it kept free access.
+// To disable the paywall for local testing, change this constant in code.
+const REQUIRE_MEMBERSHIP_FOR_FULL_ACCESS = true;
 
 // Category ids free members can access in full. To change what's free, just
 // add or remove ids from this list — nothing else needs to change.
@@ -8059,7 +8038,6 @@ window.addEventListener('DOMContentLoaded', function () {
 window.addEventListener('DOMContentLoaded', applyFeatureFlags);
 window.addEventListener('DOMContentLoaded', initCardStyle);
 window.addEventListener('DOMContentLoaded', initHomeLayout);
-window.addEventListener('DOMContentLoaded', initPaywallToggleUI);
 window.addEventListener('DOMContentLoaded', updateSavedProductsCount);
 window.addEventListener('DOMContentLoaded', initPhotoVariants);
 window.addEventListener('DOMContentLoaded', initHomeCategoryVisibility);
