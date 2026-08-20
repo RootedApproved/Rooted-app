@@ -2206,7 +2206,14 @@ body.style-photo .cat-card::before{
   .fm-legend-wrap,.fm-results{margin-left:var(--gut-lg);margin-right:var(--gut-lg);}
   .about-body{padding-left:var(--gut-lg);padding-right:var(--gut-lg);}
 
-  /* Hero type gets room to breathe at desktop scale. */
+  /* Hero type gets room to breathe at desktop scale — and the hero owns the
+     entire first viewport: nothing below it may peek in before scrolling.
+     (Mobile keeps the clamp so short landscape phones aren't overwhelmed.) */
+  .rt-hero{min-height:100svh;}
+  /* The content below the hero must itself fill a viewport, or the browser
+     clamps the arrow's scroll short and a strip of hero stays visible. Two
+     viewports total: one for the hero, one for everything after it. */
+  #screen-home .page{min-height:200svh;}
   .rt-hero-inner{padding-left:var(--gut-lg);padding-right:var(--gut-lg);}
   .rt-hero-title{max-width:17ch;}
 
@@ -3348,7 +3355,7 @@ html .ru-module-card{
         <p class="rt-hero-sub">Every product rated against a published standard. No guesswork.</p>
         <div class="rt-hero-actions">
           <button class="rt-btn rt-btn-primary" onclick="handleJoinClick()">Become a member</button>
-          <button class="rt-btn rt-btn-ghost" onclick="showTab('categories')">Browse the standards</button>
+          <button class="rt-btn rt-btn-ghost" onclick="showTab('categories')">Browse ROOTED Products</button>
           <button class="rt-hero-down" onclick="scrollToAskRooted()" aria-label="Scroll down to Ask ROOTED"><i data-lucide="arrow-down"></i></button>
         </div>
       </div>
@@ -3515,7 +3522,7 @@ html .ru-module-card{
 <div id="screen-clothing" class="screen">
 <div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Clothing (Men's)</div>
     <p class="cat-desc">Tap a category to see rated products and education.</p>
   </div>
@@ -3722,7 +3729,7 @@ html .ru-module-card{
 <!-- ORAL CARE HUB -->
 <div id="screen-oral" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Oral Care</div>
     <p class="cat-desc">Effective plaque removal, healthy gums, and a balanced microbiome — without unnecessary plastic or chemical exposure.</p>
   </div>
@@ -3747,7 +3754,7 @@ html .ru-module-card{
 <!-- SUPPLEMENTS HUB -->
 <div id="screen-supplements" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Supplement / Detox</div>
     <p class="cat-desc">Third-party tested and free of undisclosed fillers, synthetic dyes, and seed-oil carriers — with NCAA-relevant banned-substance testing flagged wherever it applies.</p>
   </div>
@@ -3777,7 +3784,7 @@ html .ru-module-card{
 <!-- CLEANING & HOME HUB -->
 <div id="screen-cleaning" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Cleaning <span class="plain-amp">&amp;</span> Home</div>
     <p class="cat-desc">Every cleaning product should do its job while introducing the least possible toxic burden into the home — prioritizing ingredient transparency, fragrance-free formulas, and mechanical cleaning over chemical dependence.</p>
   </div>
@@ -3799,7 +3806,7 @@ html .ru-module-card{
 <!-- LIGHTING & CIRCADIAN HEALTH HUB -->
 <div id="screen-lighting" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Lighting <span class="plain-amp">&amp;</span> Circadian Health</div>
     <p class="cat-desc">Light is a genuine biological signal, not just illumination — the goal is bright, blue-shifted light in the morning and dim, warm light in the evening, matching what your circadian clock actually evolved to expect. Not every LED is a problem and not every incandescent bulb is automatically better; each product is judged on its own light output, not on category assumptions.</p>
   </div>
@@ -3818,7 +3825,7 @@ html .ru-module-card{
 </div></div>
 <div id="screen-air" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Air Quality</div>
     <p class="cat-desc">Indoor air problems are almost always invisible without measurement — the goal is verified filtration and humidity performance over marketing claims. True HEPA with an independently confirmed CADR rating, no ozone or ionization side effects, and monitors/detectors whose accuracy has actually been checked against reference instruments, not just asserted by the brand.</p>
   </div>
@@ -3834,7 +3841,7 @@ html .ru-module-card{
 </div></div>
 <div id="screen-water" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Water</div>
     <p class="cat-desc">Maximizing contaminant removal while minimizing unnecessary chemical and material exposure — from what comes out of the tap to what you store it in.</p>
   </div>
@@ -3854,7 +3861,7 @@ html .ru-module-card{
 <!-- FOOD & DIET -->
 <div id="screen-food" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Food <span class="plain-amp">&amp;</span> Diet</div>
     <p class="cat-desc">Food is consumed more often and in greater volume than anything else you buy, so small quality differences compound over time. The focus is nutrient density, ingredient integrity, and sourcing transparency — named farms and regions over vague claims, short whole-food ingredient lists over industrial additives.</p>
   </div>
@@ -3886,7 +3893,7 @@ html .ru-module-card{
 <!-- COOKWARE HUB -->
 <div id="screen-cookware" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Cookware <span class="plain-amp">&amp;</span> Kitchen</div>
     <p class="cat-desc">Inert, durable materials that don't leach, degrade, or require disposable coatings — favoring cast iron, carbon steel, stainless steel, glass, and solid wood over engineered "nonstick" convenience.</p>
   </div>
@@ -3915,7 +3922,7 @@ html .ru-module-card{
 <!-- BEDROOM TEXTILES HUB -->
 <div id="screen-textiles" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Bedroom Textiles</div>
     <p class="cat-desc">People spend roughly a third of life in prolonged, warm, skin-to-skin contact with bedroom textiles — the exact condition that accelerates chemical transfer. We prioritize natural-fiber sheets, certified fills, and mattresses free of flame retardants, memory foam, and undisclosed synthetic blends.</p>
   </div>
@@ -4003,7 +4010,7 @@ html .ru-module-card{
 <!-- PERSONAL CARE HUB -->
 <div id="screen-personal" class="screen"><div class="page">
   <div class="cat-hd">
-    <button class="cat-back" onclick="goHome()">← Home</button>
+    <button class="cat-back" onclick="goBackSmart()" aria-label="Back">←</button>
     <div class="cat-title">Personal Care</div>
     <p class="cat-desc">Simple, transparent, biologically compatible ingredients and durable natural materials over heavily processed formulas, synthetic fragrance, and marketing-driven "clean beauty."</p>
   </div>
@@ -4784,8 +4791,15 @@ function initScrollbarWidth() {
    `nav-over` while the home hero is still behind the nav (white-on-image).
    Read from a rAF-throttled scroll listener so this stays cheap. */
 function scrollToAskRooted() {
-  const el = document.getElementById('ask-rooted');
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Scroll to the hero's exact bottom edge rather than the section heading:
+  // scrollIntoView with a nav offset left a strip of the hero photograph
+  // visible behind the translucent nav. Landing at the hero's bottom puts the
+  // next section flush at the top of the viewport; its own generous padding
+  // keeps the heading clear of the fixed nav.
+  const hero = document.querySelector('#screen-home .rt-hero');
+  if (!hero) return;
+  const top = hero.getBoundingClientRect().bottom + window.scrollY;
+  window.scrollTo({ top: Math.max(0, Math.round(top)), behavior: 'smooth' });
 }
 
 function initNavState() {
