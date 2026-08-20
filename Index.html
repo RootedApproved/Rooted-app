@@ -3318,6 +3318,14 @@ html .ru-module-card{
   .standard-card-full{grid-column:1 / -1;padding-top:clamp(20px,3vw,32px);}
 }
 
+
+/* Recommendations: the section already carries the page gutter, so the nested
+   product grid must not add its own. */
+#screen-recommendations-placeholder .prod-list.rec-grid{padding-left:0;padding-right:0;}
+@media (max-width:1023px){
+  #screen-recommendations-placeholder .prod-list.rec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -5956,7 +5964,20 @@ function renderRecommendations() {
 
   if (suggestions.length) {
     html += renderRecSection("Because You've Been Looking At...", suggestions);
-  } else {
+  }
+
+  // A thin history produces one or two matches, which read as a broken page.
+  // Gold Standard picks always follow (excluding anything already shown), so
+  // the screen is a full shelf from the very first visit.
+  const shownIds = new Set([...excludeIds, ...suggestions.map(x => x.id)]);
+  const goldExtras = Object.entries(PRODUCTS)
+    .filter(([id, p]) => p.gold === true && !shownIds.has(id))
+    .slice(0, 9)
+    .map(([id, p]) => ({ id, p }));
+  if (goldExtras.length) {
+    html += renderRecSection('Gold Standard Picks', goldExtras, { allGold: true });
+  }
+  if (!suggestions.length && !goldExtras.length) {
     html += `<div style="padding:20px 18px;color:var(--mid);font-size:13px;">No further Tier 1 matches yet in these categories — check back as we add more products.</div>`;
   }
 
@@ -5967,7 +5988,10 @@ function renderRecSection(title, items, opts) {
   opts = opts || {};
   const legend = opts.allGold ? `<div class="rec-gold-legend"><span class="tb-gold-inline">★</span> All picks below are Gold Standard — ROOTED's highest bar</div>` : '';
   const cards = items.map(({ id, p }) => buildProdCard(id, p)).join('');
-  return `<div class="pd-sec"><div class="pd-eye">Recommended</div><div class="pd-sec-title">${title}</div>${legend}${cards}</div>`;
+  // Cards must live in the same .prod-list grid used everywhere else — loose
+  // in the section they render as one full-width column, which at desktop
+  // width meant a single suggestion became a page-sized photograph.
+  return `<div class="pd-sec"><div class="pd-eye">Recommended</div><div class="pd-sec-title">${title}</div>${legend}<div class="prod-list rec-grid">${cards}</div></div>`;
 }
 
 function showProduct(id){
